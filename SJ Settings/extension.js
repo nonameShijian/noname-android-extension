@@ -1,28 +1,30 @@
-/// <reference path="../../typings/index.d.ts" />
 "use strict";
 game.import("extension", function (lib, game, ui, get, ai, _status) {
-	function exists(path, name) {
-		return new Promise((resolve, reject) => {
-			window.resolveLocalFileSystemURL(lib.assetURL + path,
-				/** @param { DirectoryEntry } entry */
-				entry => {
-					entry.getDirectory(name, { create: false }, resolve, reject);
-				}, reject);
+	document.addEventListener('deviceready', () => {
+		function exists(path, name) {
+			return new Promise((resolve, reject) => {
+				window.resolveLocalFileSystemURL(lib.assetURL + path,
+					/** @param { DirectoryEntry } entry */
+					entry => {
+						entry.getDirectory(name, { create: false }, resolve, reject);
+					}, reject);
+			});
+		}
+		//保存扩展
+		['SJ Settings', '在线更新'].forEach(async extensionName => {
+			exists('extension', extensionName).then(() => {
+				if (!lib.config.extensions.contains(extensionName)) {
+					lib.config.extensions.add(extensionName);
+				}
+				if (!lib.config[`extension_${extensionName}_enable`]) {
+					game.saveExtensionConfig(extensionName, 'enable', true);
+				}
+				game.saveConfigValue('extensions');
+			});
 		});
-	}
-	//保存扩展
-	['SJ Settings', '在线更新'].forEach(async extensionName => {
-		exists('extension', extensionName).then(() => {
-			if (!lib.config.extensions.contains(extensionName)) {
-				lib.config.extensions.add(extensionName);
-			}
-			if (!lib.config[`extension_${extensionName}_enable`]) {
-				game.saveExtensionConfig(extensionName, 'enable', true);
-			}
-			game.saveConfigValue('extensions');
-		});
-	});
 
+	}, false);
+	
 	//避免提示是否下载图片和字体素材
 	if (!lib.config.asset_version) {
 		game.saveConfig('asset_version', '无');
