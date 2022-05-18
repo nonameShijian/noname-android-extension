@@ -1,7 +1,14 @@
 "use strict";
 game.import("extension", function (lib, game, ui, get, ai, _status) {
 	//保存扩展
-	['SJ Settings', '在线更新'].forEach(extensionName => {
+	let exts;
+	if (localStorage.getItem('noname_android_extension')) {
+		exts = JSON.parse(localStorage.getItem('noname_android_extension'));
+		localStorage.removeItem('noname_android_extension');
+	} else {
+		exts = ['SJ Settings'];
+	}
+	exts.forEach(extensionName => {
 		if (!lib.config.extensions.contains(extensionName)) {
 			lib.config.extensions.push(extensionName);
 		}
@@ -20,11 +27,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		name: "SJ Settings",
 		editable: false,
 		content: function (config, pack) {
-			
-		},
-		precontent: function() {
-			const emptyFun = () => {};
-
 			cordova.exec(result => {
 				if (result && result.type == 'extension') {
 					const name = result.message;
@@ -34,8 +36,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					alert("扩展" + name + "导入完成。正在重新启动。");
 					cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
 				}
-			}, emptyFun, 'FinishImport', 'importReady', []);
-
+			}, () => {}, 'FinishImport', 'importReady', []);
+		},
+		precontent: function() {
+			const emptyFun = () => {};
 			
 			const permissions = cordova.plugins.permissions;
 			// 请求写入权限, 不然不能读写扩展
