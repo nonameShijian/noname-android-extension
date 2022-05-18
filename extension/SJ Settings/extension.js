@@ -27,28 +27,31 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		name: "SJ Settings",
 		editable: false,
 		content: function (config, pack) {
-			cordova.exec(result => {
-				if (result && result.type == 'extension') {
-					const name = result.message;
-					lib.config.extensions.add(name);
-					game.saveConfigValue('extensions');
-					game.saveConfig('extension_' + name + "_enable", true);
-					alert("扩展" + name + "导入完成。正在重新启动。");
-					cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
-				}
-			}, () => {}, 'FinishImport', 'importReady', []);
+			delete lib.extensionMenu['extension_SJ Settings'].delete;
 		},
 		precontent: function() {
 			const emptyFun = () => {};
-			
-			const permissions = cordova.plugins.permissions;
-			// 请求写入权限, 不然不能读写扩展
-			const WRITE_EXTERNAL_STORAGE = permissions['WRITE_EXTERNAL_STORAGE'];
-			permissions.checkPermission(WRITE_EXTERNAL_STORAGE, (status) => {
-				if (!status.hasPermission) {
-					permissions.requestPermission(WRITE_EXTERNAL_STORAGE, emptyFun, emptyFun);
-				}
-			}, emptyFun);
+			document.addEventListener('deviceready', () => {
+				cordova.exec(result => {
+					if (result && result.type == 'extension') {
+						const name = result.message;
+						lib.config.extensions.add(name);
+						game.saveConfigValue('extensions');
+						game.saveConfig('extension_' + name + "_enable", true);
+						alert("扩展" + name + "导入完成。正在重新启动。");
+						cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
+					}
+				}, () => {}, 'FinishImport', 'importReady', []);
+
+				const permissions = cordova.plugins.permissions;
+				// 请求写入权限, 不然不能读写扩展
+				const WRITE_EXTERNAL_STORAGE = permissions['WRITE_EXTERNAL_STORAGE'];
+				permissions.checkPermission(WRITE_EXTERNAL_STORAGE, (status) => {
+					if (!status.hasPermission) {
+						permissions.requestPermission(WRITE_EXTERNAL_STORAGE, emptyFun, emptyFun);
+					}
+				}, emptyFun);
+			}, false);
 		},
 		config: {},
 		package: {
