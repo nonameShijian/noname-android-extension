@@ -1,6 +1,5 @@
 "use strict";
 game.import("extension", function (lib, game, ui, get, ai, _status) {
-	//保存扩展
 	let exts;
 	if (localStorage.getItem('noname_android_extension')) {
 		exts = JSON.parse(localStorage.getItem('noname_android_extension'));
@@ -8,7 +7,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 	} else {
 		exts = ['SJ Settings'];
 	}
-	exts.forEach(extensionName => {
+	for (const extensionName of exts) {
 		if (!lib.config.extensions.contains(extensionName)) {
 			lib.config.extensions.push(extensionName);
 		}
@@ -16,7 +15,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			game.saveExtensionConfig(extensionName, 'enable', true);
 		}
 		game.saveConfigValue('extensions');
-	});
+	}
 	
 	//避免提示是否下载图片和字体素材
 	if (!lib.config.asset_version) {
