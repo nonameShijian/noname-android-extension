@@ -162,6 +162,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					};
 
 					function showDialog(extNames) {
+						const downloadExtList = [];
 						const dialog = document.createElement('dialog');
 						dialog.id = 'dialog';
 						const title = document.createElement('div');
@@ -183,9 +184,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							checkbox.type = 'checkbox';
 							checkbox.addEventListener('change', function() {
 								if (this.checked) {
-									extNames.add(extName);
+									downloadExtList.add(extName);
 								} else {
-									extNames.remove(extName);
+									downloadExtList.remove(extName);
 								}
 							});
 							const span = document.createElement('span');
@@ -207,7 +208,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						okBtn.onclick = function () {
 							// @ts-ignore
 							dialog.close();
-							downloadExtensions(extNames);
+							downloadExtensions(downloadExtList);
 							delete _status.isGettingExtensions;
 						}
 						dialog.appendChild(okBtn);
