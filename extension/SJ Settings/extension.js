@@ -1,5 +1,3 @@
-/// <reference path="E:/无名杀/resources/app/typings/index.d.ts" />
-// @ts-check
 "use strict";
 game.import("extension", function (lib, game, ui, get, ai, _status) {
 	let exts;
