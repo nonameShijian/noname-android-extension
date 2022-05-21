@@ -336,14 +336,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							// 延时提示
 							setTimeout(() => {
 								extList.forEach(v => {
-									if (window['noname_android_extension'][v] && Array.isArray(window['noname_android_extension'][v])) {
+									if (window['noname_android_extension'][v] && Array.isArray(window['noname_android_extension'][v].files)) {
 										lib.config.extensions.add(v);
 										game.saveConfigValue('extensions');
-										game.saveConfig('extension_' + name + "_enable", true);
+										game.saveConfig('extension_' + v + "_enable", true);
 									}
 								});
-								alert('下载完成，将自动重启');
-								game.reload();
+								if (confirm('下载完成，是否重启？')) game.reload();
 							}, 100);
 						}, 200);
 					}
