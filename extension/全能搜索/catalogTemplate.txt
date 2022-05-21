@@ -1,0 +1,9 @@
+﻿extension["全能搜索"]={
+	intro:"【武将卡牌搜索器】的重命名版本,导入后会自动卸载【武将卡牌搜索器】",
+	author:"诗笺",
+	nedisk:"",
+	forum:"",
+	size:"#SIZE",
+	version:"1.842",
+	files:[#FILES],
+};

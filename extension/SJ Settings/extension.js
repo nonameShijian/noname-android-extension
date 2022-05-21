@@ -29,6 +29,79 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		editable: false,
 		content: function (config, pack) {
 			delete lib.extensionMenu['extension_SJ Settings'].delete;
+			let layoutPath = lib.assetURL + 'extension/SJ Settings';
+			lib.init.css(layoutPath, 'extension');
+
+			// 下载进度
+			// @ts-ignore
+			game.shijianCreateProgress = (title, max, fileName, value) => {
+				/** @type { progress } */
+				// @ts-ignore
+				const parent = ui.create.div(ui.window, {
+					textAlign: 'center',
+					width: '300px',
+					height: '150px',
+					left: 'calc(50% - 150px)',
+					top: 'auto',
+					bottom: 'calc(50% - 75px)',
+					zIndex: '10',
+					boxShadow: 'rgb(0 0 0 / 40 %) 0 0 0 1px, rgb(0 0 0 / 20 %) 0 3px 10px',
+					backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))',
+					borderRadius: '8px'
+				});
+
+				// 可拖动
+				parent.className = 'dialog';
+
+				const container = ui.create.div(parent, {
+					position: 'absolute',
+					top: '0',
+					left: '0',
+					width: '100%',
+					height: '100%'
+				});
+
+				container.ontouchstart = ui.click.dialogtouchStart;
+				container.ontouchmove = ui.click.touchScroll;
+				// @ts-ignore
+				container.style.WebkitOverflowScrolling = 'touch';
+				parent.ontouchstart = ui.click.dragtouchdialog;
+
+				const caption = ui.create.div(container, '', title, {
+					position: 'relative',
+					paddingTop: '8px',
+					fontSize: '20px'
+				});
+
+				ui.create.node('br', container);
+
+				const tip = ui.create.div(container, {
+					position: 'relative',
+					paddingTop: '8px',
+					fontSize: '20px'
+				});
+				const file = ui.create.node('span', tip, '', fileName);
+				ui.create.node('br', tip);
+				const index = ui.create.node('span', tip, '', value || '0');
+				ui.create.node('span', tip, '', '/');
+				const maxSpan = ui.create.node('span', tip, '', (max + '') || '未知');
+
+				ui.create.node('br', container);
+
+				const progress = ui.create.node('progress', container);
+				progress.setAttribute('value', value || '0');
+				progress.setAttribute('max', max);
+
+				//parent.getTitle = () => caption.innerText;
+				parent.setTitle = (title) => caption.innerText = title;
+				//parent.getFileName = () => file.innerText;
+				parent.setFileName = (name) => file.innerText = name;
+				parent.getProgressValue = () => progress.value;
+				parent.setProgressValue = (value) => progress.value = index.innerText = value;
+				parent.getProgressMax = () => progress.max;
+				parent.setProgressMax = (max) => progress.max = maxSpan.innerText = max;
+				return parent;
+			};
 		},
 		precontent: function() {
 			const emptyFun = () => {};
@@ -58,8 +131,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			getExtensions: {
 				name: '获取扩展',
 				intro: '点击获取扩展',
+				clear: true,
 				onclick() {
-					if (_status.isGettingExtensions || !navigator.onLine) {
+					if (_status.isGettingExtensions || _status.isDownloadingExtensions || !navigator.onLine) {
 						if (!navigator.onLine) alert('当前网络未连接');
 						return;
 					} else _status.isGettingExtensions = true;
@@ -76,7 +150,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (!window['noname_android_extension']) throw 'err';
 								console.log(window['noname_android_extension']);
 								// 要下载的扩展名数组
-								const extNames = ['在线更新', '阳光包', '玄武江湖', '千幻聆音'];
+								// const extNames = ['在线更新', '阳光包', '玄武江湖', '千幻聆音'];
+								// @ts-ignore
+								const extNames = Object.keys(window.noname_android_extension);//.filter(v => v != 'SJ Settings');
 								// 展示窗口
 								showDialog(extNames);
 							})
@@ -88,20 +164,24 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					};
 
 					function showDialog(extNames) {
-						if (_status.getExtensionsDialog) {
-							return _status.getExtensionsDialog.showModal();
-						}
 						const dialog = document.createElement('dialog');
+						dialog.id = 'dialog';
 						const title = document.createElement('div');
-						title.innerHTML = '请选择要下载的扩展';
+						title.id = 'dialog_title';
+						title.innerHTML = '请选择要下载的扩展<br>(若不显示滚动条请尝试下滑)';
 						dialog.appendChild(title);
 						const extChoose = document.createElement('div');
-						// @ts-ignore
-						const exts = Object.keys(window.noname_android_extension).filter(v => v != 'SJ Settings');
-						for (let i = 0; i < exts.length; i++) {
-							const extName = exts[i];
+						extChoose.id = 'dialog_extChoose';
+						const parseSpanInn = function(extName) {
+							// @ts-ignore
+							let size = (window.noname_android_extension[extName] && window.noname_android_extension[extName].size) ? ("约" + window.noname_android_extension[extName].size) : "未知大小";
+							return extName + "&nbsp;&nbsp;(" + size + ")";
+						}
+						for (let i = 0; i < extNames.length; i++) {
+							const extName = extNames[i];
 							const p = document.createElement('p');
 							const checkbox = document.createElement('input');
+							checkbox.className = 'checkbox';
 							checkbox.type = 'checkbox';
 							checkbox.addEventListener('change', function() {
 								if (this.checked) {
@@ -110,12 +190,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									extNames.remove(extName);
 								}
 							});
-							if (extNames.includes(extName)) {
-								checkbox.checked = true;
-							}
 							const span = document.createElement('span');
 							span.style.fontSize = '18px';
-							span.innerHTML = extName;
+
+							span.innerHTML = parseSpanInn(extName);
 							span.onclick = function () {
 								checkbox.click();
 							}
@@ -131,15 +209,150 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						okBtn.onclick = function () {
 							// @ts-ignore
 							dialog.close();
+							downloadExtensions(extNames);
+							delete _status.isGettingExtensions;
 						}
 						dialog.appendChild(okBtn);
+						const cancelBtn = document.createElement('button');
+						cancelBtn.id = 'dialog_cancel';
+						cancelBtn.innerHTML = '取消';
+						cancelBtn.style.position = 'absolute';
+						cancelBtn.onclick = function () {
+							// @ts-ignore
+							dialog.close();
+							delete _status.isGettingExtensions;
+						}
+						dialog.appendChild(cancelBtn);
 						document.body.appendChild(dialog);
 						_status.getExtensionsDialog = dialog;
 						// @ts-ignore
 						dialog.showModal();
 					};
 
-					getExtensions();
+					function downloadExtensions(extList) {
+						function df(url, onsuccess, onerror) {
+							let downloadUrl = my_ext_site + url, path = '', name = url;
+							if (url.indexOf('/') != -1) {
+								path = url.slice(0, url.lastIndexOf('/'));
+								name = url.slice(url.lastIndexOf('/') + 1);
+							}
+							fetch(downloadUrl)
+								.then(response => {
+									const { ok, status } = response;
+									if (!ok || status != 200) {
+										throw response;
+									} else {
+										return response.arrayBuffer();
+									}
+								})
+								.then(arrayBuffer => {
+									// 创建文件夹
+									game.ensureDirectory(path, () => {
+										if (lib.node && lib.node.fs) {
+											const filePath = __dirname + '/' + path + '/' + name;
+											lib.node.fs.writeFile(filePath, Buffer.from(arrayBuffer), null, e => {
+												if (e) onerror(e);
+												else onsuccess(url);
+											});
+										} else if (typeof window.resolveLocalFileSystemURL == 'function') {
+											window.resolveLocalFileSystemURL(lib.assetURL + path,
+												/** @param { DirectoryEntry } entry */
+												entry => {
+													entry.getFile(name, { create: true }, fileEntry => {
+														fileEntry.createWriter(fileWriter => {
+															fileWriter.onwriteend = () => {
+																onsuccess(url);
+															};
+															fileWriter.write(arrayBuffer);
+														}, onerror);
+													}, onerror);
+												}, onerror);
+										}
+									});
+								})
+						};
+						//不修改原数组
+						extList = extList.slice(0);
+						const extList2 = extList.slice(0);
+						// @ts-ignore
+						const progress = game.shijianCreateProgress('下载扩展', null, '未知', '未知');
+						const download = () => {
+							if (extList.length) {
+								const currentExt = extList.shift();
+								if (!window['noname_android_extension'][currentExt] || !Array.isArray(window['noname_android_extension'][currentExt].files)) {
+									console.log('下载源中没有这个扩展：' + currentExt);
+									download();
+								}
+								let i = 0, 
+									files = window['noname_android_extension'][currentExt].files,
+									max = files.length;
+								const reload = (current, success, error) => {
+									console.log(current + '下载失败，稍后将重新下载');
+									setTimeout(() => {
+										console.log('开始下载：' + files[i]);
+										progress.setFileName(files[i]);
+										progress.setProgressValue(i);
+										df(current, success, error);
+									}, 200);
+								};
+								const success = (current) => {
+									console.log(current + '下载成功');
+									if (++i < max) {
+										console.log('开始下载：' + files[i]);
+										progress.setFileName(files[i]);
+										progress.setProgressValue(i);
+										df(files[i], success, error);
+									} else {
+										//自调用
+										download();
+									}
+								};
+								const error = (e) => {
+									console.error(e);
+									reload(files[i], success, error);
+								}
+								console.log('开始下载：' + files[i]);
+								progress.setFileName(files[i]);
+								progress.setProgressMax(files.length);
+								progress.setProgressValue(i);
+								df(files[i], success, error);
+							} else {
+								onfinish(extList2, progress);
+							}
+						};
+						_status.isDownloadingExtensions = true;
+						download();
+					};
+
+					function onfinish(extList, progress) {
+						delete _status.isDownloadingExtensions;
+						console.log(extList + '下载成功');
+						// 更新进度
+						progress.setProgressValue(progress.getProgressMax());
+						progress.setFileName('下载完成');
+						setTimeout(() => {
+							// 移除进度条
+							progress.remove();
+							// 延时提示
+							setTimeout(() => {
+								extList.forEach(v => {
+									if (window['noname_android_extension'][v] && Array.isArray(window['noname_android_extension'][v])) {
+										lib.config.extensions.add(v);
+										game.saveConfigValue('extensions');
+										game.saveConfig('extension_' + name + "_enable", true);
+									}
+								});
+								alert('下载完成，将自动重启');
+								game.reload();
+							}, 100);
+						}, 200);
+					}
+
+					if (_status.getExtensionsDialog) {
+						 _status.getExtensionsDialog.showModal();
+					} else {
+						getExtensions();
+					}
 				}
 			}
 		},

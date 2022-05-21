@@ -1,0 +1,43 @@
+.checkbox {
+	vertical-align: middle;
+}
+
+#dialog {
+	width: 350px;
+	height: 250px;
+	text-shadow: none;
+	font-size: 20px;
+}
+
+#dialog_title {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	width: 100%;
+	left: 0;
+}
+
+#dialog_extChoose {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	width: 100%;
+	height: 150px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	left: 0;
+	text-align: left;
+	border: 1px solid black;
+}
+
+#dialog_ok {
+	position: absolute;
+	right: 15px;
+	bottom: 10px;
+}
+
+#dialog_cancel {
+	position: absolute;
+	left: 15px;
+	bottom: 10px;
+}
