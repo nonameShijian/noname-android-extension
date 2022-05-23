@@ -251,6 +251,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							const { version } = lib.extensionPack[ext];
 							if (version === window['noname_android_extension'][ext].version) {
 								return confirm(`将要下载的【${ext}】扩展与已经安装的扩展版本号一致，是否继续安装？`);
+							} else {
+								return true;
 							}
 						});
 						//不修改原数组
@@ -353,7 +355,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			}
 		},
 		package: {
-			intro: "",
+			intro: "本扩展的功能是导入\"从其他应用使用无名杀打开的扩展包\"，请勿删除",
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
