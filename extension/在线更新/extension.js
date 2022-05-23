@@ -664,9 +664,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				const tip = ui.create.div(container, {
 					position: 'relative',
 					paddingTop: '8px',
-					fontSize: '20px'
+					fontSize: '20px',
+					width: '100%'
 				});
 				const file = ui.create.node('span', tip, '', fileName);
+				file.style.width = file.style.maxWidth = '100%';
 				ui.create.node('br', tip);
 				const index = ui.create.node('span', tip, '', value || '0');
 				ui.create.node('span', tip, '', '/');
@@ -678,9 +680,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				progress.setAttribute('value', value || '0');
 				progress.setAttribute('max', max);
 
-				//parent.getTitle = () => caption.innerText;
+				parent.getTitle = () => caption.innerText;
 				parent.setTitle = (title) => caption.innerText = title;
-				//parent.getFileName = () => file.innerText;
+				parent.getFileName = () => file.innerText;
 				parent.setFileName = (name) => file.innerText = name;
 				parent.getProgressValue = () => progress.value;
 				parent.setProgressValue = (value) => progress.value = index.innerText = value;

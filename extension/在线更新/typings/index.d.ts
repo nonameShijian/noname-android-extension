@@ -1,6 +1,10 @@
 interface progress extends HTMLDivElement {
+	/** 获取标题 */
+	getTitle: (title: string) => string;
 	/** 更改标题 */
 	setTitle: (title: string) => void;
+	/** 获取显示的文件名 */
+	getFileName: (title: string) => string;
 	/** 更改显示的文件名 */
 	setFileName: (title: string) => void;
 	/** 获取进度*/

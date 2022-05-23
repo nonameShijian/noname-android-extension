@@ -76,9 +76,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				const tip = ui.create.div(container, {
 					position: 'relative',
 					paddingTop: '8px',
-					fontSize: '20px'
+					fontSize: '20px',
+					width: '100%'
 				});
 				const file = ui.create.node('span', tip, '', fileName);
+				file.style.width = file.style.maxWidth = '100%';
 				ui.create.node('br', tip);
 				const index = ui.create.node('span', tip, '', value || '0');
 				ui.create.node('span', tip, '', '/');
@@ -90,9 +92,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				progress.setAttribute('value', value || '0');
 				progress.setAttribute('max', max);
 
-				//parent.getTitle = () => caption.innerText;
+				parent.getTitle = () => caption.innerText;
 				parent.setTitle = (title) => caption.innerText = title;
-				//parent.getFileName = () => file.innerText;
+				parent.getFileName = () => file.innerText;
 				parent.setFileName = (name) => file.innerText = name;
 				parent.getProgressValue = () => progress.value;
 				parent.setProgressValue = (value) => progress.value = index.innerText = value;
@@ -127,7 +129,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		},
 		config: {
 			getExtensions: {
-				name: '获取扩展',
+				name: '<button>点击获取扩展</button>',
 				intro: '点击获取扩展',
 				clear: true,
 				onclick() {
@@ -230,49 +232,28 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 					function downloadExtensions(extList) {
 						function df(url, onsuccess, onerror) {
-							let downloadUrl = my_ext_site + url, path = '', name = url;
-							if (url.indexOf('/') != -1) {
-								path = url.slice(0, url.lastIndexOf('/'));
-								name = url.slice(url.lastIndexOf('/') + 1);
-							}
-							fetch(downloadUrl)
-								.then(response => {
-									const { ok, status } = response;
-									if (!ok || status != 200) {
-										throw response;
-									} else {
-										return response.arrayBuffer();
-									}
-								})
-								.then(arrayBuffer => {
-									// 创建文件夹
-									game.ensureDirectory(path, () => {
-										if (lib.node && lib.node.fs) {
-											const filePath = __dirname + '/' + path + '/' + name;
-											lib.node.fs.writeFile(filePath, Buffer.from(arrayBuffer), null, e => {
-												if (e) onerror(e);
-												else onsuccess(url);
-											});
-										} else if (typeof window.resolveLocalFileSystemURL == 'function') {
-											window.resolveLocalFileSystemURL(lib.assetURL + path,
-												/** @param { DirectoryEntry } entry */
-												entry => {
-													entry.getFile(name, { create: true }, fileEntry => {
-														fileEntry.createWriter(fileWriter => {
-															fileWriter.onwriteend = () => {
-																onsuccess(url);
-															};
-															fileWriter.write(arrayBuffer);
-														}, onerror);
-													}, onerror);
-												}, onerror);
-										}
-									});
-								})
+							let downloadUrl = my_ext_site + url;
+							let fileTransfer = new FileTransfer();
+							let folder = cordova.file.externalApplicationStorageDirectory + url;
+							fileTransfer.download(encodeURI(downloadUrl), folder, () => {
+								onsuccess(url);
+							}, onerror);
 						};
+						const extList2 = extList.slice(0).filter(ext => {
+							// 仓库中没有这个扩展
+							if (!window['noname_android_extension'][ext]) return false;
+							// 还没安装这个扩展
+							if (!lib.config.extensions.includes(ext)) return true;
+							// 从extensionPack获取已安装扩展的版本
+							if (!lib.extensionPack || !lib.extensionPack[ext]) return true;
+
+							const { version } = lib.extensionPack[ext];
+							if (version === window['noname_android_extension'][ext].version) {
+								return confirm(`将要下载的【${ext}】扩展与已经安装的扩展版本号一致，是否继续安装？`);
+							}
+						});
 						//不修改原数组
-						extList = extList.slice(0);
-						const extList2 = extList.slice(0);
+						extList = extList2.slice(0);
 						// @ts-ignore
 						const progress = game.shijianCreateProgress('下载扩展', null, '未知', '未知');
 						const download = () => {
@@ -280,11 +261,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								const currentExt = extList.shift();
 								if (!window['noname_android_extension'][currentExt] || !Array.isArray(window['noname_android_extension'][currentExt].files)) {
 									console.log('下载源中没有这个扩展：' + currentExt);
-									download();
+									return download();
 								}
 								let i = 0, 
 									files = window['noname_android_extension'][currentExt].files,
 									max = files.length;
+								/** 重新下载 */
 								const reload = (current, success, error) => {
 									console.log(current + '下载失败，稍后将重新下载');
 									setTimeout(() => {
@@ -294,8 +276,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										df(current, success, error);
 									}, 200);
 								};
-								const success = (current) => {
-									console.log(current + '下载成功');
+								const success = (current, log) => {
+									if (log !== false) {
+										console.log(current + '下载成功');
+									}
 									if (++i < max) {
 										console.log('开始下载：' + files[i]);
 										progress.setFileName(files[i]);
@@ -307,8 +291,20 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								};
 								const error = (e) => {
-									console.error(e);
-									reload(files[i], success, error);
+									console.dir(e);
+									// 网址解析错误？
+									if (typeof e.exception == 'string' && e.exception.startsWith('Unable to resolve host')) {
+										console.log('网址解析错误,下载不了');
+										success(files[i], false);
+									} else if (e.http_status === null) {
+										console.log('http码为null');
+										success(files[i], false);
+									} else if (e.http_status == 404 || e.http_status == '404') {
+										console.log('指定网址中没有这个文件');
+										success(files[i], false);
+									} else {
+										reload(files[i], success, error);
+									}
 								}
 								console.log('开始下载：' + files[i]);
 								progress.setFileName(files[i]);
@@ -325,7 +321,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 					function onfinish(extList, progress) {
 						delete _status.isDownloadingExtensions;
-						console.log(extList + '下载成功');
+						if (extList.length > 0) console.log(extList + '下载成功');
 						// 更新进度
 						progress.setProgressValue(progress.getProgressMax());
 						progress.setFileName('下载完成');
