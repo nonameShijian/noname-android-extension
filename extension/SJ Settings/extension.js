@@ -242,6 +242,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						const extList2 = extList.slice(0).filter(ext => {
 							// 仓库中没有这个扩展
 							if (!window['noname_android_extension'][ext]) return false;
+							if (!Array.isArray(window['noname_android_extension'][ext].files)) return false;
 							// 还没安装这个扩展
 							if (!lib.config.extensions.includes(ext)) return true;
 							// 从extensionPack获取已安装扩展的版本
@@ -259,10 +260,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						const download = () => {
 							if (extList.length) {
 								const currentExt = extList.shift();
-								if (!window['noname_android_extension'][currentExt] || !Array.isArray(window['noname_android_extension'][currentExt].files)) {
-									console.log('下载源中没有这个扩展：' + currentExt);
-									return download();
-								}
 								let i = 0, 
 									files = window['noname_android_extension'][currentExt].files,
 									max = files.length;
@@ -321,24 +318,29 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 					function onfinish(extList, progress) {
 						delete _status.isDownloadingExtensions;
-						if (extList.length > 0) console.log(extList + '下载成功');
-						// 更新进度
-						progress.setProgressValue(progress.getProgressMax());
+						if (extList.length > 0) {
+							console.log(extList + '下载成功');
+							progress.setProgressValue(progress.getProgressMax());
+						} else {
+							progress.setProgressMax(0);
+						}
 						progress.setFileName('下载完成');
 						setTimeout(() => {
 							// 移除进度条
 							progress.remove();
 							// 延时提示
-							setTimeout(() => {
-								extList.forEach(v => {
-									if (window['noname_android_extension'][v] && Array.isArray(window['noname_android_extension'][v].files)) {
-										lib.config.extensions.add(v);
-										game.saveConfigValue('extensions');
-										game.saveConfig('extension_' + v + "_enable", true);
-									}
-								});
-								if (confirm('下载完成，是否重启？')) game.reload();
-							}, 100);
+							if (extList.length > 0) {
+								setTimeout(() => {
+									extList.forEach(v => {
+										if (window['noname_android_extension'][v] && Array.isArray(window['noname_android_extension'][v].files)) {
+											lib.config.extensions.add(v);
+											game.saveConfigValue('extensions');
+											game.saveConfig('extension_' + v + "_enable", true);
+										}
+									});
+									if (confirm('下载完成，是否重启？')) game.reload();
+								}, 100);
+							}
 						}, 200);
 					}
 
@@ -355,7 +357,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.0",
+			version: "1.1",
 		}
 	};
 });
