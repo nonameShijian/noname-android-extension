@@ -1,3 +1,6 @@
+/// <reference path="../../typings/index.d.ts" />
+/// <reference path="./typings/index.d.ts" />
+//@ts-check
 "use strict";
 game.import("extension", function (lib, game, ui, get, ai, _status) {
 	let exts;
@@ -148,88 +151,167 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							.then(text => {
 								eval(text);
 								if (!window['noname_android_extension']) throw 'err';
-								console.log(window['noname_android_extension']);
+								// console.log(window['noname_android_extension']);
 								// 要下载的扩展名数组
-								// const extNames = ['在线更新', '阳光包', '玄武江湖', '千幻聆音'];
-								// @ts-ignore
-								const extNames = Object.keys(window.noname_android_extension);//.filter(v => v != 'SJ Settings');
+								const extNames = Object.keys(window.noname_android_extension);
 								// 展示窗口
 								showDialog(extNames);
 							})
 							.catch(e => {
 								console.log(e);
-								if (navigator.onLine) getExtensions()
+								if (navigator.onLine) getExtensions();
 								else alert('当前网络未连接');
 							})
 					};
 
+					/**
+					 * 
+					 * @param { string[] } extNames 
+					 */
 					function showDialog(extNames) {
+						/** 
+						 * @type { string[] } 最终下载哪些扩展
+						 **/
 						const downloadExtList = [];
-						const dialog = document.createElement('dialog');
-						dialog.id = 'dialog';
-						const title = document.createElement('div');
-						title.id = 'dialog_title';
-						title.innerHTML = '请选择要下载的扩展<br>(若不显示滚动条请尝试下滑)';
-						dialog.appendChild(title);
-						const extChoose = document.createElement('div');
-						extChoose.id = 'dialog_extChoose';
-						const parseSpanInn = function(extName) {
-							// @ts-ignore
-							let size = (window.noname_android_extension[extName] && window.noname_android_extension[extName].size) ? ("约" + window.noname_android_extension[extName].size) : "未知大小";
-							return extName + "&nbsp;&nbsp;(" + size + ")";
-						}
+
+						/** 
+						 * 判断版本
+						 * @param { string } v1 现有版本
+						 * @param { string } v2 要更新的版本
+						 * @returns { boolean | 'equal' }
+						 */
+						function compareVersion(v1 = '', v2 = '') {
+							// 相等版本
+							if (v1 === v2) return 'equal';
+							let version_1 = v1.split('.').map(item => Number(item) || 0);
+							let version_2 = v2.split('.').map(item => Number(item) || 0);
+							// 现有版本: 无
+							if (version_1.length == 1 && version_1[0] == 0) {
+								// 要更新的版本不是 无
+								if (version_2.length > 1 || version_2[0] > 0) return true;
+							} else if (version_2.length == 1 && version_2[0] == 0) {
+								// 要更新的版本是 无
+								return true;
+							} else {
+								return version_2.every((v, i) => {
+									return v > (version_1[i] || 0);
+								});
+							}
+						};
+
+						/** dialog框 */
+						const dialog = ui.create.div('.dialog.scroll1', ui.window, {
+							textShadow: 'none',
+							fontSize: '20px',
+						});
+						_status.getExtensionsDialog = dialog;
+						const contentContainer = ui.create.div('.content-container', dialog);
+						const content = ui.create.div('.content', contentContainer);
+						/** 标题 */
+						const caption = ui.create.div('.caption', '请选择要下载的扩展<br>(若不显示滚动条请尝试下滑)', content);
+						/** 下载扩展按钮 */
+						const download = ui.create.div('.menubutton.text.active', caption, {
+							innerHTML: '下载扩展',
+							cursor: 'pointer',
+							position: 'absolute',
+							right: '15px',
+							width: '65px',
+							top: '15px'
+						}, function() {
+							delete _status.isGettingExtensions;
+							ui.dialog.show();
+							ui.control.show();
+							_status.getExtensionsDialog.hide();
+							downloadExtensions(downloadExtList);
+						});
+						/** 取消按钮 */
+						const cancel = ui.create.div('.menubutton.text.highlight', caption, {
+							innerHTML: '取消下载',
+							cursor: 'pointer',
+							position: 'absolute',
+							left: '15px',
+							width: '65px',
+							top: '15px'
+						}, function () {
+							delete _status.isGettingExtensions;
+							ui.dialog.show();
+							ui.control.show();
+							_status.getExtensionsDialog.hide();
+						});
 						for (let i = 0; i < extNames.length; i++) {
 							const extName = extNames[i];
-							const p = document.createElement('p');
-							const checkbox = document.createElement('input');
+							if (!window.noname_android_extension[extName]) {
+								console.warn(`【${extName}】扩展不存在`);
+								continue;
+							}
+							const { author, size, version, nonameVersion } = window.noname_android_extension[extName];
+							/** 其中一个扩展的dialog框 */
+							const ext = ui.create.div('.videonode.menubutton.extension.large', content, {
+								marginLeft: '0px',
+								maxHeight: '150px'
+							});
+							const ext_name = ui.create.div('.caption', extName, ext);
+							const ext_author = ui.create.div('.text.author', '作者: ' + (author ? author : '未知'), ext);
+							const ext_version = ui.create.div('.text', '版本: ' + (version ? version : '未知版本'), ext);
+							const ext_size = ui.create.div('.text', '大小: ' + (size ? ('约' + size) : '未知大小'), ext);
+							const ext_intro = ui.create.div('.text', ext, {
+								innerHTML: '关于本扩展的描述',
+							});
+							const download = ui.create.div(ext, {
+								position: 'absolute',
+								right: 0,
+								top: 0,
+								fontSize: '15px'
+							});
+							const checkbox = ui.create.node('input', download);
 							checkbox.className = 'checkbox';
 							checkbox.type = 'checkbox';
-							checkbox.addEventListener('change', function() {
+							checkbox.addEventListener('change', function () {
 								if (this.checked) {
+									// 判断是否符合无名杀版本
+									if (typeof nonameVersion == 'string') {
+										if (lib.version != nonameVersion) {
+											alert(`为避免扩展报错，本扩展的当前版本(${version ? version : '未知版本'})只适用于无名杀版本${nonameVersion}`);
+											this.checked = false;
+											return false;
+										}
+									}
+									// 判断版本
+									if (lib.extensionPack && lib.extensionPack[extName] && typeof lib.extensionPack[extName].version == 'string') {
+										const bool = compareVersion(lib.extensionPack[extName].version, version);
+										if (bool == 'equal') {
+											if (!confirm(`【${extName}】扩展与您本地的扩展版本相同，是否确认选择？`)) {
+												this.checked = false;
+												return false;
+											}
+										} else if (!bool) {
+											if (!confirm(`本地的扩展【${extName}】可能比服务器中的扩展版本高，是否确认选择？`)) {
+												this.checked = false;
+												return false;
+											}
+										}
+									} else {
+										console.warn(`未找到【${extName}】扩展的配置，无法进行版本比对`);
+									}
 									downloadExtList.add(extName);
 								} else {
 									downloadExtList.remove(extName);
 								}
 							});
-							const span = document.createElement('span');
-							span.style.fontSize = '18px';
-
-							span.innerHTML = parseSpanInn(extName);
-							span.onclick = function () {
+							const span = ui.create.node('span', download, {
+								innerHTML: '是否下载此扩展'
+							}, function() {
 								checkbox.click();
-							}
-							p.appendChild(checkbox);
-							p.appendChild(span);
-							extChoose.appendChild(p);
+							});
 						}
-						dialog.appendChild(extChoose);
-						const okBtn = document.createElement('button');
-						okBtn.id = 'dialog_ok';
-						okBtn.innerHTML = '开始下载';
-						okBtn.style.position = 'absolute';
-						okBtn.onclick = function () {
-							// @ts-ignore
-							dialog.close();
-							downloadExtensions(downloadExtList);
-							delete _status.isGettingExtensions;
-						}
-						dialog.appendChild(okBtn);
-						const cancelBtn = document.createElement('button');
-						cancelBtn.id = 'dialog_cancel';
-						cancelBtn.innerHTML = '取消';
-						cancelBtn.style.position = 'absolute';
-						cancelBtn.onclick = function () {
-							// @ts-ignore
-							dialog.close();
-							delete _status.isGettingExtensions;
-						}
-						dialog.appendChild(cancelBtn);
-						document.body.appendChild(dialog);
+
 						_status.getExtensionsDialog = dialog;
-						// @ts-ignore
-						dialog.showModal();
 					};
 
+					/**
+					 * 
+					 * @param { string[] } extList 
+					 */
 					function downloadExtensions(extList) {
 						function df(url, onsuccess, onerror) {
 							let downloadUrl = my_ext_site + url;
@@ -346,8 +428,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						}, 200);
 					}
 
+					ui.dialog.hide();
+					ui.control.hide();
 					if (_status.getExtensionsDialog) {
-						 _status.getExtensionsDialog.showModal();
+						 _status.getExtensionsDialog.show();
 					} else {
 						getExtensions();
 					}
@@ -359,7 +443,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.1",
+			version: "1.2",
 		}
 	};
 });

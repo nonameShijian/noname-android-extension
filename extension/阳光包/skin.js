@@ -5,27 +5,6 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
     }
     var taici = {
     //原皮台词
-        'lyz_zhaoyun':{
-                    'lyzlongying':{
-                        order:1,
-                        content:'①银枪所至，千夫不敌！<br>②抽身而退，万军难挡！',
-                    },
-                    'lyzhunyou':{
-                        order:2,
-                        content:'①八方风雨，天涯何归？<br>②滴水不漏，稳若泰山！',
-                    },
-                    'lyzcuizhen':{
-                        order:3,
-                        content:'①无知小儿，先站稳阵脚再来吧！<br>②是谁给你的勇气，来跟本将军叫阵！',
-                    },
-                    'lyzchengyu':{
-                        order:4,
-                        content:'①一人一枪一匹马，疆场尽驰骋！<br>②龙升九天，马踏飞燕！',
-                    },
-                    'die':{
-                        content:'北伐大业未定，末将实难心安……',
-                    }
-        },
         'lyz_shen_diaochan':{
                     'lyzyuhun':{
                         order:1,
@@ -105,7 +84,7 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     },
                     'lyzlingxiang':{
                         order:3,
-                        content:'①贼人，是不是被本姑娘给吓破胆了呀？<br>②看我不好好杀杀你的威风！',
+                        content:'①西凉铁骑，北地枪法，你如何能挡？<br>②骏马银枪，敌莫敢当。',
                     },
                     'fanghun_lyz_mayunlu':{
                         order:4,
@@ -116,7 +95,7 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                         content:'①连我都打不过，还想挑战我哥？',
                     },
                     'die':{
-                        content:'子龙哥哥，救我！',
+                        content:'子龙，大哥，来世再会……',
                     }
         },
         'lyz_zhouyu':{
@@ -833,7 +812,19 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                         content:'吾死不足怜惜，无奈家仇未报！',
                     }
         },
-    
+        'lyz_zhaoyun':{
+                    'lyzlinhuang':{
+                        order:1,
+                        content:'①破阵御敌，傲然屹立。<br>②平战乱，享太平。',
+                    },
+                    'lyzyuwang':{
+                        order:2,
+                        content:'①横枪勒马，舍我其谁。<br>②枪挑四海，咫尺天涯。',
+                    },
+                    'die':{
+                        content:'吾当战于沙场，岂可毙于卧榻！',
+                    }
+        },
     
     };
     lib.qhlypkg.push({
@@ -903,7 +894,6 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
         },
         originSkinInfo:function(name){
             var info = {
-                'lyz_zhaoyun':'',
                 'lyz_shen_diaochan':'',
                 'lyz_shen_zhangliao':'',
                 'lyz_shen_gaodayihao':'',
@@ -955,6 +945,7 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                 'lyz_nanxun':'技能思路及素材提供：尋',
                 'lyz_shen_guanyu':'',
                 'lyz_wangyi':'',
+                'lyz_zhaoyun':'',
             
             };
             return info[name];
@@ -973,33 +964,6 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
         audio:'extension/阳光包/skin/audio/',//切换皮肤后的技能配音位置
         skininfo:{
         //皮肤台词
-            'lyz_zhaoyunp1':{
-				level:"传说",
-				translation:"赤胆龙心",
-				info:"",
-                order:1,//显示顺序，号越小越前面。
-                skill:{
-                    'lyzlongying':{
-                        order:1,
-                        content:'①豪胆干云立乾坤，枪出寒潭斩蛟龙！<br>②剑起星奔诛万里，摧却终南第一峰！',
-                    },
-                    'lyzhunyou':{
-                        order:2,
-                        content:'①枪出如龙势如虎，气掠涯南海角东！<br>②天涯海角不相负，海角天涯豪气存！',
-                    },
-                    'lyzcuizhen':{
-                        order:3,
-                        content:'①无知小儿，先站稳阵脚再来吧！<br>②是谁给你的勇气，来跟本将军叫阵！',
-                    },
-                    'lyzchengyu':{
-                        order:4,
-                        content:'①一人一枪一匹马，疆场尽驰骋！<br>②龙升九天，马踏飞燕！',
-                    },
-                    'die':{
-                        content:'红日坠瑶池，白袍入枯冢。',
-                    }
-                }
-            },
             'lyz_shen_gaodayihaop1':{
 				level:"史诗",
 				translation:"孤胆救主",
@@ -1085,7 +1049,7 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     },
                     'lyzlingxiang':{
                         order:3,
-                        content:'①贼人，是不是被本姑娘给吓破胆了呀？<br>②看我不好好杀杀你的威风！',
+                        content:'①西凉铁骑，北地枪法，你如何能挡？<br>②骏马银枪，敌莫敢当。',
                     },
                     'fanghun_lyz_mayunlu':{
                         order:4,
@@ -1096,7 +1060,7 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                         content:'①连我都打不过，还想挑战我哥？',
                     },
                     'die':{
-                        content:'子龙哥哥，救我！',
+                        content:'子龙，大哥，来世再会……',
                     }
                 }
             },
@@ -1147,37 +1111,6 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     },
                     'lyzlingxiang':{
                         order:3,
-                        content:'①贼人，是不是被本姑娘给吓破胆了呀？<br>②看我不好好杀杀你的威风！',
-                    },
-                    'fanghun_lyz_mayunlu':{
-                        order:4,
-                        content:'①小小鼠辈，还不配与我夫君过招！',
-                    },
-                    'tieqi_lyz_mayunlu':{
-                        order:5,
-                        content:'①连我都打不过，还想挑战我哥？',
-                    },
-                    'die':{
-                        content:'子龙哥哥，救我！',
-                    }
-                }
-            },
-            'lyz_mayunlup4':{
-				level:"传说",
-				translation:"花海舞枪",
-				info:"",
-                order:4,//显示顺序，号越小越前面。
-                skill:{
-                    'lyzjingxing':{
-                        order:1,
-                        content:'①飞花鎏金，凤仪枪武。<br>②凤栖梧桐，吾归沙场。',
-                    },
-                    'lyzfengyi':{
-                        order:2,
-                        content:'①战场上，看你耍什么花样！<br>②这些小兵，我来对付足矣。',
-                    },
-                    'lyzlingxiang':{
-                        order:3,
                         content:'①西凉铁骑，北地枪法，你如何能挡？<br>②骏马银枪，敌莫敢当。',
                     },
                     'fanghun_lyz_mayunlu':{
@@ -1193,11 +1126,11 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     }
                 }
             },
-            'lyz_mayunlup5':{
+            'lyz_mayunlup4':{
 				level:"传说",
 				translation:"烟绚繁星",
 				info:"",
-                order:5,//显示顺序，号越小越前面。
+                order:4,//显示顺序，号越小越前面。
                 skill:{
                     'lyzjingxing':{
                         order:1,
@@ -1224,11 +1157,11 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     }
                 }
             },
-            'lyz_mayunlup6':{
+            'lyz_mayunlup5':{
 				level:"限定",
 				translation:"花好月圆",
 				info:"",
-                order:6,//显示顺序，号越小越前面。
+                order:5,//显示顺序，号越小越前面。
                 skill:{
                     'lyzjingxing':{
                         order:1,
@@ -1255,11 +1188,11 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     }
                 }
             },
-            'lyz_mayunlup7':{
+            'lyz_mayunlup6':{
 				level:"限定",
 				translation:"巾帼花武",
 				info:"",
-                order:7,//显示顺序，号越小越前面。
+                order:6,//显示顺序，号越小越前面。
                 skill:{
                     'lyzjingxing':{
                         order:1,
@@ -1271,7 +1204,7 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     },
                     'lyzlingxiang':{
                         order:3,
-                        content:'①贼人，是不是被本姑娘给吓破胆了呀？<br>②看我不好好杀杀你的威风！',
+                        content:'①西凉铁骑，北地枪法，你如何能挡？<br>②骏马银枪，敌莫敢当。',
                     },
                     'fanghun_lyz_mayunlu':{
                         order:4,
@@ -1344,10 +1277,29 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                 }
             },
             'lyz_zhenjip2':{
+				level:"史诗",
+				translation:"廊下待君",
+				info:"",
+                order:2,//显示顺序，号越小越前面。
+                skill:{
+                    'lyzshenhuang':{
+                        order:1,
+                        content:'①洛水清泉流，心波起波澜。<br>②山水入画，洛神点绛唇。',
+                    },
+                    'lyzjinghong':{
+                        order:2,
+                        content:'①一顾倾人城，再顾倾人国。<br>②北方有佳人，绝世而独立。',
+                    },
+                    'die':{
+                        content:'行行重行行，与君生别离。',
+                    }
+                }
+            },
+            'lyz_zhenjip3':{
 				level:"传说",
 				translation:"洛神御水",
 				info:"",
-                order:2,//显示顺序，号越小越前面。
+                order:3,//显示顺序，号越小越前面。
                 skill:{
                     'lyzshenhuang':{
                         order:1,
@@ -1362,11 +1314,11 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     }
                 }
             },
-            'lyz_zhenjip3':{
+            'lyz_zhenjip4':{
 				level:"限定",
 				translation:"才颜双绝",
 				info:"",
-                order:3,//显示顺序，号越小越前面。
+                order:4,//显示顺序，号越小越前面。
                 skill:{
                     'lyzshenhuang':{
                         order:1,
@@ -1381,11 +1333,11 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     }
                 }
             },
-            'lyz_zhenjip4':{
+            'lyz_zhenjip5':{
 				level:"限定",
 				translation:"端瑞洛水",
 				info:"",
-                order:4,//显示顺序，号越小越前面。
+                order:5,//显示顺序，号越小越前面。
                 skill:{
                     'lyzshenhuang':{
                         order:1,
@@ -1598,22 +1550,22 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                 skill:{
                     'lyzchouyi':{
                         order:1,
-                        content:'①因果有律，世间无常。<br>②万物无异，强弱有别。',
+                        content:'①我还耗得起！<br>②隐忍以行，厚积而薄发。',
                     },
                     'lyztianqian':{
                         order:2,
-                        content:'①轻举妄为，徒招横祸。',
+                        content:'①你敢与天斗？',
                     },
                     'lyzdikun':{
                         order:3,
-                        content:'①逆势而为，不自量力。',
+                        content:'①老夫倒要看看，谁敢和司马氏作对？',
                     },
                     'lyzguiyuan':{
                         order:4,
-                        content:'①吾之身前，万籁俱寂。<br>②吾之身后，了无生机！',
+                        content:'①拜印封戒，就在今朝！<br>②老夫终于等到这一天啦！',
                     },
                     'die':{
-                        content:'生门一闭，唯有赴死……',
+                        content:'我的时代……还没开始就结束了吗？',
                     }
                 }
             },
@@ -1968,6 +1920,44 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     },
                     'die':{
                         content:'巾帼之血流尽，终未能平贼……',
+                    }
+                }
+            },
+            'lyz_zhaoyunp1':{
+				level:"传说",
+				translation:"烟绚繁星",
+				info:"",
+                order:1,//显示顺序，号越小越前面。
+                skill:{
+                    'lyzlinhuang':{
+                        order:1,
+                        content:'①银枪所至，千夫不敌！<br>②抽身而退，万军难挡！',
+                    },
+                    'lyzyuwang':{
+                        order:2,
+                        content:'①八方风雨，天涯何归？<br>②滴水不漏，稳若泰山！',
+                    },
+                    'die':{
+                        content:'北伐大业未定，末将实难心安……',
+                    }
+                }
+            },
+            'lyz_zhaoyunp2':{
+				level:"传说",
+				translation:"赤胆龙心",
+				info:"",
+                order:2,//显示顺序，号越小越前面。
+                skill:{
+                    'lyzlinhuang':{
+                        order:1,
+                        content:'①豪胆干云立乾坤，枪出寒潭斩蛟龙！<br>②剑起星奔诛万里，摧却终南第一峰！',
+                    },
+                    'lyzyuwang':{
+                        order:2,
+                        content:'①枪出如龙势如虎，气掠涯南海角东！<br>②天涯海角不相负，海角天涯豪气存！',
+                    },
+                    'die':{
+                        content:'红日坠瑶池，白袍入枯冢。',
                     }
                 }
             },

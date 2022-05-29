@@ -581,16 +581,39 @@ content:function(config, pack){
 					}
 					
 					var s = player.getCards('s');
-					if (s.length)
-						handcards.insertBefore(fragment, s[0]);
-					else
+					if (s.length){
+						var found = false;
+						for(var i=0;i<handcards.childElementCount;i++){
+							if(handcards.childNodes[i]==s[0]){
+								handcards.insertBefore(fragment, s[0]);
+								found = true;
+								break;
+							}
+						}
+						if(!found){
+							handcards.appendChild(fragment);
+						}
+					}
+					else{
 						handcards.appendChild(fragment);
-
+					}
 					s = player.getCards('s');
-					if (s.length)
-						handcards2.insertBefore(fragment2, s[0]);
-					else
+					if (s.length){
+						var found = false;
+						for(var i=0;i<handcards2.childElementCount;i++){
+							if(handcards2.childNodes[i]==s[0]){
+								handcards2.insertBefore(fragment2, s[0]);
+								found = true;
+								break;
+							}
+						}
+						if(!found){
+							handcards2.appendChild(fragment2);
+						}
+					}
+					else{
 						handcards2.appendChild(fragment2);
+					}
 					
 					if(this==game.me||_status.video) ui.updatehl();
 					if (!_status.video) {
@@ -1140,7 +1163,7 @@ content:function(config, pack){
 				};
 				EventContent.chooseBool = function () {
 					"step 0"
-					if (event.isMine()) {
+					if ((typeof event.isMine=='function')&&event.isMine()) {
 						if (event.frequentSkill && !lib.config.autoskilllist.contains(event.frequentSkill)) {
 							ui.click.ok();
 							return;
@@ -1211,7 +1234,7 @@ content:function(config, pack){
 				};
 				EventContent.chooseTarget = function () {
 					"step 0"
-					if (event.isMine()) {
+					if ((typeof event.isMine=='function')&&event.isMine()) {
 						if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 							ui.click.cancel();
 							return;
@@ -1252,7 +1275,12 @@ content:function(config, pack){
 								tipText = tipText.replace(/<\/?.+?\/?>/g, '');
 								handTip.appendText(tipText);
 								if (event.promptbar != 'none') {
-									event.promptbar = handTip.appendText(' 0 - ' + get.select(event.selectTarget)[1]);
+									var from = get.select(event.selectTarget)[0];
+									var to = get.select(event.selectTarget)[1];
+									if(!isFinite(to)){
+										to = '∞';
+									}
+									event.promptbar = handTip.appendText(' '+from+' - ' + to);
 									event.promptbar.sels = 0;
 									event.promptbar.reqs = get.numStr(get.select(event.selectTarget)[1], 'target');
 									event.custom.add.target = function() {
@@ -1299,7 +1327,7 @@ content:function(config, pack){
 					if (event.onresult) {
 						event.onresult(event.result);
 					}
-					if (event.result.bool && event.autodelay && !event.isMine()) {
+					if (event.result.bool && event.autodelay && !((typeof event.isMine=='function')&&event.isMine())) {
 						if (typeof event.autodelay == 'number') {
 							game.delayx(event.autodelay);
 						} else {
@@ -1335,7 +1363,7 @@ content:function(config, pack){
 						}
 						var range = get.select(event.selectCard);
 						game.check();
-						if (event.isMine()) {
+						if ((typeof event.isMine=='function')&&event.isMine()) {
 							if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 								ui.click.cancel();
 								return;
@@ -1392,8 +1420,13 @@ content:function(config, pack){
 									event.dialog = handTip;
 									tipText = tipText.replace(/<\/?.+?\/?>/g, '');
 									handTip.appendText(tipText);
+									var from = event.selectCard[0];
+									var to = event.selectCard[1];
+									if(!isFinite(to)){
+										to = '∞';
+									}
 									if (Array.isArray(event.selectCard)) {
-										event.promptbar = handTip.appendText(' 0 - ' + event.selectCard[1]);
+										event.promptbar = handTip.appendText(' '+from+' - ' + to);
 										event.promptbar.sels = 0;
 										event.promptbar.reqs = get.numStr(event.selectCard[1], 'card');
 										event.custom.add.card = function() {
@@ -1449,7 +1482,7 @@ content:function(config, pack){
 						event.promptdiscard.close();
 					}
 					"step 3"
-					if (event.result.bool && event.result.cards && event.result.cards.length && !game.online && event.autodelay && !event.isMine()) {
+					if (event.result.bool && event.result.cards && event.result.cards.length && !game.online && event.autodelay && !((typeof event.isMine=='function') && event.isMine())) {
 						if (typeof event.autodelay == 'number') {
 							game.delayx(event.autodelay);
 						} else {
@@ -1496,7 +1529,7 @@ content:function(config, pack){
 						if (game.modeSwapPlayer && !_status.auto && player.isUnderControl()) {
 							game.modeSwapPlayer(player);
 						}
-						if (event.isMine()) {
+						if ((typeof event.isMine=='function')&&event.isMine()) {
 							if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 								ui.click.cancel();
 								return;
@@ -1700,7 +1733,7 @@ content:function(config, pack){
 					}
 					_status.noclearcountdown = true;
 					if (event.type == 'phase') {
-						if (event.isMine()) {
+						if ((typeof event.isMine=='function')&&event.isMine()) {
 							event.endButton = ui.create.control('结束回合', 'stayleft',
 							function() {
 								if (_status.event.skill) {
@@ -1722,7 +1755,7 @@ content:function(config, pack){
 							bool: false
 						}
 						return;
-					} else if (event.isMine()) {
+					} else if ((typeof event.isMine=='function')&&event.isMine()) {
 						if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 							ui.click.cancel();
 							return;
@@ -1773,7 +1806,7 @@ content:function(config, pack){
 										tipText = '请选择一张卡牌';
 									}
 									
-									if (event.type == 'phase' && event.isMine()) {
+									if (event.type == 'phase' &&(typeof event.isMine=='function')&& event.isMine()) {
 										handTip.appendText('出牌阶段', 'phase');
 										tipText = '，' + tipText
 									}
@@ -2791,7 +2824,7 @@ content:function(config, pack){
 					if (typeof event.skillDialog == 'object') {
 						event.skillDialog.close();
 					}
-					if (event.isMine()) {
+					if ((typeof event.isMine=='function') && event.isMine()) {
 						event.skillDialog = true;
 					}
 					game.uncheck();
@@ -4544,7 +4577,7 @@ content:function(config, pack){
 							this.classList.add('selected');
 							this.updateTransform(true);
 						}
-						if (game.chess && get.config('show_range') && !_status.event.skill && this.classList.contains('selected') && _status.event.isMine() && _status.event.name == 'chooseToUse') {
+						if (game.chess && get.config('show_range') && !_status.event.skill && this.classList.contains('selected')&&(typeof _status.event.isMine=='function') && _status.event.isMine() && _status.event.name == 'chooseToUse') {
 							var player = _status.event.player;
 							var range = get.info(this).range;
 							if (range) {
@@ -4846,7 +4879,7 @@ content:function(config, pack){
 							event._cardChoice = [];
 							firstCheck = true;
 						}
-						if (event.isMine() && event.name == 'chooseToUse' && event.parent.name == 'phaseUse' && !event.skill && !event._targetChoice && !firstCheck && window.Map && !lib.config.compatiblemode) {
+						if ((typeof event.isMine=='function')&&event.isMine() && event.name == 'chooseToUse' && event.parent.name == 'phaseUse' && !event.skill && !event._targetChoice && !firstCheck && window.Map && !lib.config.compatiblemode) {
 							event._targetChoice = new Map();
 							for (var i = 0; i < event._cardChoice.length; i++) {
 								if (!lib.card[event._cardChoice[i].name].complexTarget) {
@@ -5021,7 +5054,7 @@ content:function(config, pack){
 					if (event._skillChoice) {
 						skills2 = event._skillChoice;
 						for (var i = 0; i < skills2.length; i++) {
-							if (event.isMine() || !event._aiexclude.contains(skills2[i])) {
+							if (((typeof event.isMine=='function')&&event.isMine()) || !event._aiexclude.contains(skills2[i])) {
 								skills.push(skills2[i]);
 							}
 						}
@@ -5055,7 +5088,7 @@ content:function(config, pack){
 							}
 							
 							if (enable) {
-								if (event.isMine() || !event._aiexclude.contains(skills2[i])) {
+								if (((typeof event.isMine=='function')&&event.isMine()) || !event._aiexclude.contains(skills2[i])) {
 									skills.add(skills2[i]);
 								}
 								event._skillChoice.add(skills2[i]);
@@ -5120,7 +5153,7 @@ content:function(config, pack){
 				} else if (_status.event.multitarget) {
 					_status.multitarget = true;
 				}
-				if (event.isMine()) {
+				if ((typeof event.isMine=='function')&&event.isMine()) {
 					if (game.chess && game.me && get.config('show_distance')) {
 						for (var i = 0; i < players.length; i++) {
 							if (players[i] == game.me) {
@@ -6819,7 +6852,7 @@ content:function(config, pack){
 					
 					event.player.wait();
 					decadeUI.game.wait();
-				} else if (!event.isMine()) {
+				} else if (!(typeof event.isMine=='function' && event.isMine())) {
 					event.switchToAuto();
 				}
 				"step 1"
@@ -9921,7 +9954,7 @@ package:{
     author:"短歌 QQ464598631",
     diskURL:"",
     forumURL:"",
-    version:"1.2.0.220114",
+	version:"1.2.0.220114.3",
 },
 files:{
     "character":[],

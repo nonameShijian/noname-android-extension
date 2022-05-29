@@ -451,21 +451,23 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					else console.error(e);
 				}
 				
-				fetch(url)
-					.then(response => {
-						const { ok } = response;
-						if (!ok) {
-							throw response;
-						} else {
-							return response.arrayBuffer();
-						}
-					})
-					.then(arrayBuffer => {
-						// 写入文件
-						//if (!arrayBuffer) return;
-						// 先创建指定文件夹
-						game.ensureDirectory(path, () => {
-			                if (lib.node && lib.node.fs) {
+				if (window.FileTransfer) {
+					let fileTransfer = new FileTransfer();
+					fileTransfer.download(encodeURI(url), encodeURI(lib.assetURL + path + name), success, error);
+				} else {
+					fetch(url)
+						.then(response => {
+							const { ok } = response;
+							if (!ok) {
+								throw response;
+							} else {
+								return response.arrayBuffer();
+							}
+						})
+						.then(arrayBuffer => {
+							// 写入文件
+							// 先创建指定文件夹
+							game.ensureDirectory(path, () => {
 								const filePath = __dirname + '/' + path + '/' + name;
 								// 如果是个文件夹，就退出
 								if (lib.node.fs.existsSync(filePath)) {
@@ -478,48 +480,23 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 									}
 								}
 								lib.node.fs.writeFile(filePath, Buffer.from(arrayBuffer), null, e => {
-			                        if (e) {
-			                            error(e, 'writeFile');
-			                        } else {
-			                            success();
-			                        }
-			                    });
-			                } else if (typeof window.resolveLocalFileSystemURL == 'function') {
-			                    window.resolveLocalFileSystemURL(lib.assetURL + path, 
-									/** @param { DirectoryEntry } entry */
-									entry => {
-										function write() {
-											entry.getFile(name, { create: true }, fileEntry => {
-												fileEntry.createWriter(fileWriter => {
-													fileWriter.onwriteend = () => {
-														success();
-													};
-													fileWriter.write(arrayBuffer);
-												}, e => {
-													error(e, 'writeFile');
-												});
-											});
-										};
-										// 先判断要下载的是否是个文件夹
-										// 如果是，创建了就直接成功吧
-										entry.getDirectory(name, { create: false }, entry => {
-											console.error(`${path + '/' + name}是个文件夹`);
-											lib.config.brokenFile.remove(path + '/' + name);
-											game.saveConfigValue('brokenFile');
-											error(path + '/' + name, 'isDirectory');
-										}, write);
-			                    });
-			                }
-			            });
-					})
-					.catch(e => {
-						if (e instanceof Response) {
-							const { status, statusText } = e;
-							error(status, statusText);
-						} else {
-							error(e);
-						}
-					});
+									if (e) {
+										error(e, 'writeFile');
+									} else {
+										success();
+									}
+								});
+							});
+						})
+						.catch(e => {
+							if (e instanceof Response) {
+								const { status, statusText } = e;
+								error(status, statusText);
+							} else {
+								error(e);
+							}
+						});
+				}
 			};
 			
 			game.shijianDownloadFile = (current, onsuccess, onerror) => {
@@ -528,7 +505,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				if( (alertStr = canUpdate()) !== true ) {
 					return alert(alertStr);
 				}
-				// 重新下载
+				// 500ms后重新下载
 				let reload = (err, statusText) => {
 					onerror(current, err, statusText);
 					setTimeout(() => {
@@ -554,13 +531,12 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						switch(e) {
 							case 404 :
 								game.print("文件不存在，不需要重新下载");
-								console.log({current, e, statusText: "文件不存在，不需要重新下载"});
+								console.log(`${current}不存在，不需要重新下载`);
 								lib.config.brokenFile.remove(current);
 								game.saveConfigValue('brokenFile');
 								return onsuccess(current, true);
 							case 429 :
 								game.print("请求太多，稍后重新下载");
-								//console.error({current, e, statusText: "请求太多，稍后重新下载"});
 								onerror(current, e, "请求太多，请稍后重新下载");
 								break;
 							default:
@@ -570,14 +546,23 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						}
 					} else if (statusText === 'writeFile') {
 						game.print("写入文件失败");
-						//console.error(current, '写入文件失败');
 						onerror(current, e, '写入文件失败');
 					} else if (statusText === 'isDirectory') {
-						console.log({ current, e, statusText: "文件是个文件夹，不需要重新下载" });
+						console.log(`${current}是个文件夹，不需要重新下载`);
+						return onsuccess(current, true);
+					} else if (typeof e.exception == 'string' && e.exception.startsWith('Unable to resolve host')) {
+						console.log('网址解析错误,下载不了');
+						return onsuccess(current, true);
+					} else if (e.http_status === null) {
+						console.log('http码为null');
+						return onsuccess(current, true);
+					} else if (e.http_status == 404 || e.http_status == '404') {
+						console.log('指定网址中没有这个文件: ' + current);
+						lib.config.brokenFile.remove(current);
+						game.saveConfigValue('brokenFile');
 						return onsuccess(current, true);
 					} else {
 						game.print(e);
-						//console.error(current, e);
 						onerror(current, e, statusText);
 					}
 					reload(e, statusText);
@@ -609,9 +594,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							onsuccess(current, bool);
 							//自调用
 							download();
-						}, (current, e, statusText) => {
-							onerror(current, e, statusText);
-						});
+						}, onerror);
 			
 					} else {
 						onfinish();
@@ -764,7 +747,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
             show_version: {
                 clear: true,
                 nopointer: true,
-                name: '扩展版本： v1.3',
+                name: '扩展版本： v1.31',
             },
             update_link_explain: {
                 clear: true,
@@ -1498,7 +1481,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.3",
+			version: "1.31",
 		},
 	}
 });

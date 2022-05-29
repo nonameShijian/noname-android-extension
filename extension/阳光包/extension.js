@@ -7,7 +7,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
     //史诗武将
 	lib.rank.rarity.epic.addArray(["lyz_zhouyu","lyz_lingju","lyz_caiwenji","lyz_zhenji","lyz_daqiao","lyz_xiaoqiao","lyz_sunshangxiang","lyz_simayi","lyz_guojia","lyz_huatuo","lyz_caojie","lyz_caocao","lyz_liubei","lyz_sunjian","lyz_zhangjiao","lyz_luxun","lyz_diaochan","lyz_guanyinping","lyz_bulianshi","lyz_wangyi"]);
 	//传说武将
-	lib.rank.rarity.legend.addArray(["lyz_zhaoyun","lyz_shen_diaochan","lyz_shen_zhangliao","lyz_shen_gaodayihao","lyz_zhugeliang","lyz_mayunlu","lyz_shen_lvbu","lyz_machao","lyz_shen_simayi","lyz_shen_zhouyu","lyz_yangguangweiliang","lyz_zhangfei","lyz_yjlgt","lyz_guanyu","lyz_xunyu","lyz_shijian","lyz_lvlingqi","lyz_zuoci","lyz_sunce","lyz_ziyu","lyz_xusheng","lyz_xuedaoshaozhu","lyz_shen_zhenji","lyz_shen_zhugeliang","lyz_nanxun","lyz_shen_guanyu"]);
+	lib.rank.rarity.legend.addArray(["lyz_shen_diaochan","lyz_shen_zhangliao","lyz_shen_gaodayihao","lyz_zhugeliang","lyz_mayunlu","lyz_shen_lvbu","lyz_machao","lyz_shen_simayi","lyz_shen_zhouyu","lyz_yangguangweiliang","lyz_zhangfei","lyz_yjlgt","lyz_guanyu","lyz_xunyu","lyz_shijian","lyz_lvlingqi","lyz_zuoci","lyz_sunce","lyz_ziyu","lyz_xusheng","lyz_xuedaoshaozhu","lyz_shen_zhenji","lyz_shen_zhugeliang","lyz_nanxun","lyz_shen_guanyu","lyz_zhaoyun"]);
     
          
     lib.arenaReady.push(function (){
@@ -16,8 +16,6 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
                         lib.ygb_player_init=lib.element.player.init;
                         lib.element.player.init=function(character,character2,skill){
                             var ygb={
-            
-            "lyz_zhaoyun":"☼赵云",
             "lyz_shen_diaochan":"☼神貂蝉",
             "lyz_shen_zhangliao":"☼神张辽",
             "lyz_shen_gaodayihao":"☼高达一号",
@@ -68,8 +66,8 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             "lyz_shen_zhugeliang":"☼神诸葛亮",
             "lyz_nanxun":"南尋",    
             "lyz_shen_guanyu":"☼神关羽",
-            "lyz_wangyi":"☼王异",         
-                            
+            "lyz_wangyi":"☼王异",
+            "lyz_zhaoyun":"☼赵云",                     
                             };                            
                             var player=lib.ygb_player_init.apply(this, arguments);
 
@@ -118,14 +116,13 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             yangguangbao:{
                 "lyz_shen":["lyz_shen_guanyu","lyz_shen_zhugeliang","lyz_shen_zhenji","lyz_shen_diaochan","lyz_shen_zhangliao","lyz_shen_gaodayihao","lyz_shen_lvbu","lyz_shen_simayi","lyz_shen_zhouyu","lyz_shen_zhenji","lyz_shen_guanyu"],
                 "lyz_wei":["lyz_wangyi","lyz_xinxianying","lyz_zhangliao","lyz_xunyu","lyz_caiwenji","lyz_zhenji","lyz_simayi","lyz_guojia","lyz_caocao","lyz_zhangchunhua","lyz_wangyi"],
-                "lyz_shu":["lyz_guanyinping","lyz_guanyu","lyz_zhangfei","lyz_zhaoyun","lyz_zhugeliang","lyz_mayunlu","lyz_huangyueying","lyz_liubei","lyz_zhangxingcai"],
+                "lyz_shu":["lyz_guanyinping","lyz_guanyu","lyz_zhangfei","lyz_zhugeliang","lyz_mayunlu","lyz_huangyueying","lyz_liubei","lyz_zhangxingcai","lyz_zhaoyun"],
                 "lyz_wu":["lyz_bulianshi","lyz_sunce","lyz_zhouyu","lyz_daqiao","lyz_xiaoqiao","lyz_sunshangxiang","lyz_sunjian","lyz_luxun","lyz_xusheng"],
                 "lyz_qun":["lyz_jiaxu","lyz_zuoci","lyz_lvlingqi","lyz_lingju","lyz_machao","lyz_huatuo","lyz_caojie","lyz_zhangjiao","lyz_diaochan"],
                 "lyz_caidan":["lyz_yangguangweiliang","lyz_yjlgt","lyz_shijian","lyz_ziyu","lyz_xuedaoshaozhu","lyz_nanxun"],
             },
         },
         character:{
-            "lyz_zhaoyun":["male","shu",4,["lyzlongying","lyzhunyou","lyzcuizhen","lyzchengyu"],["die_audio"]],
             "lyz_shen_diaochan":["female","shen",3,["lyzyuhun","lyzhuanmei","lyzyuepo"],["die_audio"]],
             "lyz_shen_zhangliao":["male","shen",4,["lyzcuifeng","lyzxiasha","lyzzhijue"],["die_audio"]],
             "lyz_shen_gaodayihao":["male","shen",1,["lyzjuejing","lyzlonghun","lyzzhanjiang"],["die_audio"]],
@@ -177,9 +174,10 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             "lyz_nanxun":["male","shen",5,["lyzdingzheng","lyzshiyi","lyzhuanxing"],["die_audio"]],
             "lyz_shen_guanyu":["male","shen",5,["lyzmingjue","lyzyanren","lyzedao"],["die_audio"]],
             "lyz_wangyi":["female","wei",4,["lyzzhaojie","lyzyingwu"],["die_audio"]],
+            "lyz_zhaoyun":["male","shu",4,["lyzlinhuang","lyzyuwang"],["die_audio"]],
+            
         },
         characterIntro:{
-            "lyz_zhaoyun":"<br>【武将定位】 爽将<br> <br>【武将简介】 血染征袍透甲红，当阳谁敢与争锋！古来冲阵扶危主，只有常山赵子龙。",
             "lyz_shen_diaochan":"<br>【武将定位】 控制·限制·回复<br> <br>【武将简介】 阳光包的☼神貂蝉保留了官方操控别人回合的创新设计并加强了操作体验。技能1〖驭魂〗为核心技能，相比〖惑心〗，〖驭魂〗控制目标精准，不需消耗手牌且能为☼神貂蝉提供额外的存过牌能力。技能2〖幻魅〗为特色技能，强制发动的特性使☼神貂蝉每一回合的打法都不尽相同，可随机的诸如〖离魂〗等技能更能与〖驭魂〗形成完美的配合。技能3〖月魄〗为生存技能，☼神貂蝉进入濒死状态时的回复能力与脱离濒死状态时强大的负面威慑效果能够为她创造一定的生存环境。",
             "lyz_shen_zhangliao":"<br>【武将定位】 输出·限制<br> <br>【武将简介】 保留了官方神张辽夺取他人技能的创新性设计。技能1〖摧锋〗为机制技能，夺取不同的武将技能为☼神张辽带来较高的随机性和趣味性。技能2〖諕杀〗为主收益技能，具有可控的稳定收益，自身血量越低，压制力越强。技能3〖制决〗为辅收益技能，除配合“摧锋”发动外，还可用于处理敌方棘手的武将，只需对其造成一次伤害即可。整体上，☼神张辽技能多变，收益稳定，是强度较高的娱乐武将。",
             "lyz_shen_gaodayihao":"<br>【武将定位】 爽将<br> <br>【武将简介】 传说中的“高达一号”，谁用谁知道！☼高达一号将〖旧龙魂〗改为拥有锁定技标签的〖新龙魂〗，并略微调整了〖斩将〗的效果（可获得【青釭剑】的范围：场上、牌堆、弃牌堆），再次提高了其过牌量和生存能力。",
@@ -231,11 +229,11 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             "lyz_nanxun":"<br>【武将定位】 彩蛋<br> <br>【武将简介】 南尋，亦称尋，无名杀玩家，热衷于对扩展“十周年UI”和“手杀ui”进行修改，代表作“魔改十周年UI”。代码水平不高，但也会指导萌新和解答一些问题，常出没于夜晚的群聊中。",
             "lyz_shen_guanyu":"<br>【武将定位】 限制·生存·输出<br> <br>【武将简介】 阳光包的☼神关羽仍延续了官方“追魂恶鬼”的形象设定，但具体思路有所差别，整体节奏较慢。技能1〖冥绝〗为生存技能，确保☼神关羽能度过爆发较高的前期，重生后的火【杀】需合理选择目标。技能2〖魇刃〗为主收益技能，只能对有手牌的其他角色发动，但发动后能弃置三个区域的牌，合理地选择颜色和弃牌数是关键，此技能使用的【杀】不计入次数限制且无次数限制。技能3〖噩道〗取材于“六道轮回”中的“饿鬼道”与“畜牲道”，“饿鬼”与“畜牲”能够共存，但自身不能叠加，且在☼神关羽死亡后仍生效。配合〖魇刃〗强制让敌人攻击自身，能够起到不错的效果。",
             "lyz_wangyi":"<br>【武将定位】 成长·限制·控场<br> <br>【武将简介】 阳光包☼王异的人设与官方一致，但武将的技能和定位均有差别，拥有强大的主动能力。技能1〖昭节〗为核心收益技能，带有成长属性，需注意技能的触发条件。技能2〖颖悟〗参考了王异“秘计九出”的典故。“单目标普通锦囊牌”与杨仪的〖狷狭〗范围相同，不包括【无中生有】等锦囊。【无懈可击】、【顺手牵羊】、【决斗】应该是使用频率较高的锦囊牌。总体上，不需要节省〖颖悟〗的次数，尽快地令〖昭节〗发育成型，是☼王异的基本思路。",
+            "lyz_zhaoyun":"<br>【武将定位】 防御·过牌<br> <br>【武将简介】 官方赵云防御能力足够，但主动能力、过牌能力不足，且与团队的相性较差。阳光包则作出了部分调整。技能1〖鳞煌〗为核心技能，触发频率较高，使得☼赵云发挥防御与团队辅助能力时不再依赖手牌，克制大部分拆迁武将。需注意，〖鳞煌〗仅能“使用”而不能“打出”牌（在通常需要“打出”【杀】或【闪】的情况下，都能使用【无懈可击】）。技能2〖宇望〗为收益技能，发动时能积累“心”。☼赵云能够重铸依赖度极低的【杀】、【闪】、【无懈可击】或部分价值不高的锦囊进行过牌，并获取【酒】、【桃】、装备或核心锦囊等关键牌。在获取相应的牌后，剩余的牌回归原位。总而言之，☼赵云正如演义描绘的那样，是个非常稳定、强力、令人心安的武将。",
             
         },
         
         characterTitle:{
-		    "lyz_zhaoyun":"云涯无对",
 		    "lyz_shen_diaochan":"魅影神光",
 		    "lyz_shen_zhangliao":"諕杀灭魄",
 		    "lyz_shen_gaodayihao":"天龙乘云",
@@ -287,11 +285,212 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
 		    "lyz_nanxun":"小有名气",
 		    "lyz_shen_guanyu":"厄刃拂夜",
 		    "lyz_wangyi":"绝智明妍",
+		    "lyz_zhaoyun":"云涯无对",
 		
 		},       
        
        //技能代码
        skill:{
+            lyzlinhuang:{
+                group:"lyzlinhuang_use",
+                audio:"ext:阳光包/audio:2",
+                trigger:{
+                    player:["phaseZhunbeiBegin","loseAfter"]
+                },
+                intro:{
+                    content:"共有#枚“心”"
+                },
+                marktext:"心",
+                forced:true,
+                filter:function(event,player){
+                    if(player.countMark("lyzlinhuang")>6) return false;
+                    if(event.name!="lose") return true;
+                    else{
+                        var evt=event.getParent();
+                        return evt.name!="useCard";
+                    }
+                },
+                content:function(){
+                    player.addMark("lyzlinhuang",1);
+                },
+                subSkill:{
+                    use:{
+                         enable:'chooseToUse',
+                         audio:"lyzlinhuang",
+				filter:function(event,player){
+					if(!player.countMark("lyzlinhuang")) return false;
+					return event.filterCard({name:'sha'},player,event)||
+						event.filterCard({name:'wuxie'},player,event)||
+						event.filterCard({name:'shan'},player,event);
+				},
+				chooseButton:{
+					dialog:function(event,player){
+						var list=[];
+						if(event.filterCard({name:'sha'},player,event)){
+							list.push(['基本','','sha']);
+                            for(var j of lib.inpile_nature) list.push(['基本','','sha',j]);
+						}
+						if(event.filterCard({name:'wuxie'},player,event)){
+							list.push(['锦囊','','wuxie']);
+						}						
+						if(event.filterCard({name:'shan'},player,event)){
+							list.push(['基本','','shan']);
+						}
+						return ui.create.dialog('鳞煌',[list,'vcard'],'hidden');
+					},
+					check:function(button){
+						var player=_status.event.player;
+						var card={name:button.link[2],nature:button.link[3]};						
+							if(card.name=='sha'){
+								if(card.nature=='fire') return 2.95;
+								else return 2.9;
+							}
+							else if(card.name=='wuxie'||card.name=='shan'){
+								return 4;
+							}
+					},
+					backup:function(links,player){
+						return {
+							filterCard:function(){return false},
+							viewAs:{name:links[0][2],nature:links[0][3],isCard:true},
+							audio:"lyzlinhuang",
+							selectCard:-1,
+							popname:true,
+							precontent:function(){
+								player.removeMark("lyzlinhuang");
+							},
+						}
+					},
+					prompt:function(links,player){
+						return '选择'+get.translation(links[0][3]||'')+get.translation(links[0][2])+'的目标';
+					}
+				},
+				hiddenCard:function(player,name){
+					return (name=="sha"||name=="shan"||name=="wuxie")&&player.countMark('lyzlinhuang')>0;
+				},
+				ai:{
+					order:function(){
+					    var player=_status.event.player;
+						var event=_status.event;													
+						if(event.filterCard({name:'wuxie'},player,event)||event.filterCard({name:'shan'},player,event)){
+							return 4;
+						}
+						if(event.filterCard({name:'sha'},player,event)){
+							return 2.9;
+						}
+					},
+					respondSha:true,
+					respondShan:true,
+					skillTagFilter:function(player,tag,arg){
+						if(!player.countMark("lyzlinhuang")) return false;
+						return true;
+					},
+					result:{
+						player:function(player){
+							return 1;
+						}
+					}
+				}
+                    }
+                }
+            },
+            lyzyuwang:{
+                enable:"phaseUse",
+                group:"lyzyuwang2",
+                audio:"ext:阳光包/audio:2",
+                filter:function(event,player){
+                    return player.countCards("he")>0;
+                },
+                filterCard:function(card,player){
+					return !player.storage.lyzyuwang||!player.storage.lyzyuwang.contains(get.type(card,'trick'));
+				},
+				check:function(card){
+				    if(card.name=="wuxie"||card.name=="sha"||card.name=="shan") return 10;
+					else return 10-get.value(card);
+				},
+				position:"he",
+				discard:false,
+				lose:false,
+				delay:false,    
+				content:function(){
+				    "step 0"
+				    if(!player.storage.lyzyuwang) player.storage.lyzyuwang=[];
+					player.storage.lyzyuwang.push(get.type(cards[0],'trick'));
+					"step 1"
+					player.loseToDiscardpile(cards[0]);
+					player.draw();
+					"step 2"
+					var type=get.type(cards[0]);
+					if(type=="basic"){
+					    var names=[];
+						var cards=[];
+						while(cards.length<3){
+							var card=get.cardPile(function(card){
+								return !cards.contains(card)&&!names.contains(card.name)&&get.type(card)=='basic';
+							});
+							if(card){
+								cards.push(card);
+								names.push(card.name);
+							}
+							else break;
+						}
+						if(cards.length){
+						    player.chooseCardButton("请选择要获得的牌",true,cards).set("ai",function(button){
+                                    return 1;
+                            });
+						}
+						else event.finish();					    
+					}
+					else event.goto(4);
+					"step 3"
+					if(result.bool){
+					    player.gain(result.links,"gain2");
+					    event.finish();
+					}
+					"step 4"
+					var names=[];
+						var cards=[];
+						while(cards.length<4){
+							var card=get.cardPile(function(card){
+								return !cards.contains(card)&&!names.contains(card.name)&&get.type(card)!='basic';
+							});
+							if(card){
+								cards.push(card);
+								names.push(card.name);
+							}
+							else break;
+						}
+						if(cards.length){
+						    player.chooseCardButton("请选择要获得的牌",true,cards).set("ai",function(button){
+                                    return 1;
+                            });
+						}
+						else event.finish();
+						"step 5"	
+				      if(result.bool){
+					    player.gain(result.links,"gain2");
+					}
+				},
+				ai:{
+                    order:10,
+                    result:{
+                        player:function(player){
+                            return 1;
+                        }
+                    }
+                },
+            },
+            lyzyuwang2:{
+                charlotte:true,
+                trigger:{
+                    player:"phaseBefore"
+                },
+                forced:true,
+                popup:false,
+                content:function(){
+                    player.storage.lyzyuwang=[];
+                }
+            },
             lyzzhaojie:{
                 audio:"ext:阳光包/audio:2",
                 derivation:["lyzzhaojie_lv1","lyzzhaojie_lv2","lyzzhaojie_lv3"],
@@ -973,6 +1172,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             },
             lyzshepo2:{
                 mark:true,
+                charlotte:true,
                 intro:{content:'跳过下个出牌阶段'},
             },
             lyzliaolai:{
@@ -3019,6 +3219,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             lyzshenhuang:{
                 audio:"ext:阳光包/audio:2",
                 group:"lyzshenhuang2",
+                usable:2,
                         enable:["chooseToUse","chooseToRespond"],
                         hiddenCard:function(player,name){
                            if(!['sha','shan','tao','jiu'].contains(name)) return false;
@@ -3239,58 +3440,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             event.finish();
                 }
             },
-            lyzlongying:{
-                audio:"ext:阳光包/audio:2",
-                locked:true,
-                enable:["chooseToRespond","chooseToUse"],
-                filter:function (event,player){
-            return player.countCards('he',{type:'basic'})>0;
-    },
-                chooseButton:{
-                    dialog:function (event,player){
-            var list=["huosha","shan","tao","jiu"];
-              for(var i=0;i<list.length;i++){
-			     list[i]=['基本','',list[i]];
-	    }
-            return ui.create.dialog('龙影',[list,'vcard']);
-        },
-                    filter:function(button,player){
-						return _status.event.getParent().filterCard({name:button.link[2]},player,_status.event.getParent());
-					},
-                    backup:function (links,player){
-            return {
-                audio:'lyzlongying',
-                filterCard:function (card,player){
-                    var name=links[0][2];
-                    if(name=="sha"||name=="tao"){
-                        return get.color(card)=="red"&&get.type(card)=="basic";
-                    }
-                    if(name=="shan"||name=="jiu"){
-                        return get.color(card)=="black"&&get.type(card)=="basic";
-                    }
-                    return false;
-                },
-                position:"hes",
-                selectCard:1,
-                popname:true,
-                ai:function(card){
-                    return 8-ai.get.value(card);
-                },
-                viewAs:{name:links[0][2],
-                    nature:links[0][3]
-                },
-            }
-        },
-                    prompt:function (links,player){
-                    return '将一张牌当做'+(get.translation(links[0][3])||'')+get.translation(links[0][2])+'使用';
-        },
-                },
-                ai:{
-                  respondSha:true,
-					respondShan:true,
-					 save:true,                
-                }          
-            },
+      
             lyzlonghun:{
 				audio:"ext:阳光包/audio:4",
 				locked:true,
@@ -3454,269 +3604,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
 					}
 				}
 			}, 
-            lyzhunyou:{
-                audio:"ext:阳光包/audio:2",
-                trigger:{
-                    player:"loseAfter",
-                },
-                forced:true,
-                filter:function (event,player){
-                     return player!=_status.currentPhase&&event.hs&&event.hs.length>0&&['useCard','respond'].contains(event.getParent().name);
-                },
-                content:function (){
-                     "step 0"
-                     event.card=get.cards()[0];
-                     game.cardsGotoOrdering(event.card);
-                     event.videoId=lib.status.videoId++;
-                     var judgestr=get.translation(player)+'发动了〖魂佑〗';
-                     game.addVideo('judge1',player,[get.cardInfo(event.card),judgestr,event.videoId]);
-                     game.broadcastAll(function(player,card,str,id,cardid){
-                          var event;
-                          if(game.online){
-                               event={};
-                          }
-                          else{
-                               event=_status.event;
-                          }
-                          if(game.chess){
-                               event.node=card.copy('thrown','center',ui.arena).animate('start');
-                          }
-                          else{
-                               event.node=player.$throwordered(card.copy(),true);
-                          }
-                          if(lib.cardOL) lib.cardOL[cardid]=event.node;
-                          event.node.cardid=cardid;
-                          event.node.classList.add('thrownhighlight');
-                          ui.arena.classList.add('thrownhighlight');
-                          event.dialog=ui.create.dialog(str);
-                          event.dialog.classList.add('center');
-                          event.dialog.videoId=id;
-                     },player,event.card,judgestr,event.videoId,get.id());
-
-                     game.log(player,'展示了',event.card);
-                     game.delay(2);
-                     
-                          player.chooseTarget('选择获得此牌的角色').set('ai',function(target){
-                               var att=get.attitude(_status.event.player,target);
-                               if(_status.event.du){
-                                    if(target.hasSkillTag('nodu')) return 0;
-                                    return -att;
-                               }
-                               if(att>0){
-                                    return att+Math.max(0,5-target.countCards('h'));
-                               }
-                               return att;
-                          }).set('du',event.card.name=='du');
-                     
-                     
-                     "step 1"
-                     if(result.bool){
-                          event.dialog.close();
-                          game.addVideo('judge2',null,event.videoId);
-                          player.line(result.targets,'green');
-                          result.targets[0].gain(event.card,'log');
-                          event.node.moveDelete(result.targets[0]);
-                          game.addVideo('gain2',result.targets[0],[get.cardInfo(event.node)]);
-                          ui.arena.classList.remove('thrownhighlight');
-                          game.broadcast(function(card,target,id){
-                               var dialog=get.idDialog(id);
-                               if(dialog){
-                                    dialog.close();
-                               }
-                               ui.arena.classList.remove('thrownhighlight');
-                               if(card.clone){
-                                    card.clone.moveDelete(target);
-                               }
-                          },event.card,result.targets[0],event.videoId);
-                     }
-                     else{
-                          game.addVideo('deletenode',player,[get.cardInfo(event.node)]);
-                          event.node.delete();
-                          game.broadcast(function(id){
-                               var dialog=get.idDialog(id);
-                               if(dialog){
-                                    dialog.close();
-                               }
-                               if(card.clone){
-                                    card.clone.delete();
-                               }
-                               ui.arena.classList.remove('thrownhighlight');
-                          },event.videoId,event.card);
-                          event.dialog.close();
-                          game.addVideo('judge2',null,event.videoId);
-                          ui.arena.classList.remove('thrownhighlight');
-                     }
-                     
-                  "step 2"
-                  if(get.type(event.card,'trick')!=get.type(trigger.getParent().card,'trick')){
-                         event.disbool=true;
-						player.chooseTarget('是否弃置一名角色区域里的一张牌？',function(card,player,target){
-							return target.countDiscardableCards(player,'hej')>0;
-						}).set('ai',function(target){
-							var player=_status.event.player;
-							return get.effect(target,{name:'guohe'},player,player);
-						});
-                                            
-                     }
-                    else{
-                          event.recoverbool=true;
-                          player.chooseTarget('是否令一名角色回复1点体力？',function(card,player,target){
-                               return target.hp<target.maxHp;
-                          }).set('ai',function(target){
-            return get.attitude(player,target);
-        });
-        }
-        "step 3"
-        if(event.recoverbool){
-                          if(result.bool){
-                               player.line(result.targets[0],'green');
-                               result.targets[0].recover();
-                          }
-                          event.dialog.close();
-                          game.addVideo('judge2',null,event.videoId);
-                          game.addVideo('deletenode',player,[get.cardInfo(event.node)]);
-                          event.node.delete();
-                          game.broadcast(function(id,card){
-                               var dialog=get.idDialog(id);
-                               if(dialog){
-                                    dialog.close();
-                               }
-                               if(card.clone){
-                                    card.clone.delete();
-                               }
-                               ui.arena.classList.remove('thrownhighlight');
-                          },event.videoId,event.card);
-                          ui.arena.classList.remove('thrownhighlight');
-                     }
-                     else if(event.disbool){
-						if(result.bool){
-							player.line(result.targets[0],'green');
-							player.discardPlayerCard(result.targets[0],'hej',true);
-						}
-						event.dialog.close();
-						game.addVideo('judge2',null,event.videoId);
-						game.addVideo('deletenode',player,[get.cardInfo(event.node)]);
-						event.node.delete();
-						game.broadcast(function(id,card){
-							var dialog=get.idDialog(id);
-							if(dialog){
-								dialog.close();
-							}
-							if(card.clone){
-								card.clone.delete();
-							}
-							ui.arena.classList.remove('thrownhighlight');
-						},event.videoId,event.card);
-						ui.arena.classList.remove('thrownhighlight');
-					}
-                },
-                ai:{
-                    effect:{
-                        target:function (card,player,target){
-                               if(get.tag(card,'respond')&&target.countCards('h')>1) return [1,0.2];
-                          },
-                    },
-                },
-            },
-            lyzcuizhen:{
-                shaRelated:true,
-                audio:"ext:阳光包/audio:2",
-                trigger:{
-                    player:"useCardToPlayered",
-                },
-                check:function (event,player){
-        return get.attitude(player,event.target)<0;
-    },
-                filter:function (event,player){
-        return event.card.name=='sha';
-    },
-                logTarget:"target",
-                content:function (){
-        "step 0"
-        player.judge(function(){return 0});
-        if(!trigger.target.hasSkill('baiban')){
-            trigger.target.addTempSkill('baiban');
-        }
-        "step 1"
-        var suit=get.suit(result.card);
-        var target=trigger.target;
-        var num=target.countCards('h','shan');
-        target.chooseCard('请交给'+get.translation(player)+'一张'+get.translation(suit)+'牌，否则不能使用或打出手牌直至回合结束','he',function(card){
-            return get.suit(card)==_status.event.suit;
-        }).set('ai',function(card){
-            var num=_status.event.num;
-            if(num==0) return 0;
-            if(card.name=='shan') return num>1?2:0;
-            return 8-get.value(card);
-        }).set('num',num).set('suit',suit);
-        "step 2"
-        if(result.bool){
-            var cards=result.cards;
-            player.gain(cards,trigger.target,'giveAuto');
-        }
-    
-        else{
-            trigger.target.addTempSkill('lyzcuizhen2');
-        }
-    },
-                ai:{
-                    ignoreSkill:true,
-                    skillTagFilter:function (player,tag,arg){
-            if(!arg||arg.isLink||!arg.card||arg.card.name!='sha') return false;
-            if(!arg.target||get.attitude(player,arg.target)>=0) return false;
-            if(!arg.skill||!lib.skill[arg.skill]||lib.skill[arg.skill].charlotte||get.is.locked(arg.skill)||!arg.target.getSkills(true,false).contains(arg.skill)) return false;
-        },
-                },
-            },
-            "lyzcuizhen2":{
-                mark:true,
-                marktext:"摧",
-                charlotte:true,
-                mod:{
-                    "cardEnabled2":function (card){
-            if(get.position(card)=='h') return false;
-        },
-                },
-                intro:{
-                    content:"不能使用或打出手牌",
-                },
-            },
-            lyzchengyu:{
-                audio:"ext:阳光包/audio:2",
-                trigger:{
-                    global:"phaseJieshuBegin",
-                },
-                forced:true,
-                filter:function (event,player){
-                    return player.getHistory('useCard',function(card){
-                        return get.type(card.card)=='basic';
-                    }).length>0||player.getHistory('respond',function(card){
-                        return get.type(card.card)=='basic';
-                    }).length>0;
-                },
-                content:function (){
-                    'step 0'
-                        var list=[];
-                        for(var i=0;i<lib.inpile.length;i++){
-                            var name=lib.inpile[i];
-                            if(get.type(name)=='basic') list.push(['基本','',name]);
-                            if(name=='sha'){
-                                for(var j of lib.inpile_nature) list.push(['基本','','sha',j]);
-                            }
-                        }
-                  player.chooseButton(['骋宇：选择要使用的牌，或点取消摸两张牌',[list,'vcard']],function(button){
-						return _status.event.player.getUseValue({name:button.link[2],nature:button.link[3]});
-					},function(button){
-						return _status.event.player.hasUseTarget({name:button.link[2],nature:button.link[3]});
-					});
-                    'step 1'
-                    if(!result.bool) player.draw(2);
-                    else {
-                    player.chooseUseTarget({name:result.links[0][2],isCard:true,nature:result.links[0][3]});
-                    player.draw();
-                          }
-                },
-            },
+            
             
             lyzcuifeng:{
                 audio:"ext:阳光包/audio:2",
@@ -5299,6 +5187,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             },
             lyztianfu2:{
                         mark:true,
+                        charlotte:true,
                         marktext:"负",
                         intro:{
                             content:"已明置身份牌",
@@ -6295,6 +6184,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
     },
             },
             "lyzguilv3":{
+                 charlotte:true,
             },
             lyzchouyi:{
                 audio:"ext:阳光包/audio:2",
@@ -6442,6 +6332,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             },
             "lyztianqian3":{
                 mark:true,
+                charlotte:true,
                 intro:{
                     content:function (storage,player){
                         return '手牌上限+'+player.storage.lyztianqian3;
@@ -7083,6 +6974,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             },
             "lyzxingyun_draw":{
                 mark:true,
+                charlotte:true,
                 audio:"lyzxingyun",
                 intro:{
                     content:"当前颜色：$",
@@ -8156,6 +8048,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             },
             "lyzshulun2":{
                 mark:true,
+                charlotte:true,
                 intro:{
                     content:"上回合已成为过〖束论〗的目标",
                 },
@@ -11874,7 +11767,6 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
              
              
             //武将部分
-            "lyz_zhaoyun":"☼赵云",
             "lyz_shen_diaochan":"☼神貂蝉",
             "lyz_shen_zhangliao":"☼神张辽",
             "lyz_shen_gaodayihao":"☼高达一号",
@@ -11926,18 +11818,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             "lyz_nanxun":"南尋",
             "lyz_shen_guanyu":"☼神关羽",
             "lyz_wangyi":"☼王异",
+            "lyz_zhaoyun":"☼赵云",
             
             //技能部分
-            lyzlongying:"龙影",
-            "lyzlongying_info":"锁定技，你可将一张红色基本牌当火【杀】或【桃】使用或打出；你可将一张黑色基本牌当【闪】或【酒】使用或打出。",
-            lyzhunyou:"魂佑",
-            "lyzhunyou_info":"锁定技，当你于回合外使用或打出手牌后，你展示牌堆顶的一张牌并可将之交给一名角色，然后若这两张牌类别相同，你可令一名角色回复1点体力；否则你可弃置一名角色区域里的一张牌。",
-            lyzcuizhen:"摧阵",
-            "lyzcuizhen_info":"当你使用【杀】指定目标后，你可进行一次判定并令目标角色的技能失效直至回合结束，然后其选择一项：交给你一张与判定牌花色相同的牌；或不能使用或打出手牌直至回合结束。",
-            "lyzcuizhen2":"摧阵",
-            "lyzcuizhen2_info":"",
-            lyzchengyu:"骋宇",
-            "lyzchengyu_info":"锁定技，任一角色的结束阶段开始时，若你于此回合使用或打出过基本牌，则你选择一项：视为使用一张基本牌，然后摸一张牌；或摸两张牌。",
             lyzyuhun:"驭魂",
             lyzyuhun2:"驭魂",
             "lyzyuhun_info":"出牌阶段限一次，你可将武将牌翻面并跳过本回合的弃牌阶段，若如此做，你将一名其他角色的下回合改为由你操控。当一名角色的回合结束时，若你的武将牌背面向上，你摸一张牌。",         
@@ -12006,7 +11889,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             lyzqingge:"清歌",
             "lyzqingge_info":"锁定技，任一角色的回合结束后，若你于此回合获得或失去过牌，你摸一张牌。",
             lyzshenhuang:"神惶",
-            "lyzshenhuang_info":"你可将两张手牌当任一基本牌使用或打出。若你以此法使用牌对应的实体牌中包含：红色牌，你复原武将牌；黑色牌，你摸一张牌。", 
+            "lyzshenhuang_info":"每回合限两次，你可将两张手牌当任一基本牌使用或打出。若你以此法使用牌对应的实体牌中包含：红色牌，你复原武将牌；黑色牌，你摸一张牌。", 
 			lyzjinghong:"惊鸿",
 			"lyzjinghong_info":"锁定技，每轮限四次，当其他角色使用或打出的名称字数为X的非转化实体牌结算完毕即将进入弃牌堆时，你获得之；准备阶段和结束阶段，你重新声明X的值；出牌阶段开始时，你随机获得一张名称字数为X的牌；（X初始为2，取值区间为1至5）。",
 			lyzjinghong2:"惊鸿",
@@ -12280,6 +12163,10 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"阳�
             lyzzhaojie_lv3_info:"出牌阶段限一次，你可进行一次判定或弃置一张牌，并记录判定牌（弃置牌）的颜色。若如此做，则直至你下回合开始，当你使用或被其他角色使用此颜色有目标的基本牌或普通锦囊牌时，你选择两项：①摸一张牌；②弃置一名角色区域里的一张牌；③令此牌结算两次。",
             lyzyingwu:"颖悟",
             lyzyingwu_info:"剩余可使用9次，出牌阶段/其他角色的回合限一次，你可视为使用一张单目标普通锦囊牌/【无懈可击】；当此技能的使用次数达到3、6、9时，你对〖昭节〗进行第一、二、三次升级。",
+		    lyzlinhuang:"鳞煌",
+            lyzlinhuang_info:"准备阶段或当你不因使用而失去一次牌后，你获得1枚“心”（至多拥有7枚“心”）。你可于合法时机移去1枚“心”并视为使用一张任意种类的【杀】、【闪】或【无懈可击】。",
+            lyzyuwang:"宇望",
+            lyzyuwang_info:"出牌阶段每类牌限一次，你可重铸一张牌，然后若此牌为基本/非基本牌，你观看牌堆和弃牌堆里牌名不同的三张基本/四张非基本牌，并获得其中一张。",
 		  }
        }
          
@@ -12326,9 +12213,9 @@ help:{},config:{
             
         },                                
     },
-    intro:"“阳光包”版本：5.7.71<br>☼扩展简介：自制三国武将合集，武将技能均推翻重塑。适用环境：三服全扩，八人军争场。武将强度：平均为半阴级；包内带武将评级，仅代表该武将在本扩展内的强度水平，SSS武将的强度不受限。<br>☼运行环境：①较新的游戏版本（必需）；②打开“兼容模式”（推荐）；③“十周年UI”扩展（可选）；④“千幻聆音”扩展（可选）。<br>☼扩展说明：①本扩展部分引用了游戏本体武将包的代码，请勿隐藏游戏本体的武将包。②本扩展的更新可能会伴随文件的删减，推荐彻底删除旧版再安装新版。③因语音需求，本扩展部分与原版同名同效果的衍生技能为全新ID的技能，可与原版技能共同存在并在满足条件时分别单独发动。<br>☼鸣谢——<br>代码支持：戒除联盟、诗笺、寰宇星城、微尘、“柚子、奶茶、猫以及面具”、尋。<br>素材支持：〖世海〗资源包、『桤楴』露头包、周子鱼yu、无伤大鸽子、洛神、戴夫、血刀少主、遗计两个桃、尋、可宣、林柒柒。<br>特别感谢所有热爱支持阳光包的玩家们，你们的支持是阳光包更新的最大动力！<br><br>更新说明——<br>1.修复了一处皮肤命名错误的问题；<br>2.去除☼徐盛的输入字符提示，提升输入体验；<br>3.调整☼神关羽〖噩道〗的技能效果，并为状态类效果添加charlotte标签；<br>4.交换彩蛋武将“子鱼”〖诱循〗技能拼输拼赢的效果；<br>5.替换☼王异的插画，将原插画改为皮肤“绝色异彩”；<br>6.新增☼大乔的皮肤“白鹤梁神女”；<br>7.新增☼曹节的两套皮肤；<br>8.新增☼张星彩的两套皮肤；<br>9.新增☼甄姬的四套皮肤；<br>10.调整部分武将的插画、文本、配音。",
+    intro:"“阳光包”版本：5.7.72<br>☼扩展简介：自制三国武将合集，武将技能均推翻重塑。适用环境：三服全扩，八人军争场。武将强度：平均为半阴级；包内带武将评级，仅代表该武将在本扩展内的强度水平，SSS武将的强度不受限。<br>☼运行环境：①较新的游戏版本；②打开“兼容模式”；③“十周年UI”扩展；④“千幻聆音”扩展。<br>☼扩展说明：①本扩展部分引用了游戏本体武将包的代码，请勿隐藏游戏本体的武将包。②本扩展的更新可能会伴随文件的删减，推荐彻底删除旧版再安装新版。③因语音需求，本扩展部分与原版同名同效果的衍生技能为全新ID的技能，可与原版技能共同存在并在满足条件时分别单独发动。<br>☼鸣谢——<br>代码支持：戒除联盟、诗笺、寰宇星城、微尘、“柚子、奶茶、猫以及面具”、尋。<br>素材支持：〖世海〗资源包、『桤楴』露头包、周子鱼yu、无伤大鸽子、洛神、戴夫、血刀少主、遗计两个桃、尋、可宣、林柒柒。<br>特别感谢所有热爱支持阳光包的玩家们，你们的支持是阳光包更新的最大动力！<br><br>更新说明——<br>（此版本建议删除原扩展并重新导入）<br>1.重塑☼赵云（定位：防御·过牌，评级：SSS）；<br>2.为大部分状态类效果添加charlotte标签；<br>3.为☼甄姬的〖神惶〗限定了次数；<br>4.新增☼甄姬的史诗皮肤“廊下待君”；<br>5.调整☼赵云的插画，并将原插画改为皮肤“烟绚繁星”；<br>6.调整☼马云騄的插画和皮肤；<br>7.为☼神司马懿的皮肤“鉴往知来”补齐语音；<br>8.调整部分武将的插画、文本、配音。",
     author:"阳光微凉",
     diskURL:"",
     forumURL:"",
-    version:"5.7.71",
+    version:"5.7.72",
 },files:{"character":[],"card":[],"skill":[]}}})
