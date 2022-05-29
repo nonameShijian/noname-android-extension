@@ -244,7 +244,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								console.warn(`【${extName}】扩展不存在`);
 								continue;
 							}
-							const { author, size, version, nonameVersion } = window.noname_android_extension[extName];
+							const { author, size, version, nonameVersion, intro } = window.noname_android_extension[extName];
 							/** 其中一个扩展的dialog框 */
 							const ext = ui.create.div('.videonode.menubutton.extension.large', content, {
 								marginLeft: '0px',
@@ -253,9 +253,32 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							const ext_name = ui.create.div('.caption', extName, ext);
 							const ext_author = ui.create.div('.text.author', '作者: ' + (author ? author : '未知'), ext);
 							const ext_version = ui.create.div('.text', '版本: ' + (version ? version : '未知版本'), ext);
+							// 提示无名杀版本不兼容
+							if (typeof nonameVersion == 'string' && lib.version != nonameVersion) {
+								ui.create.node('span', ext_version, {
+									innerHTML: '<span style="color: turquoise;">(版本不兼容)</span>',
+								});
+							}
+							// 提示可更新
+							else if (version && lib.extensionPack && lib.extensionPack[extName] && typeof lib.extensionPack[extName].version == 'string') {
+								const bool = compareVersion(lib.extensionPack[extName].version, version);
+								if (bool === true) {
+									ui.create.node('span', ext_version, {
+										innerHTML: '<span style="color: springgreen;">(可更新)</span>',
+									});
+								} else if (bool === 'equal') {
+									ui.create.node('span', ext_version, {
+										innerHTML: '<span style="color: orange;">(与本地扩展版本相同)</span>',
+									});
+								} else {
+									ui.create.node('span', ext_version, {
+										innerHTML: '<span style="color: deepskyblue;">(本地扩展可能比服务器中的扩展版本更高)</span>',
+									});
+								}
+							}
 							const ext_size = ui.create.div('.text', '大小: ' + (size ? ('约' + size) : '未知大小'), ext);
 							const ext_intro = ui.create.div('.text', ext, {
-								innerHTML: '关于本扩展的描述',
+								innerHTML: intro || '暂无描述',
 							});
 							const download = ui.create.div(ext, {
 								position: 'absolute',
@@ -279,13 +302,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									// 判断版本
 									if (lib.extensionPack && lib.extensionPack[extName] && typeof lib.extensionPack[extName].version == 'string') {
 										const bool = compareVersion(lib.extensionPack[extName].version, version);
-										if (bool == 'equal') {
+										if (bool === 'equal') {
 											if (!confirm(`【${extName}】扩展与您本地的扩展版本相同，是否确认选择？`)) {
 												this.checked = false;
 												return false;
 											}
-										} else if (!bool) {
-											if (!confirm(`本地的扩展【${extName}】可能比服务器中的扩展版本高，是否确认选择？`)) {
+										} else if (bool === false) {
+											if (!confirm(`本地的扩展【${extName}】可能比服务器中的扩展版本更高，是否确认选择？`)) {
 												this.checked = false;
 												return false;
 											}
