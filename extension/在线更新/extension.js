@@ -747,7 +747,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
             show_version: {
                 clear: true,
                 nopointer: true,
-                name: '扩展版本： v1.31',
+                name: '扩展版本： v1.32',
             },
             update_link_explain: {
                 clear: true,
@@ -1474,14 +1474,29 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				name: '检查图片素材(全部)',
                 onclick: assetConfigFun('assetImageFull')
 			},
+			address: {
+				clear: true,
+				nopointer: true,
+				name: `</br>
+					最新完整包下载地址1：
+					<a target='_self' href='https://hub.fastgit.org/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
+					最新完整包下载地址2：
+					<a target='_self' href='https://hub.fastgit.xyz/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a>
+				`,
+			}
 		},
 		help: {},
 		package: {
-			intro: "<span style='font-weight: bold;'>※本扩展不与【概念武将】和【假装无敌】扩展兼容</span></br>安装本扩展后会自动覆盖【自动检测更新】的功能，不论扩展是否开启</br>点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br><span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>最新完整包下载地址1：<a target='_self' href='https://hub.fastgit.org/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>最新完整包下载地址2：<a target='_self' href='https://hub.fastgit.xyz/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a>",
+			intro: `
+				<span style='font-weight: bold;'>※本扩展不与【概念武将】和【假装无敌】扩展兼容</span></br>
+				安装本扩展后会自动覆盖【自动检测更新】的功能，不论扩展是否开启</br>
+				点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br>
+				<span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>
+			`,
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.31",
+			version: "1.32",
 		},
 	}
 });
