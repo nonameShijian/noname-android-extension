@@ -246,7 +246,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     item.checked = game.getExtensionConfig('在线更新', configName);
                     item.onchange = () => {
                         game.saveConfig(configName, item.checked);
-                        assetConfigFun[configName].onclick(item.checked);
+						assetConfigFun[configName] && assetConfigFun[configName].onclick(item.checked);
 					}
                 };
 
@@ -453,7 +453,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				
 				if (window.FileTransfer) {
 					let fileTransfer = new FileTransfer();
-					fileTransfer.download(encodeURI(url), encodeURI(lib.assetURL + path + name), success, error);
+					fileTransfer.download(encodeURI(url), encodeURI(lib.assetURL + path + '/' + name), success, error);
 				} else {
 					fetch(url)
 						.then(response => {
