@@ -320,7 +320,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 							// 提示可更新
 							else if (version && lib.extensionPack && lib.extensionPack[extName] && typeof lib.extensionPack[extName].version == 'string') {
-								lib.extensionPack['阳光包'].version
 								const bool = compareVersion(lib.extensionPack[extName].version, version);
 								if (bool === true) {
 									ui.create.node('span', ext_version, {
