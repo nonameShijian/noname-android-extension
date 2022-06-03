@@ -1,0 +1,441 @@
+.qh-not-replace{
+
+}
+.qh-must-replace{
+    
+}
+.qh-editdialog{
+    display: block;
+    z-index: 25;
+    width: 461px;
+    height: 365px;
+    background-position: center;
+    background-image: url('qhly_dialog.png');
+    background-repeat: no-repeat;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.qh-editdialog-inner{
+    display: block;
+    z-index: 5;
+    left: calc(17.13%);
+    top:calc(15%);
+    width: calc(65.73%);
+    height: calc(59.18%);
+    font-size: 20px;
+    color: white;
+    font-family: 'qh_songhei';
+    overflow: scroll;
+}
+.qh-skinchange-background{
+    z-index:40;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+.qh-skinchange-border{
+    z-index: 40;
+    display: block;
+    width: 0px;
+    height: 100%;
+    background-size: auto 100%;
+    background-position: center;
+    background-image: url('qhly_border.png');
+}
+.qh-skinchange-dialog{
+    z-index: 40;
+    display: block;
+    left: 50%;
+    top: 50%;
+    width: 729px;
+    height: 254px;
+    transform: translate(-50%, -50%);
+    background-size: 100% 100%;
+    background-image: url('qhly_skin_out_background.png');
+}
+.qh-hujiaimg{
+    z-index: 36;
+    width: calc(12.83%);
+    height: calc(84.71%);
+    background-image: url('qhly_hudun.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+}
+.qh-hujiaimg>.qh-hujiaimg-inner{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    width: auto;
+    height: auto;
+    font-family: 'qh_songhei';
+    transform: translate(-50%, -50%);
+}
+.qh-skinchange-exit{
+    z-index: 10;
+    display:block;
+    right:0px;
+    top:0px;
+    background-image: url('newui_back_sanguo2.png');
+    width: 50px;
+    height: 55px;
+    background-size: 100% 100%;
+}
+.qh-skinchange-enlarge{
+    z-index: 10;
+    display:block;
+    left:0px;
+    top:0px;
+    background-image: url('qhly_pic_enlarge.png');
+    width: 64px;
+    height: 44px;
+    background-size: 100% 100%;
+}
+.qh-skinchange-cover{
+    z-index: 9;
+    display: block;
+    left:calc(3.7%);
+    top:calc(7.09%);
+    width: calc(93.14%);
+    height: calc(87.01%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.qh-skinchange-area{
+    z-index: 9;
+    display: block;
+    text-align: left;
+    left:0px;
+    top:0px;
+    height:100%;
+    border-radius: 10px;
+    transition: transform 0s;
+    overflow: hidden;
+}
+.qh-skinchange-skin{
+    z-index: 10;
+    display: block;
+    left: 0px;
+    top:0px;
+    width:150px;
+    height:100%;
+    background-size: cover;
+    background-position: center;
+}
+.qh-skinchange-skin-text{
+    display: block;
+    bottom:0px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'qh_songhei';
+    color:white;
+    text-shadow: .2rem 0rem .5rem blue,-.2rem 0rem .5rem blue,0rem .2rem .5rem blue,0rem -.2rem .5rem blue;
+}
+.qh-lock{
+    z-index: 40;
+    display: block;
+    left: 0;
+    height: 0;
+    width: calc(100%);
+    height: calc(100%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-image: url('qhly_pic_lock.png');
+    pointer-events:none;
+}
+.primary-avatar>.qhly_skinplayerbutton{
+    left: 2px;
+    top:24px;
+    z-index: 25;
+    width: 38px;
+    height: 38px;
+    background-image: url('qhly_skin_button.png');
+    background-size: 100% 100%;
+    display: block;
+}
+.deputy-avatar>.qhly_skinplayerbutton2{
+    left: 2px;
+    top:24px;
+    z-index: 25;
+    width: 38px;
+    height: 38px;
+    background-image: url('qhly_skin_button.png');
+    background-size: 100% 100%;
+    display: block;
+}
+.avatar>.qhly_skinplayerbutton{
+    left: 2px;
+    bottom:55px;
+    z-index: 25;
+    width: 38px;
+    height: 38px;
+    background-image: url('qhly_skin_button.png');
+    background-size: 100% 100%;
+    display: block;
+}
+.avatar2>.qhly_skinplayerbutton2{
+    left: 2px;
+    bottom:55px;
+    z-index: 25;
+    width: 38px;
+    height: 38px;
+    background-image: url('qhly_skin_button.png');
+    background-size: 100% 100%;
+    display: block;
+}
+.qhly-chgskin-background {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;    
+    background-size: 100% 100%;
+    background-image: url('qhly_pic_background.jpg');
+    transform: translate(-50%, -50%);
+    z-index: 22;
+}
+.qhly-chgskin-background >.qhly-text-bk{
+    display: block;
+    position: absolute;
+    right: 100px;
+    height: 500px;
+    width: calc(100% - 500px);
+    top:50%;
+    transform: translate(0%,-50%);
+    font-family: 'yuanli';
+    background-image: url('qhly_text_biankuang.jpg');
+    background-size: 100% 100%;
+}
+
+.qhly-text-bk >.qhly-text{
+    display: block;
+    position: absolute;
+    right: calc(1%);
+    height: calc(77.5%);
+    width: calc(98%);
+    top:calc(10.17%);
+    overflow:scroll;
+    font-family: 'yuanli';
+    font-size: 22px;
+    color:white;
+}
+.qhly-chgskin-background >.qhly-skin{
+    display: block;
+    position: absolute;
+    left: 100px;
+    top: 50%;
+    width: 200px;
+    height: 267px;
+    background-size: 100% 100%;
+    z-index: 23;
+    transform: translate(0%, -50%);
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+    border-bottom-right-radius:15px;
+    border-bottom-left-radius:15px;
+}
+
+.qhly-skin >.qhly-belowtitle{
+    display: block;
+    position: absolute;
+    bottom: -46px;
+    height: 40px;
+    width: 100px;
+    left: 50%;
+    font-family: 'xinwei';
+    font-size: 24px;
+    color: yellow;
+    text-align: center;
+    transform: translate(-50%, 0%);
+}
+
+.qhly-skin >.qhly-headtitle{
+    display: block;
+    position: absolute;
+    top: -46px;
+    height: 40px;
+    width: 100px;
+    left: 50%;
+    font-family: 'xinwei';
+    font-size: 24px;
+    color: yellow;
+    text-align: center;
+    transform: translate(-50%, 0%);
+}
+
+.qhly-skin >.qhly-leftbutton{
+    display: block;
+    position: absolute;
+    top: 50%;
+    height: 45px;
+    width: 45px;
+    left: -60px;
+    transform: translate(0%, -50%);
+    background-size: 100% 100%;
+    background-image: url('qhly_left_arrow.png');
+}
+
+.qhly-skin >.qhly-rightbutton{
+    display: block;
+    position: absolute;
+    top: 50%;
+    height: 45px;
+    width: 45px;
+    right: -60px;
+    transform: translate(0%, -50%);
+    background-size: 100% 100%;
+    background-image: url('qhly_right_arrow.png');
+}
+
+.qhly-skin >.qhly-okbutton{
+    display: block;
+    position: absolute;
+    bottom: -70px;
+    height: 30px;
+    width: 100px;
+    left: 50%;
+    transform: translate(-50%,0%);
+    background-size: 100% 100%;
+    background-image: url('qhly_ok_button.png');
+}
+
+.menubg.charactercard>.qhly-skin-button{
+    position: absolute;
+    left: 0px;
+    top:0px;
+    z-index: 25;
+    width: 50px;
+    height: 50px;
+    background-image: url('qhly_skin_button.png');
+    background-size: 100% 100%;
+    display: block;
+}
+
+.dialog>.qhly-skin-intro-button-zhu{
+    position: absolute;
+    left: 5px;
+    top:5px;
+    z-index: 99;
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+.dialog>.qhly-skin-intro-button-fu{
+    position: absolute;
+    left: 40px;
+    top:5px;
+    z-index: 99;
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+.qhly-skin >.qhly-biankuang{
+    display: block;
+    position: absolute;
+    left:0px;
+    top:0px;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    z-index: 24;
+    background-image: url('qhly_pic_biankuang.png');
+}
+
+.qhly-skin>.qhly-level{
+    display: block;
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    font-family: 'yuanli';
+    font-size: 20px;
+    z-index: 28;
+    color:yellow;
+}
+
+.qhly-dragonwin-out{
+    z-index: 40;
+    display: block;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.qhly-dragonwin-out>.qhly-dragonback{
+    z-index: 1;
+    display: block;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    transition: transform 0s;
+}
+
+.qhly-dragonback>.qhly-dragonback-backgroundimage{
+    z-index: 1;
+    display: block;
+    opacity: 0.9;
+    background-size: 100% 100%;
+    background-image: url('qhly_smallwin_circle.png');
+    left: 0px;
+    top:0px;
+    width: 100%;
+    height: 100%;
+}
+
+.qhly-dragonback>.qhly-dragonskin{
+    z-index:5;
+    display: block;
+    left:0px;
+    top:0px;
+    width: calc(17.2952%);
+    height: calc(19.246%);
+    transition: transform 0s;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.qhly-dragonskin>.qhly-dragonskincover{
+    z-index: 1;
+    width: calc(58.56%);
+    height: calc(70.04%);
+    left:calc(20.72%);
+    bottom:calc(12.96%);
+    display: block;
+    border-top-left-radius:5%;
+    border-top-right-radius:5%;
+    border-bottom-right-radius:5%;
+    border-bottom-left-radius:5%;
+    background-size: cover;
+    background-position: center;
+}
+
+.qhly-dragonback>.qhly-dragonhead{
+    z-index: 10;
+    opacity: 0.8;
+    display: block;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-image: url('qhly_smallwin_center.png');
+    pointer-events:none;
+    transition: transform 0s;
+}

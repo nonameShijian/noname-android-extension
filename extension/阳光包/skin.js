@@ -647,25 +647,18 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                         order:4,
                         content:'（默认）',
                     },
-                    'lyztianyi':{
+                    'lyzshenzhuo':{
                         order:5,
+                        content:'①孙家天下孙家兵，成就千秋万世名！',
+                    },
+                    'lyztianyi':{
+                        order:6,
                         content:'①大军横扫之处，无不臣服！',
                     },
-                    'lyzyingzi':{
-                        order:6,
-                        content:'①驰骋疆场，快哉，快哉！',
-                    },
+                    
                     'lyzpojun':{
                         order:7,
                         content:'①所当者破，所击者服！',
-                    },
-                    'lyzpoxi':{
-                        order:8,
-                        content:'①孙家天下孙家兵，成就千秋万世名！',
-                    },
-                    'lyzyinghun':{
-                        order:9,
-                        content:'①列祖列宗，赐我力量，保我大吴！',
                     },
                     'die':{
                         content:'一世英名，付诸东流……',
@@ -802,14 +795,14 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
         'lyz_wangyi':{
                     'lyzzhaojie':{
                         order:1,
-                        content:'①忠贞与国，节烈与身。<br>②我辈虽女流，烈胆胜须眉！',
+                        content:'①守义死节，不为苟生。<br>②秉忠持义，纵死犹归。',
                     },
                     'lyzyingwu':{
                         order:2,
-                        content:'①孤城临险，须出奇计。<br>②秘计九出，佐君平贼。',
+                        content:'①奇谋九策，共御强敌。<br>②密谋筹策，奇计制敌。',
                     },
                     'die':{
-                        content:'吾死不足怜惜，无奈家仇未报！',
+                        content:'为雪君父之耻，死而不惜！',
                     }
         },
         'lyz_zhaoyun':{
@@ -1221,20 +1214,58 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
             },
             'lyz_lingjup1':{
 				level:"传说",
-				translation:"骐舞凤歌",
+				translation:"舞魅蛊心",
 				info:"",
                 order:1,//显示顺序，号越小越前面。
                 skill:{
                     'lyzwuren':{
                         order:1,
-                        content:'①隐忍多时，就为了这一日。<br>②复仇的滋味，是如此甜美。',
+                        content:'①竭心筹谋，动手时机已到。<br>②倾竭此生缘，只为此刻。',
                     },
                     'lyzhongshang':{
                         order:2,
-                        content:'①过去的一切，都与我无关了。<br>②从今天起，只为自己而活。',
+                        content:'①焚销诛心，汝不得安生。<br>②这些煎熬折磨，你也该尝尝。',
                     },
                     'die':{
-                        content:'此生，犹如梦境一般……',
+                        content:'这次失败，我还有机会吗。',
+                    }
+                }
+            },
+            'lyz_lingjup2':{
+				level:"传说",
+				translation:"骐舞凤歌",
+				info:"",
+                order:2,//显示顺序，号越小越前面。
+                skill:{
+                    'lyzwuren':{
+                        order:1,
+                        content:'①竭心数载，只为今朝殿上之舞。<br>②筹谋半生，不负昨日血海深仇。',
+                    },
+                    'lyzhongshang':{
+                        order:2,
+                        content:'①寒语能刺骨，愁绪欲焚心。<br>②酹酒焚心魂欲断，寻名抚壁泪重煎。',
+                    },
+                    'die':{
+                        content:'缘起缘灭，终不过是造化弄人。',
+                    }
+                }
+            },
+            'lyz_lingjup3':{
+				level:"限定",
+				translation:"金枝玉叶",
+				info:"",
+                order:3,//显示顺序，号越小越前面。
+                skill:{
+                    'lyzwuren':{
+                        order:1,
+                        content:'①缘浅情浓，竭力而衰。<br>②心竭而出，缘竭而究。',
+                    },
+                    'lyzhongshang':{
+                        order:2,
+                        content:'①伤我心神，焚汝身骨。<br>②你的身份，我已为你抹去。',
+                    },
+                    'die':{
+                        content:'情随梦境散，花随时节落。',
                     }
                 }
             },
@@ -1406,6 +1437,25 @@ window.ygb_import(function(lib,game,ui,get,ai,_status){
                     },
                     'die':{
                         content:'红消香断有谁怜……',
+                    }
+                }
+            },
+            'lyz_xiaoqiaop2':{
+				level:"限定",
+				translation:"战场绝版",
+				info:"",
+                order:2,//显示顺序，号越小越前面。
+                skill:{
+                    'lyzfangze':{
+                        order:1,
+                        content:'①芙蓉如面柳如眉，腮凝新荔鼻腻脂。<br>②秀靥比花娇，玉颜胜春红。',
+                    },
+                    'lyzfumeng':{
+                        order:2,
+                        content:'①桃花随风逝，飘落待归期。<br>②昨日繁花盛，今日萧萧落。',
+                    },
+                    'die':{
+                        content:'过尽千帆皆不是，魂断庐江口。',
                     }
                 }
             },

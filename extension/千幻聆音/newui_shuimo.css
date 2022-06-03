@@ -1,0 +1,626 @@
+.qh-background{
+    z-index: 22;
+    position: absolute;
+    background-size: cover;
+    top: 50%;
+    left: 50%;
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    transform:translate(-50%,-50%);
+    background-image: url('qhly_pic_background_shuimo.jpg');
+}
+
+.qh-window{
+    font-size: 16px;
+    position: absolute;
+    height: 1338px;
+    width: 778px;
+    left: 50%;
+    top: 50%;
+    display: block;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transform: translate(-50%,-50%);
+    background-image: url('newui_shuimo_ground.jpg');
+    z-index: 30;
+}
+
+.qh-window>.qh-back{
+    z-index: 50;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 5.88%;
+    height: 11.11%;
+    display: block;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('newui_back_shuimo.png');
+}
+
+.qh-window>.qh-avatar{
+    z-index: 32;
+    position: absolute;
+    top:0;
+    left:0;
+    width: calc(38.13%);
+    height: calc(100%);
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-avatar>.qh-avatar-rank{
+    z-index: 33;
+    right: calc(5%);
+    top:0px;
+    width: 100px;
+    height: 100px;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;;
+}
+
+.qh-window>.qh-window-backboard{
+    z-index: 34;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('newui_shuimo_bg1.png');
+}
+
+.qh-window>.qh-window-backboard-lutou{
+    z-index: 34;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('newui_shuimo_bg1.png');
+}
+
+.qh-window>.qh-window-cover{
+    z-index: 35;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('newui_shuimo_bg2.png');
+}
+
+.qh-avatar>.qh-image-standard{
+    z-index: 33;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top-left-radius:0px;
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius:0px;
+}
+
+.qh-avatar>.qh-image-lutou{
+    z-index: 33;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.qh-window>.qh-avatar-label{
+    z-index: 36;
+    position: absolute;
+    display: block;
+    width: calc(30.00%);
+    height:calc(17.5%);
+    left: calc(13.32%);
+    top: calc(72.41%);
+}
+
+.qh-avatar-label>.qh-avatar-label-group{
+    z-index: 35;
+    position: absolute;
+    left: 0;
+    top:0;
+    height:calc(100%);
+    width: calc(21.16%);
+    color:white;
+    font-family: 'qh_weili';
+    line-height: 100%;
+    font-size: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('newui_shuimo_group.png');
+}
+
+.qh-avatar-label>.qh-avatar-label-group-double{
+    z-index: 35;
+    position: absolute;
+    left: 0;
+    top:0;
+    height:calc(77.53%);
+    width: calc(21.16%);
+    color:white;
+    font-family: 'qh_weili';
+    line-height: 100%;
+    font-size: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('newui_shuimo_doublegroup.png');
+}
+
+.qh-avatar-label-group-double>.qh-avatar-label-group-double-a{
+    z-index: 36;
+    position: absolute;
+    right:10px;
+    top:0px;
+    font-size:26px;
+    color:white;
+    font-family: 'qh_songhei';
+}
+
+.qh-avatar-label-group-double>.qh-avatar-label-group-double-b{
+    z-index: 36;
+    position: absolute;
+    left:10px;
+    bottom:0px;
+    font-size:26px;
+    color:black;
+    font-family: 'qh_songhei';
+}
+
+.qh-avatar-label>.qh-avatar-label-name{
+    z-index: 35;
+    position: absolute;
+    top:calc(40.0%);
+    left:calc(19.5%);
+    width:calc(78.84%);
+    height:calc(60%);
+    color:white;
+    font-family: 'qh_songhei';
+    line-height: 100%;
+    font-size: 40px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: justify;
+}
+
+.qh-avatar-label>.qh-avatar-label-title{
+    z-index: 35;
+    position: absolute;
+    bottom:calc(60%);
+    left:calc(19.5%);
+    width:calc(78.84%);
+    height:calc(30%);
+    color:white;
+    font-family: 'qh_songhei';
+    line-height: 100%;
+    font-size: 23px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: justify;
+}
+
+.qh-window>.qh-hp{
+    z-index: 36;
+    position: absolute;
+    left:calc(14.33%);
+    bottom: calc(4.07%);
+    width: calc(22.28%);
+    height: calc(7.87%);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: flex-start;
+}
+
+.qh-hpimg{
+    z-index: 36;
+    display: block;
+    width: calc(12.83%);
+    height: calc(84.71%);
+    background-image: url('newui_shuimo_hpimg.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-hptext{
+    z-index: 36;
+    font-size: 33px;
+    color:rgb(129, 214, 247);
+    font-family: 'qh_songhei';
+}
+
+.qh-window>.qh-mp{
+    z-index: 36;
+    position: absolute;
+    left:calc(14.33%);
+    bottom: calc(1.67%);
+    width: calc(22.28%);
+    height: calc(2.04%);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-mp>.qh-mptext{
+    z-index: 35;
+    font-size: 35px;
+    color:rgb(129, 214, 247);
+    font-family: 'qh_songhei';
+}
+
+.qh-mp>.qh-mpimg{
+    z-index: 35;
+    width: calc(12.83%);
+    height: calc(100%);
+    background-image: url('newui_shuimo_mpimg.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-window>.qh-button1{
+    z-index: 36;
+    right: calc(1.89%);
+    top:calc(6.76%);
+    width: 100px;
+    height: 100px;
+    background-image: url('newui_button_shuimo.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color:white;
+    font-family: 'qh_songhei';
+    font-size: 28px;
+    line-height: 280%;
+    text-align: center;
+}
+
+.qh-window>.qh-button2{
+    z-index: 36;
+    right: calc(1.89%);
+    top:calc(6.76% + 100px);
+    width: 100px;
+    height: 100px;
+    background-image: url('newui_button_shuimo.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color:white;
+    font-family: 'qh_songhei';
+    font-size: 28px;
+    line-height: 280%;
+    text-align: center;
+}
+
+.qh-window>.qh-button3{
+    z-index: 36;
+    right: calc(1.89%);
+    top:calc(6.76% + 200px);
+    width: 100px;
+    height: 100px;
+    background-image: url('newui_button_shuimo.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color:white;
+    font-family: 'qh_songhei';
+    font-size: 28px;
+    line-height: 280%;
+    text-align: center;
+}
+
+.qh-window>.qh-button4{
+    z-index: 36;
+    right: calc(1.89%);
+    top:calc(6.76% + 300px);
+    width: 100px;
+    height: 100px;
+    background-image: url('newui_button_shuimo.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color:white;
+    font-family: 'qh_songhei';
+    font-size: 28px;
+    line-height: 280%;
+    text-align: center;
+}
+
+.qh-window>.qh-page-introduce{
+    z-index: 36;
+    left:calc(37.32%);
+    top:calc(0%);
+    width: calc(52.41%);
+    height: calc(100%);
+    display: block;
+}
+
+.qh-page-introduce>.qh-page-introduce-text{
+    display: block;
+    z-index: 36;
+    left:20px;
+    top:50%;
+    width: calc(100% -40px);
+    height: auto;
+    max-height: calc(100%);
+    color:black;
+    font-family: 'qh_zhunyuan';
+    font-size: 20px;
+    overflow: scroll;
+    text-shadow: none;
+    transform: translate(0, -50%);
+}
+
+.qh-window>.qh-page-skill{
+    z-index: 36;
+    left:calc(37.32%);
+    top:calc(0%);
+    width: calc(52.41%);
+    height: calc(100%);
+    display: block;
+}
+
+.qh-window>.qh-page-skin{
+    z-index: 36;
+    left:calc(37.32%);
+    top:calc(0%);
+    width: calc(52.41%);
+    height: calc(100%);
+    display: block;
+}
+
+.qh-window>.qh-page-config{
+    z-index: 36;
+    left:calc(37.32%);
+    top:calc(0%);
+    width: calc(52.41%);
+    height: calc(100%);
+    display: block;
+}
+
+.qh-page-config>.qh-page-config-text{
+    z-index: 32;
+    left:20px;
+    top:0px;
+    width: calc(100% -40px);
+    height: calc(100%);
+    display: block;
+    color:black;
+    text-shadow: 2px 2px 2px white;
+    font-family: 'qh_zhunyuan';
+    font-size: 20px;
+    overflow: scroll;
+}
+
+.qh-page-skill>.qh-page-skill-text{
+    display: block;
+    z-index: 32;
+    left:20px;
+    top:50%;
+    width: calc(100% -40px);
+    height: auto;
+    max-height: calc(100%);
+    color:black;
+    font-family: 'qh_zhunyuan';
+    font-size: 20px;
+    overflow: scroll;
+    text-shadow: none;
+    transform: translate(0, -50%);
+}
+
+.qh-page-skin>.qh-page-skin-text{
+    z-index: 32;
+    left:40px;
+    top:0px;
+    width: calc(100% - 80px);
+    height: calc(56.13%);
+    display: block;
+    color:black;
+    font-family: 'qh_zhunyuan';
+    text-shadow: none;
+    font-size: 18px;
+    overflow: scroll;
+}
+
+.qh-page-skin>.qh-page-skinavatar1{
+    z-index: 35;
+    left:calc(0%);
+    bottom:calc(-1.57%);
+    width:calc(32.77%);
+    height:calc(43.70%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0s;
+}
+
+.qh-page-skin>.qh-page-skinavatar2{
+    z-index: 34;
+    left:calc(21.09%);
+    bottom:calc(-1.57%);
+    width:calc(32.77%);
+    height:calc(43.70%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0s;
+}
+
+.qh-page-skin>.qh-page-skinavatar3{
+    z-index: 33;
+    left:calc(42.18%);
+    bottom:calc(-1.57%);
+    width:calc(32.77%);
+    height:calc(43.70%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0s;
+}
+
+.qh-page-skinavatarcover{
+    z-index: 33;
+    width: calc(58.56%);
+    height: calc(70.04%);
+    left:calc(20.72%);
+    bottom:calc(12.96%);
+    display: block;
+    border-top-left-radius:7px;
+    border-top-right-radius:7px;
+    border-bottom-right-radius:7px;
+    border-bottom-left-radius:7px;
+    transition: background-image 0s;
+}
+
+.qh-page-skinavatarcover>.qh-page-skinavatarpicture{
+    z-index: 34;
+    width: calc(100%);
+    height: calc(100%);
+    left:calc(0%);
+    top:calc(0%);
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top-left-radius:7px;
+    border-top-right-radius:7px;
+    border-bottom-right-radius:7px;
+    border-bottom-left-radius:7px;
+    transition: background-image 0s;
+    border:none;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.qh-page-skinavatarcover>.qh-page-skinavatarpicture-lutou{
+    z-index: 34;
+    width: calc(100%);
+    height: calc(106.55%);
+    left:calc(0%);
+    top:calc(-6.55%);
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top-left-radius:7px;
+    border-top-right-radius:7px;
+    border-bottom-right-radius:7px;
+    border-bottom-left-radius:7px;
+    transition: background-image 0s;
+    border:none;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.qh-page-skinavatarcover>.qh-page-skinavatartitle{
+    z-index: 35;
+    width: calc(100%);
+    height: calc(20%);
+    bottom:calc(5%);
+    background-image: url("newui_shuimo_skin_title.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-page-skinavatartitle>.qh-page-skinavatartitle-text{
+    width: 100%;
+    bottom: calc(20%);
+    font-size: 21px;
+    font-family: 'qh_songhei';
+    color: white;
+    text-align: center;
+    text-shadow: .2rem 0rem .5rem red,-.2rem 0rem .5rem red,0rem .2rem .5rem red,0rem -.2rem .5rem red;
+}
+
+.qh-page-skinavatarlevel{
+    z-index: 35;
+    width: calc(25.77%);
+    height:calc(23.16%);
+    bottom:calc(65.00%);
+    right:calc(15.00%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0s;
+}
+
+.qh-page-skin>.qh-page-skin-leftarrow{
+    z-index:35;
+    left: calc(-0.80%);
+    bottom:calc(12.88%);
+    width: calc(7.73%);
+    height: calc(14.20%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('newui_arrow_left_shuimo.png');
+}
+
+.qh-page-skin>.qh-page-skin-rightarrow{
+    z-index:35;
+    left: calc(67.99%);
+    bottom:calc(12.88%);
+    width: calc(7.73%);
+    height: calc(14.20%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('newui_arrow_right_shuimo.png');
+}
+
+.qh-page-skin>.qh-hide-skin-button{
+    z-index:35;
+    left:0px;
+    bottom:0px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('qhly_skin_button.png');
+}
