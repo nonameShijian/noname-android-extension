@@ -331,8 +331,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								// 要更新的版本是 无
 								return true;
 							} else {
-								return version_2.every((v, i) => {
-									return v >= (version_1[i] || 0);
+								return version_2.some((v, i) => {
+									return v > (version_1[i] || 0);
 								});
 							}
 						};
