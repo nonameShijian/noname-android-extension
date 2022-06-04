@@ -259,6 +259,49 @@
     font-size: 1.8em;
 }
 
+
+.qh-below-menu{
+    z-index: 39;
+    width: calc(14.05%);
+    height: auto;
+    max-height: calc(76% - 20px);
+    overflow:scroll;
+    left: calc(39.54%);
+    top:calc(23.78%);
+    border-spacing:0px 0px;
+    border-collapse: separate;
+}
+
+.qh-below-menu-item{
+    z-index: 15;
+    color: white;
+    font-family: 'qh_songhei';
+    font-size: 1.8em;
+    height:65px;
+    width: calc(100%);
+    background-image: url('newui_button_rq.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.qh-button1>.qh-otherinfoarrow{
+    display: block;
+    z-index:15;
+    right:10px;
+    top:calc(50% - 11px);
+    width: 22px;
+    height: 22px;
+    background-image: url('qhly_pic_down_arrow.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
 .qh-window>.qh-button2{
     z-index: 31;
     left: calc(53.44%);

@@ -3065,12 +3065,58 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         }
         return ret;
     };
+    game.qhly_getIntroduceExtraPage=function(name,pkg){
+        if(!pkg)pkg=game.qhly_foundPackage(name);
+        if(pkg.characterIntroduceExtra){
+            var extra = pkg.characterIntroduceExtra(name);
+            if(extra){
+                return extra;
+            }
+        }
+    };
     get.qhly_getOriginSkinInfo=function(name,pkg){
         if(!pkg)pkg=game.qhly_foundPackage(name);
         if(pkg.originSkinInfo){
             return pkg.originSkinInfo(name);
         }
         return "";
+    };
+    game.qhly_createBelowMenu=function(items,parent){
+        var menu = ui.create.div('.qh-below-menu',parent);
+        var content = "";
+        if(!_status.qhly_belowMenuId){
+            _status.qhly_belowMenuId=1;
+        }else{
+            _status.qhly_belowMenuId++;
+        }
+        var id = _status.qhly_belowMenuId;
+        content += "<table style='width:100%;height:auto;' border='0' frame='void' rules='none'>";
+        var bid_i = 0;
+        for(var item of items){
+            content += "<tr>";
+            content += "<td class='qh-below-menu-item' id='qhly_below_menu_"+id+"_"+bid_i+"'>"+item.name+"</td>";
+            content += "</tr>";
+            bid_i++;
+        }
+        content += "</table>";
+        menu.innerHTML = content;
+        lib.setScroll(menu);
+        for(var i=0;i<bid_i;i++){
+            var td = document.getElementById('qhly_below_menu_'+id+"_"+i);
+            if(td){
+                ui.qhly_addListenFunc(td);
+                (function(i,td){
+                    td.listen(function(e){
+                        var item = items[i];
+                        if(item.onchange){
+                            item.onchange();
+                        }
+                        e.stopPropagation();
+                    });
+                })(i,td);
+            }
+        }
+        return menu;
     };
     game.qhly_initNewView=function(name,view,page){
         var currentViewSkin = lib.qhly_viewskin[lib.config.qhly_currentViewSkin];
@@ -3086,6 +3132,10 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             skin:ui.create.div('.qh-button3',view),
             config:ui.create.div('.qh-button4',view),
         };
+        subView.menuCover = ui.create.div();
+        subView.menuCover.style.width="100%";
+        subView.menuCover.style.height="100%";
+        subView.menuCover.style.zIndex=38;
         if(currentViewSkin.isQiLayout){
             subView.avatarImage = ui.create.div('.qh-image-standard',subView.avatar);
             subView.rank = ui.create.div('.qh-avatar-rank',subView.avatar);
@@ -3110,6 +3160,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             subView.mp = ui.create.div('.qh-mp');
             subView.mp.hide();
             subView.pageButton.introduce.innerHTML = "简介";
+            subView.pageButton.introduce.downButton = ui.create.div('.qh-otherinfoarrow',subView.pageButton.introduce);
             subView.pageButton.skill.innerHTML = "技能";
             subView.pageButton.skin.innerHTML = "皮肤";
             subView.pageButton.config.innerHTML = "选项";
@@ -3142,25 +3193,65 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             subView.dragontail.hide();
             subView.dragonhead = ui.create.div('.qh-avatar-dragonhead',subView.avatar);
             subView.dragonhead.hide();
-            subView.pageButton.introduce.innerHTML = "介 绍";
+            subView.pageButton.introduce.innerHTML = "简 介";
+            subView.pageButton.introduce.downButton = ui.create.div('.qh-otherinfoarrow',subView.pageButton.introduce);
             subView.pageButton.skill.innerHTML = "技 能";
             subView.pageButton.skin.innerHTML = "皮 肤";
-            subView.pageButton.config.innerHTML = "配 置";
+            subView.pageButton.config.innerHTML = "选 项";
         }
         subView.page = {
             introduce:{
                 pageView:ui.create.div('.qh-page-introduce',view),
                 refresh:function(name,state){
                     if(!this.inited)this.init(name,state);
+                    if(!state.introduceExtraPage || state.introduceExtraPage == '简介'){
+                        var intro = get.qhly_getIntroduce(name,state.pkg);
+                        this.text.innerHTML ="<br>"+ intro +"<br><br><br><br><br><br><br>";
+                        if(currentViewSkin.isQiLayout){
+                            subView.pageButton.introduce.innerHTML = "简介";
+                        }else{
+                            subView.pageButton.introduce.innerHTML = "简 介";
+                        }
+                        subView.pageButton.introduce.appendChild(subView.pageButton.introduce.downButton);
+                    }else{
+                        var ret = '';
+                        var handleView = null;
+                        if(state.introduceExtraFunc){
+                            var func = state.pkg[state.introduceExtraFunc];
+                            if(typeof func == 'function'){
+                                var fc = func(name);
+                                if(fc){
+                                    if(typeof fc == 'string'){
+                                        ret = "<br>"+fc+"<br><br><br><br><br><br><br>";
+                                    }else{
+                                        if(fc.content){
+                                            ret = "<br>"+fc.content+"<br><br><br><br><br><br><br>";
+                                        }
+                                        if(fc.handleView && typeof fc.handleView == 'function'){
+                                            handleView = fc.handleView;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        this.text.innerHTML = ret;
+                        if(handleView){
+                            handleView(this.text);
+                        }
+                        var btname = state.introduceExtraPage;
+                        if(!currentViewSkin.isQiLayout && btname.length == 2){
+                            btname = btname.charAt(0)+' '+btname.charAt(1);
+                        }
+                        subView.pageButton.introduce.innerHTML = btname;
+                        subView.pageButton.introduce.appendChild(subView.pageButton.introduce.downButton);
+                    }
                 },
                 init:function(name,state){
-                    var intro = get.qhly_getIntroduce(name,state.pkg);
                     this.text = ui.create.div('.qh-page-introduce-text',this.pageView);
                     if(lib.config.qhly_vMiddle === false && currentViewSkin.isQiLayout){
                         this.text.style.height = "100%";
                         this.text.style.maxHeight = "none";
                     }
-                    this.text.innerHTML ="<br>"+ intro +"<br><br><br><br><br><br><br>";
                     lib.setScroll(this.text);
                     fixTextSize(this.text);
                     game.qhly_changeViewPageSkin('introduce',this.pageView);
@@ -4368,6 +4459,13 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             intro:get.character(name),
             mainView:subView,
         };
+        subView.menuCover.listen(function(current){
+            if(state.extraMenu){
+                state.extraMenu.delete();
+                delete state.extraMenu;
+            }
+            view.removeChild(subView.menuCover);
+        });
         refreshRank=function(){
             if(subView.rank){
                 if(lib.config.qhly_showrarity){
@@ -4382,6 +4480,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             }
         };
         var showPage=function(pagename){
+            
             var tpage = subView.page[pagename];
             subView.currentPage = pagename;
             if(tpage){
@@ -4405,8 +4504,55 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         for(var k in subView.pageButton){
             (function(m){
                 subView.pageButton[m].listen(function(){
-                    game.qhly_playQhlyAudio('qhly_voc_press',null,true);
-                    showPage(m);
+                    if(subView.currentPage != m){
+                        showPage(m);
+                        if(state.extraMenu){
+                            state.extraMenu.delete();
+                            delete state.extraMenu;
+                        }
+                        game.qhly_playQhlyAudio('qhly_voc_press',null,true);
+                    }else if(m == 'introduce'){
+                        if(state.extraMenu){
+                            state.extraMenu.delete();
+                            delete state.extraMenu;
+                        }else{
+                            var extra = game.qhly_getIntroduceExtraPage(name,state.pkg);
+                            if(extra){
+                                game.qhly_playQhlyAudio('qhly_voc_click2',null,true);
+                                var arr = [{
+                                    name:'简介',
+                                    onchange:function(){
+                                        state.introduceExtraPage = "简介";
+                                        subView.page.introduce.refresh(name,state);
+                                        if(state.extraMenu){
+                                            state.extraMenu.delete();
+                                            delete state.extraMenu;
+                                            view.removeChild(subView.menuCover);
+                                        }
+                                    }
+                                }];
+                                for(var obj of extra){
+                                    (function(obj){
+                                        arr.push({
+                                            name:obj.name,
+                                            onchange:function(){
+                                                state.introduceExtraPage = obj.name;
+                                                state.introduceExtraFunc = obj.func;
+                                                subView.page.introduce.refresh(name,state);
+                                                if(state.extraMenu){
+                                                    state.extraMenu.delete();
+                                                    delete state.extraMenu;
+                                                    view.removeChild(subView.menuCover);
+                                                }
+                                            }
+                                        });
+                                    })(obj);
+                                }
+                                state.extraMenu = game.qhly_createBelowMenu(arr,view);
+                                view.appendChild(subView.menuCover);
+                            }
+                        }
+                    }
                 });
             })(k);
         }
@@ -4549,6 +4695,11 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     chname = "未命名武将";
                 }
             }
+             if(game.qhly_getIntroduceExtraPage(name,state.pkg)){
+                 subView.pageButton.introduce.downButton.show();
+             }else{
+                 subView.pageButton.introduce.downButton.hide();
+             }
             if(currentViewSkin.isQiLayout){
                 subView.name.innerHTML = chname;
             }else{
@@ -5975,5 +6126,5 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
     author:"玄武江湖工作室",
     diskURL:"",
     forumURL:"",
-    version:"2.9.0.2",
+    version:"3.0.0",
 },files:{"character":[],"card":[],"skill":[]}}})

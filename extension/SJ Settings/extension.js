@@ -296,9 +296,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								showDialog(extNames);
 							})
 							.catch(e => {
-								console.log(e);
-								if (navigator.onLine) getExtensions();
-								else alert('当前网络未连接');
+								alert(typeof e == 'string' ? '网络请求错误' : e.message);
+								if (_status.getExtensionsDialog) {
+									_status.getExtensionsDialog.show();
+								} else {
+									if (navigator.onLine) {
+										setTimeout(getExtensions, 500);
+									}
+									else alert('当前网络未连接');
+								}
 							})
 					};
 
@@ -399,7 +405,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 							// 提示可更新
 							else if (version && lib.extensionPack && lib.extensionPack[extName] && typeof lib.extensionPack[extName].version == 'string') {
-								lib.extensionPack['阳光包'].version
 								const bool = compareVersion(lib.extensionPack[extName].version, version);
 								if (bool === true) {
 									ui.create.node('span', ext_version, {
@@ -605,7 +610,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.22",
+			version: "1.23",
 		}
 	};
 });

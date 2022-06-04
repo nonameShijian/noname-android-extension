@@ -297,6 +297,33 @@
     background-repeat: no-repeat;
 }
 
+.qh-below-menu{
+    z-index: 39;
+    width: 218px;
+    height: auto;
+    max-height: calc(93% - 20px);
+    overflow:scroll;
+    right:calc(1.89% + 100px);
+    top:calc(6.76% + 20px);
+    border-spacing:0px 0px;
+    border-collapse: separate;
+}
+
+.qh-below-menu-item{
+    z-index: 15;
+    color: white;
+    font-family: 'qh_songhei';
+    font-size: 28px;
+    height: 55px;
+    width: 218px;
+    background-image: url('newui_shuimo_below_item.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .qh-window>.qh-button1{
     z-index: 36;
     right: calc(1.89%);
@@ -312,6 +339,19 @@
     font-size: 28px;
     line-height: 280%;
     text-align: center;
+}
+
+.qh-button1>.qh-otherinfoarrow{
+    display: block;
+    z-index:15;
+    right:5px;
+    top:calc(40% - 15px);
+    width: 22px;
+    height: 22px;
+    background-image: url('qhly_pic_down_arrow.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .qh-window>.qh-button2{
