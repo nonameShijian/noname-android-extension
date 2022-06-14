@@ -371,6 +371,111 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         lib.config.qhly_order[name+'-'+skin] = order;
         game.saveConfig('qhly_order',lib.config.qhly_order);
     };
+    game.qhly_genId=function(){
+        if(!_status.qhly_genId){
+            _status.qhly_genId = 1;
+        }else{
+            _status.qhly_genId++;
+        }
+        return _status.qhly_genId;
+    };
+    game.qhly_parseConfig=function(obj){
+        if(!_status.qhly_config_selfedit_id){
+            _status.qhly_config_selfedit_id=1;
+        }else{
+            _status.qhly_config_selfedit_id++;
+        }
+        var str = "";
+        var image = obj.image ? obj.image:"extension/千幻聆音/qhly_pic_config.png";
+        var title = obj.title ? obj.title:"自定义设置";
+        var text = obj.text ? obj.text:"";
+        str += "<h2><img src='";
+        str += lib.assetURL+image+"' style='width:50px'/>";
+        str += title;
+        str += "</h2>";
+        if(text.length){
+            str += "<p>"+text+"</p>";
+        }
+        var onfinish=function(){
+
+        };
+        if(['checkboxList','复选框'].contains(obj.type)){
+            var items = obj.items ? obj.items:[];
+            var oncheck = obj.oncheck?obj.oncheck:function(){};
+            var checkboxRef = {};
+            for(var item of items){
+                var id = "qhly_selfedit_checkbox_"+game.qhly_genId();
+                checkboxRef[id] = item;
+                str += "<p><span style='display:inline-block;height:30px;'><img id='"+id+"'/><span id='"+id+"_text' style='display:inline-block;position:relative;bottom:25%;'>";
+                if(typeof item == 'string'){
+                    str += item;
+                }else{
+                    str += item.name;
+                }
+                str += "</span></span></p>";
+            }
+            var bindFunc=function(checkbox,text){
+                if(!text)return;
+                ui.qhly_addListenFunc(text);
+                text.listen(function(){
+                    game.qhly_playQhlyAudio('qhly_voc_check',null,true);
+                    checkbox.qhly_setChecked(!checkbox.qhly_checked,true);
+                });
+            };
+            onfinish=function(view){
+                for(var id in checkboxRef){
+                    var item = checkboxRef[id];
+                    var current = item.current;
+                    if(typeof current == 'function'){
+                        current = current();
+                    }
+                    var checkbox = document.getElementById(id);
+                    var checkboxText = document.getElementById(id+"_text");
+                    ui.qhly_initCheckBox(checkbox,current?true:false);
+                    bindFunc(checkbox,checkboxText);
+                    (function(checkbox,item){
+                        checkbox.qhly_onchecked=function(check){
+                            oncheck(item,check);
+                        };
+                    })(checkbox,item);
+                }
+            };
+        }else if(['selectList','下拉列表'].contains(obj.type)){
+            var id = "qhly_selfedit_select_"+game.qhly_genId();
+            str += "<p><select style='font-size:22px;font-family:'qh_youyuan';' id='"+id+"'></select></p>";
+            onfinish=function(view){
+                var select = document.getElementById(id);
+                var items = obj.items ? obj.items:{};
+                var current = typeof obj.current == 'function'?obj.current():obj.current;
+                for(var key in items){
+                    var opt = document.createElement('option');
+                    opt.innerHTML = items[key];
+                    opt.setAttribute('key',key);
+                    if(current == key){
+                        opt.selected = 'selected';
+                    }
+                    select.appendChild(opt);
+                }
+                select.onchange=function(e){
+                    var event = e?e:window.event;
+                    if(event.target){
+                        target = event.target;
+                        var opt = target[target.selectedIndex];
+                        if(opt){
+                            var key = opt.getAttribute('key');
+                            if(obj.onchange){
+                                obj.onchange(key);
+                            }
+                        }
+                    }
+                };
+            };
+        }
+        return {
+            content:str,
+            onfinish:onfinish,
+        };
+    };
     //默认皮肤包
     var DEFAULT_PACKAGE = {
         isExt:false,//不是扩展武将
@@ -900,6 +1005,60 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             }
         });
     }
+
+    if(!lib.config.qhly_winrecord){
+        game.saveConfig('qhly_winrecord',{
+            
+        });
+    }
+
+    game.qhly_recordGameOver=function(name,win,player){
+        if(win !== true && win !== false)return;
+        var record = lib.config.qhly_winrecord[name];
+        if(!record){
+            record = {};
+            lib.config.qhly_winrecord[name] = record;
+        }
+        var recordMode = record[get.mode()];
+        if(!recordMode){
+            recordMode = {};
+            record[get.mode()] = recordMode;
+        }
+        var identity = get.mode()=='guozhan' ? player.group : player.identity;
+        if(!identity){
+            identity = "未知身份";
+        }else{
+            identity = get.translation(identity+'2');
+        }
+        var wlr = recordMode[identity];
+        if(!wlr){
+            wlr = {};
+            recordMode[identity] = wlr;
+        }
+        if(win === true){
+            if(!wlr.win){
+                wlr.win = 0;
+            }
+            wlr.win++;
+        }else if(win === false){
+            if(!wlr.lose){
+                wlr.lose = 0;
+            }
+            wlr.lose++;
+        }
+        game.saveConfig('qhly_winrecord',lib.config.qhly_winrecord);
+    };
+
+    lib.onover.push(function(ret){
+        var name = game.me.name ? game.me.name:game.me.name1;
+        if(name){
+            game.qhly_recordGameOver(name,ret,game.me);
+        }
+        var name2 = game.me.name2;
+        if(name2){
+            game.qhly_recordGameOver(name2,ret,game.me);
+        }
+    });
     
     //持久化存储皮肤数据
     game.qhlySyncConfig=function(){
@@ -1542,6 +1701,46 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         return false;
     };
     //获取某武将的皮肤列表。
+    game.qhly_getSkinAudioList=function(name,callback,locked){
+        var pkg = game.qhly_foundPackage(name);
+        if(!pkg.audio){
+            if(callback){
+                callback(false);
+            }
+            return;
+        }
+        game.qhly_getSkinList(name,function(ret,list){
+            if(!ret || !list ||!list.length){
+                if(callback){
+                    callback(false);
+                }
+                return;
+            }
+            var path = pkg.audio;
+            game.qhly_checkFileExist(path,function(s){
+                if(s){
+                    game.getFileList(path,function(folders){
+                        var retList = [];
+                        var retList2 = [];
+                        for(var item of list){
+                            var nm = game.qhly_earseExt(item);
+                            if(folders.contains(nm)){
+                                retList.add(nm);
+                                retList2.add(item);
+                            }
+                        }
+                        if(callback){
+                            callback(true,retList,retList2);
+                        }
+                    });
+                }else{
+                    if(callback){
+                        callback(false);
+                    }
+                }
+            });
+        },locked);
+    };
     game.qhly_getSkinList=function(name,callback,locked,loadInfoJs){
         if(locked === undefined){
             locked = true;
@@ -3066,13 +3265,96 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         return ret;
     };
     game.qhly_getIntroduceExtraPage=function(name,pkg){
+        var ret = [];
         if(!pkg)pkg=game.qhly_foundPackage(name);
         if(pkg.characterIntroduceExtra){
             var extra = pkg.characterIntroduceExtra(name);
             if(extra){
-                return extra;
+                ret.addArray(extra);
             }
         }
+        if(lib.config.qhly_recordWin){
+            ret.push({
+                name:'战绩',
+                qh_func:'qhly_getCharacterZhanjiPage',
+            });
+        }
+        if(ret.length){
+            return ret;
+        }
+    };
+    game.qhly_getCharacterZhanjiPage=function(name){
+        var str = "";
+        var record = lib.config.qhly_winrecord;
+        if(record && record[name]){
+            var modekeys = Object.keys(record[name]);
+            var modeSort ={
+                'identity':1,
+                'guozhan':2,
+                'doudizhu':3,
+            };
+            modekeys.sort(function(a,b){
+                if(a==b)return 0;
+                if(modeSort[a] && modeSort[b]){
+                    return modeSort[a] - modeSort[b];
+                }
+                if(modeSort[a]){
+                    return -1;
+                }
+                if(modeSort[b]){
+                    return 1;
+                }
+                return a<b ? -1:1;
+            });
+            for(var mode of modekeys){
+                str += "<h1>"+get.translation(mode)+"模式：</h1>";
+                var identitySort = {
+                    '主公':1,
+                    '盟主':2,
+                    '忠臣':3,
+                    '侠士':4,
+                    '护卫':5,
+                    '反贼':6,
+                    '乱寇':7,
+                    '刺客':8,
+                    '逆贼':9,
+                    '内奸':10,
+                    '细作':11,
+                    '僭主':12,
+                    '地主':13,
+                    '农民':14,
+                };
+                var identKeys = Object.keys(record[name][mode]);
+                identKeys.sort(function(a,b){
+                    if(a==b)return 0;
+                    if(identitySort[a] && identitySort[b]){
+                        return identitySort[a] - identitySort[b];
+                    }
+                    if(identitySort[a]){
+                        return -1;
+                    }
+                    if(identitySort[b]){
+                        return 1;
+                    }
+                    return a<b ? -1:1;
+                });
+                for(var identity of identKeys){
+                    var ri = record[name][mode][identity];
+                    var win = ri.win ? ri.win:0;
+                    var lose = ri.lose? ri.lose:0;
+                    str += "<h2>"+identity + "：</h2>";
+                    str += "<p>胜利："+win;
+                    str += "&nbsp;&nbsp;失败："+lose;
+                    str += "&nbsp;&nbsp;总场："+(win+lose);
+                    str += "&nbsp;&nbsp;胜率："+(((win+lose)<=0)?0:((win*100/(win+lose)).toFixed(2)))+"%";
+                    str += "</p>";
+                    str += "<br>";
+                }
+            }
+        }else{
+            return "该武将还未进行过对局。";
+        }
+        return str;
     };
     get.qhly_getOriginSkinInfo=function(name,pkg){
         if(!pkg)pkg=game.qhly_foundPackage(name);
@@ -3217,7 +3499,12 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         var ret = '';
                         var handleView = null;
                         if(state.introduceExtraFunc){
-                            var func = state.pkg[state.introduceExtraFunc];
+                            var func = null;
+                            if(typeof state.introduceExtraFunc == 'function'){
+                                func = state.introduceExtraFunc;
+                            }else{
+                                func = state.pkg[state.introduceExtraFunc];
+                            }
                             if(typeof func == 'function'){
                                 var fc = func(name);
                                 if(fc){
@@ -3920,6 +4207,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         if(currentSkin.skinId){
                             content += "<p><span>皮肤品质&nbsp;&nbsp;</span><select style='font-size:22px;font-family:'qh_youyuan';' id='qhconfig_level_select'></select></p>";
                             content += "<p><span>皮肤顺序&nbsp;&nbsp;</span><select style='font-size:22px;font-family:'qh_youyuan';' id='qhconfig_order_select'></select></p>";
+                            //content += "<p><span>语音重定向&nbsp;&nbsp;</span><select style='font-size:22px;font-family:'qh_youyuan';' id='qhconfig_audio_redirect_select'></select></p>";
                         }
                         content += "<br><br>";
                     }
@@ -4005,7 +4293,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                 }
                             }
                         };
-
+                        
                     }
                         var banInRandomCheckbox = document.getElementById('qhconfig_checkbox_banInRandom');
                         var bindFunc=function(checkbox,text){
@@ -4253,8 +4541,24 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         content += "<p>可以设置"+get.translation(name)+"的专属背景音乐，在游戏开始时将自动切换。</p>";
                         content += "<p><select style='font-size:22px;font-family:'qh_youyuan';' id='qhconfig_music_select'></select></p>";
                     }
+                    var extraConfigs = [];
+                    if(state.pkg.characterConfigExtra){
+                        var characterConfigExtra = state.pkg.characterConfigExtra(name);
+                        if(characterConfigExtra){
+                            for(var extc of characterConfigExtra){
+                                var extobj = game.qhly_parseConfig(extc);
+                                content += extobj.content;
+                                extraConfigs.push(extobj);
+                            }
+                        }
+                    }
                     content += "<br><br><br><br><br><br>";
                     this.innerConfig.innerHTML = content;
+                    for(var extraConfig of extraConfigs){
+                        if(extraConfig.onfinish){
+                            extraConfig.onfinish(this.innerConfig);
+                        }
+                    }
                     var bindFunc=function(checkbox,text){
                         if(!text)return;
                         ui.qhly_addListenFunc(text);
@@ -4537,7 +4841,11 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                             name:obj.name,
                                             onchange:function(){
                                                 state.introduceExtraPage = obj.name;
-                                                state.introduceExtraFunc = obj.func;
+                                                if(obj.qh_func){
+                                                    state.introduceExtraFunc = game[obj.qh_func];
+                                                }else{
+                                                    state.introduceExtraFunc = obj.func;
+                                                }
                                                 subView.page.introduce.refresh(name,state);
                                                 if(state.extraMenu){
                                                     state.extraMenu.delete();
@@ -4874,6 +5182,10 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             return;
         }
         //game.pause();
+        if(!lib.config.qhly_huaijiu_mentioned){
+            alert("【经典怀旧】UI套装已经停止维护，如果需要更好的UI体验，建议切换到别的UI套装。");
+            game.saveConfig('qhly_huaijiu_mentioned',true);
+        }
         var background = ui.create.div('.qhly-chgskin-background',document.body);
         background.animate('start');
         var avatar = ui.create.div('.qhly-skin',background);
@@ -5689,6 +6001,15 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             game.saveConfig('qhly_smallwinclosewhenchange',item);
         }
     },
+    "qhly_recordWin":{
+        "name":"展示战绩",
+        "intro":"打开此选项，可以在千幻资料页查看战绩。",
+        "init":lib.config.qhly_recordWin === undefined ? false:lib.config.qhly_recordWin,
+        onclick:function(item){
+            game.saveConfig('extension_千幻聆音_qhly_recordWin',item);
+            game.saveConfig('qhly_recordWin',item);
+        }
+    },
     "qhly_randskin":{
         "name":"随机皮肤",
         "intro":"打开此选项，游戏开始时，会随机更换皮肤。",
@@ -6126,5 +6447,5 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
     author:"玄武江湖工作室",
     diskURL:"",
     forumURL:"",
-    version:"3.0.0",
+    version:"3.0.3.1",
 },files:{"character":[],"card":[],"skill":[]}}})

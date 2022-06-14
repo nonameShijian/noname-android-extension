@@ -413,7 +413,7 @@
     z-index: 32;
     left:20px;
     top:0px;
-    width: calc(100% -40px);
+    width: calc(100% - 40px);
     height: calc(100%);
     display: block;
     color:black;
@@ -427,7 +427,7 @@
     z-index: 32;
     left:20px;
     top:0px;
-    width: calc(100% -40px);
+    width: calc(100% - 40px);
     height: calc(100%);
     display: block;
     color:black;
