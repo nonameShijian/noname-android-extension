@@ -56,7 +56,7 @@
 	left: calc(50% - 100px);
 	top: calc(50% - 15px);
 	width: 200px;
-	height: 30px;
+	height: 25px;
 	color: white;
 	font-size: 20px;
 	text-align: center;
@@ -101,6 +101,50 @@
     border-top: 13px solid transparent;
     border-bottom: 13px solid transparent;
     border-left: 13px solid black;
+}
+
+.Searcher>.menu>.chooseModule {
+	position: absolute;
+	left: calc(50% - 250px);
+	top: calc(50% - 15px);
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background: rgba(200, 200, 100, 0.5);
+}
+
+.Searcher>.menu>.chooseModule>.list {
+	overflow: hidden;
+	max-height: 0px;
+	background: rgb(255, 255, 255);
+	width: 100px;
+	text-align: center;
+	position: absolute;
+	top: 40px;
+	margin: 0;
+	padding: 0;
+	/* 去除li的原点占位 */
+	padding-left: 0px;
+	list-style: none;
+	z-index: 1000;
+	text-shadow: none;
+	height: 0;
+	transition: height cubic-bezier(0.25, 0.46, 0.45, 0.94) .5s;
+}
+
+.Searcher>.menu>.chooseModule>.list>li {
+	border: 1px solid black;
+}
+
+.Searcher>.menu>.chooseModule>.list.hover {
+	display: block;
+	height: 126px;
+	max-height: 200px;
+	color: rgb(0, 0, 0);
+	border: 1px solid #000;
+	position: absolute;
+	transition: height cubic-bezier(0.25, 0.46, 0.45, 0.94) .5s;
 }
 
 .showDescription {

@@ -22,10 +22,10 @@ game.import("libDescription", function (lib, game, ui, get, ai, _status) {
         string 字符串
         number 数字
         boolean 布尔值
+		function 函数
         
     */
    
-
     lib.description = Object.assign(lib.description || {}, {
         player: {
             // 关于player这个对象的描述
@@ -2106,11 +2106,11 @@ game.import("libDescription", function (lib, game, ui, get, ai, _status) {
                 },
                 // 方法的参数列表
                 args: {
-                    tag: {
+					gaintag: {
                         // 此参数是不是必须的
                         exist: true,
                         // 参数类型
-                        type: '字符串（想让这个牌上显示啥字就填什么',
+                        type: '字符串',
                         // 参数作用
                         description: '想让这个牌上显示啥字就填什么',
                         // 参数的顺序，allRight指任一顺序皆可
@@ -2118,7 +2118,6 @@ game.import("libDescription", function (lib, game, ui, get, ai, _status) {
                     },
                 }
             },
-
         },
         lib: {
             // 关于lib这个对象的描述
@@ -2126,7 +2125,10 @@ game.import("libDescription", function (lib, game, ui, get, ai, _status) {
 
             character: {
                 [qnssDescriptionSymbol]: '关于lib.character这个对象的描述',
-                [qnssKeySymbol]: '为lib.character对象的所有属性，添加一个默认的描述，例如lib.character.sunce， lib.character.re_sunben',
+				// 为lib.character对象的所有属性，添加一个默认的描述，例如lib.character.sunce， lib.character.re_sunben
+                [qnssKeySymbol](data) {
+					return `武将${lib.translate[data.slice(14)]}的信息`
+				},
             },
 
             element: {
@@ -2140,17 +2142,16 @@ game.import("libDescription", function (lib, game, ui, get, ai, _status) {
                 }
             },
         },
-
         game: {
             // 关于game这个对象的描述
             [qnssDescriptionSymbol]: '关于game这个对象的描述',
 
             players: {
-                type: 'PLayer[]',
+                type: 'Player[]',
                 description: '在场上的玩家数组'
             },
             dead: {
-                type: 'PLayer[]',
+                type: 'Player[]',
                 description: '已经阵亡的玩家数组'
             },
         },
@@ -2295,7 +2296,7 @@ game.import("libDescription", function (lib, game, ui, get, ai, _status) {
                     type: 'string',
                     description: '正在操控的角色的名字（英文id）'
                 }
-            },
+            }
         },
         get: {
 
@@ -2304,6 +2305,6 @@ game.import("libDescription", function (lib, game, ui, get, ai, _status) {
 
         }
     });
-    
+
     return {};
 });

@@ -5,6 +5,7 @@
 game.import("extension", function (lib, game, ui, get, ai, _status) {
 	let exts;
 	if (localStorage.getItem('noname_android_extension')) {
+		// @ts-ignore
 		exts = JSON.parse(localStorage.getItem('noname_android_extension'));
 		localStorage.removeItem('noname_android_extension');
 	} else {
@@ -337,9 +338,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								// 要更新的版本是 无
 								return true;
 							} else {
-								return version_2.some((v, i) => {
-									return v > (version_1[i] || 0);
-								});
+								for (let i = 0; i < version_1.length && i < version_2.length; i++) {
+									version_1[i] = version_1[i] || 0;
+									version_2[i] = version_2[i] || 0;
+									if (version_2[i] > version_1[i]) return true;
+									if (version_1[i] > version_2[i]) return false;
+								}
 							}
 						};
 

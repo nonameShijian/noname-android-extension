@@ -2261,7 +2261,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         div.style.left = x.toFixed(3) + 'px';
         div.style.top = y.toFixed(3) + 'px';
     };
-    game.qhly_open_small_dragon=function(name,from){
+    game.qhly_open_small_dragon=function(name,from,ingame){
         if(_status.qhly_open)return;
         _status.qhly_open = true;
         game.qhly_playQhlyAudio('qhly_voc_click3',null,true);
@@ -2647,7 +2647,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             if(time - state.preclicktime < 250){
                 background.delete();
                 _status.qhly_open = false;
-                game.qhly_open_new(name,lib.config.qhly_doubledefaultpage?lib.config.qhly_doubledefaultpage:'skill');
+                game.qhly_open_new(name,lib.config.qhly_doubledefaultpage?lib.config.qhly_doubledefaultpage:'skill',ingame);
             }
             state.preclicktime = time;
             e.stopPropagation();
@@ -2742,9 +2742,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         },false);
 
     };
-    game.qhly_open_small=function(name,from){
+    game.qhly_open_small=function(name,from,ingame){
         if(lib.config.qhly_smallwindowstyle == 'dragon' || !lib.config.qhly_smallwindowstyle){
-            game.qhly_open_small_dragon(name,from);
+            game.qhly_open_small_dragon(name,from,ingame);
             return;
         }
         try{
@@ -2962,7 +2962,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             exit.listen(exitListener);
             enlarge.listen(function(){
                 exitListener();
-                game.qhly_open_new(name,lib.config.qhly_doubledefaultpage?lib.config.qhly_doubledefaultpage:'skill');
+                game.qhly_open_new(name,lib.config.qhly_doubledefaultpage?lib.config.qhly_doubledefaultpage:'skill',ingame);
             });
         }catch(e){
             if(QHLY_DEBUGMODE){
@@ -2971,11 +2971,19 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         }
     };
     //打开选择皮肤界面。
-    game.qhly_open_new=function(name,page){
+    game.qhly_open_new=function(name,page,ingame){
         try{
         //if(name.indexOf('gz_') == 0){
         //    name = name.slice(3);
         //}
+        var cplayer = null;
+        if(ingame){
+            if(get.itemtype(ingame) == 'player'){
+                cplayer = ingame;
+            }else if( ingame.parentNode && get.itemtype(ingame.parentNode) == 'player'){
+                cplayer = ingame.parentNode;
+            }
+        }
         if(_status.qhly_open)return;
         _status.qhly_open = true;
         _status.qhly_skillAudioWhich = {};
@@ -3021,7 +3029,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         });
         gback.hide();
         document.body.appendChild(gback);
-        game.qhly_initNewView(name,background,page);
+        game.qhly_initNewView(name,background,page,cplayer);
         gback.show();
         game.pause2();
         }catch(e){
@@ -3400,7 +3408,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         }
         return menu;
     };
-    game.qhly_initNewView=function(name,view,page){
+    game.qhly_initNewView=function(name,view,page,cplayer){
         var currentViewSkin = lib.qhly_viewskin[lib.config.qhly_currentViewSkin];
         var subView ={};
         if(!page){
@@ -3598,6 +3606,20 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                             });
                         }
                     }
+                    var tempSkill = [];
+                    if(cplayer && lib.config.qhly_skillingame){
+                        var skills = cplayer.getSkills(false,false);
+                        for(var tskill of skills){
+                            if(viewSkill.contains(tskill))continue;
+                            var info = get.info(tskill);
+                            if(!info)continue;
+                            if(!lib.translate[tskill])continue;
+                            if(info.popup === false)continue;
+                            if(info.nopop === true)continue;
+                            viewSkill.add(tskill);
+                            tempSkill.add(tskill);
+                        }
+                    }
                     if(currentViewSkin.isQiLayout){
                         content += "<table border='2' frame='void' rules='none'>";
                         for(var skill of viewSkill){
@@ -3606,10 +3628,18 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                             if(detail){
                                 var cskill = get.translation(skill);
                                 content += "<tr>";
-                                content += "<td style='text-align:center;vertical-align:top;width:100px;height:100px;background-repeat:no-repeat;background-position:top left;background-size:100px 100px;background-image:url("+lib.assetURL+"extension/千幻聆音/newui_shuimo_skillname.png);";
+                                content += "<td style='text-align:center;";
+                                if(cplayer && lib.config.qhly_skillingame){
+                                    if(!cplayer.hasSkill(skill)){
+                                        content += 'opacity:0.5;'
+                                    }
+                                }
+                                content += "vertical-align:top;width:100px;height:100px;background-repeat:no-repeat;background-position:top left;background-size:100px 100px;background-image:url("+lib.assetURL+"extension/千幻聆音/newui_shuimo_skillname.png);";
                                 content += "color:";
                                 if(derivation.contains(skill)){
                                     content += get.qhly_getIf(currentViewSkin.skillPageDerivationSkillColor,"#0000ff")+";";
+                                }else if(tempSkill.contains(skill)){
+                                    content += get.qhly_getIf(currentViewSkin.skillPageTempSkillColor,"#00FF00")+";";
                                 }else{
                                     content += get.qhly_getIf(currentViewSkin.skillPageSkillNameColor,"#5B0F00")+";";
                                 }
@@ -3630,10 +3660,33 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                 content += "'>";
                                 content += cskill;
                                 content += "</td>";
-                                content += "<td style='vertical-align:top;'";
+                                content += "<td style='vertical-align:top;";
+                                if(cplayer && lib.config.qhly_skillingame){
+                                    if(!cplayer.hasSkill(skill)){
+                                        content += 'opacity:0.5;'
+                                    }
+                                }
                                 content += "'>";
-                                content += "<img style='width:135px;height:51px;' id='qhly_skillv_"+skill+"'/><br>";
+                                content += "<img style='width:135px;height:51px;' id='qhly_skillv_"+skill+"'/><br><span ";
+                                var dynamicTranslate = null;
+                                if(cplayer && lib.config.qhly_skillingame){
+                                    var dtrans = lib.dynamicTranslate[skill];
+                                    if(dtrans){
+                                        dtrans = dtrans(cplayer,skill);
+                                    }
+                                    if(dtrans && dtrans!=detail){
+                                        dynamicTranslate = dtrans;
+                                        content += "style='opacity:0.5;text-decoration:line-through;'"
+                                    }
+                                }
+                                content += '>';
                                 content += detail;
+                                content += "</span>";
+                                if(dynamicTranslate){
+                                    content += "<br><br><span style='color:orange;'>";
+                                    content += dynamicTranslate;
+                                    content += "</span>";
+                                }
                                 content += "<br>";
                                 var info = get.info(skill);
                                 if(info && (info.frequent||info.subfrequent)){
@@ -3652,12 +3705,44 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                             if(detail){
                                 content += "<h3";
                                 if(derivation.contains(skill)){
-                                    content += " style='color:"+get.qhly_getIf(currentViewSkin.skillPageDerivationSkillColor,"#0000ff")+";'>"
+                                    content += " style='color:"+get.qhly_getIf(currentViewSkin.skillPageDerivationSkillColor,"#0000ff")+";";
+                                }else if(tempSkill.contains(skill)){
+                                    content += " style='color:"+get.qhly_getIf(currentViewSkin.skillPageDerivationSkillColor,"#00ff00")+";";
                                 }else{
-                                    content += " style='color:"+get.qhly_getIf(currentViewSkin.skillPageSkillNameColor,"#5B0F00")+";'>";
+                                    content += " style='color:"+get.qhly_getIf(currentViewSkin.skillPageSkillNameColor,"#5B0F00")+";";
                                 }
+                                if(cplayer && lib.config.qhly_skillingame){
+                                    if(!cplayer.hasSkill(skill)){
+                                        content += "opacity:0.5;"
+                                    }
+                                }
+                                content += "'>";
                                 content += "【"+get.translation(skill)+"】<img style='vertical-align:middle;width:35px;' id='qhly_skillv_"+skill+"'/></h3>";
-                                content += "<p>"+detail;
+                                content += "<p";
+                                content += ">";
+                                content += "<span style='";
+                                var dynamicTranslate = null;
+                                if(cplayer && lib.config.qhly_skillingame){
+                                    var dtrans = lib.dynamicTranslate[skill];
+                                    if(dtrans){
+                                        dtrans = dtrans(cplayer,skill);
+                                    }
+                                    if(dtrans && dtrans!=detail){
+                                        dynamicTranslate = dtrans;
+                                        content += "opacity:0.5;text-decoration:line-through;"
+                                    }
+                                    if(!cplayer.hasSkill(skill)){
+                                        content += "opacity:0.5;"
+                                    }
+                                }
+                                content += "'>";
+                                content += detail;
+                                content += "</span>";
+                                if(dynamicTranslate){
+                                    content += "<br><br><span style='color:orange;'>";
+                                    content += dynamicTranslate;
+                                    content += "</span>";
+                                }
                                 var info = get.info(skill);
                                 if(info && (info.frequent||info.subfrequent)){
                                     content += "<br>&nbsp;&nbsp;<img style='vertical-align:middle;' id='qhly_autoskill_"+skill+"'/><b id='qhly_autoskill_text_"+skill+"'>自动发动</b>"
@@ -5171,14 +5256,14 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         game.qhly_changeViewSkin(subView);
         showPage(page);
     };
-    game.qhly_open=function(name){
+    game.qhly_open=function(name,page,ingame){
         if(name.indexOf('gz_') == 0){
             if(lib.config.qhly_guozhan===false || get.mode() != 'guozhan' || !game.qhly_hasGuozhanSkin(name)){
                 name = name.slice(3);
             }
         }
         if(lib.config.qhly_newui !== false && (lib.config.qhly_currentViewSkin != 'jingdian')){
-            game.qhly_open_new(name,'skin');
+            game.qhly_open_new(name,page?page:'skin',ingame);
             return;
         }
         //game.pause();
@@ -5381,9 +5466,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             if(arguments[4]){
                 if(lib.config.qhly_replaceCharacterCard2 == 'window'){
                     game.resume2();
-                    game.qhly_open_small(arguments[0]);
+                    game.qhly_open_small(arguments[0],null,arguments[4]);
                 }else if(lib.config.qhly_currentViewSkin != 'jingdian'){
-                    game.qhly_open_new(arguments[0],lib.config.qhly_doubledefaultpage?lib.config.qhly_doubledefaultpage:'skill');
+                    game.qhly_open_new(arguments[0],lib.config.qhly_doubledefaultpage?lib.config.qhly_doubledefaultpage:'skill',arguments[4]);
                 }else{
                     game.qhly_open(arguments[0]);
                 }
@@ -5700,9 +5785,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         }
                     }
                     if(lib.config.qhly_smallwiningame){
-                        game.qhly_open_small(player.name1 ? player.name1 : player.name,player);
+                        game.qhly_open_small(player.name1 ? player.name1 : player.name,player,player);
                     }else{
-                        game.qhly_open(player.name1 ? player.name1 : player.name);
+                        game.qhly_open(player.name1 ? player.name1 : player.name,'skin',player);
                     }
                 });
                 if(lib.config.qhly_dragButton){
@@ -5718,9 +5803,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                 player.node.qhly_skinButton2 = button;
                 button.listen(function(){
                     if(lib.config.qhly_smallwiningame){
-                        game.qhly_open_small(player.name2,player);
+                        game.qhly_open_small(player.name2,player,player);
                     }else{
-                        game.qhly_open(player.name2);
+                        game.qhly_open(player.name2,'skin',player);
                     }
                 });
                 if(lib.config.qhly_dragButton){
@@ -6221,6 +6306,15 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             game.saveConfig('qhly_editmode',item);
         }
     },
+    "qhly_skillingame":{
+        "name":"显示对局技能",
+        "intro":"打开此选项后，对局中查看武将技能界面时，将显示对局中的技能。",
+        "init":lib.config.qhly_skillingame === undefined ? false : lib.config.qhly_skillingame,
+        onclick:function(item){
+            game.saveConfig('extension_千幻聆音_qhly_skillingame',item);
+            game.saveConfig('qhly_skillingame',item);
+        }
+    },
     "qhly_yinxiaoshezhi":{
         "name":"<font size='5' color='blue'>音效设置》</font>",
         "clear":true,
@@ -6447,5 +6541,5 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
     author:"玄武江湖工作室",
     diskURL:"",
     forumURL:"",
-    version:"3.0.3.1",
+    version:"3.0.5",
 },files:{"character":[],"card":[],"skill":[]}}})

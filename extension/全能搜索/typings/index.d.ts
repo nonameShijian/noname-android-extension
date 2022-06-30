@@ -33,5 +33,26 @@ declare const qnssSee: (a: HTMLAnchorElement) => void
 
 declare interface Lib {
     /** 对于每个方法的注释 */
-    description: {}
+    description: {
+		player: Map<string | Symbol, any>,
+		card: Map<string | Symbol, any>, 
+		lib: Map<string | Symbol, any>, 
+		game: Map<string | Symbol, any>, 
+		ui: Map<string | Symbol, any>, 
+		get: Map<string | Symbol, any>, 
+		ai: Map<string | Symbol, any>, 
+		_status: Map<string | Symbol, any>
+	}
+}
+
+declare interface Game {
+	/** 把js代码高亮显示 */
+	全能搜索_highlight: (text: string) => string;
+	/** 双击复制target */
+	全能搜索_copy: (target: any) => void;
+}
+
+declare interface UI {
+	/** 点击进入全能搜索界面 */
+	Searcher: HTMLDivElement;
 }

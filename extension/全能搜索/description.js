@@ -1,7 +1,9 @@
 /// <reference path="./typings/index.d.ts" />
 "use strict";
 game.import("libDescription", function (lib, game, ui, get, ai, _status) {
-    lib.description = Object.assign(lib.description || {}, {
+	if (!lib.description) lib.description = {};
+
+	const description = {
         game: {
             "全能搜索_copy": {
                 from: '全能搜索',
@@ -35,7 +37,18 @@ game.import("libDescription", function (lib, game, ui, get, ai, _status) {
                 from: '全能搜索',
                 description: "搜索器的一个实例"
             }
-        }
-    });
+        },
+		ui: {
+			Searcher: '全能搜索创建的搜索器类'
+		}
+    };
+
+	for (const key in description) {
+		if (!lib.description[key]) lib.description[key] = description[key];
+		else {
+			Object.assign(lib.description[key], description[key]);
+		}
+	}
+
     return {};
 });
