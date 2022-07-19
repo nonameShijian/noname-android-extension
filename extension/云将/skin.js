@@ -16,10 +16,6 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
 
     var gonglve = {
         'yunyouzi':"<video width='300' height='200' controls autoplay style='width:50%;height:100%;object-fit:fill;'><source src='"+lib.assetURL+"extension/云将/fuli/SP_1.mp4'</video>",
-        'yunliubei':"这似乎是某个宝藏拓展的激活码，一位神秘人赠予用来匡扶汉室的资源，但因为分成了三份只能看到其中一段：yunjiang_*******",
-        'yunguanyu':"这似乎是某个宝藏拓展的激活码，一位神秘人因见证了桃园结义所赠送，但因为分成了三份只能看到其中一段：********tyjy***",
-        'yunzhangfei':"这似乎是某个宝藏拓展的激活码，一位神秘人因感慨复读机无处不在顺手赠送，但因为分成了三份只能看到其中一段：************lgz",
-        'yundongzuo':"这似乎是董卓搜刮汉室珍藏的时候发现的某个宝藏拓展激活码，能换取丰厚的奖励：yunjiang_lhzs",
     };    
     lib.qhlypkg.push({
         isExt:true,//是否是扩展，一般填true
@@ -70,7 +66,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yuncaocao':{
                     '___origin':{
                         'yunzongyu':1,//恢复皮肤初始状态
-                        'yunzongyu':'extension/云将/yuncaocao1a.jpg',
+                        'yunzongyu':'extension/云将/yuncaocaoa.jpg',
                     },
                     'yuncaocao4.jpg':{                  
                         'yunzongyu':'extension/云将/yuncaocao4a.jpg',
@@ -112,7 +108,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yuncaopi':{
                     '___origin':{
                         'yundengwei':1,//恢复皮肤初始状态
-                        'yundengwei':'extension/云将/yuncaopi1a.jpg',
+                        'yundengwei':'extension/云将/yuncaopia.jpg',
                     },
                     'yuncaopi4.jpg':{                  
                         'yundengwei':'extension/云将/yuncaopi4a.jpg',
@@ -129,7 +125,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yunzhangchunhua':{
                     '___origin':{
                         'yunjuekou':1,//恢复皮肤初始状态
-                        'yunjuekou':'extension/云将/yunzhangchunhua1a.jpg',
+                        'yunjuekou':'extension/云将/yunzhangchunhuaa.jpg',
                     },
                     'yunzhangchunhua4.jpg':{                  
                         'yunjuekou':'extension/云将/yunzhangchunhua4a.jpg',
@@ -150,27 +146,27 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yunhuangyueying':{
                     '___origin':{
                         'yunqiqiao':1,//恢复皮肤初始状态
-                        'yunqiqiao':'extension/云将/yunhuangyueying1a.jpg',
+                        'yunqiqiao':'extension/云将/yunhuangyueyinga.jpg',
                     },    
                     'yunhuangyueying5.jpg':{
                         'yunqiqiao':1,//恢复皮肤初始状态
                         'yunqiqiao':'extension/云将/yunhuangyueying5a.jpg',
                     },     
-                    'yunhuangyueying5.1.jpg':{
+                    'yunhuangyueying9.jpg':{
                         'yunqiqiao':1,//恢复皮肤初始状态
-                        'yunqiqiao':'extension/云将/yunhuangyueying5.1a.jpg',
+                        'yunqiqiao':'extension/云将/yunhuangyueying9a.jpg',
                     },               
                 },
                 'yunliubei':{
                     '___origin':{
                         'yunsangu':1,//恢复皮肤初始状态
-                        'yunsangu':'extension/云将/yunliubei1a.jpg',
+                        'yunsangu':'extension/云将/yunliubeia.jpg',
                     },                    
                 },
                 'yunpangtong':{
                     '___origin':{
                         'yunfengming':1,//恢复皮肤初始状态
-                        'yunfengming':'extension/云将/yunpangtong1a.jpg',
+                        'yunfengming':'extension/云将/yunpangtonga.jpg',
                     },                    
                     'yunpangtong5.jpg':{
                         'yunfengming':1,//恢复皮肤初始状态
@@ -180,25 +176,25 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yunsunce':{
                     '___origin':{
                         'yunxianxi':1,//恢复皮肤初始状态
-                        'yunxianxi':'extension/云将/yunsunce1a.jpg',
+                        'yunxianxi':'extension/云将/yunsuncea.jpg',
                     },                    
                 },
                 'yunsunquan':{
                     '___origin':{
                         'yunjianye':1,//恢复皮肤初始状态
-                        'yunjianye':'extension/云将/yunsunquan1a.jpg',
+                        'yunjianye':'extension/云将/yunsunquana.jpg',
                     },                    
                 },
                 'yunxushi':{
                     '___origin':{
                         'yunfuzhu':1,//恢复皮肤初始状态
-                        'yunfuzhu':'extension/云将/yunxushi1a.jpg',
+                        'yunfuzhu':'extension/云将/yunxushia.jpg',
                     },                    
                 },
                 'yunzhouyu':{
                     '___origin':{
                         'yunyeyan':1,//恢复皮肤初始状态
-                        'yunyeyan':'extension/云将/yunzhouyu1a.jpg',
+                        'yunyeyan':'extension/云将/yunzhouyua.jpg',
                     },   
                     'yunzhouyu5.jpg':{
                         'yunyeyan':1,//恢复皮肤初始状态
@@ -208,7 +204,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yuncaishi':{
                     '___origin':{
                         'yunxianzhou':1,//恢复皮肤初始状态
-                        'yunxianzhou':'extension/云将/yuncaishi1a.jpg',
+                        'yunxianzhou':'extension/云将/yuncaishia.jpg',
                     },   
                     'yuncaishi4.jpg':{
                         'yunxianzhou':1,//恢复皮肤初始状态
@@ -220,15 +216,15 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                     },                                               
                 },
                 'db_yundaxiaoqiao':{
-                    '___origin':{
+                    'db_yundaxiaoqiao5.jpg':{
                         'fengyunshibian_dxq':1,//恢复皮肤初始状态
-                        'fengyunshibian_dxq':'extension/云将/db_yundaxiaoqiao1a.jpg',
-                    },                    
+                        'fengyunshibian_dxq':['extension/云将/db_yundaxiaoqiao5a.jpg','extension/云将/db_yundaxiaoqiao5b.jpg'],
+                        },
                 },
                 'yunzhangjiao':{
                     '___origin':{
                         'yunhuangtian':1,//恢复皮肤初始状态
-                        'yunhuangtian':'extension/云将/yunzhangjiao1a.jpg',
+                        'yunhuangtian':'extension/云将/yunzhangjiaoa.jpg',
                     },                    
                     'yunzhangjiao7.jpg':{
                         'yunhuangtian':1,//恢复皮肤初始状态
@@ -238,7 +234,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yundiaochan':{
                     '___origin':{
                         'yunbiyue':1,//恢复皮肤初始状态
-                        'yunbiyue':'extension/云将/yundiaochan1a.jpg',
+                        'yunbiyue':'extension/云将/yundiaochana.jpg',
                     },     
                     'yundiaochan7.jpg':{
                         'yunbiyue':1,//恢复皮肤初始状态
@@ -248,7 +244,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yundongbai':{
                     '___origin':{
                         'yunjiaoheng':1,//恢复皮肤初始状态
-                        'yunjiaoheng':'extension/云将/yundongbai1a.jpg',
+                        'yunjiaoheng':'extension/云将/yundongbaia.jpg',
                     },     
                     'yundongbai5.jpg':{
                         'yunjiaoheng':1,//恢复皮肤初始状态
@@ -258,7 +254,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'db_yunjiaxu':{
                     '___origin':{
                         'yunjimou':1,//恢复皮肤初始状态
-                        'yunjimou':'extension/云将/db_yunjiaxu1a.jpg',
+                        'yunjimou':'extension/云将/db_yunjiaxua.jpg',
                     },  
                     'db_yunjiaxu5.jpg':{
                         'yunjimou':1,//恢复皮肤初始状态
@@ -266,15 +262,25 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                     },                    
                 },
                 'yunzhaoxiang':{
+                    'yunzhaoxiang4.jpg':{
+                        'yunfanghun':1,//恢复皮肤初始状态
+                        'yunfanghun':'extension/云将/yunzhaoxiang4a.jpg',
+                    },
                     'yunzhaoxiang5.jpg':{
                         'yunfanghun':1,//恢复皮肤初始状态
                         'yunfanghun':'extension/云将/yunzhaoxiang5a.jpg',
+                    },
+                },
+                'yunhuaman':{
+                    '___origin':{
+                        'yunfanghun':1,//恢复皮肤初始状态
+                        'yunzhanyuan':'extension/云将/yunhuamana.jpg',
                     },                    
                 },
                 'yunjiangwei':{
                     '___origin':{
                         'yunqilin':1,//恢复皮肤初始状态
-                        'yunqilin':['extension/云将/yunjiangwei1a.jpg','extension/云将/yunjiangwei1b.jpg','extension/云将/yunjiangwei1c.jpg'],
+                        'yunqilin':['extension/云将/yunjiangweia.jpg','extension/云将/yunjiangweib.jpg','extension/云将/yunjiangweic.jpg'],
                     },
                     'yunjiangwei5.jpg':{
                         'yunqilin':1,//恢复皮肤初始状态
@@ -284,7 +290,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yuncaiwenji':{
                     '___origin':{
                         'yunbeige':1,//恢复皮肤初始状态
-                        'yunbeige':['extension/云将/yuncaiwenji1a.jpg','extension/云将/yuncaiwenji1b.jpg','extension/云将/yuncaiwenji1c.jpg'],
+                        'yunbeige':['extension/云将/yuncaiwenjia.jpg','extension/云将/yuncaiwenjib.jpg','extension/云将/yuncaiwenjic.jpg'],
                     },                    
                     'yuncaiwenji5.jpg':{
                         'yunbeige':1,//恢复皮肤初始状态
@@ -294,7 +300,7 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 'yunsunshangxiang':{
                     '___origin':{
                         'yunxiaoji':1,//恢复皮肤初始状态
-                        'yunxiaoji':['extension/云将/yunsunshangxiang1a.jpg','extension/云将/yunsunshangxiang1b.jpg','extension/云将/yunsunshangxiang1c.jpg','extension/云将/yunsunshangxiang1d.jpg'],
+                        'yunxiaoji':['extension/云将/yunsunshangxianga.jpg','extension/云将/yunsunshangxiangb.jpg','extension/云将/yunsunshangxiangc.jpg','extension/云将/yunsunshangxiangd.jpg'],
                     },                    
                     'yunsunshangxiang5.jpg':{
                         'yunxiaoji':1,//恢复皮肤初始状态
