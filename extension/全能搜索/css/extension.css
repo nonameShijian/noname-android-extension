@@ -204,17 +204,17 @@
 
 .updateContent {
 	top: 20%;
-	left: 15%;
-	width: 70%;
-	height: 60%;
+	left: 15% !important;
+	width: 70% !important;
+	height: 60% !important;
 	background-color: rgba(0, 0, 0, 0.6);
 	z-index: 100;
 	overflow-y: scroll;
 }
 
 .updateContentClose {
-	position: absolute;
-	right: 0px;
+	position: fixed !important;
+    right: 15% !important;
 	width: 50px;
 	height: 50px;
 	background: silver;

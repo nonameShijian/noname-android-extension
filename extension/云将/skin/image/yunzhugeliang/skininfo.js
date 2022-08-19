@@ -71,32 +71,6 @@ window.qhly_import_safe(function(lib,game,ui,get,ai,_status){
                 }
             }
         },
-        "yunzhugeliang4": {
-            "level": "$extension/云将/biaoqian/ico_shishi.png",
-            "translation": "珠联璧合",
-            "order": 4,
-            "levelStyle": {
-                "width": "45px",
-                "height": "45px",
-                "bottom": "calc(0.00%)",
-                "left": "calc(65.00%)",
-                "opacity": "1"
-            },
-            "skill": {
-                "yunshouji": {
-                    "content": "隔岸观火，静候佳音。<br>亮早有成策在胸，主公大可放心。"
-                },
-                "yunqixing": {
-                    "content": "七星北斗，布阵如棋。<br>问天用奇术，洞敌于机先。"
-                },
-                "yunbazhen": {
-                    "content": "行兵布阵，自在我心。<br>八阵既成，庶几不败矣？"
-                },
-                "die": {
-                    "content": "悠悠苍天……何薄于我……"
-                }
-            }
-        },
         "yunzhugeliang7": {
             "level": "$extension/云将/biaoqian/ico_diancang.png",
             "translation": "小小卧龙",
@@ -119,7 +93,7 @@ window.qhly_import_safe(function(lib,game,ui,get,ai,_status){
                     "content": "料事如神，随机应变。<br>你还是太弱了。"
                 },
                 "die": {
-                    "content": "对天起誓，以明我志。"
+                    "content": "对天起誓……以明我志……"
                 }
             }
         }

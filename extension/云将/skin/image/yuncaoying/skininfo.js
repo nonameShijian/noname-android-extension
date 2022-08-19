@@ -124,9 +124,9 @@ window.qhly_import_safe(function(lib,game,ui,get,ai,_status){
         }
         },
         "yuncaoying5": {
-            "level": "$extension/云将/biaoqian/ico_chuanshuo.png",
+            "level": "$extension/云将/biaoqian/ico_chuanshuo_dt.png",
             "translation": "惊鸿殊色",
-            "order": 5,
+            "order": 5.1,
             "levelStyle": {
                 "width": "45px",
                 "height": "45px",
@@ -149,6 +149,32 @@ window.qhly_import_safe(function(lib,game,ui,get,ai,_status){
                 }
             }
         },
+        /*"yuncaoying6": {
+            "level": "$extension/云将/biaoqian/ico_zhenbao.png",
+            "translation": "沧海横流",
+            "order": 6,
+            "levelStyle": {
+                "width": "70px",
+                "height": "65px",
+                "bottom": "calc(-7.00%)",
+                "left": "calc(50.00%)",
+                "opacity": "1"
+            },
+            "skill": {
+            "yunlingren": {
+                "content": "此山已为我军所围，尔等若降，还可善终！<br>借势凌人，敌军早降。<br>大军压境，问汝，降是不降？"
+            },
+            "yunlingrenxiaoxiong": {
+                "content": "一城一地之礼，何足败我？<br>为大事者，当如祖父一般，眼界高远。<br>枭雄佑护，祖父遗志，我定继承！"
+            },
+            "yunfujian": {
+                "content": "以上智行间，则大功可成！<br>五间之法，吾尽知而可用。<br>粮资军备，一览无遗。"
+            },
+            "die": {
+                "content": "曹魏河山，我还能守护几时？"
+            }
+        }
+    },*/
         "yuncaoying7": {
             "level": "$extension/云将/biaoqian/ico_diancang.png",
             "translation": "无限魅力",

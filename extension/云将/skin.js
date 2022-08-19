@@ -7,9 +7,15 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
         lib.qhly_groupimage = {};
     }
     
+    lib.qhly_groupimage['western'] = 'extension/千幻聆音/name_western.webp';
+    lib.qhly_groupimage['han'] = 'extension/云将/biaoqian/han.png';
+    
     if(!lib.qhly_groupcolor){
         lib.qhly_groupcolor = {};
     }
+    
+    lib.qhly_groupcolor['han'] = "#68228B";
+    lib.qhly_groupcolor['western'] = "#9400D3";
 
     var taici = {
     };
@@ -138,6 +144,10 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                     },
                 },
                 'yunguanyu':{
+                    '___origin':{
+                        'yunguayin':1,//恢复皮肤初始状态
+                        'yunguayin':'extension/云将/yunguanyua.jpg',
+                    },    
                     'yunguanyu4.jpg':{
                         'yunguayin':1,//恢复皮肤初始状态
                         'yunguayin':'extension/云将/yunguanyu4a.jpg',
@@ -145,16 +155,16 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                 },
                 'yunhuangyueying':{
                     '___origin':{
-                        'yunqiqiao':1,//恢复皮肤初始状态
-                        'yunqiqiao':'extension/云将/yunhuangyueyinga.jpg',
-                    },    
+                        'yunlinglong':1,//恢复皮肤初始状态
+                        'yunlinglong':'extension/云将/yunhuangyueyinga.jpg',
+                    },
                     'yunhuangyueying5.jpg':{
-                        'yunqiqiao':1,//恢复皮肤初始状态
-                        'yunqiqiao':'extension/云将/yunhuangyueying5a.jpg',
+                        'yunlinglong':1,//恢复皮肤初始状态
+                        'yunlinglong':'extension/云将/yunhuangyueying5a.jpg',
                     },     
                     'yunhuangyueying9.jpg':{
-                        'yunqiqiao':1,//恢复皮肤初始状态
-                        'yunqiqiao':'extension/云将/yunhuangyueying9a.jpg',
+                        'yunlinglong':1,//恢复皮肤初始状态
+                        'yunlinglong':'extension/云将/yunhuangyueying9a.jpg',
                     },               
                 },
                 'yunliubei':{
@@ -239,17 +249,25 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                     'yundiaochan7.jpg':{
                         'yunbiyue':1,//恢复皮肤初始状态
                         'yunbiyue':'extension/云将/yundiaochan7a.jpg',
-                    },                                   
+                    },
+                    'yundiaochan8.jpg':{
+                        'yunbiyue':1,//恢复皮肤初始状态
+                        'yunbiyue':'extension/云将/yundiaochan8a.jpg',
+                    },
                 },
                 'yundongbai':{
                     '___origin':{
                         'yunjiaoheng':1,//恢复皮肤初始状态
                         'yunjiaoheng':'extension/云将/yundongbaia.jpg',
-                    },     
+                    },
+                    'yundongbai2.jpg':{
+                        'yunjiaoheng':1,//恢复皮肤初始状态
+                        'yunjiaoheng':'extension/云将/yundongbai2a.jpg',
+                    },
                     'yundongbai5.jpg':{
                         'yunjiaoheng':1,//恢复皮肤初始状态
                         'yunjiaoheng':'extension/云将/yundongbai5a.jpg',
-                    },                                   
+                    },
                 },
                 'db_yunjiaxu':{
                     '___origin':{

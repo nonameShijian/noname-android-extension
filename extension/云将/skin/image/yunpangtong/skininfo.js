@@ -90,10 +90,10 @@ window.qhly_import_safe(function(lib,game,ui,get,ai,_status){
                     "content": "置之死地方能后生！"
                 },
                 "yunniepan": {
-                    "content": "燃烧吧！"
+                    "content": "大展宏图，就在今日！"
                 },
                 "die": {
-                    "content": "对天起誓，以明我志。"
+                    "content": "对天起誓……以明我志……"
                 }
             }
         }

@@ -154,13 +154,39 @@ window.qhly_import_safe(function(lib,game,ui,get,ai,_status){
         },
         "yunsunshangxiang7.1": {
             "level": "$extension/云将/biaoqian/ico_diancang.png",
-            "translation": "烈焰炙心",
+            "translation": "无限魅力",
             "order": 7,
             "levelStyle": {
                 "width": "55px",
                 "height": "25px",
                 "bottom": "calc(4.00%)",
                 "left": "calc(57.00%)",
+                "opacity": "1"
+            },
+            "skill": {
+                "yunjieyin": {
+                    "content": "愿不愿意，和我在一起？<br>掀喜帕，偷窥美君郎。"
+                },
+                "yunqingyuan": {
+                    "content": "嘻～结发为夫妻，恩爱两不疑。<br>望君更上一层楼。<br>夫君之志，即妾身之志。"
+                },
+                "yunxiaoji": {
+                    "content": "这份大礼，我收下啦～<br>待本姑娘再换把兵器。<br>"
+                },
+                "die": {
+                    "content": "哥哥……妹妹我……想家了……"
+                }
+            }
+        },
+        "yunsunshangxiang8": {
+            "level": "$extension/云将/biaoqian/ico_xinchuanshuo.png",
+            "translation": "烈焰炙心",
+            "order": 8,
+            "levelStyle": {
+                "width": "75px",
+                "height": "27px",
+                "bottom": "calc(4.00%)",
+                "left": "calc(50.00%)",
                 "opacity": "1"
             },
             "skill": {

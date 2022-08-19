@@ -1,0 +1,677 @@
+.qh-background{
+    z-index: 22;
+    position: absolute;
+    background-size: cover;
+    top: 50%;
+    left: 50%;
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+    transform:translate(-50%,-50%);
+    background-image: url('qhly_pic_background3.jpg');
+}
+
+.qh-window{
+    font-size: 16px;
+    position: absolute;
+    height: 1338px;
+    width: 778px;
+    left: 50%;
+    top: 50%;
+    display: block;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transform: translate(-50%,-50%);
+    background-image: url('newui_lolbig_ground.jpg');
+    z-index: 30;
+}
+
+.qh-window>.qh-back{
+    z-index: 50;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    width: calc(4.048%);
+    height: calc(7.2%);
+    display: block;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('newui_back_lolbig.png');
+}
+
+.qh-window>.qh-avatar{
+    z-index: 32;
+    position: absolute;
+    top:0;
+    right: 0;
+    width: calc(50%);
+    height: calc(100%);
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.qh-avatar>.qh-avatar-rank{
+    z-index: 33;
+    right:120px;
+    top:0px;
+    width: 100px;
+    height: 100px;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;;
+}
+
+.qh-window>.qh-window-backboard{
+    z-index: 34;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('newui_lol_bg1.png');
+}
+
+.qh-window>.qh-window-backboard-lutou{
+    z-index: 34;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url('newui_lol_bg1.png');
+}
+
+.qh-window>.qh-window-cover{
+    z-index: 35;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.qh-avatar>.qh-image-standard{
+    z-index: 33;
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top-left-radius:0px;
+    border-top-right-radius:0px;
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius:0px;
+}
+
+.qh-avatar>.qh-image-lutou{
+    z-index: 33;
+    position: absolute;
+    top:calc(-5%);
+    left:calc(-7%);
+    width: 114%;
+    height: 114%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.qh-window>.qh-avatar-label{
+    z-index: 36;
+    position: absolute;
+    display: block;
+    width: calc(16.46%);
+    height:calc(100%);
+    right:0px;
+    top:0px;
+}
+
+.qh-avatar-label>.qh-avatar-label-group{
+    z-index: 35;
+    position: absolute;
+    right: 0;
+    top:0;
+    height:calc(24.94%);
+    width:calc(80%);
+    color:"#B5AB82";
+    text-shadow: .2rem 0rem .5rem #725b30,-.2rem 0rem .5rem #725b30,0rem .2rem .5rem #725b30,0rem -.2rem .5rem #725b30;
+    font-family: 'shousha';
+    line-height: 100%;
+    font-size: 73px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('newui_lol_group.png');
+}
+
+.qh-avatar-label>.qh-avatar-label-group-double{
+    z-index: 35;
+    position: absolute;
+    left: 0;
+    top:0;
+    height:calc(24.94%);
+    width:calc(80%);
+    color:"#B5AB82";
+    font-family: 'qh_weili';
+    line-height: 100%;
+    font-size: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('newui_lol_group.png');
+}
+
+.qh-avatar-label-group-double>.qh-avatar-label-group-double-a{
+    z-index: 36;
+    position: absolute;
+    right:calc(40%);
+    top:calc(40%);
+    font-size:40px;
+    color:white;
+    font-family: 'qh_songhei';
+}
+
+.qh-avatar-label-group-double>.qh-avatar-label-group-double-b{
+    z-index: 36;
+    position: absolute;
+    left:calc(40%);
+    bottom:calc(40%);
+    font-size:40px;
+    color:skyblue;
+    font-family: 'qh_songhei';
+}
+
+.qh-avatar-label>.qh-avatar-label-name{
+    z-index: 35;
+    position: absolute;
+    top:calc(44.94%);
+    left:calc(30%);
+    width:calc(78.84%);
+    height:calc(60%);
+    color:#B5AB82;
+    font-family: 'shousha';
+    font-size: 38px;
+    display: block;
+    font-weight:bold
+}
+
+.qh-avatar-label>.qh-avatar-label-title{
+    z-index: 35;
+    position: absolute;
+    top:calc(24.94%);
+    right:calc(10%);
+    width:calc(20%);
+    height:calc(50%);
+    color:#B5AB82;
+    font-family: 'shousha';
+    font-size: 40px;
+    display: block;
+    font-weight:bold;
+}
+
+.qh-window>.qh-hp{
+    z-index: 36;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 50.453px;
+    height: 230px;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: flex-start;
+}
+
+.qh-hpimg{
+    z-index: 36;
+    display: block;
+    width: 50.453px;
+    height: 44px;
+    background-image: url('newui_lol_hpimg.png');
+    background-size: 80% 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-hptext{
+    z-index: 36;
+    font-size: 33px;
+    width: 50.453px;
+    color:white;
+    font-family: 'qh_songhei';
+    text-align: center;
+}
+
+.qh-window>.qh-mp{
+    z-index: 36;
+    position: absolute;
+    right: -15px;
+    bottom: 10px;
+    width: 50.453px;
+    height: 250px;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: flex-start;
+}
+
+.qh-mp>.qh-mptext{
+    z-index: 35;
+    font-size: 33px;
+    width: 50.453px;
+    color:white;
+    font-family: 'qh_songhei';
+    text-align: center;
+}
+
+.qh-mp>.qh-mpimg{
+    z-index: 35;
+    width: 50.453px;
+    height: 44px;
+    background-image: url('newui_lol_mpimg.png');
+    background-size: 50% 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-below-menu{
+    z-index: 39;
+    width: calc(7.5%);
+    height: auto;
+    max-height: calc(76% - 20px);
+    overflow:scroll;
+    left: 0;
+    top:calc(14.815%);
+    border-spacing:0px 0px;
+    border-collapse: separate;
+}
+
+.qh-below-menu-item{
+    z-index: 15;
+    color: white;
+    font-family: 'qh_heiti';
+    font-size: 1.8em;
+    height:65px;
+    width: calc(100%);
+    background-color: black;
+    background-image: url('newui_button_selected_lol.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.qh-window>.qh-button1{
+    z-index: 36;
+    top:calc(10%);
+    left: 0px;
+    width: calc(7.5%);
+    height: calc(4.815%);
+    color:#C0B588;
+    background-image: url('newui_button_lol.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'qh_heiti';
+    font-size: 22px;
+    text-align: center;
+}
+
+.qh-button1>.qh-otherinfoarrow{
+    display: block;
+    z-index:15;
+    right:3px;
+    top:calc(40% - 8px);
+    width: 17px;
+    height: 17px;
+    background-image: url('qhly_pic_down_arrow.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-window>.qh-button2{
+    z-index: 36;
+    top:calc(10%);
+    left: calc(7.5%);
+    width: calc(7.5%);
+    height: calc(4.815%);
+    color:#C0B588;
+    background-image: url('newui_button_lol.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'qh_heiti';
+    font-size: 22px;
+    text-align: center;
+}
+
+.qh-window>.qh-button3{
+    z-index: 36;
+    top:calc(10%);
+    left: calc(15%);
+    width: calc(7.5%);
+    height: calc(4.815%);
+    color:#C0B588;
+    background-image: url('newui_button_lol.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'qh_heiti';
+    font-size: 22px;
+    text-align: center;
+}
+
+.qh-window>.qh-button4{
+    z-index: 36;
+    left: calc(22.5%);
+    top:calc(10%);
+    width: calc(7.5%);
+    height: calc(4.815%);
+    color:#C0B588;
+    background-image: url('newui_button_lol.png');
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'qh_heiti';
+    font-size: 22px;
+    text-align: center;
+}
+
+.qh-window>.qh-page-introduce{
+    z-index: 36;
+    left:0px;
+    top:calc(15%);
+    width: calc(50%);
+    height: calc(85%);
+    display: block;
+}
+
+.qh-page-introduce>.qh-page-introduce-text{
+    display: block;
+    z-index: 36;
+    left:20px;
+    top:50%;
+    width: calc(100% - 40px);
+    height: auto;
+    max-height: calc(100%);
+    color:#C0B588;
+    font-family: 'qh_heiti';
+    font-size: 16px;
+    overflow: scroll;
+    text-shadow: none;
+    transform: translate(0, -50%);
+}
+
+.qh-window>.qh-page-skill{
+    z-index: 36;
+    left:0px;
+    top:calc(15%);
+    width: calc(50%);
+    height: calc(85%);
+    display: block;
+}
+
+.qh-window>.qh-page-skin{
+    z-index: 36;
+    left:0px;
+    top:calc(15%);
+    width: calc(100%);
+    height: calc(85%);
+    display: block;
+}
+
+.qh-window>.qh-page-config{
+    z-index: 36;
+    left:0px;
+    top:calc(15%);
+    width: calc(50%);
+    height: calc(85%);
+    display: block;
+}
+
+.qh-page-config>.qh-page-config-text{
+    z-index: 32;
+    left:20px;
+    top:0px;
+    width: calc(100% - 40px);
+    height: calc(100%);
+    display: block;
+    color:#C0B588;
+    font-family: 'qh_heiti';
+    font-size: 20px;
+    overflow: scroll;
+}
+
+.qh-page-skill>.qh-page-skill-text{
+    display: block;
+    z-index: 32;
+    left:20px;
+    top:50%;
+    width: calc(100% - 40px);
+    height: auto;
+    max-height: calc(100%);
+    color:#C0B588;
+    font-family: 'qh_heiti';
+    font-size: 15px;
+    overflow: scroll;
+    text-shadow: none;
+    transform: translate(0, -50%);
+}
+
+.qh-page-skin>.qh-page-skin-text{
+    z-index: 32;
+    left:40px;
+    top:0px;
+    width: calc(28%);
+    height: calc(56.13%);
+    display: block;
+    color:#C0B588;
+    font-family: 'qh_heiti';
+    text-shadow: none;
+    font-size: 15px;
+    overflow: scroll;
+}
+
+.qh-page-skin>.qh-page-skin-name{
+    z-index:32;
+    left:calc(8%);
+    bottom: calc(10%);
+    font-weight: bold;
+    font-style:italic;
+    width: auto;
+    height: auto;
+    display: block;
+    color:#C0B588;
+    font-family: 'qh_heiti';
+    font-size: 45px;
+}
+
+.qh-page-skin>.qh-page-skinavatar1{
+    z-index: 35;
+    left:calc(34.375%);
+    bottom:calc(2.199%);
+    width:calc(9.01%);
+    height:calc(26.736%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0px;
+    transition: background-image 0s;
+    background-image: url('newui_lol_skinbackground.png');
+}
+
+.qh-page-skin>.qh-page-skinavatar2{
+    z-index: 34;
+    left:calc(46.875%);
+    bottom:calc(0%);
+    width:calc(11.82%);
+    height:calc(35.07%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0px;
+    transition: background-image 0s;
+    background-image: url('newui_lol_skinbackground.png');
+}
+
+.qh-page-skin>.qh-page-skinavatar3{
+    z-index: 33;
+    left:calc(61.98%);
+    bottom:calc(2.199%);
+    width:calc(9.01%);
+    height:calc(26.736%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0px;
+    background-image: url('newui_lol_skinbackground.png');
+    transition: background-image 0s;
+}
+
+.qh-page-skinavatarcover{
+    z-index: 33;
+    width: calc(95.58%);
+    height: calc(96.68%);
+    left:calc(2.21%);
+    bottom:calc(1.66%);
+    display: block;
+    border-radius: 0px;
+    transition: background-image 0s;
+}
+
+.qh-page-skinavatarcover>.qh-page-skinavatarpicture{
+    z-index: 34;
+    width: calc(100%);
+    height: calc(100%);
+    left:calc(0%);
+    top:calc(0%);
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0px;
+    transition: background-image 0s;
+    border:none;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.qh-page-skinavatarcover>.qh-page-skinavatarpicture-lutou{
+    z-index: 34;
+    width: calc(100%);
+    height: calc(106.55%);
+    left:calc(0%);
+    top:calc(-6.55%);
+    display: block;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-top-left-radius:7px;
+    border-top-right-radius:7px;
+    border-bottom-right-radius:7px;
+    border-bottom-left-radius:7px;
+    transition: background-image 0s;
+    border:none;
+    box-shadow: 0px 0px 0px 0px;
+}
+
+.qh-page-skinavatarcover>.qh-page-skinavatartitle{
+    z-index: 35;
+    width: calc(100%);
+    height: calc(20%);
+    bottom:calc(5%);
+    background-image: url("newui_shuimo_skin_title.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.qh-page-skinavatartitle>.qh-page-skinavatartitle-text{
+    width: 100%;
+    bottom: calc(20%);
+    font-size: 21px;
+    font-family: 'qh_songhei';
+    color: white;
+    text-align: center;
+    text-shadow: .2rem 0rem .5rem red,-.2rem 0rem .5rem red,0rem .2rem .5rem red,0rem -.2rem .5rem red;
+}
+
+.qh-page-skinavatarlevel{
+    z-index: 35;
+    width:calc(33.5%);
+    height:calc(25.09%);
+    bottom:calc(74.91%);
+    right:calc(0.00%);
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0s;
+}
+
+.qh-page-skin>.qh-page-skin-leftarrow{
+    z-index:35;
+    left: calc(30.92%);
+    bottom:calc(10.07%);
+    width: 31.67px;
+    height: 50px;
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('newui_arrow_left_lol.png');
+}
+
+.qh-page-skin>.qh-page-skin-rightarrow{
+    z-index:35;
+    left: calc(71.99%);
+    bottom:calc(10.07%);
+    width: 31.67px;
+    height: 50px;
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('newui_arrow_right_lol.png');
+}
+
+.qh-page-skin>.qh-hide-skin-button{
+    z-index:35;
+    left:0px;
+    bottom:0px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('qhly_skin_button_sanguo2.png');
+}

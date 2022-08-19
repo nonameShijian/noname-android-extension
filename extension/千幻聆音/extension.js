@@ -12,6 +12,11 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
     game.qhly_importSkinInfo=function(obj){
         lib.qhly_dirskininfo[obj.name] = obj;
     };
+    lib.qhly_filterPlainText=function(str){
+        if(!str)return "";
+        var regex = /(<([^>]+)>)/ig;
+        return str.replace(regex,"");
+    };
     game.qhly_earseExt=function(path){
         if(!path)return null;
         var foundDot = path.lastIndexOf('.');
@@ -128,6 +133,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             lib.configMenu.appearence.config.cardtext_font.item,
             lib.configMenu.appearence.config.global_font.item];
         var fonts = {
+            'qh_heiti':"黑体",
             'qh_zhunyuan':'准圆',
             'qh_youyuan':'幼圆',
             'qh_weili':"魏隶",
@@ -149,12 +155,14 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         game.saveConfig('qhly_newui',true);
     //}
     if(ui && ui.css && ui.css.fontsheet && ui.css.fontsheet.sheet && ui.css.fontsheet.sheet.insertRule){
+        ui.css.fontsheet.sheet.insertRule("@font-face {font-family: 'qh_heiti';src: url('"+lib.assetURL+"extension/千幻聆音/heiti.ttf');}",0);
         ui.css.fontsheet.sheet.insertRule("@font-face {font-family: 'qh_zhunyuan';src: url('"+lib.assetURL+"extension/千幻聆音/zhunyuan.ttf');}",0);
         ui.css.fontsheet.sheet.insertRule("@font-face {font-family: 'qh_youyuan';src: url('"+lib.assetURL+"extension/千幻聆音/youyuan.ttf');}",0);
         ui.css.fontsheet.sheet.insertRule("@font-face {font-family: 'qh_songhei';src: url('"+lib.assetURL+"extension/千幻聆音/songhei.ttf');}",0);
         ui.css.fontsheet.sheet.insertRule("@font-face {font-family: 'qh_weili';src: url('"+lib.assetURL+"extension/千幻聆音/weili.ttf');}",0);
     }else{
         ui.qhlycss = lib.init.sheet();
+        ui.qhlycss.sheet.insertRule("@font-face {font-family: 'qh_heiti';src: url('"+lib.assetURL+"extension/千幻聆音/heiti.ttf');}",0);
         ui.qhlycss.sheet.insertRule("@font-face {font-family: 'qh_zhunyuan';src: url('"+lib.assetURL+"extension/千幻聆音/zhunyuan.ttf');}",0);
         ui.qhlycss.sheet.insertRule("@font-face {font-family: 'qh_youyuan';src: url('"+lib.assetURL+"extension/千幻聆音/youyuan.ttf');}",0);
         ui.qhlycss.sheet.insertRule("@font-face {font-family: 'qh_songhei';src: url('"+lib.assetURL+"extension/千幻聆音/songhei.ttf');}",0);
@@ -874,6 +882,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         name:'水墨龙吟',
         whr:2.2028,
         isQiLayout:true,
+        buttonTextSpace:false,
+        lihuiSupport:true,
+        layoutType:'qi',
         skillPageSkillNameColor:'#FFFFFF',
         skillPageDerivationSkillColor:'#00F5FF',
         skinPageSkillNameColor:'#FFFFFF',
@@ -883,6 +894,34 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         skinPagePlayAudioButtonImage:'extension/千幻聆音/qhly_pic_playaudiobutton_shuimo.png',
         onchange:function(){
             game.saveConfig('qhly_viewskin_css','newui_shuimo');
+        },
+        changeViewSkin:function(view){
+            
+        },
+        skinPage:function(pageName,view){
+
+        }
+    };
+
+    lib.qhly_viewskin['lolbig'] = {
+        name:'海克斯科技',
+        whr:1.77778,
+        isLolBigLayout:true,
+        buttonTextSpace:false,
+        favouriteImage:'extension/千幻聆音/newui_fav_lol.png',
+        lihuiSupport:true,
+        layoutType:'lolbig',
+        skillPageSkillNameColor:'#C0B588',
+        skillPageDerivationSkillColor:'#00F5FF',
+        skinPageSkillNameColor:'#FFFFFF',
+        buttonImage:'extension/千幻聆音/newui_button_lol.png',
+        buttonPressedImage:'extension/千幻聆音/newui_button_selected_lol.png',
+        skillPagePlayAudioButtonImage:'extension/千幻聆音/newui_playaudio_lol.png',
+        skinPagePlayAudioButtonImage:'extension/千幻聆音/qhly_pic_playaudiobutton_lol.png',
+        checkBoxCheckedImage:'extension/千幻聆音/newui_checkbox_checked_lol.png',
+        checkBoxImage:'extension/千幻聆音/newui_checkbox_unchecked_lol.png',
+        onchange:function(){
+            game.saveConfig('qhly_viewskin_css','newui_lolbig');
         },
         changeViewSkin:function(view){
             
@@ -3466,7 +3505,38 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             subView.pageButton.skill.style.lineHeight = lineHeight;
             subView.pageButton.skin.style.lineHeight = lineHeight;
             subView.pageButton.config.style.lineHeight = lineHeight;
-        }else{
+        }else if(currentViewSkin.isLolBigLayout){
+            subView.avatarImage = ui.create.div('.qh-image-standard',subView.avatar);
+            subView.rank = ui.create.div('.qh-avatar-rank',subView.avatar);
+            subView.avatarImage.classList.add('qh-must-replace');
+            subView.avatarImage.classList.add('avatar');
+            subView.avatarLabel = ui.create.div('.qh-avatar-label',view);
+            subView.group = ui.create.div('.qh-avatar-label-group',subView.avatarLabel);
+            if(lib.config.qhly_lolshilizihao){
+                subView.group.style.fontSize = lib.config.qhly_lolshilizihao + "px";
+            }
+            subView.doublegroup = ui.create.div('.qh-avatar-label-group-double',subView.avatarLabel);
+            subView.doublegroupA = ui.create.div('.qh-avatar-label-group-double-a',subView.doublegroup);
+            subView.doublegroupB = ui.create.div('.qh-avatar-label-group-double-b',subView.doublegroup);
+            if(lib.config.qhly_lolshilizihao){
+                subView.doublegroupA.style.fontSize = parseInt(lib.config.qhly_lolshilizihao)*0.4 + "px";
+                subView.doublegroupB.style.fontSize = parseInt(lib.config.qhly_lolshilizihao)*0.4 + "px";
+            }
+            subView.doublegroup.hide();
+            subView.name = ui.create.div('.qh-avatar-label-name',subView.avatarLabel);
+            subView.characterTitle = ui.create.div('.qh-avatar-label-title',subView.avatarLabel);
+            subView.hp = ui.create.div('.qh-hp',view);
+            subView.mp = ui.create.div('.qh-mp');
+            subView.mp.hide();
+            subView.pageButton.introduce.innerHTML = "简介";
+            subView.pageButton.introduce.downButton = ui.create.div('.qh-otherinfoarrow',subView.pageButton.introduce);
+            subView.pageButton.skill.innerHTML = "技能";
+            subView.pageButton.skin.innerHTML = "皮肤";
+            subView.pageButton.config.innerHTML = "选项";
+            subView.cover = ui.create.div('.qh-window-cover',view);
+            subView.board = ui.create.div('.qh-window-backboard',view);
+        }
+        else{
             subView.avatarImage = ui.create.div('.qh-image-standard',subView.avatar);
             subView.avatarImage.classList.add('qh-must-replace');
             subView.avatarImage.classList.add('avatar');
@@ -3497,7 +3567,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     if(!state.introduceExtraPage || state.introduceExtraPage == '简介'){
                         var intro = get.qhly_getIntroduce(name,state.pkg);
                         this.text.innerHTML ="<br>"+ intro +"<br><br><br><br><br><br><br>";
-                        if(currentViewSkin.isQiLayout){
+                        if(currentViewSkin.buttonTextSpace === false){
                             subView.pageButton.introduce.innerHTML = "简介";
                         }else{
                             subView.pageButton.introduce.innerHTML = "简 介";
@@ -3534,7 +3604,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                             handleView(this.text);
                         }
                         var btname = state.introduceExtraPage;
-                        if(!currentViewSkin.isQiLayout && btname.length == 2){
+                        if(currentViewSkin.buttonTextSpace!==false && btname.length == 2){
                             btname = btname.charAt(0)+' '+btname.charAt(1);
                         }
                         subView.pageButton.introduce.innerHTML = btname;
@@ -3543,7 +3613,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                 },
                 init:function(name,state){
                     this.text = ui.create.div('.qh-page-introduce-text',this.pageView);
-                    if(lib.config.qhly_vMiddle === false && currentViewSkin.isQiLayout){
+                    if(lib.config.qhly_vMiddle === false && (currentViewSkin.isQiLayout||currentViewSkin.isLolBigLayout)){
                         this.text.style.height = "100%";
                         this.text.style.maxHeight = "none";
                     }
@@ -3561,7 +3631,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                 init:function(name,state){
                     this.text = ui.create.div('.qh-page-skill-text',this.pageView);
                     lib.setScroll(this.text);
-                    if(lib.config.qhly_vMiddle===false && currentViewSkin.isQiLayout){
+                    if(lib.config.qhly_vMiddle===false  && (currentViewSkin.isQiLayout||currentViewSkin.isLolBigLayout)){
                         this.text.style.maxHeight = 'none';
                         this.text.style.height = '100%';
                     }
@@ -3674,9 +3744,13 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                     if(dtrans){
                                         dtrans = dtrans(cplayer,skill);
                                     }
-                                    if(dtrans && dtrans!=detail){
+                                    if(dtrans && lib.qhly_filterPlainText(dtrans)!=lib.qhly_filterPlainText(detail)){
                                         dynamicTranslate = dtrans;
                                         content += "style='opacity:0.5;text-decoration:line-through;'"
+                                    }else{
+                                        if(dtrans && dtrans.length){
+                                            detail = dtrans;
+                                        }
                                     }
                                 }
                                 content += '>';
@@ -3703,6 +3777,26 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                             if(!lib.translate[skill+"_info"])continue;
                             var detail = get.translation(skill+"_info");
                             if(detail){
+                                var skilltitle = get.translation(skill);
+                                if(!currentViewSkin.isLolBigLayout){
+                                    skilltitle = "【"+skilltitle+"】";
+                                }else{
+                                    var str = "<span style='";
+                                    str += 'display:flex;justify-content:center;align-items: center;';
+                                    str += "background-image:url(";
+                                    str += lib.assetURL+"extension/千幻聆音/newui_lol_skill_button.png";
+                                    str += ");";
+                                    str += 'font-size:15px;';
+                                    str += 'width:94px;height:24px;text-align:center;'
+                                    str += 'background-size:100% 100%;';
+                                    str += "background-repeat:no-repeat;";
+                                    str += "background-position:center;";
+                                    str += "' id='qhly_skillv_"+skill+"'";
+                                    str += ">";
+                                    str += skilltitle;
+                                    str += "</span>";
+                                    skilltitle = str;
+                                }
                                 content += "<h3";
                                 if(derivation.contains(skill)){
                                     content += " style='color:"+get.qhly_getIf(currentViewSkin.skillPageDerivationSkillColor,"#0000ff")+";";
@@ -3717,7 +3811,11 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                     }
                                 }
                                 content += "'>";
-                                content += "【"+get.translation(skill)+"】<img style='vertical-align:middle;width:35px;' id='qhly_skillv_"+skill+"'/></h3>";
+                                content += skilltitle;
+                                if(!currentViewSkin.isLolBigLayout){
+                                    content += "<img style='vertical-align:middle;width:35px;' id='qhly_skillv_"+skill+"'/>";
+                                }
+                                content += "</h3>";
                                 content += "<p";
                                 content += ">";
                                 content += "<span style='";
@@ -3727,9 +3825,13 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                     if(dtrans){
                                         dtrans = dtrans(cplayer,skill);
                                     }
-                                    if(dtrans && dtrans!=detail){
+                                    if(dtrans && lib.qhly_filterPlainText(dtrans)!=lib.qhly_filterPlainText(detail)){
                                         dynamicTranslate = dtrans;
                                         content += "opacity:0.5;text-decoration:line-through;"
+                                    }else{
+                                        if(dtrans && dtrans.length){
+                                            detail = dtrans;
+                                        }
                                     }
                                     if(!cplayer.hasSkill(skill)){
                                         content += "opacity:0.5;"
@@ -3882,16 +3984,21 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     var that = this;
                     game.qhly_setCurrentSkin(name,skin.skinId,function(){
                         _status.qhly_skillAudioWhich = {};
+                        if(currentViewSkin.isLolBigLayout){
+                            that.currentIndex = that.currentIndex + num - 1;
+                        }
                         that.refresh(name,state);
                         if(state.onChangeSkin){
                             state.onChangeSkin();
                         }
-                        if(currentViewSkin.isQiLayout && state.pkg.characterLihui){
+                        if((currentViewSkin.lihuiSupport) && state.pkg.characterLihui){
                             var lihuiPath = state.pkg.characterLihui(name,lib.config.qhly_skinset.skin[name]);
                             if(lihuiPath){
                                 state.mainView.avatarImage.setBackgroundImage(lihuiPath);
+                                state.useLihuiLayout(true);
                             }else{
                                 state.mainView.avatarImage.setBackground(name,'character');
+                                state.useLihuiLayout(false);
                             }
                         }else{
                             state.mainView.avatarImage.setBackground(name,'character');
@@ -4020,10 +4127,18 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     var that = this;
                     if(this.firstRefresh){
                         var ret = false;
-                        for(var i=0;i<this.skinList.length;i++){
+                        for(var i=(currentViewSkin.isLolBigLayout?-1:0);i<this.skinList.length;i++){
                             var skin = this.skinList[i];
                             this.currentIndex = i;
                             if(this.canViewSkin(game.qhly_getSkin(name))){
+                                if(currentViewSkin.isLolBigLayout){
+                                    for(var j=0;j<3;j++){
+                                        var skinAt = this.getSkinAt(j);
+                                        if(skinAt && skinAt.skinId == game.qhly_getSkin(name)){
+                                            this.currentIndex = i+j-1;
+                                        }
+                                    }
+                                }
                                 ret = true;
                                 break;
                             }
@@ -4038,17 +4153,32 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     for(var v of this.skinViews){
                         v.show();
                     }
-                    if(currentViewSkin.isQiLayout){
+                    if(currentViewSkin.isLolBigLayout){
+                        this.text.style.height = "70%";
+                    }
+                    else if(currentViewSkin.isQiLayout){
                         this.text.style.height = "63.61%";
                     }else{
                         this.text.style.height = "56.13%";
                     }
-                    if(this.currentIndex == 0){
+                    if(currentViewSkin.isLolBigLayout){
+                        if(!this.getSkinAt(0)){
+                            this.leftArrow.hide();
+                        }else{
+                            this.leftArrow.show();
+                        }
+                    }else if(this.currentIndex <= 0){
                         this.leftArrow.hide();
                     }else{
                         this.leftArrow.show();
                     }
-                    if(this.currentIndex+3 < this.skinList.length){
+                    if(currentViewSkin.isLolBigLayout){
+                        if(!this.getSkinAt(2)){
+                            this.rightArrow.hide();
+                        }else{
+                            this.rightArrow.show();
+                        }
+                    }else if(this.currentIndex+3 < this.skinList.length){
                         this.rightArrow.show();
                     }else{
                         this.rightArrow.hide();
@@ -4058,6 +4188,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         var currentSkinView = this['skin'+(i+1)];
                         var levelView = this['skinLevel'+(i+1)];
                         if(this.getSkinAt(i)){
+                            if(currentViewSkin.isLolBigLayout){
+                                currentSkinView.qhBoard.show();
+                            }
                             var skinId = this.getSkinAt(i).skinId;
                             if(game.qhly_skinLock(name,skinId)){
                                 currentSkinView.qh_setLock(true);
@@ -4094,6 +4227,8 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                     currentSkinView.qhBoard.style.filter = "saturate(50%)";
                                     currentSkinView.qhTitle.hide();
                                 }
+                            }else if(currentViewSkin.isLolBigLayout){
+
                             }else{
                                 if(currentSkin == this.getSkinAt(i).skinId){
                                     currentSkinView.qhCover.classList.add('selected');
@@ -4163,13 +4298,20 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         }else{
                             currentSkinView.hide();
                             levelView.hide();
+                            if(currentViewSkin.isLolBigLayout){
+                                currentSkinView.qhBoard.hide();
+                            }
                         }
                     }
                     }else{
                         for(var v of this.skinViews){
                             v.hide();
                         }
-                        this.text.style.height = "100%";
+                        if(currentViewSkin.isLolBigLayout){
+                            this.text.style.height = "70%";
+                        }else{
+                            this.text.style.height = "100%";
+                        }
                     }
                     var content = "<br>";
                     var currentSkin = this.getCurrentSkin(name);
@@ -4184,7 +4326,10 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     }else{
                         tname = get.translation(currentSkin.skinId);
                     }
-                    if(!currentViewSkin.isQiLayout){
+                    if(this.skinName){
+                        this.skinName.innerHTML = tname;
+                    }
+                    if(!currentViewSkin.isQiLayout && !currentViewSkin.isLolBigLayout){
                         content += "<h2 style='color:"+get.qhly_getIf(currentViewSkin.skinPageHeadTitleColor,"#783f04")+"'>皮肤名称：<span style='color:"+get.qhly_getIf(currentViewSkin.skinPageHeadSkinNameColor,"black")+"'>"+tname+"</span></h2>";
                     }
                     var extInfo = "";
@@ -4198,7 +4343,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                             }
                         }
                     }
-                    if(!currentViewSkin.isQiLayout){
+                    if(!currentViewSkin.isQiLayout && !currentViewSkin.isLolBigLayout){
                         content += extInfo;
                     }
                     var addButton = [];
@@ -4282,7 +4427,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                             }
                         }
                     }
-                    if(currentViewSkin.isQiLayout){
+                    if(currentViewSkin.isQiLayout || currentViewSkin.isLolBigLayout){
                         content += extInfo;
                     }
                     content += "<br><br>";
@@ -4476,6 +4621,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     this.text = ui.create.div('.qh-page-skin-text',this.pageView);
                     lib.setScroll(this.text);
                     fixTextSize(this.text);
+                    if(currentViewSkin.isLolBigLayout){
+                        this.skinName = ui.create.div('.qh-page-skin-name',this.pageView);
+                    }
                     this.skinBoard1 = ui.create.div('.qh-page-skinavatar1',this.pageView);
                     this.skinBoard2 = ui.create.div('.qh-page-skinavatar2',this.pageView);
                     this.skinBoard3 = ui.create.div('.qh-page-skinavatar3',this.pageView);
@@ -4528,6 +4676,10 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     this.skinLevel1 = ui.create.div('.qh-page-skinavatarlevel',this.skinBoard1);
                     this.skinLevel2 = ui.create.div('.qh-page-skinavatarlevel',this.skinBoard2);
                     this.skinLevel3 = ui.create.div('.qh-page-skinavatarlevel',this.skinBoard3);
+                    this.skinLevel1.style.pointerEvents = 'none';
+                    this.skinLevel2.style.pointerEvents = 'none';
+                    this.skinLevel3.style.pointerEvents = 'none';
+
                     this.skin1.classList.add('qh-not-replace');
                     this.skin2.classList.add('qh-not-replace');
                     this.skin3.classList.add('qh-not-replace');
@@ -4558,16 +4710,26 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     this.leftArrow=ui.create.div('.qh-page-skin-leftarrow',this.pageView);
                     this.rightArrow=ui.create.div('.qh-page-skin-rightarrow',this.pageView);
                     this.leftArrow.listen(function(){
-                        if(that.currentIndex > 0){
+                        if(currentViewSkin.isLolBigLayout){
+                            if(that.getSkinAt(0)){
+                                that.onClickSkin(0,name,state);
+                            }
+                        }else if(that.currentIndex > 0){
                             that.currentIndex--;
                             that.refresh(name,state);
                             game.qhly_playQhlyAudio('qhly_voc_press',null,true);
                         }
                     });
                     this.rightArrow.listen(function(){
-                        that.currentIndex++;
-                        that.refresh(name,state);
-                        game.qhly_playQhlyAudio('qhly_voc_press',null,true);
+                        if(currentViewSkin.isLolBigLayout){
+                            if(that.getSkinAt(2)){
+                                that.onClickSkin(2,name,state);
+                            }
+                        }else if(that.currentIndex < that.skinList.length){
+                            that.currentIndex++;
+                            that.refresh(name,state);
+                            game.qhly_playQhlyAudio('qhly_voc_press',null,true);
+                        }
                     });
                     this.skinViews = [this.skinBoard1,this.skinBoard2,this.skinBoard3,this.skin1,this.skin2,this.skin3,this.leftArrow,this.rightArrow];
                     this.hideButton = ui.create.div('.qh-hide-skin-button',this.pageView);
@@ -4577,6 +4739,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         game.qhly_playQhlyAudio('qhly_voc_press',null,true);
                     });
                     this.text.listen(function(){
+                        if(currentViewSkin.isLolBigLayout)return;
                         if(that.consumeTextClick){
                             that.consumeTextClick = false;
                             return;
@@ -4869,12 +5032,29 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             }
         };
         var showPage=function(pagename){
-            
+            /*
+            if(currentViewSkin.isLolBigLayout){
+                if(pagename == 'skin'){
+                    state.useLihuiLayout(state.useLihui());
+                    subView.avatar.style.right = "50%";
+                    subView.avatar.style.width="calc(40%)";
+                    subView.avatar.style.transform = "translate(50%,0%)";
+                    subView.board.setBackgroundImage(state.useLihui()?"extension/千幻聆音/newui_lol_bg_center_big.png":"extension/千幻聆音/newui_lol_bg_center_small.png");
+                }else{
+                    subView.avatar.style.right = "0px";
+                    subView.avatar.style.width="calc(50%)";
+                    subView.avatar.style.transform = "";
+                    subView.board.setBackgroundImage(state.useLihui()?"extension/千幻聆音/newui_lol_bg1_big.png":"extension/千幻聆音/newui_lol_bg1.png");
+                }
+            }
+            */
             var tpage = subView.page[pagename];
             subView.currentPage = pagename;
+            state.currentPage = pagename;
             if(tpage){
                 tpage.refresh(name,state);
             }
+            state.useLihuiLayout(state.useLihui());
             for(var p in subView.page){
                 if(p == pagename){
                     subView.page[p].pageView.show();
@@ -4887,6 +5067,68 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     subView.pageButton[k].setBackgroundImage(get.qhly_getIf(currentViewSkin.buttonPressedImage,'extension/千幻聆音/newui_button_selected.png'));
                 }else{
                     subView.pageButton[k].setBackgroundImage(get.qhly_getIf(currentViewSkin.buttonImage,'extension/千幻聆音/newui_button.png'));
+                }
+            }
+        };
+        state.useLihui=function(){
+            if(currentViewSkin.lihuiSupport && state.pkg.characterLihui){
+                var lihuiPath = state.pkg.characterLihui(name,lib.config.qhly_skinset.skin[name]);
+                return lihuiPath;
+            }
+            return false;
+        };
+        state.useLihuiLayout=function(use){
+            if(use){
+                if(currentViewSkin.isLolBigLayout){
+                    if(state.currentPage == 'skin'){
+                        //subView.rank.style.right="60px";
+                        if(lib.config.qhly_showrarity){
+                            subView.rank.hide();
+                        }
+                        subView.board.setBackgroundImage("extension/千幻聆音/newui_lol_bg_center_big.png");
+                        subView.avatar.style.right = "5%";
+                        subView.avatarImage.style.backgroundSize="contain";
+                        subView.avatarImage.style.backgroundPosition="100% 50%";
+                        subView.avatar.style.width="calc(100%)";
+                        subView.avatar.style.transform = "";
+                    }else{
+                        //subView.rank.style.right="120px";
+                        if(lib.config.qhly_showrarity){
+                            subView.rank.show();
+                        }
+                        subView.board.setBackgroundImage("extension/千幻聆音/newui_lol_bg1_big.png");
+                        subView.avatar.style.right = "0";
+                        subView.avatarImage.style.backgroundSize="contain";
+                        subView.avatarImage.style.backgroundPosition="100% 50%";
+                        subView.avatar.style.width="calc(100%)";
+                        subView.avatar.style.transform = "";
+                    }
+                }
+            }else{
+                if(currentViewSkin.isLolBigLayout){
+                    if(state.currentPage == 'skin'){
+                        //subView.rank.style.right="60px";
+                        if(lib.config.qhly_showrarity){
+                            subView.rank.hide();
+                        }
+                        subView.board.setBackgroundImage("extension/千幻聆音/newui_lol_bg_center_small.png");
+                        subView.avatar.style.right = "50%";
+                        subView.avatar.style.width="calc(40%)";
+                        subView.avatarImage.style.backgroundSize="cover";
+                        subView.avatarImage.style.backgroundPosition="50% 50%";
+                        subView.avatar.style.transform = "translate(50%,0%)";
+                    }else{
+                        //subView.rank.style.right="120px";
+                        if(lib.config.qhly_showrarity){
+                            subView.rank.show();
+                        }
+                        subView.board.setBackgroundImage("extension/千幻聆音/newui_lol_bg1.png");
+                        subView.avatar.style.right = "0px";
+                        subView.avatar.style.width="calc(50%)";
+                        subView.avatarImage.style.backgroundSize="cover";
+                        subView.avatarImage.style.backgroundPosition="50% 50%";
+                        subView.avatar.style.transform = "";
+                    }
                 }
             }
         };
@@ -4965,15 +5207,18 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     subView.board.classList.add('qh-window-backboard');
                 }
             }
-            if(currentViewSkin.isQiLayout && state.pkg.characterLihui){
+            if(currentViewSkin.lihuiSupport && state.pkg.characterLihui){
                 var lihuiPath = state.pkg.characterLihui(name,lib.config.qhly_skinset.skin[name]);
                 if(lihuiPath){
                     subView.avatarImage.setBackgroundImage(lihuiPath);
+                    state.useLihuiLayout(true);
                 }else{
                     subView.avatarImage.setBackground(name,'character');
+                    state.useLihuiLayout(false);
                 }
             }else{
                 subView.avatarImage.setBackground(name,'character');
+                state.useLihuiLayout(false);
             }
             state.onChangeSkin=function(){
                 if(!subView.characterTitle)return;
@@ -5017,36 +5262,40 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         ctitle = ctitle.slice(2);
                     }
                 }
-                if(!lib.config.qhly_titlereplace || lib.config.qhly_titlereplace == 'title'){
-                    if(ctitle){
-                        subView.characterTitle.innerHTML = ctitle;
-                    }else{
-                        subView.characterTitle.innerHTML = '';
-                    }
-                }else if(lib.config.qhly_titlereplace == 'skin'){
-                    var skinName = game.qhly_getSkin(name);
-                    if(!skinName && ctitle){
-                        subView.characterTitle.innerHTML = ctitle;
-                    }else{
-                        var ext = game.qhly_getSkinInfo(name,skinName);
-                        if(ext){
-                            if(ext.translation){
-                                subView.characterTitle.innerHTML = ext.translation;
-                            }else{
-                                subView.characterTitle.innerHTML = game.qhly_earse_ext(skinName);
+                if(currentViewSkin.isQiLayout){
+                    if(!lib.config.qhly_titlereplace || lib.config.qhly_titlereplace == 'title'){
+                        if(ctitle){
+                            subView.characterTitle.innerHTML = ctitle;
+                        }else{
+                            subView.characterTitle.innerHTML = '';
+                        }
+                    }else if(lib.config.qhly_titlereplace == 'skin'){
+                        var skinName = game.qhly_getSkin(name);
+                        if(!skinName && ctitle){
+                            subView.characterTitle.innerHTML = ctitle;
+                        }else{
+                            var ext = game.qhly_getSkinInfo(name,skinName);
+                            if(ext){
+                                if(ext.translation){
+                                    subView.characterTitle.innerHTML = ext.translation;
+                                }else{
+                                    subView.characterTitle.innerHTML = game.qhly_earse_ext(skinName);
+                                }
                             }
                         }
+                    }else if(lib.config.qhly_titlereplace == 'pkg'){
+                        var pname = game.qhly_getCharacterPackage(name);
+                        if(pname){
+                            subView.characterTitle.innerHTML = get.translation(pname+"_character_config");
+                        }
                     }
-                }else if(lib.config.qhly_titlereplace == 'pkg'){
-                    var pname = game.qhly_getCharacterPackage(name);
-                    if(pname){
-                        subView.characterTitle.innerHTML = get.translation(pname+"_character_config");
-                    }
+                }else{
+                    subView.characterTitle.innerHTML = get.verticalStr(lib.qhly_filterPlainText(ctitle));
                 }
             };
             state.onChangeSkin();
             var group = state.intro[1];
-            if(get.is.double(state.name) && currentViewSkin.isQiLayout){
+            if(get.is.double(state.name) && (currentViewSkin.isQiLayout || currentViewSkin.isLolBigLayout)){
                 subView.group.hide();
                 subView.doublegroup.show();
                 var groups = get.is.double(state.name,true);
@@ -5057,8 +5306,20 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     subView.doublegroup.hide();
                 }
                 subView.group.show();
-                if(currentViewSkin.isQiLayout){
-                    subView.group.innerHTML = get.translation(group);
+                if(currentViewSkin.isQiLayout || currentViewSkin.isLolBigLayout){
+                    if(currentViewSkin.isLolBigLayout){
+                        if(lib.qhly_groupimage[group]){
+                            var groupHtml = "<img style='display:block;position:absolute;width:65%;height:65%;left:50%;top:50%;transform:translate(-50%,-50%);' ";
+                            groupHtml += "src='"+lib.assetURL+lib.qhly_groupimage[group]+"'/>";
+                            subView.group.innerHTML = groupHtml;
+                        }else{
+                            var groupHtml = "<b>";
+                            groupHtml+=get.translation(group)+"</b>";
+                            subView.group.innerHTML = groupHtml;               
+                        }
+                    }else{
+                        subView.group.innerHTML = get.translation(group);
+                    }
                 }else{
                     if(lib.qhly_groupimage[group]){
                         subView.group.innerHTML = "";
@@ -5099,7 +5360,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                 var vname = get.verticalStr(chname);
                 subView.name.innerHTML = vname;
             }
-            if(!currentViewSkin.isQiLayout){
+            if(!currentViewSkin.isQiLayout && !currentViewSkin.isLolBigLayout){
                 if(lib.qhly_groupcolor[group]){
                     subView.name.style.textShadow = "2px 2px 2px "+lib.qhly_groupcolor[group];
                 }else{
@@ -5114,7 +5375,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                 subView.name.style.fontSize = '2.8em';
             }
             var hp = state.intro[2];
-            if(currentViewSkin.isQiLayout){
+            if(currentViewSkin.isQiLayout || currentViewSkin.isLolBigLayout){
                 while(subView.hp.hasChildNodes()){
                     subView.hp.removeChild(subView.hp.lastChild);
                 }
@@ -5122,22 +5383,34 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     if(!isFinite(hp)){
                         subView.hp.appendChild(ui.create.div('.qh-hpimg'));
                         var hptext = ui.create.div('.qh-hptext');
-                        hptext.style.left = "calc(12.83%)";
                         subView.hp.appendChild(hptext);
-                        hptext.innerHTML = "×∞";
+                        hptext.innerHTML = "×"+(currentViewSkin.isLolBigLayout?"<br>":"")+"∞";
+                        if(currentViewSkin.isQiLayout){
+                            hptext.style.left = "calc(12.83%)";
+                        }else if(currentViewSkin.isLolBigLayout){
+                            hptext.style.top = "44px";
+                        }
                     }else{
                         if(hp <= 6){
                             for(var i=0;i<hp;i++){
                                 var img = ui.create.div('.qh-hpimg');
-                                img.style.left = "calc("+(i * 12.83)+"%)";
+                                if(currentViewSkin.isQiLayout){
+                                    img.style.left = "calc("+(i * 12.83)+"%)";
+                                }else if(currentViewSkin.isLolBigLayout){
+                                    img.style.top = (i * 44)+"px";
+                                }
                                 subView.hp.appendChild(img);
                             }
                         }else{
                             subView.hp.appendChild(ui.create.div('.qh-hpimg'));
                             var hptext = ui.create.div('.qh-hptext');
-                            hptext.style.left = "calc(12.83%)";
+                            if(currentViewSkin.isQiLayout){
+                                hptext.style.left = "calc(12.83%)";
+                            }else if(currentViewSkin.isLolBigLayout){
+                                hptext.style.top = "44px";
+                            }
                             subView.hp.appendChild(hptext);
-                            hptext.innerHTML = "×"+hp;
+                            hptext.innerHTML = "×"+(currentViewSkin.isLolBigLayout?"<br>":"")+hp;
                         }
                     }
                 }else if(typeof hp == 'string'){
@@ -5149,19 +5422,32 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         if(isNaN(hp1) || isNaN(hp2)){
                             subView.hp.appendChild(ui.create.div('.qh-hpimg'));
                             var hptext = ui.create.div('.qh-hptext');
-                            hptext.style.left = "calc(12.83%)";
+                            if(currentViewSkin.isQiLayout){
+                                hptext.style.left = "calc(12.83%)";
+                            }else if(currentViewSkin.isLolBigLayout){
+                                hptext.style.top = "44px";
+                            }
                             subView.hp.appendChild(hptext);
-                            hptext.innerHTML = "×"+hp;
+                            hptext.innerHTML = "×"+(currentViewSkin.isLolBigLayout?"<br>":"")+hp;
                         }else{
                             if(hp2 >= 6){
                                 subView.hp.appendChild(ui.create.div('.qh-hpimg'));
                                 var hptext = ui.create.div('.qh-hptext');
-                                hptext.style.left = "calc(12.83%)";
+                                if(currentViewSkin.isQiLayout){
+                                    hptext.style.left = "calc(12.83%)";
+                                }else{
+                                    hptext.style.top = "44px";
+                                }
                                 subView.hp.appendChild(hptext);
-                                hptext.innerHTML = "×"+hp1+'/'+hp2;
+                                var br = (currentViewSkin.isLolBigLayout?"<br>":"");
+                                hptext.innerHTML = "×"+br+hp1+br+'/'+br+hp2;
                                 if(hujia){
                                     var hujiaDiv = ui.create.div('.qh-hujiaimg');
-                                    hujiaDiv.style.left = "calc(-12.83%)";
+                                    if(currentViewSkin.isQiLayout){
+                                        hujiaDiv.style.left = "calc(-12.83%)";
+                                    }else if(currentViewSkin.isLolBigLayout){
+                                        hujiaDiv.style.top = "-44px";
+                                    }
                                     var hujiaInfo = ui.create.div('.qh-hujiaimg-inner');
                                     hujiaDiv.appendChild(hujiaInfo);
                                     hujiaInfo.innerHTML = ''+hujia;
@@ -5170,22 +5456,42 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                             }else{
                                 for(var i=0;i<hp2;i++){
                                     var img = ui.create.div('.qh-hpimg');
-                                    img.style.left = "calc("+(i * 12.83)+"%)";
+                                    if(currentViewSkin.isQiLayout){
+                                        img.style.left = "calc("+(i * 12.83)+"%)";
+                                    }else if(currentViewSkin.isLolBigLayout){
+                                        img.style.top = (i * 44)+"px";
+                                    }
                                     subView.hp.appendChild(img);
                                     if(i >= hp1){
-                                        img.setBackgroundImage('extension/千幻聆音/newui_shuimo_hpimg_gray.jpg');
+                                        if(currentViewSkin.isQiLayout){
+                                            img.setBackgroundImage('extension/千幻聆音/newui_shuimo_hpimg_gray.jpg');
+                                        }else if(currentViewSkin.isLolBigLayout){
+                                            img.setBackgroundImage('extension/千幻聆音/newui_lol_hpimg_gray.png');
+                                        }
                                     }
                                 }
                                 if(hujia){
                                     if(hujia + hp2 <= 6){
                                         for(var i=hp2;i<hujia+hp2;i++){
                                             var img = ui.create.div('.qh-hujiaimg');
-                                            img.style.left = "calc("+(i * 12.83)+"%)";
+                                            if(currentViewSkin.isQiLayout){
+                                                img.style.left = "calc("+(i * 12.83)+"%)";
+                                            }else if(currentViewSkin.isLolBigLayout){
+                                                img.style.top = (i * 44)+"px";
+                                                img.style.width = "50.453px";
+                                                img.style.height = '44px';
+                                            }
                                             subView.hp.appendChild(img);
                                         }
                                     }else{
                                         var hujiaDiv = ui.create.div('.qh-hujiaimg');
-                                        hujiaDiv.style.left = "calc("+(hp2 * 12.83)+"%)";
+                                        if(currentViewSkin.isQiLayout){
+                                            hujiaDiv.style.left = "calc("+(i * 12.83)+"%)";
+                                        }else if(currentViewSkin.isLolBigLayout){
+                                            hujiaDiv.style.top = (i * 44)+"px";
+                                            hujiaDiv.style.width = "50.453px";
+                                            hujiaDiv.style.height = '44px';
+                                        }
                                         var hujiaInfo = ui.create.div('.qh-hujiaimg-inner');
                                         hujiaDiv.appendChild(hujiaInfo);
                                         hujiaInfo.innerHTML = ''+hujia;
@@ -5199,7 +5505,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         var hptext = ui.create.div('.qh-hptext');
                         hptext.style.left = "calc(12.83%)";
                         subView.hp.appendChild(hptext);
-                        hptext.innerHTML = "×"+hp;
+                        hptext.innerHTML = "×"+(currentViewSkin.isLolBigLayout?"<br>":"")+hp;
                     }
                 }
                 while(subView.mp.hasChildNodes()){
@@ -5213,14 +5519,18 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                     if(mp <= 6){
                         for(var i=0;i<mp;i++){
                             var img = ui.create.div('.qh-mpimg');
-                            img.style.left = "calc("+(i * 12.83)+"%)";
+                            if(currentViewSkin.isQiLayout){
+                                img.style.left = "calc("+(i * 12.83)+"%)";
+                            }else if(currentViewSkin.isLolBigLayout){
+                                img.style.top = (i*44)+'px';
+                            }
                             subView.mp.appendChild(img);
                         }
                     }else{
                         subView.mp.appendChild(ui.create.div('.qh-mpimg'));
                         var mptext = ui.create.div('.qh-mptext');
                         subView.mp.appendChild(mptext);
-                        mptext.innerHTML = "×"+mp;
+                        mptext.innerHTML = "×"+(currentViewSkin.isLolBigLayout?"<br>":"")+mp;
                     }
                 }
             }else{
@@ -5975,7 +6285,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
     },
     "qhly_vMiddle":{
         "name":"纵向居中",
-        "intro":"打开此选项后，在【水墨龙吟】套装中，技能和介绍字数较少时将居中显示。",
+        "intro":"打开此选项后，在【水墨龙吟】【海克斯科技】套装中，技能和介绍字数较少时将居中显示。",
         "init":lib.config.qhly_vMiddle === undefined ? true : lib.config.qhly_vMiddle,
         onclick:function(item){
             game.saveConfig('extension_千幻聆音_qhly_vMiddle',item);
@@ -6019,6 +6329,15 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         onclick:function(item){
             game.saveConfig('extension_千幻聆音_qhly_replaceCharacterCard2',item);
             game.saveConfig('qhly_replaceCharacterCard2',item);
+        }
+    },
+    "qhly_nolihuiOrigin":{
+        "name":"无立绘皮肤显示原皮",
+        "intro":"设置此选项，支持立绘的套装中，没有立绘资源的皮肤会显示原皮的立绘。",
+        "init":lib.config.qhly_nolihuiOrigin === undefined ?false:lib.config.qhly_nolihuiOrigin,
+        onclick:function(item){
+            game.saveConfig('extension_千幻聆音_qhly_nolihuiOrigin',item);
+            game.saveConfig('qhly_nolihuiOrigin',item);
         }
     },
     "qhly_smallwiningame":{
@@ -6463,15 +6782,6 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             game.saveConfig('qhly_lihuiSupport',item);
         }
     },
-    "qhly_nolihuiOrigin":{
-        "name":"无立绘皮肤显示原皮",
-        "intro":"设置此选项，【水墨龙吟】套装中，没有立绘资源的皮肤会显示原皮的立绘。",
-        "init":lib.config.qhly_nolihuiOrigin === undefined ?false:lib.config.qhly_nolihuiOrigin,
-        onclick:function(item){
-            game.saveConfig('extension_千幻聆音_qhly_nolihuiOrigin',item);
-            game.saveConfig('qhly_nolihuiOrigin',item);
-        }
-    },
     "qhly_hideShuimoCover":{
         "name":"隐藏墨迹",
         "intro":"设置此选项，【水墨龙吟】将隐藏上面的墨迹，以显示全皮肤。",
@@ -6481,7 +6791,86 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             game.saveConfig('qhly_hideShuimoCover',item);
         }
     },
-
+    "qhly_lolconfig":{
+        "name":"<font size='5' color='blue'>海克斯科技相关设置》</font>",
+        "clear":true,
+    },
+    "qhly_lolhanggaoxiufu":{
+        "name":"技能名行高调整",
+        "intro":"设置此选项，可调整【海克斯科技】界面按钮的文字行高。",
+        "init":lib.config.qhly_lolhanggaoxiufu === undefined ? "250" : lib.config.qhly_lolhanggaoxiufu,
+        "item":{
+            "250":"250%",
+            "260":"260%",
+            "270":"270%",
+            "280":"280%",
+            "290":"290%",
+            "300":"300%",
+            "310":"310%",
+            "320":"320%",
+            "330":"330%",
+            "340":"340%",
+            "350":"350%",
+            "360":"360%",
+            "370":"370%",
+            "380":"380%",
+            "390":"390%",
+            "400":"400%"
+        },
+        onclick:function(item){
+            game.saveConfig('extension_千幻聆音_qhly_lolhanggaoxiufu',item);
+            game.saveConfig('qhly_lolhanggaoxiufu',item);
+        }
+    },
+    "qhly_lolhanggaoxiufu2":{
+        "name":"按钮行高调整",
+        "intro":"设置此选项，可调整【海克斯科技】界面按钮的文字行高。",
+        "init":lib.config.qhly_lolhanggaoxiufu2 === undefined ? "250" : lib.config.qhly_lolhanggaoxiufu2,
+        "item":{
+            "250":"250%",
+            "260":"260%",
+            "270":"270%",
+            "280":"280%",
+            "290":"290%",
+            "300":"300%",
+            "310":"310%",
+            "320":"320%",
+            "330":"330%",
+            "340":"340%",
+            "350":"350%",
+            "360":"360%",
+            "370":"370%",
+            "380":"380%",
+            "390":"390%",
+            "400":"400%",
+        },
+        onclick:function(item){
+            game.saveConfig('extension_千幻聆音_qhly_hanggaoxiufu2',item);
+            game.saveConfig('qhly_hanggaoxiufu2',item);
+        }
+    },
+    "qhly_lolshilizihao":{
+        "name":"势力字号调整",
+        "intro":"设置此选项，可调整【海克斯科技】界面按钮的势力字号。",
+        "init":lib.config.qhly_lolshilizihao === undefined ? "65" : lib.config.qhly_lolshilizihao,
+        "item":{
+            "50":"50",
+            "55":"55",
+            "60":"60",
+            "65":"65",
+            "70":"70",
+            "75":"75",
+            "80":"80",
+            "85":"85",
+            "90":"90",
+            "95":"95",
+            "100":"100",
+        },
+        onclick:function(item){
+            game.saveConfig('extension_千幻聆音_qhly_lolshilizihao',item);
+            game.saveConfig('qhly_lolshilizihao',item);
+        }
+    },
     "qhly_qitashezhi":{
         "name":"<font size='5' color='blue'>其他》</font>",
         "clear":true,
@@ -6537,9 +6926,9 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         translate:{
         },
     },
-    intro:"对局内实时换肤换音扩展！<br>感谢七.提取的【水墨龙吟】界面素材。<br><br>感谢以下群友参与了BUG反馈，并给出了可行的建议：<br>Empty city° ꧁彥꧂ 折月醉倾城 世中人 ᴀᴅɪᴏs 废城<b><br><br>玄武江湖工作室群：522136249</b><br><img style=width:238px src="+lib.assetURL+"extension/千幻聆音/xwjh_pic_erweima.jpg> <br><br><b>时空枢纽群：1075641665</b><img style=width:238px src="+lib.assetURL+"extension/千幻聆音/sksn_pic_erweima.jpg> <br><br><b>千幻聆音皮肤群：646556261</b><img style=width:238px src="+lib.assetURL+"extension/千幻聆音/qhly_pic_erweima.jpg><br><b>千幻聆音皮肤二群：859056471</b><img style=width:238px src="+lib.assetURL+"extension/千幻聆音/qhly_pic_erweima2.jpg>",
+    intro:"对局内实时换肤换音扩展！<br>感谢七.提供的【水墨龙吟】界面素材。<br>感谢灵徒℡丶提供的【海克斯科技】界面素材。<br>感谢以下群友参与了BUG反馈，并给出了可行的建议：<br>Empty city° ꧁彥꧂ 折月醉倾城 世中人 ᴀᴅɪᴏs 废城<b><br><br>玄武江湖工作室群：522136249</b><br><img style=width:238px src="+lib.assetURL+"extension/千幻聆音/xwjh_pic_erweima.jpg> <br><br><b>时空枢纽群：1075641665</b><img style=width:238px src="+lib.assetURL+"extension/千幻聆音/sksn_pic_erweima.jpg> <br><br><b>千幻聆音皮肤群：646556261</b><img style=width:238px src="+lib.assetURL+"extension/千幻聆音/qhly_pic_erweima.jpg><br><b>千幻聆音皮肤二群：859056471</b><img style=width:238px src="+lib.assetURL+"extension/千幻聆音/qhly_pic_erweima2.jpg>",
     author:"玄武江湖工作室",
     diskURL:"",
     forumURL:"",
-    version:"3.0.5",
+    version:"4.0.1",
 },files:{"character":[],"card":[],"skill":[]}}})

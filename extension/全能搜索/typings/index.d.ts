@@ -20,6 +20,12 @@ declare interface Window {
 
     /** 设置全局的跳转搜索功能 */
     qnssSee: (a: HTMLAnchorElement) => void
+	/**
+	 * 用于寻找并播放扩展武将的阵亡配音(仅限于用game.import函数创建的武将包)
+	 * @param ext 扩展名
+	 * @param charName 武将名
+	 */
+	qnssFindDieAudio: (ext: string, charName: string) => void;
 }
 
 /** 设置全局Symbol,用于设置一个对象的描述 */
@@ -30,6 +36,13 @@ declare const qnssKeySymbol: Symbol
 
 /** 设置全局的跳转搜索功能 */
 declare const qnssSee: (a: HTMLAnchorElement) => void
+
+/**
+	 * 用于寻找并播放扩展武将的阵亡配音(仅限于用game.import函数创建的武将包)
+	 * @param ext 扩展名
+	 * @param charName 武将名
+	 */
+declare const qnssFindDieAudio: (ext: string, charName: string) => void;
 
 declare interface Lib {
     /** 对于每个方法的注释 */

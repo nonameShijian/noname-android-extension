@@ -6,7 +6,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		name: "全能搜索",
 		editable: false,
 		onremove: function () {
-			game.saveExtensionConfig('全能搜索', 'searchList');
+			// game.saveExtensionConfig('全能搜索', 'searchList');
 		},
 		content: function(config, pack) {
             //移除武将卡牌搜索器扩展
@@ -33,8 +33,93 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
             window.qnssKeySymbol = Symbol('key');
             // 设置全局的跳转搜索功能
             window.qnssSee = function (a) {
-                _status.全能搜索_Searcher.tujianBegin(_status.全能搜索_Searcher.content, a.innerText, false);
+                _status.全能搜索_Searcher.tujianBegin(_status.全能搜索_Searcher.content, a ? a.innerText : undefined, false);
             };
+
+			Promise.allSettled = Promise.allSettled || function (arr) {
+				var P = this;
+				return new P(function (resolve, reject) {
+					if (Object.prototype.toString.call(arr) !== '[object Array]') {
+						return reject(new TypeError(typeof arr + ' ' + arr +
+							' ' + ' is not iterable(cannot read property Symbol(Symbol.iterator))'));
+					}
+					var args = Array.prototype.slice.call(arr);
+					if (args.length === 0) return resolve([]);
+					var arrCount = args.length;
+
+					function resolvePromise(index, value) {
+						if (typeof value === 'object') {
+							var then = value.then;
+							if (typeof then === 'function') {
+								then.call(value, function (val) {
+									args[index] = { status: 'fulfilled', value: val };
+									if (--arrCount === 0) {
+										resolve(args);
+									}
+								}, function (e) {
+									args[index] = { status: 'rejected', reason: e };
+									if (--arrCount === 0) {
+										resolve(args);
+									}
+								})
+							}
+						}
+					}
+
+					for (var i = 0; i < args.length; i++) {
+						resolvePromise(i, args[i]);
+					}
+				})
+			};
+			// 韩云
+			window.qnssFindDieAudio = function (ext, charName) {
+				const r =  new RegExp(`game.playAudio\\(['"]..['"],\\s*['"]extension['"],\\s*['"]` + ext + `\\S*['"],\\s*\\S+\\)`);
+				const player = ui.create.player().init(charName);
+				const dieAudioSkills = Object.keys(lib.skill).filter(v => {
+					if (!v.startsWith('_')) return false;
+					const info = lib.skill[v];
+					if (typeof info.trigger != 'object' || typeof info.content != 'function') return false;
+					for (let [evtPlayer, value] of Object.entries(info.trigger)) {
+						if (['global', 'player'].includes(evtPlayer)) {
+							if (!Array.isArray(value)) value = [value];
+							if (!value.some(v => v.startsWith('die'))) return false;
+						}
+					}
+					if (typeof info.filter == 'function') {
+						try {
+							if (info.filter({ player }, player) == false) return false;
+						} catch (e) {
+							return false;
+						}
+					}
+					if (r.test(info.content.toString()) == false) return false;
+					return true;
+				});
+				if (!dieAudioSkills.length) {
+					game.alert("该武将没有阵亡语音");
+				} else {
+					const dieAudioSkillsPromise = dieAudioSkills.map(skill => {
+						return new Promise((resolve, reject) => {
+							const toString = lib.skill[skill].content.toString();
+							const match = toString.match(r);
+							if (!match) reject();
+							let evalArgs = match[0];
+							evalArgs = evalArgs.slice(0, evalArgs.lastIndexOf(',') + 1) + '\'' + player.name + '\'' + ', (e) => { reject(e); });';
+							// console.log(evalArgs);
+							eval(evalArgs);
+							// audio的onerror是异步触发的
+							setTimeout(() => {
+								resolve();
+							}, 100);
+						});
+					});
+					Promise.allSettled(dieAudioSkillsPromise).then(result => {
+						if (result.every(v => v.status == 'rejected')) {
+							game.alert("该武将没有阵亡语音");
+						}
+					});
+				}
+			};
             // 引入全局api描述
             // 创建Promise
             const importDescription = function(path, file) {
@@ -133,6 +218,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                      * @type {string[]}
                      *  */
                     this.searchList = game.getExtensionConfig('全能搜索', 'searchList') || [];
+					/**
+					 * @description 搜索历史, 用于和武将界面联动。该config不随“清空历史”而清空
+					 * @type {string[]}
+					 *  */
+					this.tsymqSearchList = game.getExtensionConfig('全能搜索', 'tsymqSearchList') || [];
                     /** @type {HTMLUListElement} */
                     this.ul = this.menu.appendChild(document.createElement('ul'));
 
@@ -339,11 +429,10 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         if (!this.input.value) return;
                         alwaysShow.sort();
                         for (let data of alwaysShow) {
-                            if (!this.searchList.contains(data) && !data.startsWith(this.input.value)) {
+                            if (!this.searchList.contains(data) || !data.startsWith(this.input.value)) {
                                 continue;
                             }
-                            const li = createLi(data);
-                            this.ul.appendChild(li);
+                            this.ul.appendChild(createLi(data));
                         }
                         showUl();
                     }
@@ -391,13 +480,6 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         clearOptions();
                     });
 
-                    // 失去焦点
-                    /*this.input.onblur = () => {
-                        if (document.activeElement != this.ul && !this.ul.contains(document.activeElement)) {
-                            this.ul.style.display = 'none';
-                        }
-                    };*/
-
                     //获得焦点
                     this.input.onfocus = showUl;
 
@@ -412,10 +494,14 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                 this.input.value = this.hoverLi.innerText;
 								delete this.hoverLi;
 								this.input.dispatchEvent(new CustomEvent('changeInput'));
+								this.ul.style.display = 'none';
+								while (this.ul.hasChildNodes()) {
+									this.ul.removeChild(this.ul.firstChild);
+								}
 								return;
                             }
-                            this.tujianBegin(this.content, this.input.value);
-                            this.input.value = '';
+                            this.tujianBegin(this.content, this.input.value, true);
+                            // this.input.value = '';
                         } else if (e.key == 'ArrowUp') {
                             //上一个
                             if (!this.ul.hasChildNodes()) return;
@@ -432,6 +518,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             if (this.hoverLi) {
                                 this.hoverLi.dispatchEvent(new CustomEvent('mouseover'));
                             }
+							this.input.setSelectionRange(-1, -1);
                         } else if (e.key == 'ArrowDown') {
                             //下一个
                             if (!this.ul.hasChildNodes()) return;
@@ -448,6 +535,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             if (this.hoverLi) {
                                this.hoverLi.dispatchEvent(new CustomEvent('mouseover'));
                             }
+							this.input.setSelectionRange(-1, -1);
                         } else {
                             // 关于搜索代码的判断
                             const value = this.input.value;
@@ -465,8 +553,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             if (!key) {
                                 clearOptions();
                                 for (const item of this.searchList) {
-                                    if (item.startsWith(this.input.value)) {
-                                        alwaysShow.add(item);
+									if (item.startsWith(this.input.value) && this.input.value.length > 0) {
+                                        this.alwaysShow.add(item);
                                         updateDescription();
                                         break;
                                     }
@@ -515,8 +603,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 
                     //搜索按钮
                     this.search.addEventListener('click', () => {
-                        this.tujianBegin(this.content, this.input.value);
-                        this.input.value = "";
+                        this.tujianBegin(this.content, this.input.value, true);
+                        // this.input.value = "";
                         this.ul.style.display = 'none';
                     });
 
@@ -525,7 +613,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     ui.arena.classList.remove('menupaused');
                     ui.arena.hide();
                     ui.system.hide();
-                    ui.menuContainer.hide();
+                    ui.menuContainer && ui.menuContainer.hide();
                     ui.window.appendChild(this.manual);
 
                     if (typeof target == 'string') {
@@ -579,15 +667,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						if (a.endsWith(result)) name.push(a);
                     }
                     if (name.length == 0) return false;
-
                     this.dialog.addText('<div style="text-align:center; font-size: 25px;">武将搜索结果</div>');
 
                     for (let i = 0; i < name.length; i++) {
                         let character = lib.character[name[i]];
                         if (!character) continue; //没有这个武将就跳过这次循环
-                        this.dialog.addSmall([
-                            [name[i]], 'character'
-                        ]);
                         let str = ''; //展示的html代码
                         let allcharacter = lib.characterPack; //所有武将包
                         let Packname; //包名
@@ -618,106 +702,115 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             if (lib.translate[char3[i]]) {
                                 skillstr +=
                                     `<li>
-								<font color="21ffd8" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">[ ${lib.translate[char3[i]]} ]</font>
-								<font color=6df95b>[</font>
-								<font color=6df95b>${char3[i]}</font>
-								<font color=6df95b>]</font></br>
-								<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述&nbsp</span><span>${lib.translate[char3[i] + '_info']}</span></br>
-								<span class="bluetext">技能语音&nbsp</span>
-								<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${char3[i]}", {name:"${charName}"}, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
-								<span class="bluetext">技能代码&nbsp</span>
-								<a onclick='
-								let display = this.parentNode.nextElementSibling.style.display;
-								this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
-								this.innerHTML = (display !== "none" ? "点击查看技能代码" : "点击关闭技能代码");
-								'>点击查看技能代码</a>
-							</li>
-							<li style="display: none; list-style-type: none;">
-								<font color="21ffd8">[ ${lib.translate[char3[i]]} ] </font>技能代码：</br>
-								<pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(lib.skill[char3[i]]))}</pre>
-							</li>`;
+										<font color="21ffd8" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">[ ${lib.translate[char3[i]]} ]</font>
+										<font color=6df95b>[</font>
+										<font color=6df95b>${char3[i]}</font>
+										<font color=6df95b>]</font></br>
+										<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述&nbsp</span><span>${lib.translate[char3[i] + '_info']}</span></br>
+										<span class="bluetext">技能语音&nbsp</span>
+										<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${char3[i]}", {name:"${charName}"}, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
+										<span class="bluetext">技能代码&nbsp</span>
+										<a onclick='
+										let display = this.parentNode.nextElementSibling.style.display;
+										this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
+										this.innerHTML = (display !== "none" ? "点击查看技能代码" : "点击关闭技能代码");
+										'>点击查看技能代码</a>
+									</li>
+									<li style="display: none; list-style-type: none;">
+										<font color="21ffd8">[ ${lib.translate[char3[i]]} ] </font>技能代码：</br>
+										<pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(lib.skill[char3[i]]))}</pre>
+									</li>`;
                             }
                         }
 
                         for (let i = 0; i < skillDerivation.length; i++) {
                             skillDerivationstr +=
                                 `<li>
-								<font color="21ffd8" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">[ ${lib.translate[skillDerivation[i]]} ]</font>
-								<font color=6df95b>[</font>
-								<font color=6df95b>${skillDerivation[i]}</font>
-								<font color=6df95b>]</font></br>
-								<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述&nbsp</span><span>${lib.translate[skillDerivation[i] + '_info']}</span></br>
-								<span class="bluetext">技能语音&nbsp</span>
-								<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${skillDerivation[i]}", {name:"${charName}"}, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
-								<span class="bluetext">技能代码&nbsp</span>
-								<a onclick='
-								let display = this.parentNode.nextElementSibling.style.display;
-								this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
-								this.innerHTML = (display !== "none" ? "点击查看技能代码" : "点击关闭技能代码");
-								'>点击查看技能代码</a>
-							</li>
-							<li style="display: none; list-style-type: none;">
-								<font color="21ffd8">[ ${lib.translate[skillDerivation[i]]} ] </font>技能代码：</br>
-								<pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(lib.skill[skillDerivation[i]]))}</pre>
-							</li>`;
+									<font color="21ffd8" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">[ ${lib.translate[skillDerivation[i]]} ]</font>
+									<font color=6df95b>[</font>
+									<font color=6df95b>${skillDerivation[i]}</font>
+									<font color=6df95b>]</font></br>
+									<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述&nbsp</span><span>${lib.translate[skillDerivation[i] + '_info']}</span></br>
+									<span class="bluetext">技能语音&nbsp</span>
+									<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${skillDerivation[i]}", {name:"${charName}"}, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
+									<span class="bluetext">技能代码&nbsp</span>
+									<a onclick='
+									let display = this.parentNode.nextElementSibling.style.display;
+									this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
+									this.innerHTML = (display !== "none" ? "点击查看技能代码" : "点击关闭技能代码");
+									'>点击查看技能代码</a>
+								</li>
+								<li style="display: none; list-style-type: none;">
+									<font color="21ffd8">[ ${lib.translate[skillDerivation[i]]} ] </font>技能代码：</br>
+									<pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(lib.skill[skillDerivation[i]]))}</pre>
+								</li>`;
                         }
 
-                        str +=
-                            `</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">武将信息&nbsp</span><span>${get.characterIntro(charName)}</span></br>
-					<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">所在武将包&nbsp</span><span>${Packname}</span></br>
-					<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">武将名称&nbsp</span>
-					${lib.translate[charName]}
-					<font color=6df95b>[</font>
-					<font color=6df95b>${charName}</font>
-					<font color=6df95b>]</font></br>
-					<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">武将称号&nbsp</span><span>${get.colorspan(lib.characterTitle[charName] || "暂无称号")}</span></br>
-					<span class="bluetext">武将性别&nbsp</span><span>${lib.translate[character[0]]}</span></br>
-					<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">武将势力&nbsp</span>
-					${lib.translate[character[1]]}
-					<font color=6df95b>[</font>
-					<font color=6df95b>${character[1]}</font>
-					<font color=6df95b>]</font></br>
-					<span class="bluetext">体力上限&nbsp</span>${character[2]} </br>
-					<span class="bluetext">阵亡语音&nbsp</span>
-					<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放阵亡语音' 
-					onclick='
-					let findInExt = false;
-					Object.keys(lib.characterPack).forEach( (key, index, arr) => {
-						if(!key.includes("mode_extension_")) return false;
-						if("${charName}" in lib.characterPack[key] 
-						&& lib.character["${charName}"] == lib.characterPack[key]["${charName}"]) {
-							findInExt = key.slice(15);
-						}
-					});
-					if(findInExt){
-						game.playAudio("..", "extension", findInExt, "${charName}", function(){
-							game.alert("该扩展武将没有阵亡语音");
-						});
-					} else if(lib.character["${charName}"] && lib.character["${charName}"][4].contains("die_audio")){
-						game.playAudio("die", "${charName}", function(){
-							game.alert("该武将没有阵亡语音");
-						});
-					} else{
-						game.playAudio("die", "${charName}",function(){
-							game.playAudio("die", "${charName}".slice("${charName}".indexOf("_") + 1), function(){
-								game.alert("该武将没有阵亡语音");
+                        str +=`</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">武将信息&nbsp</span><span>${get.characterIntro(charName)}</span></br>
+							<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">所在武将包&nbsp</span><span>${Packname}</span></br>
+							<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">武将名称&nbsp</span>
+							${lib.translate[charName]}
+							<font color=6df95b>[</font>
+							<font color=6df95b>${charName}</font>
+							<font color=6df95b>]</font></br>
+							<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">武将称号&nbsp</span><span>${get.colorspan(lib.characterTitle[charName] || "暂无称号")}</span></br>
+							<span class="bluetext">武将性别&nbsp</span><span>${lib.translate[character[0]]}</span></br>
+							<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">武将势力&nbsp</span>
+							${lib.translate[character[1]]}
+							<font color=6df95b>[</font>
+							<font color=6df95b>${character[1]}</font>
+							<font color=6df95b>]</font></br>
+							<span class="bluetext">体力上限&nbsp</span>${character[2]} </br>
+							<span class="bluetext">阵亡语音&nbsp</span>
+							<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放阵亡语音' 
+							onclick='
+							let findInExt = false;
+							Object.keys(lib.characterPack).forEach((key, index, arr) => {
+								// 扩展自带的武将包
+								if(key.includes("mode_extension_")) {
+									if("${charName}" in lib.characterPack[key] && lib.character["${charName}"] == lib.characterPack[key]["${charName}"]) {
+										findInExt = key.slice(15);
+									}
+								}
+								// 扩展自定义的武将包
+								if (lib.config.extensions.includes( lib.translate[key + "_character_config"] )) {
+									if("${charName}" in lib.characterPack[key] && lib.character["${charName}"] == lib.characterPack[key]["${charName}"]) {
+										findInExt = lib.translate[key + "_character_config"];
+									}
+								}
 							});
-						});
-					}'
-					style='position: absolute; width: 100px; margin: 0; padding: 0;' /> </br>
-					<span class="bluetext">武将技能</span>：${skillstr}`;
+							if(findInExt){
+								game.playAudio("..", "extension", findInExt, "${charName}", function() {
+									window.qnssFindDieAudio(findInExt, "${charName}")
+								});
+							} else if(lib.character["${charName}"] && lib.character["${charName}"][4].contains("die_audio")){
+								game.playAudio("die", "${charName}", function() {
+									game.alert("该武将没有阵亡语音");
+								});
+							} else{
+								game.playAudio("die", "${charName}",function() {
+									game.playAudio("die", "${charName}".slice("${charName}".indexOf("_") + 1), function(){
+										game.alert("该武将没有阵亡语音");
+									});
+								});
+							}'
+							style='position: absolute; width: 100px; margin: 0; padding: 0;' /> </br>
+							<span class="bluetext">武将技能</span>：${skillstr}`;
 
                         if (skillDerivation.length) {
                             str += `</br><span class="bluetext">武将衍生技</span>：${skillDerivationstr}`;
                         }
 
                         str += `</br></br></br>`;
-                        this.dialog.addText(
-                            `
-				<div>
-					<div style="display:block; left:auto; text-align:left; font-size: 20px;"> ${str} </div>
-				</div>`
-                        );
+						//setTimeout(() => {
+							this.dialog.addSmall([
+								[name[i]], 'character'
+							]);
+							this.dialog.addText(`
+							<div>
+								<div style="display:block; left:auto; text-align:left; font-size: 20px;"> ${str} </div>
+							</div>`);
+						//}, 0);
                     }
                 }
                 /** 寻找卡牌 */
@@ -807,75 +900,73 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         }
                         str +=
                             `</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">卡牌名称</span> ${lib.translate[name[i]]}
-					<font color=6df95b>[ </font>
-                    <font color=6df95b>${name[i]}</font>
-                    <font color=6df95b> ]</font>
-						</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">卡牌类别</span> ： ${lib.translate[card.type]}
-                        <font color=6df95b>[ </font>
-                        <font color=6df95b>${card.type}</font>
-                        <font color=6df95b> ]</font>
-						</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">卡牌效果</span>：${nature ? lib.card.sha.cardPrompt({ name: 'sha', nature }) : lib.translate[name[i] + '_info']}
-						</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">所在卡牌包</span>：${Packname_translate || '无'}
-                        <font color=6df95b>[ </font>
-                        <font color=6df95b>${Packname || '无'}</font>
-                        <font color=6df95b> ]</font>
-						</br>`;
+							<font color=6df95b>[ </font>
+							<font color=6df95b>${name[i]}</font>
+							<font color=6df95b> ]</font>
+								</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">卡牌类别</span> ： ${lib.translate[card.type]}
+								<font color=6df95b>[ </font>
+								<font color=6df95b>${card.type}</font>
+								<font color=6df95b> ]</font>
+								</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">卡牌效果</span>：${nature ? lib.card.sha.cardPrompt({ name: 'sha', nature }) : lib.translate[name[i] + '_info']}
+								</br><span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">所在卡牌包</span>：${Packname_translate || '无'}
+								<font color=6df95b>[ </font>
+								<font color=6df95b>${Packname || '无'}</font>
+								<font color=6df95b> ]</font>
+								</br>`;
                         if (card.derivation) {
                             str += `<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">卡牌来源</span> ：${lib.translate[card.derivation]}
-                    <font color=6df95b>[ </font>
-                    <font color=6df95b>${card.derivation}</font>
-                    <font color=6df95b> ]</font>
-                    </br>`;
+								<font color=6df95b>[ </font>
+								<font color=6df95b>${card.derivation}</font>
+								<font color=6df95b> ]</font>
+								</br>`;
                         }
-                        str +=
-                            `
-                    <span class="bluetext">卡牌语音（男）</span>：
-					<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='卡牌语音（男）' onclick="
-                    let audioinfo = lib.card['${cardName || name[i]}'].audio;
-                    if('${cardName || name[i]}' == 'sha' && ['fire', 'thunder', 'ice'].includes('${nature}') ){
-						game.playAudio('card', 'male', 'sha_${nature}');
-					} else {
-					    if (typeof audioinfo == 'string') {
-							if (audioinfo.indexOf('ext:') == 0) game.playAudio('..', 'extension', audioinfo.slice(4), '${name[i]}_male');
-							else game.playAudio('card', 'male', audioinfo);
-						}
-						else {
-							game.playAudio('card', 'male', '${name[i]}');
-						}
-					}
-                    " style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
-					<span class="bluetext">卡牌语音（女）</span>：
-					<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='卡牌语音（女）' onclick="
-                    let audioinfo = lib.card['${cardName || name[i]}'].audio;
-                    if('${cardName || name[i]}' == 'sha' && ['fire', 'thunder', 'ice'].includes('${nature}') ){
-						game.playAudio('card', 'female', 'sha_${nature}');
-					} else {
-					    if (typeof audioinfo == 'string') {
-							if (audioinfo.indexOf('ext:') == 0) game.playAudio('..', 'extension', audioinfo.slice(4), '${name[i]}_female');
-							else game.playAudio('card', 'female', audioinfo);
-						}
-						else {
-							game.playAudio('card', 'female', '${name[i]}');
-						}
-					}
-                    " style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
-                    <span class="bluetext">卡牌代码</span>：
-					<span style="color:6df95b" onclick='
-						let display = this.nextElementSibling.style.display;
-						this.nextElementSibling.style.display = display == "none" ? "" : "none";
-						this.innerHTML = (display !== "none" ? "点击查看${lib.translate[name[i]]}代码" : "点击关闭${lib.translate[name[i]]}代码");
-					'>点击查看${lib.translate[name[i]]}代码</span>
-					<span style="display: none;">
-						</br>
-						<font color="21ffd8">[ ${lib.translate[name[i]]} ] </font>卡牌代码：</br>
-						<pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(card))}</pre>
-					</span>
-					</br></br></br>`;
-                        this.dialog.addText(
-                            `<div>
-					    <div style="display:block; left:auto; text-align:left; font-size: 20px;"> ${str} </div>
-				    </div>`
-                        );
+                        str += `
+							<span class="bluetext">卡牌语音（男）</span>：
+							<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='卡牌语音（男）' onclick="
+							let audioinfo = lib.card['${cardName || name[i]}'].audio;
+							if('${cardName || name[i]}' == 'sha' && ['fire', 'thunder', 'ice'].includes('${nature}') ){
+								game.playAudio('card', 'male', 'sha_${nature}');
+							} else {
+								if (typeof audioinfo == 'string') {
+									if (audioinfo.indexOf('ext:') == 0) game.playAudio('..', 'extension', audioinfo.slice(4), '${name[i]}_male');
+									else game.playAudio('card', 'male', audioinfo);
+								}
+								else {
+									game.playAudio('card', 'male', '${name[i]}');
+								}
+							}
+							" style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
+							<span class="bluetext">卡牌语音（女）</span>：
+							<img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='卡牌语音（女）' onclick="
+							let audioinfo = lib.card['${cardName || name[i]}'].audio;
+							if('${cardName || name[i]}' == 'sha' && ['fire', 'thunder', 'ice'].includes('${nature}') ){
+								game.playAudio('card', 'female', 'sha_${nature}');
+							} else {
+								if (typeof audioinfo == 'string') {
+									if (audioinfo.indexOf('ext:') == 0) game.playAudio('..', 'extension', audioinfo.slice(4), '${name[i]}_female');
+									else game.playAudio('card', 'female', audioinfo);
+								}
+								else {
+									game.playAudio('card', 'female', '${name[i]}');
+								}
+							}
+							" style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
+							<span class="bluetext">卡牌代码</span>：
+							<span style="color:6df95b" onclick='
+								let display = this.nextElementSibling.style.display;
+								this.nextElementSibling.style.display = display == "none" ? "" : "none";
+								this.innerHTML = (display !== "none" ? "点击查看${lib.translate[name[i]]}代码" : "点击关闭${lib.translate[name[i]]}代码");
+							'>点击查看${lib.translate[name[i]]}代码</span>
+							<span style="display: none;">
+								</br>
+								<font color="21ffd8">[ ${lib.translate[name[i]]} ] </font>卡牌代码：</br>
+								<pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(card))}</pre>
+							</span>
+							</br></br></br>`;
+						this.dialog.addText(`
+						<div>
+							<div style="display:block; left:auto; text-align:left; font-size: 20px;"> ${str} </div>
+						</div>`);
                     }
                 }
                 /** 寻找技能 */
@@ -915,6 +1006,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						let info;
 						if (lib.translate[skills[i] + '_info']) {
 							info = lib.translate[skills[i] + '_info'].slice(0);
+						} else if (skills[i].endsWith('_info')) {
+							skills[i] = skills[i].slice(0, -5);
+							continue;
 						}
 						if (indexs.includes(i)) {
 							let index = -1;
@@ -930,7 +1024,6 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 								}
 								else break;
 							}
-
 						}
                         str += `<li>
 								<!-- 技能中文名 -->
@@ -1232,8 +1325,12 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 }
                 /** 将内容加入到下拉框 */
                 addToDataList(data) {
-                    this.searchList.add(data);
-                    game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
+					if (this.searchList.add(data) !== false) {
+						game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
+					}
+					if (this.tsymqSearchList.add(data) !== false) {
+						game.saveExtensionConfig('全能搜索', 'tsymqSearchList', [...new Set(this.tsymqSearchList)]);
+					}
                     //输入框失去焦点
                     this.input.blur();
                 }
@@ -1241,10 +1338,16 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 clearDataList() {
                     this.searchList = [];
                     this.clearOptions();
-                    game.saveExtensionConfig('全能搜索', 'searchList');
+					game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
                     game.alert("搜索历史已清空");
                 }
-                //展示
+				/**
+				 * 展示
+				 * @param { Lib.element.Dialog } dialog 
+				 * @param { string } result 
+				 * @param { boolean } [canAddToDataList] 
+				 * @returns 
+				 */
                 tujianBegin(dialog, result, canAddToDataList) {
                     this.clearDialog(dialog);
                     if (result === "" || result === null || result === undefined) return game.alert("请输入名称");
@@ -1257,15 +1360,18 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 					let resultSKill = containsKey('findSkill') ? this.findSkill(result) : false;
 					let resultCode = containsKey('findCode') ? this.findCode(result) : false;
 
-					if (resultCharacter === false && resultCard === false && resultSKill === false && resultCode === false) {
+					if ([resultCharacter, resultCard, resultSKill, resultCode].every(v => v == false)) {
 						game.alert(`没有符合条件的武将，卡牌，技能或代码!(搜索内容："${result}")`);
 						this.clearDialog(dialog);
 						return;
 					}
 
 					// 只搜索到代码的，不加入搜索历史
-					if (!(resultCharacter === false && resultCard === false && resultSKill === false)) {
-						canAddToDataList && this.addToDataList(result);
+					if (![resultCharacter, resultCard, resultSKill].every(v => v === false)) {
+						// 搜索的字大于1 或 搜索内容不包括技能且单字为汉字
+						if (result.length > 1 || (resultSKill === false && /[\u4e00-\u9fa5]+/.test(result))) {
+							canAddToDataList && this.addToDataList(result);
+						}
 					}
 
                     ui.background.setBackgroundImage("extension/全能搜索/img/" + ['相爱相杀', 'picture'].randomGet() + ".png");
@@ -1314,6 +1420,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							layer.remove();
 						});
 						let content = ui.create.div(layer, {
+							width: '100%',
+							height: '100%',
 							innerHTML: this.responseText,
 						});
 					});
@@ -1337,9 +1445,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 			}
 		},
 		package: {
-			intro: '【武将卡牌搜索器】的重命名版本,导入后会自动卸载【武将卡牌搜索器】',
+			intro: '【武将卡牌搜索器】的重命名版本,导入后会自动卸载【武将卡牌搜索器】。',
 			author: "<span class='bluetext'>诗笺</span>",
-			version: "2.0",
+			version: "2.15",
 		},
 	}
 });

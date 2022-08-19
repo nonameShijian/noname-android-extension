@@ -30,8 +30,116 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		editable: false,
 		content: function (config, pack) {
 			delete lib.extensionMenu['extension_SJ Settings'].delete;
+
 			let layoutPath = lib.assetURL + 'extension/SJ Settings';
 			lib.init.css(layoutPath, 'extension');
+
+			/** 修改游戏导入设置 */
+			const changeImportData = setInterval(() => {
+				if (!ui.import_data_button) return;
+				/** 确定按钮 */
+				const button = ui.import_data_button.querySelector('button');
+				if (!button) return;
+				button.onclick = function (e) {
+					const fileToLoad = this.previousSibling.files[0];
+					if (fileToLoad) {
+						const fileReader = new FileReader();
+						fileReader.onload = function (fileLoadedEvent) {
+							/** @type { string | object } */
+							// @ts-ignore
+							let data = fileLoadedEvent.target.result;
+							window.noname_shijianInterfaces.importConfigData(data);
+						};
+						fileReader.readAsText(fileToLoad, "UTF-8");
+					} else {
+						alert('请选择导入的游戏设置');
+					}
+				};
+				clearInterval(changeImportData);
+			}, 500);
+
+			// 导入配置
+			noname_shijianInterfaces.importConfigData = data => {
+				if (!data) return;
+				const extensions = lib.config.extensions;
+				try {
+					data = JSON.parse(lib.init.decode(data));
+					if (!data || typeof data != 'object') {
+						throw ('err');
+					}
+					// @ts-ignore
+					if (lib.db && (!data.config || !data.data)) {
+						throw ('err');
+					}
+				}
+				catch (e) {
+					console.log(e);
+					if (e == 'err') {
+						alert('导入文件格式不正确');
+					} else {
+						alert('导入失败： ' + e.message);
+					}
+					return;
+				}
+				alert('导入成功, 即将自动重启');
+				if (!lib.db) {
+					const noname_inited = localStorage.getItem('noname_inited');
+					const onlineKey = localStorage.getItem(lib.configprefix + 'key');
+					localStorage.clear();
+					if (noname_inited) {
+						localStorage.setItem('noname_inited', noname_inited);
+					}
+					if (onlineKey) {
+						localStorage.setItem(lib.configprefix + 'key', onlineKey);
+					}
+					for (let i in data) {
+						localStorage.setItem(i, data[i]);
+					}
+				}
+				else {
+					for (let i in data.config) {
+						game.putDB('config', i, data.config[i]);
+						lib.config[i] = data.config[i];
+					}
+					for (let i in data.data) {
+						game.putDB('data', i, data.data[i]);
+					}
+					// 现有扩展的合并
+					if (confirm('导入配置是否额外保存现有扩展？\n否则只保留SJ Settings扩展')) {
+						lib.config.extensions = [...new Set([...lib.config.extensions, ...extensions])];
+					} else {
+						lib.config.extensions = [...new Set([...lib.config.extensions, 'SJ Settings'])];
+					}
+					game.saveConfigValue('extensions');
+				}
+				lib.init.background();
+				game.reload();
+			};
+
+			/**
+			 * 对选择文件或路径选择后返回到无名杀后执行的代码
+			 * @param { object } result
+			 * @param { string } result.path 文件地址
+			 * @param { boolean } result.isDirectory 是否是文件夹
+			 * @param { string } result.data 文件内容
+			 * @param { 'file' | 'folder' } result.type 选择类型
+			  */
+			noname_shijianInterfaces.finishChooseFile = (result) => {
+				const { path, isDirectory, data, type } = result;
+				console.log('finishChooseFile', result);
+				if (type == 'file') {
+					if (!isDirectory && data) {
+						const split = path.split('/');
+						if (split[split.length - 1].startsWith('无名杀 - 数据')) {
+							noname_shijianInterfaces.importConfigData(data);
+						}
+					}
+				} else if (type == 'folder') {
+					console.log(path);
+				} else if (type == 'share') {
+					// 以后要做的分享文件功能
+				}
+			};
 
 			// 下载进度
 			// @ts-ignore
@@ -164,133 +272,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					game.loop();
 				}
 			};
-
-			/** 修改游戏导入设置 */
-			const changeImportData = setInterval(() => {
-				if (!ui.import_data_button) return;
-				/** 确定按钮 */
-				const button = ui.import_data_button.querySelector('button');
-				if (!button) return;
-				button.onclick = function(e) {
-					const fileToLoad = this.previousSibling.files[0];
-					if (fileToLoad) {
-						const fileReader = new FileReader();
-						fileReader.onload = function (fileLoadedEvent) {
-							/** @type { string | object } */
-							// @ts-ignore
-							let data = fileLoadedEvent.target.result;
-							window.noname_shijianInterfaces.importConfigData(data);
-						};
-						fileReader.readAsText(fileToLoad, "UTF-8");
-					} else {
-						alert('请选择导入的游戏设置');
-					}
-				};
-				clearInterval(changeImportData);
-			}, 500);
-
-			// 导入配置
-			noname_shijianInterfaces.importConfigData = data => {
-				if (!data) return;
-				const extensions = lib.config.extensions;
-				try {
-					data = JSON.parse(lib.init.decode(data));
-					if (!data || typeof data != 'object') {
-						throw ('err');
-					}
-					// @ts-ignore
-					if (lib.db && (!data.config || !data.data)) {
-						throw ('err');
-					}
-				}
-				catch (e) {
-					console.log(e);
-					if (e == 'err') {
-						alert('导入文件格式不正确');
-					} else {
-						alert('导入失败： ' + e.message);
-					}
-					return;
-				}
-				alert('导入成功');
-				if (!lib.db) {
-					const noname_inited = localStorage.getItem('noname_inited');
-					const onlineKey = localStorage.getItem(lib.configprefix + 'key');
-					localStorage.clear();
-					if (noname_inited) {
-						localStorage.setItem('noname_inited', noname_inited);
-					}
-					if (onlineKey) {
-						localStorage.setItem(lib.configprefix + 'key', onlineKey);
-					}
-					for (let i in data) {
-						localStorage.setItem(i, data[i]);
-					}
-				}
-				else {
-					for (let i in data.config) {
-						game.putDB('config', i, data.config[i]);
-						lib.config[i] = data.config[i];
-					}
-					for (let i in data.data) {
-						game.putDB('data', i, data.data[i]);
-					}
-					// 现有扩展的合并
-					if (confirm('导入配置是否额外保存现有扩展？\n否则只保留SJ Settings扩展')) {
-						lib.config.extensions = [...new Set([...lib.config.extensions, ...extensions])];
-					} else {
-						lib.config.extensions = [...new Set([...lib.config.extensions, 'SJ Settings'])];
-					}
-					game.saveConfigValue('extensions');
-				}
-				lib.init.background();
-				game.reload();
-			};
-
-			/**
-			 * 对选择文件或路径选择后返回到无名杀后执行的代码
-		 	 * @param { object } result
-			 * @param { string } result.path 文件地址
-			 * @param { boolean } result.isDirectory 是否是文件夹
-			 * @param { string } result.data 文件内容
-		 	 * @param { 'file' | 'folder' } result.type 选择类型
-		 	*/
-			noname_shijianInterfaces.finishChooseFile = (result) => {
-				const { path, isDirectory, data, type } = result;
-				if (type == 'file') {
-					if (!isDirectory && data) {
-						const split = path.split('/');
-						if (split[split.length - 1].startsWith('无名杀 - 数据')) {
-							noname_shijianInterfaces.importConfigData(data);
-						}
-					}
-				} else if (type == 'folder') {
-					console.log(path);
-				} else if (type == 'share') {
-					// 以后要做的分享文件功能
-				}
-			};
 		},
 		precontent: function() {
 			const emptyFun = () => {};
-
-			const getImportExtension = function() {
-				cordova.exec(result => {
-					if (result && result.type == 'extension') {
-						const name = result.message;
-						lib.config.extensions.add(name);
-						game.saveConfigValue('extensions');
-						game.saveConfig('extension_' + name + "_enable", true);
-						alert("扩展" + name + "导入完成。正在重新启动。");
-						cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
-					} else if (result && result.type == 'package') {
-						localStorage.setItem('noname_inited', result.message);
-						cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
-					}
-				}, () => {
-					console.warn('未从其他应用解压zip');
-				}, 'FinishImport', 'importReady', []);
-			};
 
 			document.addEventListener('deviceready', () => {
 				// @ts-ignore
@@ -302,6 +286,24 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						permissions.requestPermission(WRITE_EXTERNAL_STORAGE, emptyFun, emptyFun);
 					}
 				}, emptyFun);
+
+				const getImportExtension = function () {
+					cordova.exec(result => {
+						if (result && result.type == 'extension') {
+							const name = result.message;
+							lib.config.extensions.add(name);
+							game.saveConfigValue('extensions');
+							game.saveConfig('extension_' + name + "_enable", true);
+							alert("扩展" + name + "导入完成。正在重新启动。");
+							cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
+						} else if (result && result.type == 'package') {
+							localStorage.setItem('noname_inited', result.message);
+							cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
+						}
+					}, () => {
+						console.warn('未从其他应用解压zip');
+					}, 'FinishImport', 'importReady', []);
+				};
 
 				getImportExtension();
 
@@ -360,10 +362,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (_status.getExtensionsDialog) {
 									_status.getExtensionsDialog.show();
 								} else {
+									/*
 									if (navigator.onLine) {
 										setTimeout(getExtensions, 500);
 									}
 									else alert('当前网络未连接');
+									*/
 								}
 							})
 							.finally(() => {
@@ -739,7 +743,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.26",
+			version: "1.29",
 		}
 	};
 });

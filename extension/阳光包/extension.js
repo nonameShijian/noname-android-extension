@@ -11,9 +11,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			//精品武将
 			lib.rank.rarity.rare.addArray(["lyz_huangyueying", "lyz_zhangxingcai", "lyz_xinxianying", "lyz_jiaxu", "lyz_zhangliao", "lyz_zhangchunhua", "lyz_guansuo"]);
 			//史诗武将
-			lib.rank.rarity.epic.addArray(["lyz_zhouyu", "lyz_lingju", "lyz_caiwenji", "lyz_zhenji", "lyz_daqiao", "lyz_xiaoqiao", "lyz_sunshangxiang", "lyz_simayi", "lyz_guojia", "lyz_huatuo", "lyz_caojie", "lyz_caocao", "lyz_liubei", "lyz_sunjian", "lyz_zhangjiao", "lyz_luxun", "lyz_diaochan", "lyz_guanyinping", "lyz_bulianshi", "lyz_wangyi"]);
+			lib.rank.rarity.epic.addArray(["lyz_zhouyu", "lyz_lingju", "lyz_caiwenji", "lyz_zhenji", "lyz_daqiao", "lyz_xiaoqiao", "lyz_sunshangxiang", "lyz_simayi", "lyz_guojia", "lyz_huatuo", "lyz_caojie", "lyz_caocao", "lyz_liubei", "lyz_sunjian", "lyz_zhangjiao", "lyz_luxun", "lyz_diaochan", "lyz_guanyinping", "lyz_bulianshi", "lyz_wangyi", "lyz_zhangchangpu"]);
 			//传说武将
-			lib.rank.rarity.legend.addArray(["lyz_shen_diaochan", "lyz_shen_zhangliao", "lyz_shen_gaodayihao", "lyz_zhugeliang", "lyz_mayunlu", "lyz_shen_lvbu", "lyz_machao", "lyz_shen_simayi", "lyz_shen_zhouyu", "lyz_yangguangweiliang", "lyz_zhangfei", "lyz_yjlgt", "lyz_guanyu", "lyz_xunyu", "lyz_shijian", "lyz_lvlingqi", "lyz_zuoci", "lyz_sunce", "lyz_ziyu", "lyz_xusheng", "lyz_xuedaoshaozhu", "lyz_shen_zhenji", "lyz_shen_zhugeliang", "lyz_nanxun", "lyz_shen_guanyu", "lyz_zhaoyun", "lyz_caoying", "lyz_fengliyue"]);
+			lib.rank.rarity.legend.addArray(["lyz_shen_diaochan", "lyz_shen_zhangliao", "lyz_shen_gaodayihao", "lyz_zhugeliang", "lyz_mayunlu", "lyz_shen_lvbu", "lyz_machao", "lyz_shen_simayi", "lyz_shen_zhouyu", "lyz_yangguangweiliang", "lyz_zhangfei", "lyz_yjlgt", "lyz_guanyu", "lyz_xunyu", "lyz_shijian", "lyz_lvlingqi", "lyz_zuoci", "lyz_sunce", "lyz_ziyu", "lyz_xusheng", "lyz_xuedaoshaozhu", "lyz_shen_zhenji", "lyz_shen_zhugeliang", "lyz_nanxun", "lyz_shen_guanyu", "lyz_zhaoyun", "lyz_caoying", "lyz_fengliyue", "lyz_linqiqi","lyz_yeling","lyz_lvbao","lyz_shizhongren"]);
 
 
 			lib.arenaReady.push(function () {
@@ -78,6 +78,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								"lyz_caoying": "☼曹婴",
 								"lyz_fengliyue": "风璃月",
 								"lyz_guansuo": "☼关索",
+								"lyz_zhangchangpu":"☼张昌蒲",
+								"lyz_linqiqi":"林柒柒",
+								"lyz_yeling": "夜凌",
+								"lyz_lvbao": "铝宝",
+								"lyz_shizhongren": "世中人",
 
 							};
 							var player = lib.ygb_player_init.apply(this, arguments);
@@ -128,11 +133,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						characterSort: {
 							yangguangbao: {
 								"lyz_shen": ["lyz_shen_guanyu", "lyz_shen_zhugeliang", "lyz_shen_zhenji", "lyz_shen_diaochan", "lyz_shen_zhangliao", "lyz_shen_gaodayihao", "lyz_shen_lvbu", "lyz_shen_simayi", "lyz_shen_zhouyu", "lyz_shen_zhenji", "lyz_shen_guanyu"],
-								"lyz_wei": ["lyz_caoying", "lyz_wangyi", "lyz_xinxianying", "lyz_zhangliao", "lyz_xunyu", "lyz_caiwenji", "lyz_zhenji", "lyz_simayi", "lyz_guojia", "lyz_caocao", "lyz_zhangchunhua", "lyz_wangyi"],
+								"lyz_wei": ["lyz_zhangchangpu","lyz_caoying", "lyz_wangyi", "lyz_xinxianying", "lyz_zhangliao", "lyz_xunyu", "lyz_caiwenji", "lyz_zhenji", "lyz_simayi", "lyz_guojia", "lyz_caocao", "lyz_zhangchunhua", "lyz_wangyi"],
 								"lyz_shu": ["lyz_guansuo","lyz_guanyinping", "lyz_guanyu", "lyz_zhangfei", "lyz_zhugeliang", "lyz_mayunlu", "lyz_huangyueying", "lyz_liubei", "lyz_zhangxingcai", "lyz_zhaoyun"],
 								"lyz_wu": ["lyz_bulianshi", "lyz_sunce", "lyz_zhouyu", "lyz_daqiao", "lyz_xiaoqiao", "lyz_sunshangxiang", "lyz_sunjian", "lyz_luxun", "lyz_xusheng"],
 								"lyz_qun": ["lyz_jiaxu", "lyz_zuoci", "lyz_lvlingqi", "lyz_lingju", "lyz_machao", "lyz_huatuo", "lyz_caojie", "lyz_zhangjiao", "lyz_diaochan"],
-								"lyz_caidan": ["lyz_fengliyue","lyz_yangguangweiliang", "lyz_yjlgt", "lyz_shijian", "lyz_ziyu", "lyz_xuedaoshaozhu", "lyz_nanxun"],
+								"lyz_caidan": ["lyz_shizhongren","lyz_lvbao","lyz_fengliyue","lyz_yangguangweiliang", "lyz_yjlgt", "lyz_shijian", "lyz_ziyu", "lyz_xuedaoshaozhu", "lyz_nanxun","lyz_linqiqi","lyz_yeling"],
 							},
 						},
 						character: {
@@ -191,6 +196,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"lyz_caoying": ["female", "wei", 4, ["lyzzhuyuan", "lyzxianzheng"], ["die_audio"]],
 							"lyz_fengliyue": ["male", "shen",4, ["lyzyaotian"],["die_audio"]],
 							"lyz_guansuo": ["male", "shu",4, ["lyzzongjiang","lyzlanzheng"],["die_audio"]],
+							"lyz_zhangchangpu": ["female", "wei", 3 , ["lyzshuming","lyzmianjie"],["die_audio"]],
+							"lyz_linqiqi": ["male", "shen", 4 , ["lyzjuao","lyzweipo"],["die_audio"]],
+							"lyz_yeling": ["male", "shen", 3, ["lyzjimou", "lyzliluan","lyzguijue"], ["die_audio"]],
+							"lyz_lvbao": ["female", "shen", 3, ["lyzchimu", "lyzgouxi","lyzduozi"], ["die_audio"]],
+							"lyz_shizhongren": ["male", "shen", 4, ["lyzhuisheng", "lyzliandou","lyzlingkong"], ["die_audio"]],
 							
 
 						},
@@ -199,7 +209,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"lyz_shen_zhangliao": "张辽（169年～222年），字文远，雁门马邑（今山西省朔州市）人。汉末三国时期曹魏名将，聂壹的后人。<br><br>起初，担任雁门郡吏。又先后跟随丁原、何进、董卓、吕布，恪尽职守，历尽坎坷。吕布败亡后，张辽归属曹操。此后，立下众多显赫的功勋。洞察敌情而劝降昌豨。攻袁氏而转战河北。在白狼山之战率领先锋大破乌桓并斩杀乌桓单于蹋顿。驱逐辽东大将柳毅。以静制动平定军中谋反。进军江淮击灭陈兰、梅成。此后，长期镇守合肥。<br><br>建安二十年（215年），合肥之战，张辽率领八百将士，袭击东吴十万大军，一直冲杀到孙权的主帅旗下，令东吴军队皆披靡。在东吴撤军时，张辽率领追兵，大破孙权、甘宁、凌统等，差点活捉孙权。经此一役，张辽威震江东。“张辽止啼”成为流传千古的典故。<br><br>黄初元年（220年），张辽进封晋阳侯。染病之后，依旧令孙权非常忌惮。黄初三年（222年），张辽抱病击破吴将吕范。同年，病逝于江都，谥曰刚侯。张辽为历代所推崇，成为古今六十四名将之一。",
 							"lyz_shen_gaodayihao": "赵云（？－229年），字子龙，常山真定人。身长八尺，姿颜雄伟，汉末三国时期蜀汉名将，与关羽、张飞并称“燕南三士”。<br><br>汉末军阀混战，赵云受本郡推举，率领义从加入公孙瓒。期间结识了汉室皇亲刘备，但不久之后，赵云因为兄长去世而离开。赵云离开公孙瓒大约七年后，在邺城与刘备相见，从此追随刘备。<br><br>赵云跟随刘备将近三十年，先后参加过博望坡之战、长坂坡之战、江南平定战，独自指挥过入川之战、汉水之战、箕谷之战，都取得了非常好的战果。除了四处征战，赵云还先后以偏将军任桂阳太守，以留营司马留守公安，以翊军将军督江州。除此之外，赵云于平定益州时引霍去病故事劝谏刘备将田宅归还百姓，又于关羽、张飞被害之后劝谏刘备不要伐吴，被后世赞为有大臣局量的儒将，甚至被认为是三国时期的完美人物。<br><br>赵云去世后，于蜀汉景耀四年（261年）被追谥为“顺平侯”，其“常胜将军”的形象在后世被广为流传。",
 							"lyz_zhugeliang": "诸葛亮（181年—234年10月8日），字孔明，号卧龙，琅琊阳都（今山东省临沂市沂南县）人，三国时期蜀汉丞相，中国古代杰出的政治家、军事家、发明家、文学家。<br><br>诸葛亮早年随叔父诸葛玄到荆州，诸葛玄死后，诸葛亮就在隆中隐居。刘备依附荆州刘表时三顾茅庐，诸葛亮向刘备提出占据荆州、益州，联合孙权共同对抗曹操的“隆中对”策，刘备根据诸葛亮的策略，成功建立蜀汉政权，与孙权、曹操形成三足鼎立之势。章武元年（221年），刘备称帝，任命诸葛亮为丞相，伐吴失败后，刘备于永安举国托付于诸葛亮。刘禅继位后，封诸葛亮为武乡侯，领益州牧。勤勉谨慎，大小政事必亲自处理，赏罚严明；与东吴联盟，改善和西南各族的关系；实行屯田政策，加强战备。前后五次北伐中原，未能实现兴复汉室的目标。终因积劳成疾，于建兴十二年（234年）病逝于五丈原（今陕西省宝鸡市岐山境内），享年五十四岁。后主刘禅追谥为忠武侯，后世常以武侯尊称。东晋桓温追封为武兴王。<br><br>诸葛亮散文代表作有《出师表》《诫子书》等。曾发明木牛流马、孔明灯等，并改造连弩，叫做诸葛连弩，可一弩十矢俱发。诸葛亮一生“鞠躬尽瘁，死而后已”，是中国传统文化中忠臣与智者的代表人物。",
-							"lyz_mayunlu": "那时节马超正与妹子马云騄、妻子杨凤，家常闲话。原来马腾三子一女，长子马超，次子马铁，三子马休，女儿马云騄，品貌超群，武艺出众。马腾因女儿幼年无母，爱女之心，甚于爱子，立意与她找一个盖世英雄的女婿，所以长了二十二岁，尚未字人。",
+							"lyz_mayunlu": "西凉军阀马腾的女儿，马超的妹妹，貌美如花，性格豪爽，跟着兄长自幼习武，武艺十分高强，马家上下对她都十分疼爱。马腾十分看重这个女儿，决计为她找一个盖世英雄做夫婿，所以马云騄长到二十二岁还没有嫁人。<br><br><font color=red>【原（cai）创（dan）小（xiao）故（ti）事（shi）】</font><br><br>秋风萧瑟，万物凋零。<br><br>这场雨已经持续多日了，雨水混着腐叶与泥土，以及死去动物的尸体，气味顺着风播散开去，几里地外的军营都常能闻见这阵阵令人不适的气味。<br><br>“啐，这鬼天气！”守门的兵卒裹了裹铠甲下的秋衣，目光向营内扫了一扫，“每日除了巡哨便是侦查，真不知何日能到头！”<br><br>雨点不住地落在营地的泥土里，偶尔能听见兵刃撞击声和夫长们严厉的训斥声，还有巡哨士兵的脚步声和战马的马蹄声。四周有些静，静得没有一丝烟火气。<br><br>不远处，枣红马背上一道红色的身影或许是整座军营，乃至这四方天地间唯一的亮色。对面前的两名士兵交代了几句后，少女调转马头，向营地中间的一座大帐走去。在她身后，两道人影疾驰出了大门，渐渐隐没在雨和叶中。<br><br>“喂！”<br><br>少年恍惚间睁开眼，帐外，雨中少女手执长枪，挑开门帘，像海底的火苗，正有些热切地盯着自己。<br><br>“若此战你胜了，日后君临天下，喜爱别的女子多过我，我当如何？”<br><br>少年怔了怔，正欲开口，秋风骤起，面前伸着手臂的少女不禁打了个寒颤。<br><br>“你有这工夫胡思乱想，不如赶紧回营中添件衣裳，免得受了风寒。”<br><br>“啧，又是这套说词，无趣！”少女黛眉微蹙，旋即身体又不受控制地抖了抖，“这天真冷，不与你在这耗着了，走了！”<br><br>红色的身影渐渐远去，少年正欲起身回案，口中突然涌现了一阵铁腥味，抬眼望去，帐中悬挂着的宝剑正“嗒”“嗒”地往下滴着水。帐内原本能提供些许温暖的柴焰，也在这肆虐的寒风中失去了生机。<br><br>“冷，真冷啊……”",
 							"lyz_zhouyu": "周瑜（175年-210年），字公瑾，庐江舒县（今安徽庐江县西南）人。东汉末年军事家、政治家、谋略家、东吴名将。出身庐江周氏，洛阳令周异之子，从祖周景、从父周忠，都官至太尉，位列三公。周瑜身材高大，容貌俊美，精音律，当时有“曲有误周郎顾”之语。<br><br>周瑜少与孙策交好，兴平二年，助孙策于曲阿之战中击败刘繇 。建安三年起随孙策平定江东。建安五年，孙策遇刺身亡，孙权继任，周瑜将兵赴丧，以中护军的身份与长史张昭共掌众事。建安七年，曹操责权送质，周瑜谏阻纳质，建议孙权占据江南，拥兵观变，确立了割据江东、独立建国的战略方针。建安十三年，曹军兵临江东，周瑜分析曹操兵行四患，力主抗曹，并亲率吴军，以火攻大败曹军于赤壁。赤壁之战是中国历史上著名的以少胜多的战役之一，此役奠定了汉末“三分天下”的基础。建安十四年，周瑜又率军于南郡之战中大破曹仁、徐晃联军，成功夺取军事重镇江陵，拜偏将军领南郡太守。建安十五年提出“取蜀，并张鲁，联马超，再以襄阳为根据地蚕食曹操，北方可图”的战略。在整装取蜀途中病逝于巴丘，年仅三十六岁。<br><br>正史上周瑜“性度恢廓”、“雅量高致”、“实奇才也”，他文武兼备，有雄才大略，是东吴势力取得军事成功和割据地位的主要功臣之一。被赞誉为“世间豪杰英雄士，江左风流美丈夫”。",
 							"lyz_shen_lvbu": "吕布（？～199年2月7日），字奉先，并州五原郡九原县人。东汉末年名将、东汉末年群雄之一。<br><br>吕布因为骁武被并州牧丁原授骑都尉、河内主簿等职。杀死丁原后，成为董卓的义子，授中郎将。受到董卓猜疑，在司徒王允唆使下，诛杀董卓，迁奋武将军、仪同三司，进封温侯。旋即被董卓旧部击败，便逃离长安。先投袁术，被袁术拒绝。改投袁绍，被袁绍猜忌。于是去依附张杨。<br><br>兴平元年（194年），吕布趁曹操攻打陶谦时与陈宫等联络而进入兖州，占据濮阳，与曹操血战两年，曾使曹操数战不利，但最终被曹操击败转而去依附徐州刘备。又趁刘备与袁术作战时袭取了徐州，与刘备时而和好，时而相互攻伐。期间，以辕门射戟化解刘备与纪灵的争斗。<br><br>建安三年（198年），吕布遣将击败刘备与夏侯惇后，曹操亲自出马征讨吕布，水淹下邳。吕布被部下叛变，于十二月癸酉（199年2月7日）城破被俘，被处死。<br><br>吕布以勇武闻名，号称“飞将”，时有“人中吕布，马中赤兔”之说。吕布所用的实战武器为矛。在《三国演义》及民间其他艺术形象，吕布多被塑造成三国第一猛将。其武器也被虚构为方天画戟。",
 							"lyz_lingju": "灵雎是电影《铜雀台》中虚构的人物，她是貂蝉和吕布的女儿，是一个唯美善良的女子。灵雎从小被人培养的死士，使命就是杀死曹操。为了靠近曹操，她被安排到曹操身边，成为曹操的“忘年红颜知己”。",
@@ -250,6 +260,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             "lyz_caoying": "曹婴是曹操的孙女，弓马娴熟，文武双全，深得曹操的用兵之道及心术。于凤鸣山一战中担任魏军大都督，率军阻止诸葛亮北伐，并且因罗平安的告密而全歼关兴、张苞、赵云率领的蜀军部队。在《三国演义》中对应她的原型人物为夏侯懋。佩身武器是孟德剑，曹婴对音律有所通宵，擅长琵琶。在刀、剑、弩武器方面皆有涉猎。祖父曹操的“宁教我负天下人，休教天下人负我”这段描述，一直是激励她前行的动力。",
 						    "lyz_fengliyue": "风璃月，风玄君的分身，作为一个玩弄牌字数的单一武将，适当时机选择不同字数的牌序，力求收益最大化，同时四血身板让其有了更多的可能，巧妙运用字数牌序来达到拆牌，补牌，过牌等作用，为团队做出更多的贡献。",
 						    "lyz_guansuo": "<font color=red>【与扩展《云将》和《天牢令》的联动武将】</font><br><br>关索，是中国古代民间传说里的虚构人物，出自《花关索传》。<br><br>《三国演义》中为蜀汉名将关羽的第三子（毛本）或长子（周本），荆州失陷后逃难到鲍家庄养病，伤愈后听说东吴仇人已死，乃回归蜀汉，并随同诸葛亮南征。<br><br>《全像通俗三国志传》里提及关索出生时关羽因杀人而逃难在外，刘备占据荆州后，关索才来荆州投奔父亲；后来刘备攻下益州，关索带兵镇守云南一带。云南一带仍流传以关索为主角的“关索戏”。",
+						    "lyz_zhangchangpu": "张氏（199年—257年），字昌蒲，太原兹氏人。三国时期魏国太傅钟繇之妾，名将钟会生母。<br><br>张昌蒲早年死了父母，被钟繇纳为妾室。张昌蒲性格严谨，非礼勿动，当时上下都称颂她。钟繇的贵妾孙氏当时代理正室事务，因嫉妒她的贤明常常诋毁她。孙氏聪明擅长辩论，却始终不能伤到张昌蒲半分。后来张昌蒲有孕在身，孙氏更加嫉恨，把毒药放在食物中，张昌蒲吃了后而呕吐昏厥几日。别人问：“怎么不告诉公呢？”张昌蒲回答道：“嫡庶互相迫害，危害家庭国家，这是古代就知道的教训。假如钟公偏信我了，谁又能说出事情真相？她估计我一定会说出去，所以会恶人先告状。事情既然由她而出，我又何必自找麻烦呢？”于是称病不见。孙氏果然先对钟繇说：“妾身希望她能得一男子，所以给她能得男孩的药，她反过来说我毒害她。”钟繇说：“得男药是好事，你却偷偷给她，这不合常理。”于是询问侍者都说出了真相，孙氏因此获罪被驱逐出府。钟繇又问张昌蒲：“你怎么不说呢？”张昌蒲说了缘故，钟繇非常惊奇，因此认为她贤明。不久张氏生下钟会，更加受到钟繇宠爱。钟繇赶出贵妾孙氏后，再纳贾氏为正室。<br><br>张昌蒲对儿子教育方面颇为严厉。钟会虽年幼，四岁时便已教他《孝经》，七岁诵读《论语》，八岁诵《诗》，十岁诵《尚书》，十一岁诵《易》，十二岁诵《春秋左氏传》、《国语》，十三岁诵《周礼》、《礼记》，十四岁读其父钟繇所撰写的《易记》，十五岁就让他进太学进行深造。<br><br>嘉平元年（公元249年），时任中书侍郎的钟会与其他部分朝臣正在曹爽营中，司马懿趁曹爽陪曹芳离开洛阳至高平陵扫墓，发动政变（高平陵之变），众人恐惧，只有张昌蒲镇定自若。中书令刘放、侍郎卫瓘、夏侯和等人问张昌蒲钟会在危难之中为什么还会如此的镇静，张昌蒲说：“曹爽奢僭无度，我以前就非常怀疑他是否能掌控朝局。如今司马懿政变，目的并不是要危害国家，而是针对曹爽一党。而且听说司马懿这次出兵，军队并没有许多辎重等物资，说明战事不长。更何况我儿整天都在皇帝的身边听候差遣，有什么可担忧的？”后来果然如同张昌蒲所言。",
+						    "lyz_linqiqi": "常年混迹于十周年UI群的一个无名杀玩家。",
+						    "lyz_yeling": "<font color=red>【三国志 夜凌传】（作者：一个见多识广的人）</font><br><br>夜凌，山东琅琊人，178年夜，夜凌出生之夜，天有异象，百鸟凌励，故名之夜凌。凌少时爱天文，有远志，聪慧过人，与诸葛亮为好友，事之如同亲弟。初平三年，凌父调任江东，凌随之。凌知身处乱世应有所依仗，故以家财聚敛人心，礼贤下士。终成一方豪强，居江东之首。<br><br>是时，策围陆康，鏖战两年，克之。陆康既没，凌则引陆康之子——陆绩，厚遇之，常与之论天文历法，深有所得。兴平元年，策攻刘繇，凌知策锋芒太盛，不可强抗之，乃定零号计划。凌修书一封，以素闻坚之大名为托词与其交好，率援军助之。策之将士不过五六千人，凌之举无异雪中送炭，策感激至极，屡遣使者而谢。兴平二年至建安五年，凌随策东征西讨，屡建奇功，助策平江东，收子义，报父仇，阻策杀来使、屠东冶，策之大名享誉天下，凌之美名亦为世人所知。待策一统江东，公瑾私告与策曰：如今江东豪强惟有夜凌，久之必为大祸，何不杀之以除后患。策不听，曰：吾有今日之成就，皆靠夜凌所辅，吾岂能行此不义之事。同年，策为许贡之客所杀，临终托权以大事。夜凌长哭哀悼数日，既回宅邸，笑谓左右曰：零号计划已成，江东已为囊中之物。<br><br>是时，客谓凌曰：今策已死，权势微，何不取而代之，自统江东。凌对曰：不可。于情，策成大计之日仍视吾为座上宾，今取其业，有损与名，不义也。于理，君可知策为何而死？名声过显而树敌过多，今吾拥兵过万，粮草充足，江东诸侯不知吾之思，故于此生变之际而未动，吾衰则诸侯反，吾强则诸侯定，权已无策以限制于我。况权亦有周瑜鲁肃等辅佐，与之战，虽胜，亦有所伤，又何必自相攻伐，予外人可乘之机？权虽为明为江东之主，亦处处受制于吾，故言江东已为囊中之物。<br><br>策死，诸侯畏凌之威名，皆不敢反，惟山越起兵作乱，欲篡而自立。权乃使夜凌率军镇抚，讨不从命。数日，凌军大破之，山越乃退而守其营。时天干物燥，凌欲用火攻，左右谓之曰：今天下动荡，应尽集江东之力，烈火无识，虽可破敌，难以收降兵为己用。凌笑曰：此皆无能之辈，于吾有何益哉？遂以火箭灼其营，火光接天，山越死伤甚重，待火毕，山越大军仅余四成，皆惧而降之，未敢不服。阳光闻之，评曰：甚矣，燃其小营，杀五六百足以，山越亦服，何必多造杀孽，为人所惧哉？<br><br>建安十年，凌从权征黄祖，虏其人民而还。<br><br>十三年春，凌与吕蒙，凌统等共讨黄祖。凌统斩张硕，祖乃令陈就守沔口，周瑜欲以舰破之。凌劝曰：沔口依鲁山（龟山），与蛇山对望，今吾等之师逆流而上，航道狭窄，若陈就据崖顶而袭，舟舰有何益？徒增伤亡耳。如今之计，惟有令死节之士断其联系，方可破敌。瑜从之，乃使凌统、董袭率百人而袭，果破之。待城破，权欲屠城以报父仇，凌谏曰：屠城之事，有损天道，有违人和，古今为人所不耻。昔策欲屠东冶，吾劝之，乃罢，民心归附。今君欲报父仇，可枭其首，戮其军，何必以黎民之命为之陪葬，徒留恶名？权不听，屠之。夜凌深恶之。<br><br>夜凌于府中宴请鲁肃，曰：今刘表病重，曹操定乘机南下，届时江东亦不保矣，久闻子敬有图谋天下之意，故此番请教破局之法。肃答，凌深以为然，笑而言：刘备非池中之物，今武有闪闪，关张，赵云，文有梦梦、诗笺、孔明，更有猫儿此等精玄学之异士助之，宜早有所图，待君至荆州，可循吾之旧友孔明，引其至江东，可促两家联合，共破曹贼。<br><br>肃到当阳长阪，与备会，宣腾权旨，及陈江东强固，劝备与权并力。备甚欢悦。时诸葛亮与备相随，肃谓亮曰“我子瑜友也，君之旧友夜凌思君甚切。”备遣亮使权，肃亦反命。",
+						    "lyz_lvbao": "<font color=red>【三国志 铝宝传】（作者：一个见多识广的人）</font><br><br>2HAlO₂·H₂O（偏铝酸）ฅฅ*原名铝土矿，号明矾居士，友皆称其铝宝。铝以天牢令为天下所知，与阳柚共负美名，三者私交甚好，然阳逐鹿天下，柚云游四海，铝则隐居山林之中，究数化之理。后人受此启，成核弹。铝虽隐居，笔耕不辍，故天牢令多有传世。铝尝见阳光作阳光包，叹其才华，曰：阳光乃真变态也！<br><br>是时，世人有言，惑难解，惟有二法，候柚、寻铝。铝多现于巴蜀荆襄之地，虽不愿步入红尘，然若有贤明之人访而求计，亦思而告之。时孔明寻而拜之，铝乃设追击之问，亮解之，铝遂与亮共商大事。亮以隆中对示铝，铝对曰：荆州于建业之上游，其地北抵伏牛山脉，南至五岭，西据巫峡，东达下雉，地处大江中游，实乃四战之地，历为江东所争，君言占荆州，外结好孙权，孙权岂敢委备以咽喉之地？跨荆、扬而全据长江方为权之上策，望君深虑。况兵出荆、益，定致卒散而难为强军，不可不思也。若荆州有失，则此对为散沙一盘，君必查之。亮深以为然，拜而求解，铝言：难哉，难哉。吾尝有幸遇夜凌，天下(๑¯㉨¯๑)也，今其据江东而辅孙权，兵精而粮足，权多受制于凌，吾闻君与凌为好友，余下之事，君自行之。亮感其言，三谢而去。",
+						    "lyz_shizhongren": "毫无贡献的萌新。",
 						
 						},
 
@@ -309,16 +324,946 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"lyz_caoying": "弦起龙蛰",
 							"lyz_fengliyue": "仙途缈缈",
 							"lyz_guansuo": "暗香缭刃",
+							"lyz_zhangchangpu": "施衿结褵",
+							"lyz_linqiqi": "用剑的艺术家",
+							"lyz_yeling": "过路阴谋家",
+							"lyz_lvbao": "天牢女皇",
+							"lyz_shizhongren": "德养清隽",
 							
 						},
 
 						//技能代码
 						skill: {
+						
+						lyzhuisheng:{
+							audio: "ext:阳光包/audio:2",
+							global:["lyzhuisheng_mark","lyzhuisheng_draw","lyzhuisheng_draw2"],
+							trigger:{
+								player:["damageEnd","phaseZhunbeiBegin"],
+								global:"roundStart"
+							},
+							direct:true,
+							locked:true,
+                            content:function(){
+                            	  "step 0"
+                            	 player.chooseTarget(true,"绘声：令一名角色获得「绘」",function(card,player,target){
+						              return true;
+					             }).set('ai',function(target){
+						               return get.attitude(_status.event.player,target);
+					             });
+					              "step 1"
+					             if(result.bool){
+					             	  var target=result.targets[0];
+					             	  player.logSkill("lyzhuisheng",target);
+					             	  target.addMark("lyzhuisheng_mark");
+					             	  var chat=["声绘千主，色延万年。","一绘定心，二绘展骥，三绘扬名！"].randomGet();
+					             	  player.chat(chat);
+					             }
+                            },
+                            subSkill:{
+                            	mark:{
+                            		marktext:"绘",
+						            intro:{
+							          name:"绘声",
+							          content:"mark",
+						            },
+						            sub:true,
+                            	},
+                            	draw:{
+                            		trigger:{
+                            			player:"phaseDrawBegin2"
+                            		},
+                            		filter:function(event,player){
+					                    return !event.numFixed&&player.countMark("lyzhuisheng_mark");
+				                    },
+				                    forced:true,
+				                    content:function(){
+					                    trigger.num++;
+				                    },
+                            	},
+                            	draw2:{
+                                    trigger:{
+                                    	player:"loseAfter",
+                                    	global:['equipAfter','addJudgeAfter','gainAfter','loseAsyncAfter','addToExpansionAfter'],
+                                    },
+                                    filter:function(event,player){
+                                    	if(!player.countMark("lyzhuisheng_mark")) return false;
+                                    	if(player.getHistory("lose",function(evt){
+							               return evt&&evt.cards2&&evt.cards2.length>0;
+						                }).length>player.countMark("lyzhuisheng_mark")) return false;
+						                if(player.getHistory("lose",function(evt){
+							               return evt&&evt.cards2&&evt.cards2.length>0;
+						                }).length>3) return false;
+                                        if(event.name=='gain'&&event.player==player) return false;
+                                        var evt=event.getl(player);
+					                    return evt&&evt.cards2&&evt.cards2.length>0;
+                                    },
+                                    forced:true,
+                                    content:function(){
+                                    	player.draw();
+                                    }
+                            	}
+                            }
+						},
+						lyzliandou:{
+						    group:"lyzliandou_clear",
+							enable:"phaseUse",
+							usable:1,
+						    audio: "ext:阳光包/audio:2",
+							content:function(){
+                                "step 0"
+                                var chat=["愿世间无人病，愿架上药生尘。","斗尽千魑百魅，破绝众险万难。","苍染发鬓指背，穹落照日久山。"].randomGet();
+					            player.chat(chat);
+                                if(player.countDiscardableCards("he")>1){
+                                	player.chooseToDiscard(2,"he","弃置两张牌，或点取消失去1点体力").set('ai', function (card){
+										 return 7-get.value(card);
+									});
+                                }
+                                "step 1"
+                                if(!result.cards) player.loseHp();
+                                "step 2"
+                                var lists=get.gainableSkills(function(info){
+						             if(info.shaRelated) return true;
+					             },player);
+					             lists.remove(player.getSkills());
+					             var list=lists.randomGets(5);
+					             if(!list.length) {
+					                  event.finish();
+					                  return;
+					             }
+					             var dialog=ui.create.dialog('forcebutton');
+						         dialog.add("请选择一个技能");
+						         var clickItem=function(){
+							          _status.event._result=this.link;
+							           dialog.close();
+							           game.resume();
+						         };
+					             for(var i=0;i<list.length;i++){
+							            if(lib.translate[list[i]+'_info']){
+								             var translation=get.translation(list[i]);
+								             var item=dialog.add('<div class="popup pointerdiv" style="width:80%;display:inline-block"><div class="skill">【'+
+								                 translation+'】</div><div>'+lib.translate[list[i]+'_info']+'</div></div>');
+								             item.firstChild.addEventListener('click',clickItem);
+								             item.firstChild.link=list[i];
+							            }
+						          }
+						          dialog.add(ui.create.div('.placeholder'));
+						          event.switchToAuto=function(){
+							           event._result=event.skillai();
+							           dialog.close();
+							           game.resume();
+						          };
+						          event.confirm=ui.create.confirm('c');
+						          event.custom.replace.confirm=function(){
+							           event._result=null;
+							           dialog.close();
+							           game.resume();
+						          };
+						          _status.imchoosing=true;
+						          game.pause();
+						          "step 3"
+						          _status.imchoosing=false;
+					               if(event.confirm){
+						                event.confirm.close();
+					               }
+					               if(typeof result=='string'){
+						                var link=result;
+						                event.link=link;						                
+						                player.chooseTarget("令一名角色获得〖"+get.translation(link)+"〗",function(card,player,target){
+						                       return true;
+					                    }).set('ai',function(target){
+						                       return get.attitude(_status.event.player,target);
+					                    });
+					              }
+					              else event.finish();
+					              "step 4"
+					              if(result.bool){
+					                  var target=result.targets[0];
+					                  player.line(target);
+					                  target.addSkillLog(event.link);
+					                  player.storage.lyzliandou_skill=event.link;
+					                  player.storage.lyzliandou_target=target;
+					              }
+							},
+							ai: {
+								order: 10,
+								result: {
+									player: function (player) {
+										if(player.hp==1&&player.countDiscardableCards("he")<2) return -1;
+										return 1;
+									}
+								}
+							},
+						},
+						lyzliandou_clear:{
+						    trigger:{
+						        player:"phaseBegin"
+						    },
+						    forced:true,
+						    popup:false,
+						    charlotte:true,
+						    filter:function(event,player){
+						          return player.storage.lyzliandou_skill&&player.storage.lyzliandou_target;
+						    },
+						    content:function(){
+						         player.storage.lyzliandou_target.removeSkill(player.storage.lyzliandou_skill);
+						         delete player.storage.lyzliandou_target;
+						         delete player.storage.lyzliandou_skill;
+						    }
+						},
+						lyzlingkong:{
+							derivation:"lyzshennu",
+							trigger:{
+								global:"dying"
+							},
+							filter:function(event,player){
+							    if(event.player==player) return true;
+							    return event.source==player;
+							},
+							audio: "ext:阳光包/audio:2",
+							forced:true,
+							unique:true,
+				            skillAnimation:true,
+				            juexingji:true,
+				            animationColor:'metal',
+				            content:function(){
+				            	"step 0"
+				            	var chat=["属于我们的时代，开始啦！","绘家天下绘家兵，成就32101。"].randomGet();
+					            player.chat(chat);
+				            	player.awakenSkill("lyzlingkong");
+				            	"step 1"
+				            	player.loseMaxHp();
+				            	"step 2"
+				            	player.recover(player.maxHp-player.hp);
+				            	"step 3"
+				            	player.addSkillLog("lyzshennu");
+				            }
+						},
+						lyzshennu:{
+							trigger:{
+								player:"phaseJieshuBegin"
+							},
+							direct:true,
+							unique:true,
+							audio: "ext:阳光包/audio:9",
+							filter:function(event,player){
+								return game.hasPlayer(function(current){
+									 return current.countMark("lyzhuisheng_mark");
+								});
+							},
+							content:function(){
+								"step 0"
+								player.chooseTarget(get.prompt2("lyzshennu"),function(card,player,target){
+						            return target.countMark("lyzhuisheng_mark");
+					             }).set('ai',function(target){
+						               return target.countMark("lyzhuisheng_mark");
+					             });
+					             "step 1"
+					             if(result.bool){
+					                 var chat=["雾出山野，纱起纺丝；弄值于世，尘归于尘。","清隽君子立世中，风落花起流水淙。"].randomGet();
+					             	  player.chat(chat);
+					             	 var target=result.targets[0];
+					             	 player.logSkill("lyzshennu",target);
+					             	 event.target=target;
+					             	 event.count=target.countMark("lyzhuisheng_mark");
+					             	 event.num=0;
+					             }
+					             else event.finish();
+					             "step 2"
+					             event.target.removeMark("lyzhuisheng_mark",event.target.countMark("lyzhuisheng_mark"));
+					             "step 3"
+					             event.num++;
+					             player.chooseUseTarget({
+						                 name:"sha",
+						                 nature:"fire",
+						                 isCard:true,
+					             },"请选择火【杀】的目标（"+event.num+"/"+event.count+"）",false,"nodistance");
+					             "step 4"
+					              if(result.bool&&event.num<event.count) event.goto(3);
+							}
+						},
+						
+						lyzchimu:{
+						    audio: "ext:阳光包/audio:2",
+						    mark: true,
+							marktext: "☯",
+							zhuanhuanji: true,
+							locked: true,
+							intro: {
+								content: function (storage, player, skill) {
+									if (player.storage.lyzchimu) return "当一张你使用有目标的或目标包含你的基本牌或普通锦囊牌结算完毕后，你从牌堆顶或牌堆底摸一张牌。";
+									return "当一张你使用有目标的或目标包含你的基本牌或普通锦囊牌结算完毕后，你将此牌使用者或一名目标角色区域里的一张牌置于牌堆顶或牌堆底。";
+								},
+							},
+						    trigger:{
+						        global:"useCardAfter"
+						    },
+						    forced:true,
+						    filter:function(event,player){
+						        if(event.player==player&&!event.targets.length) return false;
+						        if(event.player!=player&&!event.targets.contains(player)) return false;
+						        if(get.type(event.card)!="basic"&&get.type(event.card)!="trick") return false;
+						        if(!player.storage.lyzchimu){						             
+						             return game.hasPlayer(function(current){
+									      return current.countCards("hej")&&(event.targets.contains(current)||current==event.player);
+								     });
+						        }
+						        return true;
+						    },
+						    content:function(){
+						        "step 0"
+						        if(player.storage.lyzchimu){
+						             player.changeZhuanhuanji("lyzchimu");
+						             player.chooseControl(function () {
+										return Math.random() < 0.5 ? '选项一' : '选项二';
+									 }).set('prompt', '鸱目').set('choiceList', ['从牌堆顶摸一张牌','从牌堆底摸一张牌']);
+						        }
+						        else event.goto(2);
+						        "step 1"
+						        if(result.control=="选项一") player.draw();
+						        else player.draw("bottom");
+						        event.finish();
+						        "step 2"
+						        player.changeZhuanhuanji("lyzchimu");
+						              player.chooseTarget(true,'鸱目：请选择此牌使用者或一名目标角色',function(card,player,target){
+						                    return (_status.event.targets.contains(target)||target==trigger.player)&&target.countCards("hej");
+					                  }).set('ai',function(target){
+						                    return 2-get.attitude(_status.event.player,target);
+					                  }).set('targets',trigger.targets);						        
+						        "step 3"
+						        var target=result.targets[0];
+						        event.target=target;
+						        player.line(target);
+						        if(target.countCards("hej")){
+						             player.choosePlayerCard(target,true,'hej').set('visible',true);
+						        }
+						        else event.finish();
+						        "step 4"
+						        event.card=result.cards[0];
+						        var str=get.translation(event.card);
+						        player.chooseControl(function () {
+									return Math.random() < 0.5 ? '选项一' : '选项二';
+							    }).set('prompt', '鸱目').set('choiceList', ['将'+str+'置于牌堆顶','将'+str+'置于牌堆底']);
+							    "step 5"
+							    var node=ui['cardPile'];
+							    event.target.lose(card, ui.special);			
+							    if(result.control=='选项二') node.appendChild(card);
+							    else node.insertBefore(card,node.firstChild);												
+						        game.updateRoundNumber();
+						    }
+						},
+						lyzgouxi:{
+				group: "lyzgouxi2",
+				audio: "ext:阳光包/audio:2",
+		        trigger:{global:'useCardToTarget'},
+				filter:function(event,player){	
+				   if(event.card==player.storage.lyzgouxi)	return false;		   
+				   if(!event.target) return false;	
+				   if(event.player==player)	return false;		    
+					if(event.targets.contains(player)){
+					     var info=get.info(event.card);
+					     if(info.type!='trick'&&info.type!='basic') return false;
+					     if(info.multitarget) return false;
+					     if(event.targets.length>1) return true;
+					         return game.hasPlayer(function(current){
+						        return !event.targets.contains(current)&&lib.filter.targetEnabled2(event.card,event.player,current);
+					         });
+					}
+					else {
+					    if(event.player==player) return false;
+					    var type=get.type(event.card);
+					    if(type!='basic'&&type!='trick') return false;
+					    return lib.filter.targetEnabled2(event.card,event.player,player);
+					}
+				},
+				direct:true,
+				content:function(){
+					'step 0'
+					player.storage.lyzgouxi=trigger.card;
+					'step 1'
+					if(!trigger.targets.contains(player)){
+					     event.goto(6);
+					     return;
+					}
+					var bool1=(trigger.targets.length>1);
+					var bool2=game.hasPlayer(function(current){
+						return !trigger.targets.contains(current)&&lib.filter.targetEnabled2(trigger.card,trigger.player,current);
+					});
+					if(bool1&&bool2){
+						player.chooseControlList(get.prompt('lyzgouxi'),['为'+get.translation(trigger.card)+'增加一个目标','为'+get.translation(trigger.card)+'减少一个目标'],function(event,player){
+							if(_status.event.add) return 0;
+							return 1;
+						}).set('add',get.effect(player,trigger.card,trigger.player,player)>=0);
+					}
+					else if(bool2){
+						event.type='add';
+						event.goto(3);
+						event.unchosen=true;
+					}
+					else{
+						event.type='remove';
+						event.goto(3);
+						event.unchosen=true;
+					}
+					'step 2'
+					if(result.control=='cancel2'){
+						event.finish();
+					}
+					else if(result.index==1){
+						event.type='remove';
+					}
+					else{
+						event.type='add';
+					}
+					'step 3'
+					if(event.type=='add'){
+						player.chooseTarget(event.unchosen?get.prompt('lyzgouxi'):null,'为'+get.translation(trigger.card)+'增加一个目标',function(card,player,target){
+							var trigger=_status.event.getTrigger();
+							return !trigger.targets.contains(target)&&lib.filter.targetEnabled2(trigger.card,trigger.player,target);
+						}).set('ai',function(target){
+							var trigger=_status.event.getTrigger();
+							return get.effect(target,trigger.card,trigger.player,_status.event.player);
+						});
+					}
+					else{
+						player.chooseTarget(event.unchosen?get.prompt('lyzgouxi'):null,'为'+get.translation(trigger.card)+'减少一个目标',function(card,player,target){
+							return _status.event.targets.contains(target);
+						}).set('ai',function(target){
+							var trigger=_status.event.getTrigger();
+							return -get.effect(target,trigger.card,trigger.player,_status.event.player);
+						}).set('targets',trigger.targets);
+					}
+					'step 4'
+					if(result.bool){
+						if(!event.isMine()&&!event.isOnline()) game.delayx();
+						event.target=result.targets[0];
+					}
+					else{
+						event.finish();
+					}
+					'step 5'
+					player.logSkill('lyzgouxi',event.target);
+					if(event.type=='add'){
+						trigger.targets.push(event.target);
+					}
+					else{
+						trigger.targets.remove(event.target);
+					}
+					event.finish();
+					'step 6'
+					player.chooseBool("是否发动〖媾嬉〗，成为" + get.translation(trigger.card) + "的额外目标？").ai = function () {
+						return get.effect(player,trigger.card,event.player,player)>0;
+					};
+					'step 7'
+					if(result.bool){
+					    trigger.getParent().targets.add(player);
+					    trigger.player.line(player,'green');
+					    player.logSkill("lyzgouxi");
+					}
+				},
+						},
+						lyzgouxi2:{
+						    trigger:{
+						       global:"useCardAfter"
+						    },
+						    forced:true,
+						    popup:false,
+						    content:function(){
+						       delete player.storage.lyzgouxi;
+						    }
+						},						
+						lyzduozi:{
+						    trigger:{
+						        player:"dying"
+						    },
+						    audio: "ext:阳光包/audio:2",
+						    direct:true,
+						    unique:true,
+						    charlotte:true,
+				            skillAnimation:true,
+				            limited:true,
+				            animationColor:'metal',
+						    content:function(){
+						         "step 0"
+						         player.chooseTarget(get.prompt2("lyzduozi"),function(card,player,target){
+						                  return target!=player;
+					             }).set('ai',function(target){
+						                  return -get.attitude(_status.event.player,target);
+					             });
+					             "step 1"
+					             if(result.bool){
+					                 var target=result.targets[0];
+					                 event.target=target;
+					                 player.logSkill("lyzduozi",target);
+					                 player.awakenSkill("lyzduozi");
+					             }
+					             else event.finish();
+					             "step 2"
+					             player.maxHp=Math.max(event.target.maxHp,1);
+					             player.update();
+					             "step 3"
+					             player.hp=Math.max(event.target.hp,1);
+					             player.update();
+					             "step 4"
+					             event.target.maxHp=2;
+					             event.target.update();
+					             "step 5"
+					             event.target.hp=1;
+					             event.target.update();
+					             "step 6"
+					             player.clearSkills();
+					             var list=get.gainableSkills(function(info){
+						             if(info.limited) return true;
+					             },player);
+					             list.remove(player.getSkills());
+					             var skills=list.randomGets(2);
+					             for(var i of skills) player.addSkillLog(i);
+						    }
+						},
+						
+						lyzjimou:{
+    audio: "ext:阳光包/audio:2",
+    enable:"phaseUse",
+    filter:function(event,player){
+        return event.lyzjimou_list&&player.countCards('hes',function(card){
+            return (!get.tag(card,'damage')&&get.type2(card)=='trick')||get.subtype(card)=='equip1'
+        });
+    },
+    onChooseToUse:function(event,player){
+        if(!game.online){
+            var evt=event.getParent();
+            if(evt.name!='phaseUse') return;
+            if(!evt.lyzjimou_list){
+                var list=["xietianzi","caomu","gz_wenheluanwu","chuqibuyi","chenghuodajie","geanguanhuo","toulianghuanzhu","wy_meirenji","wy_xiaolicangdao"]                                
+                evt.lyzjimou_list=list;
+            }
+            if(!event.lyzjimou_list) event.set('lyzjimou_list',evt.lyzjimou_list);
+        }
+    },
+    chooseButton:{
+        dialog:function(event,player){
+            var list=[];
+            for(var i of player.storage.lyzjimou_Begin) list.push(['锦囊','',i]);
+            return ui.create.dialog('极谋',[list,'vcard']);
+        },
+        filter:function(button,player){
+            return lib.filter.filterCard({name:button.link[2]},player,_status.event.getParent());
+        },
+        check:function(button){
+            return _status.event.player.getUseValue({name:button.link[2]});
+        },
+        backup:function(links,player){
+            return {
+                audio:'lyzjimou',
+                filterCard:true,
+                popname:true,
+                position:'hes',
+                viewAs:{name:links[0][2]},
+                check:function(card){
+                    return 6-get.value(card);
+                },
+                filterCard:function(card){
+                    return (!get.tag(card,'damage')&&get.type2(card)=='trick')||get.subtype(card)=='equip1'
+                },
+                onuse:function(links,player){
+                player.storage.lyzjimou_over=true
+                },
+            };
+        },
+        prompt:function(links,player){
+            return '将一张非伤害类锦囊牌当'+get.translation(links[0][2])+'使用';
+        },
+    },
+ai:{
+                            order:1,
+                            result:{
+                                player:1,
+                            },
+                        },
+    group:["lyzjimou_Begin","lyzjimou_over"],
+    subSkill:{
+    Begin:{
+    trigger:{
+    player:"enterGame",
+    global:"gameStart",
+    },
+    silent:true,
+    charlotte:true,
+    filter:function(event,player){
+    return !player.storage.lyzjimou_Begin
+    },
+    mark:true,
+    onremove:true,
+    intro:{
+        content:"已记录的牌名：$",
+    },
+    content:function(){
+    list=["xietianzi","caomu","gz_wenheluanwu","chuqibuyi","chenghuodajie","geanguanhuo","toulianghuanzhu","wy_meirenji","wy_xiaolicangdao","jiedao"]
+    for(var i=0;i<list.length;i++){
+    player.markAuto('lyzjimou_Begin',[list[i]])
+    }
+    },
+    },
+    over:{
+    trigger:{
+                player:"useCardAfter",
+            },
+      silent:true,
+            filter:function(event,player){
+        return !event.card.isCard&&player.getStorage('lyzjimou_Begin').contains(event.card.name)&&player.storage.lyzjimou_over==true
+            },
+            charlotte:true,
+            content:function(){
+            player.storage.lyzjimou_over=false
+            player.storage.lyzjimou_Begin.remove(trigger.card.name)
+            },
+    },
+    },
+},
+lyzliluan:{
+audio: "ext:阳光包/audio:2",
+trigger:{
+source:"damageBegin4",
+},
+init:function(player){
+player.storage.lyzliluan=0
+},
+frequent:true,
+filter:function(event,player){
+return player.storage.lyzliluan<Math.ceil(game.players.length/2)&&event.card&&get.type2(event.card)=='trick'&&get.tag(event.card,'damage')
+},
+content:function(){
+"step 0"
+player.storage.lyzliluan++
+player.draw()
+card=[]
+cards=[]
+list1=player.getStorage('lyzjimou_Begin');            
+            list2=get.typeCard('trick')
+          for(var i=0;i<list2.length;i++){
+          card.add(game.createCard(list2[i]))
+          }
+         for(var i=0;i<card.length;i++){
+         if(!player.getStorage('lyzjimou_Begin').contains(card[i].name)&&get.tag(card[i],'damage')){        
+           cards.add(card[i].name)
+           }
+          }          
+          if(cards.length){
+           dialog=[get.prompt('lyzliluan')]        
+                    dialog.push('<div class="text center">悧乱</div>');
+                    dialog.push([cards,'vcard']);                
+                player.chooseButton(dialog)}else{
+                event.finish()
+                }
+"step 1"
+if(result.bool){
+ var name=result.links[0][2];
+ player.markAuto('lyzjimou_Begin',[name])
+}
+},
+group:["lyzliluan_over"],
+subSkill:{
+over:{
+trigger:{
+global:"phaseEnd",
+},
+silent:true,
+charlotte:true,
+content:function(){
+player.storage.lyzliluan=0
+},
+},
+},
+},
+lyzguijue:{
+audio: "ext:阳光包/audio:2",
+trigger:{
+target:"useCardToPlayered",
+},
+filter:function(event,player){
+return player.num("h")==1&&event.player!=player&&get.type2(event.card)!='equip'
+},
+"prompt2":function(event,player){
+        return '诡谲:将所有手牌置入弃牌堆，并发动一次【金蝉脱壳】的效果';
+    },
+content:function(){
+"step 0"
+card=player.getCards("h")
+ player.lose(card, ui.discardPile);
+ "step 1"
+ player.draw(2)
+ trigger.targets.remove(player) 
+},
+},
+						    lyzjuao:{
+						        mod:{
+					                maxHandcardBase:function(player,num){
+						                 return 0;
+					                },
+				                },
+						        trigger:{
+						            player: "useCard",
+						            target: "useCardToTarget"
+						        },
+						        //frequent:true,
+						        audio: "ext:阳光包/audio:2",
+						        filter:function (event, player){
+						            if(event.name=="useCardToTarget") return event.player!=player;
+						            return true;
+						        },
+						        check: function (event, player){
+						            return get.translation(event.card.name).length==1||get.translation(event.card.name).length==2||get.translation(event.card.name).length==4;
+						        },
+						        usable:1,
+						        content:function(){
+						            var names=[];
+						            var cards=[];
+						            while(cards.length<4){
+							               var card=get.cardPile2(function(card){
+								                return !cards.contains(card)&&!names.contains(card.name)&&get.translation(card.name).length==get.translation(trigger.card.name).length;
+							               });
+							               if(card){
+								                cards.push(card);
+								                names.push(card.name);
+							               }
+							               else break;
+						            }
+						            if(cards.length) player.gain(cards,'gain2');
+						        }						        
+						    },
+						    lyzweipo:{
+				                audio:"ext:阳光包/audio:2",
+				                trigger:{
+					                  player:"phaseDiscardEnd",
+				                },
+				                direct:true,				                
+				                content:function(){
+				                    "step 0"
+				                    var cards=[];
+						            player.getHistory("lose",function(evt){
+							             if(evt&&evt.type=="discard"&&evt.getParent("phaseDiscard")==trigger&&evt.hs) cards.addArray(evt.hs);
+						            });
+						            var list0=[];
+									for (var i of cards) list0.add(get.type2(i));
+									event.num=list0.length+1;
+									"step 1"
+				                    player.chooseTarget(get.prompt2("lyzweipo"),function(card,player,target){
+						                  return target!=player;
+					                }).set('ai',function(target){
+						                  return -get.attitude(_status.event.player,target);
+					                });
+					                "step 2"
+					                if(result.bool){
+					                      var target=result.targets[0];
+					                      var list=[1,2,3,4,5,6,7];
+							              var list2=list.randomGets(event.num);
+							              player.logSkill("lyzweipo",target);
+							              game.log(get.translation(target)+"执行了〖威迫〗中的"+get.cnNumber(event.num)+"项");
+							              if(list2.contains(1)) target.chooseToDiscard("he",true);
+							              if(list2.contains(2)) target.loseHp();
+							              if(list2.contains(3)) target.link(true);
+							              if(list2.contains(4)) target.turnOver(true);
+							              if(list2.contains(5)) {
+							                   var card=get.cardPile2(function(card){
+								                    return card.name=="bingliang";
+							                   });
+							                   if(card&&!target.hasJudge("bingliang")){
+							                        target.$gain2(card);
+							                        target.addJudge(card);
+							                        game.delay();
+							                   }
+							              }
+							              if(list2.contains(6)) {
+							                   var card=get.cardPile2(function(card){
+								                    return card.name=="lebu";
+							                   });
+							                   if(card&&!target.hasJudge("lebu")){
+							                        target.$gain2(card);
+							                        target.addJudge(card);
+							                        game.delay();
+							                   }
+							              }
+							              if(list2.contains(7)){
+							                  target.addTempSkill("fengyin",{player:"phaseBegin"});
+							                  game.log(get.translation(target)+"的非锁定技失效直至其回合开始");
+							              } 
+					                }					                
+				                }
+						    },
+						    lyzshuming:{
+						        audio: "ext:阳光包/audio:2",
+						        group: "lyzshuming2",
+						        enable:"phaseUse",
+						        usable:1,
+						        filterTarget:function(card,player,target){
+									return target!=player;
+								},
+								content:function(){
+								    "step 0"
+								    var name=get.translation(target);
+								    if(player.isHealthy()) var str="两";
+								    else var str="三";
+								    player.chooseControl(function () {
+										return Math.random() < 0.5 ? '选项一' : '选项二';
+									}).set('prompt', '书命').set('choiceList', ['令'+name+'获得'+str+'张红色基本牌','令'+name+'获得'+str+'张黑色非基本牌']);
+									"step 1"
+									if(player.isHealthy()) var num=2;
+								    else var num=3;
+									if(result.control=="选项一"){
+									    var cards=[];
+						                while(num--){
+							                var card=get.cardPile(function(card){
+								                 return  !cards.contains(card)&&get.color(card)=='red'&&get.type(card)=='basic';
+							                });
+							                if(card){
+								                cards.push(card);
+							                }
+						              }
+						               if(cards.length) target.gain(cards,'gain2').gaintag.add("lyzshuming");
+									}
+									else {
+									    var cards=[];
+						                while(num--){
+							                var card=get.cardPile(function(card){
+								                 return !cards.contains(card)&&get.color(card)=='black'&&get.type(card)!='basic';
+							                });
+							                if(card){
+								                cards.push(card);
+							                }
+						               }
+						              if(cards.length) target.gain(cards,'gain2').gaintag.add("lyzshuming");
+									}
+									"step 2"
+									game.updateRoundNumber();
+								},
+								ai: {
+									order: 10,
+									result: {
+										target: function (player, target) {
+											return 1 
+										},
+									},
+								},
+						    },
+						    lyzshuming2:{
+						        trigger:{
+					                global:['equipAfter','addJudgeAfter','loseAfter','gainAfter','loseAsyncAfter','addToExpansionAfter'],
+				                },
+				                audio:"lyzshuming",
+				                direct:true,
+				                filter:function(event,player){
+				                    if(_status.dying.length) return false;
+					                return game.hasPlayer(function(current){
+						                var evt=event.getl(current);
+					if(!evt||!evt.cards2||!evt.cards2.length) return false;
+					if(event.name=='lose'){
+						for(var i in event.gaintag_map){
+							if(event.gaintag_map[i].contains('lyzshuming')) return true;
+						}
+						return false;
+					}
+					return current.hasHistory('lose',function(evt){
+						if(event!=evt.getParent()) return false;
+						for(var i in evt.gaintag_map){
+							if(evt.gaintag_map[i].contains('lyzshuming')) return true;
+						}
+						return false;
+					});
+					                });					                
+				                },				                
+				                content:function (){
+				                    "step 0"
+				                    event.list=game.filterPlayer(function(current){
+						               var evt=trigger.getl(current);
+						               return evt&&evt.cards2&&evt.cards2.length;
+					                }).sortBySeat(_status.currentPhase);
+					                "step 1"
+					                var target=event.list.shift();
+					                event.target=target;
+					                if(target.isAlive()){
+					                      if(!player.hasSkill("lyzshuming3")){
+					                             player.chooseControlList(function () {
+										               return get.attitude(player,event.target)>=0? '选项一' : '选项二';
+									             }).set('prompt', get.prompt("lyzshuming")).set('choiceList', ['摸一张牌','对'+get.translation(event.target)+'造成1点伤害']);
+					                      }
+					                      else event.goto(3);
+					                }
+				                    else event.goto(5);
+					                "step 2"
+									if(result.index!=2) player.logSkill("lyzshuming",event.target); 
+									if(result.index==0){
+									    player.draw();
+									    event.goto(5);
+									} 
+									else if(result.index==1){
+									    event.target.damage();
+									    player.addTempSkill("lyzshuming3");
+									    event.goto(5);
+									} 
+									"step 3"
+									player.chooseBool("是否发动〖书命〗摸一张牌？");
+									"step 4"
+									if(result.bool){
+									     player.logSkill("lyzshuming");
+									     player.draw();
+									} 
+									"step 5"
+								    if(event.list.length) event.goto(1);
+				                }
+						    },
+						    lyzshuming3:{},
+						    lyzmianjie:{
+						        audio: "ext:阳光包/audio:2",
+						        trigger:{
+						            player:"damageEnd"
+						        },
+						        forced:true,
+						        unique:true,
+						        content:function(){
+						            "step 0"
+						            event.count=trigger.num;
+						            "step 1"
+						            event.count--;
+						            player.draw();
+						            "step 2"
+						            if(game.hasPlayer(function (current) {
+									     return current.countCards("h")&&current!=player;
+									})&&player.hasSkill("lyzshuming")){
+									     player.chooseTarget(true,"观看一名其他角色的手牌并将其中至多"+get.cnNumber(player.getDamagedHp()+1)+"张标记为「书命」牌",function (card, player, target) {
+											return target.countCards("h")&&target!=player;
+								         }).set('ai', function (target) {
+								            var player=_status.event.player;
+											return -get.attitude(player,target);
+							             });
+									}
+									"step 3"
+									if(result.bool){
+									     var target=result.targets[0];
+									     event.target=target;
+									     player.line(target);
+									     player.chooseButton(['选择至多'+get.cnNumber(player.getDamagedHp()+1)+'张牌标记为「书命」牌',target.getCards('h')],[1,player.getDamagedHp()+1]).set('ai',function(button){
+						                      var card=button.link;
+						                      var val=target.getUseValue(card);
+						                      if(val>0) return val;
+						                      return get.value(card);
+					                     }).set('filterButton', function (button) {
+										    var card=button.link;
+										    if(card.hasGaintag("lyzshuming")) return false;
+										    return true;
+									     });
+									}
+									else event.finish();
+									"step 4"
+									if(result.links) event.target.addGaintag(result.links, "lyzshuming");
+									"step 5"
+									if(event.count>0) event.goto(1);
+						        }
+						    },
 						    lyzzongjiang:{
 						        group:"lyzzongjiang_gain",
 						        audio: "ext:阳光包/audio:2",
 						        intro: {
-									content: "共有#枚“征”",
+									content: "共有#枚「征」",
 								},
 						        trigger:{
 						            player:"gainAfter"
@@ -370,7 +1315,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								    if(game.hasPlayer(function (current) {
 									     return current.name=="yunhuaman"&&current.isDamaged();
 									})){
-									     player.chooseTarget("请令一名「云将·花鬘」回复1点体力",function (card, player, target) {
+									     player.chooseTarget("请令一名“云将·花鬘”回复1点体力",function (card, player, target) {
 											return target.name=="yunhuaman"&&target.isDamaged();
 								         }).set('ai', function (target) {
 								            var player=_status.event.player;
@@ -552,10 +1497,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                         audio:"lyzzhuyuan",
                                         forced:true,
                                         filter:function(event, player){
-                                        	return game.countPlayer(function (current) { return current.hasSkill("lyzzhuyuan2") }) <= player.maxHp&&game.countPlayer(function (current) { return current.hasSkill("lyzzhuyuan2") }) > 0;
+                                        	return game.countPlayer(function (current) { return current.hasSkill("lyzzhuyuan2") }) > 0;
                                         },
                                         content:function(){
-                                        	player.draw(game.countPlayer(function (current) { return current.hasSkill("lyzzhuyuan2") }));
+                                        	player.draw(Math.min(5,game.countPlayer(function (current) { return current.hasSkill("lyzzhuyuan2") })));
                                         }
 				                	}
 				                }
@@ -810,7 +1755,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				                     player.viewHandcards(target);
 				                     "step 1"
 				                     var name=get.translation(target);
-				                     var choiceList=["将你的一张黑色手牌当【杀】对"+name+"使用","将"+name+"的一张红色手牌当【决斗】对"+name+"使用","背水！本回合你手牌上限-1并依次执行上述所有选项"];
+				                     var choiceList=["将你的一张黑色手牌当【杀】对"+name+"使用","将"+name+"的一张红色手牌当【决斗】对"+name+"使用","背水！本回合你的手牌上限-1并依次执行上述所有选项"];
 				                     var choices=[];
 				                     var hs=player.getCards('hs',function(card){
 						                  return player.canUse(get.autoViewAs({name:'sha'},[card]),target,false)&&get.color(card)=="black";
@@ -889,7 +1834,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									global: "gameDrawAfter"
 								},
 								intro: {
-									content: "共有#枚“心”"
+									content: "共有#枚「心」"
 								},
 								marktext: "心",
 								forced: true,
@@ -996,7 +1941,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								},
 								intro: {
-									content: '本回合手牌上限+#'
+									content: '手牌上限+#'
 								},
 								enable: "phaseUse",
 								group: "lyzyuwang2",
@@ -1532,7 +2477,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								mark: true,
 								charlotte: true,
 								intro: {
-									content: "受到属性伤害+1"
+									content: "受到的属性伤害+1"
 								},
 								trigger: {
 									player: "damageBegin3",
@@ -1608,7 +2553,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										}
 									}
 									"step 1"
-									player.chooseTarget("〖释疑〗：请选择一名角色", true, function (card, player, target) {
+									player.chooseTarget("释疑：请选择一名角色", true, function (card, player, target) {
 										return target != player;
 									}).set('ai', function (target) {
 										var att = get.attitude(_status.event.player, target);
@@ -1811,7 +2756,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								selectTarget: 1,
 								multitarget: true,
 								multiline: true,
-								prompt: "令一名角色获得或移去“阵”",
+								prompt: "令一名角色获得或移除「阵」",
 								content: function () {
 									for (var i = 0; i < targets.length; i++) {
 										if (!targets[i].hasSkill("lyzzhen")) targets[i].addSkill("lyzzhen");
@@ -2050,7 +2995,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									player.storage.lyzshenjiang = 1;
 								},
 								intro: {
-									content: "出牌阶段限一次，你可从所有名称字数不大于(#)的牌中选择至多(#)张名称字数不同的可使用的牌，然后你按选牌的顺序视为依次合法地使用这些牌。"
+									content: "出牌阶段限一次，你可从所有名称字数不大于(#)的牌中选择至多(#)张名称字数各不相同的牌，然后你按选牌的顺序视为依次使用这些牌。"
+								},
+								prompt: function (event, player,storage){
+								     var player=_status.event.player;
+								     return "出牌阶段限一次，你可从所有名称字数不大于("+(player.storage.lyzshenjiang)+")的牌中选择至多("+(player.storage.lyzshenjiang)+")张名称字数各不相同的牌，然后你按选牌的顺序视为依次使用这些牌。"
 								},
 								mark: true,
 								audio: "ext:阳光包/audio:2",
@@ -2178,7 +3127,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									var chat = ["恶堕于此，尽情沉沦吧！", "别忘了，是谁……将你推上的神坛！"].randomGet();
 									player.chat(chat);
 									"step 1"
-									player.chooseTarget("淫天：将一名男性角色改为女性，或将一名女性角色改为神势力", true, function (card, player, target) {
+									player.chooseTarget("淫天：将一名男性角色的性别改为女，或将一名女性角色的势力改为神", true, function (card, player, target) {
 										return player.inRange(target) && ((target.sex == "male") || (target.sex == "female" && target.group != "shen"));
 									}).set('ai', function (target) {
 										var att = get.attitude(_status.event.player, target);
@@ -2300,7 +3249,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										var att = get.attitude(target, player);
 										if (att > 0) return "选项一";
 										return ["选项一", "选项二", "选项三"].randomGet();
-									}).set('prompt', '玷神').set('choiceList', ["孕：将手牌补至体力上限然后将所有手牌交给" + get.translation(player), "缚：将武将牌翻至背面并横置", "凌：减1点体力上限并令" + get.translation(player) + "加1点体力上限"]);
+									}).set('prompt', '玷神').set('choiceList', ["孕：将手牌摸至体力上限然后将所有手牌交给" + get.translation(player), "缚：将武将牌翻至背面并横置", "凌：减1点体力上限并令" + get.translation(player) + "加1点体力上限"]);
 									"step 3"
 									if (result.control == "选项一") {
 										var chat = ["怎会……如此……", "你这恶贼！我要杀了你！"].randomGet();
@@ -2359,7 +3308,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								},
 								intro: {
-									content: '本回合手牌上限+#'
+									content: '手牌上限+#'
 								},
 								init: function (player) {
 									player.storage.lyzwendao = 0;
@@ -2442,7 +3391,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									if (player.storage.lyzzhaoce.contains("wu")) controls.push("wu");
 									if (player.storage.lyzzhaoce.contains("wei")) controls.push("wei");
 									if (player.storage.lyzzhaoce.contains("shen")) controls.push("shen");
-									player.chooseControl(controls).set("prompt", "〖昭策〗：请选择一种势力");
+									player.chooseControl(controls).set("prompt", "昭策：请选择一种势力");
 									"step 1"
 									var list;
 									if (_status.characterlist) {
@@ -2452,6 +3401,16 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											if (lib.character[name][1] == result.control) list.push(name);
 										}
 									}
+									else if (_status.connectMode) {
+												list = get.charactersOL(function (i) {
+													return lib.character[i][1] != result.control;
+												});
+											}
+											else {
+												list = get.gainableCharacters(function (info) {
+													return info[1] == result.control;
+												});
+											}
 									var players = game.players.concat(game.dead);
 									for (var i = 0; i < players.length; i++) {
 										list.remove(players[i].name);
@@ -2713,7 +3672,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 									if (get.suit(card) == "heart") {
 										player.give(card, target, true);
-										target.chooseCard("将一张手牌当作【无中生有】对" + get.translation(player) + "使用", true).set('ai', function (card) {
+										target.chooseCard("将一张手牌当【无中生有】对" + get.translation(player) + "使用", true).set('ai', function (card) {
 											var att = get.attitude(target, player);
 											if (att < 0 && get.color(card) == "black") return 10;
 											if (att > 0 && get.color(card) == "red") return 10;
@@ -2861,7 +3820,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								forced: true,
 								content: function () {
 									"step 0"
-									player.chooseTarget('你可令一名其他角色获得“哀”', function (card, player, target) {
+									player.chooseTarget('你可令一名其他角色获得「哀」', function (card, player, target) {
 										return target != player && !target.hasSkill("lyzwanai_ai");
 									}).set('ai', function (target) {
 										var player = _status.event.player;
@@ -2903,7 +3862,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								marktext: "哀",
 								intro: {
 									name: "惋哀",
-									content: "已获得“哀”",
+									content: "已获得「哀」",
 								},
 								charlotte: true,
 							},
@@ -3131,7 +4090,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								marktext: "驭",
 								intro: {
 									content: function (storage, player) {
-										return "下回合由☼神貂蝉控制";
+										return "下回合已被控制";
 									},
 								},
 								popup: false,
@@ -3167,7 +4126,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										forced: true,
 										content: function () {
 											"step 0"
-											player.chooseTarget(true, '〖月魄〗：请选择一名角色', function (card, player, target) {
+											player.chooseTarget(true, '月魄：请选择一名角色', function (card, player, target) {
 												return target != player;
 											}).set('ai', function (target) {
 												return -get.attitude(_status.event.player, target);
@@ -3227,7 +4186,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									for (var i of list) {
 										skills.addArray((lib.character[i][3] || []).filter(function (skill) {
 											var info = get.info(skill);
-											return info && !info.zhuSkill && !info.limited && !info.juexingji && !info.hiddenSkill && !info.charlotte && !info.dutySkill;
+											return info && !info.zhuSkill && !info.limited && !info.juexingji && !info.hiddenSkill && !info.charlotte && !info.dutySkill&& !info.unique;
 										}));
 									}
 									if (!list.length || !skills.length) { event.finish(); return; }
@@ -3362,7 +4321,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											}
 											else if (get.type(name) == 'basic') list.push(['基本', '', name]);
 										}
-										player.chooseButton(['〖偃尊〗：选择要使用的牌', [list, 'vcard']], function (button) {
+										player.chooseButton(['偃尊：选择要使用的牌', [list, 'vcard']], function (button) {
 											return _status.event.player.getUseValue({ name: button.link[2], nature: button.link[3] });
 										}, function (button) {
 											return _status.event.player.hasUseTarget({ name: button.link[2], nature: button.link[3] });
@@ -3378,7 +4337,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											var name = lib.inpile[i];
 											if (get.type(name) == 'trick') list.push(['锦囊', '', name]);
 										}
-										player.chooseButton(['〖偃尊〗：选择要使用的牌', [list, 'vcard']], function (button) {
+										player.chooseButton(['偃尊：选择要使用的牌', [list, 'vcard']], function (button) {
 											return _status.event.player.getUseValue({ name: button.link[2], nature: button.link[3] });
 										}, function (button) {
 											return _status.event.player.hasUseTarget({ name: button.link[2], nature: button.link[3] });
@@ -4178,6 +5137,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								trigger: {
 									player: "phaseZhunbeiBegin",
 								},
+								filter: function (event, player){
+								    return !player.getEquip("qinggang");
+								},
 								content: function () {
 									var card = get.cardPile('qinggang', 'field');
 									if (card) {
@@ -4296,7 +5258,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								audio: "ext:阳光包/audio:2",
 								content: function () {
 									"step 0"
-									player.chooseTarget("〖舞刃〗：请选择要指定的目标", function (card, player, target) {
+									player.chooseTarget("舞刃：请选择要指定的目标", function (card, player, target) {
 										return player.inRange(target) && target != player && player.canUse({ name: 'sha' }, target, false);
 									}).set('ai', function (target) {
 										return -get.attitude(player, target);
@@ -4348,7 +5310,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									content: function (storage, player, skill) {
 										// var player=_status.event.player;
 										var str = "已获得如下效果：<br>";
-										if (player.storage.lyzhongshang > 0) str += "·摸牌阶段摸牌数和手牌上限+1<br>";
+										if (player.storage.lyzhongshang > 0) str += "·摸牌阶段多摸一张牌且手牌上限+1<br>";
 										if (player.storage.lyzhongshang > 1) str += "·计算与其他角色距离-1<br>";
 										if (player.storage.lyzhongshang > 2) str += "·对其他角色造成的伤害+1";
 										return str;
@@ -5110,7 +6072,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 									else event.goto(7);
 									"step 2"
-									player.chooseTarget("〖筹疾〗（使用牌）：请选择要指定的目标", [1, 2], true, function (card, player, target) {
+									player.chooseTarget("筹疾（使用牌）：请选择要指定的目标", [1, 2], true, function (card, player, target) {
 										return target != player;
 									}).set('ai', function (target) {
 										return -get.attitude(player, target);
@@ -5157,7 +6119,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									player.useCard(false, { name: result.links[0][2], nature: result.links[0][3], isCard: true }, list);
 									event.finish();
 									"step 7"
-									player.chooseTarget("〖筹疾〗（获得牌）：请选择要指定的目标", [1, 2], true, function (card, player, target) {
+									player.chooseTarget("筹疾（获得牌）：请选择要指定的目标", [1, 2], true, function (card, player, target) {
 										return target != player;
 									}).set('ai', function (target) {
 										return get.attitude(player, target);
@@ -5605,7 +6567,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									player.draw(2);
 									player.chooseControl(function () {
 										return Math.random() < 0.5 ? '选项一' : '选项二';
-									}).set('prompt', '龙劫').set('choiceList', ['获得' + get.translation(trigger.player) + '武将牌上的技能', '从五张未登场的蜀国武将牌上选择获得至多三个技能']);
+									}).set('prompt', '龙劫').set('choiceList', ['获得' + get.translation(trigger.player) + '武将牌上的技能', '从五张未登场的蜀国武将牌中选择获得至多三个技能']);
 									"step 2"
 									if (result.control == '选项一') {
 										var skills = trigger.player.getStockSkills('仲村由理', '天下第一').filter(function (skill) {
@@ -5799,7 +6761,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										event.finish();
 									}
 									"step 2"
-									player.chooseCard([1, Infinity], 'he', true, '〖昭仁〗：将至少一张牌交给' + get.translation(target));
+									player.chooseCard([1, Infinity], 'he', true, '昭仁：将至少一张牌交给' + get.translation(target));
 									"step 3"
 									if (result.bool) {
 										player.changeZhuanhuanji("lyzzhaoren");
@@ -6180,8 +7142,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									});
 									if (num1 != num2) {
 										player.chooseControl('cancel2').set('choiceList', [
-											'令一名群势力角色获得技能〖雷击〗、〖鬼道〗或〖天妒〗',
-											'令一名角色将势力变更为群',
+											'令一名群势力角色获得〖雷击〗、〖鬼道〗或〖天妒〗',
+											'令一名角色将势力改为群',
 										]).set('prompt', get.prompt('lyztaiping'));
 									}
 									else {
@@ -6197,7 +7159,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										return;
 									}
 									else if (result.index == 1) {
-										player.chooseTarget('请选择一名角色，将其势力变更为群', true, function (card, player, target) {
+										player.chooseTarget('请选择一名角色，将其势力改为群', true, function (card, player, target) {
 											return target.group != "qun";
 										});
 									}
@@ -6254,7 +7216,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								forced: true,
 								content: function () {
 									"step 0"
-									player.chooseTarget(true, "请选择要获得“谦”的角色", function (card, player, target) {
+									player.chooseTarget(true, "请选择要获得「谦」的角色", function (card, player, target) {
 										return !target.hasSkill("lyzdingqian_mark") && target != player;
 									}).set('ai', function (target) {
 										return -get.attitude(player, target);
@@ -6270,7 +7232,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										mark: true,
 										marktext: "谦",
 										intro: {
-											content: "已获得“谦”",
+											content: "已获得「谦」",
 										},
 										sub: true,
 									},
@@ -6624,7 +7586,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									"step 1"
 									player.chooseControl(function () {
 										return Math.random() < 0.5 ? '选项一' : '选项二';
-									}).set('prompt', '归元').set('choiceList', ['令至多两名其他角色将体力回复至体力上限', '令至多两名其他角色弃置所有牌，然后将体力上限调整至与当前体力值相同']);
+									}).set('prompt', '归元').set('choiceList', ['令至多两名其他角色回复所有体力', '令至多两名其他角色弃置所有牌，然后将体力上限调整至与当前体力值相同']);
 									"step 2"
 									if (result.control == '选项一') {
 										player.chooseTarget([1, 2], "请选择〖归元〗的目标", lib.filter.notMe).ai = function (target) {
@@ -6760,7 +7722,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 													}, card)
 												}
 												next.logSkill = 'lyzlingying';
-												next.set('openskilldialog', '〖绫缨〗：将一张装备牌当' + get.translation(card) + '使用');
+												next.set('openskilldialog', '绫缨：将一张装备牌当' + get.translation(card) + '使用');
 												next.set('norestore', true);
 												next.set('_backupevent', 'lyzlingyingx');
 												next.set('custom', {
@@ -7138,7 +8100,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								forced: true,
 								content: function () {
 									"step 0"
-									player.chooseControl('red', 'black').set('prompt', '〖行云〗：请选择一种颜色').set('ai', function () {
+									player.chooseControl('red', 'black').set('prompt', '行云：请选择一种颜色').set('ai', function () {
 										var list = [0, 1];
 										return list.randomGet();
 									});
@@ -7528,7 +8490,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										event.directresult = player.storage.lyzningxian.slice(0);
 									}
 									else {
-										player.chooseCardButton('弃置三张“弦”', 3, player.storage.lyzningxian, true);
+										player.chooseCardButton('移去三张「弦」', 3, player.storage.lyzningxian, true);
 									}
 									"step 1"
 									if (event.directresult || result.bool) {
@@ -7574,7 +8536,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								},
 								content: function () {
 									"step 0"
-									trigger.player.chooseCard("he", "〖掷果〗：交给" + get.translation(player) + "一张牌", true);
+									trigger.player.chooseCard("he", "掷果：交给" + get.translation(player) + "一张牌", true);
 									"step 1"
 									if (result.bool) {
 										player.gain(result.cards, trigger.player);
@@ -7793,6 +8755,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									"step 1"
 									target.addTempSkill('lyzqingyan_off');
 									target.draw(3);
+									"step 2"
+									if(!target.storage.lyzqingyan) target.storage.lyzqingyan=1;
+									else target.storage.lyzqingyan++;
 								},
 								check: function (card) {
 									return 10 - get.value(card);
@@ -7830,7 +8795,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									player.addMark("lyzfengxuan", 1);
 								},
 								intro: {
-									content: '共有#枚锋',
+									content: '共有#枚「锋」',
 								},
 							},
 							lyztiansha: {
@@ -7917,7 +8882,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									var chat = ["《无名杀全教程》震撼发布！主编正是在下。", "新版教程添加什么内容合适？"].randomGet();
 									player.chat(chat);
 									player.draw(2);
-									player.chooseCard(2, 'he', true, '选择两张牌作为“典”');
+									player.chooseCard(2, 'he', true, '选择两张牌作为「典」');
 									'step 1'
 									player.storage.lyzzhidian = player.storage.lyzzhidian.concat(result.cards);
 									player.lose(result.cards, ui.special, 'toStorage');
@@ -7942,7 +8907,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											"step 0"
 											var chat = ["读！教！程！", "不看教程，不必多言。"].randomGet();
 											player.chat(chat);
-											player.chooseCardButton('选择获得一张同类别的“典”', player.storage.lyzzhidian, true).set('filterButton', function (button) {
+											player.chooseCardButton('选择获得一张同类别的「典」', player.storage.lyzzhidian, true).set('filterButton', function (button) {
 												return get.type2(button.link) == get.type2(trigger.card);
 											});
 											"step 1"
@@ -8292,7 +9257,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								content: function () {
 									"step 0"
 									var num = Math.min(game.players.length - 1, 3);
-									player.chooseTarget(num, true, "请选择〖搦战〗的目标", "令" + get.cnNumber(num) + "名角色获得“英”", lib.filter.notMe).set("ai", function (target) {
+									player.chooseTarget(num, true, "请选择〖搦战〗的目标", "令" + get.cnNumber(num) + "名角色获得「英」", lib.filter.notMe).set("ai", function (target) {
 										var player = _status.event.player;
 										return Math.max(1, get.attitude(player, target)) / Math.max(1, get.distance(player, target));
 									});
@@ -8317,7 +9282,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								intro: {
 									name: "搦战",
 									name2: "英",
-									content: "出牌阶段可多使用一张【杀】"
+									content: "使用【杀】的限制次数+1"
 								},
 								mod: {
 									cardUsable: function (card, player, num) {
@@ -8644,7 +9609,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										locked: true,
 										content: function () {
 											"step 0"
-											player.chooseToDiscard("he", "〖虓虎〗：是否弃置一张非基本牌并令此伤害-1？", function (card, player) {
+											player.chooseToDiscard("he", "虓虎：是否弃置一张非基本牌并令此伤害-1？", function (card, player) {
 												return get.type(card) != "basic";
 											}).set("ai", function (card) {
 												return 10 - get.value(card);
@@ -8677,6 +9642,16 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											list.push(name);
 										}
 									}
+									else if (_status.connectMode) {
+												list = get.charactersOL(function (i) {
+													return true;
+												});
+											}
+											else {
+												list = get.gainableCharacters(function (info) {
+													return true;
+												});
+											}
 									var players = game.players.concat(game.dead);
 									for (var i = 0; i < players.length; i++) {
 										list.remove(players[i].name);
@@ -8764,7 +9739,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									player.markSkill('lyzxianshi');
 									player.chooseControl(function () {
 										return get.attitude(player, trigger.player) < 0 ? '选项一' : '选项二';
-									}).set('prompt', '先识').set('choiceList', ["令" + get.translation(trigger.player) + "跳过摸牌阶段和出牌阶段", "令" + get.translation(trigger.player) + "跳过判定阶段和弃牌阶段"]);
+									}).set('prompt', '先识').set('choiceList', ["令" + get.translation(trigger.player) + "跳过此回合的摸牌阶段和出牌阶段", "令" + get.translation(trigger.player) + "跳过此回合的判定阶段和弃牌阶段"]);
 									"step 3"
 									if (result.control == '选项一') {
 										trigger.player.skip("phaseDraw");
@@ -8777,7 +9752,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								},
 								onremove: true,
 								intro: {
-									content: "已对$发动过技能",
+									content: "已对$发动过本技能",
 								},
 							},
 							lyzxiaoran: {
@@ -8824,6 +9799,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								usable: 1,
 								filterTarget: function (card, player, target) {
 									if (target.countCards("h") == 0) return false;
+							        if (target == player) return false;
 									var num = Math.min(Math.abs(player.countCards("h") - target.countCards("h")), 3);
 									return player.countCards("h") >= num;
 								},
@@ -8839,7 +9815,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									"step 2"
 									event.videoId = lib.status.videoId++;
 									var cards = target.getCards('h');
-									event.dialog = ui.create.dialog('〖韬明〗：请选择牌', cards);
+									event.dialog = ui.create.dialog('韬明：请按照想分配的顺序选择牌', cards);
 									event.dialog.videoId = event.videoId;
 									if (!event.isMine()) {
 										event.dialog.style.display = 'none';
@@ -8864,7 +9840,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 									else event.finish();
 									"step 4"
-									player.chooseTarget(true, '请依次选择' + get.cnNumber(event.num2) + '名角色，按照刚才选牌的顺序获得牌', event.num2, function (card, player, target) {
+									player.chooseTarget(true, '请依次选择' + get.cnNumber(event.num2) + '名角色，按照刚才选牌的顺序分配牌', event.num2, function (card, player, target) {
 										return target != event.target1;
 									}).set('ai', function (target) {
 										return get.attitude(_status.event.player, target) + 0.5;
@@ -8921,7 +9897,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											"step 2"
 											event.videoId = lib.status.videoId++;
 											var cards = event.target.getCards('h');
-											event.dialog = ui.create.dialog('〖韬明〗：请按照想分配的顺序选择牌', cards);
+											event.dialog = ui.create.dialog('韬明：请按照想分配的顺序选择牌', cards);
 											event.dialog.videoId = event.videoId;
 											if (!event.isMine()) {
 												event.dialog.style.display = 'none';
@@ -8946,7 +9922,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											}
 											else event.finish();
 											"step 4"
-											player.chooseTarget(true, '请按想分配的顺序选择' + get.cnNumber(event.num2) + '名角色，按照刚才选牌的顺序获得牌', event.num2, function (card, player, target) {
+											player.chooseTarget(true, '请按想分配的顺序选择' + get.cnNumber(event.num2) + '名角色，按照刚才选牌的顺序分配牌', event.num2, function (card, player, target) {
 												return target != event.target;
 											}).set('ai', function (target) {
 												return get.attitude(_status.event.player, target) + 0.5;
@@ -8972,7 +9948,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							lyzcaiqing: {
 								intro: {
 									name: "才清",
-									content: '已因$牌发动过技能',
+									content: '已因$牌发动过本技能',
 								},
 								group: "lyzcaiqing_recover",
 								audio: "ext:阳光包/audio:2",
@@ -9011,7 +9987,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									return true;
 								},
 								direct: true,
-								locked: true,
 								content: function () {
 									"step 0"
 									player.chooseTarget("是否发动〖才清〗？请选择一名角色").set('ai', function (target) {
@@ -9056,14 +10031,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 									if (result.control == "trick") {
 										player.storage.lyzcaiqing.add("trick");
-										var card = get.cardPile2(function (card) {
+										var card = get.cardPile(function (card) {
 											return get.type2(card, false) == "trick"
 										});
 										if (card) event.target.gain(card, 'gain2');
 									}
 									if (result.control == "equip") {
 										player.storage.lyzcaiqing.add("equip");
-										var card = get.cardPile2(function (card) {
+										var card = get.cardPile(function (card) {
 											return get.type2(card, false) == "equip"
 										});
 										if (card) event.target.gain(card, 'gain2');
@@ -9319,7 +10294,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 											const next = player.chooseTarget();
 											next.set('filterTarget', lib.filter.notMe);
-											next.set('prompt', '是否将技能赠与其他角色？');
+											next.set('prompt', '是否将技能赠予其他角色？');
 											next.set('prompt2', `【${lib.translate[skillName]}】:${lib.translate[skillName + '_info']}`);
 											next.set('ai', (target) => {
 												const player = _status.event.player;
@@ -10693,7 +11668,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								content: function () {
 									"step 0"
 									var controls = ["1", "2", "3", "4", "5"];
-									player.chooseControl(controls).set('prompt', '〖惊鸿〗：请选择一项').ai = function () {
+									player.chooseControl(controls).set('prompt', '惊鸿：请选择一项').ai = function () {
 										return "1";
 									};
 									"step 1"
@@ -10808,7 +11783,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									"step 2"
 									player.chooseControl(function (event, player) {
 										return Math.random();
-									}).set('prompt', '犹凛').set('choiceList', ['使用杀目标数和次数+1', '横置任意名角色', '计算与其他角色距离-1']);
+									}).set('prompt', '犹凛').set('choiceList', ['使用【杀】的限制次数+1且可多指定一个目标', '横置任意名角色', '计算与其他角色的距离-1']);
 									"step 3"
 									if (result.control == "选项一") {
 										player.addTempSkill("lyzyoulin_sha");
@@ -11509,6 +12484,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									content: "当前有#个标记",
 								},
 								marktext: "疆",
+								dutySkill: true,
 								audio: "ext:阳光包/audio:2",
 								trigger: {
 									source: "damageSource",
@@ -11701,7 +12677,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								content: function () {
 									'step 0'
 									player.chooseControl().set('choiceList', [
-										'摸一张牌，且本回合使用【杀】的次数上限+1',
+										'摸一张牌，且本回合使用【杀】的限制次数+1',
 										'摸三张牌，且本回合不能再使用【杀】',
 									]).set('ai', () => _status.event.player.hasSha() ? 0 : 1);
 									'step 1'
@@ -11772,6 +12748,16 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											list.push(name);
 										}
 									}
+									else if (_status.connectMode) {
+												list = get.charactersOL(function (i) {
+													return true;
+												});
+											}
+											else {
+												list = get.gainableCharacters(function (info) {
+													return true;
+												});
+											}
 									var players = game.players.concat(game.dead);
 									for (var i = 0; i < players.length; i++) {
 										list.remove(players[i].name);
@@ -11832,7 +12818,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									for (var i = 0; i < game.dead.length; i++) {
 										list.push(game.dead[i].name);
 									}
-									player.chooseButton(ui.create.dialog('选择一名已死亡的角色令其复活', [list, 'character']), function (button) {
+									player.chooseButton(ui.create.dialog('令一名已死亡的角色复活', [list, 'character']), function (button) {
 										for (var i = 0; i < game.dead.length && game.dead[i].name != button.link; i++);
 										return ai.get.attitude(_status.event.player, game.dead[i]);
 									});
@@ -11844,6 +12830,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										dead.revive(2);
 										dead.draw(2);
 										dead.clearSkills();
+									}
+								},
+								ai: {
+									order: 7,
+									result: {
+										player: function (player) {
+											return 1;
+										}
 									}
 								},
 							},
@@ -12037,7 +13031,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									/* 创建dialog */
 									var dialog = ui.create.dialog(false);
 									/* dialog标题 */
-									dialog.add('请任意输入至多五个字符');
+									dialog.add('请输入至多五个字符');
 									/* dialog.add方法只接受div，而不是input */
 									var div = document.createElement('div');
 									/* 创建input并添加到div里 */
@@ -12196,16 +13190,22 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 
 						translate: {
-
-							//分组部分
-							"lyz_shen": '<img src="' + lib.assetURL + 'extension/阳光包/image/fenlan/yangguangbao_shen.png" width="91" height="21">',
+                         //武将分栏-
+							
+						/**	"lyz_shen": '<img src="' + lib.assetURL + 'extension/阳光包/image/fenlan/yangguangbao_shen.png" width="91" height="21">',
 							"lyz_wei": '<img src="' + lib.assetURL + 'extension/阳光包/image/fenlan/yangguangbao_wei.png" width="91" height="21">',
 							"lyz_shu": '<img src="' + lib.assetURL + 'extension/阳光包/image/fenlan/yangguangbao_shu.png" width="91" height="21">',
 							"lyz_wu": '<img src="' + lib.assetURL + 'extension/阳光包/image/fenlan/yangguangbao_wu.png" width="91" height="21">',
 							"lyz_qun": '<img src="' + lib.assetURL + 'extension/阳光包/image/fenlan/yangguangbao_qun.png" width="91" height="21">',
-							"lyz_caidan": '<img src="' + lib.assetURL + 'extension/阳光包/image/fenlan/yangguangbao_caidan.png" width="43" height="21">',
-
-
+							"lyz_caidan": '<img src="' + lib.assetURL + 'extension/阳光包/image/fenlan/yangguangbao_caidan.png" width="43" height="21">',   */
+							
+                            "lyz_shen":"阳·神话再临",
+                            "lyz_wei":"阳·天下归心",
+                            "lyz_shu":"阳·龙横蜀汉",
+                            "lyz_wu":"阳·虎踞江东",
+                            "lyz_qun":"阳·逐鹿群雄",
+                            "lyz_caidan":"阳·大千世界",
+							
 							//武将部分
 							"lyz_shen_diaochan": "☼神貂蝉",
 							"lyz_shen_zhangliao": "☼神张辽",
@@ -12262,43 +13262,47 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"lyz_caoying":"☼曹婴",
 							"lyz_fengliyue":"风璃月",
                             "lyz_guansuo":"☼关索",
-
-							//技能部分
+                            "lyz_zhangchangpu":"☼张昌蒲",
+                            "lyz_linqiqi":"林柒柒",
+                            "lyz_yeling": "夜凌",
+                            "lyz_lvbao":"铝宝",
+                            "lyz_shizhongren":"世中人",
 							
+							//技能部分
 							lyzyuhun: "驭魂",
 							lyzyuhun2: "驭魂",
-							"lyzyuhun_info": "出牌阶段限一次，你可将武将牌翻面并跳过本回合的弃牌阶段，若如此做，你将一名其他角色的下回合改为由你操控。当一名角色的回合结束时，若你的武将牌背面向上，你摸一张牌。",
+							"lyzyuhun_info": "出牌阶段限一次，你可翻面并跳过本回合的弃牌阶段，然后将一名其他角色的下回合改为由你操控。每名角色的回合结束时，若你的武将牌背面向上，你摸一张牌。",
 							lyzhuanmei: "幻魅",
 							"lyzhuanmei_info": "锁定技，回合开始时，你从五张未登场的女性武将牌中选择获得至多两个技能直至你下回合开始。",
 							lyzyuepo: "月魄",
-							"lyzyuepo_info": "锁定技，当你进入濒死状态时，你弃置所有手牌（至少一张）并回复1点体力；当你脱离濒死状态时，你令一名其他角色获得以下技能中的一个：〖崩坏〗、〖无谋〗、〖仇海〗、〖缠怨〗。",
+							"lyzyuepo_info": "锁定技，当你进入濒死状态时，你弃置所有手牌（至少一张）并回复1点体力。当你脱离濒死状态时，你令一名其他角色获得以下技能中的一个：〖崩坏〗、〖无谋〗、〖仇海〗、〖缠怨〗。",
 							lyzcuifeng: "摧锋",
-							"lyzcuifeng_info": "出牌阶段限一次，你可与一名其他角色拼点：若你赢，你选择该角色武将牌上的一个可获得的技能，令此技能失效直至其下回合结束，然后你获得此技能。",
+							"lyzcuifeng_info": "出牌阶段限一次，你可拼点：若你赢，你令拼点对象武将牌上的一个技能失效直至其下回合结束，然后你获得此技能。",
 							"lyzcuifeng2": "摧锋",
 							"lyzcuifeng2_info": "",
 							lyzxiasha: "諕杀",
-							"lyzxiasha_info": "准备阶段，你可弃置至多X名角色区域里的一张牌；结束阶段，你可视为对至多X名其他角色使用一张雷【杀】（X为你已损失的体力值）。",
+							"lyzxiasha_info": "准备阶段，你可弃置至多X名角色区域里的一张牌。结束阶段，你可视为对至多X名其他角色使用一张雷【杀】（X为你已损失的体力值）。",
 							"lyzxiasha2": "諕杀",
 							"lyzxiasha2_info": "",
 							lyzzhijue: "制决",
-							"lyzzhijue_info": "当你拼点后，你可获得拼点牌中点数大的一张；当你对其他角色造成伤害后，你可令其变更武将牌。",
+							"lyzzhijue_info": "当你拼点后，你可获得拼点牌中点数大的一张。当你对其他角色造成伤害后，你可令其变更武将牌。",
 							lyzjuejing: "绝境",
 							"lyzjuejing_info": "锁定技，你始终跳过摸牌阶段，你的手牌数始终为4。",
 							lyzlonghun: "龙魂",
 							"lyzlonghun_info": "锁定技，你可将至多两张同花色的牌按以下规则使用或打出：红桃当【桃】；方块当火【杀】；梅花当【闪】；黑桃当【无懈可击】。若你以此法使用了两张红色牌，则此牌回复值或伤害值+1，若你以此法使用了两张黑色牌，则你弃置当前回合角色一张牌。",
 							lyzzhanjiang: "斩将",
-							"lyzzhanjiang_info": "准备阶段，你可将【青釭剑】置入你的装备区并替换原装备。",
+							"lyzzhanjiang_info": "准备阶段，若你未装备【青釭剑】，你可将【青釭剑】置入你的装备区并替换原装备。",
 							lyzwendao: "问道",
-							"lyzwendao_info": "锁定技，每回合限两次，当你使用基本/锦囊牌后，你获得一张锦囊/基本牌；当你使用一张非基本牌后，本回合你的手牌上限+1（至多+2）。",
+							"lyzwendao_info": "锁定技，每回合限两次，当你使用基本/锦囊牌后，你获得一张锦囊/基本牌。当你使用一张非基本牌后，本回合你的手牌上限+1（至多+2）。",
 							lyzzhaoce: "昭策",
-							"lyzzhaoce_info": "出牌阶段限一次，你可选择一个已记录的势力并从该势力五张未登场的武将牌上选择一个技能，然后你可令一名角色失去上次以此法获得的技能并获得此技能。每轮游戏开始时或当你受到伤害后，你依序在〖昭策〗中记录如下势力：蜀、群、吴、魏、神。",
+							"lyzzhaoce_info": "出牌阶段限一次，你可选择一个已记录的势力并从该势力五张未登场的武将牌中选择一个技能，然后你可令一名角色失去上次以此法获得的技能并获得此技能。每轮游戏开始时或当你受到伤害后，你依序在本技能中记录如下势力：蜀·群·吴·魏·神。",
 							lyzkuitian: "窥天",
-							"lyzkuitian_info": "出牌阶段限一次，你可进行判定，然后选择一项：获得生效后的判定牌；或弃置一张与判定结果颜色相同的牌，若此牌为红/黑色，你令至多两名角色处于“狂风”/“大雾”状态直至你下回合开始。",
+							"lyzkuitian_info": "出牌阶段限一次，你可判定，然后选择一项：①获得生效后的判定牌；②弃置一张与判定结果颜色相同的牌，若此牌为红/黑色，你令至多两名角色处于“狂风”/“大雾”状态直至你下回合开始。",
 							lyzlingxiang2:"凌骧",
 							lyzlingxiang3:"凌骧",
 							lyzlingxiang4:"凌骧",
 							lyzlingxiang:"凌骧",
-							lyzlingxiang_info:"锁定技，回合开始时或当你造成/受到1点伤害时，你摸一张牌，然后将牌堆或弃牌堆里一张对应的坐骑牌置入你的一个空置坐骑栏内。其他角色/你使用的与你装备区坐骑牌颜色相同的带伤害标签的牌对你无效/无视防具且不能被其他角色响应。",
+							lyzlingxiang_info:"锁定技，回合开始时或当你造成或受到1点伤害时，你摸一张牌，然后将一张坐骑牌置入你的一个空置坐骑栏内。其他角色/你使用的与你装备区坐骑牌颜色相同的带伤害标签的牌对你无效/无视防具且不能被其他角色响应。",
 							lyzhuangxiao2:"凰潇",
 							lyzhuangxiao:"凰潇",
 							lyzhuangxiao_info:"出牌阶段限一次，你可观看一名其他角色的手牌，然后选择一项：①将你的一张黑色手牌当【杀】对其使用；②将其一张红色手牌当【决斗】对其使用；背水：本回合你的手牌上限-1。",
@@ -12306,155 +13310,153 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"lyzxinlve_info": "锁定技，准备阶段或当你受到伤害后，你摸两张牌并可展示任意张手牌，若这些牌包含的花色数不小于:1，你弃置一名角色区域里的一张牌; 2,你横置至多两名角色; 3,你将展示的牌交给一名其他角色并回复1点体力,然后令其回复或失去1点体力。",
 							lyzyanjie: "焰劫",
 							"lyzyanjie_info": "每名角色限一次，结束阶段，你可对一名其他角色造成X点火焰伤害并获得其区域里的等量张牌（X为本局中其累计获得过你牌数量的一半，向下取整且至少为1）。",
-							lyzfengyin: "凤吟",
-							"lyzfengyin_info": "锁定技，你计算与其他角色的距离-X；其他角色计算与你的距离+X（X为你已损失的体力值且至少为1）。",
-							lyzkuipo: "溃魄",
-							"lyzkuipo_info": "锁定技，当你对其他角色造成伤害后，你废除其一个随机的装备栏，若其装备栏均已被废除，改为其减1点体力上限。",
 							lyznuozhan: "搦战",
-							"lyznuozhan_info": "锁定技，游戏开始时，你令三名其他角色（若人数不足则改为所有其他角色）获得“英”；有“英”的角色于其出牌阶段可多使用一张【杀】。",
+							"lyznuozhan_info": "锁定技，游戏开始时，你令三名其他角色（若人数不足则改为所有其他角色）获得「英」。有「英」的角色使用【杀】的限制次数+1。",
 							lyzzhenguan: "镇关",
-							"lyzzhenguan_info": "使命技，当你对有“英”的角色造成伤害后，移去其“英”。成功：当你造成伤害后或你的回合开始时，若场上没有“英”，则你获得〖极武〗和〖溃魄〗。失败：当你进入濒死状态时，你将体力回复至体力上限，然后获得〖无谋〗和〖利驭〗。",
+							"lyzzhenguan_info": "使命技，当你对有「英」的角色造成伤害后，其移除「英」。<br>成功：回合开始时或当你造成伤害后，若场上没有「英」，你获得〖极武〗和〖溃魄〗。<br>失败：当你进入濒死状态时，你回复所有体力，然后获得〖无谋〗和〖利驭〗。",
 							lyzxiaohu: "虓虎",
 							"lyzxiaohu_info": "锁定技，你不能成为延时锦囊牌的目标。准备阶段和结束阶段，你摸X张牌。当你受到伤害时，你可弃置一张非基本牌并令此伤害-1（X为你已损失的体力值+1）。",
+							lyzkuipo: "溃魄",
+							"lyzkuipo_info": "锁定技，当你对其他角色造成伤害后，你随机废除其一个装备栏，若其装备栏均已被废除，改为其减1点体力上限。",
 							lyznewjiwu: "极武",
-							"lyznewjiwu_info": "出牌阶段，你可弃置一张牌，然后获得以下技能中的一个直至回合结束：〖强袭〗、〖铁骑〗、〖旋风〗、〖完杀〗。",
+							"lyznewjiwu_info": "出牌阶段，你可弃置一张牌并获得以下技能中的一个直至回合结束：〖强袭〗、〖铁骑〗、〖旋风〗、〖完杀〗。",
+							lyznewqiangxi: "强袭",
+							"lyznewqiangxi_info": "出牌阶段每名角色限一次，你可失去1点体力或弃置一张武器牌，然后对你攻击范围内的一名其他角色造成1点伤害。",
+							lyznewtieqi: "铁骑",
+							"lyznewtieqi_info": "当你使用【杀】指定一名角色为目标后，你可判定并令其非锁定技失效直至回合结束，除非其弃置一张与判定结果花色相同的牌，否则不能使用【闪】抵消此【杀】。",
+							lyznewxuanfeng: "旋风",
+							"lyznewxuanfeng_info": "当你于弃牌阶段弃置过至少两张牌，或失去装备区里的牌后，你可弃置至多两名其他角色的共计两张牌。然后若此时是你的回合内，你可对其中一名角色造成1点伤害。",
+							lyznewwansha: "完杀",
+							"lyznewwansha_info": "锁定技，你的回合内，①不处于濒死状态的其他角色不能使用【桃】。②当有角色进入濒死状态时，你令除该角色之外的其他角色的非锁定技失效直至此濒死状态结算结束。",
 							lyzwuren: "舞刃",
-							"lyzwuren_info": "准备阶段或当你受到伤害后，你可视为对一名攻击范围内的角色使用任意一种【杀】。",
+							"lyzwuren_info": "准备阶段或当你受到伤害后，你可视为对一名攻击范围内的角色使用一张任意种类的【杀】。",
 							lyzhongshang: "红殇",
-							"lyzhongshang_info": "锁定技，当一名其他角色进入濒死状态时，你随机获得牌堆里的一张红色牌；当有角色死亡后，你回复1点体力，然后依序获得如下效果之一：1.摸牌阶段摸牌数和手牌上限+1；2.计算与其他角色的距离-1；3.对其他角色造成的伤害+1。",
+							"lyzhongshang_info": "锁定技，当一名其他角色进入濒死状态时，你获得一张红色牌。当一名角色死亡后，你回复1点体力，然后依序获得如下能力之一：①摸牌阶段摸牌数和手牌上限+1；②计算与其他角色的距离-1；③对其他角色造成的伤害+1。",
 							lyzchengxin: "澄心",
-							"lyzchengxin_info": "出牌阶段限一次，你可令一名角色摸两张牌，然后其进行判定，若结果为：1.红色，其回复1点体力；2.黑色，其复原武将牌；3.基本牌，其获得一张【桃】；4.非基本牌，其获得一张【无懈可击】；5.点数为A或K，你令其获得〖悲歌〗或〖默识〗。",
+							"lyzchengxin_info": "出牌阶段限一次，你可令一名角色摸两张牌，然后其判定，若结果为：红色，其回复1点体力；黑色，其复原武将牌；基本牌，其获得一张【桃】；非基本牌，其获得一张【无懈可击】；点数为A或K，你令其获得〖悲歌〗或〖默识〗。",
 							lyzfuqing: "赋情",
 							"lyzfuqing_info": "当一名角色受到伤害后，你可摸一张牌（若你已受伤则改为摸两张牌），然后交给其至少一张牌。",
-							lyzlingbo: "凌波",
-							"lyzlingbo_info": "准备阶段或当你受到伤害后，你可移动场上一张牌。出牌阶段限一次，你可令一名有牌的角色展示一张手牌并将之交给另一名角色，若此牌为红桃，你回复1点体力。",
-							lyzqingge: "清歌",
-							"lyzqingge_info": "锁定技，任一角色的回合结束后，若你于此回合获得或失去过牌，你摸一张牌。",
 							lyzshenhuang: "神惶",
-							"lyzshenhuang_info": "每回合限两次，你可将两张手牌当任一基本牌使用或打出。若你以此法使用牌对应的实体牌中包含：红色牌，你复原武将牌；黑色牌，你摸一张牌。",
+							"lyzshenhuang_info": "每回合限两次，你可将两张手牌当任意基本牌使用或打出，若你以此法使用牌且对应的实体牌中包含：红色牌，你复原武将牌；黑色牌，你摸一张牌。",
 							lyzjinghong: "惊鸿",
-							"lyzjinghong_info": "锁定技，每轮限四次，当其他角色使用或打出的名称字数为X的非转化实体牌结算完毕即将进入弃牌堆时，你获得之；准备阶段和结束阶段，你重新声明X的值；出牌阶段开始时，你随机获得一张名称字数为X的牌；（X初始为2，取值区间为1至5）。",
+							"lyzjinghong_info": "锁定技，每轮限四次，当其他角色使用或打出的名称字数为X的非转化实体牌结算完毕即将进入弃牌堆时，你获得之。准备阶段和结束阶段，你重新声明X的值。出牌阶段开始时，你随机获得一张名称字数为X的牌；（X初始为2，取值区间为1至5）。",
 							lyzjinghong2: "惊鸿",
 							lyzjinghong3: "惊鸿",
 							lyzjinghong4: "惊鸿",
 							lyzyurong: "玉容",
-							"lyzyurong_info": "出牌阶段限X次，你可选择一项：1.将一张方块牌当作【乐不思蜀】置入一名其他角色的判定区，然后摸一张牌；2.交给一名其他角色一张红桃牌，然后其将一张手牌当作【无中生有】对你使用；3.弃置一张梅花牌并令一名其他角色弃置三张牌；4.交给一名其他角色一张黑桃牌，然后其摸一张牌并将武将牌翻面（X为你已损失的体力值+1）。",
+							"lyzyurong_info": "出牌阶段限X次，你可选择一项：①将一张方块牌当【乐不思蜀】置入一名其他角色的判定区，然后摸一张牌；②交给一名其他角色一张红桃牌，然后其将一张手牌当【无中生有】对你使用；③弃置一张梅花牌并令一名其他角色弃置三张牌；④交给一名其他角色一张黑桃牌，然后其摸一张牌并翻面（X为你已损失的体力值+1）。",
 							"lyzyurong2": "玉容",
 							"lyzyurong2_info": "",
 							lyzfuhua: "浮华",
-							"lyzfuhua_info": "当你成为红色非装备牌的目标时/受到1点伤害后，你可选择一项：摸一张牌；或摸两张牌，然后交给此牌使用者/伤害来源一张牌。",
+							"lyzfuhua_info": "当你成为红色非装备牌的目标时/受到1点伤害后，你可选择一项：①摸一张牌；②摸两张牌，然后交给此牌使用者/伤害来源一张牌。",
 							lyzfangze: "芳泽",
-							"lyzfangze_info": "当一名角色的回合开始时，你可交给其至多三张牌（若为你则改为须摸两张牌），然后观看其手牌并弃置其区域里至多等量的牌，若此次弃置的牌来自其：手牌区，你可令其摸两张牌；装备区，你可令其回复1点体力且本回合使用牌无距离与次数限制。",
+							"lyzfangze_info": "每名其他角色/你的回合开始时，你可交给其至多三张牌/须摸两张牌，然后观看其手牌并弃置其区域里至多等量的牌，若此次弃置的牌来自其：手牌区，你可令其摸两张牌；装备区，你可令其回复1点体力且此回合使用牌无距离与次数限制。",
 							lyzfumeng: "浮梦",
-							"lyzfumeng_info": "锁定技，当你受到伤害后，你摸两张牌，然后若伤害来源的手牌数不小于你，防止你本回合受到的所有伤害；你的手牌上限+X（X为你的体力值）。",
+							"lyzfumeng_info": "锁定技，当你受到伤害后，你摸两张牌，然后若伤害来源的手牌数不小于你，防止你此回合受到的所有伤害。你的手牌上限+X（X为你的体力值）。",
 							lyzbeiwu: "备武",
-							"lyzbeiwu_info": "锁定技，你于以下时机获得1枚“武”：你的回合开始时；当你受到1点伤害后；当你使用的装备牌结算完成后。若你的“武”数量不小于2，你视为拥有〖枭姬〗。",
+							"lyzbeiwu_info": "锁定技，你于以下时机获得1枚「武」：回合开始时；当你受到1点伤害后；当你使用的装备牌结算完毕后。若你「武」的数量不小于2，你视为拥有〖枭姬〗。",
 							lyzjiaogong: "娇弓",
-							"lyzjiaogong_info": "出牌阶段，你可移去1枚“武”，视为使用一张无距离限制的【杀】；当你使用【杀】指定目标后，你可移去1枚“武”并获得其一张牌；当你造成伤害时，你可移去1枚“武”并令此伤害+1。",
+							"lyzjiaogong_info": "出牌阶段，你可移除1枚「武」并视为使用一张无距离限制的【杀】。当你使用【杀】指定目标后，你可移除1枚「武」并获得目标角色的一张牌。当你造成伤害时，你可移除1枚「武」并令此伤害+1。",
 							lyzzhiying: "智映",
-							"lyzzhiying_info": "任一角色的结束阶段，你可视为使用一张该角色于此回合出牌阶段内使用过普通锦囊牌（你以此法使用的牌无距离限制），若此牌造成了伤害，则你回复1点体力。",
+							"lyzzhiying_info": "每名角色的结束阶段，你可视为使用一张其于此回合出牌阶段内使用过的普通锦囊牌（以此法使用的牌无距离限制），然后若此牌造成了伤害，你回复1点体力。",
 							lyzjinxin: "锦心",
-							"lyzjinxin_info": "准备阶段或当你受到伤害后，你可选择一项：1.将牌堆或弃牌堆里的一张【八卦阵】或【木牛流马】置入一名角色的装备区并替换原装备；2.弃置一名角色装备区的防具和宝物；3.摸一张牌。",
+							"lyzjinxin_info": "准备阶段或当你受到伤害后，你可选择一项：①将一张【八卦阵】或【木牛流马】置入一名角色的装备区并替换原装备；②弃置一名角色装备区里的防具和宝物；③摸一张牌。",
 							lyzyinfeng: "隐锋",
-							"lyzyinfeng_info": "锁定技，你不能被翻面或横置，且不能成为延时锦囊牌或其他角色拼点的目标。当你受到伤害后，防止你受到的所有伤害直至你下回合开始。",
+							"lyzyinfeng_info": "锁定技，你不能翻面或横置，且不能成为延时锦囊牌或其他角色拼点的目标。当你受到伤害后，防止你受到的所有伤害直至你下回合开始。",
 							lyztaohui: "韬晦",
-							"lyztaohui_info": "锁定技，出牌阶段开始时，你摸X张牌，你的手牌上限+X（X为游戏轮数且至多为5）。",
+							"lyztaohui_info": "锁定技，出牌阶段开始时，你摸X张牌。你的手牌上限+X（X为游戏轮数且至多为5）。",
 							lyzchouji: "筹疾",
-							"lyzchouji_info": "每回合每项限一次，当你的体力值变化后，你可选择至多两名其他角色，然后执行一项：视为对这些角色使用一张合法的普通锦囊牌；或令这些角色依次获得牌堆里一张由你指定牌名的锦囊牌（若牌堆里没有你声明的牌，则改为其摸一张牌）。",
+							"lyzchouji_info": "每回合每项限一次，当你的体力值变化后，你可选择至多两名其他角色，然后执行一项：①视为对这些角色使用一张普通锦囊牌；②令这些角色依次获得一张由你指定牌名的锦囊牌（若牌堆里没有你指定牌名的牌，改为其摸一张牌）。",
 							lyzmingfu: "命缚",
-							"lyzmingfu_info": "锁定技，出牌阶段开始时，若你已受伤，则你回复1点体力，否则你失去1点体力；当你进入濒死状态时，你可令一名其他角色获得〖遗计〗。",
-							lyztianwei: "天威",
+							"lyzmingfu_info": "锁定技，出牌阶段开始时，若你已受伤，则你回复1点体力，否则你失去1点体力。当你进入濒死状态时，你可令一名其他角色获得〖遗计〗。",
 							"lyztianwei2": "天威",
 							lyztianwei3: "天威",
 							"lyztianwei3_info": "",
-							"lyztianwei_info": "锁定技，当你使用带伤害标签的牌指定其他角色为目标后，你令其防具和技能失效直至回合结束。每回合限一次，当你造成伤害后，你摸两张牌且本回合使用牌无距离和次数限制。",
+							lyztianwei: "天威",
+							"lyztianwei_info": "锁定技，当你使用带伤害标签的牌指定其他角色为目标后，你令其防具和技能失效直至此回合结束。每回合限一次，当你造成伤害后，你摸两张牌且此回合使用牌无距离和次数限制。",
 							lyzxiaohun: "骁魂",
 							"lyzxiaohun_info": "你可将一张非基本牌当【杀】或【决斗】使用或打出，你以此法使用红色转化牌的伤害值+1。",
 							lyzqinggu: "清骨",
-							lyzqinggu_info: "出牌阶段限一次，你可弃置一张带伤害标签的牌或装备牌并对一名角色造成1点伤害，若弃置的是武器牌，则改为对至多X名角色各造成1点伤害（X为该武器牌的攻击范围且至少为1）；当一名角色受到伤害后，若伤害来源为你，则你可令其回复2点体力。",
+							"lyzqinggu_info": "出牌阶段限一次，你可弃置一张带伤害标签的牌或装备牌并对一名角色造成1点伤害，若弃置的是武器牌，则改为对至多X名角色各造成1点伤害（X为该武器牌的攻击范围且至少为1）。当一名角色受到伤害后，若伤害来源为你，你可令其回复2点体力。",
 							lyzhuomai: "活脉",
-							lyzhuomai_info: "锁定技，当一名角色受到伤害时，若其没有“淤”，则其获得“淤”；当一名角色回复体力后，你可令其移去“淤”并与其各摸一张牌。",
+							"lyzhuomai_info": "锁定技，当一名角色受到伤害时，若其没有「淤」，其获得「淤」。当一名角色回复体力后，你可令其移除「淤」并与其各摸一张牌。",
 							lyztiantong: "天通",
-							lyztiantong_info: "限定技，当一名角色进入濒死状态时，你可令其依次执行以下操作：1.加1点体力上限；2.将体力回复至体力上限；3.复原武将牌；4.废除判定区；5.恢复所有装备栏。",
-							lyzmafei: "麻沸",
-							"lyzmafei_info": "当一名角色的回合开始时，你可弃置X张牌并令其将体力回复至体力上限（至多回复至5），然后其跳过本回合的出牌阶段和弃牌阶段（X为你对其发动过〖麻沸〗的次数且至少为1）。",
-							lyzwuqin: "五禽",
-							"lyzwuqin_info": "准备阶段，你可选择一名角色，令其回复1点体力并摸一张牌，若其于上回合成为过此技能的目标且于上回合未以此法增加过体力上限，则其加1点体力上限。",
+							"lyztiantong_info": "限定技，当一名角色进入濒死状态时，你可令其依次执行以下所有项：①加1点体力上限；②回复所有体力；③复原武将牌；④废除判定区；⑤复原所有装备栏。",
+							lyzxianmu: "献穆",
+							"lyzxianmu_info": "锁定技，每名角色的回合结束时，你于此回合每满足以下一项便摸一张牌：获得过牌；失去过牌；受到过伤害。结算完毕后，你可将两张牌交给一名其他角色并令其复原武将牌，然后你再令其视为使用一张【桃】或无距离限制的任意种类的【杀】。",
+							lyzfengjun: "奉君",
+							"lyzfengjun_info": "出牌阶段限一次或当你受到伤害后，你可选择一名有牌的其他角色，然后摸一张牌并与其拼点。当你拼点赢时，你可令一名角色获得〖密诏〗且摸牌阶段多摸一张牌直至其回合结束。",
+							lyzfengjun3: "奉君",
+							lyzfengjun_damage: "奉君",
 							lyzbabei: "霸北",
-							"lyzbabei_info": "准备阶段，你可从你和你攻击范围内的角色中选择至多两名，然后依次获得这些角色区域里的一张牌；结束阶段，你可对一名体力值不大于你的角色造成1点伤害。",
+							"lyzbabei_info": "准备阶段，你可从你和你攻击范围内的角色中选择至多两名，然后依次获得这些角色区域里的一张牌。结束阶段，你可对一名体力值不大于你的角色造成1点伤害。",
 							"lyztianfu2": "天负",
 							lyztianfu: "天负",
-							"lyztianfu_info": "主公技，出牌阶段限一次，你可与一名其他角色拼点：若你赢且其有暗置的身份牌，则其亮出身份牌，若为忠臣，你回复1点体力，否则你对其造成1点伤害；若你没赢，你获得〖归心〗直至你下回合开始。",
-							lyzlongjie: "龙劫",
-							"lyzlongjie_info": "主公技，限定技，当一名忠臣死亡后，你可回复1点体力并摸两张牌，然后选择一项：获得其武将牌上的所有技能；或从五张未登场的蜀势力武将牌上选择获得至多三个技能。",
+							"lyztianfu_info": "主公技，出牌阶段限一次，你可拼点：若你赢且拼点对象有暗置的身份牌，其亮出身份牌，若为忠臣，你回复1点体力，否则你对其造成1点伤害；若你没赢，你视为拥有〖归心〗直至你下回合开始。",
 							lyzzhaoren: "昭仁",
-							"lyzzhaoren_info": "转换技，出牌阶段限一次，阳：你可交给一名其他角色至少一张牌，然后视为使用一张无次数限制的基本牌。阴：你可获得一名其他角色区域里的至多两张牌。结束阶段，你摸等同于此回合出牌阶段以此法交出或获得牌数量的牌（至多为4）。",
-							lyzyilie: "翊烈",
-							"lyzyilie_info": "主公技，限定技，出牌阶段或当你受到伤害后，若你的体力值不大于2，你可令一名不为主公的其他角色增加1点体力上限并摸两张牌，然后其将武将牌替换为“界孙笨”，身份牌替换为忠臣。",
+							"lyzzhaoren_info": "转换技，出牌阶段限一次，阳：你可交给一名其他角色至少一张牌，然后视为使用一张无次数限制的基本牌；阴：你可获得一名其他角色区域里的至多两张牌。结束阶段，你摸等同于此回合出牌阶段以此法交出或获得牌数量的牌（至多摸四张牌）。",
+							lyzlongjie: "龙劫",
+							"lyzlongjie_info": "主公技，限定技，当一名忠臣死亡后，你可回复1点体力并摸两张牌，然后选择一项：①获得其武将牌上的所有技能；②从五张未登场的蜀势力武将牌中选择获得至多三个技能。",
 							lyzjinzheng: "尽征",
-							"lyzjinzheng_info": "出牌阶段开始时，你可失去1点体力，然后记录一个基本牌或锦囊牌的名称。当你使用与记录名称相同的牌时，你选择一项：摸X张牌；或对一名体力值不小于你的其他角色造成1点伤害（X为你已损失体力值的一半，向上取整，你至多以此法记录四个牌名）。",
+							"lyzjinzheng_info": "出牌阶段开始时，你可失去1点体力，然后记录一个基本牌或普通锦囊牌的牌名。当你使用记录牌名的牌时，你选择一项：①摸X张牌；②对一名体力值不小于你的其他角色造成1点伤害（X为你已损失体力值的一半，向上取整，你至多以此法记录四个牌名）。",
 							"lyzjinzheng2": "尽征",
 							"lyzjinzheng2_info": "",
+							lyzyilie: "翊烈",
+							"lyzyilie_info": "主公技，限定技，出牌阶段或当你受到伤害后，若你的体力值不大于2，你可令一名不为主公的其他角色增加1点体力上限并摸两张牌，然后其将武将牌替换为“界孙笨”，身份牌替换为忠臣。",
 							lyzluanshi: "乱始",
-							"lyzluanshi_info": "当一名角色的出牌阶段开始时，你可令其进行判定，然后你可弃置一张牌，若此牌与判定结果颜色相同，则你对其造成1点雷电伤害，否则其摸两张牌。",
+							"lyzluanshi_info": "每名角色的出牌阶段开始时，你可令其判定，然后你可弃置一张牌，若此牌与判定结果颜色相同，你对其造成1点雷电伤害，否则其摸两张牌。",
 							lyztaiping: "太平",
-							"lyztaiping_info": "主公技，结束阶段，你可选择一项：将一名角色的势力变更为群；或令一名群势力角色获得技能〖雷击〗、〖鬼道〗或〖天妒〗。",
+							"lyztaiping_info": "主公技，结束阶段，你可选择一项：①将一名角色的势力改为群；②令一名群势力角色获得〖雷击〗、〖鬼道〗或〖天妒〗。",
 							lyzcanqing: "残情",
 							"lyzcanqing_info": "当你使用牌指定其他角色为目标后/成为其他角色使用牌的目标后，你可获得一名目标角色/此牌使用者区域里的一张牌，若你以此法获得了黑色或装备牌，则你失去1点体力或交给其一张牌。",
 							lyzwanai: "惋哀",
-							"lyzwanai_info": "锁定技，回合开始时，你可令一名其他角色获得“哀”（若场上已有“哀”则转移给该角色）。每回合限两次，当有“哀”的角色获得牌后，若其手牌数大于你的体力值，则其弃置多余手牌。",
+							"lyzwanai_info": "锁定技，回合开始时，你可令一名其他角色获得「哀」（若场上已有「哀」则转移给该角色）。每回合限两次，当有「哀」的角色获得牌后，若其手牌数大于你的体力值，其弃置多余手牌。",
 							"lyzwanai2": "惋哀",
 							lyzdingqian: "定谦",
-							"lyzdingqian_info": "锁定技，准备阶段或当你受到伤害后，你令一名没有“谦”的其他角色获得“谦”；当有“谦”的角色于其摸牌阶段外获得牌后，若你的手牌数不大于体力上限，你摸一张牌，否则你可重铸一张牌。",
+							"lyzdingqian_info": "锁定技，准备阶段或当你受到伤害后，你令一名没有「谦」的其他角色获得「谦」。当有「谦」的角色于其摸牌阶段外获得牌后，若你的手牌数不大于体力上限，你摸一张牌，否则你可重铸一张牌。",
 							lyzguilv: "规虑",
-							"lyzguilv_info": "出牌阶段开始时，你可与一名其他角色各摸一张牌，若如此做，则出牌阶段结束时，若其手牌数不大于你，你可对其造成1点火焰伤害或与其各回复1点体力。",
+							"lyzguilv_info": "出牌阶段开始时，你可与一名其他角色各摸一张牌，然后此阶段结束时，若其手牌数不大于你，你可对其造成1点火焰伤害或与其各回复1点体力。",
 							"lyzguilv2": "规虑",
 							"lyzguilv2_info": "",
 							"lyzguilv3": "规虑",
 							"lyzguilv3_info": "",
 							lyzchouyi: "筹易",
-							"lyzchouyi_info": "锁定技，每轮游戏开始时或当你受到伤害后，你展示牌堆顶一张牌，若点数为偶数，你获得“阳爻”，否则你获得“阴爻”；然后若你已有“阳爻”和“阴爻”，你获得“太初”（每种标记限1枚）。",
+							"lyzchouyi_info": "锁定技，每轮游戏开始时或当你受到伤害后，你展示牌堆顶的一张牌，若点数为偶/奇数，你获得「阳爻」/「阴爻」。然后若你有「阳爻」和「阴爻」，你获得「太初」（每种标记限1枚）。",
 							lyztianqian: "天乾",
-							"lyztianqian_info": "准备阶段，你可移去“阳爻”并选择一名角色，然后你摸X张牌，此回合手牌上限+X（X为该角色上回合使用过牌的花色数+类别数）。",
+							"lyztianqian_info": "准备阶段，你可移除「阳爻」并选择一名角色，然后你摸X张牌且此回合手牌上限+X（X为其上回合使用过牌的花色数+类别数）。",
 							"lyztianqian2": "天乾",
 							"lyztianqian2_info": "",
 							"lyztianqian3": "天乾",
 							"lyztianqian3_info": "",
 							lyzdikun: "地坤",
-							"lyzdikun_info": "当一名其他角色的出牌阶段开始时，你可移去“阴爻”并声明一种牌的类别，此阶段结束时，若其于此阶段内使用过该类别的牌，则你可令其失去一个技能，否则你加1点体力上限，然后回复1点体力。",
+							"lyzdikun_info": "每名其他角色的出牌阶段开始时，你可移除「阴爻」并声明一种牌的类别，此阶段结束时，若其于此阶段内使用过该类别的牌，你可令其失去一个技能，否则你加1点体力上限，然后回复1点体力。",
 							"lyzdikun2": "地坤",
 							"lyzdikun2_info": "",
 							lyzguiyuan: "归元",
-							"lyzguiyuan_info": "出牌阶段，你可移去“太初”并选择一项：令至多两名其他角色将体力回复至体力上限；或令至多两名其他角色弃置所有牌，然后将体力上限调整至与当前体力值相同。",
+							"lyzguiyuan_info": "出牌阶段，你可移除「太初」并令至多两名其他角色：①回复所有体力；②弃置所有牌，然后将体力上限调整至与当前体力值相同。",
 							lyzxingxuan: "星旋",
-							"lyzxingxuan_info": "每回合限一次，当你使用牌指定其他角色为目标后/成为其他角色使用牌的目标后，你可与其中一名目标角色/此牌使用者交换手牌或装备区里的牌。",
+							"lyzxingxuan_info": "每回合限一次，当你使用牌指定其他角色为目标后/成为其他角色使用牌的目标后，你可与一名目标角色/此牌使用者交换手牌或装备区里的牌。",
 							"lyzxingxuan2": "星旋",
 							lyzlingying: "绫缨",
-							"lyzlingying_info": "当一名角色的出牌阶段结束时，你可将一张装备牌当作该角色于此阶段内使用过的一张基本牌或普通锦囊牌使用，你以此法使用的牌无距离和次数限制。",
-							lyzxianmu: "献穆",
-							"lyzxianmu_info": "锁定技，任一角色的回合结束时，你于此回合每满足以下一项便摸一张牌：获得过牌；失去过牌；受到过伤害。然后你可将两张牌交给一名其他角色，若如此做，其复原武将牌，然后你令其视为使用一张无距离限制的任意一种【杀】或【桃】。",
-							lyzfengjun: "奉君",
-							"lyzfengjun_info": "出牌阶段限一次或当你受到伤害后，你可选择一名有牌的其他角色，然后摸一张牌并与其拼点。当你拼点赢时，你可令一名角色视为拥有〖密诏〗且摸牌阶段多摸一张牌直至其回合结束。",
-							lyzfengjun3: "奉君",
-							lyzfengjun_damage: "奉君",
+							"lyzlingying_info": "每名角色的出牌阶段结束时，你可将一张装备牌当该角色于此阶段内使用过的一张基本牌或普通锦囊牌使用（无距离和次数限制）。",
 							lyzyinghuo: "荧惑",
-							"lyzyinghuo_info": "出牌阶段限一次，你可将至少一张带伤害标签的牌交给一名其他角色，然后该角色展示所有手牌，并对你选择的另一名角色依次强制使用其中所有带伤害标签的牌。结算完毕后，若有角色因此受到伤害，则你摸一张牌并回复1点体力。",
+							"lyzyinghuo_info": "出牌阶段限一次，你可将至少一张带伤害标签的牌交给一名其他角色，然后其展示所有手牌，并对你选择的另一名角色依次强制使用其中所有带伤害标签的牌。结算完毕后，若有角色因此受到伤害，你摸一张牌并回复1点体力。",
 							lyzxingyun: "行云",
-							"lyzxingyun_info": "锁定技，每轮游戏开始时，你声明一种颜色；当你成为异性角色使用该色牌或同性角色使用非该色牌的目标后，你摸一张牌且手牌上限+1直至你回合结束。",
+							"lyzxingyun_info": "锁定技，每轮游戏开始时，你声明一种颜色。当你成为异/同性角色使用该色/非该色牌的目标后，你摸一张牌且手牌上限+1直至你回合结束。",
 							"lyzxingyun_draw": "行云",
 							"lyzxingyun_draw_info": "",
 							lyzningxian: "凝弦",
-							"lyzningxian_info": "出牌阶段限一次，你可将一张基本牌或普通锦囊牌置于你的武将牌上，称为“弦”（“弦”的花色和牌名须各不相同）；你的手牌上限+X（X为“弦”的数量）。",
+							"lyzningxian_info": "出牌阶段限一次，你可将一张基本牌或普通锦囊牌置于你的武将牌上，称为「弦」（「弦」的花色和牌名须各不相同）。你的手牌上限+X（X为「弦」的数量）。",
 							lyzjueyin: "绝音",
-							"lyzjueyin_info": "锁定技，每回合限一次，当你需要使用或打出与“弦”同名的牌时，你可视为使用或打出了此牌，然后若此时是你的回合内，你摸一张牌。",
+							"lyzjueyin_info": "锁定技，每回合限一次，当你需要使用或打出与「弦」同名的牌时，你可视为使用或打出了此牌，然后若此时是你的回合内，你摸一张牌。",
 							"lyzjueyin2": "绝音",
 							"lyzjueyin2_info": "",
 							"lyzjueyin3": "绝音",
 							"lyzjueyin4": "绝音",
 							lyzdizui: "涤罪",
-							"lyzdizui_info": "出牌阶段限一次，你可将三张“弦”置入弃牌堆并选择一名其他角色，令其立即死亡。",
+							"lyzdizui_info": "出牌阶段限一次，你可移去三张「弦」并令一名其他角色立即死亡。",
 							lyzzhiguo: "掷果",
-							"lyzzhiguo_info": "锁定技，场上女性角色摸牌阶段多摸一张牌；其摸牌阶段结束时，须交给你一张牌并令你回复1点体力，然后你可令其失去或回复1点体力。",
+							"lyzzhiguo_info": "锁定技，场上的女性角色：①于其摸牌阶段多摸一张牌；②于其摸牌阶段结束时，须交给你一张牌并令你回复1点体力，然后你可令其失去或回复1点体力。",
 							"lyzzhiguo2": "掷果",
 							"lyzzhiguo2_info": "",
 							lyzpingfang: "评芳",
@@ -12462,166 +13464,182 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							lyzqingyan: "倾颜",
 							"lyzqingyan_info": "出牌阶段每名角色限一次，你可失去1点体力或弃置一张【酒】，然后令你或一名女性角色摸三张牌。",
 							lyzfengxuan: "锋玄",
-							"lyzfengxuan_info": "锁定技，当你使用的黑色牌结算完毕后或成为其他角色使用黑色牌的目标后，若你“锋”的数量小于体力上限，则你获得1枚“锋”。",
+							"lyzfengxuan_info": "锁定技，当你使用的黑色牌结算完毕后或成为其他角色使用黑色牌的目标后，若你「锋」的数量小于体力上限，你获得1枚「锋」。",
 							lyztiansha: "天煞",
-							"lyztiansha_info": "出牌阶段限一次，你可移去所有“锋”并摸等量的牌；根据你此次移去“锋”的数量，如下效果生效直至回合结束：不小于2，其他角色不能使用或打出手牌；不小于3，你使用牌无次数限制；不小于4，其他角色的技能失效。",
+							"lyztiansha_info": "出牌阶段限一次，你可移除所有「锋」并摸等量的牌。根据你此次移除「锋」的数量，如下效果生效直至回合结束：不小于2，其他角色不能使用或打出手牌；不小于3，你使用牌无次数限制；不小于4，其他角色的技能失效。",
 							lyztiansha3: "天煞",
 							lyztiansha4: "天煞",
 							lyzzhidian: "治典",
-							"lyzzhidian_info": "准备阶段，你可摸两张牌，然后将两张牌置于武将牌上，称为“典”。当一名角色使用牌时，你可获得一张同类别的“典”并选择一项：令此牌无效；或令其回复1点体力。",
+							"lyzzhidian_info": "准备阶段，你可摸两张牌，然后将两张牌置于武将牌上，称为「典」。当一名角色使用牌时，你可获得一张同类别的「典」并选择一项：①令此牌无效；②令其回复1点体力。",
 							lyzshulun: "束论",
-							"lyzshulun_info": "当一名其他角色的回合开始时，若其上回合未成为过〖束论〗的目标，则你可声明一种牌的类别，令其只能使用或打出该类别的牌直至回合结束。",
+							"lyzshulun_info": "每名其他角色的回合开始时，若你上回合未对其发动过本技能，你可声明一种牌的类别，令其只能使用或打出该类别的牌直至回合结束。",
 							"lyzshulun2": "束论",
 							"lyzshulun2_info": "",
 							lyzjianji: "检记",
-							"lyzjianji_info": "限定技，出牌阶段，你可弃置三张牌，然后令一名其他角色失去X点体力，若你以此法弃置的牌类别均不同且该角色未因此死亡，回合结束时，你令此技能于此局游戏内的发动次数上限+1（X为其体力值）。",
+							"lyzjianji_info": "限定技，出牌阶段，你可弃置三张牌，然后令一名其他角色失去所有体力。若你以此法弃置牌的类别均不同且该角色未因此死亡，回合结束时，你令此技能于此局游戏内的发动次数上限+1。",
 							lyzhongzheng: "虹铮",
-							"lyzhongzheng_info": "锁定技，准备阶段或当你造成/受到伤害后，你获得1枚“势”。当你使用【杀】或【决斗】指定唯一目标后，你可为此牌附加『气慑』、『断腕』或『枭首』三种效果之一，然后摸X张牌（X为本次移去“势”的数量）。<br>『气慑』：移去1枚“势”，你观看其手牌并弃置其中一张。<br>『断腕』：移去2枚“势”，你废除其武器栏，然后令其攻击范围为0直至其回合结束。<br>『枭首』：移去3枚“势”，此牌不能被响应且伤害基数改为其当前体力值。",
+							"lyzhongzheng_info": "锁定技，准备阶段或当你造成或受到伤害后，你获得1枚「势」。当你使用【杀】或【决斗】指定唯一目标后，你可为此牌附加『气慑』、『断腕』或『枭首』三种效果之一，然后摸X张牌（X为本次移除「势」的数量）。<br>『气慑』：移除1枚「势」，你观看其手牌并弃置其中一张。<br>『断腕』：移除2枚「势」，你废除其武器栏，然后令其攻击范围为0直至其回合结束。<br>『枭首』：移除3枚「势」，此牌不能被响应且伤害值基数改为其当前体力值。",
 							"lyzhongzheng2": "虹铮",
 							"lyzhongzheng2_info": "",
 							lyzxiansheng: "显圣",
-							"lyzxiansheng_info": "觉醒技，当你进入濒死状态时，你减1点体力上限并将体力回复至体力上限，然后获得〖武神〗。",
+							"lyzxiansheng_info": "觉醒技，当你进入濒死状态时，你减1点体力上限并回复所有体力，然后获得〖武神〗。",
 							lyzrongcheng: "戎承",
 							"lyzrongcheng_info": "当你使用基本牌后，你可重铸一张牌，然后你可移动场上的一张牌。",
 							lyzzhuoji: "灼祭",
-							"lyzzhuoji_info": "锁定技，出牌阶段开始时，你视为使用一张不计入次数且无距离限制的火【杀】。当你对装备数小于你的其他角色造成伤害时，此伤害+1。",
-							lyznewqiangxi: "强袭",
-							"lyznewqiangxi_info": "出牌阶段对每名角色限一次，你可以失去1点体力或弃置一张武器牌，然后对你攻击范围内的一名其他角色造成1点伤害。",
-							lyznewtieqi: "铁骑",
-							"lyznewtieqi_info": "当你使用【杀】指定一名角色为目标后，你可以进行一次判定并令该角色的非锁定技失效直到回合结束，除非该角色弃置一张与判定结果花色相同的牌，否则不能使用【闪】抵消此【杀】。",
-							lyznewxuanfeng: "旋风",
-							"lyznewxuanfeng_info": "当你于弃牌阶段弃置过至少两张牌，或当你失去装备区里的牌后，你可以弃置至多两名其他角色的共计两张牌。然后若此时是你的回合内，你可以对其中一名角色造成1点伤害。",
-							lyznewwansha: "完杀",
-							"lyznewwansha_info": "锁定技，你的回合内，①不处于濒死状态的其他角色不能使用【桃】。②当有角色于你的回合内进入濒死状态时，你令你和除该角色之外的其他角色非锁定技失效直到此濒死状态结算结束。",
+							"lyzzhuoji_info": "锁定技，出牌阶段开始时，你视为使用一张不计入次数且无距离限制的火【杀】。你对装备数小于你的其他角色造成的伤害+1。",
 							lyzwangzuo: "王佐",
-							"lyzwangzuo_info": "锁定技，准备阶段或当你受到伤害后，你摸一张牌并从三张随机的未登场武将牌上选择一个技能，然后你可令一名角色获得此技能直至其回合结束。若其以此法获得的技能来自魏或神势力，则你可令其回复1点体力或摸一张牌。",
+							"lyzwangzuo_info": "锁定技，准备阶段或当你受到伤害后，你摸一张牌并从三张未登场的武将牌中选择一个技能，然后你可令一名角色获得此技能直至其回合结束，若其以此法获得的技能来自魏或神势力，你可再令其回复1点体力或摸一张牌。",
 							lyzxianshi: "先识",
-							"lyzxianshi_info": "每名角色限一次，当一名角色的回合开始时，你可重铸一张牌并令其跳过：1.摸牌阶段和出牌阶段；2.判定阶段和弃牌阶段。",
+							"lyzxianshi_info": "每名角色的回合开始时，若其不在本技能的记录中，你可重铸一张牌，然后记录此角色并令其跳过此回合的：①摸牌阶段和出牌阶段；②判定阶段和弃牌阶段。",
 							lyzxiaoran: "萧然",
-							"lyzxiaoran_info": "觉醒技，当你进入濒死状态时，你将体力回复至体力上限并重置〖先识〗记录的角色，然后你失去〖王佐〗，获得〖困奋〗。",
+							"lyzxiaoran_info": "觉醒技，当你进入濒死状态时，你回复所有体力并复原〖先识〗记录的角色，然后失去〖王佐〗并获得〖困奋〗。",
 							lyznewkunfen: "困奋",
 							"lyznewkunfen_info": "锁定技，结束阶段，你失去1点体力，然后摸两张牌。",
 							lyzliaolai: "辽来",
-							lyzliaolai_info: "锁定技，体力值不小于你的其他角色不能响应你使用的牌。当你对其他角色造成伤害后，若其手牌或装备数不小于你，则你获得其区域里的一张牌。",
+							lyzliaolai_info: "锁定技，体力值不小于你的其他角色不能响应你使用的牌。当你对手牌或装备数不小于你的其他角色造成伤害后，你获得其区域里的一张牌。",
 							lyzshepo: "慑魄",
-							lyzshepo_info: "出牌阶段限一次，你可视为对一名其他角色强制使用一张雷【杀】或【决斗】（若其体力值小于你，则你须先失去1点体力），若你以此法对其造成了伤害，则其跳过下个出牌阶段。",
+							lyzshepo_info: "出牌阶段限一次，你可视为对一名其他角色强制使用一张雷【杀】或【决斗】（若其体力值小于你，则你须先失去１点体力），若你以此法对其造成了伤害，其跳过下个出牌阶段。",
 							lyzshepo2: "慑魄",
 							lyztaoming: "韬明",
-							"lyztaoming_info": "出牌阶段限一次或当你受到伤害后，你可选择一名其他角色并弃置X张手牌，若如此做，你令其展示所有手牌，然后你将其中至少一张花色不同的牌交给等量的除该角色外的角色（X为你与其手牌数之差且至多为3）。",
+							"lyztaoming_info": "出牌阶段限一次或当你受到伤害后，你可选择一名其他角色并弃置X张手牌，若如此做，你令其展示所有手牌，然后你将其中至少一张花色各不相同的牌按序分配给等量的除该角色外的角色（X为你与其手牌数之差且至多为3）。",
 							lyzcaiqing: "才清",
-							"lyzcaiqing_info": "锁定技，每回合每类牌限一次，当你不因使用而失去手牌后，你可令一名角色从牌堆里获得一张此次失去牌中所含类别的牌。任一角色的回合结束后，若你于此回合至少发动了两次〖才清〗，则你可摸一张牌或回复1点体力。",
+							"lyzcaiqing_info": "每回合每类牌限一次，当你不因使用而失去手牌后，你可令一名角色获得一张此次失去牌中所含类别的牌。每名角色的回合结束后，若你于此回合至少发动了两次本技能，你可摸一张牌或回复1点体力。",
 							"lyzpianwu": "翩舞",
-							"lyzpianwu_info": "<font color=red>特殊效果：你的技能不会无效或失去。</font><br><br>锁定技，①若场上因〖翩舞〗创建技能的数量不超过35个，则你于以下时机创建一个随机触发技能：游戏开始后；当你受到伤害后；当你造成伤害时(三轮内)；你的回合结束时。然后你选择一项：将此技能赠与一名其他角色；或获得此技能。②以此法创建的技能每回合限发动五次。",
+							"lyzpianwu_info": "<font color=red>特殊效果：你的技能不会失效或失去。</font><br><br>锁定技，若场上因本技能而创建的技能数量不超过35个，你于以下时机创建一个随机的触发技能：游戏开始后；当你受到伤害后；当你造成伤害时（三轮内）；你的回合结束时。然后你选择一项：①将此技能赠予一名其他角色；②获得此技能。以此法创建的技能每回合限发动五次。",
 							lyzzhanmo: "战陌",
 							"lyzzhanmo_info": "锁定技，当你使用有目标的基本牌或普通锦囊牌时，若你：体力值为1或2，你对一名其他角色造成1点雷电伤害；装备区没有牌，你令此牌结算两次。",
 							lyzyoulin: "犹凛",
-							"lyzyoulin_info": "锁定技，出牌阶段开始时，你弃置所有装备牌，然后废除一个装备栏并选择一项：①本阶段你使用【杀】的次数和额定目标数+1；②你横置任意名角色；③你计算与其他角色的距离-1。结束阶段，你摸等同于你已废除装备栏数量的牌。",
-							lyzoldchenju: "尘局",
-							"lyzoldchenju_info": "锁定技，游戏开始时，随机将场上角色数一半（向下取整）的其他角色归为A类，剩余的其他角色归为B类，两类角色各随机获得一项效果；每轮游戏开始时，刷新两类角色的效果。你的回合开始时或当你受到伤害后，你可选择一项：改变一名其他角色的分类；或刷新一类角色的效果。<br>可获得的效果如下：<br>1.造成/受到的伤害+1；<br>2.手牌上限+1/-1；<br>3.计算与其他角色的距离-1/+1；<br>4.摸牌阶段额定摸牌数+1/-1；<br>5.只能对同类/异类角色使用牌。",
-							lyzoldchenju2: "尘局",
-							lyzoldchenju3: "尘局",
-							lyzoldchenju4: "尘局",
+							"lyzyoulin_info": "锁定技，出牌阶段开始时，你弃置所有装备牌，然后废除一个装备栏并选择一项：①本阶段使用【杀】的限制次数+1且可多指定一个目标；②横置任意名角色；③计算与其他角色的距离-1。结束阶段，你摸等同于你已废除装备栏数量的牌。",
+							lyzchenju: "尘局",
+							"lyzchenju_info": "锁定技，你于以下时机从五张未登场的武将牌中选择一个技能：游戏开始时；准备阶段；结束阶段；当你受到伤害后。然后你可令一名角色获得此技能并失去上次以此法获得的技能。",
 							lyzchuiweng: "垂瓮",
-							"lyzchuiweng_info": "出牌阶段限一次，你可令一名角色从牌堆或弃牌堆中获得其手牌中缺失类别的各一张牌。若其以此法获得了至少两张牌，则你回复1点体力。",
+							"lyzchuiweng_info": "出牌阶段限一次，你可令一名角色获得其手牌中缺失类别的各一张牌，然后若其以此法获得了至少两张牌，你回复1点体力。",
 							lyzchuiweng2: "垂瓮",
+							lyzwangsheng: "往生",
+							"lyzwangsheng_info": "出牌阶段限一次，你可令一名已死亡的角色复活并将体力上限与体力值调整为2，然后其失去所有技能并摸两张牌。",
 							lyzjiansha: "谏杀",
-							"lyzjiansha_info": "出牌阶段限一次，你可摸两张牌，然后可将一张带伤害标签的牌交给一名其他角色并可视为使用一张同名牌（无距离和次数限制）。",
+							"lyzjiansha_info": "出牌阶段限一次，你可摸两张牌，然后可将一张带伤害标签的牌交给一名其他角色并可视为使用一张同名牌（以此法使用的牌无距离与次数限制，且不计入次数限制）。",
 							lyzyinlan: "引澜",
-							"lyzyinlan_info": "当一名其他角色使用带伤害标签的牌指定唯一目标时，你可选择一项：交给其一张红色牌，然后为此牌额外指定一个目标；或交给其一张黑色牌，然后令此牌的伤害值+1。",
+							"lyzyinlan_info": "当一名其他角色使用带伤害标签的牌指定唯一目标时，你可选择一项：①交给其一张红色牌并为此牌多指定一个目标；②交给其一张黑色牌并令此牌的伤害值+1。",
 							lyzminwei: "泯微",
 							"lyzminwei_info": "锁定技，当你于回合外成为一类牌的目标后，本回合不处于濒死状态的你不能再成为此类牌的目标。",
 							lyzaolie: "傲烈",
-							"lyzaolie_info": "锁定技，回合开始时，你回复1点体力并摸一张牌，然后若你的体力上限小于4，你加1点体力上限。当你使用或被使用带伤害标签的牌后，你摸一张牌，若此带伤害标签的牌不为红色，则你不能再以此法摸牌直至回合结束。",
+							"lyzaolie_info": "锁定技，回合开始时，你回复1点体力并摸一张牌，然后若你的体力上限小于4，你加1点体力上限。当你使用或被使用一张带伤害标签的牌后，你摸一张牌，然后若此带伤害标签的牌不为红色，你不能再以此法摸牌直至回合结束。",
 							lyzdingjiang: "定疆",
-							"lyzdingjiang_info": "使命技，当你造成1点伤害后，你获得1枚“疆”。成功：准备阶段，若你拥有3枚“疆”或更多，则你摸等同于“疆”数量的牌，然后选择并获得以下两个技能：〖英霸〗、〖神著〗、〖天义〗、〖破军〗。失败：当你进入濒死状态时，你将体力回复至1点。",
+							"lyzdingjiang_info": "使命技，当你造成1点伤害后，你获得1枚「疆」。<br>成功：准备阶段，若你有至少3枚「疆」，则你摸等同于「疆」数量的牌，然后选择获得以下两个技能：〖英霸〗、〖神著〗、〖天义〗、〖破军〗。<br>失败：当你进入濒死状态时，你将体力回复至1点。",
 							lyzbalve: "霸略",
-							"lyzbalve_info": "主公技，游戏开始时，你加1点体力上限，然后若你拥有技能〖定疆〗，则你获得1枚“疆”。",
+							"lyzbalve_info": "主公技，游戏开始时，你加1点体力上限，然后若你有〖定疆〗，你获得1枚「疆」。",
 							lyzpojun2: "破军",
 							"lyzpojun2_info": "",
 							lyzpojun3: "破军",
 							"lyzpojun3_info": "",
-							lyzchenju: "尘局",
-							"lyzchenju_info": "锁定技，你于以下时机从五张随机的未登场的武将牌上选择一个技能：游戏开始时；准备阶段；结束阶段；当你受到伤害后。然后你可令一名角色失去上次以此法获得的技能并获得此技能。",
-							lyzwangsheng: "往生",
-							"lyzwangsheng_info": "出牌阶段限一次，你可令一名已死亡的角色复活并将体力值与体力上限调整为2，然后其失去所有技能并摸两张牌。",
 							lyzkezhi: "克止",
 							"lyzkezhi_info": "锁定技，你造成或受到的属性伤害+1。当你受到伤害时，你摸等同于此次伤害值数量的牌，然后失去1点体力或减1点体力上限并防止此伤害。",
 							lyzyouxun: "诱循",
-							"lyzyouxun_info": "出牌阶段每名角色限一次，你可与一名其他角色拼点：若你赢，其对你造成1点火焰伤害且你本回合不能再发动此技能；若你没赢，你获得其区域里的一张牌，然后对其造成1点雷电伤害。",
+							"lyzyouxun_info": "出牌阶段每名角色限一次，你可拼点：若你赢，拼点对象对你造成1点火焰伤害且你此回合不能再发动本技能；若你没赢，你获得拼点对象区域里的一张牌，然后对其造成1点雷电伤害。",
 							lyzyinjun: "阴军",
-							"lyzyinjun_info": "当你使用【杀】指定目标后，你可将其任意张牌扣置于其武将牌旁。若如此做，当前回合结束后，你获得这些牌中的一张，其获得剩余的牌。当你对手牌数不大于你的其他角色造成伤害时，此伤害+1。",
+							"lyzyinjun_info": "当你使用【杀】指定目标后，你可将其任意张牌扣置于其武将牌旁，当前回合结束后，你获得这些牌中的一张，其获得剩余的牌。你对手牌数不大于你的其他角色造成的伤害+1。",
 							lyzyinjun2: "阴军",
 							lyzyinjun3: "阴军",
 							lyzyinjun4: "阴军",
 							lyzmingbu: "冥簿",
-							"lyzmingbu_info": "游戏开始时，你任意输入至多五个字符。出牌阶段限一次，你可弃置X张牌，然后令场上所有姓名中包含该字符的其他角色失去1点体力且本回合技能失效（X为你以此法输入字符数的一半，向上取整）。",
+							"lyzmingbu_info": "游戏开始时，你输入至多五个字符。出牌阶段限一次，你可弃置X张牌并令场上所有姓名中包含你输入字符的其他角色失去1点体力且本回合技能失效（X为你以此法输入字符数的一半，向上取整）。",
 							lyzxinlan: "心澜",
-							"lyzxinlan_info": "出牌阶段限一次，你可依次选择两名角色，令前者执行以下一项，然后令后者执行另一项：1.回复或失去体力至与对方相同；2.将手牌补或弃至与对方相同；3.随机使用牌堆里的装备牌或弃置装备区的牌至与对方相同。",
+							"lyzxinlan_info": "出牌阶段限一次，你可依次选择两名角色，然后令前者执行以下一项，再令后者执行另一项：①回复或失去体力至与对方相同；②将手牌摸或弃至与对方相同；③随机使用牌堆里的装备牌或弃置装备区的牌至与对方相同。",
 							lyzyanzun: "偃尊",
-							"lyzyanzun_info": "结束阶段或当你受到伤害后，你可展示所有手牌，并根据这些牌所满足的条件依次选择对应项：没有基本牌，你可视为使用一张基本牌；没有锦囊牌，你可视为使用一张普通锦囊牌；没有装备牌，你将牌堆或弃牌堆里的一张装备牌置于你的一个空置装备栏内。结算完毕后，你摸一张牌。",
+							"lyzyanzun_info": "结束阶段或当你受到伤害后，你可展示所有手牌并根据这些牌所满足的条件依次执行对应项：没有基本牌，你可视为使用一张基本牌；没有锦囊牌，你可视为使用一张普通锦囊牌；没有装备牌，你将一张装备牌置于你的一个空置装备栏内。结算完毕后，你摸一张牌。",
 							lyzyintian: "淫天",
-							lyzyintian_info: "锁定技，准备阶段，你选择一项：将攻击范围内一名男性角色的性别改为女；或将攻击范围内一名女性角色的势力改为神。",
+							lyzyintian_info: "锁定技，准备阶段，你选择一项：①将攻击范围内一名男性角色的性别改为女；②将攻击范围内一名女性角色的势力改为神。",
 							lyzyudi: "欲地",
-							lyzyudi_info: "出牌阶段限一次，你可选择一名女性角色，然后观看其手牌并获得其中所有的红色牌，若你未以此法获得牌，则你可对其造成2点伤害。",
+							lyzyudi_info: "出牌阶段限一次，你可选择一名女性角色，然后观看其手牌并获得其中所有的红色牌，若你未以此法获得牌，你可对其造成2点伤害。",
 							lyzdianshen: "玷神",
-							lyzdianshen_info: "结束阶段，你可弃置一张点数为J的牌并令一名神势力女性角色选择一项：孕，其将手牌补至体力上限，然后将所有手牌交给你；缚，将武将牌翻至背面并横置；凌，减1点体力上限并令你加1点体力上限。",
+							lyzdianshen_info: "结束阶段，你可弃置一张点数为J的牌并令一名神势力女性角色选择一项：孕，将手牌摸至体力上限，然后将所有手牌交给你；缚，将武将牌翻至背面并横置；凌，减1点体力上限并令你加1点体力上限。",
 							lyzrugui: "辱鬼",
 							lyzrugui_info: "限定技，当一名女性角色死亡后，你可加1点体力上限并回复1点体力，然后获得其所有牌。",
 							lyzqiqing: "祈情",
-							lyzqiqing_info: "当一名其他角色的回合开始时，其可交给你一张牌，然后可令一名异性角色摸一张牌。",
+							lyzqiqing_info: "每名其他角色的回合开始时，其可交给你一张牌，然后可令一名异性角色摸一张牌。",
 							lyzshenjiang: "神降",
-							lyzshenjiang_info: "出牌阶段限一次，你可从所有名称字数不大于(1)的牌中选择至多(1)张名称字数不同的可使用的牌，然后按选牌的顺序依次视为合法地使用这些牌。",
+							lyzshenjiang_info: "出牌阶段限一次，你可从所有名称字数不大于（1）的牌中选择至多（1）张名称字数各不相同的牌，然后按选牌的顺序视为依次使用这些牌。",
 							lyzdianchuan: "点川",
 							lyzdianchuan_info: "出牌阶段结束时，你令〖神降〗中所有括号内的数字+1，然后你可交给一名因〖祈情〗而交给过你牌的角色一至两张牌并再令〖神降〗中所有括号内的数字+1（至多为5）。",
 							lyzdianchuan2: "点川",
 							lyzdouzhuan: "斗转",
-							lyzdouzhuan_info: "出牌阶段限一次，你可选择一名角色，若其没有“阵”，则其获得“阵”，否则其移去“阵”（有“阵”的角色称为阵列角色）。",
+							lyzdouzhuan_info: "出牌阶段限一次，你可选择一名角色，若其没有「阵」，则其获得「阵」，否则其移除「阵」（有「阵」的角色称为阵列角色）。",
 							lyzzhen: "阵",
 							lyzxingsuo: "星锁",
-							lyzxingsuo_info: "锁定技，非阵列角色不能响应阵列角色使用的带伤害标签的牌。当非阵列角色：①受到伤害时，若其上下家均为阵列角色且不为同一角色，则此伤害+1；②使用带伤害标签的牌指定阵列角色为唯一目标时，其需弃置一张牌，否则此牌无效。",
+							lyzxingsuo_info: "锁定技，非阵列角色不能响应阵列角色使用的带伤害标签的牌。当非阵列角色：①受到伤害时，若其上下家均为阵列角色且不为同一角色，此伤害+1；②使用带伤害标签的牌指定阵列角色为唯一目标时，其需弃置一张牌，否则此牌无效。",
 							lyzxingsuo2: "星锁",
 							lyzxingsuo3: "星锁",
 							lyztianji: "天汲",
-							lyztianji_info: "每轮游戏限一次，当一名其他角色的回合结束后，你可减1点体力上限并进行一个额外的回合。在你的额外回合内，你于摸牌阶段多摸一张牌且跳过弃牌阶段。",
+							lyztianji_info: "每轮限一次，每名其他角色的回合结束后，你可减1点体力上限并执行一个额外的回合。在你的额外回合内，你于摸牌阶段多摸一张牌且跳过弃牌阶段。",
 							lyzdingzheng: "订正",
-							lyzdingzheng_info: "每回合限两次，当一名其他角色不因此技能使用的仅指定唯一非自身目标的基本牌或普通锦囊牌结算完毕后，若此牌的使用者与目标均存活，则你可弃置一张红/黑色牌并令其视为强制对同一目标再次使用此牌/视为你强制对其使用此牌。",
+							lyzdingzheng_info: "每回合限两次，当一名其他角色不因本技能使用的仅指定唯一非自身目标的基本牌或普通锦囊牌结算完毕后，若此牌的使用者与目标均存活，你可弃置一张红/黑色牌并令其视为强制对同一目标再次使用此牌/视为你强制对其使用此牌。",
 							lyzshiyi: "释疑",
-							lyzshiyi_info: "锁定技，每轮游戏开始时，你选择一名其他角色。当其使用牌时，若此牌与其本回合使用的上一张牌均有颜色且颜色：不同，其摸一张牌；相同，你摸一张牌。",
+							lyzshiyi_info: "锁定技，每轮游戏开始时，你选择一名其他角色。当其使用牌时，若此牌与其本回合使用的上一张牌均有颜色且颜色不同/相同，其/你摸一张牌。",
 							lyzhuanxing: "缓行",
-							lyzhuanxing_info: "锁定技，当一名其他角色的回合结束后，其须交给你一张牌。你的非首回合开始时，你须选择X名其他角色，然后依次交给这些角色一张牌（X为你的手牌数与场上存活角色数的一半（向下取整）中的较小值）。",
+							lyzhuanxing_info: "锁定技，每名其他角色的回合结束后，其须交给你一张牌。你的非首回合开始时，你须选择X名其他角色，然后依次交给这些角色一张牌（X为你的手牌数与场上存活角色数的一半（向下取整）中的较小值）。",
 							lyzmingjue: "冥绝",
-							lyzmingjue_info: "锁定技，若游戏人数大于3且场上无死亡角色，则你防止受到的所有伤害且跳过弃牌阶段。每回合限一次，当你进入濒死状态时，你将体力回复至1点，然后视为强制使用一张无距离限制的火【杀】，若此火【杀】未造成伤害，你失去1点体力。",
+							lyzmingjue_info: "锁定技，若游戏人数大于3且场上无死亡角色，你防止受到的所有伤害且跳过弃牌阶段。每回合限一次，当你进入濒死状态时，你将体力回复至1点，然后视为强制使用一张无距离限制的火【杀】，若此火【杀】未造成伤害，你失去1点体力。",
 							lyzyanren: "魇刃",
 							lyzyanren_info: "出牌阶段限一次，你可观看一名其他角色的手牌并弃置其区域里的一至两张同色牌，若为红/黑色，则规定牌名为【杀】/【决斗】；若弃牌数为一/二，则视为你对其/其对你强制使用一张规定牌名的牌。",
 							lyzedao: "噩道",
-							lyzedao_info: "出牌阶段限一次，你可令一名对你造成过伤害的其他角色进行判定，若结果为红/黑色，其称为“饿鬼”/“畜牲”。“饿鬼”的手牌上限-1；“畜牲”受到的属性伤害+1。",
+							lyzedao_info: "出牌阶段限一次，你可令一名对你造成过伤害的其他角色判定：若结果为红/黑色，其称为“饿鬼”/“畜牲”。“饿鬼”的手牌上限-1；“畜牲”受到的属性伤害+1。",
 							lyzegui: "饿鬼",
 							lyzchusheng: "畜牲",
 							lyzzhaojie: "昭节",
-							lyzzhaojie_info: "出牌阶段限一次，你可进行一次判定或弃置一张牌，并记录判定牌（弃置牌）的花色。若如此做，则直至你下回合开始，当你使用此花色有目标的基本牌或普通锦囊牌时，你选择一项：①摸一张牌；②弃置一名角色区域里的一张牌。",
+							lyzzhaojie_info: "出牌阶段限一次，你可判定或弃置一张牌，并记录此次判定牌或弃置牌的花色。若如此做，则直至你下回合开始，当你使用此花色有目标的基本牌或普通锦囊牌时，你选择一项：①摸一张牌；②弃置一名角色区域里的一张牌。",
 							lyzzhaojie_lv1: "昭节·升级lv1",
-							lyzzhaojie_lv1_info: "出牌阶段限一次，你可进行一次判定或弃置一张牌，并记录判定牌（弃置牌）的颜色。若如此做，则直至你下回合开始，当你使用此颜色有目标的基本牌或普通锦囊牌时，你选择一项：①摸一张牌；②弃置一名角色区域里的一张牌。",
+							lyzzhaojie_lv1_info: "出牌阶段限一次，你可判定或弃置一张牌，并记录此次判定牌或弃置牌的颜色。若如此做，则直至你下回合开始，当你使用此颜色有目标的基本牌或普通锦囊牌时，你选择一项：①摸一张牌；②弃置一名角色区域里的一张牌。",
 							lyzzhaojie_lv2: "昭节·升级lv2",
-							lyzzhaojie_lv2_info: "出牌阶段限一次，你可进行一次判定或弃置一张牌，并记录判定牌（弃置牌）的颜色。若如此做，则直至你下回合开始，当你使用或被其他角色使用此颜色有目标的基本牌或普通锦囊牌时，你选择一项：①摸一张牌；②弃置一名角色区域里的一张牌。",
+							lyzzhaojie_lv2_info: "出牌阶段限一次，你可判定或弃置一张牌，并记录此次判定牌或弃置牌的颜色。若如此做，则直至你下回合开始，当你使用或被使用此颜色有目标的基本牌或普通锦囊牌时，你选择一项：①摸一张牌；②弃置一名角色区域里的一张牌。",
 							lyzzhaojie_lv3: "昭节·升级lv3",
-							lyzzhaojie_lv3_info: "出牌阶段限一次，你可进行一次判定或弃置一张牌，并记录判定牌（弃置牌）的颜色。若如此做，则直至你下回合开始，当你使用或被其他角色使用此颜色有目标的基本牌或普通锦囊牌时，你选择两项：①摸一张牌；②弃置一名角色区域里的一张牌；③令此牌结算两次。",
+							lyzzhaojie_lv3_info: "出牌阶段限一次，你可判定或弃置一张牌，并记录此次判定牌或弃置牌的颜色。若如此做，则直至你下回合开始，当你使用或被使用此颜色有目标的基本牌或普通锦囊牌时，你选择两项：①摸一张牌；②弃置一名角色区域里的一张牌；③令此牌结算两次。",
 							lyzyingwu: "颖悟",
-							lyzyingwu_info: "剩余可使用9次，出牌阶段/其他角色的回合限一次，你可视为使用一张单目标普通锦囊牌/【无懈可击】；当此技能的使用次数达到3、6、9时，你对〖昭节〗进行第一、二、三次升级。",
+							lyzyingwu_info: "剩余可使用9次，出牌阶段/其他角色的回合限一次，你可视为使用一张单目标普通锦囊牌/【无懈可击】。当本技能的使用次数达到3/6/9时，你对〖昭节〗进行第一/二/三次升级。",
 							lyzlinhuang: "鳞煌",
-							lyzlinhuang_info: "游戏开始时或当你不因使用而失去牌后，若你“心”的数量小于场上存活角色数，则你获得1枚“心”。你可于合法时机移去1枚“心”并视为使用一张【杀】（任意种类）、【闪】或【无懈可击】。",
+							lyzlinhuang_info: "游戏开始时或当你不因使用而失去牌后，若你「心」的数量小于场上存活角色数，则你获得1枚「心」。你可于合法时机移除1枚「心」并视为使用一张任意种类的【杀】、【闪】或【无懈可击】。",
 							lyzyuwang: "宇望",
 							lyzyuwang_info: "出牌阶段限三次，你可重铸一张牌，然后若此牌为：基本牌，你摸一张牌且本回合手牌上限+1；锦囊牌，你可令一名角色回复1点体力；装备牌，你可移动场上一张牌。",
 							lyzzhuyuan2:"逐渊",
 							lyzzhuyuan:"逐渊",
-							lyzzhuyuan_info:"锁定技，当你使用有颜色的牌指定其他角色为目标/响应其他角色使用的牌时，你令目标角色于此回合称为“渊龙”且不能使用或打出与此牌同色的牌。你计算与非“渊龙”的距离-1且对其使用牌无次数限制。每个回合结束时，若“渊龙”数不大于你的体力上限，则你摸等同于“渊龙”数的牌。",
+							lyzzhuyuan_info:"锁定技，当你使用有颜色的牌指定其他角色为目标/响应其他角色使用的牌时，你令目标角色于此回合称为“渊龙”且不能使用或打出与此牌同色的牌。你计算与非“渊龙”的距离-1且对其使用牌无次数限制。每名角色的回合结束时，你摸等同于“渊龙”数的牌（至多摸五张）。",
 							lyzxianzheng:"弦征",
-							lyzxianzheng_info:"准备阶段，你可弃置你和你攻击范围内任意名角色区域里的一张牌，然后横置至多等同于此次以此法弃置黑色牌数量的角色。若此次弃置的牌大于两张且点数不同，则你可再对一名角色造成1点雷电伤害。",
+							lyzxianzheng_info:"准备阶段，你可弃置你和你攻击范围内任意名角色区域里的一张牌，然后横置至多等同于此次以此法弃置黑色牌数量的角色。若此次弃置的牌大于两张且点数不同，你可再对一名角色造成1点雷电伤害。",
 							lyzyaotian:"爻天",
-							lyzyaotian_info:"锁定技，每轮游戏开始时，清除〖爻天〗记录的字数。当你使用牌时，若〖爻天〗没有记录，则记录此牌字数，否则若你此次使用牌的字数大于/不大于记录字数，你可令一名角色弃/摸X张牌（X为此牌字数与记录数字之差且至少为1，每回合每名角色限一次）。",
+							lyzyaotian_info:"锁定技，每轮游戏开始时，复原本技能为未记录字数的状态。当你使用牌时，若本技能未记录字数，则记录此牌字数，否则若你此次使用牌的字数大于/不大于记录字数，你可令一名角色弃/摸X张牌（X为此牌字数与记录数字之差且至少为1，每回合每名角色限一次）。",
 						    lyzzongjiang:"纵疆",
-							lyzzongjiang_info:"锁定技，当其他角色使用指定多目标的牌结算完毕即将进入弃牌堆时，你获得之。当你于回合外获得牌后，你获得1枚“征”（至多拥有3枚“征”）。",
+							lyzzongjiang_info:"锁定技，当其他角色使用指定多目标的牌结算完毕即将进入弃牌堆时，你获得之。当你于回合外获得牌后，你获得1枚「征」（至多拥有3枚「征」）。",
 							lyzlanzheng:"阑征",
-							lyzlanzheng_info:"锁定技，准备阶段，若你有“征”，则你摸等同于“征”数量的牌并可令「云将·花鬘」回复1点体力；结束阶段，你移去所有“征”并视为依次使用至多等量无距离限制的【杀】，若「天牢令·鲍三娘」在场，则你以此法使用的【杀】无视防具。",
+							lyzlanzheng_info:"锁定技，准备阶段，若你有「征」，则你摸等同于「征」数量的牌并可令“云将·花鬘”回复1点体力。结束阶段，你移除所有「征」并视为依次使用至多等量无距离限制的【杀】，若“天牢令·鲍三娘”在场，你以此法使用的【杀】无视防具。",
+						    lyzshuming:"书命",
+						    lyzshuming_info:"出牌阶段限一次，你可令一名其他角色获得两张（若你已受伤则改为三张）黑色非基本牌或红色基本牌（标记为「书命」牌）。当一名角色失去「书命」牌后，若场上没有处于濒死状态的角色，你可选择一项：①摸一张牌；②对其造成1点伤害且本回合不能再选择此项。",
+						    lyzmianjie:"勉诫",
+						    lyzmianjie_info:"锁定技，当你受到1点伤害后，你摸一张牌，然后观看一名其他角色的手牌并将其中至多X张标记为「书命」牌（X为你已损失的体力值+1）。",
+						    lyzjuao:"倨傲",
+						    lyzjuao_info:"锁定技，每回合限一次，当你使用牌或成为其他角色使用牌的目标时，你可从牌堆里获得四张与此牌名称字数相同且各自牌名互不相同的牌。你的手牌上限基值为0。",
+						    lyzweipo:"威迫",
+						    lyzweipo_info:"弃牌阶段结束时，你可令一名其他角色随机执行以下X项：①弃置一张牌；②失去1点体力；③横置武将牌；④将武将牌翻至背面；⑤将一张【乐不思蜀】置入判定区；⑥将一张【兵粮寸断】置入判定区；⑦非锁定技失效直至其下回合结束（X为你于此阶段内弃置过牌的类别数+1）。",
+						    lyzjimou:"极谋",
+                            "lyzjimou_info":"出牌阶段，你可将一张武器牌或非伤害类锦囊牌当本技能记录牌名中的一张牌使用，此牌结算完毕后，你从本技能的记录中移除此牌名（本技能初始记录的牌名如下：挟令、草木皆兵、文和乱武、出其不意、趁火打劫、偷梁换柱、隔岸观火、美人计、笑里藏刀、借刀杀人）。",
+                            lyzliluan:"悧乱",
+                            "lyzliluan_info":"每回合限X次，当你使用伤害类锦囊牌即将造成伤害时，你可摸一张牌并在〖极谋〗的记录中增加一种伤害类锦囊牌的牌名（X为场上存活角色数的一半，向上取整）。",
+                            lyzguijue:"诡谲",
+                            "lyzguijue_info":"当你成为其他角色使用非装备牌的目标时，若你的手牌数为1，你可将所有手牌置入弃牌堆并发动一次【金蝉脱壳】的效果。",     
+						    lyzchimu:"鸱目",
+							lyzchimu_info:"锁定技，转换技，当一张你使用有目标的或目标包含你的基本牌或普通锦囊牌结算完毕后，阳：你将此牌使用者或一名目标角色区域里的一张牌置于牌堆顶或牌堆底。阴：你从牌堆顶或牌堆底摸一张牌。",
+							lyzgouxi:"媾嬉",
+							lyzgouxi_info:"当一名其他角色使用基本牌或普通锦囊牌指定目标时，若此牌目标包含/不包含你，你可为此牌增加或减少一个目标（目标数至少为一）/成为此牌的额外目标。",
+							lyzduozi:"夺恣",
+							lyzduozi_info:"限定技，当你进入濒死状态时，你可选择一名其他角色，然后与其依次执行以下所有项：①你将体力上限调整至与其相同；②你将体力值调整至与其相同；③其将体力上限调整为2；④其将体力值调整为1；⑤你失去所有技能，然后随机获得两个限定技。",
+							lyzhuisheng:"绘声",
+							lyzhuisheng_info:"锁定技，你于以下时机令一名角色获得1枚「绘」：每轮游戏开始时；准备阶段；当你受到伤害后。有「绘」的角色：①于摸牌阶段多摸一张牌；②于每回合前X次失去牌时，摸一张牌（X为其拥有「绘」的数量且至多为三）。",
+							lyzliandou:"炼斗",
+							lyzliandou_info:"出牌阶段限两次，你可弃置两张牌或失去1点体力，然后可从五个与“杀”有关的技能中选择一个并可令一名角色获得此技能直至你下回合开始。",
+							lyzlingkong:"凌空",
+							lyzlingkong_info:"觉醒技，当你进入濒死状态或其他角色因你造成的伤害而进入濒死状态时，你减1点体力上限并回复所有体力，然后获得〖神怒〗。",
+							lyzshennu:"神怒",
+							lyzshennu_info:"结束阶段，你可令一名角色移除所有「绘」，然后你视为依次使用至多等量的无距离限制的火【杀】。",
+
 						
 						}
 					}
@@ -12641,11 +13659,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		config: {
 
 			"ygb_gengxin": {
-				"name": "扩展版本：5.8.01",
+				"name": "扩展版本：5.8.21",
 				"init": "1",
 				"intro": "点击查看此版本的更新内容",
 				"item": {
-					"1": "<font color=red>更新内容</font>", "2": "<br>1.暗香缭刃—☼关索 登场！（评级：S，定位：输出，过牌）；<br>PS：☼关索为与扩展《云将》和《天牢令》的联动武将，对应的联动武将为「云将·花鬘」与「天牢令·鲍三娘」，任意两名或三名武将的联动效果能够让☼关索的能力大幅提升；<br><br>2.新增扩展说明：本扩展的部分技能依赖另一技能发动效果（例如☼张飞的〖天煞〗依赖〖锋玄〗发动），在单独拥有此技能时有较低概率会出现不可预知的错误。现已将这部分技能纳入“神仙列表”（即无法通过诸如左慈〖化身〗，许劭〖评鉴〗等渠道获取），但不排除一些特殊情况。因此，请各位玩家在游戏时稍加留心；<br><br>3.调整《阳光包》内部分拥有获取其他武将技能能力武将（例如☼神张辽、☼左慈、☼诸葛亮、☼荀彧等），将其可获取的技能库改为与官方武将相同；<br><br>4.新增☼关索的传说皮肤“承父武志”；<br><br>5.调整部分武将的插画、文本、配音。"
+					"1": "<font color=red>更新内容</font>", "2": "（特别感谢“无伤大鸽子”为本扩展近期的版本提供大量露头图片）<br>1.新增了马妹妹的一个原创小故事，也可能是某个扩展的彩蛋提示；<br>2.新增☼大乔的皮肤“活动爆料”；<br>3.新增☼神诸葛亮的传说皮肤“禳星祈命”；<br>4.调整部分武将的插画、文本、配音。"
 				}
 			},
 			"ygb_shuoming": {
@@ -12653,7 +13671,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				"init": "1",
 				"intro": "点击查看扩展说明",
 				"item": {
-					"1": "查看说明", "2": "自制三国武将合集，武将技能均推翻重塑。<br>适用环境：三服全扩，八人军争场。<br>武将强度：平均为半阴级；包内带武将评级，仅代表该武将在本扩展内的强度水平，传说（SSS）武将强度不限。<br><br>注意事项——<br>①本扩展部分引用了游戏本体武将包的代码，请勿隐藏游戏本体的武将包。<br>②本扩展的更新可能会伴随文件的删减，推荐彻底删除旧版再安装新版。<br>③因语音需求，本扩展部分与原版同名同效果的衍生技能为全新ID的技能，可与原版技能共同存在并在满足条件时分别单独发动。<br>④本扩展的部分技能依赖另一技能发动效果（例如☼张飞的〖天煞〗依赖〖锋玄〗发动），在单独拥有此技能时有较低概率会出现不可预知的错误。现已将这部分技能纳入“神仙列表”（即无法通过诸如左慈〖化身〗，许劭〖评鉴〗等渠道获取），但不排除一些特殊情况，请各位玩家在游戏时稍加留心。"
+					"1": "查看说明", "2": "自制三国武将合集，武将技能均推翻重塑。<br>适用环境：三服全扩，八人军争场。<br>武将强度：平均为半阴级；包内带武将评级，仅代表该武将在本扩展内的强度水平，传说（SSS）武将强度不限。<br><br>注意事项——<br>①本扩展部分引用了游戏本体武将包的代码，请勿隐藏游戏本体的武将包。<br>②本扩展的更新可能会伴随文件的删减，推荐彻底删除旧版再安装新版。<br>③因语音需求，本扩展部分与原版同名同效果的衍生技能为全新ID的技能，可与原版技能共同存在并在满足条件时分别单独发动。<br>④本扩展的部分技能依赖另一技能发动效果（例如☼张飞的〖天煞〗依赖〖锋玄〗发动），在单独拥有此技能时有较低概率会出现不可预知的错误。现已将这部分技能纳入“神仙列表”（即无法通过诸如左慈〖化身〗，许劭〖评鉴〗等渠道获取），但不排除一些特殊情况，请各位玩家在游戏时稍加留心。<br>⑤联动扩展《武将界面》于2022.8.5增添了本扩展的一项隐藏成就。本扩展为此同步增添了判定武将“阳光微凉”技能〖倾颜〗于一局内对某名角色累计发动次数的功能，以适配该隐藏成就。"
 				}
 			},
 			"ygb_huanjing": {
@@ -12669,7 +13687,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				"init": "1",
 				"intro": "点击查看鸣谢名单",
 				"item": {
-					"1": "<font color=navy>鸣谢名单</font>", "2": "·代码支持：戒除联盟、诗笺、寰宇星城、微尘、“柚子、奶茶、猫以及面具”、尋。<br>·素材支持：〖世海〗资源包、『桤楴』露头包、周子鱼yu、无伤大鸽子、洛神、戴夫、血刀少主、遗计两个桃、尋、可宣、林柒柒。"
+					"1": "<font color=navy>鸣谢名单</font>", "2": "·代码支持：戒除联盟、诗笺、寰宇星城、柚子、尋、微尘。<br>·素材支持：无伤大鸽子、周子鱼yu、『桤楴』露头包、『世海』资源包、洛神、戴夫、血刀少主、遗计两个桃、尋、可宣、林柒柒。"
 				}
 			},
 			ygbLutou: {
@@ -12709,7 +13727,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "阳光微凉",
 			diskURL: "",
 			forumURL: "",
-			version: "5.8.01",
+			version: "5.8.21",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}

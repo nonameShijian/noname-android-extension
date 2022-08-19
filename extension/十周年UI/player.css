@@ -458,7 +458,7 @@
 	opacity: 1 !important;
 }
 
-.player>.hp-wrap>.hp>div {
+.player>.hp-wrap>.hp>div:not(.shield) {
     position: static;
 	margin-top: 3px;
 	width: 12px;
@@ -1285,6 +1285,10 @@
     box-sizing: border-box;
     word-break: break-all;
     z-index: 99;
+}
+
+.player.connect>div:not(.avatar):not(.name):not(.nameol):not(.hp):not(.room):not(.gaming):not(.identity).chat-bubble {
+	display: block !important;
 }
 
 .player>.jie-mark {
