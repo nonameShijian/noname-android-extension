@@ -161,7 +161,11 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                     'yunhuangyueying5.jpg':{
                         'yunlinglong':1,//恢复皮肤初始状态
                         'yunlinglong':'extension/云将/yunhuangyueying5a.jpg',
-                    },     
+                    },
+                    'yunhuangyueying6.jpg':{
+                        'yunlinglong':1,//恢复皮肤初始状态
+                        'yunlinglong':'extension/云将/yunhuangyueying6a.jpg',
+                    },
                     'yunhuangyueying9.jpg':{
                         'yunlinglong':1,//恢复皮肤初始状态
                         'yunlinglong':'extension/云将/yunhuangyueying9a.jpg',
@@ -193,7 +197,11 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                     '___origin':{
                         'yunjianye':1,//恢复皮肤初始状态
                         'yunjianye':'extension/云将/yunsunquana.jpg',
-                    },                    
+                    },
+                    'yunsunquan5.jpg':{
+                        'yunjianye':1,//恢复皮肤初始状态
+                        'yunjianye':'extension/云将/yunsunquan5a.jpg',
+                    },
                 },
                 'yunxushi':{
                     '___origin':{
@@ -268,6 +276,10 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                         'yunjiaoheng':1,//恢复皮肤初始状态
                         'yunjiaoheng':'extension/云将/yundongbai5a.jpg',
                     },
+                    'yundongbai7.jpg':{
+                        'yunjiaoheng':1,//恢复皮肤初始状态
+                        'yunjiaoheng':'extension/云将/yundongbai7a.jpg',
+                    },
                 },
                 'db_yunjiaxu':{
                     '___origin':{
@@ -285,15 +297,19 @@ window.yunjiang_import(function(lib,game,ui,get,ai,_status){
                         'yunfanghun':'extension/云将/yunzhaoxiang4a.jpg',
                     },
                     'yunzhaoxiang5.jpg':{
-                        'yunfanghun':1,//恢复皮肤初始状态
+                        'yunzhanyuan':1,//恢复皮肤初始状态
                         'yunfanghun':'extension/云将/yunzhaoxiang5a.jpg',
                     },
                 },
                 'yunhuaman':{
                     '___origin':{
-                        'yunfanghun':1,//恢复皮肤初始状态
+                        'yunzhanyuan':1,//恢复皮肤初始状态
                         'yunzhanyuan':'extension/云将/yunhuamana.jpg',
-                    },                    
+                    },
+                    'yunhuaman4.jpg':{
+                        'yunzhanyuan':1,//恢复皮肤初始状态
+                        'yunzhanyuan':'extension/云将/yunhuaman4a.jpg',
+                    },
                 },
                 'yunjiangwei':{
                     '___origin':{

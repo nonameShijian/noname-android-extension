@@ -20,7 +20,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 	}
 	game.saveConfigValue('extensions');
 	
-	//避免提示是否下载图片和字体素材
+	// 避免提示是否下载图片和字体素材
 	if (!lib.config.asset_version) {
 		game.saveConfig('asset_version', '无');
 	}
@@ -143,7 +143,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 			// 下载进度
 			// @ts-ignore
-			game.shijianCreateProgress = (title, max, fileName, value) => {
+			game.shijianCreateProgress = game.shijianCreateProgress || ((title, max, fileName, value) => {
 				/** @type { progress } */
 				// @ts-ignore
 				const parent = ui.create.div(ui.window, {
@@ -190,16 +190,17 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					fontSize: '20px',
 					width: '100%'
 				});
+
 				const file = ui.create.node('span', tip, '', fileName);
 				file.style.width = file.style.maxWidth = '100%';
 				ui.create.node('br', tip);
-				const index = ui.create.node('span', tip, '', value || '0');
+				const index = ui.create.node('span', tip, '', String(value || '0'));
 				ui.create.node('span', tip, '', '/');
-				const maxSpan = ui.create.node('span', tip, '', (max + '') || '未知');
+				const maxSpan = ui.create.node('span', tip, '', String(max || '未知'));
 
 				ui.create.node('br', container);
 
-				const progress = ui.create.node('progress', container);
+				const progress = ui.create.node('progress.zxgxProgress', container);
 				progress.setAttribute('value', value || '0');
 				progress.setAttribute('max', max);
 
@@ -212,7 +213,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				parent.getProgressMax = () => progress.max;
 				parent.setProgressMax = (max) => progress.max = maxSpan.innerText = max;
 				return parent;
-			};
+			});
 
 			// 修改window.onerror
 			window.onerror = function (msg, src, line, column, err) {
@@ -301,7 +302,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							cordova.exec(game.reload, game.reload, 'FinishImport', 'importReceived', []);
 						}
 					}, () => {
-						console.warn('未从其他应用解压zip');
+						// console.warn('未从其他应用解压zip');
 					}, 'FinishImport', 'importReady', []);
 				};
 
@@ -683,6 +684,16 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					cordova.exec(emptyFun, emptyFun, 'FinishImport', 'listView', ['file', 'readFile']);
 				}
 			},
+			/*requestPermission: {
+				name: '<button>请求Android/data权限</button>',
+				intro: '请求Android/data权限',
+				clear: true,
+				onclick() {
+					const emptyFun = () => {};
+					// 请求访问Android/data
+					cordova.exec(emptyFun, console.error, 'FinishImport', 'requestPermission', []);
+				}
+			},*/
 			startWebSocketServer: {
 				name: '开启本地服务器',
 				init: false,
@@ -743,7 +754,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.29",
+			version: "1.292",
 		}
 	};
 });

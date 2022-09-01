@@ -91,7 +91,7 @@ declare interface Lib {
 		/** 感谢寰宇星城 */
 		xuanwu: "https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw",
 		/** 感谢Show-K */
-		URC: "http://123.56.240.30",
+		URC: "http://123.56.240.30/libccy/noname",
 	},
 }
 
@@ -173,6 +173,8 @@ declare interface Game {
 
 	/**
 	 * 从更新源获取要更新的文件(不包括素材)
+	 * 
+	 * 最大重试次数为5次
 	 */
 	shijianGetUpdateFiles: () => Promise<{
 		/** window.noname_update */
@@ -183,6 +185,8 @@ declare interface Game {
 
 	/**
 	 * 从更新源获取要更新的素材(皮肤文件除外)
+	 * 
+	 * 最大重试次数为5次
 	 */
 	shijianGetUpdateAssets: () => Promise<{
 		assets: string[],

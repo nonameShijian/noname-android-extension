@@ -29,7 +29,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				console.warn('设备不支持AbortController');
 			}
 
-			fetch(url, { signal }).then(resolve).catch(reject);
+			fetch(url, { signal }).then(response => {
+				if (response.status != 200 || !response.ok) {
+					return reject(response);
+				}
+				resolve(response);
+			}).catch(reject);
 		});
 	};
 
@@ -137,6 +142,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 	return {
 		name: "在线更新",
+		editable: false,
 		onremove: function () {
 			// 删除本扩展后，更新源改回coding
 			lib.updateURL = lib.updateURLS.coding;
@@ -392,14 +398,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			Object.assign(lib.updateURLS, {
 				fastgit: 'https://raw.fastgit.org/libccy/noname',
 				xuanwu: 'https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw',
-				URC: 'http://123.56.240.30',
+				URC: 'http://123.56.240.30/libccy/noname',
 			});
 
-			// 初始化，更新地址修改回coding
+			// 初始化，更新地址修改为URC
 			if (!game.getExtensionConfig('在线更新', 'update_link')) {
-				game.saveConfig('update_link', 'coding');
-				game.saveExtensionConfig('在线更新', 'update_link', 'coding');
-				lib.updateURL = lib.updateURLS['coding'];
+				game.saveConfig('update_link', 'URC');
+				game.saveExtensionConfig('在线更新', 'update_link', 'URC');
+				lib.updateURL = lib.updateURLS['URC'];
 			} else {
 				game.saveConfig('update_link', game.getExtensionConfig('在线更新', 'update_link'));
 			}
@@ -415,10 +421,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								return url;
 							}
 						}
-						game.saveConfig('update_link', 'coding');
-						game.saveExtensionConfig('在线更新', 'update_link', 'coding');
-						lib.updateURL = lib.updateURLS.coding;
-						return 'coding';
+						game.saveConfig('update_link', 'URC');
+						game.saveExtensionConfig('在线更新', 'update_link', 'URC');
+						lib.updateURL = lib.updateURLS.URC;
+						return 'URC';
 					})(),
 					item: {
 						coding: 'Coding',
@@ -428,9 +434,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						URC: 'URC'
 					},
 					onclick: function (item) {
-						game.saveConfig('update_link', item);
-						game.saveExtensionConfig('在线更新', 'update_link', item);
-						lib.updateURL = lib.updateURLS[item] || lib.updateURLS.coding;
+						if (lib.updateURLS[item]) {
+							game.saveConfig('update_link', item);
+							game.saveExtensionConfig('在线更新', 'update_link', item);
+							lib.updateURL = lib.updateURLS.coding;
+						} else {
+							alert(`选择的更新源(${ item })不存在`);
+							return false;
+						}
 					},
 				};
 			}
@@ -594,7 +605,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				function error(e, message) {
 					// 手机端下载的错误
 					// 如果下载的是文件夹(xx/game/)会报400，如果是xx/game的形式在github会报404
-					if (e instanceof window.FileTransferError) {
+					// Show-K的服务器下载文件夹也是404，不用管
+					if (window.FileTransferError && e instanceof window.FileTransferError) {
 						const errorCode = {
 							1: 'FILE_NOT_FOUND_ERR',
 							2: 'INVALID_URL_ERR',
@@ -609,13 +621,26 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							target: e.target,
 							error: errorCode[e.code]
 						});
-						if (typeof onerror == 'function') {
-							onerror(e, e.body);
+						switch(e.http_status) {
+							case 404: 
+								game.print(`更新源中不存在${path}/${name}`);
+								console.log(`更新源中不存在${path}/${name}`);
+								success(undefined, true);
+								break;
+							default:
+								if (typeof onerror == 'function') {
+									onerror(e, e.body);
+								}
 						}
+						
 					} else {
 						// 电脑端下载的错误
 						console.error(e, message);
-						if (typeof onerror == 'function') {
+						if (message == 'Not Found') {
+							game.print(`更新源中不存在${path}/${name}`);
+							console.log(`更新源中不存在${path}/${name}`);
+							success(undefined, true);
+						} else if (typeof onerror == 'function') {
 							onerror(e, message);
 						}
 					}
@@ -687,7 +712,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 					fetch.then(response => response.arrayBuffer())
 						.then(arrayBuffer => {
-							// console.log(arrayBuffer);
+							console.log(arrayBuffer);
 							// 写入文件
 							// 先创建指定文件夹
 							game.ensureDirectory(path, () => {
@@ -699,7 +724,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									const stat = fs.statSync(filePath);
 									if (stat.isDirectory()) {
 										console.error(`${path + '/' + name}是个文件夹`);
-										alert(`${path + '/' + name}是个文件夹，不予下载。请将此问题报告给此更新源的管理员。`);
+										alert(`${path + '/' + name}是个文件夹，不予下载。请将此问题报告给此更新源的管理者。`);
 										lib.config.extension_在线更新_brokenFile.remove(path + '/' + name);
 										game.saveConfigValue('extension_在线更新_brokenFile');
 										// return error(new Error(path + '/' + name), 'isDirectory');
@@ -712,7 +737,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								});
 							});
 						})
-						.catch(error);
+						.catch(
+							/** @param { Response } response */
+							response => {
+							error(new Error(String(response.status)), response.statusText);
+						})
 				}
 			};
 
@@ -722,6 +751,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				 * @param { string } current 文件名 
 				 */
 				let reload = (current) => {
+					// game.print会导致游戏越来越卡
+					/*
 					let str1 = "正在下载：";
 					let current3 = current.replace(lib.updateURL, '');
 
@@ -731,15 +762,16 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						game.print(str1 + current3.slice(11));
 					} else {
 						game.print(str1 + current3.slice(current3.lastIndexOf('/') + 1));
-					}
+					}*/
+
 					game.shijianDownload(current, skipDownload => {
 						if (skipDownload === true) {
 							game.print(`跳过下载: ${current}`);
 							console.log(`跳过下载: ${current}`);
-						} else {
+						} /* else {
 							game.print(`下载成功: ${current}`);
 							console.log(`下载成功: ${current}`);
-						}
+						} */
 						onsuccess();
 						//自调用
 						download();
@@ -821,16 +853,17 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					fontSize: '20px',
 					width: '100%'
 				});
+
 				const file = ui.create.node('span', tip, '', fileName);
 				file.style.width = file.style.maxWidth = '100%';
 				ui.create.node('br', tip);
-				const index = ui.create.node('span', tip, '', value || '0');
+				const index = ui.create.node('span', tip, '', String(value || '0'));
 				ui.create.node('span', tip, '', '/');
-				const maxSpan = ui.create.node('span', tip, '', (max + '') || '未知');
+				const maxSpan = ui.create.node('span', tip, '', String(max || '未知'));
 
 				ui.create.node('br', container);
 
-				const progress = ui.create.node('progress', container);
+				const progress = ui.create.node('progress.zxgxProgress', container);
 				progress.setAttribute('value', value || '0');
 				progress.setAttribute('max', max);
 
@@ -920,38 +953,33 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					if (!game.download) {
 						reject(new Error('此版本不支持游戏内更新，请手动更新'));
 					}
-					// 是否可以更新，每次都调用的原因是判断网络问题
-					try {
-						await canUpdate();
-					} catch (e) {
-						if (e.name === 'AbortError') {
-							return reject('网络连接超时');
-						} else if (typeof e == 'number') {
-							return reject(`网络连接失败，HTTP返回码为${e}`);
-						} else {
-							return reject(e);
-						}
-					}
 					if (window.noname_update && window.noname_source_list) {
 						resolve({
 							update: window.noname_update,
 							source_list: window.noname_source_list
 						});
 					} else {
-						while (!(window.noname_update && window.noname_source_list)) {
+						// 设置最大重试次数为5次
+						let i = 0;
+						while (!(window.noname_update && window.noname_source_list) && i < 5) {
 							try {
 								await getNonameUpdate().then(() => getSourceList());
 							} catch (e) {
 								console.log(e);
+								i++;
 								if (e == 'user_not_login') return reject(e);
 							}
 						}
-						resolve({
-							// @ts-ignore
-							update: window.noname_update,
-							// @ts-ignore
-							source_list: window.noname_source_list
-						});
+						if (i == 5) {
+							reject('达到最大重试次数');
+						} else {
+							resolve({
+								// @ts-ignore
+								update: window.noname_update,
+								// @ts-ignore
+								source_list: window.noname_source_list
+							});
+						}
 					}
 				});
 			};
@@ -996,34 +1024,30 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					if (!game.download) {
 						reject(new Error('此版本不支持游戏内更新，请手动更新'));
 					}
-					// 是否可以更新，每次都调用的原因是判断网络问题
-					try {
-						await canUpdate();
-					} catch (e) {
-						if (e.name === 'AbortError') {
-							return reject('网络连接超时');
-						} else if (typeof e == 'number') {
-							return reject(`网络连接失败，HTTP返回码为${e}`);
-						} else {
-							return reject(e);
-						}
-					}
 					if (window.noname_asset_list) {
 						resolve({
 							assets: window.noname_asset_list,
 						});
 					} else {
-						while (typeof window.noname_asset_list != 'object') {
+						// 设置最大重试次数为5次
+						let i = 0;
+						while (typeof window.noname_asset_list != 'object' && i < 5) {
 							try {
 								await getNonameAssets();
 							} catch (e) {
 								console.log(e);
+								i++;
 								if (e == 'user_not_login') return reject(e);
 							}
 						}
-						resolve({
-							assets: window.noname_asset_list,
-						});
+						if (i == 5) {
+							reject('达到最大重试次数');
+						} else {
+							resolve({
+								// @ts-ignore
+								assets: window.noname_asset_list,
+							});
+						}
 					}
 				});
 			}
@@ -1037,16 +1061,21 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			// 禁用自动检查更新
 			Object.defineProperty(game, 'checkForUpdate', {
 				get() {
-					return function () {};
+					return function () {
+						alert('无名杀自带的自动检查更新已禁用，请使用在线更新扩展内的自动检查更新功能');
+						game.saveConfig('auto_check_update', false);
+					};
 				},
 				set(v) {}
 			});
+
+			lib.init.css(lib.assetURL + 'extension/在线更新', 'extension');
 		},
 		config: {
 			show_version: {
 				clear: true,
 				nopointer: true,
-				name: '扩展版本： v1.41',
+				name: '扩展版本： v1.42',
 			},
 			update_link_explain: {
 				clear: true,
@@ -1092,10 +1121,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							return url;
 						}
 					}
-					game.saveConfig('update_link', 'coding');
-					game.saveExtensionConfig('在线更新', 'update_link', 'coding');
-					lib.updateURL = lib.updateURLS.coding;
-					return 'coding';
+					game.saveConfig('update_link', 'URC');
+					game.saveExtensionConfig('在线更新', 'update_link', 'URC');
+					lib.updateURL = lib.updateURLS['URC'];
+					return 'URC';
 				})(),
 				item: {
 					coding: 'Coding',
@@ -1107,9 +1136,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				onclick: function (item) {
 					if (item != game.getExtensionConfig('在线更新', 'update_link')) {
 						delete window.noname_update;
-						game.saveConfig('update_link', item);
-						game.saveExtensionConfig('在线更新', 'update_link', item);
-						lib.updateURL = lib.updateURLS[item] || lib.updateURLS.coding;
+						if (lib.updateURLS[item]) {
+							game.saveConfig('update_link', item);
+							game.saveExtensionConfig('在线更新', 'update_link', item);
+							lib.updateURL = lib.updateURLS[item];
+						} else {
+							alert(`选择的更新源(${item})不存在`);
+							return false;
+						}
 					}
 				},
 			},
@@ -1834,7 +1868,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		help: {},
 		package: {
 			intro: `
-				<span style='font-weight: bold;'>※本扩展不与【概念武将】和【假装无敌】扩展兼容</span></br>
+				<span style='font-weight: bold;'>※本扩展不与【概念武将】和【假装无敌】扩展兼容，若同时安装本扩展和那两个扩展，后果自负</span></br>
 				安装本扩展后会自动覆盖【自动检测更新】的功能，不论扩展是否开启</br>
 				点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br>
 				<span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>
@@ -1842,7 +1876,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.41",
+			version: "1.42",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}
