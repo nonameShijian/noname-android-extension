@@ -30,7 +30,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			}
 
 			fetch(url, { signal }).then(response => {
-				if (response.status != 200 || !response.ok) {
+				if (!response.ok) {
 					return reject(response);
 				}
 				resolve(response);
@@ -97,7 +97,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 	/**
 	 * @description 请求错误处理
-	 * @param { { url: string, error: number | Error, message: string } | Error } err 
+	 * @param { { url: string, error: number | Error, message: string } | Error | String } err 
 	 */
 	const response_catch = err => {
 		console.error(err);
@@ -124,14 +124,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					alert(`网络请求目标：${url}\n${error instanceof window.ProgressEvent ? '' : ('状态消息或状态码：' + error + '\n')}提示:${message}`);
 				}
 			}
-		} else {
+		} else if (err instanceof Error) {
 			if (err.name === 'AbortError') {
 				alert('网络连接超时');
 			} else if (err.message == 'Failed to fetch') {
 				alert('网络请求失败');
-			} else {
-				// alert(err.message || err);
 			}
+		} else if (typeof err == 'string') {
+			alert(err);
 		}
 
 		if (++game.updateErrors > 5) {
@@ -390,7 +390,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					}).catch(console.error);
 				}
 				setInterval(checkUpdate, 1000 * 60 * 10);
-				checkUpdate();
+				setTimeout(checkUpdate, 1000);
 			}
 		},
 		precontent: function () {
@@ -398,7 +398,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			Object.assign(lib.updateURLS, {
 				fastgit: 'https://raw.fastgit.org/libccy/noname',
 				xuanwu: 'https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw',
-				URC: 'http://123.56.240.30/libccy/noname',
+				URC: 'https://unitedrhythmized.club/libccy/noname'
 			});
 
 			// 初始化，更新地址修改为URC
@@ -437,7 +437,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						if (lib.updateURLS[item]) {
 							game.saveConfig('update_link', item);
 							game.saveExtensionConfig('在线更新', 'update_link', item);
-							lib.updateURL = lib.updateURLS.coding;
+							lib.updateURL = lib.updateURLS[item];
 						} else {
 							alert(`选择的更新源(${ item })不存在`);
 							return false;
@@ -712,7 +712,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 					fetch.then(response => response.arrayBuffer())
 						.then(arrayBuffer => {
-							console.log(arrayBuffer);
+							// console.log(arrayBuffer);
 							// 写入文件
 							// 先创建指定文件夹
 							game.ensureDirectory(path, () => {
@@ -904,7 +904,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								} catch (e) {
 									if (e && e.message && e.message.indexOf('in JSON at position') != -1) {
-										try { eval(text) } catch (error) { }
+										try { eval(text) } catch (error) {}
 										if (typeof window.noname_update != 'object') {
 											return Promise.reject('更新内容获取失败(game/update.js)，请重试');
 										}
@@ -971,7 +971,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 						}
 						if (i == 5) {
-							reject('达到最大重试次数');
+							reject('达到最大重试次数(5次), 请重试');
 						} else {
 							resolve({
 								// @ts-ignore
@@ -1041,7 +1041,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 						}
 						if (i == 5) {
-							reject('达到最大重试次数');
+							reject('达到最大重试次数(5次), 请重试');
 						} else {
 							resolve({
 								// @ts-ignore
@@ -1075,7 +1075,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			show_version: {
 				clear: true,
 				nopointer: true,
-				name: '扩展版本： v1.42',
+				name: '扩展版本： v1.43',
 			},
 			update_link_explain: {
 				clear: true,
@@ -1349,6 +1349,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								parentNode.insertBefore(span, parentNode.firstElementChild);
 
 								let consoleMenu;
+								// @ts-ignore
 								if (this != button) {
 									consoleMenu = document.createElement('button');
 									consoleMenu.setAttribute('type', 'button');
@@ -1876,7 +1877,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.42",
+			version: "1.44",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}

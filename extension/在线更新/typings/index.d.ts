@@ -91,7 +91,7 @@ declare interface Lib {
 		/** 感谢寰宇星城 */
 		xuanwu: "https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw",
 		/** 感谢Show-K */
-		URC: "http://123.56.240.30/libccy/noname",
+		URC: "https://unitedrhythmized.club/libccy/noname",
 	},
 }
 
