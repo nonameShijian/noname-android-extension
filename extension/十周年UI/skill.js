@@ -1,34 +1,34 @@
 'use strict';
-decadeModule.import(function(lib, game, ui, get, ai, _status){
+decadeModule.import(function (lib, game, ui, get, ai, _status) {
 	decadeUI.skill = {
-		guanxing:{
+		guanxing: {
 			audio: 2,
 			audioname: ['jiangwei', 're_jiangwei', 're_zhugeliang'],
 			trigger: {
 				player: 'phaseZhunbeiBegin'
 			},
 			frequent: true,
-			content: function() {
+			content: function () {
 				'step 0'
 				if (player.isUnderControl()) {
 					game.modeSwapPlayer(player);
 				}
-				
+
 				var num = Math.min(5, game.countPlayer());
 				if (player.hasSkill('yizhi') && player.hasSkill('guanxing')) {
 					num = 5;
 				}
 				var player = event.player;
-				if(player.isUnderControl()) game.modeSwapPlayer(player);
-				
+				if (player.isUnderControl()) game.modeSwapPlayer(player);
+
 				var cards = get.cards(num);
 				var guanXing = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
-				game.broadcast(function(player, cards){
+				game.broadcast(function (player, cards) {
 					if (!window.decadeUI) return;
 					decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
 				}, player, cards);
-				
-				event.switchToAuto = function(){
+
+				event.switchToAuto = function () {
 					var cards = guanXing.cards[0].concat();
 					var cheats = [];
 					var judges = player.node.judges.childNodes;
@@ -36,7 +36,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					if (judges.length) {
 						cheats = decadeUI.get.cheatJudgeCards(cards, judges, true);
 					}
-					
+
 					if (cards.length && cheats.length == judges.length) {
 						for (var i = 0; i >= 0 && i < cards.length; i++) {
 							if (get.value(cards[i], player) >= 5) {
@@ -45,30 +45,30 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							}
 						}
 					}
-					
+
 					var time = 500;
 					for (var i = 0; i < cheats.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							guanXing.move(card, index, 0);
 							if (finished) guanXing.finishTime(1000);
 						}, time, cheats[i], i, (i >= cheats.length - 1) && cards.length == 0);
 						time += 500;
 					}
-					
+
 					for (var i = 0; i < cards.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							guanXing.move(card, index, 1);
 							if (finished) guanXing.finishTime(1000);
 						}, time, cards[i], i, (i >= cards.length - 1));
 						time += 500;
 					}
 				};
-				
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
@@ -76,43 +76,43 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				}
 				'step 1'
 				player.popup(get.cnNumber(event.num1) + '上' + get.cnNumber(event.num2) + '下');
-				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) +'张牌置于牌堆底');
+				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) + '张牌置于牌堆底');
 				game.updateRoundNumber()
 			},
 			ai: {
 				threaten: 1.2
 			}
 		},
-		reguanxing:{
+		reguanxing: {
 			audio: 'guanxing',
-			audioname: ['jiangwei','re_jiangwei','re_zhugeliang','gexuan'],
-			frequent:true,
+			audioname: ['jiangwei', 're_jiangwei', 're_zhugeliang', 'gexuan'],
+			frequent: true,
 			trigger: {
-				player:['phaseZhunbeiBegin','phaseJieshuBegin']
+				player: ['phaseZhunbeiBegin', 'phaseJieshuBegin']
 			},
-			filter:function(event, player, name) {
+			filter: function (event, player, name) {
 				if (name == 'phaseJieshuBegin') {
 					return player.hasSkill('reguanxing_on');
 				}
 				return true;
 			},
-			content:function(){
+			content: function () {
 				'step 0'
 				var player = event.player;
-				if(player.isUnderControl()) game.modeSwapPlayer(player);
-				
+				if (player.isUnderControl()) game.modeSwapPlayer(player);
+
 				var cards = get.cards(game.countPlayer() < 4 ? 3 : 5);
 				var guanXing = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
-				game.broadcast(function(player, cards){
+				game.broadcast(function (player, cards) {
 					if (!window.decadeUI) return;
 					decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
 				}, player, cards);
-				
-				event.switchToAuto = function(){
+
+				event.switchToAuto = function () {
 					var cheats = [];
 					var cards = guanXing.cards[0].concat();
 					var judges;
-					
+
 					var next = player.getNext();
 					var friend = player;
 					if (event.triggername == 'phaseJieshuBegin') {
@@ -122,11 +122,11 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					} else {
 						judges = player.node.judges.childNodes;
 					}
-					
+
 					if (judges.length) {
 						cheats = decadeUI.get.cheatJudgeCards(cards, judges, friend != null);
 					}
-						
+
 					if (cards.length && cheats.length == judges.length) {
 						for (var i = 0; i >= 0 && i < cards.length; i++) {
 							if (friend) {
@@ -142,31 +142,31 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							}
 						}
 					}
-					
+
 					var time = 500;
 					for (var i = 0; i < cheats.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							guanXing.move(card, index, 0);
 							if (finished) guanXing.finishTime(1000);
 						}, time, cheats[i], i, (i >= cheats.length - 1) && cards.length == 0);
 						time += 500;
 					}
-					
+
 					for (var i = 0; i < cards.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							guanXing.move(card, index, 1);
 							if (finished) guanXing.finishTime(1000);
 						}, time, cards[i], i, (i >= cards.length - 1));
 						time += 500;
 					}
 				};
-				
+
 				if (event.isOnline()) {
 					// 判断其他玩家是否有十周年UI，否则直接给他结束，不知道有没有效果
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					// 等待其他玩家操作
 					event.player.wait();
 					// 暂停主机端游戏
@@ -203,52 +203,52 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					*/
 				}
 				'step 1'
-				if(event.triggername == 'phaseZhunbeiBegin' && event.num1 == 0) player.addTempSkill('reguanxing_on');
+				if (event.triggername == 'phaseZhunbeiBegin' && event.num1 == 0) player.addTempSkill('reguanxing_on');
 				player.popup(get.cnNumber(event.num1) + '上' + get.cnNumber(event.num2) + '下');
-				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) +'张牌置于牌堆底');
+				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) + '张牌置于牌堆底');
 				game.updateRoundNumber();
 			},
-			subSkill:{
-				on:{}
+			subSkill: {
+				on: {}
 			},
 		},
-		chengxiang:{
+		chengxiang: {
 			audio: 2,
 			frequent: true,
 			trigger: {
 				player: 'damageEnd'
 			},
-			content: function() {
+			content: function () {
 				'step 0'
 				var cards = get.cards(4);
 				var guanXing = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, 4, false);
 				guanXing.doubleSwitch = true;
 				guanXing.caption = '【称象】';
 				guanXing.header2 = '获得的牌';
-				guanXing.callback = function(){
+				guanXing.callback = function () {
 					var num = 0;
 					for (var i = 0; i < this.cards[1].length; i++) {
 						num += get.number(this.cards[1][i]);
 					}
-					
+
 					return num > 0 && num <= 13;
 				};
-				
-				game.broadcast(function(player, cards, callback){
+
+				game.broadcast(function (player, cards, callback) {
 					if (!window.decadeUI) return;
 					var guanXing = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, 4, false);
 					guanXing.caption = '【称象】';
 					guanXing.header2 = '获得的牌';
 					guanXing.callback = callback;
 				}, player, cards, guanXing.callback);
-				
+
 				var player = event.player;
-				event.switchToAuto = function(){
+				event.switchToAuto = function () {
 					var cards = guanXing.cards[0];
 					var num, sum, next;
 					var index = 0;
 					var results = [];
-					
+
 					for (var i = 0; i < cards.length; i++) {
 						num = 0;
 						sum = 0;
@@ -256,20 +256,20 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						for (var j = i; j < cards.length; j++) {
 							if (j != i && j < next)
 								continue;
-							
+
 							num = sum + get.number(cards[j]);
 							if (num <= 13) {
 								sum = num;
 								if (!results[index]) results[index] = [];
 								results[index].push(cards[j]);
 							}
-							
+
 							if (j >= cards.length - 1) index++;
 						}
-						
+
 						if (results[index] && results[index].length == cards.length) break;
 					}
-					
+
 					var costs = [];
 					for (var i = 0; i < results.length; i++) {
 						costs[i] = {
@@ -282,35 +282,35 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							if (player.hasFriend() && player.hasSkill('renxin') && get.type(results[i][j]) == 'equip' && player.hp > 1) {
 								costs[i].value += 5;
 							}
-							
+
 							// 如果自己有延时牌且没有无懈可击，优先选择无懈可击
 							if (player.node.judges.childNodes.length > 0 && !player.hasWuxie() && results[i][j] == 'wuxie') {
 								costs[i].value += 5;
 							}
 						}
 					}
-					
-					costs.sort(function(a, b) {
+
+					costs.sort(function (a, b) {
 						return b.value - a.value;
 					});
-					
+
 					var time = 500;
 					var result = results[costs[0].index];
-					
+
 					for (var i = 0; i < result.length; i++) {
-						setTimeout(function(move, finished){
+						setTimeout(function (move, finished) {
 							guanXing.move(move, guanXing.cards[1].length, 1);
 							if (finished) guanXing.finishTime(1000);
 						}, time, result[i], (i >= result.length - 1));
 						time += 500;
 					}
 				};
-				
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
@@ -326,7 +326,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				maixie: true,
 				maixie_hp: true,
 				effect: {
-					target: function(card, player, target) {
+					target: function (card, player, target) {
 						if (get.tag(card, 'damage')) {
 							if (player.hasSkillTag('jueqing', false, target)) return [1, -2];
 							if (!target.hasFriend()) return;
@@ -343,9 +343,9 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 			trigger: {
 				player: 'phaseJieshuBegin',
 			},
-			check:function(event, player) {
+			check: function (event, player) {
 				var num = 0;
-				if (player.getHistory('lose', function(evt){
+				if (player.getHistory('lose', function (evt) {
 					return evt.type == 'discard';
 				}).length) num++;
 				if (!player.isMinHandcard()) num++;
@@ -353,20 +353,20 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				if (num == 3) return player.hp >= 2;
 				return true;
 			},
-			prompt:function(event, player) {
+			prompt: function (event, player) {
 				var num = 3;
-				if (player.getHistory('lose', function(evt){
+				if (player.getHistory('lose', function (evt) {
 					return evt.type == 'discard';
 				}).length) num--;
 				if (!player.isMinHandcard()) num--;
 				if (!player.getStat('damage')) num--;
 				return get.prompt('xinfu_zuilun') + '（可获得' + get.cnNumber(num) + '张牌）'
 			},
-			content:function() {
+			content: function () {
 				'step 0'
 				event.num = 0;
 				event.cards = get.cards(3);
-				if (player.getHistory('lose', function(evt){
+				if (player.getHistory('lose', function (evt) {
 					return evt.type == 'discard';
 				}).length) event.num++;
 				if (!player.isMinHandcard()) event.num++;
@@ -376,20 +376,20 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					player.gain(event.cards, 'draw');
 					event.finish();
 					return;
-				} 
+				}
 
 				var cards = event.cards;
 				var gains = cards.length - event.num;
-				
+
 				var zuiLun = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, gains);
 				zuiLun.caption = '【罪论】';
 				zuiLun.header2 = '获得的牌';
 				zuiLun.tip = '可获得' + gains + '张牌<br>' + zuiLun.tip;
-				zuiLun.callback = function(){
-					return this.cards[1].length == gains; 
+				zuiLun.callback = function () {
+					return this.cards[1].length == gains;
 				};
-				
-				game.broadcast(function(player, cards, gains, callback){
+
+				game.broadcast(function (player, cards, gains, callback) {
 					if (!window.decadeUI) return;
 					var zuiLun = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, gains);
 					zuiLun.caption = '【罪论】';
@@ -397,34 +397,34 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					zuiLun.tip = '可获得' + gains + '张牌<br>' + zuiLun.tip;
 					zuiLun.callback = callback;
 				}, player, cards, gains, zuiLun.callback);
-				
+
 				var player = event.player;
-				event.switchToAuto = function(){
+				event.switchToAuto = function () {
 					var cheats = [];
 					var cards = zuiLun.cards[0].concat();
 					var stopped = false;
-					
+
 					var next = player.getNext();
 					var hasFriend = get.attitude(player, next) > 0;
-					
+
 					// 判断下家是不是队友，令其生效或者失效
 					var judges = next.node.judges.childNodes;
 					if (judges.length > 0) cheats = decadeUI.get.cheatJudgeCards(cards, judges, hasFriend);
-						
+
 					// 如果有【父荫】优先把好牌给队友
 					if (hasFriend && player.hasSkill('xinfu_fuyin')) {
 						cards = decadeUI.get.bestValueCards(cards, next);
 					} else {
-						cards.sort(function(a, b){
+						cards.sort(function (a, b) {
 							return get.value(a, player) - get.value(b, player);
 						});
 					}
-					
+
 					cards = cheats.concat(cards);
 					var time = 500;
 					var gainNum = gains;
 					for (var i = cards.length - 1; i >= 0; i--) {
-						setTimeout(function(card, index, finished, moveDown){
+						setTimeout(function (card, index, finished, moveDown) {
 							zuiLun.move(card, index, moveDown ? 1 : 0);
 							if (finished) zuiLun.finishTime(1000);
 						}, time, cards[i], i, i == 0, gainNum > 0);
@@ -432,12 +432,12 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						gainNum--;
 					}
 				};
-				
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
@@ -458,9 +458,9 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					player.gain(event.cards, 'draw');
 					event.finish();
 				} else {
-					player.chooseTarget('请选择一名角色，与其一同失去1点体力', true, function(card, player, target) {
+					player.chooseTarget('请选择一名角色，与其一同失去1点体力', true, function (card, player, target) {
 						return target != player;
-					}).ai = function(target) {
+					}).ai = function (target) {
 						return - get.attitude(_status.event.player, target);
 					};
 				}
@@ -475,7 +475,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 			trigger: {
 				player: 'phaseDrawBegin1'
 			},
-			content:function(){
+			content: function () {
 				'step 0'
 				var cards = get.cards(4);
 				var player = event.player;
@@ -483,11 +483,11 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				xunxun.caption = '【恂恂】';
 				xunxun.header1 = '牌堆底';
 				xunxun.header2 = '牌堆顶';
-				xunxun.callback = function(){
+				xunxun.callback = function () {
 					return this.cards[0].length == 2 && this.cards[1].length == 2;
 				};
-				
-				game.broadcast(function(player, cards, callback){
+
+				game.broadcast(function (player, cards, callback) {
 					if (!window.decadeUI) return;
 					var xunxun = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, 2);
 					xunxun.caption = '【恂恂】';
@@ -496,36 +496,36 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					xunxun.callback = callback;
 				}, player, cards, xunxun.callback);
 
-				event.switchToAuto = function(){
+				event.switchToAuto = function () {
 					var cards = decadeUI.get.bestValueCards(xunxun.cards[0].concat(), player);
 					var time = 500;
 					for (var i = 0; i < 2; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							xunxun.move(card, index, 1);
 							if (finished) xunxun.finishTime(1000);
 						}, time, cards[i], i, i >= 1);
 						time += 500;
 					}
 				}
-				
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
 					event.switchToAuto();
 				}
-				
+
 				'step 1'
 				var first = ui.cardPile.firstChild;
 				var cards = event.cards2;
 				for (var i = 0; i < cards.length; i++) {
 					ui.cardPile.insertBefore(cards[i], first);
 				}
-				
+
 				cards = event.cards1;
 				for (var i = 0; i < cards.length; i++) {
 					ui.cardPile.appendChild(cards[i]);
@@ -533,40 +533,40 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 			},
 
 		},
-		
+
 		xinfu_dianhua: {
 			audio: 2,
 			frequent: true,
 			trigger: {
 				player: ["phaseZhunbeiBegin", "phaseJieshuBegin"],
 			},
-			filter:function(event, player){
+			filter: function (event, player) {
 				for (var i = 0; i < lib.suit.length; i++) {
 					if (player.hasMark('xinfu_falu_' + lib.suit[i])) return true;
 				}
 				return false;
 			},
-			content:function(){
+			content: function () {
 				'step 0'
 				var num = 0;
 				var player = event.player;
 				for (var i = 0; i < lib.suit.length; i++) {
 					if (player.hasMark('xinfu_falu_' + lib.suit[i])) num++;
 				}
-				
+
 				var cards = get.cards(num);
 				var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
 				dialog.caption = '【点化】';
-				game.broadcast(function(player, cards){
+				game.broadcast(function (player, cards) {
 					if (!window.decadeUI) return;
 					decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length).caption = '【点化】';
 				}, player, cards);
-				
-				event.switchToAuto = function(){
+
+				event.switchToAuto = function () {
 					var cheats = [];
 					var cards = dialog.cards[0].concat();
 					var judges;
-					
+
 					var next = player.getNext();
 					var friend = player;
 					if (event.triggername == 'phaseJieshuBegin') {
@@ -576,11 +576,11 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					} else {
 						judges = player.node.judges.childNodes;
 					}
-					
+
 					if (judges.length) {
 						cheats = decadeUI.get.cheatJudgeCards(cards, judges, friend != null);
 					}
-						
+
 					if (cards.length && cheats.length == judges.length) {
 						for (var i = 0; i >= 0 && i < cards.length; i++) {
 							if (friend) {
@@ -596,18 +596,18 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							}
 						}
 					}
-					
+
 					var time = 500;
 					for (var i = 0; i < cheats.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							dialog.move(card, index, 0);
 							if (finished) dialog.finishTime(1000);
 						}, time, cheats[i], i, (i >= cheats.length - 1) && cards.length == 0);
 						time += 500;
 					}
-					
+
 					for (var i = 0; i < cards.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							dialog.move(card, index, 1);
 							if (finished) dialog.finishTime(1000);
 						}, time, cards[i], i, (i >= cards.length - 1));
@@ -617,62 +617,62 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				// var dianhua = decadeUI.content.chooseGuanXing(player, cards, cards.length);
 				// dianhua.caption = '【点化】';
 				// game.broadcast(function(player, cards, callback){
-					// if (!window.decadeUI) return;
-					// var dianhua = decadeUI.content.chooseGuanXing(player, cards, cards.length);
-					// dianhua.caption = '【点化】';
-					// dianhua.callback = callback;
+				// if (!window.decadeUI) return;
+				// var dianhua = decadeUI.content.chooseGuanXing(player, cards, cards.length);
+				// dianhua.caption = '【点化】';
+				// dianhua.callback = callback;
 				// }, player, cards, dianhua.callback);
-				
-				// event.switchToAuto = function(){
-					// var cards = dianhua.cards[0].concat();
-					// var cheats = [];
-					// var judges;
-					
-					// var next = player.getNext();
-					// var friend = player;
-					// if (event.triggername == 'phaseJieshuBegin') {
-						// friend = next;
-						// judges = friend.node.judges.childNodes;
-						// if (get.attitude(player, friend) < 0) friend = null;
-					// } else {
-						// judges = player.node.judges.childNodes;
-					// }
-					
-					// if (judges.length > 0) cheats = decadeUI.get.cheatJudgeCards(cards, judges, friend != null);
-					
-					// if (friend) {
-						// cards = decadeUI.get.bestValueCards(cards, friend);
-					// } else {
-						// cards.sort(function(a, b){
-							// return get.value(a, next) - get.value(b, next);
-						// });
-					// }
 
-					// cards = cheats.concat(cards);
-					// var time = 500;
-					// for (var i = 0; i < cards.length; i++) {
-						// setTimeout(function(card, index, finished){
-							// dianhua.move(card, index, 0);
-							// if (finished) dianhua.finishTime(1000);
-						// }, time, cards[i], i, i >= cards.length - 1);
-						// time += 500;
-					// }
+				// event.switchToAuto = function(){
+				// var cards = dianhua.cards[0].concat();
+				// var cheats = [];
+				// var judges;
+
+				// var next = player.getNext();
+				// var friend = player;
+				// if (event.triggername == 'phaseJieshuBegin') {
+				// friend = next;
+				// judges = friend.node.judges.childNodes;
+				// if (get.attitude(player, friend) < 0) friend = null;
+				// } else {
+				// judges = player.node.judges.childNodes;
 				// }
-				
+
+				// if (judges.length > 0) cheats = decadeUI.get.cheatJudgeCards(cards, judges, friend != null);
+
+				// if (friend) {
+				// cards = decadeUI.get.bestValueCards(cards, friend);
+				// } else {
+				// cards.sort(function(a, b){
+				// return get.value(a, next) - get.value(b, next);
+				// });
+				// }
+
+				// cards = cheats.concat(cards);
+				// var time = 500;
+				// for (var i = 0; i < cards.length; i++) {
+				// setTimeout(function(card, index, finished){
+				// dianhua.move(card, index, 0);
+				// if (finished) dianhua.finishTime(1000);
+				// }, time, cards[i], i, i >= cards.length - 1);
+				// time += 500;
+				// }
+				// }
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
 					event.switchToAuto();
 				}
-				
+
 				'step 1'
 				player.popup(get.cnNumber(event.num1) + '上' + get.cnNumber(event.num2) + '下');
-				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) +'张牌置于牌堆底');
+				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) + '张牌置于牌堆底');
 				game.updateRoundNumber();
 			},
 
@@ -683,19 +683,19 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 			trigger: {
 				player: 'loseAfter'
 			},
-			check:function(event){
+			check: function (event) {
 				var cards = [];
 				for (var i = 0; i < event.cards2.length; i++) {
 					if (get.position(event.cards2[i]) == 'd') {
 						cards.push(event.cards2[i]);
 					}
 				}
-				
+
 				var player = event.player;
-				
+
 				if (_status.currentPhase == player) {
 					for (var i = 0; i < cards.length; i++) {
-						if (get.value(cards[i], event.player) > 4) return true; 
+						if (get.value(cards[i], event.player) > 4) return true;
 					}
 				} else if (_status.currentPhase) {
 					var next = _status.currentPhase.getNext();
@@ -709,7 +709,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 								}
 							}
 						} else {
-							for (var i = 0; i < cards.length; i++) if (get.value(cards[i], next) > 4) return true; 
+							for (var i = 0; i < cards.length; i++) if (get.value(cards[i], next) > 4) return true;
 						}
 					} else {
 						if (judges.length > 0) {
@@ -722,13 +722,13 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						} else {
 							for (var i = 0; i < cards.length; i++) if (get.value(cards[i], next) < 4) return true;
 						}
-						
+
 					}
 				}
-				
+
 				return false;
 			},
-			filter:function(event, player) {
+			filter: function (event, player) {
 				if (event.type != 'discard') return false;
 				for (var i = 0; i < event.cards2.length; i++) {
 					if (get.position(event.cards2[i]) == 'd') {
@@ -737,7 +737,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				}
 				return false;
 			},
-			content:function() {
+			content: function () {
 				'step 0'
 				var cards = [];
 				for (var i = 0; i < trigger.cards2.length; i++) {
@@ -749,15 +749,15 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						// 防止因为限制结算速度，而导致牌提前进入弃牌堆
 					}
 				}
-				
+
 				if (!cards.length) return;
 				var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
 				dialog.caption = '【纵玄】';
 				dialog.header1 = '弃牌堆';
 				dialog.header2 = '牌堆顶';
 				dialog.lockCardsOrder(0);
-				dialog.callback = function(){ return this.cards[1].length > 0; };
-				game.broadcast(function(player, cards, callback){
+				dialog.callback = function () { return this.cards[1].length > 0; };
+				game.broadcast(function (player, cards, callback) {
 					if (!window.decadeUI) return;
 					var zongxuan = decadeUI.content.chooseGuanXing(player, cards, cards.length);
 					dialog.caption = '【纵玄】';
@@ -766,16 +766,16 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					dialog.lockCardsOrder(0);
 					dialog.callback = callback;
 				}, player, cards, dialog.callback);
-				
-				event.switchToAuto = function(){
+
+				event.switchToAuto = function () {
 					var parent = event.parent;
 					while (parent != null && parent.name != 'phaseDiscard') parent = parent.parent;
-					
+
 					var cards = dialog.cards[0].concat();
 					var cheats = [];
 					var next = player.getNext();
 					var hasFriend = get.attitude(player, next) > 0;
-					
+
 					if (parent) {
 						var hasZhiYan = player.hasSkill('zhiyan');	//如果有【直言】，AI 1000%肯定会用这个技能
 						var judges = next.node.judges.childNodes;
@@ -783,13 +783,13 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							cheats = decadeUI.get.cheatJudgeCards(cards, judges, hasFriend);
 						}
 					}
-					
+
 					if (cards.length > 0) {
-						cards.sort(function(a, b){
+						cards.sort(function (a, b) {
 							return get.value(b, player) - get.value(a, player);
 						});
 						cheats.splice(0, 0, cards.shift());
-						
+
 						var cost;
 						for (var i = 0; i < cards.length; i++) {
 							if (hasFriend) {
@@ -799,52 +799,52 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							}
 						}
 					}
-					
+
 					var time = 500;
 					for (var i = 0; i < cheats.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							dialog.move(card, index, 1);
 							if (finished) dialog.finishTime(cards.length <= 1 ? 250 : 1000);;
 						}, time, cheats[i], i, (i >= cheats.length - 1));
 						time += 500;
 					}
 				}
-				
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
 					event.switchToAuto();
 				}
-				
+
 				'step 1'
 				var first = ui.cardPile.firstChild;
 				var cards = event.cards2;
 				for (var i = 0; i < cards.length; i++) {
 					ui.cardPile.insertBefore(cards[i], first);
 				}
-				
+
 				cards = event.cards1;
 				for (var i = 0; i < cards.length; i++) {
 					ui.discardPile.appendChild(cards[i]);
 				}
-				
+
 				game.log(player, '将' + get.cnNumber(event.num2) + '张牌置于牌堆顶');
 			},
 		},
 		identity_junshi: {
-			name:'军师',
-			mark:true,
-			silent:true,
-			intro:{ content:'准备阶段开始时，可以观看牌堆顶的三张牌，然后将这些牌以任意顺序置于牌堆顶或牌堆底' },
-			trigger:{
-				player:'phaseBegin'
+			name: '军师',
+			mark: true,
+			silent: true,
+			intro: { content: '准备阶段开始时，可以观看牌堆顶的三张牌，然后将这些牌以任意顺序置于牌堆顶或牌堆底' },
+			trigger: {
+				player: 'phaseBegin'
 			},
-			content:function(){
+			content: function () {
 				"step 0"
 				if (player.isUnderControl()) {
 					game.modeSwapPlayer(player);
@@ -853,14 +853,14 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				var cards = get.cards(num);
 				var guanxing = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
 				guanxing.caption = '【军师】';
-				game.broadcast(function(player, cards, callback){
+				game.broadcast(function (player, cards, callback) {
 					if (!window.decadeUI) return;
 					var guanxing = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
 					guanxing.caption = '【军师】';
 					guanxing.callback = callback;
 				}, player, cards, guanxing.callback);
-				
-				event.switchToAuto = function(){
+
+				event.switchToAuto = function () {
 					var cards = guanxing.cards[0].concat();
 					var cheats = [];
 					var judges = player.node.judges.childNodes;
@@ -874,30 +874,30 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							}
 						}
 					}
-					
+
 					var time = 500;
 					for (var i = 0; i < cheats.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							guanxing.move(card, index, 0);
 							if (finished) guanxing.finishTime(1000);
 						}, time, cheats[i], i, (i >= cheats.length - 1) && cards.length == 0);
 						time += 500;
 					}
-					
+
 					for (var i = 0; i < cards.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							guanxing.move(card, index, 1);
 							if (finished) guanxing.finishTime(1000);
 						}, time, cards[i], i, (i >= cards.length - 1));
 						time += 500;
 					}
 				}
-				
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
@@ -905,44 +905,44 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				}
 				"step 1"
 				player.popup(get.cnNumber(event.num1) + '上' + get.cnNumber(event.num2) + '下');
-				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) +'张牌置于牌堆底');
+				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) + '张牌置于牌堆底');
 				game.updateRoundNumber();
 			},
 		},
-		wuxin:{
+		wuxin: {
 			audio: 2,
-			trigger:{ 
-				player:'phaseDrawBegin1' 
+			trigger: {
+				player: 'phaseDrawBegin1'
 			},
-			content:function(){
+			content: function () {
 				var num = get.population('qun');
 				if (player.hasSkill('huangjintianbingfu')) {
-					num+=player.getExpansions('huangjintianbingfu').length;
+					num += player.getExpansions('huangjintianbingfu').length;
 				}
-				
+
 				var cards = get.cards(num);
 				var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length);
 				dialog.caption = '【悟心】';
-				game.broadcast(function(player, cards, callback){
+				game.broadcast(function (player, cards, callback) {
 					if (!window.decadeUI) return;
 					var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length);
 					dialog.caption = '【悟心】';
 					dialog.callback = callback;
 				}, player, cards, dialog.callback);
-				
-				event.switchToAuto = function(){
+
+				event.switchToAuto = function () {
 					var cards = dialog.cards[0].concat();
 					var cheats = [];
-					
+
 					var next = player.getNext();
 					var friend = player;
 					var judges = friend.node.judges.childNodes;
 					if (judges.length > 0) cheats = decadeUI.get.cheatJudgeCards(cards, judges, friend != null);
-					
+
 					if (friend) {
 						cards = decadeUI.get.bestValueCards(cards, friend);
 					} else {
-						cards.sort(function(a, b){
+						cards.sort(function (a, b) {
 							return get.value(a, next) - get.value(b, next);
 						});
 					}
@@ -950,19 +950,19 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					cards = cheats.concat(cards);
 					var time = 500;
 					for (var i = 0; i < cards.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							dialog.move(card, index, 0);
 							if (finished) dialog.finishTime(cards.length <= 1 ? 250 : 1000);;
 						}, time, cards[i], i, i >= cards.length - 1);
 						time += 500;
 					}
 				}
-				
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
@@ -979,7 +979,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					trigger: {
 						global: 'loseAfter'
 					},
-					filter: function(event, player) {
+					filter: function (event, player) {
 						if (event.type != 'discard') return false;
 						if (event.player == player) return false;
 						for (var i = 0; i < event.cards2.length; i++) {
@@ -990,7 +990,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						return false;
 					},
 					// direct: true,
-					content: function() {
+					content: function () {
 						"step 0"
 						if (trigger.delay == false) game.delay();
 						"step 1"
@@ -1004,7 +1004,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 								// 防止因为限制结算速度，而导致牌提前进入弃牌堆
 							}
 						}
-						
+
 						var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length, false);
 						dialog.caption = '【落英】';
 						dialog.header1 = '弃牌堆';
@@ -1015,8 +1015,8 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						dialog.cards[0] = [];
 						dialog.update();
 						dialog.onMoved();
-						dialog.callback = function(){ return true; };
-						game.broadcast(function(player, cards, callback){
+						dialog.callback = function () { return true; };
+						game.broadcast(function (player, cards, callback) {
 							if (!window.decadeUI) return;
 							var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length, false);
 							dialog.caption = '【落英】';
@@ -1030,11 +1030,11 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							dialog.onMoved();
 							dialog.callback = callback;
 						}, player, cards, dialog.callback);
-						
-						event.switchToAuto = function(){
+
+						event.switchToAuto = function () {
 							var cards = dialog.cards[1].concat();
 							var time = 500;
-							
+
 							if (cards.length) {
 								var discards = [];
 								for (var i = 0; i < cards.length; i++) {
@@ -1042,10 +1042,10 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 										discards.push(cards[i]);
 									}
 								}
-								
+
 								if (discards.length) {
 									for (var i = 0; i < discards.length; i++) {
-										setTimeout(function(card, index, finished){
+										setTimeout(function (card, index, finished) {
 											dialog.move(card, index, 0);
 											if (finished) dialog.finishTime(1000);
 										}, time, discards[i], i, i >= discards.length - 1);
@@ -1054,17 +1054,17 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 								} else {
 									dialog.finishTime(1000);
 								}
-								
+
 							} else {
 								dialog.finishTime(1000);
 							}
 						}
-						
+
 						if (event.isOnline()) {
-							event.player.send(function(){
+							event.player.send(function () {
 								if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 							}, event.player);
-							
+
 							event.player.wait();
 							decadeUI.game.wait();
 						} else if (!event.isMine()) {
@@ -1084,28 +1084,28 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						global: 'cardsDiscardAfter'
 					},
 					// direct: true,
-					check: function(event, player) {
+					check: function (event, player) {
 						return event.cards[0].name != 'du';
 					},
-					filter: function(event, player) {
+					filter: function (event, player) {
 						var evt = event.getParent().relatedEvent;
 						if (!evt || evt.name != 'judge') return;
 						if (evt.player == player) return false;
 						if (get.position(event.cards[0], true) != 'd') return false;
 						return (get.suit(event.cards[0]) == 'club');
 					},
-					content: function() {
+					content: function () {
 						"step 0"
 						var cards = trigger.cards;
-						
+
 						var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length, false);
 						dialog.caption = '【落英】';
 						dialog.header1 = '弃牌堆';
 						dialog.header2 = '获得牌';
 						dialog.tip = '请选择要获得的牌';
 						dialog.lockCardsOrder(0);
-						dialog.callback = function(){ return true; };
-						game.broadcast(function(player, cards, callback){
+						dialog.callback = function () { return true; };
+						game.broadcast(function (player, cards, callback) {
 							if (!window.decadeUI) return;
 							var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length, false);
 							dialog.caption = '【落英】';
@@ -1115,25 +1115,25 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							dialog.lockCardsOrder(0);
 							dialog.callback = callback;
 						}, player, cards, dialog.callback);
-						
-						event.switchToAuto = function(){
+
+						event.switchToAuto = function () {
 							var cards = dialog.cards[0].concat();
 							var time = 500;
 							for (var i = 0; i < cards.length; i++) {
 								if (get.value(cards[i], player) < 0) continue;
-								setTimeout(function(card, index, finished){
+								setTimeout(function (card, index, finished) {
 									dialog.move(card, index, 1);
 									if (finished) dialog.finishTime(cards.length <= 1 ? 250 : 1000);;
 								}, time, cards[i], i, i >= cards.length - 1);
 								time += 500;
 							}
 						}
-						
+
 						if (event.isOnline()) {
-							event.player.send(function(){
+							event.player.send(function () {
 								if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 							}, event.player);
-							
+
 							event.player.wait();
 							decadeUI.game.wait();
 						} else if (!event.isMine()) {
@@ -1149,16 +1149,392 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				},
 			}
 		},
+		huashen: {
+			audio: 'huashen2',
+			unique: true,
+			forbid: ['guozhan'],
+			init: function (player) {
+				player.storage.huashen = {
+					list: [],
+					shown: [],
+					owned: {},
+					player: player,
+				}
+			},
+			get: function (player, num) {
+				if (typeof num != 'number') num = 1;
+				var list = [];
+				while (num--) {
+					var name = player.storage.huashen.list.randomRemove();
+					var skills = lib.character[name][3].slice(0);
+					for (var i = 0; i < skills.length; i++) {
+						var info = lib.skill[skills[i]];
+						if (info.limited || info.juexingji || info.charlotte || info.zhuSkill || info.hiddenSkill || info.dutySkill) {
+							skills.splice(i--, 1);
+						}
+					}
+					player.storage.huashen.owned[name] = skills;
+					// player.popup(name);
+					game.log(player, '获得了一个化身');
+					list.push(name);
+				}
+				if (player.isUnderControl(true)) {
+					var cards = [];
+					for (var i = 0; i < list.length; i++) {
+						var cardname = 'huashen_card_' + list[i];
+						lib.card[cardname] = {
+							fullimage: true,
+							image: 'character:' + list[i]
+						}
+						lib.translate[cardname] = lib.translate[list[i]];
+						cards.push(game.createCard(cardname, '', ''));
+					}
+					player.$draw(cards);
+				}
+			},
+			group: ['huashen1', 'huashen2'],
+			intro: {
+				content: function (storage, player) {
+					var str = '';
+					var slist = storage.owned;
+					var list = [];
+					for (var i in slist) {
+						list.push(i);
+					}
+					if (list.length) {
+						str += get.translation(list[0]);
+						for (var i = 1; i < list.length; i++) {
+							str += '、' + get.translation(list[i]);
+						}
+					}
+					var skill = player.additionalSkills.huashen[0];
+					if (skill) {
+						str += '<p>当前技能：' + get.translation(skill);
+					}
+					return str;
+				},
+				mark: function (dialog, content, player) {
+					var slist = content.owned;
+					var list = [];
+					for (var i in slist) {
+						list.push(i);
+					}
+					if (list.length) {
+						dialog.addSmall([list, 'character']);
+					}
+					if (!player.isUnderControl(true)) {
+						for (var i = 0; i < dialog.buttons.length; i++) {
+							if (!content.shown.contains(dialog.buttons[i].link)) {
+								dialog.buttons[i].node.group.remove();
+								dialog.buttons[i].node.hp.remove();
+								dialog.buttons[i].node.intro.remove();
+								dialog.buttons[i].node.name.innerHTML = '未<br>知';
+								dialog.buttons[i].node.name.dataset.nature = '';
+								dialog.buttons[i].style.background = '';
+								dialog.buttons[i]._nointro = true;
+								dialog.buttons[i].classList.add('menubg');
+							}
+						}
+					}
+					if (player.additionalSkills.huashen) {
+						var skill = player.additionalSkills.huashen[0];
+						if (skill) {
+							dialog.add('<div><div class="skill">【' + get.translation(skill) +
+								'】</div><div>' + lib.translate[skill + '_info'] + '</div></div>');
+						}
+					}
+				}
+			},
+			setup: function (player, gain) {
+				for (var i in lib.character) {
+					if (lib.filter.characterDisabled2(i) || lib.filter.characterDisabled(i)) continue;
+					var add = false;
+					for (var j = 0; j < lib.character[i][3].length; j++) {
+						var info = lib.skill[lib.character[i][3][j]];
+						if (!info) {
+							continue;
+						}
+						if (!info.limited && !info.juexingji && !info.charlotte && !info.zhuSkill && !info.hiddenSkill && !info.dutySkill) {
+							add = true; break;
+						}
+					}
+					if (add) {
+						player.storage.huashen.list.push(i);
+					}
+				}
+				for (var i = 0; i < game.players.length; i++) {
+					player.storage.huashen.list.remove([game.players[i].name]);
+					player.storage.huashen.list.remove([game.players[i].name1]);
+					player.storage.huashen.list.remove([game.players[i].name2]);
+				}
+				player.storage.huasheninited = true;
+				if (gain) {
+					player.markSkill('huashen');
+					lib.skill.huashen.get(player, 2);
+					_status.event.trigger('huashenStart');
+				}
+			}
+		},
+		huashen1: {
+			trigger: { global: 'gameStart', player: ['enterGame', 'damageBefore'] },
+			forced: true,
+			popup: false,
+			//priority:10,
+			filter: function (event, player) {
+				return !player.storage.huasheninited;
+			},
+			content: function () {
+				lib.skill.huashen.setup(player, trigger.name != 'damage');
+			}
+		},
+		huashen2: {
+			audio: 2,
+			trigger: { player: ['phaseBegin', 'phaseEnd', 'huashenStart'] },
+			filter: function (event, player, name) {
+				//if(name=='phaseBegin'&&game.phaseNumber==1) return false;
+				return true;
+			},
+			//priority:50,
+			forced: true,
+			//popup:false,
+			content: function () {
+				'step 0'
+				if (get.is.empty(player.storage.huashen.owned)) {
+					if (!player.storage.huasheninited) {
+						lib.skill.huashen.setup(player, false);
+					}
+					event.finish();
+					return;
+				}
+				event.trigger('playercontrol');
+				'step 1'
+				var slist = player.storage.huashen.owned;
+				var list = [];
+				for (var i in slist) {
+					list.push(i);
+				}
+				event.switchToAuto = function () {
+					var currentbutton = event.dialog.querySelector('.selected.button');
+					if (!currentbutton) {
+						currentbutton = event.dialog.buttons[0];
+						currentbutton.classList.add('selected');
+					}
+					event.clickControl(player.storage.huashen.owned[currentbutton.link].randomGet());
+				}
+
+				event.clickControl = function (link, type) {
+					if (link != 'cancel2') {
+						var currentname;
+						if (type == 'ai') {
+							currentname = event.currentname;
+						}
+						else {
+							currentname = event.dialog.querySelector('.selected.button').link;
+						}
+						player.storage.huashen.shown.add(currentname);
+						if (!player.additionalSkills.huashen || !player.additionalSkills.huashen.contains(link)) {
+							player.addAdditionalSkill('huashen', link);
+							//player.logSkill('huashen2');
+							player.flashAvatar('huashen', currentname);
+							game.log(player, '获得技能', '【' + get.translation(link) + '】');
+							player.popup(link);
+
+							if (event.dialog && event.dialog.buttons) {
+								for (var i = 0; i < event.dialog.buttons.length; i++) {
+									if (event.dialog.buttons[i].classList.contains('selected')) {
+										var name = event.dialog.buttons[i].link;
+										player.sex = lib.character[name][0];
+										player.group = lib.character[name][1];
+										// player.node.identity.style.backgroundColor=get.translation(player.group+'Color');
+										break;
+									}
+								}
+							}
+
+							// if(event.triggername=='phaseZhunbeiBegin'){
+							// 	(function(){
+							// 		var skills=[link];
+							// 		var list=[];
+							// 		game.expandSkills(skills);
+							// 		var triggerevent=event._trigger;
+							// 		var name='phaseZhunbeiBegin';
+							// 		for(i=0;i<skills.length;i++){
+							// 			var trigger=get.info(skills[i]).trigger;
+							// 			if(trigger){
+							// 				var add=false;
+							// 				if(player==triggerevent.player&&trigger.player){
+							// 					if(typeof trigger.player=='string'){
+							// 						if(trigger.player==name) add=true;
+							// 					}
+							// 					else if(trigger.player.contains(name)) add=true;
+							// 				}
+							// 				if(trigger.global){
+							// 					if(typeof trigger.global=='string'){
+							// 						if(trigger.global==name) add=true;
+							// 					}
+							// 					else if(trigger.global.contains(name)) add=true;
+							// 				}
+							// 				if(add&&player.isOut()==false) list.push(skills[i]);
+							// 			}
+							// 		}
+							// 		for(var i=0;i<list.length;i++){
+							// 			game.createTrigger('phaseZhunbeiBegin',list[i],player,triggerevent);
+							// 		}
+							// 	}());
+							// }
+						}
+					}
+					if (type != 'ai') {
+						// ui.auto.show();
+						event.dialog.close();
+						event.control.close();
+						game.resume();
+					}
+				};
+				if (event.isMine()) {
+					event.dialog = ui.create.dialog('选择获得一项技能', [list, 'character']);
+					for (var i = 0; i < event.dialog.buttons.length; i++) {
+						event.dialog.buttons[i].classList.add('pointerdiv');
+					}
+					if (trigger.name == 'game') {
+						event.control = ui.create.control();
+					}
+					else {
+						event.control = ui.create.control(['cancel2']);
+					}
+					event.control.custom = event.clickControl;
+					event.control.replaceTransition = false;
+					// ui.auto.hide();
+					game.pause();
+					for (var i = 0; i < event.dialog.buttons.length; i++) {
+						event.dialog.buttons[i].classList.add('selectable');
+					}
+					event.custom.replace.button = function (button) {
+						if (button.classList.contains('selected')) {
+							button.classList.remove('selected');
+							if (trigger.name == 'game') {
+								event.control.style.opacity = 0;
+							}
+							else {
+								event.control.replace(['cancel2']);
+							}
+						}
+						else {
+							for (var i = 0; i < event.dialog.buttons.length; i++) {
+								event.dialog.buttons[i].classList.remove('selected');
+							}
+							button.classList.add('selected');
+							event.control.replace(slist[button.link]);
+							if (trigger.name == 'game' && getComputedStyle(event.control).opacity == 0) {
+								event.control.style.transition = 'opacity 0.5s';
+								ui.refresh(event.control);
+								event.control.style.opacity = 1;
+								event.control.style.transition = '';
+								ui.refresh(event.control);
+							}
+							else {
+								event.control.style.opacity = 1;
+							}
+						}
+						event.control.custom = event.clickControl;
+					}
+					event.custom.replace.window = function () {
+						for (var i = 0; i < event.dialog.buttons.length; i++) {
+							if (event.dialog.buttons[i].classList.contains('selected')) {
+								event.dialog.buttons[i].classList.remove('selected');
+								if (trigger.name == 'game') {
+									event.control.style.opacity = 0;
+								}
+								else {
+									event.control.replace(['cancel2']);
+								}
+								event.control.custom = event.clickControl;
+								return;
+							}
+						}
+					}
+				}
+				else {
+					var skills = [];
+					var map = {};
+					for (var i = 0; i < list.length; i++) {
+						var sub = player.storage.huashen.owned[list[i]];
+						skills.addArray(sub);
+						for (var j = 0; j < sub.length; j++) {
+							map[sub[j]] = list[i];
+						}
+					}
+					var add = player.additionalSkills.huashen;
+					if (typeof add == 'string') {
+						add = [add];
+					}
+					if (Array.isArray(add)) {
+						for (var i = 0; i < add.length; i++) {
+							skills.remove(add[i]);
+						}
+					}
+					var cond = 'out';
+					if (event.triggername == 'phaseZhunbeiBegin') {
+						cond = 'in';
+					}
+					skills.randomSort();
+					skills.sort(function (a, b) {
+						return get.skillRank(b, cond) - get.skillRank(a, cond);
+					});
+					var choice = skills[0];
+					if (choice) {
+						event.currentname = map[choice];
+						event.clickControl(choice, 'ai');
+					}
+				}
+			}
+		},
+		nsanruo: {
+			unique: true,
+			init: function (player) {
+				if (!player.node.handcards1.cardMod) {
+					player.node.handcards1.cardMod = {};
+				}
+				if (!player.node.handcards2.cardMod) {
+					player.node.handcards2.cardMod = {};
+				}
+				var cardMod = function (card) {
+					if (get.info(card).multitarget) return;
+					if (card.name == 'sha' || get.type(card) == 'trick') return ['暗弱', '杀或普通锦囊牌对你不可见'];
+				};
+				player.node.handcards1.cardMod.nsanruo = cardMod;
+				player.node.handcards2.cardMod.nsanruo = cardMod;
+				player.node.handcards1.classList.add('nsanruo');
+				player.node.handcards2.classList.add('nsanruo');
+				if (!ui.css.nsanruo) {
+					ui.css.nsanruo = lib.init.sheet(
+						'.handcards.nsanruo>.card[data-card-type="trick"]:not(*[data-card-multitarget="1"])>*,' +
+						'.handcards.nsanruo>.card[data-card-name="sha"]>*{visibility:hidden !important;}',
+						'.handcards.nsanruo>.card[data-card-type="trick"]:not(*[data-card-multitarget="1"]),' +
+						'.handcards.nsanruo>.card[data-card-name="sha"]{background-size:0 0 !important;box-shadow:inset 0 0 0 2px white;}'
+					);
+				}
+			},
+			onremove: function (player) {
+				player.node.handcards1.classList.remove('nsanruo');
+				player.node.handcards2.classList.remove('nsanruo');
+				delete player.node.handcards1.cardMod.nsanruo;
+				delete player.node.handcards2.cardMod.nsanruo;
+			},
+			ai: {
+				neg: true
+			}
+		},
 	};
-	
+
 	decadeUI.inheritSkill = {
 		xz_xunxun: {
 			audio: 2,
 			trigger: {
 				player: 'phaseDrawBegin1'
 			},
-			filter:function (event,player){
-				var num = game.countPlayer(function(current){
+			filter: function (event, player) {
+				var num = game.countPlayer(function (current) {
 					return current.isDamaged();
 				});
 				return num >= 1 && !player.hasSkill('xunxun');
@@ -1189,7 +1565,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 			}
 		},
 		nk_shekong: {
-			content:function(){
+			content: function () {
 				'step 0'
 				event.cardsx = cards.slice(0);
 				var num = get.cnNumber(cards.length);
@@ -1198,16 +1574,16 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				if (cards.length > 1) prompt += ('；或弃置一张牌，然后' + trans + '摸' + num + '张牌');
 				var next = target.chooseToDiscard(prompt, 'he', true);
 				next.numx = cards.length;
-				next.selectCard = function() {
+				next.selectCard = function () {
 					if (ui.selected.cards.length > 1) return _status.event.numx;
 					return [1, _status.event.numx];
 				};
 				next.complexCard = true;
-				next.ai = function(card) {
+				next.ai = function (card) {
 					if (ui.selected.cards.length == 0 || (_status.event.player.countCards('he',
-					function(cardxq) {
-						return get.value(cardxq) < 7;
-					}) >= _status.event.numx)) return 7 - get.value(card);
+						function (cardxq) {
+							return get.value(cardxq) < 7;
+						}) >= _status.event.numx)) return 7 - get.value(card);
 					return - 1;
 				};
 				'step 1'
@@ -1224,28 +1600,28 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 					var cards = event.cardsx;
 					var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length);
 					dialog.caption = '【设控】';
-					game.broadcast(function(player, cards, callback){
+					game.broadcast(function (player, cards, callback) {
 						if (!window.decadeUI) return;
 						var dialog = decadeUI.content.chooseGuanXing(player, cards, cards.length);
 						dialog.caption = '【设控】';
 						dialog.callback = callback;
 					}, player, cards, dialog.callback);
-					
-					event.switchToAuto = function(){
+
+					event.switchToAuto = function () {
 						var cards = dialog.cards[0].concat();
 						var cheats = [];
 						var judges;
-						
+
 						var next = player.getNext();
 						var friend = (get.attitude(player, next) < 0) ? null : next;
 						judges = next.node.judges.childNodes;
-						
+
 						if (judges.length > 0) cheats = decadeUI.get.cheatJudgeCards(cards, judges, friend != null);
-						
+
 						if (friend) {
 							cards = decadeUI.get.bestValueCards(cards, friend);
 						} else {
-							cards.sort(function(a, b){
+							cards.sort(function (a, b) {
 								return get.value(a, next) - get.value(b, next);
 							});
 						}
@@ -1253,19 +1629,19 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						cards = cheats.concat(cards);
 						var time = 500;
 						for (var i = 0; i < cards.length; i++) {
-							setTimeout(function(card, index, finished){
+							setTimeout(function (card, index, finished) {
 								dialog.move(card, index, 0);
 								if (finished) dialog.finishTime(cards.length <= 1 ? 250 : 1000);;
 							}, time, cards[i], i, i >= cards.length - 1);
 							time += 500;
 						}
 					}
-					
+
 					if (event.isOnline()) {
-						event.player.send(function(){
+						event.player.send(function () {
 							if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 						}, event.player);
-						
+
 						event.player.wait();
 						decadeUI.game.wait();
 					} else if (!event.isMine()) {
@@ -1274,8 +1650,8 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				} else event.finish();
 			}
 		},
-		kamome_huanmeng:{
-			content:function(){
+		kamome_huanmeng: {
+			content: function () {
 				"step 0"
 				if (player.isUnderControl()) {
 					game.modeSwapPlayer(player);
@@ -1284,14 +1660,14 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				var cards = get.cards(num);
 				var guanxing = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
 				guanxing.caption = '【幻梦】';
-				game.broadcast(function(player, cards, callback){
+				game.broadcast(function (player, cards, callback) {
 					if (!window.decadeUI) return;
 					var guanxing = decadeUI.content.chooseGuanXing(player, cards, cards.length, null, cards.length);
 					guanxing.caption = '【幻梦】';
 					guanxing.callback = callback;
 				}, player, cards, guanxing.callback);
-				
-				event.switchToAuto = function(){
+
+				event.switchToAuto = function () {
 					var cards = guanxing.cards[0].concat();
 					var cheats = [];
 					var judges = player.node.judges.childNodes;
@@ -1305,30 +1681,30 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 							}
 						}
 					}
-					
+
 					var time = 500;
 					for (var i = 0; i < cheats.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							guanxing.move(card, index, 0);
 							if (finished) guanxing.finishTime(1000);
 						}, time, cheats[i], i, (i >= cheats.length - 1) && cards.length == 0);
 						time += 500;
 					}
-					
+
 					for (var i = 0; i < cards.length; i++) {
-						setTimeout(function(card, index, finished){
+						setTimeout(function (card, index, finished) {
 							guanxing.move(card, index, 1);
 							if (finished) guanxing.finishTime(1000);
 						}, time, cards[i], i, (i >= cards.length - 1));
 						time += 500;
 					}
 				}
-				
+
 				if (event.isOnline()) {
-					event.player.send(function(){
+					event.player.send(function () {
 						if (!window.decadeUI && decadeUI.eventDialog) _status.event.finish();
 					}, event.player);
-					
+
 					event.player.wait();
 					decadeUI.game.wait();
 				} else if (!event.isMine()) {
@@ -1336,17 +1712,17 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				}
 				"step 1"
 				player.popup(get.cnNumber(event.num1) + '上' + get.cnNumber(event.num2) + '下');
-				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) +'张牌置于牌堆底');
+				game.log(player, '将' + get.cnNumber(event.num1) + '张牌置于牌堆顶，' + get.cnNumber(event.num2) + '张牌置于牌堆底');
 				game.updateRoundNumber()
 			},
 		},
-		
-		xinbenxi:{
-			content: function() {
+
+		xinbenxi: {
+			content: function () {
 				"step 0"
 				event.videoId = lib.status.videoId++;
-				var func = function(card, id, bool) {
-					var list = ['为XXX多指定一个目标', '令XXX无视防具', '令XXX不可被抵消', '当XXX造成伤害时摸一张牌', ];
+				var func = function (card, id, bool) {
+					var list = ['为XXX多指定一个目标', '令XXX无视防具', '令XXX不可被抵消', '当XXX造成伤害时摸一张牌',];
 					var choiceList = ui.create.dialog('【奔袭】：请选择一至两项', 'forcebutton');
 					choiceList.videoId = id;
 					for (var i = 0; i < list.length; i++) {
@@ -1357,7 +1733,7 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 						if (i == 0 && !bool) str += '</div>';
 						str += '</div>';
 						var next = choiceList.add(str);
-						next.firstChild.addEventListener(lib.config.touchscreen ? 'touchend': 'click', ui.click.button);
+						next.firstChild.addEventListener(lib.config.touchscreen ? 'touchend' : 'click', ui.click.button);
 						next.firstChild.link = i;
 						for (var j in lib.element.button) {
 							next[j] = lib.element.button[j];
@@ -1378,82 +1754,82 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 				next.set('forced', true);
 				next.set('selectButton', [1, 2]);
 				next.set('filterButton',
-				function(button) {
-					if (button.link == 0) {
-						return _status.event.bool1;
-					};
-					return true;
-				});
+					function (button) {
+						if (button.link == 0) {
+							return _status.event.bool1;
+						};
+						return true;
+					});
 				next.set('bool1', lib.skill.xinbenxi.filterx(trigger, player));
 				next.set('ai',
-				function(button) {
-					var player = _status.event.player;
-					var event = _status.event.getTrigger();
-					switch (button.link) {
-					case 0:
-						{
-							if (game.hasPlayer(function(current) {
-								return lib.filter.targetEnabled2(event.card, player, current) && !event.targets.contains(current) && get.effect(current, event.card, player, player) > 0;
-							})) return 1.6 + Math.random();
-							return 0;
-						}
-					case 1:
-						{
-							if (event.targets.filter(function(current) {
-								var eff1 = get.effect(current, event.card, player, player);
-								player._xinbenxi_ai = true;
-								var eff2 = get.effect(current, event.card, player, player);
-								delete player._xinbenxi_ai;
-								return eff1 > eff2;
-							}).length) return 1.9 + Math.random();
-							return Math.random();
-						}
-					case 2:
-						{
-							var num = 1.3;
-							if (event.card.name == 'sha' && event.targets.filter(function(current) {
-								if (current.mayHaveShan() && get.attitude(player, current) <= 0) {
-									if (current.hasSkillTag('useShan')) num = 1.9;
-									return true;
+					function (button) {
+						var player = _status.event.player;
+						var event = _status.event.getTrigger();
+						switch (button.link) {
+							case 0:
+								{
+									if (game.hasPlayer(function (current) {
+										return lib.filter.targetEnabled2(event.card, player, current) && !event.targets.contains(current) && get.effect(current, event.card, player, player) > 0;
+									})) return 1.6 + Math.random();
+									return 0;
 								}
-								return false;
-							}).length) return num + Math.random();
-							return 0.5 + Math.random();
+							case 1:
+								{
+									if (event.targets.filter(function (current) {
+										var eff1 = get.effect(current, event.card, player, player);
+										player._xinbenxi_ai = true;
+										var eff2 = get.effect(current, event.card, player, player);
+										delete player._xinbenxi_ai;
+										return eff1 > eff2;
+									}).length) return 1.9 + Math.random();
+									return Math.random();
+								}
+							case 2:
+								{
+									var num = 1.3;
+									if (event.card.name == 'sha' && event.targets.filter(function (current) {
+										if (current.mayHaveShan() && get.attitude(player, current) <= 0) {
+											if (current.hasSkillTag('useShan')) num = 1.9;
+											return true;
+										}
+										return false;
+									}).length) return num + Math.random();
+									return 0.5 + Math.random();
+								}
+							case 3:
+								{
+									return (get.tag(event.card, 'damage') || 0) + Math.random();
+								}
 						}
-					case 3:
-						{
-							return (get.tag(event.card, 'damage') || 0) + Math.random();
-						}
-					}
-				});
+					});
 				"step 1"
 				if (player.isOnline2()) {
 					player.send('closeDialog', event.videoId);
 				}
 				event.dialog.close();
-				var map = [function(trigger, player, event) {
+				var map = [function (trigger, player, event) {
 					player.chooseTarget('请选择' + get.translation(trigger.card) + '的额外目标', true,
-					function(card, player, target) {
-						var player = _status.event.player;
-						if (_status.event.targets.contains(target)) return false;
-						return lib.filter.targetEnabled2(_status.event.card, player, target);
-					}).set('targets', trigger.targets).set('card', trigger.card).set('ai',
-					function(target) {
-						var trigger = _status.event.getTrigger();
-						var player = _status.event.player;
-						return get.effect(target, trigger.card, player, player);
-					});
+						function (card, player, target) {
+							var player = _status.event.player;
+							if (_status.event.targets.contains(target)) return false;
+							return lib.filter.targetEnabled2(_status.event.card, player, target);
+						}).set('targets', trigger.targets).set('card', trigger.card).set('ai',
+							function (target) {
+								var trigger = _status.event.getTrigger();
+								var player = _status.event.player;
+								return get.effect(target, trigger.card, player, player);
+							});
 				},
-				function(trigger, player, event) {
+				function (trigger, player, event) {
 					player.storage.xinbenxi_unequip.add(trigger.card);
 				},
-				function(trigger, player, event) {
+				function (trigger, player, event) {
 					player.storage.xinbenxi_directHit.add(trigger.card);
 					trigger.nowuxie = true;
 					trigger.customArgs.
-				default.directHit2 = true;
+						default.directHit2 = true;
 				},
-				function(trigger, player, event) {
+				function (trigger, player, event) {
 					player.storage.xinbenxi_damage.add(trigger.card);
 				}];
 				for (var i = 0; i < result.links.length; i++) {
@@ -1470,20 +1846,20 @@ decadeModule.import(function(lib, game, ui, get, ai, _status){
 
 		},
 	}
-	
+
 	if (!_status.connectMode) {
 		for (var key in decadeUI.skill) {
 			if (lib.skill[key]) lib.skill[key] = decadeUI.skill[key];
 		}
-		
+
 		for (var key in decadeUI.inheritSkill) {
 			if (lib.skill[key]) {
-				 for (var j in decadeUI.inheritSkill[key]) {
+				for (var j in decadeUI.inheritSkill[key]) {
 					lib.skill[key][j] = decadeUI.inheritSkill[key][j]
-				 }
+				}
 			}
 		}
 	}
-	
+
 });
 

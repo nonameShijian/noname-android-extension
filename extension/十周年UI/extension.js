@@ -468,7 +468,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									hpNode.innerHTML = '';
 									hpNode.classList.remove('textstyle');
 									while (hpMax > hpNode.childNodes.length) ui.create.div(hpNode);
-									while (hpMax < hpNode.childNodes.length) hpNode.lastChild.remove();
+									while (hpNode.childNodes.length && hpMax < hpNode.childNodes.length) hpNode.lastChild.remove();
 
 									for (var i = 0; i < hpMax; i++) {
 										if (i < hp) {
@@ -546,6 +546,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							if (next.source == undefined && !next.nosource) next.source = _status.event.player;
 							if (next.ai == undefined) next.ai = get.unuseful2;
 							next.position = 'hs';
+							if (next.ai2 == undefined) next.ai2 = (() => 1);
 							next.setContent('chooseToRespond');
 							next._args = Array.from(arguments);
 							return next;
@@ -1596,9 +1597,30 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								var ok = game.check();
 								if (ok) {
 									ui.click.ok();
-								} else if (ai.basic.chooseCard(event.ai)) {
-									ui.click.ok();
-									event._aiexcludeclear = true;
+								} else if (ai.basic.chooseCard(event.ai1 || event.ai)) {
+									if (ai.basic.chooseTarget(event.ai2)) {
+										ui.click.ok();
+										event._aiexcludeclear = true;
+									} else {
+										if (!event.norestore) {
+											if (event.skill) {
+												var skill = event.skill;
+												ui.click.cancel();
+												event._aiexclude.add(skill);
+												var info = get.info(skill);
+												if (info.sourceSkill) {
+													event._aiexclude.add(info.sourceSkill);
+												}
+											} else {
+												get.card(true).aiexclude();
+												game.uncheck();
+											}
+											event.redo();
+											game.resume();
+										} else {
+											ui.click.cancel();
+										}
+									}
 								} else if (event.skill && !event.norestore) {
 									var skill = event.skill;
 									ui.click.cancel();
@@ -1619,6 +1641,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"step 2"
 							event.resume();
 							if (event.result) {
+								if (event.result._sendskill) {
+									lib.skill[event.result._sendskill[0]] = event.result._sendskill[1];
+								}
 								if (event.result.skill) {
 									var info = get.info(event.result.skill);
 									if (info && info.chooseButton) {
@@ -1890,6 +1915,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 							event.resume();
 							if (event.result) {
+								if (event.result._sendskill) {
+									lib.skill[event.result._sendskill[0]] = event.result._sendskill[1];
+								}
 								if (event.result.skill) {
 									var info = get.info(event.result.skill);
 									if (info && info.chooseButton) {
@@ -1973,7 +2001,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								var next = owner.lose(card, ui.special, 'visible').set('type', 'equip').set('getlx', false);
 								next.animate = true;
 								next.blameEvent = event;
-							}
+							} else if (get.position(card) == 'c') event.updatePile = true;
 
 							"step 1"
 							if (event.cancelled) {
@@ -2027,11 +2055,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (lib.config.background_audio) {
 									game.playAudio('effect', type);
 								}
-							},
-								get.subtype(card));
+							}, get.subtype(card));
 							player.$equip(card);
 							game.addVideo('equip', player, get.cardInfo(card));
 							game.log(player, '装备了', card);
+							if (event.updatePile) game.updateRoundNumber();
 							"step 5"
 							var info = get.info(card, false);
 							if (info.onEquip && (!info.filterEquip || info.filterEquip(card, player))) {
@@ -2139,7 +2167,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										var id = owner.playerid;
 										if (!map[id]) map[id] = [];
 										map[id].push(i);
-									}
+									} else if (!event.updatePile && get.position(i) == 'c') event.updatePile = true;
 								}
 								for (var i in map) {
 									var owner = (_status.connectMode ? lib.playerOL : game.playerMap)[i];
@@ -2243,19 +2271,21 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							} else if (event.source && (event.animate == 'give' || event.animate == 'giveAuto')) {
 								game.pause();
 								gainTo(cards);
+								var evtmap = event.relatedLose;
 								if (event.animate == 'give') {
-									event.source.$give(cards, player);
+									if (evtmap && evtmap.cards && evtmap.cards.length > 0) event.source.$give(evtmap.cards, player);
+									else event.source.$give(cards, player);
 								} else {
 									var c;
 									var hs = [];
 									var ots = [];
 									hs.duiMod = ots.duiMod = event.source;
-									for (var i = 0; i < cards.length; i++) {
-										c = cards[i];
-										if (event.relatedLose && event.relatedLose.hs && event.relatedLose.hs.contains(c))
-											hs.push(c);
-										else
-											ots.push(c);
+									if (evtmap && evtmap.hs && evtmap.cards) {
+										for (var i = 0; i < cards.length; i++) {
+											c = cards[i];
+											if (evtmap.hs.contains(c)) hs.push(c);
+											else if (evtmap.cards.contains(c)) ots.push(c);
+										}
 									}
 
 									if (hs.length)
@@ -2271,6 +2301,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								game.log(player, '获得了', cards);
 							}
 							"step 4"
+							if (event.updatePile) game.updateRoundNumber();
 							event.finish();
 						};
 						EventContent.gameDraw = function () {
@@ -3752,30 +3783,31 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										item = item.name;
 									} else {
 										mark = ui.create.div('.card.mark');
-										if (lib.skill[item] && lib.skill[item].markimage) {
-											mark.text = decadeUI.element.create('mark-text', mark);
-											if (decadeUI.config.playerMarkStyle == 'decade') {
-												mark.text.innerHTML = "<img src='" + lib.assetURL + lib.skill[item].markimage + "' style='width:18px;height:15px;'/>";
-											} else {
-												mark.text.innerHTML = " ";
-												mark.text.setBackgroundImage(lib.skill[item].markimage);
+										var markText = lib.translate[item + '_bg'];
+										if (!markText) {
+											markText = get.translation(item).substr(0, 2);
+											if (decadeUI.config.playerMarkStyle != 'decade') {
+												markText = markText[0];
 											}
+										}
+										mark.text = decadeUI.element.create('mark-text', mark);
+										if (lib.skill[item] && lib.skill[item].markimage) {
+											markText = '　';
+											mark.text.style.animation = 'none';
+											mark.text.setBackgroundImage(lib.skill[item].markimage);
 											mark.text.style['box-shadow'] = 'none';
 											mark.text.style.backgroundPosition = 'center';
 											mark.text.style.backgroundSize = 'contain';
 											mark.text.style.backgroundRepeat = 'no-repeat';
+											mark.text.classList.add('before-hidden');
 										} else {
-											var markText = lib.translate[item + '_bg'];
-											if (!markText || markText[0] == '+' || markText[0] == '-') {
-												markText = get.translation(item).substr(0, 2);
-												if (decadeUI.config.playerMarkStyle != 'decade') {
-													markText = markText[0];
-												}
-											}
-											mark.text = decadeUI.element.create('mark-text', mark);
 											if (markText.length == 2) mark.text.classList.add('small-text');
-											mark.text.innerHTML = markText;
 										}
+										if (lib.skill[item] && lib.skill[item].zhuanhuanji) {
+											mark.text.style.animation = 'none';
+											mark.text.classList.add('before-hidden');
+										}
+										mark.text.innerHTML = markText;
 									}
 
 									mark.name = item;
@@ -4017,8 +4049,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											num = this.storage[name];
 										} else if (Array.isArray(this.storage[name])) {
 											num = this.storage[name].length;
-										} else if (typeof this.storage[name] == 'boolean') {
-											num = this.storage[name] ? '+' : '-';
 										}
 
 										if (num) {
@@ -6243,8 +6273,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						if (cards) {
 							var owner = get.owner(cards[0]);
 							if (owner) {
-								event.relatedLose = owner.lose(cards, 'visible').set('getlx', false);
-							}
+								event.relatedLose = owner.lose(cards, 'visible', ui.special).set('getlx', false);
+							} else if (get.position(cards[0]) == 'c') event.updatePile = true;
 						};
 						"step 1";
 						if (cards[0].destroyed) {
@@ -6321,6 +6351,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 							game.addVideo('addJudge', player, [get.cardInfo(cards[0]), cards[0].viewAs]);
 						}
+						if (event.updatePile) game.updateRoundNumber();
 					};
 
 					lib.element.content.chooseToCompare = function () {
@@ -7048,6 +7079,23 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						} else {
 							return this.init(info.name, info.name2);
 						}
+					};
+
+					lib.element.player.prompt = function (str, nature) {
+						var node;
+						if (this.node.prompt) {
+							node = this.node.prompt;
+							node.innerHTML = '';
+							node.className = 'damage normal-font damageadded';
+						} else {
+							node = ui.create.div('.damage.normal-font', this);
+							this.node.prompt = node;
+							ui.refresh(node);
+							node.classList.add('damageadded');
+						}
+						node.innerHTML = str;
+						node.dataset.text = str;
+						node.dataset.nature = nature || 'soil';
 					};
 
 					lib.element.player.$damagepop = function (num, nature, font, nobroadcast) {
@@ -7808,7 +7856,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						if (totalW > limitW) {
 							xMargin = csw - Math.abs(limitW - csw * cards.length) / (cards.length - 1);
 							if (lib.config.fold_card) {
-								var min = 27 * cs;
+								var foldCardMinWidth = lib.config['extension_十周年UI_foldCardMinWidth'];
+								var min = cs;
+								if (foldCardMinWidth == 'cardWidth') {
+									min *= cw;
+								} else {
+									min *= (foldCardMinWidth && foldCardMinWidth.length ? parseInt(foldCardMinWidth) : 81);
+								}
 								if (xMargin < min) {
 									expand = true;
 									xMargin = min;
@@ -9981,6 +10035,27 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			closeWhenChess: {
 				name: '战棋模式关闭UI',
 				init: false,
+			},
+			foldCardMinWidth: {
+				name: '折叠手牌最小宽度',
+				intro: '设置当手牌过多时，折叠手牌露出部分的最小宽度（默认值为81）',
+				init: '81',
+				item: {
+					'9': '9',
+					'18': '18',
+					'27': '27',
+					'36': '36',
+					'45': '45',
+					'54': '54',
+					'63': '63',
+					'72': '72',
+					'81': '81',
+					'90': '90',
+					'cardWidth': '卡牌宽度'
+				},
+				update: function () {
+					if (window.decadeUI) decadeUI.layout.updateHand();
+				}
 			}
 		},
 		package: {
@@ -10006,9 +10081,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.10（Show-K修复版）',
-					'更新日期：2022-08-14',
-					'- 修复了player.actionHistory缺少useSkill的异常（举例：神孙权〖驭衡〗）。',
+					'当前版本：1.2.0.220114.12（Show-K修复版）',
+					'更新日期：2022-09-15',
+					'- 现在可以设置折叠手牌最小宽度了，且默认值修改为81。',
+					'- 为牌名辅助显示的文字增加了背景颜色，使之更容易阅读。',
+					'- 修复了targetprompt无描边的异常（举例：【借刀杀人】）。',
+					'- 修复了若游戏本体路径包含半角括号，觉醒技/限定技特效等不显示的异常。',
+					'- 修复了DIY刘璋〖暗弱〗不可见手牌依旧“可见”的异常。',
+					'- 将拼点对话框等对话框的z-index调低，使之不会遮挡游戏牌。',
+					'- “代码机制调整：现在从牌堆中获得牌/装备牌/将牌置入装备区会自动触发updateRoundNumber了。”',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10028,7 +10109,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.10",
+			version: "1.2.0.220114.12",
 		},
 		files: {
 			"character": [],

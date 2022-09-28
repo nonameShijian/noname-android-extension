@@ -148,6 +148,7 @@
 	top: auto;
 	bottom: 5px;
 	line-height: 16px;
+	background: rgba(230, 210, 166, 0.8);
 	color: black;
 	font-size: 16px;
 	font-weight: bold;

@@ -144,7 +144,7 @@
     border-image-source: url('image/decoration/dialog.png');
     border-image-slice:  46 59 28 59 fill;
 	transition: opacity, background, transform 0.5s;
-    z-index: 7;
+    z-index: 4;
 }
 
 #arena>.skill-dialog {

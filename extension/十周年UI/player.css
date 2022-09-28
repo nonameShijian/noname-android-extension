@@ -710,6 +710,10 @@
     box-sizing: border-box;
 }
 
+.player>.dui-marks>.mark>.mark-text.before-hidden::before {
+	display: none;
+}
+
 .player>.dui-marks>.mark>.mark-count {
 	position: absolute;
     left: auto;
