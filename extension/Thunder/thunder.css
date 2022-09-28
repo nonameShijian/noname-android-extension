@@ -264,9 +264,18 @@
         -1px -1px 0px #000000;
 }
 
+.skillnodelimit {
+    background-image: url('image/effect/skill3.png');
+}
+
 .initselected {
     background-image: url('image/effect/skillsel2.png');
 }
+
+.initselected2 {
+    background-image: url('image/effect/skillsel3.png');
+}
+
 
 .initbg {
     width: 100%;

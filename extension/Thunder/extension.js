@@ -1,8 +1,244 @@
+/// <reference path="../../typings/index.d.ts" />
+/// <reference path="../在线更新/typings/index.d.ts" />
 game.import("extension", function (lib, game, ui, get, ai, _status) {
     return {
         name: "Thunder",
         editable: false,
         content: function (config, pack) {
+            // 下载进度条
+            if (typeof game.shijianCreateProgress != 'function') {
+                game.shijianCreateProgress = (title, max, fileName, value) => {
+                    const parent = ui.create.div(ui.window, {
+                        textAlign: 'center',
+                        width: '300px',
+                        height: '150px',
+                        left: 'calc(50% - 150px)',
+                        top: 'auto',
+                        bottom: 'calc(50% - 75px)',
+                        zIndex: '10',
+                        boxShadow: 'rgb(0 0 0 / 40 %) 0 0 0 1px, rgb(0 0 0 / 20 %) 0 3px 10px',
+                        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))',
+                        borderRadius: '8px'
+                    });
+
+                    // 可拖动
+                    parent.className = 'dialog';
+
+                    const container = ui.create.div(parent, {
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '100%'
+                    });
+
+                    container.ontouchstart = ui.click.dialogtouchStart;
+                    container.ontouchmove = ui.click.touchScroll;
+                    container.style.WebkitOverflowScrolling = 'touch';
+                    parent.ontouchstart = ui.click.dragtouchdialog;
+
+                    const caption = ui.create.div(container, '', title, {
+                        position: 'relative',
+                        paddingTop: '8px',
+                        fontSize: '20px'
+                    });
+
+                    ui.create.node('br', container);
+
+                    const tip = ui.create.div(container, {
+                        position: 'relative',
+                        paddingTop: '8px',
+                        fontSize: '20px',
+                        width: '100%'
+                    });
+
+                    const file = ui.create.node('span', tip, '', fileName);
+                    file.style.width = file.style.maxWidth = '100%';
+                    ui.create.node('br', tip);
+                    const index = ui.create.node('span', tip, '', String(value || '0'));
+                    ui.create.node('span', tip, '', '/');
+                    const maxSpan = ui.create.node('span', tip, '', String(max || '未知'));
+
+                    ui.create.node('br', container);
+
+                    const progress = ui.create.node('progress.zxgxProgress', container);
+                    progress.setAttribute('value', value || '0');
+                    progress.setAttribute('max', max);
+
+                    parent.getTitle = () => caption.innerText;
+                    parent.setTitle = (title) => caption.innerText = title;
+                    parent.getFileName = () => file.innerText;
+                    parent.setFileName = (name) => file.innerText = name;
+                    parent.getProgressValue = () => progress.value;
+                    parent.setProgressValue = (value) => progress.value = index.innerText = value;
+                    parent.getProgressMax = () => progress.max;
+                    parent.setProgressMax = (max) => progress.max = maxSpan.innerText = max;
+                    return parent;
+                };
+            }
+
+            // 扩展自动更新(等游戏加载完成后再获取更新, 因为可以等待其他扩展加载完成)
+            lib.arenaReady.push(() => {
+                // 若lib.extensionPack.Thunder不存在，就是这个扩展还没有开启
+                if (lib.extensionPack.Thunder) {
+                    var address = 'https://nonameShijian.unitedrhythmized.club/noname-android-extension/main/extension/Thunder/';
+                    fetch(address + 'update.js')
+                        .then(response => {
+                            if (!response.ok) throw response;
+                            return response.text();
+                        })
+                        .then(text => {
+                            var data = eval(text);
+                            console.log(data);
+                            var localVersion = lib.extensionPack.Thunder.version || '0';
+                            if (data.version == localVersion) return;
+                            else {
+                                /** 
+                                 * 判断版本
+                                 * @param { string } v1 现有版本
+                                 * @param { string } v2 要更新的版本
+                                 * @returns { boolean | 'equal' } v1比v2小就返回true
+                                 */
+                                function compareVersion(v1 = '', v2 = '') {
+                                    // 相等版本
+                                    if (v1 === v2) return 'equal';
+                                    let version_1 = v1.split('.').map(item => Number(item) || 0);
+                                    let version_2 = v2.split('.').map(item => Number(item) || 0);
+                                    // 现有版本: 无
+                                    if (version_1.length == 1 && version_1[0] == 0) {
+                                        // 要更新的版本不是 无
+                                        if (version_2.length > 1 || version_2[0] > 0) return true;
+                                    } else if (version_2.length == 1 && version_2[0] == 0) {
+                                        // 要更新的版本是 无
+                                        return true;
+                                    } else {
+                                        for (let i = 0; i < version_1.length && i < version_2.length; i++) {
+                                            version_1[i] = version_1[i] || 0;
+                                            version_2[i] = version_2[i] || 0;
+                                            if (version_2[i] > version_1[i]) return true;
+                                            if (version_1[i] > version_2[i]) return false;
+                                        }
+                                    }
+                                };
+
+                                if (!compareVersion(localVersion, data.version)) return;
+                            }
+
+                            function myConfirm(message, callback) {
+                                if (navigator.notification && navigator.notification.confirm) {
+                                    navigator.notification.confirm(message, index => {
+                                        index == 1 && callback();
+                                    }, ['确定', '取消']);
+                                } else {
+                                    window.confirm(message) && callback();
+                                }
+                            }
+
+                            myConfirm(`Thunder扩展检测到更新(v${data.version}), 是否更新?\n${data.changeLog}`, () => {
+                                /**
+                                 * 下载一个文件
+                                 * @param { string } url 
+                                 */
+                                function download(url, success, error) {
+                                    var path = 'extension/Thunder';
+                                    if (window.FileTransfer) {
+                                        // 判断是不是文件夹，不是才下载
+                                        function downloadFile() {
+                                            let fileTransfer = new FileTransfer();
+                                            fileTransfer.download(encodeURI(`${address + url}?date=${(new Date()).getTime()}`), encodeURI(lib.assetURL + path + '/' + url), success, error);
+                                        }
+                                        window.resolveLocalFileSystemURL(lib.assetURL,
+                                            /**
+                                             * @param { DirectoryEntry } DirectoryEntry 
+                                             */
+                                            DirectoryEntry => {
+                                                DirectoryEntry.getDirectory(path, { create: false }, dir => {
+                                                    dir.getDirectory(url, { create: false }, () => {
+                                                        console.log(`${path}/${url}是文件夹`);
+                                                        // 跳过下载
+                                                        success(true);
+                                                    }, downloadFile);
+                                                }, downloadFile);
+                                            }, downloadFile);
+
+
+                                    } else {
+                                        fetch(`${address + url}?date=${(new Date()).getTime()}`)
+                                            .then(response => response.arrayBuffer())
+                                            .then(arrayBuffer => {
+                                                // 先创建指定文件夹
+                                                game.ensureDirectory(path, () => {
+                                                    var fs = require('fs');
+                                                    var p = require('path');
+                                                    var filePath = p.join(__dirname, path, url);
+                                                    // 如果是个文件夹，就退出
+                                                    if (fs.existsSync(filePath)) {
+                                                        var stat = fs.statSync(filePath);
+                                                        if (stat.isDirectory()) {
+                                                            console.error(`${path + '/' + url}是个文件夹`);
+                                                            return success(true);
+                                                        }
+                                                    }
+                                                    fs.writeFile(filePath, Buffer.from(arrayBuffer), null, e => {
+                                                        if (e) error(e);
+                                                        else success();
+                                                    });
+                                                });
+                                            })
+                                            .catch(response => error(new Error(response.statusText)));
+                                    }
+                                }
+
+                                /**
+                                 * 下载文件列表
+                                 * @param { string[] } files 
+                                 */
+                                function downloadList(files) {
+                                    if (!Array.isArray(files) || files.length == 0) return;
+                                    var i = 0;
+                                    var progress = game.shijianCreateProgress('更新Thunder扩展', files.length, files[0], i);
+                                    var success = skip => {
+                                        // 下载完了就结束
+                                        if (!files[++i]) {
+                                            progress.setProgressValue(files.length);
+                                            progress.setFileName('下载完成');
+                                            setTimeout(() => {
+                                                // 移除进度条
+                                                progress.remove();
+                                                // 延时提示
+                                                setTimeout(() => {
+                                                    alert('Thunder扩展更新完成，将自动重启');
+                                                    game.reload();
+                                                }, 100);
+                                            }, 200);
+                                            return;
+                                        }
+                                        // 下载成功，更新进度
+                                        progress.setProgressValue(i);
+                                        progress.setFileName(files[i]);
+                                        download(files[i], success, error);
+                                    };
+                                    var error = error => {
+                                        console.log('下载失败', error);
+                                        progress.setFileName('重新下载: ' + files[i]);
+                                        download(files[i], success, error);
+                                    };
+
+                                    download(files[i], success, error);
+                                }
+
+                                /** @type { string[] } 要下载的文件 */
+                                var files = localVersion == data.oldversion ? data.updateFiles : data.allFiles;
+                                downloadList(files);
+                            });
+                        })
+                        .catch(e => {
+                            if (e.message == 'Failed to fetch') alert('网络连接失败');
+                            else console.log('其他错误', e);
+                        });
+                }
+            });
+
             if (pack.changeLog) {
                 game.showExtensionChangeLog(pack.changeLog);
             }
@@ -2287,6 +2523,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             game.thunderCreateHead(event.list1[i], initBord, 68, x, 12);
                             for (var j = 0; j < event.list2[i].length; j++) {
                                 var td = ui.create.div('.skillnode', initBord);
+                                if (get.info(list2[i][j]).limited || get.info(list2[i][j]).juexingji) td.classList.add('skillnodelimit');
                                 td.link = skills[num];
                                 num++;
                                 td.textContent = get.translation(event.list2[i][j]);
@@ -2299,9 +2536,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                     if (this.classList.contains('initselected')) {
                                         this.classList.remove('initselected');
                                         event._result.skills.remove(this.link);
+                                    } else if (this.classList.contains('initselected2')) {
+                                        this.classList.remove('initselected2');
+                                        event._result.skills.remove(this.link);
                                     } else {
                                         if (event._result.skills.length < event.total) {
-                                            this.classList.add('initselected');
+                                            if (this.classList.contains('skillnodelimit')) this.classList.add('initselected2');
+                                            else this.classList.add('initselected');
                                             event._result.skills.push(this.link);
                                         }
                                         game.createSkillInfo(this.link, event.initbg);
@@ -9414,14 +9655,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                 skill: {},
                 translate: {},
             },
-            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.26</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
+            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.27</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
             author: "雷",
             diskURL: "",
             forumURL: "",
-            version: "3.26",
-            changeLog: `<span class="bluetext">2022/09/27日更新</span><br>
-                       -修复武将<span class="bluetext">【界SP太史慈】【全惠解】【黄权】</span>结算bug<br>
-                       -新增变身武将UI（仅影响全惠解和赵襄）<br>
+            version: "3.27",
+            changeLog: `<span class="bluetext">2022/09/28日更新</span><br>
+                       -变身武将UI觉醒技和限定技更换为红色按钮，增加界武将显示<br>
+                       -增加在线更新功能<br>
                        `,
         },
         files: { "character": [], "card": [], "skill": [] }
