@@ -14,7 +14,9 @@ var data = {
 	updateFiles: [
 		"extension.js",
 		"thunder.css",
-		"update.js"
+		"update.js",
+		"image/effect/skill3.png",
+		"image/effect/skillsel3.png",
 	],
 	// 扩展内所有文件(不包括文件夹)
 	allFiles: [
