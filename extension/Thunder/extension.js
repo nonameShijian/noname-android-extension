@@ -2110,6 +2110,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             var isMoved = false;
                             if (list[i][1]) {
                                 var bb = ui.create.buttons(list[i][1], 'card', buttons);
+                                if (list[i][2] && typeof list[i][2] == 'string') {
+                                    for (var ij of bb) ij.node.gaintag.innerHTML = get.translation(list[i][2]);
+                                }
                                 for (var j of bb) {
                                     j.draggable = true;
                                     j.style.transition = 'all 10ms linear';
@@ -2221,7 +2224,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                 updateButtons();
                             })
                             if (!game.thunderHasExt('十周年')) buttons.style.setProperty('height', '105px');
-                            if (list[i][2]) buttons.textPrompt = list[i][2];
+                            if (list[i][2] && typeof list[i][2] == 'function') buttons.textPrompt = list[i][2];
                         }
                         updateButtons();
 
@@ -2901,14 +2904,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
                     ],
                     ap: [ // 阴间
-
+                        'th_zhangfen',
                     ],
                     a: [ // 阳顶天
                         'th_fengyu',
                         'th_re_guohuanghou',
                         'th_yanfuren',
                         'th_shen_guanyu',
-                        'th_wangcan',
                         'th_guanning',
                         'th_caohua',
                         'th_zhaoang',
@@ -2945,6 +2947,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         'th_sunru',
                         'th_lvkuanglvxiang',
                         'th_caiyang',
+                        'th_niufu',
+                        'th_re_taishici',
                     ],
                     b: [ // 中规中矩
                         'th_jiling',
@@ -2959,6 +2963,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         'th_xin_huanghao',
                         'th_zhangxun',
                         'th_wujing',
+                        'th_re_liufeng',
                     ],
                     c: [ // 很弱的
                     ],
@@ -2972,6 +2977,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             'th_caohua',
                             'th_zhaoang',
                             'th_quanhuijie',
+                            'th_zhangfen',
                         ],
                         epic: [ // 史诗SS
                             'th_fengfang',
@@ -3010,12 +3016,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             'th_huzhao',
                             'th_huangquan',
                             'th_caiyang',
+                            'th_niufu',
                         ],
                         rare: [ // 稀有S
                             'th_jiling',
                             'th_xin_huanghao',
                             'th_fanchou',
                             'th_zhangxun',
+                            'th_re_liufeng',
+                            'th_re_taishici',
                         ],
                         junk: [ // 平凡A
 
@@ -3068,7 +3077,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     connect: true,
                     characterSort: {
                         thunder: {
-                            tenthAnniv: ['th_xin_huanghao', 'th_liuba', 'th_fengfang', 'th_wangchang', 'th_zhaoang', 'th_sunru', 'th_quanhuijie', 'th_caiyang',
+                            tenthAnniv: ['th_xin_huanghao', 'th_liuba', 'th_fengfang', 'th_wangchang', 'th_zhaoang', 'th_sunru', 'th_quanhuijie', 'th_caiyang', 'th_zhangfen',
                                 'th_xiahoulingnv', 'th_jiling', 'th_re_mazhong', 'th_re_liuchen', 'th_lukai', 'th_kebineng', 'th_liwan', 'th_huzhao', 'th_huangquan',
                                 'th_bianxi', 'th_zhangxun', 'th_daxiaoqiao', 'th_fanchou', 'th_zhugeshang', 'th_lvkuanglvxiang', 'th_re_liufeng', 'th_re_taishici', 'th_niufu',
                             ],
@@ -3083,6 +3092,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         },
                     },
                     character: {
+                        th_zhangfen: ['male', 'wu', 3, ['th_wanglu', 'th_xianzhu', 'th_chaixie'], ['die_audio']],
                         th_re_liufeng: ['male', 'shu', 4, ['th_xiansi'], ['die_audio']],
                         th_re_taishici: ['male', 'qun', 4, ['th_jixu'], ['die_audio']],
                         th_niufu: ['male', 'qun', '4/7', ['th_xiaoxi', 'th_xiongrao'], ['die_audio']],
@@ -3134,6 +3144,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         /* th_shiyan: ['male', 'shu', 9, ['th_shiyanskill'],[]], */
                     },
                     characterIntro: {
+                        th_zhangfen: '',
                         th_quanhuijie: '全皇后（244年－301年），吴郡钱塘（今浙江杭州）人，吴废帝孙亮的皇后，全尚之女，母孙恭之女。吴大帝长女全公主的侄孙女。赤乌十三年（250年），因全公主推荐全氏被册为孙亮的太子妃，建兴二年（253年），全氏被立为皇后。太平三年（258年），孙亮被权臣孙綝贬为会稽王，全皇后也一同贬为会稽王夫人。永安三年（260年），全皇后随夫到侯官，孙亮在途中死去，全皇后在侯官居住二十余年，吴亡后返回吴郡，永宁元年（301年）去世。',
                         th_huzhao: '胡昭（162年－250年），字孔明，颍川（治今河南禹州）人。汉末三国时期隐士、书法家。胡昭善长隶书，与钟繇、邯郸淳、卫觊、韦诞齐名。有“钟氏小巧，胡氏豪放”之说，世人并称“钟胡”。',
                         th_zhaoang: '赵昂，字伟章（一作伟璋），天水冀人。汉末时曹操部下。初为羌道令，建安中转参军事徒居州治冀城。建安十八年，马超围冀城多天，城中饥困，凉州刺史韦康不愿百姓再受苦而打算投降，赵昂进劝但不为所纳。后马超背信弃义杀韦康并劫其子赵月为人质，把他送至南郑。欲以此要迫使赵昂为己所用。后与梁宽、赵衢、庞恭、杨阜等结谋为康报仇，并举兵讨伐马超。马超兵败遂弃城，投奔张鲁。得张鲁之援后马超于建安十九年复寇，赵昂与妻子王异坚守祁山三十天至夏侯渊的救兵解围，其子赵月终为马超斩杀。自冀城之难，至于祁山，赵昂出九奇策。',
@@ -3164,6 +3175,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         th_tw_chendong: '陈武，东吴将领，孙策攻打刘繇，陈武前来相助，孙策非常喜爱陈武，拜为校尉，使作先锋。陈武以十数骑兵力杀敌五十余人。后于赤壁等战役屡立功勋。董袭献上严虎的人头来降孙策。赤壁之战，董袭受周瑜命，分兵去汉阳，合肥会战时接应太史慈，逍遥津支援孙权。濡须口之战时，董袭在船上督战，船覆董袭坚守殉职。',
                         th_tw_madai: '名将马超的从弟。早年他曾经从曹操手中死里逃生，后跟随马超大战曹操。后在诸葛亮病逝后受杨仪派遣斩杀了蜀将魏延。曾率领军队出师北伐，被魏将牛金击败而退还。',
                         th_caiyang: '蔡阳（？－201年），又作蔡扬，东汉丞相曹操部下武将，汝南太守。于建安六年（201）奉曹操之命攻击与刘备联合的汝南贼龚都等人，兵败被刘备所杀。',
+
                     },
                     characterTitle: {
 
@@ -3453,6 +3465,17 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         th_jixu_info: '出牌阶段限一次，你选择至多与你体力值相等数量的其他角色各猜测你的手牌区里是否有【杀】。系统公布这些角色各自的选择和猜测结果。若你的手牌区里：有【杀】，你此阶段使用【杀】次数+X且你可令所有猜错的角色也成为你使用【杀】的目标；没有【杀】，你弃置所有猜错的角色一张牌。结算完成后，你摸X张牌（X为猜错的角色数）。',
                         th_xiaoxi_info: '锁定技，准备阶段，你减1~2体力上限，然后选择一项：1.获得你攻击范围内一名其他角色的X张牌；2.视为对你攻击范围内的一名其他角色使用X张【杀】（X为你本次减少的体力上限）。',
                         th_xiongrao_info: '限定技，出牌阶段，你可以令所有其他角色本回合除锁定技、限定技、觉醒技以外的技能全部失效，然后你将体力上限增加至7并摸等同于增加体力上限张数的牌。',
+                        th_zhangfen: '张奋',
+                        th_wanglu: '望橹',
+                        th_xianzhu: '陷筑',
+                        th_chaixie: '拆械',
+                        th_wanglu_info: '锁定技，准备阶段，将【大攻车】置入你的装备区，若已有则改为执行一个额外的出牌阶段。',
+                        th_xianzhu_info: '每当你的【杀】造成伤害后，你可升级【大攻车】{每个【大攻车】最多5次）。',
+                        th_chaixie_info: '锁定技，当【大攻车】销毁后，你摸X张牌（X为该【大攻车】的升级次数）。',
+                        th_dagongcheSkill: '大攻车',
+                        th_dagongcheSkill_info: '出牌阶段开始时，你可视为使用一张【杀】（不计入次数），该杀可以额外指定0个目标，若以此法造成伤害，你弃置目标1张牌。此牌离开装备区后销毁。',
+                        dcsushou_tag: '对方手牌',
+                        th_sushou_tag: '对方手牌',
                     },
                     skill: {
                         th_rejiaozhao: {
@@ -8203,7 +8226,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                 var cards = trigger.player.getCards('h').randomGets(event.num);
                                 event.cards2 = cards;
                                 var next = player.chooseToMove('夙守：将手牌中至多' + get.cnNumber(player.getDamagedHp()) + '张牌与之对换');
-                                var list = [[get.translation(trigger.player) + '一半的手牌', cards]], hs = player.getCards('h');
+                                var list = [[get.translation(trigger.player) + '一半的手牌', cards, 'th_sushou_tag']], hs = player.getCards('h');
                                 if (hs.length) {
                                     list.push(['你的手牌', hs]);
                                     next.set('filterMove', function (from, to, moved) {
@@ -8729,8 +8752,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                 if (!player.hasSkill('th_quanjian_2')) list.push('将手牌调整至手牌上限（最多摸到5张），其不能使用手牌直到回合结束。');
                                 if (list.length) {
                                     player.chooseControl('cancel2').set('choiceList', list).set('ai', function () {
-                                        if (list.length > 1) return 1;
-                                        return 0;
+                                        if (list.length > 1 && !player.hasSkill('th_quanjian_AI2')) return 1;
+                                        else if (event.addIndex == 0 && !player.hasSkill('th_quanjian_AI1')) return 0;
+                                        else {
+                                            player.addTempSkill('th_quanjian_AI1');
+                                            player.addTempSkill('th_quanjian_AI2');
+                                            return 'cancel2';
+                                        }
                                     })
                                 } else event.finish();
                                 'step 1'
@@ -8757,10 +8785,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                             return get.attitude(player, target);
                                         };
                                         if (get.attitude(player, target) > 0) return Math.max(0, Math.min(5, target.maxHp) - target.countCards('h'));
-                                        if (Math.max(0, Math.min(5, target.maxHp) - target.countCards('h')) <= 1 && target.countCards('h', 'shan') && !target.hasSkillTag('respondShan', true, null, true) && player.countCards('h', function (card) {
-                                            return get.tag(card, 'respondShan') && player.getUseValue(card, null, true) > 0 && get.effect(target, card, player, player) > 0;
-                                        })) return 2;
-                                        player.addTempSkill('th_quanjian_AI');
+                                        if (Math.max(1, Math.min(5, target.maxHp) - target.countCards('h')) <= 1) return 3;
+                                        player.addTempSkill('th_quanjian_AI2');
                                         return 0;
                                     }
                                 } else event.finish();
@@ -8781,7 +8807,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                     }
                                     player.addTempSkill('th_quanjian_' + (event.addIndex + 1));
                                     game.log(player, '选择了', '#g【劝谏】', '的', '#y效果' + get.cnNumber(event.addIndex + 1, true));
-                                } else event.finish();
+                                } else {
+                                    if (event.addIndex == 0 && !event.isMine()) player.addTempSkill('th_quanjian_AI1');
+                                    if (event.addIndex == 1 && !event.isMine()) player.addTempSkill('th_quanjian_AI2');
+                                    event.finish();
+                                }
                                 'step 3'
                                 var str = '';
                                 if (event.addIndex == 0) {
@@ -8837,15 +8867,16 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                         content: '下次受到的伤害+1',
                                     },
                                 },
-                                AI: {}
+                                AI1: {},
+                                AI2: {},
                             },
                             ai: {
                                 order: 9,
                                 result: {
                                     player: function (player, target) {
-                                        if (player.hasSkill('th_quanjian_AI')) return 0;
+                                        if (player.hasSkill('th_quanjian_AI1') && player.hasSkill('th_quanjian_AI2')) return 0;
                                         if (game.hasPlayer(function (current) {
-                                            return get.attitude(player, current) < 0;
+                                            return current != player && get.attitude(player, current) != 0;
                                         })) return 1;
                                         return 0;
                                     },
@@ -9440,6 +9471,122 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                 }
                             }
                         },
+                        th_wanglu: {
+                            trigger: { player: 'phaseZhunbeiBegin' },
+                            forced: true,
+                            firstDo: true,
+                            content: function () {
+                                'step 0'
+                                if (player.countCards('e', function (card) { return card.name == 'th_dagongche' })) {
+                                    var next = player.phaseUse();
+                                    event.next.remove(next);
+                                    trigger.next.push(next);
+                                    event.finish();
+                                }
+                                'step 1'
+                                if (lib.card['th_dagongche']) {
+                                    var card = game.createCard('th_dagongche');
+                                    player.$gain2(card, false);
+                                    game.delayx();
+                                    trigger.player.equip(card);
+
+                                }
+                            }
+                        },
+                        th_xianzhu: {
+                            trigger: { source: 'damageEnd' },
+                            init: function (player) { player.storage.th_xianzhu = 0 },
+                            filter: function (event, player) {
+                                if (!event.card || get.name(event.card) != 'sha') return false;
+                                return player.storage.th_xianzhu < 5;
+                            },
+                            content: function () {
+                                player.addMark('th_xianzhu', 1);
+                            },
+                            mark: true,
+                            intro: {
+                                content: '大攻车当前#级',
+                            }
+                        },
+                        th_chaixie: {
+                            trigger: {
+                                player: 'loseAfter',
+                                global: ['equipAfter', 'addJudgeAfter', 'gainAfter', 'loseAsyncAfter', 'addToExpansionAfter'],
+                            },
+                            forced: true,
+                            charlotte: true,
+                            equipSkill: true,
+                            filter: function (event, player) {
+                                var evt = event.getl(player);
+                                if (!evt || !evt.es || !evt.es.length) return false;
+                                for (var i of evt.es) {
+                                    if (i.name == 'th_dagongche') return true;
+                                }
+                                return false;
+                            },
+                            content: function () {
+                                'step 0'
+                                if (player.storage.th_xianzhu) player.draw(player.storage.th_xianzhu);
+                                'step 1'
+                                player.storage.th_xianzhu = 0;
+                                player.markAuto('th_xianzhu');
+                            }
+                        },
+                        th_dagongcheSkill: {
+                            trigger: { player: 'phaseUseBegin' },
+                            check: function (event, player) {
+                                return game.hasPlayer(function (current) { return get.attitude(player, current) < 0 && (player.inRange(current) || player.storage.th_xianzhu > 1) });
+                            },
+                            content: function () {
+                                'step 0'
+                                var num = player.storage.th_xianzhu || 0;
+                                if (num > 0) player.addTempSkill('th_dagongcheSkill_effect1', 'useCardAfter');
+                                if (num > 1) player.addTempSkill('th_dagongcheSkill_effect2', 'useCardAfter');
+                                'step 1'
+                                player.chooseUseTarget({ name: 'sha', isCard: true }, true, false);
+                                'step 2'
+                                var evts = player.getHistory('sourceDamage', function (evt) {
+                                    return evt.card.name == 'sha' && evt.getParent(4) == event;
+                                });
+                                if (evts.length) {
+                                    for (var i = 0; i < evts.length; i++) {
+                                        player.discardPlayerCard(evts[i].player, 'he', true);
+                                    }
+                                }
+
+                            },
+                            mod: {
+                                canBeDiscarded: function (card) {
+                                    if (get.position(card) == 'e' && card.name == 'th_dagongche' && !get.owner(card).storage.th_xianzhu) return false;
+                                },
+                            },
+                            subSkill: {
+                                effect1: {
+                                    mod: {
+                                        targetInRange: function (card) {
+                                            if (card.name == 'sha') return true;
+                                        },
+                                    },
+                                    ai: {
+                                        unequip: true,
+                                        unequip_ai: true,
+                                        skillTagFilter: function (player, tag, arg) {
+                                            if (arg && arg.name == 'sha') return true;
+                                            return false;
+                                        }
+                                    }
+                                },
+                                effect2: {
+                                    mod: {
+                                        selectTarget: function (card, player, range) {
+                                            if (card.name != 'sha') return;
+                                            if (range[1] == -1) return;
+                                            range[1]++;
+                                        }
+                                    }
+                                },
+                            }
+                        },
 
 
 
@@ -9458,6 +9605,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             var suits = player.storage.th_bushi;
                             return '准备阶段，你可以将四种花色重新分配至以下描述的“[]”框中：你使用[' + get.translation(suits[0]) + ']牌无距离限制；你使用或打出[' + get.translation(suits[1]) + ']后，摸一张牌；当你成为[' + get.translation(suits[2]) + ']牌的目标后，可弃置一张牌并令此牌对你无效；结束阶段，你从牌堆或弃牌堆中获得一张[' + get.translation(suits[3]) + ']牌。';
                         },
+                        th_dagongcheSkill: function (player) {
+                            var info = player.storage.th_xianzhu || 0;
+                            return '出牌阶段开始时，你可视为使用一张【杀】（不计入次数' + (info > 0 ? '，无视距离和防具' : '') + '），该杀可以额外指定' + (info > 1 ? '1' : '0') + '个目标，若以此法造成伤害，你弃置目标' + (info > 2 ? '2' : '1') + '张牌。此牌离开装备区后销毁。';
+                        }
                     },
                 };
                 if (lib.device || lib.node) {
@@ -9475,9 +9626,31 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     name: 'thunder_card',
                     connect: true,
                     card: {
+                        th_dagongche: {
+                            fullskin: true,
+                            derivation: 'th_zhangfen',
+                            type: 'equip',
+                            subtype: 'equip5',
+                            skills: ['th_dagongcheSkill'],
+                            onLose: function () {
+                                card.fix();
+                                card.remove();
+                                card.destroyed = true;
+                                game.log(card, '被销毁了');
+                            },
+                            ai: {
+                                value: 8,
+                                equipValue: 8,
+                                basic: {
+                                    equipValue: 2,
+                                }
+                            },
+                        }
                     },
                     translate: {
                         thunder_card: "Thunder",
+                        th_dagongche: '大攻车',
+                        th_dagongche_info: '出牌阶段开始时，你可视为使用一张【杀】（不计入次数），该杀可以额外指定0个目标，若以此法造成伤害，你弃置目标1张牌。此牌离开装备区后销毁。若未升级，此牌无法被弃置。',
                     },
                     list: [],
                 }
@@ -9655,14 +9828,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                 skill: {},
                 translate: {},
             },
-            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.27</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
+            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.28</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
             author: "雷",
             diskURL: "",
             forumURL: "",
-            version: "3.27",
-            changeLog: `<span class="bluetext">2022/09/28日更新</span><br>
-                       -变身武将UI觉醒技和限定技更换为红色按钮，增加界武将显示<br>
-                       -增加在线更新功能<br>
+            version: "3.28",
+            changeLog: `<span class="bluetext">2022/09/29日更新</span><br>
+                       -新增武将【张奋】<br>
+                       -修复【黄权】ai<br>
+                       -升级UI补丁，适应即将更新的新版本改动
                        `,
         },
         files: { "character": [], "card": [], "skill": [] }
