@@ -1736,7 +1736,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     result: {
                         target: function (player, target) {
                             if (player.countCards('e') == 0) return 0;
-                            return lib.skill.th_suizheng.playerRank(target) + target.hp;
+                            return game.thunderPlayerRank(target) + target.hp;
                         },
                     },
                 },
@@ -2714,7 +2714,17 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     for (var i = 0; i < node.length; i++) {
                         node[i].remove();
                     }
-                }
+                },
+                thunderPlayerRank: function (player) {
+                    if (!player || !player.name) return 0;
+                    var list = ['s', 'ap', 'a', 'am', 'bp', 'b', 'bm', 'c', 'd'];
+                    for (var i = 0; i < list.length; i++) {
+                        for (var j of lib.rank[list[i]]) {
+                            if (player.name.indexOf(j) >= 0) return 9 - i;
+                        }
+                    }
+                    return 0;
+                },
             })
 
             setTimeout(function () {
@@ -2904,7 +2914,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
                     ],
                     ap: [ // 阴间
-                        'th_zhangfen',
+
                     ],
                     a: [ // 阳顶天
                         'th_fengyu',
@@ -2914,6 +2924,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         'th_guanning',
                         'th_caohua',
                         'th_zhaoang',
+                        'th_zhangfen',
                     ],
                     am: [ //中强将
                         'th_re_jushou',
@@ -2961,7 +2972,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     ],
                     bm: [ // 一般没发挥的武将
                         'th_xin_huanghao',
-                        'th_zhangxun',
                         'th_wujing',
                         'th_re_liufeng',
                     ],
@@ -3022,7 +3032,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             'th_jiling',
                             'th_xin_huanghao',
                             'th_fanchou',
-                            'th_zhangxun',
                             'th_re_liufeng',
                             'th_re_taishici',
                         ],
@@ -3079,7 +3088,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         thunder: {
                             tenthAnniv: ['th_xin_huanghao', 'th_liuba', 'th_fengfang', 'th_wangchang', 'th_zhaoang', 'th_sunru', 'th_quanhuijie', 'th_caiyang', 'th_zhangfen',
                                 'th_xiahoulingnv', 'th_jiling', 'th_re_mazhong', 'th_re_liuchen', 'th_lukai', 'th_kebineng', 'th_liwan', 'th_huzhao', 'th_huangquan',
-                                'th_bianxi', 'th_zhangxun', 'th_daxiaoqiao', 'th_fanchou', 'th_zhugeshang', 'th_lvkuanglvxiang', 'th_re_liufeng', 'th_re_taishici', 'th_niufu',
+                                'th_bianxi', 'th_daxiaoqiao', 'th_fanchou', 'th_zhugeshang', 'th_lvkuanglvxiang', 'th_re_liufeng', 'th_re_taishici', 'th_niufu',
                             ],
                             //ollike: [],
                             abroad: ['th_guanqiujian', 'th_tw_daxiaoqiao', 'th_shen_guanyu', 'th_niujin', 'th_re_handang', 'th_tw_jiling',
@@ -3092,7 +3101,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         },
                     },
                     character: {
-                        th_zhangfen: ['male', 'wu', 3, ['th_wanglu', 'th_xianzhu', 'th_chaixie'], ['die_audio']],
+                        th_zhangfen: ['male', 'wu', 4, ['th_wanglu', 'th_xianzhu', 'th_chaixie'], ['die_audio']],
                         th_re_liufeng: ['male', 'shu', 4, ['th_xiansi'], ['die_audio']],
                         th_re_taishici: ['male', 'qun', 4, ['th_jixu'], ['die_audio']],
                         th_niufu: ['male', 'qun', '4/7', ['th_xiaoxi', 'th_xiongrao'], ['die_audio']],
@@ -3126,7 +3135,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         th_guanqiujian: ["male", "wei", 4, ["th_zhengrong", "th_hongju"], []],
                         th_tw_daxiaoqiao: ["female", "wu", 3, ["th_xingwu", "th_pingting"], ['die_audio']],
                         th_daxiaoqiao: ["female", "wu", 3, ["th_rexingwu", "th_luoyan"], ['die_audio']],
-                        th_zhangxun: ["male", "qun", 4, ["th_suizheng"], ['die_audio']],
                         th_shen_guanyu: ["male", "shen", 5, ["th_wushen", "th_wuhun"], []],
                         th_niujin: ['male', 'wei', 4, ["th_cuorui", "th_liewei"], []],
                         th_re_handang: ['male', 'wu', 4, ["th_gongqi", "th_jiefan"], []],
@@ -3144,7 +3152,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         /* th_shiyan: ['male', 'shu', 9, ['th_shiyanskill'],[]], */
                     },
                     characterIntro: {
-                        th_zhangfen: '',
+                        th_zhangfen: '张奋，徐州彭城（今江苏徐州）人。三国时期孙吴将领，辅吴将军张昭的侄子。善于制作攻城器械。在步骘举荐下，担任将军，累迁平州都督，册封乐乡亭侯，病逝于任上。',
                         th_quanhuijie: '全皇后（244年－301年），吴郡钱塘（今浙江杭州）人，吴废帝孙亮的皇后，全尚之女，母孙恭之女。吴大帝长女全公主的侄孙女。赤乌十三年（250年），因全公主推荐全氏被册为孙亮的太子妃，建兴二年（253年），全氏被立为皇后。太平三年（258年），孙亮被权臣孙綝贬为会稽王，全皇后也一同贬为会稽王夫人。永安三年（260年），全皇后随夫到侯官，孙亮在途中死去，全皇后在侯官居住二十余年，吴亡后返回吴郡，永宁元年（301年）去世。',
                         th_huzhao: '胡昭（162年－250年），字孔明，颍川（治今河南禹州）人。汉末三国时期隐士、书法家。胡昭善长隶书，与钟繇、邯郸淳、卫觊、韦诞齐名。有“钟氏小巧，胡氏豪放”之说，世人并称“钟胡”。',
                         th_zhaoang: '赵昂，字伟章（一作伟璋），天水冀人。汉末时曹操部下。初为羌道令，建安中转参军事徒居州治冀城。建安十八年，马超围冀城多天，城中饥困，凉州刺史韦康不愿百姓再受苦而打算投降，赵昂进劝但不为所纳。后马超背信弃义杀韦康并劫其子赵月为人质，把他送至南郑。欲以此要迫使赵昂为己所用。后与梁宽、赵衢、庞恭、杨阜等结谋为康报仇，并举兵讨伐马超。马超兵败遂弃城，投奔张鲁。得张鲁之援后马超于建安十九年复寇，赵昂与妻子王异坚守祁山三十天至夏侯渊的救兵解围，其子赵月终为马超斩杀。自冀城之难，至于祁山，赵昂出九奇策。',
@@ -3169,13 +3177,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         th_zhuling: "朱灵（生卒年不详），字文博，冀州清河国人，三国时期曹魏名将。官至后将军，封为高唐侯，谥号威侯。初为袁绍部将，后归顺曹操，随曹操征伐四方，屡建战功。",
                         th_shen_jiangwei: "姜维（202年～264年3月3日），字伯约，天水郡冀县（今甘肃省天水市甘谷县）人。三国时期蜀汉名将，天水功曹姜冏之子。",
                         th_tw_daxiaoqiao: "大乔，庐江皖县人，为乔公长女，孙策之妻，容貌国色流离。小乔为大乔之妹，周瑜之妻，资貌绝伦。两人合称“二乔”。",
-                        th_zhangxun: "张勋是东汉末年军阀袁术麾下的重要将领，袁术称帝后的大将军。",
                         th_tw_jiling: "东汉末年袁术帐下将领，勇猛非常，曾奉命率军攻打小沛的刘备，在吕布辕门射戟的调停下撤兵。",
                         th_tw_re_fazheng: '字孝直，本为刘璋部下，刘备围成都时劝说刘璋投降，而后又与刘备进取汉中，献计将曹操大将夏侯渊斩首。法正善奇谋，深受刘备信任和敬重。',
                         th_tw_chendong: '陈武，东吴将领，孙策攻打刘繇，陈武前来相助，孙策非常喜爱陈武，拜为校尉，使作先锋。陈武以十数骑兵力杀敌五十余人。后于赤壁等战役屡立功勋。董袭献上严虎的人头来降孙策。赤壁之战，董袭受周瑜命，分兵去汉阳，合肥会战时接应太史慈，逍遥津支援孙权。濡须口之战时，董袭在船上督战，船覆董袭坚守殉职。',
                         th_tw_madai: '名将马超的从弟。早年他曾经从曹操手中死里逃生，后跟随马超大战曹操。后在诸葛亮病逝后受杨仪派遣斩杀了蜀将魏延。曾率领军队出师北伐，被魏将牛金击败而退还。',
                         th_caiyang: '蔡阳（？－201年），又作蔡扬，东汉丞相曹操部下武将，汝南太守。于建安六年（201）奉曹操之命攻击与刘备联合的汝南贼龚都等人，兵败被刘备所杀。',
-
                     },
                     characterTitle: {
 
@@ -3206,7 +3212,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         sunru: ['sunru', 'th_sunru'],
                         lvkuanglvxiang: ['lvkuanglvxiang', 'th_lvkuanglvxiang'],
                         liufeng: ['liufeng', 'th_re_liufeng'],
-                        taishici: [],
+                        taishici: ['taishici', 're_taishici', 'sp_taishici', 'th_re_taishici'],
+                        xf_huangquan: ['xf_huangquan', 'th_huangquan'],
                     },
                     translate: {
                         th_shiyan: '试验',
@@ -3224,7 +3231,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         th_guanqiujian: "TW毌丘俭",
                         th_tw_daxiaoqiao: "TW大小乔",
                         th_daxiaoqiao: "大小乔",
-                        th_zhangxun: "张勋",
                         th_shen_guanyu: "TW神关羽",
                         th_niujin: "TW牛金",
                         th_re_handang: "TW界韩当",
@@ -3356,8 +3362,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         "th_rexingwu_info": "弃牌阶段开始时，你可以将一张手牌置于武将牌上，称为“舞”。若你的“舞”达到三张，则你可移去三张“舞”，弃置一名其他角色装备区里的所有牌，然后对其造成X点伤害（X为移去“舞”的花色数，若为女性角色则改为1点伤害）。",
                         th_luoyan: "落雁",
                         "th_luoyan_info": "锁定技，若你有“舞”，你视为拥有技能“天香”和“流离”。",
-                        th_suizheng: "随征",
-                        "th_suizheng_info": "结束阶段,你可以选择一名角色。该角色下个回合的出牌阶段使用【杀】无距离限制且可以多使用一张【杀】。然后其出牌阶段结束时，你可以视为对其本回合造成过伤害的一名其他角色使用一张【杀】。",
                         th_wushen: "武神",
                         "th_wushen_info": "锁定技，你每阶段使用的第一张【杀】不可被响应；你的红桃手牌视为【杀】；你使用红桃【杀】无距离和次数限制，且额外指定所有拥有“梦魇”标记的角色为目标。",
                         th_wuhun: "武魂",
@@ -4740,77 +4744,6 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             onremove: function (player) {
                                 player.removeAdditionalSkill('th_luoyan');
                             },
-                        },
-                        th_suizheng: {
-                            audio: "ext:Thunder/audio/skill:2",
-                            trigger: { player: 'phaseJieshuBegin' },
-                            direct: true,
-                            playerRank: function (player) {
-                                var list = ['s', 'ap', 'a', 'am', 'bp', 'b', 'bm', 'c', 'd'];
-                                for (var i = 0; i < list.length; i++) {
-                                    for (var j of lib.rank[list[i]]) {
-                                        if (player.name.indexOf(j) >= 0) return 9 - i;
-                                    }
-                                }
-                                return 0;
-                            },
-                            content: function () {
-                                'step 0'
-                                player.chooseTarget(get.prompt('th_suizheng')).ai = (target) => {
-                                    if (target.hasJudge('lebu') || target.isTurnedOver()) return -1;
-                                    if (get.attitude(player, target) > 2) {
-                                        var att = 1;
-                                        if (target == player) att = 0.5;
-                                        return att * Math.sqrt(lib.skill.th_suizheng.playerRank(target)) * Math.sqrt(target.hp) * Math.sqrt(target.countCards('h') + 1);
-                                    }
-                                    return get.attitude(player, target);
-                                };
-                                'step 1'
-                                if (result.bool) {
-                                    player.logSkill('th_suizheng', result.targets[0]);
-                                    result.targets[0].storage.th_suizheng = player;
-                                    result.targets[0].addTempSkill('th_suizheng_effect', { player: 'phaseUseAfter' });
-                                }
-                            },
-                            subSkill: {
-                                effect: {
-                                    mark: true,
-                                    marktext: '随征',
-                                    intro: { content: '使用【杀】无距离限制且可以多使用一张杀' },
-                                    mod: {
-                                        targetInRange: function (card) {
-                                            if (card.name == 'sha') return true;
-                                        },
-                                        cardUsable: function (card, player, num) {
-                                            if (card.name == 'sha') return num + 1;
-                                        },
-                                    },
-                                    trigger: { player: 'phaseUseEnd' },
-                                    direct: true,
-                                    filter: function (event, player) {
-                                        var targets = [];
-                                        for (var i of player.getHistory('sourceDamage')) {
-                                            if (i.player && i.player.isIn() && !targets.contains(i.player) && i.player != player.storage.th_suizheng) targets.push(i.player);
-                                        }
-                                        return targets.length && player.storage.th_suizheng.isIn();
-                                    },
-                                    content: function () {
-                                        'step 0'
-                                        var targets = [];
-                                        for (var i of player.getHistory('sourceDamage')) {
-                                            if (i.player && !targets.contains(i.player) && i.player != player.storage.th_suizheng) targets.push(i.player);
-                                        }
-                                        var str = targets.length > 1 ? '中的一人' : '';
-                                        player.storage.th_suizheng.chooseTarget(get.prompt('th_suizheng'), function (card, player, target) {
-                                            return _status.event.sourcex.contains(target);
-                                        }).set('complexSelect', true).set('prompt2', '选择视为对一名角色使用一张【杀】').set('sourcex', targets).ai = (target) => get.effect(target, { name: 'sha' }, player, player);
-                                        'step 1'
-                                        if (result.bool) {
-                                            player.storage.th_suizheng.useCard({ name: 'sha', isCard: true }, result.targets[0], false);
-                                        }
-                                    }
-                                }
-                            }
                         },
                         th_wushen: {
                             mod: {
@@ -9473,6 +9406,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         },
                         th_wanglu: {
                             trigger: { player: 'phaseZhunbeiBegin' },
+                            audio: "ext:Thunder/audio/skill:2",
                             forced: true,
                             firstDo: true,
                             content: function () {
@@ -9495,9 +9429,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         },
                         th_xianzhu: {
                             trigger: { source: 'damageEnd' },
+                            audio: "ext:Thunder/audio/skill:2",
                             init: function (player) { player.storage.th_xianzhu = 0 },
                             filter: function (event, player) {
                                 if (!event.card || get.name(event.card) != 'sha') return false;
+                                if (!player.countCards('e', function (card) { return card.name == 'th_dagongche' })) return false;
                                 return player.storage.th_xianzhu < 5;
                             },
                             content: function () {
@@ -9509,6 +9445,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             }
                         },
                         th_chaixie: {
+                            audio: "ext:Thunder/audio/skill:2",
                             trigger: {
                                 player: 'loseAfter',
                                 global: ['equipAfter', 'addJudgeAfter', 'gainAfter', 'loseAsyncAfter', 'addToExpansionAfter'],
@@ -9550,7 +9487,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                 });
                                 if (evts.length) {
                                     for (var i = 0; i < evts.length; i++) {
-                                        player.discardPlayerCard(evts[i].player, 'he', true);
+                                        let num = player.storage.th_xianzhu > 2 ? 2 : 1;
+                                        player.discardPlayerCard(evts[i].player, 'he', num, true);
                                     }
                                 }
 
@@ -9828,15 +9766,16 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                 skill: {},
                 translate: {},
             },
-            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.28</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
+            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.281</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
             author: "雷",
             diskURL: "",
             forumURL: "",
-            version: "3.28",
-            changeLog: `<span class="bluetext">2022/09/29日更新</span><br>
-                       -新增武将【张奋】<br>
-                       -修复【黄权】ai<br>
-                       -升级UI补丁，适应即将更新的新版本改动
+            version: "3.281",
+            changeLog: `<span class="bluetext">2022/09/30日更新</span><br>
+                       -修复武将【张奋】血量bug<br>
+                       -修复武将【张奋】杀在造成伤害前大攻车被弃置也能触发升级大攻车的bug<br>
+                       -修复武将【张奋】大攻车3级后没有触发弃置牌+1的bug<br>
+                       -补充新武将的技能语音（只有目前官方已公布的）
                        `,
         },
         files: { "character": [], "card": [], "skill": [] }
