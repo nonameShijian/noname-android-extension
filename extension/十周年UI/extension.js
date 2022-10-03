@@ -1365,8 +1365,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								}
 								var range = get.select(event.selectCard);
-								game.check();
 								if ((typeof event.isMine == 'function') && event.isMine()) {
+									game.check();
 									if (event.hsskill && !event.forced && _status.prehidden_skills.contains(event.hsskill)) {
 										ui.click.cancel();
 										return;
@@ -7096,6 +7096,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						node.innerHTML = str;
 						node.dataset.text = str;
 						node.dataset.nature = nature || 'soil';
+						node.style.animation = 'open-fade-in 0.6s';
 					};
 
 					lib.element.player.$damagepop = function (num, nature, font, nobroadcast) {
@@ -10081,15 +10082,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.12（Show-K修复版）',
-					'更新日期：2022-09-15',
-					'- 现在可以设置折叠手牌最小宽度了，且默认值修改为81。',
-					'- 为牌名辅助显示的文字增加了背景颜色，使之更容易阅读。',
-					'- 修复了targetprompt无描边的异常（举例：【借刀杀人】）。',
-					'- 修复了若游戏本体路径包含半角括号，觉醒技/限定技特效等不显示的异常。',
-					'- 修复了DIY刘璋〖暗弱〗不可见手牌依旧“可见”的异常。',
-					'- 将拼点对话框等对话框的z-index调低，使之不会遮挡游戏牌。',
-					'- “代码机制调整：现在从牌堆中获得牌/装备牌/将牌置入装备区会自动触发updateRoundNumber了。”',
+					'当前版本：1.2.0.220114.13（Show-K修复版）',
+					'更新日期：2022-10-03',
+					'- 修复了targetprompt无动画的异常（举例：【借刀杀人】）。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
