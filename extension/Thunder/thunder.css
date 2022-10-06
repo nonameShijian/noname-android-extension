@@ -239,10 +239,11 @@
 .headname {
     font-size: 13px;
     width: 100%;
-    height: 100%;
+    height: 110%;
     position: absolute;
-    left: 3px;
-    top: 6px;
+    left: 1px;
+    top: 3px;
+    /* letter-spacing: 1px; */
     /*text-align: center;*/
     writing-mode: vertical-lr;
     font-family: 'yuanli';
