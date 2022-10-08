@@ -1,35 +1,26 @@
 // @ts-check
 var data = {
 	// 扩展版本
-	version: "3.292",
+	version: "3.3",
 
 	// 扩展的上一个版本
-	oldversion: "3.281",
+	oldversion: "3.291",
 
 	// 更新内容汇总
 	changeLog: `
-		-修复武将【杜夔】增加目标无视距离和加目标的bug
-        -删除本体已更新且无问题的武将
-        -将扩展更新更改为手动方式
+		-修复武将【牛辅】技能与官服一致
     `,
 
 	// 本次更新的所有文件(不包括文件夹)
-	updateFiles: ["extension.js",
+	updateFiles: [
+		"extension.js",
 		"thunder.css",
-		"audio/die/th_dukui.mp3",
-		"audio/die/th_lvkuanglvxiang.mp3",
-		"audio/skill/th_fanyin1.mp3",
-		"audio/skill/th_fanyin2.mp3",
-		"audio/skill/th_liehou1.mp3",
-		"audio/skill/th_liehou2.mp3",
-		"audio/skill/th_peiqi1.mp3",
-		"audio/skill/th_peiqi2.mp3",
-		"audio/skill/th_shuhe1.mp3",
-		"audio/skill/th_shuhe2.mp3",
-		"image/character/th_dukui.jpg",
-		"image/character/th_zhangxun.jpg",
-		"image/effect/common.png"],
-
+		"image/effect/junk.png",
+		"image/effect/legend.png",
+		"image/effect/common.png",
+		"image/effect/epic.png",
+		"image/effect/rare.png",
+	],
 	// 扩展内所有文件(不包括文件夹)
 	allFiles: ["extension.js",
 		"thunder.css",
@@ -264,7 +255,6 @@ var data = {
 		"image/character/th_zhangxuan.jpg",
 		"image/character/th_zhangxun.jpg",
 		"image/character/th_zhugeshang.jpg",
-		"image/effect/btnn.png",
 		"image/effect/buy_dlg.png",
 		"image/effect/common.png",
 		"image/effect/dialog1.png",
@@ -276,19 +266,13 @@ var data = {
 		"image/effect/legend.png",
 		"image/effect/pub_arrow_down.png",
 		"image/effect/rare.png",
-		"image/effect/shengong_dazaotai.png",
-		"image/effect/shengong_fanghai.png",
-		"image/effect/shengong_zhuli.png",
-		"image/effect/skill.png",
 		"image/effect/skill2.png",
 		"image/effect/skill3.png",
-		"image/effect/skillsel.png",
 		"image/effect/skillsel2.png",
 		"image/effect/skillsel3.png",
 		"image/effect/skillsl.png",
 		"image/effect/tenth.png",
 		"image/effect/thunder.jpg",
-		"image/effect/timeX.png",
 		"image/effect/video_host_detail_array.png",
 		"image/head/daxiaoqiao/daxiaoqiao.png",
 		"image/head/guanzhang/guanzhang.png",

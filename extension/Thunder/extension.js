@@ -2488,7 +2488,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     jinyu.style.setProperty('--h', height + 'px');
                     jinyu.style.setProperty('--y', y);
 
-                    var playerSkin = player.childNodes[0].style.backgroundImage.split('/');
+                    var playerRealSkin = player.style.backgroundImage;
+                    if (!playerRealSkin) playerRealSkin = player.childNodes[0].style.backgroundImage;
+
+                    playerSkin = playerRealSkin.split('/');
                     var reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
                     var skinStr = playerSkin[playerSkin.length - 1].split('.')[0], skinPath;
                     if (reg.test(playerSkin[playerSkin.length - 1])) {
@@ -2496,8 +2499,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     } else {
                         skinPath = lib.assetURL + 'extension/Thunder/image/stand/' + skinStr + '/' + skinStr + '.png';
                     }
+
                     if (game.thunderFileExist(skinPath)) jinyu.style.backgroundImage = 'url(' + skinPath + ')';
-                    else jinyu.style.backgroundImage = player.childNodes[0].style.backgroundImage;
+                    else jinyu.style.backgroundImage = playerRealSkin;
                 },
                 thunderCreateHead: function (player, dialog, width, x, y) {
                     if (typeof player != 'string') player = player.name || '';
@@ -2898,6 +2902,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                 },
             }
 
+
+
             lib.translate.daxiaoqiao = 'OL大小乔'
             lib.translate.huanghao = 'OL黄皓'
             lib.skill.th_dunshi.derivation = Object.keys(lib.skill.th_dunshi.getSkill(lib.config['extension_Thunder_guanning'])).map(i => lib.skill.th_dunshi.getSkill(lib.config['extension_Thunder_guanning'])[i][0]).addArray(['benghuai', 'weizhong'])
@@ -3244,8 +3250,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         th_xiongrao: '熊扰',
                         th_xiansi_info: '准备阶段，你可以将至多两名角色的各一张牌置于武将牌上，称为"逆"；其他角色可以移去两张"逆"，视为对你使用【杀】。若“逆”数超过你的体力值，你可以移去一张“逆”视为使用一张【杀】。',
                         th_jixu_info: '出牌阶段限一次，你选择至多与你体力值相等数量的其他角色各猜测你的手牌区里是否有【杀】。系统公布这些角色各自的选择和猜测结果。若你的手牌区里：有【杀】，你此阶段使用【杀】次数+X且你可令所有猜错的角色也成为你使用【杀】的目标；没有【杀】，你弃置所有猜错的角色一张牌。结算完成后，你摸X张牌（X为猜错的角色数）。',
-                        th_xiaoxi_info: '锁定技，准备阶段，你减1~2体力上限，然后选择一项：1.获得你攻击范围内一名其他角色的X张牌；2.视为对你攻击范围内的一名其他角色使用X张【杀】（X为你本次减少的体力上限）。',
-                        th_xiongrao_info: '限定技，出牌阶段，你可以令所有其他角色本回合除锁定技、限定技、觉醒技以外的技能全部失效，然后你将体力上限增加至7并摸等同于增加体力上限张数的牌。',
+                        th_xiaoxi_info: '锁定技，出牌阶段开始时，你减1~2体力上限，然后选择一项：1.获得你攻击范围内一名角色的X张牌；2.视为对你攻击范围内的一名角色使用X张【杀】（X为你减少的体力上限）。',
+                        th_xiongrao_info: ' 限定技，准备阶段，你可以令所有其他角色本回合除锁定技、限定技、觉醒技以外的技能全部失效，然后你将体力上限增加至7并摸等同于增加体力上限张数的牌。',
                         th_zhangfen: '张奋',
                         th_wanglu: '望橹',
                         th_xianzhu: '陷筑',
@@ -8382,21 +8388,22 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
                         //牛辅
                         th_xiaoxi: {
-                            trigger: { player: 'phaseZhunbeiBegin' },
+                            trigger: { player: 'phaseUseBegin' },
                             audio: "ext:Thunder/audio/skill:2",
                             forced: true,
                             content: () => {
                                 'step 0'
+                                if (!player.storage.th_xiaoxiHp) player.storage.th_xiaoxiHp = player.maxHp;
                                 player.chooseControl('1点上限', '2点上限').set('prompt', '选择减少的体力上限值:').set('ai', function () {
                                     if (player.maxHp - player.hp >= 2 && game.hasPlayer(function (current) { return player != current && player.inRange(current) && get.attitude(player, current) < 0 })) return '2点上限';
                                     return '1点上限';
                                 })
                                 'step 1'
                                 if (result.control) {
-                                    event.num = result.index + 1
-                                    player.loseMaxHp(event.num);
+                                    player.loseMaxHp(result.index + 1);
                                 }
                                 'step 2'
+                                event.num = player.storage.th_xiaoxiHp - player.maxHp;
                                 var list = [];
                                 event.addIndex = 0;
                                 if (game.hasPlayer(function (current) { return player != current && player.inRange(current) && current.hasCard((card) => lib.filter.canBeGained(card, current, player), 'he') })) list.push('获得你攻击范围内一名其他角色的' + event.num + '张牌');
@@ -8441,26 +8448,29 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                 event.num--;
                                 player.useCard({ name: 'sha' }, event.target, false);
                                 'step 6'
-                                if (event.num > 0) event.goto(5)
+                                if (event.num > 0 && event.target.isIn()) event.goto(5)
                             }
                         },
                         th_xiongrao: {
                             audio: "ext:Thunder/audio/skill:2",
-                            enable: 'phaseUse',
+                            trigger: { player: 'phaseZhunbeiBegin' },
                             limited: true,
                             skillAnimation: true,
                             animationColor: 'orange',
-                            complexSelect: true,
-                            filterTarget: lib.filter.notMe,
-                            selectTarget: -1,
-                            precontent: () => { player.awakenSkill('th_xiongrao') },
                             content: () => {
                                 'step 0'
-                                target.addTempSkill('th_xiongrao_block');
+                                player.awakenSkill('th_xiongrao');
+                                var players = game.filterPlayer(function (current) { return current != player });
+                                player.line(players, 'yellow');
+                                for (var i = 0; i < players.length; i++) {
+                                    players[i].addTempSkill('th_xiongrao_block');
+                                }
                                 'step 1'
-                                var num = 7 - player.maxHp
-                                player.gainMaxHp(num);
-                                player.draw(num);
+                                var num = 7 - player.maxHp;
+                                if (num > 0) {
+                                    player.gainMaxHp(num);
+                                    player.draw(num);
+                                }
                             },
                             subSkill: {
                                 block: {
@@ -8901,13 +8911,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     }
                     let parentNode = button.parentNode;
                     if (button.innerText != '检查扩展更新') return;
-                    const updateURL = 'https://nonameShijian.unitedrhythmized.club/noname-android-extension/main/extension/Thunder/';
+                    const address = 'https://nonameShijian.unitedrhythmized.club/noname-android-extension/main/extension/Thunder/';
                     if (button.disabled) {
                         return;
                     } else {
                         button.innerHTML = '正在检查更新';
                         button.disabled = true;
-                        fetch(updateURL + 'update.js')
+                        fetch(address + 'update.js')
                             .then(response => {
                                 if (!response.ok) throw response;
                                 return response.text();
@@ -9085,6 +9095,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     }
                 },
             },
+
             "group": {
                 name: "我要加群：", init: '1', item: {
                     "1": '点击查看群二维码',
@@ -9211,15 +9222,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                 skill: {},
                 translate: {},
             },
-            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.291</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
+            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.3</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
             author: "雷",
             diskURL: "",
             forumURL: "",
-            version: "3.291",
-            changeLog: `<span class="bluetext">2022/10/06日更新</span><br>
-                       -调整武将【杜夔】增加目标加上距离限制以及加目标限制<br>
-                       -扩展在线升级改为手动。<br>
-                       -删除多余武将。
+            version: "3.3",
+            changeLog: `<span class="bluetext">2022/10/08日更新</span><br>
+                       -调整武将【牛辅】技能与官服一致<br>
                        `,
         },
         files: { "character": [], "card": [], "skill": [] }
