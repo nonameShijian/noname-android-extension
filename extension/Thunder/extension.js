@@ -9053,8 +9053,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                             progress.setFileName(files[i]);
                                             download(files[i], success, error);
                                         };
-                                        var error = error => {
-                                            console.log('下载失败', error);
+                                        var error = errorText => {
+                                            console.log('下载失败', errorText);
                                             progress.setFileName('重新下载: ' + files[i]);
                                             download(files[i], success, error);
                                         };
