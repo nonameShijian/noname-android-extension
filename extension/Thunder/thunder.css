@@ -117,7 +117,7 @@
     --z: 0.9;
     width: var(--w);
     left: 0;
-    top: var(--h);
+    /* top: var(--h); */
     zoom: var(--z);
 }
 
@@ -145,7 +145,7 @@
 
 .tishi0 {
     width: 99.5%;
-    height: 20px;
+    height: auto;
     left: 0;
     top: 0;
     border: 2px solid rgb(41, 26, 3);

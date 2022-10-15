@@ -1889,7 +1889,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             var buttont = null;
                             for (var i of buttonss) {
                                 event.moved[i._link] = get.links(Array.from(i.childNodes));
-                                if (i.textPrompt) i.previousSibling.textContent = i.textPrompt(event.moved[i._link]);
+                                if (i.textPrompt) i.previousSibling.innerHTML = i.textPrompt(event.moved[i._link]);
                             }
                             if (filterOk(event.moved)) {
                                 buttont = ui.create.confirm('o');
@@ -1927,12 +1927,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         document.addEventListener("dragover", function (event) {
                             event.preventDefault();
                         });
-
+                        var tishitiaozheng = 37;
                         for (var i = 0; i < list.length; i++) {
                             var tishi = ui.create.div('.tishi' + i, cardborder);
                             if (list.length == 2 && i > 0) tishi.style.setProperty('--w', '99.5%');
                             if (list.length > 2 && i > 0 && game.thunderIsPhone()) tishi.style.setProperty('--w', '49.2%');
-                            tishi.textContent = list[i][0];
+                            tishi.innerHTML = list[i][0];
+                            if (i == 0) tishitiaozheng = 15.23 + tishi.offsetHeight;
                             var buttons = ui.create.div('.buttons', cardborder);
                             buttonss.push(buttons);
                             buttons.classList.add('popup');
@@ -1948,10 +1949,19 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             buttons._link = i;
                             var isMoved = false;
                             if (list[i][1]) {
-                                var bb = ui.create.buttons(list[i][1], 'card', buttons);
-                                if (list[i][2] && typeof list[i][2] == 'string') {
-                                    for (var ij of bb) ij.node.gaintag.innerHTML = get.translation(list[i][2]);
+                                if (get.itemtype(list[i][1]) == 'cards') {
+                                    var bb = ui.create.buttons(list[i][1], 'card', buttons);
+                                    if (list[i][2] && typeof list[i][2] == 'string') {
+                                        for (var ij of bb) ij.node.gaintag.innerHTML = get.translation(list[i][2]);
+                                    }
                                 }
+                                else if (list[i][1].length == 2) {
+                                    var bb = ui.create.buttons(list[i][1][0], list[i][1][1], buttons);
+                                }
+                                //var bb = ui.create.buttons(list[i][1], 'card', buttons);
+                                // if (list[i][2] && typeof list[i][2] == 'string') {
+                                //     for (var ij of bb) ij.node.gaintag.innerHTML = get.translation(list[i][2]);
+                                // }
                                 for (var j of bb) {
                                     j.draggable = true;
                                     j.style.transition = 'all 10ms linear';
@@ -1974,11 +1984,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                     j.ontouchstart = function (evt) {
                                         if (event.clone) event.clone.remove();
                                         var guanxingButton = evt.target, num = 0;
-                                        while (guanxingButton.className.indexOf('fullskin') == -1 && num < 6) {
+                                        while (guanxingButton.className.indexOf('card button') == -1 && num < 6) {
                                             guanxingButton = guanxingButton.parentNode;
                                             num++;
                                         }
-                                        if (guanxingButton.className.indexOf('fullskin') == -1) return;
+                                        if (guanxingButton.className.indexOf('card button') == -1) return;
                                         guanxingButton.copy = lib.element.card.copy;
 
                                         ui.selected.guanxing_button = guanxingButton;
@@ -1988,8 +1998,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
                                         event.clone = guanxingButton.copy();
                                         event.clone.style.transform = guanxingButton.style.transform;
-                                        event.clone.style.left = (guanxingButton.offsetLeft + guanxingButton.parentNode.offsetLeft - 5) + 'px';
-                                        event.clone.style.top = (guanxingButton.offsetTop + guanxingButton.parentNode.offsetTop - 38) + 'px';
+                                        event.clone.style.left = (guanxingButton.offsetLeft + guanxingButton.parentNode.offsetLeft - 1.5) + 'px';
+                                        event.clone.style.top = (guanxingButton.offsetTop + guanxingButton.parentNode.offsetTop - tishitiaozheng) + 'px';
                                         event.clone.style.zoom = game.thunderIsPhone() ? 0.65 : 0.9;
                                         event.clone.style.zIndex = 7;
                                         ui.selected.guanxing_button.style.opacity = 0;
@@ -1998,8 +2008,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                     j.ontouchmove = function (evt) {
                                         isMoved = true;
                                         if (!ui.selected.guanxing_button) return;
-                                        let x = (evt.touches[0].pageX - _status.yuqiTouchX) * 1.7 + 'px';
-                                        let y = (evt.touches[0].pageY - _status.yuqiTouchY) * 1.7 + 'px';
+                                        let x = (evt.touches[0].pageX - _status.yuqiTouchX) * (1.7 + (0.9 - game.documentZoom) * 2.4) + 'px';
+                                        let y = (evt.touches[0].pageY - _status.yuqiTouchY) * (1.7 + (0.9 - game.documentZoom) * 2.4) + 'px';
                                         event.clone.style.transform = 'translate(' + x + ',' + y + ')';
                                     }
                                     j.ontouchend = function (evt) {
@@ -2915,7 +2925,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     connect: true,
                     characterSort: {
                         thunder: {
-                            tenthAnniv: ['th_xin_huanghao', 'th_liuba', 'th_quanhuijie', 'th_caiyang', 'th_zhangfen',
+                            tenthAnniv: ['th_xin_huanghao', 'th_liuba', 'th_quanhuijie', 'th_caiyang', 'th_zhangfen', 'th_yinfuren',
                                 'th_xiahoulingnv', 'th_re_mazhong', 'th_re_liuchen', 'th_lukai', 'th_kebineng', 'th_liwan', 'th_huzhao', 'th_huangquan',
                                 'th_bianxi', 'th_daxiaoqiao', 'th_fanchou', 'th_zhugeshang', 'th_lvkuanglvxiang', 'th_re_liufeng', 'th_re_taishici', 'th_niufu', 'th_dukui',
                             ],
@@ -2930,6 +2940,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         },
                     },
                     character: {
+                        th_yinfuren: ['female', 'wei', 3, ['th_yingyu', 'th_yongbi'], ['die_audio']],
                         th_dukui: ['male', 'wei', 3, ['th_fanyin', 'th_peiqi'], ['die_audio']],
                         th_zhangfen: ['male', 'wu', 4, ['th_wanglu', 'th_xianzhu', 'th_chaixie'], ['die_audio']],
                         th_re_liufeng: ['male', 'shu', 4, ['th_xiansi'], ['die_audio']],
@@ -2974,6 +2985,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         /* th_shiyan: ['male', 'shu', 9, ['th_shiyanskill'],[]], */
                     },
                     characterIntro: {
+                        th_yinfuren: '尹夫人，东汉末年权相曹操的侍妾。尹夫人原为汉大将军何进儿媳，丈夫早逝，生有一子何晏。曹操任司空时，娶尹氏为妾，并将何晏一同带入府中，视之若己出。嫁给曹操后，尹夫人生有一子，是为范阳闵王曹矩。曹矩早亡，无子。建安二十二年（公元217年），朝廷以樊安公曹均之子曹敏继承曹矩香火，封临晋侯。',
                         th_dukui: '杜夔，字公良，河南人。汉末三国时期著名的音乐家。杜夔擅长钟律，聪思过人，丝竹八音，无所不能，只是不擅长歌舞。汉灵帝时，杜夔因其善音律担任雅乐郎。中平五年（公元188年），杜夔因病辞官，前往荆襄避祸。建安二十四年（公元219年），曹操南下荆州，任命杜夔为军谋祭酒，参太乐事，并令其制作雅乐。',
                         th_zhangfen: '张奋，徐州彭城（今江苏徐州）人。三国时期孙吴将领，辅吴将军张昭的侄子。善于制作攻城器械。在步骘举荐下，担任将军，累迁平州都督，册封乐乡亭侯，病逝于任上。',
                         th_quanhuijie: '全皇后（244年－301年），吴郡钱塘（今浙江杭州）人，吴废帝孙亮的皇后，全尚之女，母孙恭之女。吴大帝长女全公主的侄孙女。赤乌十三年（250年），因全公主推荐全氏被册为孙亮的太子妃，建兴二年（253年），全氏被立为皇后。太平三年（258年），孙亮被权臣孙綝贬为会稽王，全皇后也一同贬为会稽王夫人。永安三年（260年），全皇后随夫到侯官，孙亮在途中死去，全皇后在侯官居住二十余年，吴亡后返回吴郡，永宁元年（301年）去世。',
@@ -3267,6 +3279,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         th_peiqi: '配器',
                         th_fanyin_info: '出牌阶段开始时，你可从牌堆亮出点数最小的一张牌并选择一项：使用之（无距离限制）；或令你本回合使用的下一张牌可额外选择一个目标。然后从牌堆亮出点数翻倍的牌并重复此流程。',
                         th_peiqi_info: '当你受到伤害后，你可移动场上一张牌。然后若所有角色均在所有角色攻击范围内，你可再移动场上一张牌。',
+                        th_yinfuren: '尹夫人',
+                        th_yingyu: '媵予',
+                        th_yongbi: '拥嬖',
+                        th_yingyu_info: '准备阶段，你可以展示两名角色的各一张手牌，若花色不同，则你选择其中的一名角色获得另一名角色的展示牌。',
+                        th_yongbi_info: '限定技，出牌阶段，你可将所有手牌交给一名男性角色，然后“媵予”改为结束阶段也可以发动。根据其中牌的花色数量，你与其永久获得以下效果：至少两种，手牌上限+2；至少三种，受到大于1点的伤害时伤害-1。',
                     },
                     skill: {
                         th_rejiaozhao: {
@@ -8457,6 +8474,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             limited: true,
                             skillAnimation: true,
                             animationColor: 'orange',
+                            check: function (event, player) {
+                                if (player.maxHp <= 3) return true;
+                                return false;
+                            },
                             content: () => {
                                 'step 0'
                                 player.awakenSkill('th_xiongrao');
@@ -8715,7 +8736,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                     event.card = cards.randomGet();
                                     event.num1 = event.num2;
                                     event.goto(1);
-                                } else event.finish()
+                                } else event.num2++;
+                                'step 5'
+                                if (event.num2 <= 13) event.goto(4);
                             },
                             subSkill: {
                                 add: {
@@ -8788,6 +8811,148 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                     }
                                 }
                                 if (bool1) player.moveCard().set('prompt2', '所有人均在所有人的攻击范围内，你可再移动一张牌。');
+                            }
+                        },
+
+                        //尹夫人
+                        th_yingyu: {
+                            trigger: { player: ['phaseZhunbeiBegin', 'phaseJieshuBegin'] },
+                            audio: "ext:Thunder/audio/skill:2",
+                            filter: function (event, player) {
+                                if (event.name == 'phaseJieshu' && !player.hasSkill('th_yongbi_effect1')) return false;
+                                return game.countPlayer(function (current) { return current.countCards('h') }) > 1;
+                            },
+                            direct: true,
+                            content: function () {
+                                'step 0'
+                                player.chooseTarget(get.prompt('th_yingyu'), function (card, player, target) {
+                                    return target.countCards('h');
+                                }, 2).set('prompt2', '展示两名角色的各一张手牌').set('ai', function (target) {
+                                    var att = get.attitude(player, target);
+                                    if (ui.selected.targets.length) {
+                                        if (get.attitude(player, ui.selected.targets[0]) > 0) return -get.attitude(player, target);
+                                        return get.attitude(player, target);
+                                    }
+                                    return 20 - target.countCards('h');
+                                });
+                                'step 1'
+                                if (result.bool) {
+                                    player.logSkill('th_yingyu', result.targets);
+                                    event.cards = [];
+                                    event.target1 = result.targets[0];
+                                    event.target2 = result.targets[1];
+                                    for (var i = 0; i < result.targets.length; i++) {
+                                        var card = result.targets[i].getCards('h').randomGet();
+                                        player.showCards(card);
+                                        event.cards.push(card);
+                                    }
+                                    if (get.suit(event.cards[0]) == get.suit(event.cards[1])) event.finish();
+                                } else event.finish();
+                                'step 2'
+                                if (event.isMine()) {
+                                    event.dialog = ui.create.dialog('媵予', 'hidden');
+                                    event.dialog.addText(get.translation(event.target1) + '展示的手牌   ' + get.translation(event.target2) + '展示的手牌');
+                                    event.dialog.add([event.cards, 'card']);
+                                    event.dialog.open();
+                                    game.pause();
+                                    //game.addVideo('showCards', player, ['媵予', get.cardsInfo(event.cards)]);
+                                    //game.log(player, '展示了', event.target1, '的卡牌：', event.cards[0]);
+                                    var controls = [get.translation(event.target1) + '获得' + get.translation(event.cards[1]), get.translation(event.target2) + '获得' + get.translation(event.cards[0]), 'cancel2'];
+                                    event.control = ui.create.control(get.translation(event.target1) + '获得' + get.translation(event.cards[1]), get.translation(event.target2) + '获得' + get.translation(event.cards[0]), 'cancel2', function (link) {
+                                        var result = event._result;
+                                        if (link == 'cancel2') result.bool = false;
+                                        else {
+                                            result.index = controls.indexOf(link);
+                                            result.bool = true;
+                                        }
+                                        event.dialog.close();
+                                        event.control.close();
+                                        game.resume();
+                                        _status.imchoosing = false;
+                                    })
+                                } else {
+                                    event._result = {
+                                        bool: true,
+                                        index: get.attitude(player, event.target1) > 0 ? 0 : 1,
+                                    }
+                                }
+
+                                'step 3'
+                                if (result.bool) {
+                                    if (result.index) event.target2.gain(event.cards[0], event.target1, 'give');
+                                    else event.target1.gain(event.cards[1], event.target2, 'give');
+                                }
+                            }
+                        },
+                        th_yongbi: {
+                            skillAnimation: true,
+                            animationColor: 'wood',
+                            audio: "ext:Thunder/audio/skill:2",
+                            limited: true,
+                            enable: 'phaseUse',
+                            filterTarget: function (card, player, target) {
+                                return target.hasSex('male');
+                            },
+                            content: function () {
+                                'step 0'
+                                event.num = player.getSuitNum();
+                                player.awakenSkill('th_yongbi');
+                                target.gain(player.getCards('h'), player, 'giveAuto', 'bySelf');
+                                'step 1'
+                                var shouyizhe = [player, target]
+                                for (var i = 0; i < shouyizhe.length; i++) {
+                                    if (event.num) shouyizhe[i].addSkill('th_yongbi_effect1');
+                                    if (event.num >= 2) shouyizhe[i].addSkill('th_yongbi_effect2');
+                                    if (event.num >= 3) shouyizhe[i].addSkill('th_yongbi_effect3');
+                                }
+                            },
+                            ai: {
+                                order: function () {
+                                    return get.order({ name: 'tao' }) - 0.1;
+                                },
+                                result: {
+                                    player: function (player, target) {
+                                        if (player.getSuitNum() < 2 || target.hasJudge('lebu')) return -1;
+                                        return 0;
+                                    },
+                                    target: 1,
+                                }
+                            },
+                            subSkill: {
+                                effect1: {},
+                                effect2: {
+                                    mark: true,
+                                    mod: {
+                                        maxHandcard: (player, num) => num + 2,
+                                    },
+                                    intro: {
+                                        content: function (storage, player) {
+                                            var str = '手牌上限+2';
+                                            if (player.hasSkill('th_yongbi_effect3')) str += '<br>减伤';
+                                            return str;
+                                        }
+                                    },
+                                },
+                                effect3: {
+                                    trigger: { player: 'damageBegin4' },
+                                    forced: true,
+                                    audio: true,
+                                    filter: function (event, player) {
+                                        if (event.num <= 1) return false;
+                                        return true;
+                                    },
+                                    content: function () {
+                                        trigger.num = 1;
+                                    },
+                                    ai: {
+                                        filterDamage: true,
+                                        skillTagFilter: function (player, tag, arg) {
+                                            if (arg && arg.player) {
+                                                if (arg.player.hasSkillTag('jueqing', false, player)) return false;
+                                            }
+                                        },
+                                    },
+                                }
                             }
                         },
 
@@ -9222,13 +9387,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                 skill: {},
                 translate: {},
             },
-            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.3</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
+            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.31</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
             author: "雷",
             diskURL: "",
             forumURL: "",
-            version: "3.3",
-            changeLog: `<span class="bluetext">2022/10/08日更新</span><br>
-                       -调整武将【牛辅】技能与官服一致<br>
+            version: "3.31",
+            changeLog: `<span class="bluetext">2022/10/15日更新</span><br>
+                       -新将【尹夫人】<br>
+                       -提前适配即将更新的chooseToMove函数<br>
+                       -更改【杜夔】泛音结算
                        `,
         },
         files: { "character": [], "card": [], "skill": [] }
