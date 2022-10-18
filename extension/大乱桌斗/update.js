@@ -6,11 +6,12 @@ var data = {
 	oldversion: "2",
 	// 更新内容汇总
 	changeLog: `
-		-新增在线更新功能，自动在线检查扩展更新（感谢诗笺提供的在线更新代码）
-    `,
+		1. 新增在线更新功能，自动在线检查扩展更新（感谢诗笺提供的在线更新代码）
+		2. 修复了诸多bug
+	`,
 	// 本次更新的所有文件(不包括文件夹)
 	updateFiles: [
-		"extension.js",
+		"extension.js"
 	],
 	// 扩展内所有文件(不包括文件夹)
 	allFiles: [
@@ -166,7 +167,7 @@ var data = {
 		"extension/大乱桌斗/image/decade_extGroupImage/name_sst_reality.png",
 		"extension/大乱桌斗/image/decade_extGroupImage/name_sst_smash.png",
 		"extension/大乱桌斗/image/decade_extGroupImage/name_sst_spirit.png"
-	],
+	]
 };
 
 data;

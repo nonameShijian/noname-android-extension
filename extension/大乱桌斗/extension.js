@@ -2,7 +2,8 @@
 game.import("extension",(lib,game,ui,get,ai,_status)=>{
 	return {
 		name:"大乱桌斗",
-		content:()=>{
+		content:(config,pack)=>{
+			if(pack.changeLog) game.showExtensionChangeLog(pack.changeLog);
 			//Rank
 			const RANK={
 				s:[],
@@ -174,7 +175,6 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 					lib.rank[i].addArray(RANK[i]);
 				}
 			}
-
 			// 下载进度条
 			if (typeof game.shijianCreateProgress != 'function') {
 				game.shijianCreateProgress = (title, max, fileName, value) => {
@@ -246,7 +246,6 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 					return parent;
 				};
 			}
-
 			// 扩展自动更新(等游戏加载完成后再获取更新, 因为可以等待其他扩展加载完成)
 			lib.arenaReady.push(() => {
 				// 若lib.extensionPack.大乱桌斗不存在，就是这个扩展还没有开启
@@ -2297,18 +2296,18 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				clear:true,
 				name:"<details>\
 						<summary>\
-							更新记录（2.1）\
+							更新日志（2.1）\
 						</summary>\
-						<ul>\
+						<ol>\
 							<li>\
 								新增在线更新功能，自动在线检查扩展更新（感谢<i>诗笺</i>提供的在线更新代码）\
 							</li>\
 							<li>\
 								修复了诸多bug\
 							</li>\
-						</ul>\
+						</ol>\
 					</details>",
-				intro:"查看更新记录"
+				intro:"查看更新日志"
 			}
 		},
 		package:{
@@ -2330,21 +2329,25 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 					《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于<i>任天堂</i>、<i>Sora</i>和其他相关公司。\
 				</p>\
 				<p>\
-					作者（以斜体表示）：\
-					<ul>\
-						<li>\
-							<i>Show-K</i>（程序开发，卡牌创作）\
-						</li>\
-						<li>\
-							<i>mario not mary</i>（《大乱斗杀》计划发起，主要卡牌创作，插图）\
-						</li>\
-						<li>\
-							<i>Yumikohimi</i>、<i>南柯</i>、<i>Axel_Zhai</i>、<i>小时节</i>等（卡牌创作）\
-						</li>\
-						<li>\
-							<i>封羽翎烈</i>等（《任天堂明星大乱斗特别版全命魂介绍》、插图）\
-						</li>\
-					</ul>\
+					<details>\
+						<summary>\
+							作者（以斜体表示）\
+						</summary>\
+						<ul>\
+							<li>\
+								<i>Show-K</i>（程序开发，卡牌创作）\
+							</li>\
+							<li>\
+								<i>mario not mary</i>（《大乱斗杀》计划发起，主要卡牌创作，插图）\
+							</li>\
+							<li>\
+								<i>Yumikohimi</i>、<i>南柯</i>、<i>Axel_Zhai</i>、<i>小时节</i>等（卡牌创作）\
+							</li>\
+							<li>\
+								<i>封羽翎烈</i>等（《任天堂明星大乱斗特别版全命魂介绍》、插图）\
+							</li>\
+						</ul>\
+					</details>\
 				</p>\
 				<p>\
 					对于未经允许即使用各自作者的插图的事情表示深感抱歉，会尽量标注作者以及相应地址/社交账号，若有异议可联系修改/删除。\
@@ -2352,7 +2355,16 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1"
+			version:"2.1",
+			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1</rt><rp>）</rp></ruby></h2>\
+				<ol>\
+					<li>\
+						新增在线更新功能，自动在线检查扩展更新（感谢<i>诗笺</i>提供的在线更新代码）\
+					</li>\
+					<li>\
+						修复了诸多bug\
+					</li>\
+				</ol>"
 		},
 		files:{
 			character:[],
