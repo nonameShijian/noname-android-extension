@@ -5870,7 +5870,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					game.log(target,"成为了",trigger.card,"的使用者");
 					game.delayx();
 					"step 3"
-					target.chooseTarget("怪笔：你可以为"+get.translation(trigger.card)+"重新指定目标").set("ai",target=>get.effect(target,get.card(),_status.event.player,_status.event.player)).set("_get_card",trigger.card).set("filterTarget",(card,player,target)=>lib.filter.filterTarget(get.card(),player,target)).set("selectTarget",lib.filter.selectTarget);
+					target.chooseTarget("怪笔：你可以为"+get.translation(trigger.card)+"重新指定目标").set("ai",target=>get.effect(target,get.card(),_status.event.player,_status.event.player)+1).set("_get_card",trigger.card).set("filterTarget",(card,player,target)=>lib.filter.filterTarget(get.card(),player,target)).set("selectTarget",lib.filter.selectTarget);
 					"step 4"
 					if(result.targets&&result.targets.length){
 						target.line(result.targets,"green");
