@@ -2300,10 +2300,10 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 						</summary>\
 						<ol>\
 							<li>\
-								新增在线更新功能，自动在线检查扩展更新（感谢<i>诗笺</i>提供的在线更新代码）\
+								新增在线更新功能，自动在线检查扩展更新（感谢<i>诗笺</i>提供的在线更新代码）；\
 							</li>\
 							<li>\
-								修复了诸多bug\
+								修复了诸多bug。\
 							</li>\
 						</ol>\
 					</details>",
@@ -2359,10 +2359,10 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1</rt><rp>）</rp></ruby></h2>\
 				<ol>\
 					<li>\
-						新增在线更新功能，自动在线检查扩展更新（感谢<i>诗笺</i>提供的在线更新代码）\
+						新增在线更新功能，自动在线检查扩展更新（感谢<i>诗笺</i>提供的在线更新代码）；\
 					</li>\
 					<li>\
-						修复了诸多bug\
+						修复了诸多bug。\
 					</li>\
 				</ol>"
 		},
