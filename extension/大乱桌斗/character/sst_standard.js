@@ -1,5 +1,8 @@
 "use strict";
 game.import("character",(lib,game,ui,get,ai,_status)=>{
+	/**
+	 * @type {importCharacterConfig}
+	 */
 	const SST_STANDARD={
 		name:"sst_standard",
 		connect:true,
@@ -8188,6 +8191,24 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				}
 			},
 			sst_wangyan:{
+				init:player=>{
+					if(!_status.gameStarted&&player.isZhu&&game.players.length>4){
+						if(game.online) return;
+						if(typeof player.singleHp=="boolean"){
+							if(player.singleHp){
+								player.singleHp=false;
+							}
+							else{
+								player.singleHp=true;
+								player.maxHp--;
+							}
+						}
+						else{
+							player.maxHp--;
+						}
+						player.update();
+					}
+				},
 				unique:true,
 				zhuSkill:true,
 				enable:"phaseUse",
@@ -8204,7 +8225,6 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					return game.hasPlayer(current=>current.countCards("h")<player.countCards("h")&&current.group==player.group&&player.canUse("wugu",current));
 				},
 				ai:{
-					noExtraMaxHp:true,
 					order:1,
 					result:{
 						player:player=>{
@@ -12313,7 +12333,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_baoshi:"暴食",
 			sst_baoshi_info:"锁定技，当你使用牌后，你摸两张牌，然后若你手牌数超出体力值，你须将你区域内的牌弃置至一张。",
 			sst_wangyan:"王宴",
-			sst_wangyan_info:"主公技，你作为主公时不增加体力上限。出牌阶段限一次，你可以将所有手牌当作【五谷丰登】对所有手牌数小于你的本势力角色使用。",
+			sst_wangyan_info:"主公技，此武将牌减1点体力上限。出牌阶段限一次，你可以将所有手牌当作【五谷丰登】对所有手牌数小于你的本势力角色使用。",
 			sst_juelu:"决路",
 			sst_juelu2:"决路",
 			sst_juelu3:"决路",

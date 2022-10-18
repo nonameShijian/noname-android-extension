@@ -1,5 +1,8 @@
 "use strict";
 game.import("character",(lib,game,ui,get,ai,_status)=>{
+	/**
+	 * @type {importCharacterConfig}
+	 */
 	const SST_EXTRA={
 		name:"sst_extra",
 		connect:true,

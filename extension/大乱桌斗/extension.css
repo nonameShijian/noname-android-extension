@@ -93,6 +93,7 @@ progress.zxgxProgress {
 	border: 2px solid;
 	border-radius: 15px;
 	vertical-align: middle;
+	appearance: none;
 	-webkit-appearance: none;
 }
 
