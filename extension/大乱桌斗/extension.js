@@ -303,7 +303,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								}
 							}
 
-							myConfirm(`《大乱桌斗》扩展检测到更新(v${data.version})，是否更新？\n${data.changeLog}`, () => {
+							myConfirm(`《大乱桌斗》扩展检测到更新（${data.version}），是否更新？\n${data.changeLog}`, () => {
 								/**
 								 * 下载一个文件
 								 * @param { string } url 
@@ -405,7 +405,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 							else console.error('其他错误', e);
 						});
 				} else {
-					console.error('“lib.extensionPack.大乱桌斗”不存在，无法在线更新');
+					console.error('lib.extensionPack.大乱桌斗不存在，无法在线更新');
 				}
 			});
 		},
