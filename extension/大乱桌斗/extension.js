@@ -2296,14 +2296,11 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				clear:true,
 				name:"<details>\
 						<summary>\
-							更新日志（2.1）\
+							更新日志（2.1.1）\
 						</summary>\
 						<ol>\
 							<li>\
-								新增在线更新功能，自动在线检查扩展更新（感谢<i>诗笺</i>提供的在线更新代码）；\
-							</li>\
-							<li>\
-								修复了诸多bug。\
+								规范了帝帝帝大王〖王宴〗的技能描述和实际效果。\
 							</li>\
 						</ol>\
 					</details>",
@@ -2355,14 +2352,11 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1",
-			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1</rt><rp>）</rp></ruby></h2>\
+			version:"2.1.1",
+			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1.1</rt><rp>）</rp></ruby></h2>\
 				<ol>\
 					<li>\
-						新增在线更新功能，自动在线检查扩展更新（感谢<i>诗笺</i>提供的在线更新代码）；\
-					</li>\
-					<li>\
-						修复了诸多bug。\
+						规范了帝帝帝大王〖王宴〗的技能描述和实际效果。\
 					</li>\
 				</ol>"
 		},
