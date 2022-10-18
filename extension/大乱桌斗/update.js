@@ -19,7 +19,6 @@ var data = {
 		"extension.js",
 		"super_smash_tabletop.png",
 		"update.js",
-		"updateFiles.js",
 		"card/sst_standard.js",
 		"character/sst_extra.js",
 		"character/sst_standard.js",
