@@ -1,0 +1,107 @@
+.identitycircle>div>div[data-color='sst_light'] {
+	background-image: radial-gradient(circle at bottom left, rgb(255, 218, 71), rgb(224, 191, 62));
+}
+
+.identitycircle>div>div[data-color='sst_dark'] {
+	background-image: radial-gradient(circle at bottom left, rgb(157, 198, 255), rgb(117, 147, 189));
+}
+
+.identitycircle>div>div[data-color='sst_spirit'] {
+	background-image: radial-gradient(circle at bottom left, rgb(120, 218, 83), rgb(104, 189, 73));
+}
+
+.identitycircle>div>div[data-color='sst_reality'] {
+	background-image: radial-gradient(circle at bottom left, rgb(185, 72, 36), rgb(158, 62, 31));
+}
+
+.identitycircle>div>div[data-color='sst_smash'] {
+	background-image: radial-gradient(circle at bottom left, rgb(100, 74, 139), rgb(96, 72, 136));
+}
+
+.player .identity[data-color="sst_light"] {
+	text-shadow: black 0 0 1px, rgba(255, 203, 0, 1) 0 0 2px, rgba(255, 203, 0, 1) 0 0 5px, rgba(255, 203, 0, 1) 0 0 10px, rgba(255, 203, 0, 1) 0 0 10px;
+}
+
+.player .identity[data-color="sst_dark"] {
+	text-shadow: rgba(78, 117, 140, 1) 0 0 2px, rgba(78, 117, 140, 1) 0 0 5px, rgba(78, 117, 140, 1) 0 0 10px, rgba(78, 117, 140, 1) 0 0 10px, rgba(78, 117, 140, 1) 0 0 20px, rgba(78, 117, 140, 1) 0 0 20px, black 0 0 1px;
+}
+
+.player .identity[data-color="sst_spirit"] {
+	text-shadow: rgba(57, 123, 4, 1) 0 0 2px, rgba(57, 123, 4, 1) 0 0 5px, rgba(57, 123, 4, 1) 0 0 10px, rgba(57, 123, 4, 1) 0 0 10px, rgba(57, 123, 4, 1) 0 0 20px, rgba(57, 123, 4, 1) 0 0 20px, black 0 0 1px;
+}
+
+.player .identity[data-color="sst_reality"] {
+	text-shadow: rgba(128, 59, 2, 1) 0 0 2px, rgba(128, 59, 2, 1) 0 0 5px, rgba(128, 59, 2, 1) 0 0 10px, rgba(128, 59, 2, 1) 0 0 10px, rgba(128, 59, 2, 1) 0 0 20px, rgba(128, 59, 2, 1) 0 0 20px, black 0 0 1px;
+}
+
+.player .identity[data-color="sst_smash"] {
+	text-shadow: rgba(100, 74, 139, 1) 0 0 2px, rgba(100, 74, 139, 1) 0 0 5px, rgba(100, 74, 139, 1) 0 0 10px, rgba(100, 74, 139, 1) 0 0 10px, rgba(100, 74, 139, 1) 0 0 20px, rgba(100, 74, 139, 1) 0 0 20px, black 0 0 1px;
+}
+
+.player>.camp-wrap[data-camp='sst_light']>.camp-back {
+	background: linear-gradient(to bottom, rgb(154, 148, 122), rgb(74, 72, 57));
+}
+
+.player>.camp-wrap[data-camp='sst_dark']>.camp-back {
+	background: linear-gradient(to bottom, rgb(45, 103, 153), rgb(19, 45, 78));
+}
+
+.player>.camp-wrap[data-camp='sst_spirit']>.camp-back {
+	background: linear-gradient(to bottom, rgb(29, 114, 29), rgb(34, 42, 27));
+}
+
+.player>.camp-wrap[data-camp='sst_reality']>.camp-back {
+	background: linear-gradient(to bottom, rgb(153, 28, 34), rgb(57, 12, 17));
+}
+
+.player>.camp-wrap[data-camp='sst_reality_shen']>.camp-back {
+	background: linear-gradient(to bottom, rgb(97, 87, 15), rgb(65, 50, 9), rgb(67, 52, 9));
+}
+
+.player>.camp-wrap[data-camp='sst_smash']>.camp-back {
+	background: linear-gradient(to bottom, rgb(97, 87, 15), rgb(65, 50, 9), rgb(67, 52, 9));
+}
+
+.player>.camp-wrap[data-camp='sst_light']>.camp-name {
+	text-shadow: 0 0 5px rgb(170, 170, 170), 0 0 10px rgb(118, 118, 118), 0 0 15px rgb(118, 118, 118);
+}
+
+.player>.camp-wrap[data-camp='sst_dark']>.camp-name {
+	text-shadow: 0 0 5px rgb(50, 50, 255), 0 0 10px rgb(120, 120, 255), 0 0 15px rgb(100, 100, 255);
+}
+
+.player>.camp-wrap[data-camp='sst_spirit']>.camp-name {
+	text-shadow: 0 0 5px rgb(100, 233, 100), 0 0 10px rgb(50, 255, 50), 0 0 15px rgb(50, 255, 50);
+}
+
+.player>.camp-wrap[data-camp='sst_reality']>.camp-name {
+	text-shadow: 0 0 5px rgb(255, 100, 100), 0 0 10px rgb(255, 50, 50), 0 0 15px rgb(255, 50, 50);
+}
+
+.player>.camp-wrap[data-camp='sst_reality_shen']>.camp-name {
+	text-shadow: 0 0 5px rgb(255, 200, 0), 0 0 10px rgb(255, 200, 0), 0 0 15px rgb(255, 200, 0);
+}
+
+.player>.camp-wrap[data-camp='sst_smash']>.camp-name {
+	text-shadow: 0 0 5px rgb(255, 200, 0), 0 0 10px rgb(255, 200, 0), 0 0 15px rgb(255, 200, 0);
+}
+
+/* 更新进度条样式 */
+progress.zxgxProgress {
+	width: 75%;
+	height: 10px;
+	border: 2px solid;
+	border-radius: 15px;
+	vertical-align: middle;
+	-webkit-appearance: none;
+}
+
+progress.zxgxProgress::-webkit-progress-bar {
+	background: rgb(239, 239, 239);
+	border-radius: 0.2rem;
+}
+
+progress.zxgxProgress::-webkit-progress-value {
+	border-radius: 0.2rem;
+	background: rgb(0, 117, 255);
+}
