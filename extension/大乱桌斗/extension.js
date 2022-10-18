@@ -251,7 +251,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				// 若lib.extensionPack.大乱桌斗不存在，就是这个扩展还没有开启
 				if (lib.extensionPack.大乱桌斗) {
 					const address = 'https://nonameShijian.unitedrhythmized.club/noname-android-extension/main/extension/大乱桌斗/';
-					fetch(address + 'update.js')
+					fetch(`${address}update.js?date=${(new Date()).getTime()}`)
 						.then(response => {
 							if (!response.ok) throw response;
 							return response.text();
