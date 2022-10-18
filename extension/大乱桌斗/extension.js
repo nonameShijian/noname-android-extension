@@ -303,7 +303,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								}
 							}
 
-							myConfirm(`大乱桌斗扩展检测到更新(v${data.version}), 是否更新?\n${data.changeLog}`, () => {
+							myConfirm(`《大乱桌斗》扩展检测到更新(v${data.version})，是否更新？\n${data.changeLog}`, () => {
 								/**
 								 * 下载一个文件
 								 * @param { string } url 
@@ -363,7 +363,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								function downloadList(files) {
 									if (!Array.isArray(files) || files.length == 0) return;
 									let i = 0;
-									const progress = game.shijianCreateProgress('更新大乱桌斗扩展', files.length, files[0], i);
+									const progress = game.shijianCreateProgress('更新《大乱桌斗》扩展', files.length, files[0], i);
 									const success = skip => {
 										// 下载完了就结束
 										if (!files[++i]) {
@@ -374,7 +374,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 												progress.remove();
 												// 延时提示
 												setTimeout(() => {
-													alert('大乱桌斗扩展更新完成，将自动重启');
+													alert('《大乱桌斗》扩展更新完成，将自动重启');
 													game.reload();
 												}, 100);
 											}, 200);
@@ -405,7 +405,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 							else console.error('其他错误', e);
 						});
 				} else {
-					console.error('lib.extensionPack.大乱桌斗不存在，无法在线更新');
+					console.error('“lib.extensionPack.大乱桌斗”不存在，无法在线更新');
 				}
 			});
 		},
@@ -2355,7 +2355,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1",
+			version:"2.1s",
 			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1</rt><rp>）</rp></ruby></h2>\
 				<ol>\
 					<li>\
