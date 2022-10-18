@@ -2355,7 +2355,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1s",
+			version:"2.1",
 			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1</rt><rp>）</rp></ruby></h2>\
 				<ol>\
 					<li>\
