@@ -754,7 +754,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.292",
+			version: "1.3.0",
 		}
 	};
 });
