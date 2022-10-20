@@ -1930,6 +1930,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 												function () {
 													return 0;
 												});
+											if (event.id) next._parent_id = event.id;
+											next.type = 'chooseToUse_button';
 										} else {
 											var next = player.chooseButton(dialog);
 											next.set('ai', info.chooseButton.check ||
@@ -1941,6 +1943,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 													return true;
 												});
 											next.set('selectButton', info.chooseButton.select || 1);
+											if (event.id) next._parent_id = event.id;
+											next.type = 'chooseToUse_button';
 										}
 										event.buttoned = event.result.skill;
 									} else if (info && info.precontent && !game.online && !event.nouse) {
@@ -3315,13 +3319,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									var cardnum = card[1] || '';
 									var cardsuit = get.translation(card[0]);
 									if (parseInt(cardnum) == cardnum) cardnum = parseInt(cardnum);
-									if ([1, 11, 12, 13].contains(cardnum)) {
-										cardnum = {
-											'1': 'A',
-											'11': 'J',
-											'12': 'Q',
-											'13': 'K'
-										}[cardnum];
+									if (cardnum > 0 && cardnum < 14) {
+										cardnum = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'][cardnum - 1];
 									}
 									if (!lib.card[card[2]]) lib.card[card[2]] = {};
 									var info = lib.card[card[2]];
@@ -4861,6 +4860,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					game.check = function (event) {
 						var i, j, range;
 						if (event == undefined) event = _status.event;
+						event._checked = true;
 						var custom = event.custom || {};
 						var ok = true,
 							auto = true;
@@ -5626,10 +5626,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						ui.mebg = ui.create.div('#mebg', ui.arena);
 						ui.me = ui.create.div('.hand-wrap', ui.arena);
 						ui.handcards1Container = decadeUI.element.create('hand-cards', ui.me);
-						ui.handcards1Container.onmousewheel = decadeUI.handler.handMousewheel;
-
 						ui.handcards2Container = ui.create.div('#handcards2');
 						ui.arena.classList.remove('nome');
+						if (lib.config.mousewheel && !lib.config.touchscreen) {
+							ui.handcards1Container.onmousewheel = decadeUI.handler.handMousewheel;
+							ui.handcards2Container.onmousewheel = ui.click.mousewheel;
+						}
 
 						var equipSolts = ui.equipSolts = decadeUI.element.create('equips-wrap');
 						equipSolts.back = decadeUI.element.create('equips-back', equipSolts);
@@ -5646,8 +5648,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 						ui.handcards1Container.ontouchstart = ui.click.touchStart;
 						ui.handcards2Container.ontouchstart = ui.click.touchStart;
-						ui.handcards1Container.ontouchmove = ui.click.touchScroll;
-						ui.handcards2Container.ontouchmove = ui.click.touchScroll;
+						ui.handcards1Container.ontouchmove = decadeUI.handler.touchScroll;
+						ui.handcards2Container.ontouchmove = decadeUI.handler.touchScroll;
 						ui.handcards1Container.style.WebkitOverflowScrolling = 'touch';
 						ui.handcards2Container.style.WebkitOverflowScrolling = 'touch';
 
@@ -8136,6 +8138,24 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							hand.frameId = requestAnimationFrame(handScroll);
 						}
 					},
+					touchScroll: function (e) {
+						if (_status.mousedragging) return;
+						if (_status.draggingtouchdialog) return;
+						if (!_status.dragged) {
+							if (Math.abs(e.touches[0].clientX / game.documentZoom - this.startX) > 10 ||
+								Math.abs(e.touches[0].clientY / game.documentZoom - this.startY) > 10) {
+								_status.dragged = true;
+							}
+						}
+						if ((this == ui.handcards1Container || this == ui.handcards2Container) && !this.style.overflowX == 'scroll') {
+							e.preventDefault();
+						} else if (lib.device == 'ios' && this.scrollHeight <= this.offsetHeight + 5 && this.scrollWidth <= this.offsetWidth + 5) {
+							e.preventDefault();
+						} else {
+							delete _status._swipeorigin;
+							e.stopPropagation();
+						}
+					},
 				},
 				zooms: {
 					body: 1,
@@ -10082,9 +10102,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.13（Show-K修复版）',
-					'更新日期：2022-10-03',
-					'- 修复了targetprompt无动画的异常（举例：【借刀杀人】）。',
+					'当前版本：1.2.0.220114.14（Show-K修复版）',
+					'更新日期：2022-10-20',
+					'- 修复了各种卡牌标签互相遮挡的异常。',
+					'- 取消了非基本牌的牌名辅助显示向上偏移的功能（尽量避免牌名辅助显示遮挡花色点数）。',
+					'- 修复了手机端手牌过多时无法横向拖拽以查找手牌的异常。',
+					'- 修复了庞德公〖评才〗的擦拭机制的擦拭位置与鼠标/触控点错位的异常。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10104,7 +10127,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.12",
+			version: "1.2.0.220114.14",
 		},
 		files: {
 			"character": [],

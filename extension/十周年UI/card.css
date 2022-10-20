@@ -116,7 +116,7 @@
 .card>.gaintag.info,
 .card.button>.gaintag.info {
     left: 4px;
-    top: calc(50% - 16px);
+    top: calc(50% + 38px);
 	bottom: auto;
     right: 4px;
     width: auto;
@@ -157,10 +157,6 @@
 	border: 1px solid black;
 	border-radius: 2px;
 	z-index: 1;
-}
-
-.card.decade-card:not(*[data-card-type='basic'])>.name {
-    bottom: 20px;
 }
 
 #window[data-card-alternate-name-visible='off'] .card>.name,

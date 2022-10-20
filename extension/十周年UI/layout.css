@@ -377,7 +377,7 @@ body>.background {
 
 .card>.range.card-tag {
 	left: 4px;
-    top: calc(50% + 8px);
+    top: calc(50% + 13px);
 	bottom: auto;
     right: 4px;
     width: auto;
