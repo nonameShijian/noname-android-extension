@@ -1,13 +1,15 @@
 // @ts-check
 var data = {
 	// 扩展版本
-	version: "2.1.1",
+	version: "2.1.2",
 	// 扩展的上一个版本
-	oldversion: "2.1",
+	oldversion: "2.1.1",
 	// 更新内容汇总
-	changeLog: `
-		1. 规范了帝帝帝大王〖王宴〗的技能描述和实际效果。
-	`,
+	changeLog:
+		"1. 修复了里希特〖血轮〗〖圣袭〗互换的bug；\n" +
+		"2. 修复了吞食花〖吞食〗武将牌上的牌无法归还的bug；\n" +
+		"3. 优化了酷霸王Jr.〖怪笔〗〖捣闹〗的AI。"
+	,
 	// 本次更新的所有文件(不包括文件夹)
 	updateFiles: [
 		"extension.js"

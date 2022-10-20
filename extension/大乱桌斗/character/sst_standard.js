@@ -51,7 +51,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_kirby:["male","sst_light",3,["sst_qushi","sst_xinghuo"],["type:unknown","primary:1","attack:1","defense:1"]],
 			sst_king_k_rool:["male","sst_dark",4,["sst_badao","sst_jinjia"],[]],
 			sst_donkey_kong:["male","sst_light",4,["sst_baochui"],[]],
-			sst_richter:["male","sst_dark",4,["sst_shengxi","sst_xuelun"],[]],
+			sst_richter:["male","sst_dark",4,["sst_xuelun","sst_shengxi"],[]],
 			sst_pokemon_trainer_red:["male","sst_light",4,["sst_xiandu"],[]],
 			sst_isabelle:["female","sst_light",3,["sst_wenxu","sst_mihu"],[]],
 			sst_daisy:["female","sst_light",3,["sst_renqing","sst_manchan"],[]],
@@ -4687,18 +4687,18 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				}
 			},
 			//Richter
-			sst_shengxi:{
+			sst_xuelun:{
 				init:player=>{
-					if(typeof player.storage.sst_shengxi!="number") player.storage.sst_shengxi=1;
-					player.addAdditionalSkill("sst_shengxi",["sst_shengxi_qiongtu","sst_shengxi_shengfa","sst_shengxi_yonghun"][player.storage.sst_shengxi-1]);
+					if(typeof player.storage.sst_xuelun!="number") player.storage.sst_xuelun=1;
+					player.addAdditionalSkill("sst_xuelun",["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage.sst_xuelun-1]);
 				},
-				onremove:player=>player.removeAdditionalSkill("sst_shengxi"),
+				onremove:player=>player.removeAdditionalSkill("sst_xuelun"),
 				mark:true,
 				marktext:"☯",
 				intro:{
 					content:storage=>"转换技，你视为拥有"+["〖茕途〗","〖圣罚〗","〖勇魂〗"][storage-1]+"，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。"
 				},
-				derivation:["sst_shengxi_qiongtu","sst_shengxi_shengfa","sst_shengxi_yonghun"],
+				derivation:["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"],
 				zhuanhuanji:(player,skill)=>{
 					let fullRotation=false;
 					if(player.storage[skill]<3){
@@ -4709,60 +4709,60 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.storage[skill]=1;
 					}
 					player.markSkill(skill);
-					player.addAdditionalSkill(skill,["sst_shengxi_qiongtu","sst_shengxi_shengfa","sst_shengxi_yonghun"][player.storage[skill]-1]);
+					player.addAdditionalSkill(skill,["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage[skill]-1]);
 					if(fullRotation) player.drawTo(player.getHandcardLimit());
 				}
 			},
-			sst_shengxi_qiongtu:{
+			sst_xuelun_qiongtu:{
 				inherit:"sst_qiongtu",
 				hookTrigger:{
 					log:player=>{
-						if(!_status.event.sst_shengxi&&_status.event.skill=="sst_shengxi_qiongtu"&&player.additionalSkills.sst_shengxi&&(player.additionalSkills.sst_shengxi=="sst_shengxi_qiongtu"||player.additionalSkills.sst_shengxi.contains("sst_shengxi_qiongtu"))){
-							_status.event.set("sst_shengxi",true);
-							player.logSkill("sst_shengxi");
-							player.changeZhuanhuanji("sst_shengxi");
+						if(!_status.event.sst_xuelun&&_status.event.skill=="sst_xuelun_qiongtu"&&player.additionalSkills.sst_xuelun&&(player.additionalSkills.sst_xuelun=="sst_xuelun_qiongtu"||player.additionalSkills.sst_xuelun.contains("sst_xuelun_qiongtu"))){
+							_status.event.set("sst_xuelun",true);
+							player.logSkill("sst_xuelun");
+							player.changeZhuanhuanji("sst_xuelun");
 						}
 					}
 				}
 			},
-			sst_shengxi_shengfa:{
+			sst_xuelun_shengfa:{
 				inherit:"sst_shengfa",
 				hookTrigger:{
 					log:player=>{
-						if(!_status.event.sst_shengxi&&_status.event.skill=="sst_shengxi_shengfa"&&player.additionalSkills.sst_shengxi&&(player.additionalSkills.sst_shengxi=="sst_shengxi_shengfa"||player.additionalSkills.sst_shengxi.contains("sst_shengxi_shengfa"))){
-							_status.event.set("sst_shengxi",true);
-							player.logSkill("sst_shengxi");
-							player.changeZhuanhuanji("sst_shengxi");
+						if(!_status.event.sst_xuelun&&_status.event.skill=="sst_xuelun_shengfa"&&player.additionalSkills.sst_xuelun&&(player.additionalSkills.sst_xuelun=="sst_xuelun_shengfa"||player.additionalSkills.sst_xuelun.contains("sst_xuelun_shengfa"))){
+							_status.event.set("sst_xuelun",true);
+							player.logSkill("sst_xuelun");
+							player.changeZhuanhuanji("sst_xuelun");
 						}
 					}
 				}
 			},
-			sst_shengxi_yonghun:{
+			sst_xuelun_yonghun:{
 				inherit:"sst_yonghun",
 				hookTrigger:{
 					log:player=>{
-						if(!_status.event.sst_shengxi&&_status.event.name=="sst_shengxi_yonghun"&&player.additionalSkills.sst_shengxi&&(player.additionalSkills.sst_shengxi=="sst_shengxi_yonghun"||player.additionalSkills.sst_shengxi.contains("sst_shengxi_yonghun"))){
-							_status.event.set("sst_shengxi",true);
-							player.logSkill("sst_shengxi");
-							player.changeZhuanhuanji("sst_shengxi");
+						if(!_status.event.sst_xuelun&&_status.event.name=="sst_xuelun_yonghun"&&player.additionalSkills.sst_xuelun&&(player.additionalSkills.sst_xuelun=="sst_xuelun_yonghun"||player.additionalSkills.sst_xuelun.contains("sst_xuelun_yonghun"))){
+							_status.event.set("sst_xuelun",true);
+							player.logSkill("sst_xuelun");
+							player.changeZhuanhuanji("sst_xuelun");
 						}
 					}
 				}
 			},
-			sst_xuelun:{
+			sst_shengxi:{
 				trigger:{global:"damageSource"},
-				filter:(event,player)=>player.hasSkill("sst_shengxi")&&event.source&&!event.source.hasSkill(["sst_qiongtu","sst_shengfa","sst_yonghun"][player.storage.sst_shengxi-1],null,null,false)&&!event.source.hasSkill(["sst_shengxi_qiongtu","sst_shengxi_shengfa","sst_shengxi_yonghun"][player.storage.sst_shengxi-1],null,null,false),
+				filter:(event,player)=>player.hasSkill("sst_xuelun")&&event.source&&!event.source.hasSkill(["sst_qiongtu","sst_shengfa","sst_yonghun"][player.storage.sst_xuelun-1],null,null,false)&&!event.source.hasSkill(["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage.sst_xuelun-1],null,null,false),
 				logTarget:"source",
 				check:(event,player)=>get.attitude(player,event.source)>0,
-				prompt2:(event,player)=>"你可以询问"+get.translation(event.source)+"是否获得〖"+get.translation(["sst_shengxi_qiongtu","sst_shengxi_shengfa","sst_shengxi_yonghun"][player.storage.sst_shengxi-1])+"〗直到其发动此技能后",
+				prompt2:(event,player)=>"你可以询问"+get.translation(event.source)+"是否获得〖"+get.translation(["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage.sst_xuelun-1])+"〗直到其发动此技能后",
 				content:()=>{
 					"step 0"
-					event.current=["sst_shengxi_qiongtu","sst_shengxi_shengfa","sst_shengxi_yonghun"][player.storage.sst_shengxi-1];
-					trigger.source.chooseBool("血轮：是否获得"+get.translation(event.current)+"？").set("ai",()=>true);
+					event.current=["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage.sst_xuelun-1];
+					trigger.source.chooseBool("圣袭：是否获得"+get.translation(event.current)+"？").set("ai",()=>true);
 					"step 1"
 					if(result.bool){
-						trigger.source.addAdditionalSkill("sst_xuelun_effect",event.current,true);
-						trigger.source.addSkill("sst_xuelun_effect");
+						trigger.source.addAdditionalSkill("sst_shengxi_effect",event.current,true);
+						trigger.source.addSkill("sst_shengxi_effect");
 						trigger.source.popup(event.current,"thunder");
 						game.log(trigger.source,"获得了技能","#g【"+get.translation(event.current)+"】");
 					}
@@ -4775,23 +4775,23 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					expose:0.2
 				}
 			},
-			sst_xuelun_effect:{
+			sst_shengxi_effect:{
 				charlotte:true,
 				silent:true,
-				trigger:{player:["sst_shengxi_qiongtuAfter","sst_shengxi_shengfaAfter","sst_shengxi_yonghunAfter"]},
+				trigger:{player:["sst_xuelun_qiongtuAfter","sst_xuelun_shengfaAfter","sst_xuelun_yonghunAfter"]},
 				filter:(event,player)=>{
-					if(!player.additionalSkills.sst_xuelun_effect) return false;
+					if(!player.additionalSkills.sst_shengxi_effect) return false;
 					if(!player.hasHistory("useSkill",evt=>evt.skill==event.name&&(evt.event==event||evt.event==event.getParent()))) return false;
 					return true;
 				},
 				content:()=>{
-					player.removeAdditionalSkill("sst_xuelun_effect",trigger.name);
-					if(player.additionalSkills.sst_xuelun_effect){
-						let additionalSkills=player.additionalSkills.sst_xuelun_effect;
-						if(Array.isArray(additionalSkills)&&!additionalSkills.length) player.removeSkill("sst_xuelun_effect");
+					player.removeAdditionalSkill("sst_shengxi_effect",trigger.name);
+					if(player.additionalSkills.sst_shengxi_effect){
+						let additionalSkills=player.additionalSkills.sst_shengxi_effect;
+						if(Array.isArray(additionalSkills)&&!additionalSkills.length) player.removeSkill("sst_shengxi_effect");
 					}
 					else{
-						player.removeSkill("sst_xuelun_effect");
+						player.removeSkill("sst_shengxi_effect");
 					}
 				}
 			},
@@ -5870,7 +5870,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					game.log(target,"成为了",trigger.card,"的使用者");
 					game.delayx();
 					"step 3"
-					target.chooseTarget("怪笔：你可以为"+get.translation(trigger.card)+"重新指定目标").set("ai",target=>get.effect(target,get.card(),_status.event.player,_status.event.player)+1).set("_get_card",trigger.card).set("filterTarget",(card,player,target)=>lib.filter.filterTarget(get.card(),player,target)).set("selectTarget",lib.filter.selectTarget);
+					target.chooseTarget("怪笔：你可以为"+get.translation(trigger.card)+"重新指定目标").set("ai",target=>{
+						const player=_status.event.player;
+						const card=get.card();
+						const val=get.effect(target,card,player,player);
+						const evt=_status.event.getTrigger();
+						if(evt.targets.map(i=>get.effect(i,card,player,player)).reduce((previousValue,currentValue)=>previousValue+currentValue,0)/evt.targets.length<0) val+=1;
+						return val;
+					}).set("_get_card",trigger.card).set("filterTarget",(card,player,target)=>lib.filter.filterTarget(get.card(),player,target)).set("selectTarget",lib.filter.selectTarget);
 					"step 4"
 					if(result.targets&&result.targets.length){
 						target.line(result.targets,"green");
@@ -5914,11 +5921,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				},
 				ai:{
 					combo:"sst_guaibi",
+					halfneg:true,
 					effect:{
 						target:(card,player,target)=>{
 							if(get.attitude(player,target)<0&&get.tag(card,"damage")){
 								if(get.name(card)=="sha") return [1,1];
-								return [1,3];
+								return [1,5];
 							}
 						}
 					},
@@ -11520,8 +11528,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(cards.length){
 						game.findPlayersByPlayerid(Object.keys(player.storage.sst_tunshi_origin)).sortBySeat(_status.currentPhase).forEach(current=>{
 							if(player.storage.sst_tunshi_origin[current.playerid].length){
-								player.give(player.storage.sst_tunshi_origin[current.playerid],current);
 								cards.removeArray(player.storage.sst_tunshi_origin[current.playerid]);
+								player.give(player.storage.sst_tunshi_origin[current.playerid],current);
 							}
 						});
 						for(const i in player.storage.sst_tunshi_origin){
@@ -11547,8 +11555,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.addToExpansion(cards,result.targets[0],"give").gaintag.add("sst_tunshi");
 						if(!Array.isArray(player.storage.sst_tunshi_origin[result.targets[0].playerid])) player.storage.sst_tunshi_origin[result.targets[0].playerid]=[];
 						player.storage.sst_tunshi_origin[result.targets[0].playerid].addArray(cards);
-						lib.skill.sst_tunshi.sync(player);
 					}
+					else{
+						event.finish();
+					}
+					"step 2"
+					lib.skill.sst_tunshi.sync(player);
 				},
 				sync:player=>{
 					const cards=player.getExpansions("sst_tunshi");
@@ -11805,12 +11817,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				if(!Array.isArray(player.storage.sst_fenshi)||player.storage.sst_fenshi[1]) str+="<span class=\"bluetext\">｛若你一回合两次指定了同一名角色，你减1点体力上限并删除此内容。｝</span>";
 				return str;
 			},
-			sst_shengxi:player=>{
-				if(typeof player.storage.sst_shengxi!="number") return "转换技，你视为拥有<span class=\"bluetext\">①〖茕途〗</span>②〖圣罚〗③〖勇魂〗，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。";
+			sst_xuelun:player=>{
+				if(typeof player.storage.sst_xuelun!="number") return "转换技，你视为拥有<span class=\"bluetext\">①〖茕途〗</span>②〖圣罚〗③〖勇魂〗，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。";
 				let str="转换技，你视为拥有";
-				str+=player.storage.sst_shengxi==1?"<span class=\"bluetext\">"+"①〖茕途〗"+"</span>":"①〖茕途〗";
-				str+=player.storage.sst_shengxi==2?"<span class=\"bluetext\">"+"②〖圣罚〗"+"</span>":"②〖圣罚〗";
-				str+=player.storage.sst_shengxi==3?"<span class=\"bluetext\">"+"③〖勇魂〗"+"</span>":"③〖勇魂〗";
+				str+=player.storage.sst_xuelun==1?"<span class=\"bluetext\">"+"①〖茕途〗"+"</span>":"①〖茕途〗";
+				str+=player.storage.sst_xuelun==2?"<span class=\"bluetext\">"+"②〖圣罚〗"+"</span>":"②〖圣罚〗";
+				str+=player.storage.sst_xuelun==3?"<span class=\"bluetext\">"+"③〖勇魂〗"+"</span>":"③〖勇魂〗";
 				str+="，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。";
 				return str;
 			},
@@ -12138,16 +12150,16 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_baochui2:"爆锤",
 			sst_baochui_effect:"爆锤",
 			sst_baochui_info:"出牌阶段限一次，你使用带有「伤害」标签的牌指定唯一目标时，你可以令其伤害值基数为X+1；然后若此牌没有造成伤害，本局游戏你的手牌上限-1。（X为你本回合失去牌的数量除以2且向上取整）",
-			sst_shengxi:"圣袭",
-			sst_shengxi_info:"转换技，你视为拥有①〖茕途〗②〖圣罚〗③〖勇魂〗，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。",
-			sst_shengxi_qiongtu:"茕途",
-			sst_shengxi_qiongtu_info:"锁定技，每当你造成一次伤害，本局游戏你的摸牌阶段摸牌数+1；每当你于弃牌阶段弃置一张牌，本局游戏你的攻击范围+1；每当你使用牌被响应，本局游戏你的体力上限+1（以上三项本局游戏均至多+3）。然后你可以删除〖绝战〗一个｛｝内的内容。",
-			sst_shengxi_shengfa:"圣罚",
-			sst_shengxi_shengfa_info:"其他角色的准备阶段，你可以摸一张牌；若如此做，此回合结束阶段，若该角色于本回合内：未造成伤害，你受到1点伤害；造成了伤害，你对其造成1点伤害。",
-			sst_shengxi_yonghun:"勇魂",
-			sst_shengxi_yonghun_info:"若你使用带有「伤害」标签的牌未对唯一目标造成伤害，你可以正面向上破军1，然后若你未以此法破军带有「伤害」标签的牌，你的手牌上限+1且本回合可以额外使用一张【杀】。",
 			sst_xuelun:"血轮",
-			sst_xuelun_info:"一名角色造成伤害后，你可以询问其是否获得你〖圣袭〗当前技能（不可获得已有技能）直到其发动此技能后。",
+			sst_xuelun_info:"转换技，你视为拥有①〖茕途〗②〖圣罚〗③〖勇魂〗，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。",
+			sst_xuelun_qiongtu:"茕途",
+			sst_xuelun_qiongtu_info:"锁定技，每当你造成一次伤害，本局游戏你的摸牌阶段摸牌数+1；每当你于弃牌阶段弃置一张牌，本局游戏你的攻击范围+1；每当你使用牌被响应，本局游戏你的体力上限+1（以上三项本局游戏均至多+3）。然后你可以删除〖绝战〗一个｛｝内的内容。",
+			sst_xuelun_shengfa:"圣罚",
+			sst_xuelun_shengfa_info:"其他角色的准备阶段，你可以摸一张牌；若如此做，此回合结束阶段，若该角色于本回合内：未造成伤害，你受到1点伤害；造成了伤害，你对其造成1点伤害。",
+			sst_xuelun_yonghun:"勇魂",
+			sst_xuelun_yonghun_info:"若你使用带有「伤害」标签的牌未对唯一目标造成伤害，你可以正面向上破军1，然后若你未以此法破军带有「伤害」标签的牌，你的手牌上限+1且本回合可以额外使用一张【杀】。",
+			sst_shengxi:"圣袭",
+			sst_shengxi_info:"一名角色造成伤害后，你可以询问其是否获得你〖血轮〗当前技能（不可获得已有技能）直到其发动此技能后。",
 			sst_xiandu:"先读",
 			sst_xiandu2:"先读",
 			sst_xiandu3:"先读",
@@ -12464,7 +12476,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_qixin_info:"准备阶段，你可以弃置一张♥基本牌或普通锦囊牌并选择一至三名角色，这些角色直到你的下个回合开始可以视为使用一次此牌。",
 			sst_gongcun:"共存",
 			sst_gongcun2:"共存",
-			sst_gongcun_info:"每名角色每回合限一次，当与其相邻的角色正面朝上失去♥牌后，其可以交给该角色一张手牌。",
+			sst_gongcun_info:"一名角色的每回合限一次，当与其相邻的角色正面朝上失去♥牌后，其可以交给该角色一张手牌。",
 			sst_jichang:"饥肠",
 			sst_jichang_effect:"饥肠",
 			sst_jichang_info:"锁定技，准备阶段，你弃置所有手牌，然后你设定本回合的以下数值：<br>\

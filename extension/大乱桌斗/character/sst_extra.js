@@ -2506,7 +2506,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						});
 						const num=Math.max(...Object.values(statistic));
 						if(num<2) return 0;
-						return num-1;
+						return num;
 					}
 					if(button.link[2]=="zhengsu_mingzhi"){
 						const statistic={};
