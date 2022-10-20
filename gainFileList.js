@@ -81,7 +81,7 @@ const parseSize = function (limit) {
 	// 获取小数点后两位的值
 	let dou = sizeStr.slice(index + 1, 2);
 	// 判断后两位是否为00，如果是则删除00
-	if (dou == "00") {              
+	if (dou == "00") {
 		return sizeStr.slice(0, index) + sizeStr.slice(index + 3, 2);
 	}
 	return size;
@@ -98,8 +98,8 @@ const promiseList = Object.keys(extData).map(async name => {
 Promise.all(promiseList).then(() => {
 	console.log(extData);
 	// console.log(extData.大乱桌斗.files);
-	// fs.writeFileSync(__dirname + '/extension/大乱桌斗/updateFiles.js', `${extData.大乱桌斗.files.map(v => `"${v}"`).join(',\n')}`);
-	fs.writeFileSync(__dirname + '/update.js', `window['noname_android_extension'] = ${ JSON.stringify(extData) };`);
+	// fs.writeFileSync(__dirname + '/extension/大乱桌斗/updateFiles.js', `${extData.大乱桌斗.files.filter(v => v != 'extension/大乱桌斗/updateFiles.js').map(v => `"${v.slice(15)}"`).join(',\n')}`);
+	fs.writeFileSync(__dirname + '/update.js', `window['noname_android_extension'] = ${JSON.stringify(extData)};`);
 });
 
 // node gainFileList.js
