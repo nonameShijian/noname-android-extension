@@ -1,4 +1,4 @@
-() => ({
+(() => ({
 	// 扩展版本
 	version: "2.1.2",
 	// 扩展的上一个版本
@@ -172,4 +172,4 @@
 		"image/decade_extGroupImage/name_sst_smash.png",
 		"image/decade_extGroupImage/name_sst_spirit.png"
 	]
-})();
+}))();
