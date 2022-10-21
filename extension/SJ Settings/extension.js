@@ -341,7 +341,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						return;
 					} else _status.isGettingExtensions = true;
 					/** 扩展下载地址 */
-					const my_ext_site = 'https://raw.fastgit.org/nonameShijian/noname-android-extension/main/';
+					const my_ext_site = 'https://nonameShijian.unitedrhythmized.club/noname-android-extension/main/';
 					function getExtensions() {
 						navigator.notification.activityStart('正在获取扩展', '请稍候...');
 						fetch(my_ext_site + 'update.js')
