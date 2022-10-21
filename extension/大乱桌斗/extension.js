@@ -257,10 +257,10 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 							return response.text();
 						})
 						.then(text => {
-							const data = eval(text);
-							console.log(data);
+							const superSmashTabletop = eval(text);
+							console.log(superSmashTabletop);
 							const localVersion = lib.extensionPack.大乱桌斗.version || '0';
-							if (data.version == localVersion) return;
+							if (superSmashTabletop.version == localVersion) return;
 							else {
 								/** 
 								 * 判断版本
@@ -290,7 +290,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 									}
 								};
 
-								if (!compareVersion(localVersion, data.version)) return;
+								if (!compareVersion(localVersion, superSmashTabletop.version)) return;
 							}
 
 							function myConfirm(message, callback) {
@@ -303,7 +303,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								}
 							}
 
-							myConfirm(`《大乱桌斗》扩展检测到更新（${data.version}），是否更新？\n${data.changeLog}`, () => {
+							myConfirm(`《大乱桌斗》扩展检测到更新（${superSmashTabletop.version}），是否更新？\n${superSmashTabletop.changeLog}`, () => {
 								/**
 								 * 下载一个文件
 								 * @param { string } url 
@@ -395,7 +395,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								}
 
 								/** @type { string[] } 要下载的文件 */
-								const files = localVersion == data.oldversion ? data.updateFiles : data.allFiles;
+								const files = localVersion == superSmashTabletop.oldversion ? superSmashTabletop.updateFiles : superSmashTabletop.allFiles;
 								downloadList(files);
 							});
 						})

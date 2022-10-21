@@ -889,10 +889,10 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"天�
 					return response.text();
 				})
 				.then(text => {
-					const data = eval(text);
-					console.log(data);
+					const heavenlyPrisonOrder = eval(text);
+					console.log(heavenlyPrisonOrder);
 					const localVersion = lib.extensionPack.天牢令.version || '0';
-					if (data.version == localVersion) return;
+					if (heavenlyPrisonOrder.version == localVersion) return;
 					else {
 						/** 
 						 * 判断版本
@@ -922,7 +922,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"天�
 							}
 						};
 
-						if (!compareVersion(localVersion, data.version)) return;
+						if (!compareVersion(localVersion, heavenlyPrisonOrder.version)) return;
 					}
 
 					function myConfirm(message, callback) {
@@ -935,7 +935,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"天�
 						}
 					}
 
-					myConfirm(`《天牢令》扩展检测到更新（${data.version}），是否更新？\n${data.changeLog}`, () => {
+					myConfirm(`《天牢令》扩展检测到更新（${heavenlyPrisonOrder.version}），是否更新？\n${heavenlyPrisonOrder.changeLog}`, () => {
 						/**
 						 * 下载一个文件
 						 * @param { string } url 
@@ -1027,7 +1027,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"天�
 						}
 
 						/** @type { string[] } 要下载的文件 */
-						const files = localVersion == data.oldversion ? data.updateFiles : data.allFiles;
+						const files = localVersion == heavenlyPrisonOrder.oldversion ? heavenlyPrisonOrder.updateFiles : heavenlyPrisonOrder.allFiles;
 						downloadList(files);
 					});
 				})

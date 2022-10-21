@@ -1,5 +1,5 @@
 // @ts-check
-var data = {
+var heavenlyPrisonOrder = {
 	// 扩展版本
 	version: "10.20",
 	// 扩展的上一个版本
@@ -951,4 +951,4 @@ var data = {
 	]
 };
 
-data;
+heavenlyPrisonOrder;

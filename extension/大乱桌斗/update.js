@@ -1,5 +1,5 @@
 // @ts-check
-var data = {
+var superSmashTabletop = {
 	// 扩展版本
 	version: "2.1.2",
 	// 扩展的上一个版本
@@ -175,4 +175,4 @@ var data = {
 	]
 };
 
-data;
+superSmashTabletop;
