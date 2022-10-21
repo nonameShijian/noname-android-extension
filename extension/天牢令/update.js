@@ -1,5 +1,4 @@
-// @ts-check
-var data = {
+() => ({
 	// 扩展版本
 	version: "10.20",
 	// 扩展的上一个版本
@@ -949,6 +948,4 @@ var data = {
 		"image/audio/DIY_zili2.mp3",
 		"image/audio/JX_luzhi_die1.mp3"
 	]
-};
-
-data;
+})();
