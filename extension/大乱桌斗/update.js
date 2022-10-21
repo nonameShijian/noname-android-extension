@@ -12,7 +12,11 @@ var data = {
 	,
 	// 本次更新的所有文件(不包括文件夹)
 	updateFiles: [
-		"extension.js"
+		"extension.js",
+		"update.js",
+		"card/sst_standard.js",
+		"character/sst_extra.js",
+		"character/sst_standard.js"
 	],
 	// 扩展内所有文件(不包括文件夹)
 	allFiles: [

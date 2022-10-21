@@ -1,0 +1,47 @@
+.langxi {
+    width: 600px;
+    height: 30px;
+    background-image: -webkit-linear-gradient(left, #7feb96, #ebe48a 40%, #f50e0e 50%, #ebe48a 60%, #7feb96 100%);
+    transform: translate(-50%, 70%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 5px solid #99590f;
+    border-radius: 22px;
+}
+
+.none {
+    height: 100%;
+    width: 5px;
+    --h: 20%;
+    background-color: #99590f;
+    top: 0;
+    left: var(--h);
+}
+
+.nonef {
+    top: -2px;
+    --h: 20%;
+    left: var(--h);
+    background: linear-gradient(180deg, #fcfcbf 35%, #b58b59 50%);
+    font-family: 'HYZLSJ';
+    font-size: 38px !important;
+    text-align: center;
+    font-weight: 700;
+    -webkit-background-clip: text;
+    text-shadow: none;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 0 0 black) drop-shadow(-2px 0 0 black) drop-shadow(0 2px 0 black) drop-shadow(0 -2px 0 black);
+}
+
+.ball {
+    top: 0px;
+    height: 31px;
+    width: 31px;
+    left: -1px;
+    right: auto;
+    background-image: url('ball.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transition: all 10ms;
+}
