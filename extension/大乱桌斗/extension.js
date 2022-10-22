@@ -2296,17 +2296,11 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				clear:true,
 				name:"<details>\
 						<summary>\
-							更新日志（2.1.2）\
+							更新日志（2.1.3）\
 						</summary>\
 						<ol>\
 							<li>\
-								修复了里希特〖血轮〗〖圣袭〗互换的bug；\
-							</li>\
-							<li>\
-								修复了吞食花〖吞食〗武将牌上的牌无法归还的bug；\
-							</li>\
-							<li>\
-								优化了酷霸王Jr.〖怪笔〗〖捣闹〗的AI。\
+								修复了史蒂夫〖探矿〗只能于出牌阶段发动一次的bug。\
 							</li>\
 						</ol>\
 					</details>",
@@ -2358,17 +2352,11 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1.2",
-			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1.2</rt><rp>）</rp></ruby></h2>\
+			version:"2.1.3",
+			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1.3</rt><rp>）</rp></ruby></h2>\
 				<ol>\
 					<li>\
-						修复了里希特〖血轮〗〖圣袭〗互换的bug；\
-					</li>\
-					<li>\
-						修复了吞食花〖吞食〗武将牌上的牌无法归还的bug；\
-					</li>\
-					<li>\
-						优化了酷霸王Jr.〖怪笔〗〖捣闹〗的AI。\
+						修复了史蒂夫〖探矿〗只能于出牌阶段发动一次的bug。\
 					</li>\
 				</ol>"
 		},
