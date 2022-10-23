@@ -22,7 +22,7 @@ module.exports = {
 		},
 		'十周年UI': {
 			// 美化扩展应只适合当前的无名杀版本
-			nonameVersion: '1.9.116',
+			nonameVersion: '1.9.116.1',
 			version: '1.2.0.220114.14',
 			author: '短歌(寰宇星城, Show-K代更)',
 			intro: '是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础',
@@ -38,7 +38,7 @@ module.exports = {
 			intro: '【云将】扩展的精简版',
 		},
 		'Thunder': {
-			version: '3.31',
+			version: '3.32',
 			author: '雷',
 			intro: '本扩展主要内容为三国杀十周年最新武将（无名杀本体暂未更新的武将），并涵盖部分十周年风格的UI美化。',
 		},
