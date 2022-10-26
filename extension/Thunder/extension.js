@@ -2808,6 +2808,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         'th_caiyang',
                         'th_niufu',
                         'th_re_taishici',
+                        'th_zhuhuan',
                     ],
                     b: [ // 中规中矩
                         'th_tw_re_fazheng',
@@ -2868,6 +2869,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             'th_huangquan',
                             'th_caiyang',
                             'th_niufu',
+                            'th_zhuhuan',
                         ],
                         rare: [ // 稀有S
                             'th_xin_huanghao',
@@ -2916,7 +2918,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
             }
 
 
-            lib.skill.aichen.ai.combo = 'luochong';
+            if (lib.skill.aichen) {
+                if (lib.skill.aichen.ai) lib.skill.aichen.ai.combo = 'luochong';
+                else lib.skill.aichen.ai = { combo: 'luochong' }
+            }
             lib.translate.daxiaoqiao = 'OL大小乔'
             lib.translate.huanghao = 'OL黄皓'
             lib.skill.th_dunshi.derivation = Object.keys(lib.skill.th_dunshi.getSkill(lib.config['extension_Thunder_guanning'])).map(i => lib.skill.th_dunshi.getSkill(lib.config['extension_Thunder_guanning'])[i][0]).addArray(['benghuai', 'weizhong'])
@@ -2928,7 +2933,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                     connect: true,
                     characterSort: {
                         thunder: {
-                            tenthAnniv: ['th_xin_huanghao', 'th_quanhuijie', 'th_caiyang', 'th_zhangfen', 'th_yinfuren',
+                            tenthAnniv: ['th_xin_huanghao', 'th_quanhuijie', 'th_caiyang', 'th_zhangfen', 'th_yinfuren', 'th_zhuhuan',
                                 'th_re_mazhong', 'th_re_liuchen', 'th_kebineng', 'th_liwan', 'th_huzhao', 'th_huangquan',
                                 'th_bianxi', 'th_daxiaoqiao', 'th_fanchou', 'th_zhugeshang', 'th_lvkuanglvxiang', 'th_re_liufeng', 'th_re_taishici', 'th_niufu', 'th_dukui',
                             ],
@@ -2943,6 +2948,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         },
                     },
                     character: {
+                        th_zhuhuan: ['male', 'wu', 4, ['th_fenli', 'th_pingkou'], ['die_audio']],
                         th_yinfuren: ['female', 'wei', 3, ['th_yingyu', 'th_yongbi'], ['die_audio']],
                         th_dukui: ['male', 'wei', 3, ['th_fanyin', 'th_peiqi'], ['die_audio']],
                         th_zhangfen: ['male', 'wu', 4, ['th_wanglu', 'th_xianzhu', 'th_chaixie'], ['die_audio']],
@@ -3041,6 +3047,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         liufeng: ['liufeng', 'th_re_liufeng'],
                         taishici: ['taishici', 're_taishici', 'sp_taishici', 'th_re_taishici'],
                         xf_huangquan: ['xf_huangquan', 'th_huangquan'],
+                        zhuhuan: ['zhuhuan', 'th_zhuhuan'],
                     },
                     translate: {
                         th_shiyan: '试验',
@@ -3273,6 +3280,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                         th_yongbi: '拥嬖',
                         th_yingyu_info: '准备阶段，你可以展示两名角色的各一张手牌，若花色不同，则你选择其中的一名角色获得另一名角色的展示牌。',
                         th_yongbi_info: '限定技，出牌阶段，你可将所有手牌交给一名男性角色，然后“媵予”改为结束阶段也可以发动。根据其中牌的花色数量，你与其永久获得以下效果：至少两种，手牌上限+2；至少三种，受到大于1点的伤害时伤害-1。',
+                        th_zhuhuan: '界朱桓',
+                        th_fenli: '奋励',
+                        th_fenli_info: '若你的手牌数为全场最多，你可以跳过判定和摸牌阶段；若你的体力值为全场最多，你可以跳过出牌阶段；若你的装备区里有牌且数量为全场最多，你可以跳过弃牌阶段。',
+                        th_pingkou: '平寇',
+                        th_pingkou_info: '回合结束时，你可以对至多X名其他角色各造成1点伤害（X为你本回合跳过的阶段数）。若你跳过的阶段数大于你选择的角色数，则其中一名角色随机弃置装备区里的一张牌。',
                     },
                     skill: {
                         th_rejiaozhao: {
@@ -7356,7 +7368,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                                         player.removeSkill('th_huishu');
                                         player.removeSkill('th_yishu');
                                     }
-                                }
+                                } else player.draw(2);
                             },
                         },
 
@@ -8133,17 +8145,24 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             forced: true,
                             content: () => {
                                 'step 0'
+                                var list = ['1点上限', '2点上限'];
+                                if (player.maxHp <= 2) list.remove('2点上限');
+                                if (player.maxHp <= 1) list.remove('1点上限');
+                                if (!list.length) {
+                                    event.finish();
+                                    return;
+                                }
                                 if (!player.storage.th_xiaoxiHp) player.storage.th_xiaoxiHp = player.maxHp;
-                                player.chooseControl('1点上限', '2点上限').set('prompt', '选择减少的体力上限值:').set('ai', function () {
-                                    if (player.maxHp - player.hp >= 2 && game.hasPlayer(function (current) { return player != current && player.inRange(current) && get.attitude(player, current) < 0 })) return '2点上限';
+                                player.chooseControl(list).set('prompt', '选择减少的体力上限值:').set('ai', function () {
+                                    if (player.maxHp - player.hp >= 2 && list.contains('2点上限') && game.hasPlayer(function (current) { return player != current && player.inRange(current) && get.attitude(player, current) < 0 })) return '2点上限';
                                     return '1点上限';
                                 })
                                 'step 1'
                                 if (result.control) {
-                                    player.loseMaxHp(result.index + 1);
+                                    event.num = result.index + 1
+                                    player.loseMaxHp(event.num);
                                 }
                                 'step 2'
-                                event.num = player.storage.th_xiaoxiHp - player.maxHp;
                                 var list = [];
                                 event.addIndex = 0;
                                 if (game.hasPlayer(function (current) { return player != current && player.inRange(current) && current.hasCard((card) => lib.filter.canBeGained(card, current, player), 'he') })) list.push('获得你攻击范围内一名其他角色的' + event.num + '张牌');
@@ -8682,6 +8701,107 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                             }
                         },
 
+                        //界朱桓
+                        th_fenli: {
+                            audio: "ext:Thunder/audio/skill:2",
+                            group: ['th_fenli_draw', 'th_fenli_use', 'th_fenli_discard'],
+                            subfrequent: ['discard'],
+                            subSkill: {
+                                draw: {
+                                    audio: 'th_fenli',
+                                    trigger: { player: 'phaseJudgeBefore' },
+                                    prompt: '是否发动【奋励】跳过判定和摸牌阶段？',
+                                    filter: function (event, player) {
+                                        return player.isMaxHandcard();
+                                    },
+                                    check: function (event, player) {
+                                        if (player.getHistory('skipped').length > 0) return false;
+                                        return game.hasPlayer(function (current) {
+                                            return get.attitude(player, current) < 0 && current.hp == 1 && get.damageEffect(current, player, player) > 0;
+                                        });
+                                    },
+                                    content: function () {
+                                        player.skip('phaseDraw');
+                                        trigger.cancel();
+                                    }
+                                },
+                                use: {
+                                    audio: 'th_fenli',
+                                    trigger: { player: 'phaseUseBefore' },
+                                    prompt: '是否发动【奋励】跳过出牌阶段？',
+                                    filter: function (event, player) {
+                                        return player.isMaxHp();
+                                    },
+                                    check: function (event, player) {
+                                        if (!player.needsToDiscard() || (player.countCards('e') && player.isMaxEquip())) return true;
+                                        if (player.getHistory('skipped').length > 0) return false;
+                                        return game.hasPlayer(function (current) {
+                                            return get.attitude(player, current) < 0 && current.hp == 1 && get.damageEffect(current, player, player) > 0;
+                                        });
+                                    },
+                                    content: function () {
+                                        trigger.cancel();
+                                    }
+                                },
+                                discard: {
+                                    audio: 'th_fenli',
+                                    trigger: { player: 'phaseDiscardBefore' },
+                                    prompt: '是否发动【奋励】跳过弃牌阶段？',
+                                    frequent: true,
+                                    filter: function (event, player) {
+                                        return player.isMaxEquip() && player.countCards('e');
+                                    },
+                                    content: function () {
+                                        trigger.cancel();
+                                    }
+                                }
+                            },
+                            ai: {
+                                combo: 'th_pingkou'
+                            }
+                        },
+                        th_pingkou: {
+                            audio: "ext:Thunder/audio/skill:2",
+                            trigger: { player: 'phaseEnd' },
+                            direct: true,
+                            filter: function (event, player) {
+                                return player.getHistory('skipped').length > 0;
+                            },
+                            content: function () {
+                                'step 0'
+                                player.chooseTarget([1, player.getHistory('skipped').length], get.prompt2('th_pingkou'), function (card, player, target) {
+                                    return target != player;
+                                }).set('ai', function (target) {
+                                    var player = _status.event.player;
+                                    return get.damageEffect(target, player, player);
+                                });
+                                'step 1'
+                                if (result.bool) {
+                                    player.logSkill('th_pingkou', result.targets);
+                                    event.targets = result.targets.slice(0).sortBySeat();
+                                    if (player.getHistory('skipped').length > event.targets.length) event.targetx = event.targets.randomGet();
+                                }
+                                else {
+                                    event.finish();
+                                }
+                                'step 2'
+                                if (event.targets && event.targets.length) {
+                                    event.targets.shift().damage();
+                                    event.redo();
+                                }
+                                'step 3'
+                                if (event.targetx && event.targetx.countCards('e')) event.targetx.randomDiscard('e', true);
+                            },
+                            ai: {
+                                combo: 'th_fenli',
+                                effect: {
+                                    target: function (card) {
+                                        if (card.name == 'lebu' || card.name == 'bingliang') return 0.5;
+                                    }
+                                }
+                            }
+                        },
+
 
 
 
@@ -9109,17 +9229,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
                 skill: {},
                 translate: {},
             },
-            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.32</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
+            intro: "<p style=\"color:rgb(255,128,64); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;\">版本号：3.33</br>    欢迎加入Thunder扩展交流群一起探讨武将、聊天吹水。</p>",
             author: "雷",
             diskURL: "",
             forumURL: "",
-            version: "3.32",
-            changeLog: `<span class="bluetext">2022/10/22日更新</span><br>
-                       -【全惠解】更新<br>
-                       -现在使用觉醒框UI的武将，ai选技能时不会选择带有combo标签的技能（顺便给哀尘加了combo标签）<br>
-                       -修复【尹夫人】在没牌时也可以发动拥嬖的bug<br>
-                       -觉醒框UI现在在侦测到没装十周年UI时会上浮，避免遮住确定按钮<br>
-                       -修复部分使用卡牌美化的人无法正常使用移动卡牌的UI补丁的bug
+            version: "3.33",
+            changeLog: `<span class="bluetext">2022/10/26日更新</span><br>
+                       -修复全惠解觉醒后不选择技能没有摸牌的bug<br>
+                       -修复牛辅崩上限后计数累加的bug<br>
+                       -新武将界朱桓
                        `,
         },
         files: { "character": [], "card": [], "skill": [] }

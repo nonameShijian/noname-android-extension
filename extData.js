@@ -38,7 +38,7 @@ module.exports = {
 			intro: '【云将】扩展的精简版',
 		},
 		'Thunder': {
-			version: '3.32',
+			version: '3.33',
 			author: '雷',
 			intro: '本扩展主要内容为三国杀十周年最新武将（无名杀本体暂未更新的武将），并涵盖部分十周年风格的UI美化。',
 		},

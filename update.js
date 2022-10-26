@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "69.13KB"
+		"size": "71.00KB"
 	},
 	"SJ Settings": {
 		"version": "1.3",
@@ -40,7 +40,7 @@ window["noname_android_extension"] = {
 			"extension/全能搜索/languages/javascript.min.js",
 			"extension/全能搜索/typings/index.d.ts"
 		],
-		"size": "5.44MB"
+		"size": "5.43MB"
 	},
 	"阳光包": {
 		"version": "5.8.21",
@@ -1069,7 +1069,7 @@ window["noname_android_extension"] = {
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp1.jpg",
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp2.jpg"
 		],
-		"size": "104.43MB"
+		"size": "104.42MB"
 	},
 	"十周年UI": {
 		"nonameVersion": "1.9.116.1",
@@ -2058,7 +2058,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decorations/identity2_friend.png",
 			"extension/十周年UI/image/decorations/identity2_gameme.png"
 		],
-		"size": "167.08MB"
+		"size": "167.10MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.1",
@@ -2265,7 +2265,7 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/youyuan.ttf",
 			"extension/千幻聆音/zhunyuan.ttf"
 		],
-		"size": "63.16MB"
+		"size": "63.15MB"
 	},
 	"云将": {
 		"version": "8.73.93",
@@ -2549,7 +2549,7 @@ window["noname_android_extension"] = {
 		"size": "69.78MB"
 	},
 	"Thunder": {
-		"version": "3.32",
+		"version": "3.33",
 		"author": "雷",
 		"intro": "本扩展主要内容为三国杀十周年最新武将（无名杀本体暂未更新的武将），并涵盖部分十周年风格的UI美化。",
 		"files": [
@@ -2591,6 +2591,7 @@ window["noname_android_extension"] = {
 			"extension/Thunder/audio/die/th_yinfuren.mp3",
 			"extension/Thunder/audio/die/th_zhangfen.mp3",
 			"extension/Thunder/audio/die/th_zhangxuan.mp3",
+			"extension/Thunder/audio/die/th_zhuhuan.mp3",
 			"extension/Thunder/audio/skill/liuli_th_daxiaoqiao1.mp3",
 			"extension/Thunder/audio/skill/liuli_th_daxiaoqiao2.mp3",
 			"extension/Thunder/audio/skill/liuli_th_tw_daxiaoqiao1.mp3",
@@ -2617,6 +2618,8 @@ window["noname_android_extension"] = {
 			"extension/Thunder/audio/skill/th_enyuan2.mp3",
 			"extension/Thunder/audio/skill/th_fanyin1.mp3",
 			"extension/Thunder/audio/skill/th_fanyin2.mp3",
+			"extension/Thunder/audio/skill/th_fenli1.mp3",
+			"extension/Thunder/audio/skill/th_fenli2.mp3",
 			"extension/Thunder/audio/skill/th_fenming1.mp3",
 			"extension/Thunder/audio/skill/th_fenming2.mp3",
 			"extension/Thunder/audio/skill/th_guili1.mp3",
@@ -2667,6 +2670,8 @@ window["noname_android_extension"] = {
 			"extension/Thunder/audio/skill/th_peiqi2.mp3",
 			"extension/Thunder/audio/skill/th_piaoping1.mp3",
 			"extension/Thunder/audio/skill/th_piaoping2.mp3",
+			"extension/Thunder/audio/skill/th_pingkou1.mp3",
+			"extension/Thunder/audio/skill/th_pingkou2.mp3",
 			"extension/Thunder/audio/skill/th_qianxi1.mp3",
 			"extension/Thunder/audio/skill/th_qianxi2.mp3",
 			"extension/Thunder/audio/skill/th_qianxin1.mp3",
@@ -2796,6 +2801,7 @@ window["noname_android_extension"] = {
 			"extension/Thunder/image/character/th_zhangxuan.jpg",
 			"extension/Thunder/image/character/th_zhangxun.jpg",
 			"extension/Thunder/image/character/th_zhugeshang.jpg",
+			"extension/Thunder/image/character/th_zhuhuan.jpg",
 			"extension/Thunder/image/effect/buy_dlg.png",
 			"extension/Thunder/image/effect/common.png",
 			"extension/Thunder/image/effect/dialog1.png",
@@ -2865,7 +2871,7 @@ window["noname_android_extension"] = {
 			"extension/Thunder/image/stand/zhaoxiang/芳芷飒敌.png",
 			"extension/Thunder/image/stand/zhoufei/晴空暖鸢.png"
 		],
-		"size": "32.01MB"
+		"size": "32.81MB"
 	},
 	"大乱桌斗": {
 		"version": "2.1.3",
@@ -2876,7 +2882,6 @@ window["noname_android_extension"] = {
 			"extension/大乱桌斗/extension.js",
 			"extension/大乱桌斗/super_smash_tabletop.png",
 			"extension/大乱桌斗/update.js",
-			"extension/大乱桌斗/updateFiles.js",
 			"extension/大乱桌斗/card/sst_standard.js",
 			"extension/大乱桌斗/character/sst_extra.js",
 			"extension/大乱桌斗/character/sst_standard.js",

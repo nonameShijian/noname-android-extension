@@ -1,25 +1,24 @@
 // @ts-check
 (() => ({
 	// 扩展版本
-	version: "3.32",
+	version: "3.33",
 
 	// 扩展的上一个版本
-	oldversion: "3.31",
+	oldversion: "3.32",
 
 	// 更新内容汇总
 	changeLog: `
-	-【全惠解】更新
-	-现在使用觉醒框UI的武将，ai选技能时不会选择带有combo标签的技能（顺便给哀尘加了combo标签）
-	-修复【尹夫人】在没牌时也可以发动拥嬖的bug
-	-觉醒框UI现在在侦测到没装十周年UI时会上浮，避免遮住确定按钮
-	-修复部分使用卡牌美化的人无法正常使用移动卡牌的UI补丁的bug
+	-修复全惠解觉醒后不选择技能没有摸牌的bug
+	-修复牛辅崩上限后计数累加的bug
+	-修复牛辅崩上限能崩死自己的bug
+	-新武将界朱桓
     `,
 
 	// 本次更新的所有文件(不包括文件夹)
 	updateFiles: [
 		"extension.js",
 		"thunder.css",
-		"audio/die/th_re_taishici.mp3", "audio/die/th_quanhuijie.mp3", "audio/skill/th_jixu1.mp3", "audio/skill/th_jixu2.mp3", "audio/skill/th_yishu1.mp3", "audio/skill/th_yishu2.mp3", "audio/skill/th_ligong1.mp3", "audio/skill/th_ligong2.mp3", "audio/skill/th_huishu1.mp3", "audio/skill/th_huishu2.mp3"
+		"audio/die/th_zhuhuan.mp3", "audio/skill/th_fenli1.mp3", "audio/skill/th_fenli2.mp3", "audio/skill/th_pingkou1.mp3", "audio/skill/th_pingkou2.mp3", "image/character/th_zhuhuan.jpg",
 	],
 	// 扩展内所有文件(不包括文件夹)
 	allFiles: [
@@ -63,6 +62,6 @@
 		"image/character/th_old_re_xushu.jpg", "image/character/th_qinyilu.jpg", "image/character/th_quanhuijie.jpg", "image/character/th_re_guohuanghou.jpg", "image/character/th_re_handang.jpg",
 		"image/character/th_re_jushou.jpg", "image/character/th_re_liufeng.jpg", "image/character/th_re_mazhong.jpg", "image/character/th_re_taishici.jpg", "image/character/th_re_xushu.jpg", "image/character/th_shiyan.jpg", "image/character/th_tw_chendong.jpg", "image/character/th_tw_daxiaoqiao.jpg", "image/character/th_tw_jiling.jpg", "image/character/th_tw_madai.jpg", "image/character/th_tw_re_fazheng.jpg", "image/character/th_unknown.jpg", "image/character/th_xin_huanghao.jpg", "image/character/th_yanfuren.jpg", "image/character/th_yanrou.jpg", "image/character/th_yinfuren.jpg", "image/character/th_zhangfen.jpg", "image/character/th_zhangxuan.jpg", "image/character/th_zhangxun.jpg", "image/character/th_zhugeshang.jpg", "image/effect/buy_dlg.png", "image/effect/common.png", "image/effect/dialog1.png", "image/effect/dialog2.png", "image/effect/epic.png", "image/effect/hand.png", "image/effect/init.png", "image/effect/junk.png", "image/effect/legend.png", "image/effect/pub_arrow_down.png", "image/effect/rare.png", "image/effect/skill2.png", "image/effect/skill3.png", "image/effect/skillsel2.png", "image/effect/skillsel3.png", "image/effect/skillsl.png", "image/effect/tenth.png", "image/effect/thunder.jpg", "image/effect/video_host_detail_array.png", "image/head/daxiaoqiao/daxiaoqiao.png", "image/head/guanzhang/guanzhang.png", "image/head/old_guanzhang/old_guanzhang.png", "image/head/sp_mifangfushiren/sp_mifangfushiren.png", "image/head/th_daxiaoqiao/th_daxiaoqiao.png", "image/head/th_tw_daxiaoqiao/th_tw_daxiaoqiao.png", "image/head/wangfuzhaolei/wangfuzhaolei.png", "image/head/wolongfengchu/wolongfengchu.png", "image/head/zhaotongzhaoguang/zhaotongzhaoguang.png", "image/stand/caocao/caocao.png", "image/stand/caojinyu/caojinyu.png", "image/stand/caojinyu/惊鸿倩影.png", "image/stand/caomao/caomao.png", "image/stand/caomao/扶剑斥奸.png", "image/stand/dengai/虚拟天团.png", "image/stand/diaochan/diaochan.png", "image/stand/diaochan/战场绝版.png", "image/stand/ganning/ganning.png", "image/stand/guanyu/guanyu.png", "image/stand/haozhao/万军之拒.png", "image/stand/lukai/lukai.png", "image/stand/machao/machao.png", "image/stand/re_caocao/山河常青.png", "image/stand/re_caocao/武将列传.png", "image/stand/re_guanyu/飞龙在天.png", "image/stand/re_machao/骠骑将军.png", "image/stand/re_sunyi/腾龙翻江.png", "image/stand/re_xuzhu/武动乾坤.png", "image/stand/ruanyu/ruanyu.png", "image/stand/ruanyu/墨卷浩瀚.png", "image/stand/shen_lvmeng/风神超迈.png",
 		"image/stand/shen_machao/迅鹜惊雷.png", "image/stand/simahui/教诲不倦.png", "image/stand/tangji/月祈夕愿.png", "image/stand/th_quanhuijie/th_quanhuijie.png", "image/stand/th_zhaoang/th_zhaoang.png", "image/stand/wenyang/wenyang.png", "image/stand/wufan/wufan.png", "image/stand/wufan/夜占兴废.png", "image/stand/xiahouba/xiahouba.png", "image/stand/zhangchangpu/战场绝版.png", "image/stand/zhaoxiang/zhaoxiang.png", "image/stand/zhaoxiang/军中戏趣.png", "image/stand/zhaoxiang/含泪桃花.png", "image/stand/zhaoxiang/带军卫蜀.png", "image/stand/zhaoxiang/思亲念志.png", "image/stand/zhaoxiang/策马奔腾.png", "image/stand/zhaoxiang/芳芷飒敌.png", "audio/die/th_re_taishici.mp3", "audio/die/th_quanhuijie.mp3", "audio/skill/th_jixu1.mp3", "audio/skill/th_jixu2.mp3", "audio/skill/th_yishu1.mp3", "audio/skill/th_yishu2.mp3", "audio/skill/th_ligong1.mp3", "audio/skill/th_ligong2.mp3", "audio/skill/th_huishu1.mp3", "audio/skill/th_huishu2.mp3",
-		"image/stand/zhoufei/晴空暖鸢.png"]
+		"image/stand/zhoufei/晴空暖鸢.png", "audio/die/th_zhuhuan.mp3", "audio/skill/th_fenli1.mp3", "audio/skill/th_fenli2.mp3", "audio/skill/th_pingkou1.mp3", "audio/skill/th_pingkou2.mp3", "image/character/th_zhuhuan.jpg",]
 
 }))();
