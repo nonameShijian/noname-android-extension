@@ -41,7 +41,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_robin_male:["male","sst_dark",3,["sst_zuozhan","sst_junce"],["unseen"]],
 			sst_paipai:["male","sst_reality",4,["sst_aoshang","sst_lianxia"],[]],
 			sst_bandana_waddle_dee:["male","sst_spirit",3,["sst_qiangdu","sst_mengchen"],[]],
-			sst_magolor:["male","sst_spirit","1/1/5",["sst_miulu","sst_mofan"],[]],
+			sst_magolor:["male","sst_spirit","1/1/5",["sst_miulu","sst_jifan"],[]],
 			sst_roy:["male","sst_light",4,["sst_nuyan"],[]],
 			sst_sans:["male","sst_spirit",1,["sst_yebao","sst_juexin"],[]],
 			sst_r_o_b:["male","sst_dark",5,["sst_yinbao","sst_zhuxin"],["hiddenSkill"]],
@@ -1749,18 +1749,18 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					maxHandcard:(player,num)=>num+player.countMark("sst_miulu_effect")
 				}
 			},
-			sst_mofan:{
-				global:"sst_mofan_effect",
+			sst_jifan:{
+				global:"sst_jifan_effect",
 				mahouSkill:true,
 				enable:"phaseUse",
 				usable:1,
-				filter:(event,player)=>player.countCards("he")&&!player.hasSkill("sst_mofan_mahou"),
+				filter:(event,player)=>player.countCards("he")&&!player.hasSkill("sst_jifan_mahou"),
 				filterCard:true,
 				selectCard:[1,3],
 				position:"he",
 				content:()=>{
-					player.storage.sst_mofan_mahou=[cards.length,cards.length];
-					player.addTempSkill("sst_mofan_mahou",{player:"die"});
+					player.storage.sst_jifan_mahou=[cards.length,cards.length];
+					player.addTempSkill("sst_jifan_mahou",{player:"die"});
 					game.delayx();
 				},
 				check:card=>{
@@ -1783,23 +1783,23 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						charlotte:true,
 						content:()=>{
 							"step 0"
-							const list=player.storage.sst_mofan_mahou;
+							const list=player.storage.sst_jifan_mahou;
 							list[1]--;
 							if(list[1]==0){
 								event.num=list[0];
-								game.log(player,"的“魔帆”魔法生效");
-								player.removeSkill("sst_mofan_mahou");
-								player.chooseTarget("魔帆：你可以令至多"+get.cnNumber(5-event.num)+"名角色摸"+get.cnNumber(event.num)+"张牌（手牌数大于手牌上限的角色少摸一张牌）",[1,5-event.num]).set("ai",target=>get.attitude(_status.event.player,target));
+								game.log(player,"的“羇帆”魔法生效");
+								player.removeSkill("sst_jifan_mahou");
+								player.chooseTarget("羇帆：你可以令至多"+get.cnNumber(5-event.num)+"名角色摸"+get.cnNumber(event.num)+"张牌（手牌数大于手牌上限的角色少摸一张牌）",[1,5-event.num]).set("ai",target=>get.attitude(_status.event.player,target));
 							}
 							else{
-								game.log(player,"的“魔帆”魔法剩余","#g"+(list[1])+"回合");
-								player.markSkill("sst_mofan_mahou");
+								game.log(player,"的“羇帆”魔法剩余","#g"+(list[1])+"回合");
+								player.markSkill("sst_jifan_mahou");
 								event.finish();
 							}
 							"step 1"
 							if(result.targets&&result.targets.length){
 								event.targets=result.targets.sortBySeat(_status.currentPhase);
-								player.logSkill("sst_mofan",event.targets);
+								player.logSkill("sst_jifan",event.targets);
 							}
 							else{
 								event.finish();
@@ -1822,7 +1822,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						onremove:true,
 						marktext:"♗",
 						intro:{
-							name:"施法：魔帆",
+							name:"施法：羇帆",
 							markcount:storage=>{
 								if(storage) return storage[1];
 								return 0;
@@ -2679,8 +2679,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_miulu2:"谬陆",
 			sst_miulu_effect:"谬陆",
 			sst_miulu_info:"锁定技，若你有护甲，你最多受到1点伤害；每当你失去1点护甲，你明置一张暗置手牌，且本局游戏你的手牌上限+1；你的明置手牌不计入上限。",
-			sst_mofan:"魔帆",
-			sst_mofan_info:"出牌阶段限一次，你可以弃置X张牌并施法：可以令至多5-X名角色摸X张牌（手牌数大于手牌上限的角色少摸一张牌）。",
+			sst_jifan:"羇帆",
+			sst_jifan_info:"出牌阶段限一次，你可以弃置X张牌并施法：可以令至多5-X名角色摸X张牌（手牌数大于手牌上限的角色少摸一张牌）。",
 			sst_nuyan:"怒炎",
 			sst_nuyan_info:"当你使用可以被怒气强化的牌时，你可以弃置一张红色牌强化之，然后若弃置的牌可以造成火焰伤害，你可以对一名角色造成1点火焰伤害。",
 			sst_yebao:"业报",

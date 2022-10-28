@@ -1448,7 +1448,11 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				trigger:{global:"phaseZhunbeiBegin"},
 				filter:(event,player)=>event.player!=player&&event.player.getHp()>=player.getHp()&&5-player.countDisabled(),
 				logTarget:"player",
-				check:(event,player)=>get.attitude(player,event.player)<0,
+				check:(event,player)=>{
+					if(get.attitude(player,event.player)>=0) return false;
+					const cards=player.getCards();
+					return 6-cards.map(card=>get.useful(card)).reduce((previousValue,currentValue)=>previousValue+currentValue,0)/cards.length>0;
+				},
 				content:()=>{
 					"step 0"
 					const evt=event.getParent("phase");
@@ -1727,7 +1731,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					result:{
 						player:player=>{
 							if(_status.event.dying) return get.attitude(player,_status.event.dying);
-							return 1;
+							const cards=player.getCards("hes");
+							return Math.cbrt(5-cards.map(card=>get.value(card)).reduce((previousValue,currentValue)=>previousValue+currentValue,0)/cards.length);
 						}
 					},
 					effect:{
@@ -6590,6 +6595,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						trigger.player.addTempSkill("sst_yufeng_effect");
 						game.delayx();
 					}
+				},
+				ai:{
+					expose:0.1
 				}
 			},
 			sst_yufeng_effect:{
@@ -8185,13 +8193,15 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 0"
 					player.draw(2,"nodelay");
 					"step 1"
-					if(player.countCards("h")>player.getHp()&&player.countCards("hej")>1) player.discardPlayerCard("暴食：弃置"+get.cnNumber(player.countCards("hej")-1)+"张区域内的牌",player,player.countCards("hej")-1,"hej",true).set("ai",button=>{
-						const player=_status.event.player;
-						if(get.position(button.link)=="e"||get.position(button.link)=="j") return 100;
-						if(get.name(button.link)=="du") return 20;
-						if(!lib.filter.cardEnabled(button.link,player)||!lib.filter.cardUsable(button.link,player)) return 10;
-						return 10-player.getUseValue(button.link);
-					}).set("delay",false);
+					if(player.countCards("h")>player.getHp()&&player.countCards("hej")>1){
+						player.discardPlayerCard("暴食：弃置"+get.cnNumber(player.countCards("hej")-1)+"张区域内的牌",player,player.countCards("hej")-1,"hej",true).set("ai",button=>{
+							const player=_status.event.player;
+							if(get.position(button.link)=="e"||get.position(button.link)=="j") return 100;
+							if(get.name(button.link)=="du") return 20;
+							if(!lib.filter.cardEnabled(button.link,player)||!lib.filter.cardUsable(button.link,player)) return 10;
+							return 10-player.getUseValue(button.link);
+						}).set("delay",false);
+					}
 				},
 				ai:{
 					nokeep:true,

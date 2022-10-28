@@ -2296,11 +2296,11 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				clear:true,
 				name:"<details>\
 						<summary>\
-							更新日志（2.1.3）\
+							更新日志（2.1.4）\
 						</summary>\
 						<ol>\
 							<li>\
-								修复了史蒂夫〖探矿〗只能于出牌阶段发动一次的bug。\
+								修复了一些小问题。\
 							</li>\
 						</ol>\
 					</details>",
@@ -2352,11 +2352,11 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1.3",
-			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1.3</rt><rp>）</rp></ruby></h2>\
+			version:"2.1.4",
+			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>2.1.4</rt><rp>）</rp></ruby></h2>\
 				<ol>\
 					<li>\
-						修复了史蒂夫〖探矿〗只能于出牌阶段发动一次的bug。\
+						修复了一些小问题。\
 					</li>\
 				</ol>"
 		},
