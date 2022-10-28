@@ -7,21 +7,26 @@
 @import 'equip.css';
 
 html {
-    background: rgb(60, 60, 60);
+	background: rgb(60, 60, 60);
 }
 
 
 /* #arena>.dialog { */
-	/* display: none; */
+/* display: none; */
 /* } */
 
 body>.background {
-    animation: anime-opacity 1s ease-in-out;
+	animation: anime-opacity 1s ease-in-out;
 }
 
 @keyframes anime-opacity {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
 }
 
 #decadeUI-canvas,
@@ -73,11 +78,11 @@ body>.background {
 }
 
 #arena.phone {
-    top: 2%;
+	top: 2%;
 }
 
 /* #arena.dragging { */
-	/* cursor: default; */
+/* cursor: default; */
 /* } */
 
 #window.leftbar #arena:not(.chess) {
@@ -91,19 +96,19 @@ body>.background {
 }
 
 #arena:not(.chess).decadeUI>#mebg {
-    display: none;
+	display: none;
 }
 
 #arena.decadeUI:not(.single-handcard):not(.chess)>#autonode {
 	display: flex !important;
-    align-items: center;
-    justify-content: center;
-    left: -2% !important;
+	align-items: center;
+	justify-content: center;
+	left: -2% !important;
 	right: -2% !important;
 	bottom: -2% !important;
-    width: auto !important;
+	width: auto !important;
 	height: calc(2% + 180px);
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 }
 
 #autonode>div {
@@ -115,7 +120,7 @@ body>.background {
 	z-index: -1;
 }
 
-#window > #time {
+#window>#time {
 	left: 50px;
 	right: 50px;
 	color: rgb(250, 250, 200);
@@ -126,11 +131,11 @@ body>.background {
 
 #arena>.hand-wrap,
 #arena>.hand-back {
-    left: 143px;
+	left: 143px;
 	right: 170px;
 	width: auto;
-    height: 170px;
-    bottom: 1%;
+	height: 170px;
+	bottom: 1%;
 	transition: none;
 	z-index: 6;
 }
@@ -143,14 +148,14 @@ body>.background {
 
 .discard-zone {
 	width: 100%;
-    height: 10%;
+	height: 10%;
 }
 
 .hand-wrap>.fakeme.avatar {
-    left: -128px;
-    top: auto;
-    right: auto;
-    bottom: 0;
+	left: -128px;
+	top: auto;
+	right: auto;
+	bottom: 0;
 	width: 120px;
 	height: 120px;
 	border-radius: 0;
@@ -184,7 +189,7 @@ body>.background {
 .hand-cards>.handcards>.card {
 	margin: 0px;
 	width: 108px;
-    height: 150px;
+	height: 150px;
 	position: absolute;
 	transition-property: transform, opacity, left, top;
 	z-index: 1;
@@ -196,74 +201,74 @@ body>.background {
 }
 
 .hand-cards>.handcards>.card.selected {
-    border-radius: 2px;
+	border-radius: 2px;
 }
 
 .hand-cards>.handcards>.card.selectable {
-    border-radius: 2px;
+	border-radius: 2px;
 	cursor: pointer;
 }
 
 
 .hand-special {
 	left: auto;
-    right: calc(-1% + 3px);
-    bottom: calc(1% + 150px);
+	right: calc(-1% + 3px);
+	bottom: calc(1% + 150px);
 	width: auto;
-    height: 75px;
-    min-width: 150px;
-    box-shadow: 0 0 6px rgb(200, 150, 80) inset;
-    background: rgba(0, 0, 0, 0.4);
+	height: 75px;
+	min-width: 150px;
+	box-shadow: 0 0 6px rgb(200, 150, 80) inset;
+	background: rgba(0, 0, 0, 0.4);
 }
 
 .hand-special>.cards {
 	display: flex;
 	flex-direction: row-reverse;
 	position: relative;
-    left: 0;
-    top: 0;
-    width: auto;
-    height: auto;
-    zoom: 0.5;
+	left: 0;
+	top: 0;
+	width: auto;
+	height: auto;
+	zoom: 0.5;
 }
 
 .hand-special>.cards>.card {
 	margin-top: 0;
-    margin-left: 0;
-    margin-right: 0;
+	margin-left: 0;
+	margin-right: 0;
 	transform: none !important;
 }
 
-.hand-special>.cards>.card::after { 
-    border-radius: inherit !important;
-    box-shadow: 0px -1px 2px yellow, 0px -1px 5px yellow, 0px 0px 15px yellow;
-    transition: opacity 0.5s;
+.hand-special>.cards>.card::after {
+	border-radius: inherit !important;
+	box-shadow: 0px -1px 2px yellow, 0px -1px 5px yellow, 0px 0px 15px yellow;
+	transition: opacity 0.5s;
 }
 
 
-#arena>.card, 
+#arena>.card,
 #arena.oblongcard:not(.chess)>.card,
 #arena.oblongcard:not(.chess) .handcards>.card {
 	width: 108px;
-    height: 150px;
+	height: 150px;
 }
 
 .button.card {
 	width: 108px;
-    height: 150px;
+	height: 150px;
 	background-size: 100% 100%;
 }
 
 
 .card,
 #window:not(*[data-radius_size='']) .card {
-    border-radius: 2px;
+	border-radius: 2px;
 }
 
 .card,
 .card.decade-card {
 	width: 108px;
-    height: 150px;
+	height: 150px;
 	box-shadow: 0 1px 4px black;
 	border-radius: 2px;
 	background-repeat: no-repeat !important;
@@ -273,7 +278,7 @@ body>.background {
 }
 
 .dui-mobile .card {
-   box-shadow: 0 1px 2px black;
+	box-shadow: 0 1px 2px black;
 }
 
 #arena.decadeUI.selecting:not(.video)>.dialog:not(.noselect) .buttons>.card.button:not(.selectable):not(.noclick):not(.replaceButton) {
@@ -291,16 +296,16 @@ body>.background {
 	font-size: 80px;
 	line-height: 80px;
 	padding-top: 0;
-}    
+}
 
 .card.mark>.background {
 	line-height: 100%;
 }
 
 .card>.top-name {
-    left: 14px;
-    top: 10px;
-    width: calc(100% - 15px);
+	left: 14px;
+	top: 10px;
+	width: calc(100% - 15px);
 	color: black;
 	font-size: 20px;
 	font-family: shousha;
@@ -309,7 +314,7 @@ body>.background {
 }
 
 .card.decade-card>.top-name {
-    display: none;
+	display: none;
 }
 
 .card.decade-card>.image {
@@ -321,36 +326,36 @@ body>.background {
 #arena:not(.chess)>.card>.image,
 #arena:not(.chess) .handcards>.card>.image,
 #arena.oblongcard:not(.chess)>.card>.image,
-#arena.oblongcard:not(.chess) .handcards>.card>.image{
-    position: absolute;
-    width: 108px;
-    height: 108px;
-    left:  0;
-    top: auto;
-    right: 0;
-    bottom: 8%;
-    background-position-x: 0;
+#arena.oblongcard:not(.chess) .handcards>.card>.image {
+	position: absolute;
+	width: 108px;
+	height: 108px;
+	left: 0;
+	top: auto;
+	right: 0;
+	bottom: 8%;
+	background-position-x: 0;
 }
 
 
 .card>.suit-num {
 	font-size: 25px;
-    color: black;
-    text-align: center;
+	color: black;
+	text-align: center;
 	top: 10px;
-    left: 5px;
+	left: 5px;
 	width: 25px;
 	height: auto;
 	line-height: 20px;
 	text-shadow: 0 0 3px #ffffff, 0 0 8px #ffffff;
-    letter-spacing: -1px;
-    transform-origin: 0 0;
+	letter-spacing: -1px;
+	transform-origin: 0 0;
 	z-index: 1;
 	-webkit-text-size-adjust: none;
 }
 
 .dui-mobile .card>.suit-num>.suit {
-    font-size: 16px;
+	font-size: 16px;
 }
 
 .card[data-suit='heart']>.suit-num,
@@ -359,8 +364,8 @@ body>.background {
 }
 
 .card>.range {
-    right: 5px;
-    bottom: 5px;
+	right: 5px;
+	bottom: 5px;
 	line-height: 14px;
 	color: black;
 	font-size: 14px;
@@ -372,22 +377,22 @@ body>.background {
 }
 
 .card>.range:empty {
-    display: none;
+	display: none;
 }
 
 .card>.range.card-tag {
 	left: 4px;
-    top: calc(50% + 13px);
+	top: calc(50% + 13px);
 	bottom: auto;
-    right: 4px;
-    width: auto;
-    color: #181818;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    text-shadow: none;
+	right: 4px;
+	width: auto;
+	color: #181818;
+	font-size: 16px;
+	line-height: 24px;
+	text-align: center;
+	text-shadow: none;
 	white-space: normal;
-    background: rgba(230, 210, 166, 0.8);
+	background: rgba(230, 210, 166, 0.8);
 }
 
 .card>.card-mask {
@@ -421,7 +426,7 @@ body>.background {
 	top: 1%;
 	color: rgb(250, 250, 200);
 	font-family: xinwei;
-	text-shadow: rgb(51,51,51) 1px 0 0, rgb(51,51,51) 0 1px 0, rgb(51,51,51) -1px 0 0, rgb(51,51,51) 0 -1px 0;
+	text-shadow: rgb(51, 51, 51) 1px 0 0, rgb(51, 51, 51) 0 1px 0, rgb(51, 51, 51) -1px 0 0, rgb(51, 51, 51) 0 -1px 0;
 	/* background: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black; */
 	z-index: 4;
 }
@@ -452,15 +457,15 @@ body>.background {
 	position: absolute;
 	display: flex;
 	align-items: center;
-    align-content: center;
-    justify-content: center;
+	align-content: center;
+	justify-content: center;
 	top: auto;
 	left: 143px;
-    right: 150px;
+	right: 150px;
 	bottom: calc(20% + 40px);
 	width: auto;
 	height: 42px;
-    font-size: 23px;
+	font-size: 23px;
 	font-family: xinwei;
 	transition: opacity 0.3s;
 	pointer-events: none;
@@ -476,22 +481,22 @@ body>.background {
 
 #arena>#dui-controls.bosslist,
 #arena.choose-character>#dui-controls {
-    bottom: 20px;
+	bottom: 20px;
 }
 
 #arena.dui-mobile:not(.choose-character)>#dui-controls {
-    bottom: calc(23% + 40px);
+	bottom: calc(23% + 40px);
 }
 
 #arena>#dui-controls>.control {
 	flex: 0 0 auto;
 	display: flex;
 	align-items: center;
-    align-content: center;
-    justify-content: center;
+	align-content: center;
+	justify-content: center;
 	position: static;
 	height: calc(100% - 4px);
-    line-height: normal;
+	line-height: normal;
 	margin-left: 5px;
 	margin-right: 5px;
 	text-shadow: none;
@@ -546,10 +551,13 @@ body>.background {
 	font-size: inherit;
 }
 
+#arena.choose-to-move>#dui-controls {
+	top: calc(80%) !important;
+}
 
 /*暂停记录栏*/
 .pausedbg>#sidebar {
-    width: auto;
+	width: auto;
 }
 
 
@@ -592,25 +600,25 @@ body>.background {
 
 .button.character>.showintro.rarity {
 	font-family: yuanli;
-    font-size: 16px;
-    bottom: -25px;
-    left: calc(50% - 25px);
-    top: auto;
-    width: 50px;
-    height: 50px;
-    background-repeat: no-repeat;
-    background-size: contain;
+	font-size: 16px;
+	bottom: -25px;
+	left: calc(50% - 25px);
+	top: auto;
+	width: 50px;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .button.character>.character {
 	display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    bottom: 0;
-    border-radius: inherit;
-    background-position: top;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	bottom: 0;
+	border-radius: inherit;
+	background-position: top;
 	background-image: inherit;
 	background-size: cover;
 	pointer-events: none;
@@ -620,28 +628,9 @@ body>.background {
 #arena[data-outcrop-skin='on'] .button.character>.character {
 	height: 128px;
 	clip-path: url(#solo-clip);
-    -webkit-clip-path: url(#solo-clip);
+	-webkit-clip-path: url(#solo-clip);
 }
 
 #arena>.card>.judge-mark {
 	visibility: hidden;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
