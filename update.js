@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "71.00KB"
+		"size": "69.13KB"
 	},
 	"SJ Settings": {
 		"version": "1.3",
@@ -40,7 +40,7 @@ window["noname_android_extension"] = {
 			"extension/全能搜索/languages/javascript.min.js",
 			"extension/全能搜索/typings/index.d.ts"
 		],
-		"size": "5.43MB"
+		"size": "5.44MB"
 	},
 	"阳光包": {
 		"version": "5.8.21",
@@ -1069,11 +1069,11 @@ window["noname_android_extension"] = {
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp1.jpg",
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp2.jpg"
 		],
-		"size": "104.42MB"
+		"size": "104.43MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.116.1",
-		"version": "1.2.0.220114.14",
+		"nonameVersion": "1.9.116.2",
+		"version": "1.2.0.220114.15",
 		"author": "短歌(寰宇星城, Show-K代更)",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
@@ -1399,6 +1399,10 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/assets/dynamic/skin_shuxiangxiang_HuaYeXinQian.skel",
 			"extension/十周年UI/assets/dynamic/skin_shuxiangxiang_HuaYeXinQian_bg.png",
 			"extension/十周年UI/assets/dynamic/skin_shuxiangxiang_HuaYeXinQian_bg1.png",
+			"extension/十周年UI/assets/dynamic/skin_simashi_JieAoPiNi.atlas",
+			"extension/十周年UI/assets/dynamic/skin_simashi_JieAoPiNi.png",
+			"extension/十周年UI/assets/dynamic/skin_simashi_JieAoPiNi.skel",
+			"extension/十周年UI/assets/dynamic/skin_simashi_JieAoPiNi_bg.png",
 			"extension/十周年UI/assets/dynamic/skin_sundengzhoufei_QueXingXiQing.atlas",
 			"extension/十周年UI/assets/dynamic/skin_sundengzhoufei_QueXingXiQing.png",
 			"extension/十周年UI/assets/dynamic/skin_sundengzhoufei_QueXingXiQing.skel",
@@ -2058,7 +2062,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decorations/identity2_friend.png",
 			"extension/十周年UI/image/decorations/identity2_gameme.png"
 		],
-		"size": "167.10MB"
+		"size": "169.99MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.1",
@@ -2265,7 +2269,7 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/youyuan.ttf",
 			"extension/千幻聆音/zhunyuan.ttf"
 		],
-		"size": "63.15MB"
+		"size": "63.16MB"
 	},
 	"云将": {
 		"version": "8.73.93",

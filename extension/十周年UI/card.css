@@ -132,7 +132,6 @@
     border-radius: 2px;
     border: 1px solid black;
 	pointer-events: none;
-	z-index: 2;
 }
 
 .card>.gaintag.info:empty,
