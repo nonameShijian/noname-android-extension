@@ -2279,18 +2279,16 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 					return targets.sortBySeat(_status.currentPhase);
 				},
-				check:(event,player)=>{
-					let fin=0;
-					lib.skill.sst_guangsuo.logTarget(event).forEach(target=>{
-						if(get.attitude(player,target)>0){
-							fin-=2;
-						}
-						else{
-							fin++;
-						}
-					});
-					return fin>0;
-				},
+				check:(event,player)=>lib.skill.sst_guangsuo.logTarget(event).map(target=>{
+					let att=get.attitude(player,target);
+					if(att<0){
+						att=-Math.sqrt(-att);
+					}
+					else{
+						att=Math.sqrt(att);
+					}
+					return -0.9*att;
+				}).reduce((previousValue,currentValue)=>previousValue+currentValue,0)>0,
 				content:()=>{
 					"step 0"
 					lib.skill.sst_guangsuo.logTarget(trigger).forEach(target=>target.link(true));
@@ -2453,7 +2451,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 								const source=_status.event.getTrigger().player;
 								if(get.attitude(source,player)>=0) return false;
 								const cardValues=player.getGainableCards(source,"he").map(card=>get.value(card));
-								if(_status.event.getRand()>0.05) return 5-cardValues.reduce((previousValue,currentValue)=>previousValue+currentValue,0)/cardValues.length>0;
+								if(Math.random()>0.05) return 5+(source.hasZhuSkill("sst_yujun",player?3:0))-cardValues.reduce((previousValue,currentValue)=>previousValue+currentValue,0)/cardValues.length>0;
 								return false;
 							});
 						}
@@ -5878,7 +5876,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					target.chooseTarget("怪笔：你可以为"+get.translation(trigger.card)+"重新指定目标").set("ai",target=>{
 						const player=_status.event.player;
 						const card=get.card();
-						const val=get.effect(target,card,player,player);
+						let val=get.effect(target,card,player,player);
 						const evt=_status.event.getTrigger();
 						if(evt.targets.map(i=>get.effect(i,card,player,player)).reduce((previousValue,currentValue)=>previousValue+currentValue,0)/evt.targets.length<0) val+=1;
 						return val;
@@ -7827,7 +7825,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_tewu:{
 				intro:{
 					content:"拥有技能〖特武〗的角色对你造成伤害时弃置你一张牌",
-					markcount:()=>0
+					nocount:true
 				},
 				global:"sst_tewu2",
 				trigger:{source:"damageSource"},

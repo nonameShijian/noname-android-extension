@@ -2878,7 +2878,7 @@ window["noname_android_extension"] = {
 		"size": "32.81MB"
 	},
 	"大乱桌斗": {
-		"version": "2.1.4",
+		"version": "2.1.5",
 		"author": "Show-K",
 		"intro": "《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于<i>任天堂</i>、<i>Sora</i>和其他相关公司。",
 		"files": [
