@@ -2066,14 +2066,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								delete player.equiping;
 								return;
 							}
-							if (lib.config.background_audio) {
-								game.playAudio('effect', get.subtype(card));
-							}
-							game.broadcast(function (type) {
+							var subtype = get.subtype(card);
+							if (subtype == 'equip6') subtype = 'equip3';
+							game.broadcastAll(function (type) {
 								if (lib.config.background_audio) {
 									game.playAudio('effect', type);
 								}
-							}, get.subtype(card));
+							}, subtype);
 							player.$equip(card);
 							game.addVideo('equip', player, get.cardInfo(card));
 							game.log(player, '装备了', card);
@@ -2943,21 +2942,21 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					})({});
 
 					var Game = (function (Game) {
-						// Game.bossPhaseLoop = function () {
-						// game.broadcastAll(function(firstAction){
-						// var cur;
-						// for (var i = 0; i < game.players.length; i++) {
-						// cur = game.players[i];
-						// if (!cur.node.seat)
-						// cur.node.seat = decadeUI.element.create('seat', cur);
+						Game.bossPhaseLoop = function () {
+							game.broadcastAll(function (firstAction) {
+								var cur;
+								for (var i = 0; i < game.players.length; i++) {
+									cur = game.players[i];
+									if (!cur.node.seat)
+										cur.node.seat = decadeUI.element.create('seat', cur);
 
-						// cur.seat = get.distance(firstAction, cur, 'absolute') + 1;
-						// cur.node.seat.innerHTML = get.cnNumber(cur.seat, true);
-						// }
-						// }, game.boss);
+									cur.seat = get.distance(firstAction, cur, 'absolute') + 1;
+									cur.node.seat.innerHTML = get.cnNumber(cur.seat, true);
+								}
+							}, game.boss);
 
-						// return this._super.bossPhaseLoop.apply(this, arguments);
-						// };
+							return this._super.bossPhaseLoop.apply(this, arguments);
+						};
 						Game.logv = function (player, card, targets, event, forced, logvid) {
 							var node = ui.create.div('.hidden');
 							node.node = {};
@@ -6103,8 +6102,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 
 						card.$suitnum.$num = decadeUI.element.create(null, card.$suitnum, 'span');
+						card.$suitnum.$num.style.fontFamily = '"STHeiti","SimHei","Microsoft JhengHei","Microsoft YaHei","WenQuanYi Micro Hei",Helvetica,Arial,sans-serif';
 						card.$suitnum.$br = decadeUI.element.create(null, card.$suitnum, 'br');
 						card.$suitnum.$suit = decadeUI.element.create('suit', card.$suitnum, 'span');
+						card.$suitnum.$suit.style.fontFamily = '"STHeiti","SimHei","Microsoft JhengHei","Microsoft YaHei","WenQuanYi Micro Hei",Helvetica,Arial,sans-serif';
 						card.$equip.$suitnum = decadeUI.element.create(null, card.$equip, 'span');
 						card.$equip.$name = decadeUI.element.create(null, card.$equip, 'span');
 
@@ -8070,10 +8071,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						}, timestamp);
 					},
 					resize: function () {
-						if (decadeUI.isMobile())
+						if (decadeUI.isMobile()) {
 							ui.arena.classList.add('dui-mobile');
-						else
+							ui.window.classList.add('dui-mobile');
+						}
+						else {
 							ui.arena.classList.remove('dui-mobile');
+							ui.window.classList.remove('dui-mobile');
+						}
 
 						var set = decadeUI.dataset;
 						set.animSizeUpdated = false;
@@ -10118,14 +10123,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.15（Show-K修复版）',
-					'更新日期：2022-10-28',
-					'- 新增动皮及背景：[司马师-桀骜睥睨]。',
-					'- 修复了牌名辅助显示被遮挡的异常。',
-					'- 修复了国战模式势力标记选项中缺少“野”的异常。',
-					'- 修复了chooseToMove时确定按钮过于偏上的异常。',
-					'- 修复了单独播放副将的骨骼动画时会影响到主将的异常（感谢 雷 的帮助）',
-					'- 修复了拥有动态皮肤的武将处于隐匿状态时依旧展示动态皮肤的异常（感谢 雷 的帮助）',
+					'当前版本：1.2.0.220114.16（Show-K修复版）',
+					'更新日期：2022-11-12',
+					'- 修复了处于隐匿状态的武将的静态武将图片不显示的异常。',
+					'- 修复了手机端牌堆查看等界面花色图案过大的异常。',
+					'- 修复了因其他字体的点数花色导致破坏十周年UI卡牌点数花色布局的异常。',
+					'- 修复了使用equip6牌无声音的异常。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10145,7 +10148,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.15",
+			version: "1.2.0.220114.16",
 		},
 		files: {
 			"character": [],

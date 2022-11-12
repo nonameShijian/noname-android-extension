@@ -1966,7 +1966,7 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 					player: 1,
 				},
 			},
-		},
+		}
 	};
 
 	decadeUI.inheritSkill = {
@@ -2286,19 +2286,17 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 				}
 			},
 
-		},
+		}
+	};
+
+	for (var key in decadeUI.skill) {
+		if (lib.skill[key]) lib.skill[key] = decadeUI.skill[key];
 	}
 
-	if (!_status.connectMode) {
-		for (var key in decadeUI.skill) {
-			if (lib.skill[key]) lib.skill[key] = decadeUI.skill[key];
-		}
-
-		for (var key in decadeUI.inheritSkill) {
-			if (lib.skill[key]) {
-				for (var j in decadeUI.inheritSkill[key]) {
-					lib.skill[key][j] = decadeUI.inheritSkill[key][j]
-				}
+	for (var key in decadeUI.inheritSkill) {
+		if (lib.skill[key]) {
+			for (var j in decadeUI.inheritSkill[key]) {
+				lib.skill[key][j] = decadeUI.inheritSkill[key][j];
 			}
 		}
 	}

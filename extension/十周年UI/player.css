@@ -523,19 +523,14 @@
 .player.unseen>.primary-avatar,
 .player.unseen2>.deputy-avatar,
 .player.d-skin>.primary-avatar,
-.player.d-skin2>.deputy-avatar {
-	opacity: 0 !important;
-}
-
+.player.d-skin2>.deputy-avatar,
 .player.unseen>.dynamic-wrap,
 .player.unseen2>.dynamic-wrap {
 	opacity: 0;
 }
 
 #arena:not(.observe)>.player[data-position='0'].unseen>.primary-avatar,
-#arena:not(.observe)>.player[data-position='0'].unseen2>.deputy-avatar,
-#arena:not(.observe)>.player[data-position='0'].unseen>.dynamic-wrap,
-#arena:not(.observe)>.player[data-position='0'].unseen2>.dynamic-wrap {
+#arena:not(.observe)>.player[data-position='0'].unseen2>.deputy-avatar {
 	opacity: 0.3;
 }
 
@@ -782,7 +777,7 @@
 	border-radius: 0;
 	width: auto;
 	height: auto;
-	line-height: 18px;
+	line-height: 17px;
 	font-size: 11px;
 	color: white;
 	background-image: none;
@@ -801,7 +796,7 @@
 	padding-bottom: 3px;
 	width: auto;
 	height: auto;
-	line-height: 18px;
+	line-height: 17px;
 	border-radius: 0;
 	font-size: 11px;
 	font-weight: inherit;
