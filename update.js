@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "69.13KB"
+		"size": "71.00KB"
 	},
 	"SJ Settings": {
 		"version": "1.3",
@@ -40,7 +40,7 @@ window["noname_android_extension"] = {
 			"extension/全能搜索/languages/javascript.min.js",
 			"extension/全能搜索/typings/index.d.ts"
 		],
-		"size": "5.44MB"
+		"size": "5.43MB"
 	},
 	"阳光包": {
 		"version": "5.8.21",
@@ -1069,7 +1069,7 @@ window["noname_android_extension"] = {
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp1.jpg",
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp2.jpg"
 		],
-		"size": "104.43MB"
+		"size": "104.42MB"
 	},
 	"十周年UI": {
 		"nonameVersion": "1.9.116.3",
@@ -2061,7 +2061,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decorations/identity2_friend.png",
 			"extension/十周年UI/image/decorations/identity2_gameme.png"
 		],
-		"size": "169.99MB"
+		"size": "170.00MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.1",
@@ -2268,7 +2268,7 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/youyuan.ttf",
 			"extension/千幻聆音/zhunyuan.ttf"
 		],
-		"size": "63.16MB"
+		"size": "63.15MB"
 	},
 	"云将": {
 		"version": "8.73.93",
@@ -3035,5 +3035,87 @@ window["noname_android_extension"] = {
 			"extension/大乱桌斗/image/decade_extGroupImage/name_sst_spirit.png"
 		],
 		"size": "28.70MB"
+	},
+	"合纵抗秦": {
+		"version": "1.7",
+		"author": "烟雨墨染&苏婆玛丽奥",
+		"intro": "OL的合纵抗秦模式，现在由诗笺维护更新",
+		"files": [
+			"extension/合纵抗秦/baiqi_changsheng.mp3",
+			"extension/合纵抗秦/baiqi_fachu.mp3",
+			"extension/合纵抗秦/baiqi_shashen.mp3",
+			"extension/合纵抗秦/baiqi_wuan.mp3",
+			"extension/合纵抗秦/bubing_changbing.mp3",
+			"extension/合纵抗秦/bubing_fangzhen.mp3",
+			"extension/合纵抗秦/catalogTemplate.txt",
+			"extension/合纵抗秦/chuanguoyuxi.jpg",
+			"extension/合纵抗秦/daqin_baiqi.jpg",
+			"extension/合纵抗秦/daqin_bubing.jpg",
+			"extension/合纵抗秦/daqin_female1.jpg",
+			"extension/合纵抗秦/daqin_female2.jpg",
+			"extension/合纵抗秦/daqin_female3.jpg",
+			"extension/合纵抗秦/daqin_female4.jpg",
+			"extension/合纵抗秦/daqin_female5.jpg",
+			"extension/合纵抗秦/daqin_female6.jpg",
+			"extension/合纵抗秦/daqin_lvbuwei.jpg",
+			"extension/合纵抗秦/daqin_male1.jpg",
+			"extension/合纵抗秦/daqin_male2.jpg",
+			"extension/合纵抗秦/daqin_male3.jpg",
+			"extension/合纵抗秦/daqin_male4.jpg",
+			"extension/合纵抗秦/daqin_male5.jpg",
+			"extension/合纵抗秦/daqin_male6.jpg",
+			"extension/合纵抗秦/daqin_miyue.jpg",
+			"extension/合纵抗秦/daqin_nushou.jpg",
+			"extension/合纵抗秦/daqin_qibing.jpg",
+			"extension/合纵抗秦/daqin_shangyang.jpg",
+			"extension/合纵抗秦/daqin_tongpao.mp3",
+			"extension/合纵抗秦/daqin_yingzheng.jpg",
+			"extension/合纵抗秦/daqin_zhangyi.jpg",
+			"extension/合纵抗秦/daqin_zhaogao.jpg",
+			"extension/合纵抗秦/daqin_zhaoji.jpg",
+			"extension/合纵抗秦/extension.css",
+			"extension/合纵抗秦/extension.js",
+			"extension/合纵抗秦/lvbuwei_baixiang.mp3",
+			"extension/合纵抗秦/lvbuwei_chunqiu.mp3",
+			"extension/合纵抗秦/lvbuwei_jugu.mp3",
+			"extension/合纵抗秦/lvbuwei_qihuo.mp3",
+			"extension/合纵抗秦/lvbuwei_zhongfu.mp3",
+			"extension/合纵抗秦/miyue_taihou.mp3",
+			"extension/合纵抗秦/miyue_yintui.mp3",
+			"extension/合纵抗秦/miyue_youmie.mp3",
+			"extension/合纵抗秦/miyue_zhangzheng.mp3",
+			"extension/合纵抗秦/nushou_jinnu.mp3",
+			"extension/合纵抗秦/qibing_changjian.mp3",
+			"extension/合纵抗秦/qibing_liangju.mp3",
+			"extension/合纵抗秦/qinnu.jpg",
+			"extension/合纵抗秦/shangyangbianfa.jpg",
+			"extension/合纵抗秦/shangyang_bianfa.mp3",
+			"extension/合纵抗秦/shangyang_kencao.mp3",
+			"extension/合纵抗秦/shangyang_limu.mp3",
+			"extension/合纵抗秦/skillAi.js",
+			"extension/合纵抗秦/tongpao_bagua.png",
+			"extension/合纵抗秦/tongpao_baiyin.png",
+			"extension/合纵抗秦/tongpao_renwang.png",
+			"extension/合纵抗秦/tongpao_tengjia.png",
+			"extension/合纵抗秦/updateContent",
+			"extension/合纵抗秦/yingzheng_fenshu.mp3",
+			"extension/合纵抗秦/yingzheng_shihuang.mp3",
+			"extension/合纵抗秦/yingzheng_yitong.mp3",
+			"extension/合纵抗秦/yingzheng_zulong.mp3",
+			"extension/合纵抗秦/zhangyi_lianheng.mp3",
+			"extension/合纵抗秦/zhangyi_qiaoshe.mp3",
+			"extension/合纵抗秦/zhangyi_xichu.mp3",
+			"extension/合纵抗秦/zhangyi_xiongbian.mp3",
+			"extension/合纵抗秦/zhaogao_aili.mp3",
+			"extension/合纵抗秦/zhaogao_gaizhao.mp3",
+			"extension/合纵抗秦/zhaogao_haizhong.mp3",
+			"extension/合纵抗秦/zhaogao_zhilu.mp3",
+			"extension/合纵抗秦/zhaoji_daqi.mp3",
+			"extension/合纵抗秦/zhaoji_huoluan.mp3",
+			"extension/合纵抗秦/zhaoji_shanwu.mp3",
+			"extension/合纵抗秦/zhaoji_xianji.mp3",
+			"extension/合纵抗秦/zhenlongchangjian.jpg"
+		],
+		"size": "4.99MB"
 	}
 };
