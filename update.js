@@ -2064,7 +2064,7 @@ window["noname_android_extension"] = {
 		"size": "170.00MB"
 	},
 	"千幻聆音": {
-		"version": "4.0.1",
+		"version": "4.0.2",
 		"author": "寰宇星城",
 		"intro": "换肤换音扩展，提供美化的武将个人资料页功能",
 		"files": [

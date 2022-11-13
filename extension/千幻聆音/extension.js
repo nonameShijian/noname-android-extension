@@ -17,6 +17,37 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
         var regex = /(<([^>]+)>)/ig;
         return str.replace(regex,"");
     };
+    lib.qhly_getSkillKeyWordColorList=function(){
+        if(!lib.config.qhly_keymark)return null;
+        if(lib.config.qhly_keymark.length == 0)return null;
+        var pairs = lib.config.qhly_keymark.split(";");
+        var obj = {};
+        for(var pair of pairs){
+            var us = pair.split(":");
+            if(us[0] && us[1] && us[0].length && us[1].length){
+                obj[us[0]] = us[1];
+            }
+        }
+        return obj;
+    };
+    String.prototype.replaceAll = function(s1, s2) {
+        return this.replace(new RegExp(s1, "gm"), s2);
+    };
+    lib.qhly_keyMark=function(str){
+        if(!lib.config.qhly_keymarkopen)return str;
+        var obj = lib.qhly_getSkillKeyWordColorList();
+        if(!obj)return str;
+        for(var k in obj){
+            var v = obj[k];
+            if(k.indexOf("#") == 0){
+                var k2 = k.slice(1);
+                str = str.replaceAll(k2,"<b style='color:"+v+"'>"+k2+"</b>");
+            }else{
+                str = str.replace(k,"<b style='color:"+v+"'>"+k+"</b>");
+            }
+        }
+        return str;
+    };
     game.qhly_earseExt=function(path){
         if(!path)return null;
         var foundDot = path.lastIndexOf('.');
@@ -2879,7 +2910,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                         }
                         this.cancelClick = Math.abs(this.offset - this.tempoffset) > 50;
                         this.content.style.left = Math.round(this.tempoffset)+"px";
-                        this.offset = this.tempoffset;
+                        if(this.tempoffset)this.offset = this.tempoffset;
                     }else{
                         this.cancelClick = false;
                     }
@@ -3754,7 +3785,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                     }
                                 }
                                 content += '>';
-                                content += detail;
+                                content += lib.qhly_keyMark(detail);
                                 content += "</span>";
                                 if(dynamicTranslate){
                                     content += "<br><br><span style='color:orange;'>";
@@ -3838,7 +3869,7 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
                                     }
                                 }
                                 content += "'>";
-                                content += detail;
+                                content += lib.qhly_keyMark(detail);
                                 content += "</span>";
                                 if(dynamicTranslate){
                                     content += "<br><br><span style='color:orange;'>";
@@ -6634,6 +6665,32 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
             game.saveConfig('qhly_skillingame',item);
         }
     },
+    "qhly_keymarkopen":{
+        "name":"技能关键字高亮",
+        "intro":"打开此选项后，技能中相关关键字将会被高亮。",
+        "init":lib.config.qhly_keymarkopen === undefined ? false : lib.config.qhly_keymarkopen,
+        onclick:function(item){
+            game.saveConfig('extension_千幻聆音_qhly_keymarkopen',item);
+            game.saveConfig('qhly_keymarkopen',item);
+            if(item){
+                var ori = lib.config.qhly_keymark;
+                if(!ori){
+                    ori = "锁定技:blue;限定技:orange;觉醒技:red;使命技:gold;#出牌阶段:#00FF00;#摸牌阶段:#00FF00;#弃牌阶段:#00FF00;#准备阶段:#00FF00;#结束阶段:#00FF00;";
+                }
+                game.qhly_editDialog("关键字高亮设置","#开头为全部高亮，否则为首次出现高亮。",ori,function(value,dialog){
+                    value = value.replaceAll("：",":");
+                    value = value.replaceAll("；",";");
+                    value = value.replaceAll("\n","");
+                    value = value.replaceAll("\r","");
+                    value = value.replaceAll(" ","");
+                    game.saveConfig("qhly_keymark",value);
+                    dialog.delete();
+                },function(dialog){
+                    return true;
+                });
+            }
+        }
+    },
     "qhly_yinxiaoshezhi":{
         "name":"<font size='5' color='blue'>音效设置》</font>",
         "clear":true,
@@ -6930,5 +6987,5 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
     author:"玄武江湖工作室",
     diskURL:"",
     forumURL:"",
-    version:"4.0.1",
+    version:"4.0.2",
 },files:{"character":[],"card":[],"skill":[]}}})
