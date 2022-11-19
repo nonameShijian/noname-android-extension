@@ -40,7 +40,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_robin_female:["female","sst_dark",3,["sst_zuozhan","sst_junce"],["unseen"]],
 			sst_robin_male:["male","sst_dark",3,["sst_zuozhan","sst_junce"],["unseen"]],
 			sst_paipai:["male","sst_reality",4,["sst_aoshang","sst_lianxia"],[]],
-			sst_bandana_waddle_dee:["male","sst_spirit",3,["sst_qiangdu","sst_mengchen"],[]],
+			sst_bandana_waddle_dee:["male","sst_spirit",3,["sst_zhoudu","sst_mengchen"],[]],
 			sst_magolor:["male","sst_spirit","1/1/5",["sst_miulu","sst_jifan"],[]],
 			sst_roy:["male","sst_light",4,["sst_nuyan"],[]],
 			sst_sans:["male","sst_spirit",1,["sst_yebao","sst_juexin"],[]],
@@ -52,7 +52,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_inkling_male:["male","sst_light",3,["sst_xumo","sst_pentu"],["unseen","hiddenSkill"]],
 			sst_wii_fit_trainer:["","sst_light",4,["sst_zuoxi"],[]]
 		},
-		characterFilter:{},
+		characterFilter:{
+			sst_claude:()=>{
+				if(_status.connectMode) return lib.config.connect_cards.contains("yingbian");
+				return lib.config.cards.contains("yingbian");
+			}
+		},
 		characterIntro:{
 			/*
 			"武将作者：Yumikohimi<br>\
@@ -508,7 +513,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 0"
 					const name=player.name;
 					const next=game.createEvent("removeCharacter");
-					next.set("player",player);
+					next.player=player;
 					next.toRemove=name;
 					next.setContent(()=>{
 						const name=player.name;
@@ -660,15 +665,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.popup(result.control,"wood");
 						game.log(player,"指定此牌的应变效果为","#y"+result.control);
 						const evt=event.getParent("useCard");
-						if(evt&&evt.name=="useCard"&&!evt.sst_guimou){
-							evt.set("sst_guimou",true);
+						if(evt&&evt.name=="useCard"){
 							const next=game.createEvent("sst_guimou_clear");
 							event.next.remove(next);
 							evt.after.push(next);
-							next.set("player",player);
-							next.set("card",trigger.card);
-							next.set("cardtag",cardtag);
-							next.set("cardtag_temp",result.control.slice(0,-4));
+							next.player=player;
+							next.card=trigger.card;
+							next.cardtag=cardtag;
+							next.cardtag_temp=result.control.slice(0,-4);
 							next.setContent(lib.skill.sst_guimou.contentx);
 						}
 					}
@@ -775,16 +779,16 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					player.removeMark("sst_fuyuan_effect",1,false);
 					if(!player.hasMark("sst_fuyuan_effect")) player.removeSkill("sst_fuyuan_effect");
 					const next=game.createEvent("damage");
-					next.set("player",trigger.player);
-					if(typeof trigger.cards!="undefined") next.set("cards",trigger.cards);
-					if(typeof trigger.card!="undefined") next.set("card",trigger.card);
-					if(typeof trigger.num!="undefined") next.set("num",trigger.num);
-					if(typeof trigger.source!="undefined") next.set("source",trigger.source);
-					if(typeof trigger._triggered!="undefined") next.set("_triggered",trigger._triggered);
-					if(typeof trigger.notrigger!="undefined") next.set("notrigger",trigger.notrigger);
-					if(typeof trigger.nature!="undefined") next.set("nature",trigger.nature);
+					next.player=trigger.player;
+					if(typeof trigger.cards!="undefined") next.cards=trigger.cards;
+					if(typeof trigger.card!="undefined") next.card=trigger.card;
+					if(typeof trigger.num!="undefined") next.num=trigger.num;
+					if(typeof trigger.source!="undefined") next.source=trigger.source;
+					if(typeof trigger._triggered!="undefined") next._triggered=trigger._triggered;
+					if(typeof trigger.notrigger!="undefined") next.notrigger=trigger.notrigger;
+					if(typeof trigger.nature!="undefined") next.nature=trigger.nature;
 					next.setContent("damage");
-					next.set("filterStop",function(){
+					next.filterStop=function(){
 						if(this.source&&this.source.isDead()) delete this.source;
 						if(this.num<=0){
 							delete this.filterStop;
@@ -793,7 +797,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							this._triggered=null;
 							return true;
 						}
-					});
+					};
 				}
 			},
 			sst_doujiang:{
@@ -879,9 +883,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					const next=game.createEvent("sst_gonglie_clear");
 					event.next.remove(next);
 					evt.after.push(next);
-					next.set("player",player);
-					next.set("card",evt.card);
-					next.set("sst_gonglie",trigger.zhuzhanresult);
+					next.player=player;
+					next.card=evt.card;
+					next.sst_gonglie=trigger.zhuzhanresult;
 					next.setContent(lib.skill.sst_gonglie_zhuzhan.contentx);
 				},
 				contentx:()=>{
@@ -948,18 +952,18 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				locked:true,
 				direct:true,
 				trigger:{player:"phaseJieshuBegin"},
-				filter:(event,player)=>player.countCards("h",card=>lib.filter.cardDiscardable(card,player))&&game.countPlayer(current=>current.countCards("ej",card=>{
+				filter:(event,player)=>player.hasCard(card=>lib.filter.cardDiscardable(card,player),"h")&&game.countPlayer(current=>current.hasCard(card=>{
 					if(player.storage.sst_wenxin_alter) return get.color(card)=="red";
 					return true;
-				})),
+				},"ej")),
 				content:()=>{
 					"step 0"
 					const max=game.countPlayer(current=>{
-						if(player.storage.sst_wenxin_alter) return current.countCards("ej",card=>get.color(card)=="red");
+						if(player.storage.sst_wenxin_alter) return current.hasCard(card=>get.color(card)=="red","ej");
 						return current.countCards("ej");
 					});
 					player.chooseToDiscard(get.prompt("sst_wenxin"),get.skillInfoTranslation("sst_wenxin",player),[1,max]).set("ai",card=>{
-						const num=game.countPlayer(current=>current.countCards("ej",card=>{
+						const num=game.countPlayer(current=>current.hasCard(card=>{
 							if(_status.event.player.storage.sst_wenxin_alter&&get.color(card)!="red") return false;
 							const fieldValue=card=>{
 								const player=get.owner(card);
@@ -995,7 +999,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							const val=fieldValue(card);
 							if(get.attitude(_status.event.player,get.owner(card))>0) return -val>0;
 							return val>0;
-						}));
+						},"ej"));
 						if(ui.selected.cards.length>=num) return 0;
 						let val=5-get.useful(card);
 						if(get.color(card)=="black") val+=3;
@@ -1019,30 +1023,30 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							const guohe=(player,target)=>{
 								const att=get.attitude(player,target);
 								if(att>0){
-									if(target.countCards("j",card=>{
+									if(target.hasCard(card=>{
 										if(player.storage.sst_wenxin_alter&&get.color(card)!="red") return false;
 										const cardj=card.viewAs?{name:card.viewAs}:card;
 										return get.effect(target,cardj,target,player)<0;
-									})>0) return 3;
+									},"j")) return 3;
 									const baiyin=target.getEquip("baiyin");
 									if(baiyin&&(player.storage.sst_wenxin_alter?get.color(baiyin)=="red":true)&&target.isDamaged()&&
 										get.recoverEffect(target,player,player)>0) if(target.hp==1&&!target.hujia) return 1.6;
-									if(target.countCards("e",card=>{
+									if(target.hasCard(card=>{
 										if(player.storage.sst_wenxin_alter&&get.color(card)!="red") return false;
 										if(get.position(card)=="e") return get.value(card,target)<0;
-									})>0) return 1;
+									},"e")) return 1;
 								}
 								const es=target.getCards("e",card=>{
 									if(player.storage.sst_wenxin_alter) return get.color(card)=="red";
 									return true;
 								});
 								const noe=(es.length==0||target.hasSkillTag("noe"));
-								const noe2=(es.filter(esx=>get.value(esx,target)>0).length==0);
+								const noe2=!es.some(esx=>get.value(esx,target)>0);
 								if(noe||noe2) return 0;
-								if(att<=0&&!target.countCards("e",card=>{
+								if(att<=0&&!target.hasCard(card=>{
 									if(player.storage.sst_wenxin_alter) return get.color(card)=="red";
 									return true;
-								})) return 1.5;
+								},"e")) return 1.5;
 								return -1.5;
 							};
 							const player=_status.event.player;
@@ -1072,7 +1076,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					event.goto(2);
 					"step 5"
 					player.showHandcards();
-					if(!player.storage.sst_wenxin&&player.countCards()&&!player.countCards("h",card=>get.color(card)!="red")) event.red=true;
+					if(!player.storage.sst_wenxin&&player.countCards()&&!player.hasCard(card=>get.color(card)!="red","h")) event.red=true;
 					"step 6"
 					if(event.black) player.draw(event.black);
 					if(player.storage.sst_wenxin) event.finish();
@@ -1438,7 +1442,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 										const card=event.card;
 										if(get.cardtag(card,"yingbian_gain")){
 											const cardx=event.respondTo;
-											if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD("od").length) event.player.gain(cardx[1].cards.filterInD("od"),"gain2","log");
+											if(cardx&&cardx[1]&&cardx[1].cards&&cardx[1].cards.filterInD("o").length) event.player.gain(cardx[1].cards.filterInD("o"),"gain2","log");
 										}
 										if(get.cardtag(card,"yingbian_hit")){
 											event.directHit.addArray(game.players);
@@ -1554,7 +1558,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				}
 			},
 			//Bandana Waddle Dee
-			sst_qiangdu:{
+			sst_zhoudu:{
 				locked:false,
 				direct:true,
 				mod:{
@@ -1567,7 +1571,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					global:["equipAfter","addJudgeAfter","gainAfter","loseAsyncAfter","addToExpansionAfter"]
 				},
 				filter:(event,player)=>{
-					if(!player.countCards("he")) return false;
+					if(!player.countCards("hes")) return false;
 					const evt=event.getl(player);
 					if(evt){
 						if(event.visible&&evt.hs&&evt.hs.length){
@@ -1590,12 +1594,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				},
 				content:()=>{
 					const next=player.chooseToUse();
-					next.set("prompt",get.prompt("sst_qiangdu"));
+					next.set("prompt",get.prompt("sst_zhoudu"));
 					next.set("prompt2","你可以将一张牌当作【刺枪】使用");
-					next.set("logSkill","sst_qiangdu");
+					next.set("logSkill","sst_zhoudu");
 					next.set("norestore",true);
-					next.set("_backupevent","sst_qiangdux");
-					next.backup("sst_qiangdux");
+					next.set("_backupevent","sst_zhoudux");
+					next.backup("sst_zhoudux");
 					next.set("addCount",false);
 					next.set("custom",{
 						add:{},
@@ -1609,9 +1613,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						}
 					}
 				},
-				group:"sst_qiangdu_init"
+				group:"sst_zhoudu_init"
 			},
-			sst_qiangdu_init:{
+			sst_zhoudu_init:{
 				forced:true,
 				locked:false,
 				trigger:{
@@ -1635,7 +1639,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					game.delayx();
 				}
 			},
-			sst_qiangdux:{
+			sst_zhoudux:{
 				viewAs:{name:"sst_spear_thrust"},
 				filterCard:card=>get.itemtype(card)=="card",
 				position:"hes",
@@ -1716,7 +1720,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					player.addSkill("sst_miulu_effect");
-					if(player.countCards("h",card=>!card.hasGaintag("exposed"))) player.chooseCard("谬陆：明置"+get.cnNumber(-trigger.num)+"张暗置手牌",-trigger.num,card=>!card.hasGaintag("exposed"),true).set("ai",get.value);
+					if(player.hasCard(card=>!card.hasGaintag("exposed"),"h")) player.chooseCard("谬陆：明置"+get.cnNumber(-trigger.num)+"张暗置手牌",-trigger.num,card=>!card.hasGaintag("exposed"),true).set("ai",get.value);
 					"step 1"
 					if(result.cards&&result.cards.length){
 						player.$give(result.cards,player,false);
@@ -1946,6 +1950,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			},
 			sst_yebao_effect:{
 				charlotte:true,
+				locked:true,
 				mark:true,
 				init:player=>{
 					if(!Array.isArray(player.storage.sst_yebao_effect)) player.storage.sst_yebao_effect=[];
@@ -1964,14 +1969,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				},
 				onremove:true,
 				trigger:{global:"phaseEnd"},
-				forced:true,
+				direct:true,
 				content:()=>{
 					for(let i=0;Array.isArray(player.storage.sst_yebao_effect)&&i<player.storage.sst_yebao_effect.length;i++){
 						player.storage.sst_yebao_effect[i]--;
 						if(player.storage.sst_yebao_effect[i]<=0) player.storage.sst_yebao_effect.splice(i--,1);
 						player.markSkill("sst_yebao_effect");
 						if(!player.storage.sst_yebao_effect.length) player.removeSkill("sst_yebao_effect");
-						player.chooseToDiscard("业报：弃置一张牌","he",true);
+						player.chooseToDiscard("业报：弃置一张牌","he",true).set("logSkill","sst_yebao_effect");
 					}
 				}
 			},
@@ -2013,7 +2018,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					maixie:true,
 					maixie_hp:true,
 					maiHp:true,
-					threaten:0.5
+					threaten:0.25
 				},
 				group:"sst_juexin_fail",
 				subSkill:{
@@ -2199,9 +2204,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					let next=game.createEvent("sst_qianlong_use");
 					event.next.remove(next);
 					trigger.next.push(next);
-					next.set("player",player);
-					next.set("cards",event.cards);
-					next.setContent(function(){
+					next.player=player;
+					next.cards=event.cards;
+					next.setContent(()=>{
 						player.lose(cards,ui.special).set("type","use");
 						player.$throw(cards.length);
 					});
@@ -2209,16 +2214,13 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					player.lose(event.cards,ui.special);
 					player.$throw(event.cards.length);
 					"step 1"
-					if(!trigger.sst_qianlong){
-						trigger.set("sst_qianlong",true);
-						const next=game.createEvent("sst_qianlong_clear");
-						event.next.remove(next);
-						trigger.after.push(next);
-						next.set("player",player);
-						next.set("card",trigger.card);
-						next.set("cards",cards);
-						next.setContent(lib.skill.sst_qianlong2.contentx);
-					}
+					const next=game.createEvent("sst_qianlong_clear");
+					event.next.remove(next);
+					trigger.after.push(next);
+					next.player=player;
+					next.card=trigger.card;
+					next.cards=cards;
+					next.setContent(lib.skill.sst_qianlong2.contentx);
 				},
 				contentx:()=>{
 					"step 0"
@@ -2266,12 +2268,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 0"
 					player.chooseTarget(get.prompt2("sst_dieying"),(card,player,target)=>target.countGainableCards(player,"ej")).set("ai",target=>{
 						const shunshou=(player,target)=>{
-							if(get.attitude(player,target)<=0) return (target.countCards("e",card=>get.value(card,target)>0&&card!=target.getEquip("jinhe"))>0)?-1.5:1.5;
-							return (target.countCards("ej",card=>{
+							if(get.attitude(player,target)<=0) return (target.hasCard(card=>get.value(card,target)>0&&card!=target.getEquip("jinhe"),"e")>0)?-1.5:1.5;
+							return (target.hasCard(card=>{
 								if(get.position(card)=="e") return get.value(card,target)<=0;
 								const cardj=card.viewAs?{name:card.viewAs}:card;
 								return get.effect(target,cardj,target,player)<0;
-							})>0)?1.5:-1.5;
+							},"ej"))?1.5:-1.5;
 						};
 						const player=_status.event.player;
 						let att=get.attitude(player,target);
@@ -2322,9 +2324,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.logSkill("sst_shouyin",result.targets);
 						event.target=result.targets[0];
 						event.chooseToUse=event.target.chooseToUse("授音：你可以使用一张"+get.translation(get.type(trigger.card,"trick"))+"牌",function(card){
-							if(get.type2(card)!=get.type2(_status.event.getTrigger().card)) return false;
+							if(get.type2(card)!=get.type2(_status.event.cardx)) return false;
 							return lib.filter.filterCard.apply(this,arguments);
-						}).set("addCount",false);
+						}).set("addCount",false).set("cardx",trigger.card);
 					}
 					else{
 						event.finish();
@@ -2349,26 +2351,26 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:()=>_status.currentPhase.isIn(),
 				logTarget:()=>_status.currentPhase,
 				content:()=>{
-					lib.skill.sst_anzong.logTarget().addSkill("sst_anzong_effect");
+					lib.skill.sst_anzong.logTarget().addSkill(event.name+"_effect");
 					game.delayx();
 				}
 			},
 			sst_anzong_effect:{
 				charlotte:true,
-				init:player=>{
-					player.storage.sst_anzong_effect=player.dieAfter2;
+				init:(player,skill)=>{
+					player.storage[skill]=player.dieAfter2;
 					game.broadcastAll((player,dieAfter2)=>player.dieAfter2=dieAfter2,player,source=>{
 						if(source) source.draw(3);
 					});
 				},
 				mark:true,
 				intro:{
-					content:"杀死你执行的奖惩为：<span style=\"font-family: fzktk\">杀死你的角色摸三张牌</span>",
+					content:"杀死你执行的奖惩为：<span style=\"font-family: LXGWWenKai\">杀死你的角色摸三张牌</span>",
 					markcount:()=>3
 				},
-				onremove:player=>{
-					game.broadcastAll((player,dieAfter2)=>player.dieAfter2=dieAfter2,player,player.storage.sst_anzong_effect);
-					delete player.storage.sst_anzong_effect;
+				onremove:(player,skill)=>{
+					game.broadcastAll((player,dieAfter2)=>player.dieAfter2=dieAfter2,player,player.storage[skill]);
+					delete player.storage[skill];
 				}
 			},
 			//Inkling
@@ -2580,6 +2582,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					失败：以此法展示三次手牌后，此技能改为非使命技，“场上等量的牌”改为“场上等量的红色牌”。";
 			}
 		},
+		characterReplace:{},
 		translate: {
 			//Civil War mode reference
 			_guozhan_marks:"标记",
@@ -2670,9 +2673,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_aoshang_info:"锁定技，你使用的牌不能被点数大于此牌的牌响应且拥有「空巢→回复1点体力」应变效果。",
 			sst_lianxia:"怜下",
 			sst_lianxia_info:"出牌阶段限一次，你可以将一张牌交给一名手牌数小于你的角色，然后手牌数最多的角色依次交给你一张牌（若为你则无需交给牌）。",
-			sst_qiangdu:"枪笃",
-			sst_qiangdu_init:"枪笃",
-			sst_qiangdu_info:"游戏开始时，你将11张【刺枪】加入牌堆；你使用【刺枪】无距离限制；当你的♠牌正面向上离开你的区域后，你可以将一张牌当作【刺枪】使用。",
+			sst_zhoudu:"骤笃",
+			sst_zhoudu_init:"骤笃",
+			sst_zhoudu_info:"游戏开始时，你将11张【刺枪】加入牌堆；你使用【刺枪】无距离限制；当你的♠牌正面向上离开你的区域后，你可以将一张牌当作【刺枪】使用。",
 			sst_mengchen:"盟谌",
 			sst_mengchen_info:"当你受到1点伤害后，你可以与一名角色依次摸一张牌并弃置一张牌，然后其可以使用以此法弃置的牌中的一张牌。",
 			sst_miulu:"谬陆",
@@ -2704,7 +2707,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_shouyin_info:"你使用牌结算后，可以令一名其他角色选择是否使用一张类别相同的牌，若其以此法使用了牌且两张牌目标唯一且相同，你摸一张牌。",
 			sst_anzong:"暗踪",
 			sst_anzong_effect:"暗踪",
-			sst_anzong_info:"隐匿技，锁定技，当你登场时，将杀死当前回合角色执行的奖惩改为：<span style=\"font-family: fzktk\">杀死其的角色摸三张牌</span>。",
+			sst_anzong_info:"隐匿技，锁定技，当你登场时，将杀死当前回合角色执行的奖惩改为：<span style=\"font-family: LXGWWenKai\">杀死其的角色摸三张牌</span>。",
 			sst_xumo:"蓄墨",
 			sst_xumo_info:"隐匿技，锁定技，当你登场时，摸三张牌。",
 			sst_pentu:"喷涂",

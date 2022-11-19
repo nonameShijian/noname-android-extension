@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "71.00KB"
+		"size": "69.13KB"
 	},
 	"SJ Settings": {
 		"version": "1.3",
@@ -40,7 +40,7 @@ window["noname_android_extension"] = {
 			"extension/全能搜索/languages/javascript.min.js",
 			"extension/全能搜索/typings/index.d.ts"
 		],
-		"size": "5.43MB"
+		"size": "5.44MB"
 	},
 	"阳光包": {
 		"version": "5.8.21",
@@ -1069,7 +1069,7 @@ window["noname_android_extension"] = {
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp1.jpg",
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp2.jpg"
 		],
-		"size": "104.42MB"
+		"size": "104.43MB"
 	},
 	"十周年UI": {
 		"nonameVersion": "1.9.116.3",
@@ -2061,7 +2061,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decorations/identity2_friend.png",
 			"extension/十周年UI/image/decorations/identity2_gameme.png"
 		],
-		"size": "170.00MB"
+		"size": "169.99MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.2",
@@ -2877,12 +2877,14 @@ window["noname_android_extension"] = {
 		"size": "32.81MB"
 	},
 	"大乱桌斗": {
-		"version": "2.1.5",
+		"version": "2.1.6",
 		"author": "Show-K",
 		"intro": "《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于<i>任天堂</i>、<i>Sora</i>和其他相关公司。",
 		"files": [
 			"extension/大乱桌斗/extension.css",
 			"extension/大乱桌斗/extension.js",
+			"extension/大乱桌斗/LICENSE",
+			"extension/大乱桌斗/README.md",
 			"extension/大乱桌斗/super_smash_tabletop.png",
 			"extension/大乱桌斗/update.js",
 			"extension/大乱桌斗/card/sst_standard.js",
@@ -3034,7 +3036,7 @@ window["noname_android_extension"] = {
 			"extension/大乱桌斗/image/decade_extGroupImage/name_sst_smash.png",
 			"extension/大乱桌斗/image/decade_extGroupImage/name_sst_spirit.png"
 		],
-		"size": "28.70MB"
+		"size": "27.55MB"
 	},
 	"合纵抗秦": {
 		"version": "1.7",
@@ -3116,6 +3118,6 @@ window["noname_android_extension"] = {
 			"extension/合纵抗秦/zhaoji_xianji.mp3",
 			"extension/合纵抗秦/zhenlongchangjian.jpg"
 		],
-		"size": "4.99MB"
+		"size": "5.00MB"
 	}
 };
