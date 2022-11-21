@@ -18,8 +18,6 @@
 	animation-iteration-count: 1;
 }
 
-
-
 .player::before {
 	/* left: -15px; */
 	/* top: -15px; */
@@ -126,7 +124,6 @@
 #arena:not(.fewplayer):not(*[data-player_height=''])>.player:not(.minskin) {
 	height: 180px !important;
 }
-
 
 /*玩家锁链*/
 .player>.chain {
@@ -614,8 +611,6 @@
 	opacity: 0.3;
 }
 
-
-
 #window:not(*[data-radius_size='']) .player {
 	border-radius: 8px;
 }
@@ -632,7 +627,6 @@
 	margin: 0;
 	text-align: center;
 }
-
 
 /*玩家标记显示-灯笼*/
 .player>.dui-marks {
@@ -874,7 +868,6 @@
 	display: none;
 }
 
-
 .player>.judges>.card>.judge-mark {
 	display: block;
 	position: relative;
@@ -967,7 +960,6 @@
 	display: none !important;
 }
 
-
 /*玩家手牌数显示*/
 .player>.card-count {
 	position: absolute;
@@ -1007,7 +999,6 @@
 	z-index: -1;
 }
 
-
 /*玩家身份标记*/
 .player>.identity,
 #arena>.player:not(.minskin)>.identity {
@@ -1030,7 +1021,6 @@
 	text-shadow: rgba(255, 120, 0, 1) 0 0 2px, rgba(255, 120, 0, 1) 0 0 5px, rgba(255, 120, 0, 1) 0 0 10px,
 		rgba(255, 120, 0, 1) 0 0 10px, rgba(255, 120, 0, 1) 0 0 20px, rgba(255, 120, 0, 1) 0 0 20px, black 0 0 1px;
 }
-
 
 .player>.identity[data-color='bYe'],
 .player.opposite-camp>.identity {
@@ -1097,9 +1087,6 @@
 /* -webkit-text-stroke: 4px #644A8B; */
 /* } */
 
-
-
-
 /*联机用牌时限*/
 .player>.timerbar {
 	display: block;
@@ -1144,7 +1131,6 @@
 	text-align: center;
 	z-index: 89;
 }
-
 
 /*玩家死亡变灰*/
 .player.dead {

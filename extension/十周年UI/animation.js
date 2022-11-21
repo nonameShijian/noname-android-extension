@@ -1922,4 +1922,3 @@ if (decadeModule) decadeModule.import(function (lib, game, ui, get, ai, _status)
 	window.ui = ui;
 	window._status = _status;
 });
-

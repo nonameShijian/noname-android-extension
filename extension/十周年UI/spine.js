@@ -1941,7 +1941,7 @@ var spine;
 					createImageBitmap(request.response, {
 						premultiplyAlpha: 'none',
 						colorSpaceConversion: 'none'
-					}).then((imageBitmap)=>{
+					}).then((imageBitmap) => {
 						success(imageBitmap);
 					});
 				}
@@ -1965,7 +1965,7 @@ var spine;
 					setTimeout(success, 0, path, _this.assets[path]);
 				return;
 			}
-			
+
 			this.toLoad++;
 			this.downloadBinary(path, function (data) {
 				_this.assets[path] = data;
@@ -1992,7 +1992,7 @@ var spine;
 				setTimeout(success, 0, path, _this.assets[path]);
 				return;
 			}
-			
+
 			this.toLoad++;
 			this.downloadText(path, function (data) {
 				_this.assets[path] = data;
@@ -2022,19 +2022,19 @@ var spine;
 				if (success) setTimeout(success, 0, path, _this.assets[path]);
 				return;
 			}
-			
+
 			this.toLoad++;
 			if (self.Image == undefined || _this.useImageBitmap) {
 				this.downloadImageBitmap(path, function (imageBitmap) {
 					spine.lodedAssets[path] = imageBitmap;
-					
+
 					var texture = _this.textureLoader(imageBitmap);
 					_this.assets[path] = texture;
 					_this.toLoad--;
 					_this.loaded++;
 					if (success)
 						success(path, imageBitmap);
-					
+
 				}, function (status, response) {
 					_this.errors[path] = "Couldn't load texture " + path + ": status " + status + ".";
 					if (error)
@@ -2044,11 +2044,11 @@ var spine;
 				});
 				return;
 			}
-			
+
 			var img = new Image();
 			img.onload = function (ev) {
 				spine.lodedAssets[path] = img;
-				
+
 				var texture = _this.textureLoader(img);
 				_this.assets[path] = texture;
 				_this.toLoad--;
@@ -2976,7 +2976,7 @@ var spine;
 						this.addAfterPosition(p - pathLength_1, world, 0, out, o);
 						continue;
 					}
-					for (;; curve++) {
+					for (; ; curve++) {
 						var length_4 = lengths[curve];
 						if (p > length_4)
 							continue;
@@ -3076,7 +3076,7 @@ var spine;
 					this.addAfterPosition(p - pathLength, world, verticesLength - 4, out, o);
 					continue;
 				}
-				for (;; curve++) {
+				for (; ; curve++) {
 					var length_5 = curves[curve];
 					if (p > length_5)
 						continue;
@@ -3128,7 +3128,7 @@ var spine;
 					segment = 0;
 				}
 				p *= curveLength;
-				for (;; segment++) {
+				for (; ; segment++) {
 					var length_6 = segments[segment];
 					if (p > length_6)
 						continue;
@@ -3957,7 +3957,7 @@ var spine;
 		SkeletonClipping.prototype.clipStart = function (slot, clip) {
 			if (this.clipAttachment != null)
 				return 0;
-			
+
 			this.clipSlot = slot;
 			this.clipAttachment = clip;
 			if (slot) {
@@ -3967,7 +3967,7 @@ var spine;
 			} else {
 				this.clippingPolygon = clip.vertices.concat();
 			}
-			
+
 			var clippingPolygon = this.clippingPolygon;
 			SkeletonClipping.makeClockwise(clippingPolygon);
 			var clippingPolygons = this.clippingPolygons = this.triangulator.decompose(clippingPolygon, this.triangulator.triangulate(clippingPolygon));
@@ -3986,7 +3986,7 @@ var spine;
 		SkeletonClipping.prototype.clipEnd = function () {
 			if (this.clipAttachment == null)
 				return;
-			
+
 			this.clipSlot = null;
 			this.clipAttachment = null;
 			this.clippingPolygons = null;
@@ -4153,7 +4153,7 @@ var spine;
 			output.length = 0;
 			var clippingVertices = clippingArea;
 			var clippingVerticesLast = clippingArea.length - 4;
-			for (var i = 0;; i += 2) {
+			for (var i = 0; ; i += 2) {
 				var edgeX = clippingVertices[i], edgeY = clippingVertices[i + 1];
 				var edgeX2 = clippingVertices[i + 2], edgeY2 = clippingVertices[i + 3];
 				var deltaX = edgeX - edgeX2, deltaY = edgeY - edgeY2;
@@ -4377,7 +4377,7 @@ var spine;
 			var scale = this.scale;
 			var skeletonData = new spine.SkeletonData();
 			skeletonData.name = "";
-			
+
 			var input = new BinaryInput(binary);
 			skeletonData.hash = input.readString();
 			skeletonData.version = input.readString();
@@ -4403,19 +4403,19 @@ var spine;
 				data.shearY = input.readFloat();
 				data.length = input.readFloat() * scale;
 				data.transformMode = SkeletonBinary.TransformModeValues[input.readInt(true)];
-				
+
 				if (nonessential)
 					spine.Color.rgba8888ToColor(data.color, input.readInt32());
 				skeletonData.bones.push(data);
 			}
-			
+
 			n = input.readInt(true);
 			for (var i = 0; i < n; i++) {
 				var slotName = input.readString();
 				var boneData = skeletonData.bones[input.readInt(true)];
 				var data = new spine.SlotData(i, slotName, boneData);
 				spine.Color.rgba8888ToColor(data.color, input.readInt32());
-				
+
 				var darkColor = input.readInt32();
 				if (darkColor != -1)
 					spine.Color.rgb888ToColor(data.darkColor = new spine.Color(), darkColor);
@@ -4423,7 +4423,7 @@ var spine;
 				data.blendMode = SkeletonBinary.BlendModeValues[input.readInt(true)];
 				skeletonData.slots.push(data);
 			}
-			
+
 			n = input.readInt(true);
 			for (var i = 0, nn = void 0; i < n; i++) {
 				var data = new spine.IkConstraintData(input.readString());
@@ -4436,7 +4436,7 @@ var spine;
 				data.bendDirection = input.readByte();
 				skeletonData.ikConstraints.push(data);
 			}
-			
+
 			n = input.readInt(true);
 			for (var i = 0, nn = void 0; i < n; i++) {
 				var data = new spine.TransformConstraintData(input.readString());
@@ -4459,7 +4459,7 @@ var spine;
 				data.shearMix = input.readFloat();
 				skeletonData.transformConstraints.push(data);
 			}
-			
+
 			n = input.readInt(true);
 			for (var i = 0, nn = void 0; i < n; i++) {
 				var data = new spine.PathConstraintData(input.readString());
@@ -4487,12 +4487,12 @@ var spine;
 				skeletonData.defaultSkin = defaultSkin;
 				skeletonData.skins.push(defaultSkin);
 			}
-			
+
 			n = input.readInt(true);
 			for (var i = 0; i < n; i++) {
 				skeletonData.skins.push(this.readSkin(input, skeletonData, false, nonessential));
 			}
-			
+
 			n = this.linkedMeshes.length;
 			for (var i = 0; i < n; i++) {
 				var linkedMesh = this.linkedMeshes[i];
@@ -4507,7 +4507,7 @@ var spine;
 				linkedMesh.mesh.updateUVs();
 			}
 			this.linkedMeshes.length = 0;
-			
+
 			n = input.readInt(true);
 			for (var i = 0; i < n; i++) {
 				var data = new spine.EventData(input.readString());
@@ -4516,12 +4516,12 @@ var spine;
 				data.stringValue = input.readString();
 				skeletonData.events.push(data);
 			}
-			
+
 			n = input.readInt(true);
 			for (var i = 0; i < n; i++) {
 				skeletonData.animations.push(this.readAnimation(input, input.readString(), skeletonData));
 			}
-				
+
 			return skeletonData;
 		};
 		SkeletonBinary.prototype.readSkin = function (input, skeletonData, defaultSkin, nonessential) {
@@ -4537,7 +4537,7 @@ var spine;
 				for (var i = 0, n = input.readInt(true); i < n; i++)
 					skin.constraints.push(skeletonData.pathConstraints[input.readInt(true)]);
 			}
-			
+
 			for (var i = 0, n = input.readInt(true); i < n; i++) {
 				var slotIndex = input.readInt(true);
 				for (var ii = 0, nn = input.readInt(true); ii < nn; ii++) {
@@ -4739,7 +4739,7 @@ var spine;
 			vertices.bones = bonesArray;
 			return vertices;
 		};
-		
+
 		SkeletonBinary.prototype.readFloatArray = function (input, n, scale) {
 			var array = new Array(n);
 			if (scale == 1) {
@@ -4763,7 +4763,7 @@ var spine;
 			var timelines = new Array();
 			var scale = this.scale;
 			var duration = 0;
-			
+
 			var tempColor1 = new spine.Color();
 			var tempColor2 = new spine.Color();
 			for (var i = 0, n = input.readInt(true); i < n; i++) {
@@ -5145,7 +5145,7 @@ var spine;
 		};
 		return BinaryInput;
 	}());
-	
+
 	var SkeletonJson = (function () {
 		function SkeletonJson(attachmentLoader) {
 			this.scale = 1;
@@ -5850,7 +5850,7 @@ var spine;
 		return SkeletonJson;
 	}());
 	spine.SkeletonJson = SkeletonJson;
-	
+
 	var LinkedMesh = (function () {
 		function LinkedMesh(mesh, skin, slotIndex, parent, inheritDeform) {
 			this.mesh = mesh;
@@ -5861,7 +5861,7 @@ var spine;
 		}
 		return LinkedMesh;
 	}());
-	
+
 	var Vertices = (function () {
 		function Vertices(bones, vertices) {
 			if (bones === void 0) { bones = null; }
@@ -8115,8 +8115,8 @@ var spine;
 				v[webgl.M22] = 1;
 				v[webgl.M33] = 1;
 			}
-			
-			Matrix4.prototype.concat = function(other) {
+
+			Matrix4.prototype.concat = function (other) {
 				var i, e, a, b, ai0, ai1, ai2, ai3;
 
 				// Calculate e = a * b
@@ -8133,11 +8133,11 @@ var spine;
 				}
 
 				for (i = 0; i < 4; i++) {
-					ai0=a[i];  ai1=a[i+4];  ai2=a[i+8];  ai3=a[i+12];
-					e[i]    = ai0 * b[0]  + ai1 * b[1]  + ai2 * b[2]  + ai3 * b[3];
-					e[i+4]  = ai0 * b[4]  + ai1 * b[5]  + ai2 * b[6]  + ai3 * b[7];
-					e[i+8]  = ai0 * b[8]  + ai1 * b[9]  + ai2 * b[10] + ai3 * b[11];
-					e[i+12] = ai0 * b[12] + ai1 * b[13] + ai2 * b[14] + ai3 * b[15];
+					ai0 = a[i]; ai1 = a[i + 4]; ai2 = a[i + 8]; ai3 = a[i + 12];
+					e[i] = ai0 * b[0] + ai1 * b[1] + ai2 * b[2] + ai3 * b[3];
+					e[i + 4] = ai0 * b[4] + ai1 * b[5] + ai2 * b[6] + ai3 * b[7];
+					e[i + 8] = ai0 * b[8] + ai1 * b[9] + ai2 * b[10] + ai3 * b[11];
+					e[i + 12] = ai0 * b[12] + ai1 * b[13] + ai2 * b[14] + ai3 * b[15];
 				}
 
 				return this;
@@ -8264,13 +8264,13 @@ var spine;
 			};
 			Matrix4.prototype.translate = function (x, y, z) {
 				var v = this.values;
-				v[12] += v[0] * x + v[4] * y + v[8]  * z;
-				v[13] += v[1] * x + v[5] * y + v[9]  * z;
+				v[12] += v[0] * x + v[4] * y + v[8] * z;
+				v[13] += v[1] * x + v[5] * y + v[9] * z;
 				v[14] += v[2] * x + v[6] * y + v[10] * z;
 				v[15] += v[3] * x + v[7] * y + v[11] * z;
 				return this;
 			};
-			
+
 			Matrix4.prototype.setX = function (x) {
 				var v = this.values;
 				v[12] = v[0] * x;
@@ -8287,7 +8287,7 @@ var spine;
 				v[13] = v[1] * x + v[5] * y;
 				return this;
 			};
-			Matrix4.prototype.setRotate = function(angle, x, y, z) {
+			Matrix4.prototype.setRotate = function (angle, x, y, z) {
 				var v, s, c, len, rlen, nc, xy, yz, zx, xs, ys, zs;
 
 				angle = Math.PI * angle / 180;
@@ -8298,33 +8298,33 @@ var spine;
 
 				if (0 !== x && 0 === y && 0 === z) {
 					if (x < 0) s = -s;
-					
-					v[0] = 1;  v[4] = 0;  v[ 8] = 0;  v[12] = 0;
-					v[1] = 0;  v[5] = c;  v[ 9] =-s;  v[13] = 0;
-					v[2] = 0;  v[6] = s;  v[10] = c;  v[14] = 0;
-					v[3] = 0;  v[7] = 0;  v[11] = 0;  v[15] = 1;
-					
+
+					v[0] = 1; v[4] = 0; v[8] = 0; v[12] = 0;
+					v[1] = 0; v[5] = c; v[9] = -s; v[13] = 0;
+					v[2] = 0; v[6] = s; v[10] = c; v[14] = 0;
+					v[3] = 0; v[7] = 0; v[11] = 0; v[15] = 1;
+
 				} else if (0 === x && 0 !== y && 0 === z) {
 					if (y < 0) s = -s;
-					
-					v[0] = c;  v[4] = 0;  v[ 8] = s;  v[12] = 0;
-					v[1] = 0;  v[5] = 1;  v[ 9] = 0;  v[13] = 0;
-					v[2] =-s;  v[6] = 0;  v[10] = c;  v[14] = 0;
-					v[3] = 0;  v[7] = 0;  v[11] = 0;  v[15] = 1;
+
+					v[0] = c; v[4] = 0; v[8] = s; v[12] = 0;
+					v[1] = 0; v[5] = 1; v[9] = 0; v[13] = 0;
+					v[2] = -s; v[6] = 0; v[10] = c; v[14] = 0;
+					v[3] = 0; v[7] = 0; v[11] = 0; v[15] = 1;
 				} else if (0 === x && 0 === y && 0 !== z) {
 					if (z < 0) s = -s;
-					
-					v[0] = c;  v[4] =-s;  v[ 8] = 0;  v[12] = 0;
-					v[1] = s;  v[5] = c;  v[ 9] = 0;  v[13] = 0;
-					v[2] = 0;  v[6] = 0;  v[10] = 1;  v[14] = 0;
-					v[3] = 0;  v[7] = 0;  v[11] = 0;  v[15] = 1;
+
+					v[0] = c; v[4] = -s; v[8] = 0; v[12] = 0;
+					v[1] = s; v[5] = c; v[9] = 0; v[13] = 0;
+					v[2] = 0; v[6] = 0; v[10] = 1; v[14] = 0;
+					v[3] = 0; v[7] = 0; v[11] = 0; v[15] = 1;
 				} else {
-					len = Math.sqrt(x*x + y*y + z*z);
+					len = Math.sqrt(x * x + y * y + z * z);
 					if (len !== 1) {
-					  rlen = 1 / len;
-					  x *= rlen;
-					  y *= rlen;
-					  z *= rlen;
+						rlen = 1 / len;
+						x *= rlen;
+						y *= rlen;
+						z *= rlen;
 					}
 					nc = 1 - c;
 					xy = x * y;
@@ -8334,19 +8334,19 @@ var spine;
 					ys = y * s;
 					zs = z * s;
 
-					v[ 0] = x*x*nc +  c;
-					v[ 1] = xy *nc + zs;
-					v[ 2] = zx *nc - ys;
-					v[ 3] = 0;
+					v[0] = x * x * nc + c;
+					v[1] = xy * nc + zs;
+					v[2] = zx * nc - ys;
+					v[3] = 0;
 
-					v[ 4] = xy *nc - zs;
-					v[ 5] = y*y*nc +  c;
-					v[ 6] = yz *nc + xs;
-					v[ 7] = 0;
+					v[4] = xy * nc - zs;
+					v[5] = y * y * nc + c;
+					v[6] = yz * nc + xs;
+					v[7] = 0;
 
-					v[ 8] = zx *nc + ys;
-					v[ 9] = yz *nc - xs;
-					v[10] = z*z*nc +  c;
+					v[8] = zx * nc + ys;
+					v[9] = yz * nc - xs;
+					v[10] = z * z * nc + c;
 					v[11] = 0;
 
 					v[12] = 0;
@@ -8357,15 +8357,15 @@ var spine;
 
 				return this;
 			};
-			Matrix4.prototype.rotate = function(angle, x, y, z) {
-			  return this.concat(new spine.webgl.Matrix4().setRotate(angle, x, y, z));
+			Matrix4.prototype.rotate = function (angle, x, y, z) {
+				return this.concat(new spine.webgl.Matrix4().setRotate(angle, x, y, z));
 			};
 			Matrix4.prototype.scale = function (x, y, z) {
 				var v = this.values;
-				v[0] *= x;  v[4] *= y;  v[8]  *= z;
-				v[1] *= x;  v[5] *= y;  v[9]  *= z;
-				v[2] *= x;  v[6] *= y;  v[10] *= z;
-				v[3] *= x;  v[7] *= y;  v[11] *= z;
+				v[0] *= x; v[4] *= y; v[8] *= z;
+				v[1] *= x; v[5] *= y; v[9] *= z;
+				v[2] *= x; v[6] *= y; v[10] *= z;
+				v[3] *= x; v[7] *= y; v[11] *= z;
 				return this;
 			};
 			Matrix4.prototype.copy = function () {
@@ -9409,8 +9409,8 @@ var spine;
 				}
 			};
 
-    
- 
+
+
 			Shader.newColoredTextured = function (context) {
 				var vs = "\n\t\t\t\tattribute vec4 " + Shader.POSITION + ";\n\t\t\t\tattribute vec4 " + Shader.COLOR + ";\n\t\t\t\tattribute vec2 " + Shader.TEXCOORDS + ";\n\t\t\t\tuniform mat4 " + Shader.MVP_MATRIX + ";\n\t\t\t\tvarying vec4 v_color;\n\t\t\t\tvarying vec2 v_texCoords;\n\n\t\t\t\tvoid main () {\n\t\t\t\t\tv_color = " + Shader.COLOR + ";\n\t\t\t\t\tv_texCoords = " + Shader.TEXCOORDS + ";\n\t\t\t\t\tgl_Position = " + Shader.MVP_MATRIX + " * " + Shader.POSITION + ";\n\t\t\t\t}\n\t\t\t";
 				var fs = "\n\t\t\t\t#ifdef GL_ES\n\t\t\t\t\t#define LOWP lowp\n\t\t\t\t\tprecision mediump float;\n\t\t\t\t#else\n\t\t\t\t\t#define LOWP\n\t\t\t\t#endif\n\t\t\t\tvarying LOWP vec4 v_color;\n\t\t\t\tvarying vec2 v_texCoords;\n\t\t\t\tuniform sampler2D u_texture;\n\n\t\t\t\tvoid main () {\n\t\t\t\t\tgl_FragColor = v_color * texture2D(u_texture, v_texCoords);\n\t\t\t\t}\n\t\t\t";
@@ -9974,7 +9974,7 @@ var spine;
 				} else {
 					this.gl = context;
 				}
-				
+
 				this.premultipliedAlpha = false;
 				this.vertexEffect = null;
 				this.tempColor = new spine.Color();
@@ -9996,8 +9996,8 @@ var spine;
 				var scale = this.outcropScale;
 				var angle = this.outcropAngle;
 				var gl = this.gl;
-				
-				var ox = gl.canvas.width  / 2;
+
+				var ox = gl.canvas.width / 2;
 				var oy = gl.canvas.height / 2;
 				var x = this.outcropX;
 				var y = this.outcropY;
@@ -10005,26 +10005,26 @@ var spine;
 					x = ox;
 				if (y == null)
 					y = oy;
-				
+
 				var offsetX = ox - x;
 				var offsetY = oy - y;
 				var t = offsetY + oy - (gl.canvas.height * 0.1);
 				var r = offsetX + ox;
 				var b = offsetY - oy;
 				var l = offsetX - ox;
-				
+
 				t /= scale;
 				r /= scale;
 				b /= scale;
 				l /= scale;
-				
+
 				slotsMask = this.slotsMask;
 				if (slotsMask == null) {
 					slotsMask = this.slotsMask = new spine.ClippingAttachment('outcrop');
 					slotsMask.vertices = new Array(8);
 					slotsMask.worldVerticesLength = slotsMask.vertices.length;
 				}
-				
+
 				var verts = slotsMask.vertices;
 				verts[0] = l; verts[1] = t;
 				verts[2] = l; verts[3] = b;
@@ -10069,7 +10069,7 @@ var spine;
 				var hideSlots = this.hideSlots;
 				if (hideSlots && !Array.isArray(hideSlots))
 					hideSlots = [hideSlots];
-				
+
 				var slotName;
 				var clipSlots;
 				var slotsMask;
@@ -10078,14 +10078,14 @@ var spine;
 					if (clipSlots) {
 						if (!Array.isArray(clipSlots))
 							clipSlots = [clipSlots];
-						
+
 						slotsMask = this.getSlotsMask();
 					}
 				}
-				
+
 				for (var i = 0, n = drawOrder.length; i < n; i++) {
 					var slot = drawOrder[i];
-					
+
 					if (slotRangeStart >= 0 && slotRangeStart == slot.data.index) {
 						inRange = true;
 					}
@@ -10096,7 +10096,7 @@ var spine;
 					if (slotRangeEnd >= 0 && slotRangeEnd == slot.data.index) {
 						inRange = false;
 					}
-					
+
 					var attachment = slot.getAttachment();
 					if (attachment && hideSlots) {
 						slotName = attachment.name;
@@ -10105,7 +10105,7 @@ var spine;
 							continue;
 						}
 					}
-					
+
 					if (attachment && clipSlots) {
 						slotName = attachment.name;
 						if (slotName && clipSlots.indexOf(slotName) != -1) {
@@ -10115,7 +10115,7 @@ var spine;
 							clipper.clipEnd();
 						}
 					}
-					
+
 					var texture = null;
 					var clippedVertexSize = clipper.isClipping() ? 2 : vertexSize;
 					if (attachment instanceof spine.RegionAttachment) {
@@ -10149,7 +10149,7 @@ var spine;
 					} else {
 						clipper.clipEndWithSlot(slot);
 					}
-					
+
 					if (texture != null) {
 						var slotColor = slot.color;
 						var finalColor = this.tempColor;
@@ -10213,7 +10213,7 @@ var spine;
 							var view = renderable.vertices.subarray(0, renderable.numFloats);
 							batcher.draw(texture, view, triangles);
 						}
-						
+
 						clipper.clipEndWithSlot(slot);
 					}
 				}

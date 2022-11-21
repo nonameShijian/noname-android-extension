@@ -14,10 +14,10 @@
 /*击杀特效*/
 .effect-window>.killer-warpper {
 	display: block;
-    left: 100%;
-    top: calc(50% - 180px);
-    width: 240px;
-    height: 360px;
+	left: 100%;
+	top: calc(50% - 180px);
+	width: 240px;
+	height: 360px;
 	animation-name: moveout-left-killer;
 	animation-delay: 0.2s;
 	animation-duration: 2.6s;
@@ -47,8 +47,8 @@
 	width: 100%;
 	height: 100%;
 	background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
+	background-repeat: no-repeat;
+	background-position: top;
 	/* filter: drop-shadow(0 0 30px yellow); */
 	/* -webkit-filter: drop-shadow(0 0 30px yellow); */
 }
@@ -56,7 +56,7 @@
 .effect-window>.victim {
 	display: block;
 	left: 100%;
-    top: calc(50% - 135px);
+	top: calc(50% - 135px);
 	width: 180px;
 	height: 270px;
 	animation-name: moveout-left-victim;
@@ -71,7 +71,6 @@
 	-webkit-filter: drop-shadow(0 0 3px black) grayscale(1);
 }
 
-
 .effect-window>.victim>.back {
 	display: block;
 	position: absolute;
@@ -82,7 +81,7 @@
 }
 
 .effect-window>.victim>.back>.part1,
-.effect-window>.victim>.back>.part2  {
+.effect-window>.victim>.back>.part2 {
 	display: block;
 	position: absolute;
 	left: 0;
@@ -90,8 +89,8 @@
 	width: 100%;
 	height: 100%;
 	background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
+	background-repeat: no-repeat;
+	background-position: top;
 	animation-delay: 1s;
 	animation-duration: 0.6s;
 	animation-fill-mode: forwards;
@@ -111,14 +110,14 @@
 
 .effect-window>.victim>.rout {
 	display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
-	color: rgb(70,15,15);
+	color: rgb(70, 15, 15);
 	font-size: 100px;
 	font-family: xinwei;
 	text-align: center;
@@ -137,30 +136,30 @@
 
 .effect-window>.li {
 	display: block;
-    left: 100%;
-    top: calc(50% - 5px);
-    width: 300px;
-    height: 10px;
-    border-radius: 50% / 50%;
-    background-image: radial-gradient(white, rgb(250,250,100));
-    box-shadow: 0 0 10px rgb(250,250,100), 0 0 20px rgb(250,250,100), 0 0 30px rgb(250,250,100);
+	left: 100%;
+	top: calc(50% - 5px);
+	width: 300px;
+	height: 10px;
+	border-radius: 50% / 50%;
+	background-image: radial-gradient(white, rgb(250, 250, 100));
+	box-shadow: 0 0 10px rgb(250, 250, 100), 0 0 20px rgb(250, 250, 100), 0 0 30px rgb(250, 250, 100);
 	filter: blur(1px);
-    -webkit-filter: blur(1px);
+	-webkit-filter: blur(1px);
 	animation: moveout-left 0.4s forwards;
 	animation-iteration-count: 2;
 }
 
 .effect-window>.li-big {
 	display: block;
-    left: 100%;
-    top: calc(50% - 70px);
-    width: 120%;
-    height: 120px;
+	left: 100%;
+	top: calc(50% - 70px);
+	width: 120%;
+	height: 120px;
 	background: linear-gradient(to right, white, white 70%, transparent);
-    border-radius: 15% / 50%;
+	border-radius: 15% / 50%;
 	filter: blur(10px) drop-shadow(0 0 50px yellow);
-    -webkit-filter: blur(10px) drop-shadow(0 0 50px yellow);
-    animation: moveout-left-li-big 0.8s linear forwards;
+	-webkit-filter: blur(10px) drop-shadow(0 0 50px yellow);
+	animation: moveout-left-li-big 0.8s linear forwards;
 }
 
 .effect-window>.skill-name {
@@ -177,21 +176,20 @@
 	animation: scale-skill-name 2.18s linear forwards;
 }
 
-
 @keyframes moveout-left-killer {
 	0% {
 		left: 100%;
 	}
-	
+
 	10% {
 		left: calc(32% - 120px);
 	}
-	
+
 	60% {
 		left: calc(32% - 120px);
 		opacity: 1;
 	}
-	
+
 	100% {
 		left: calc(32% - 120px);
 		opacity: 0;
@@ -202,16 +200,16 @@
 	0% {
 		left: 100%;
 	}
-	
+
 	6% {
 		left: calc(67% - 90px);
 	}
-	
+
 	60% {
 		left: calc(67% - 90px);
 		opacity: 1;
 	}
-	
+
 	100% {
 		left: calc(67% - 90px);
 		opacity: 0;
@@ -232,7 +230,7 @@
 	0% {
 		transform: translateZ(0);
 	}
-	
+
 	100% {
 		transform: translate(20px, -20px);
 	}
@@ -242,7 +240,7 @@
 	0% {
 		transform: translateZ(0);
 	}
-	
+
 	100% {
 		transform: translate(-20px, 20px);
 	}
@@ -253,6 +251,7 @@
 		opacity: 1;
 		transform: scale(8);
 	}
+
 	100% {
 		opacity: 1;
 		transform: scale(1);
@@ -264,6 +263,7 @@
 		opacity: 1;
 		transform: scale(1);
 	}
+
 	100% {
 		opacity: 0.1;
 		transform: scale(1.8);
@@ -275,44 +275,34 @@
 		opacity: 0;
 		transform: translateX(-50%) scale(5);
 	}
-	
+
 	18% {
 		opacity: 0;
 		transform: translateX(-50%) scale(5);
 	}
-	
+
 	20% {
 		opacity: 1;
 		transform: translateX(-50%) scale(4.5);
 	}
-	
+
 	23% {
 		opacity: 1;
 		transform: translateX(-50%) scale(0.95);
 	}
-	
+
 	27% {
 		opacity: 1;
 		transform: translateX(-50%) scale(1);
 	}
-	
+
 	92% {
 		opacity: 1;
 		transform: translateX(-50%) scale(1);
 	}
-	
+
 	100% {
 		opacity: 0;
 		transform: translateX(-50%) scale(1);
 	}
 }
-
-
-
-
-
-
-
-
-
-

@@ -1254,6 +1254,62 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_bayonetta:"猎天使魔女"
 		},
 		skill:{
+			//System
+			_sst_sex_select:{
+				charlotte:true,
+				superCharlotte:true,
+				trigger:{
+					global:'gameStart',
+					player:['enterGame','showCharacterEnd']
+				},
+				ruleSkill:true,
+				silent:true,
+				firstDo:true,
+				priority:2020,
+				filter:(event,player)=>player.sex=='',
+				content:()=>{
+					'step 0'
+					player.chooseControl('male','female').set('prompt','选择性别').set('ai',()=>['male','female'].randomGet());
+					'step 1'
+					player.sex=result.control;
+					game.broadcast((player,sex)=>player.sex=sex,player,result.control);
+					const name=player.name;
+					const differentAvatar=['sst_corrin','sst_robin','nnk_robin','sst_inkling'];
+					if(differentAvatar.contains(name)) player.setAvatar(name,name+'_'+result.control);
+					game.log(player,'将性别变为了','#y'+get.translation(result.control));
+					const differentGroup={sst_corrin_male:'sst_dark',sst_corrin_female:'sst_light'};
+					if(typeof differentGroup[name+'_'+result.control]=='string') player.changeGroup(differentGroup[name+'_'+result.control]);
+					player.update();
+				}
+			},
+			_sst_group_select:{
+				charlotte:true,
+				superCharlotte:true,
+				trigger:{
+					global:'gameStart',
+					player:['enterGame','showCharacterEnd']
+				},
+				ruleSkill:true,
+				silent:true,
+				firstDo:true,
+				priority:2019,
+				filter:(event,player)=>!get.config('no_group')&&player.group=='sst_smash',
+				content:()=>{
+					'step 0'
+					player.chooseControl('sst_light','sst_dark','sst_spirit','sst_reality').set('prompt','选择势力').set('ai',()=>{
+						if(game.zhu&&game.zhu!=_status.event.player&&get.attitude(_status.event.player,game.zhu)>0&&_status.event.controls.contains(game.zhu.group)) return game.zhu.group;
+						return _status.event.controls.randomGet();
+					});
+					'step 1'
+					player.changeGroup(result.control);
+					player.update();
+				}
+			},
+			braces:{
+				intro:{
+					content:'#'
+				}
+			},
 			//Mario
 			sst_jueyi:{
 				mod:{

@@ -1,22 +1,21 @@
-
 /*选中阴影显示*/
 .card::before {
 	content: '';
-    position: absolute;
-    top: -7px;
+	position: absolute;
+	top: -7px;
 	left: -7px;
 	height: 100%;
-    width: 100%;
+	width: 100%;
 	border-image-source: url('assets/image/card_select.png');
-    border-image-slice: 8 7 7 8;
-    border-style: solid;
-    border-image-width: 8px 7px 7px 8px;
-    border-width: 7px;
+	border-image-slice: 8 7 7 8;
+	border-style: solid;
+	border-image-width: 8px 7px 7px 8px;
+	border-width: 7px;
 	box-shadow: none;
 	border-radius: inherit;
 	opacity: 0;
 	transition: opacity 0.3s linear;
-    z-index: 0;
+	z-index: 0;
 }
 
 .card::after {
@@ -24,7 +23,7 @@
 }
 
 .card.selected::before {
-    opacity: 1;
+	opacity: 1;
 }
 
 
@@ -39,15 +38,15 @@
 
 .card>.animation {
 	position: absolute;
-    width: 100%;
-    height: 100%;
-    line-height: 150px;
+	width: 100%;
+	height: 100%;
+	line-height: 150px;
 	color: black;
 	font-size: 100px;
-    font-family: 'xingkai';
+	font-family: 'xingkai';
 	font-display: swap;
-    text-align: center;
-    text-shadow: 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white;
+	text-align: center;
+	text-shadow: 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white;
 	opacity: 0;
 	pointer-events: none;
 }
@@ -57,17 +56,17 @@
 }
 
 .card>.animation[data-nature='thunder']::before {
-	content:'';
+	content: '';
 	display: block;
-    position: absolute;
+	position: absolute;
 	left: calc(50% - 50px);
 	top: calc(50% - 30px);
 	width: 100px;
-  	height: 60px;
+	height: 60px;
 	text-shadow: 0 0 10px white !important;
-  	background: linear-gradient(to bottom, white, rgba(100,100,255,1) 15%, white 30%, rgba(100,100,255,1) 50%, white 70%, rgba(100,100,255,1) 85%, white);
-  	clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%);
-  	-webkit-clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%);
+	background: linear-gradient(to bottom, white, rgba(100, 100, 255, 1) 15%, white 30%, rgba(100, 100, 255, 1) 50%, white 70%, rgba(100, 100, 255, 1) 85%, white);
+	clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%);
+	-webkit-clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%);
 	transform: scale(1.5);
 	z-index: -1;
 	pointer-events: none;
@@ -75,36 +74,36 @@
 
 .card>.animation-player {
 	display: block;
-    position: absolute;
-    left: -120%;
-    top: -70%;
-    width: 340%;
-    height: 240%;
-    transition: none;
-    pointer-events: none;
-    z-index: 8;
+	position: absolute;
+	left: -120%;
+	top: -70%;
+	width: 340%;
+	height: 240%;
+	transition: none;
+	pointer-events: none;
+	z-index: 8;
 }
 
 /*出牌来源提示*/
 .card>.used-info {
-    opacity: 0;
-    margin: 0px;
-    padding: 0px;
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
-    text-align: center;
+	opacity: 0;
+	margin: 0px;
+	padding: 0px;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	text-align: center;
 	/* background-color: rgba(0, 0, 0, 0.4); */
-	background: linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 20%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0.1) 100%);
-    color: rgb(255, 255, 200);
-    font-size: 17px;
+	background: linear-gradient(to right, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 20%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0.1) 100%);
+	color: rgb(255, 255, 200);
+	font-size: 17px;
 	width: 100%;
 	height: 33%;
 	display: flex;
 	align-items: center;
 	align-content: center;
 	justify-content: center;
-	font-family: 'STHeiti', 'SimHei', 'Microsoft JhengHei', 'Microsoft YaHei', 'WenQuanYi Micro Hei', Helvetica,Arial, sans-serif !important;
+	font-family: 'STHeiti', 'SimHei', 'Microsoft JhengHei', 'Microsoft YaHei', 'WenQuanYi Micro Hei', Helvetica, Arial, sans-serif !important;
 	z-index: 4;
 }
 
@@ -115,22 +114,22 @@
 /*卡牌转换提示*/
 .card>.gaintag.info,
 .card.button>.gaintag.info {
-    left: 4px;
-    top: calc(50% + 38px);
+	left: 4px;
+	top: calc(50% + 38px);
 	bottom: auto;
-    right: 4px;
-    width: auto;
-    color: #181818;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: shousha;
-    line-height: 24px;
-    text-align: center;
-    text-shadow: none;
+	right: 4px;
+	width: auto;
+	color: #181818;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: shousha;
+	line-height: 24px;
+	text-align: center;
+	text-shadow: none;
 	white-space: normal;
-    background: rgba(230, 210, 166, 0.8);
-    border-radius: 2px;
-    border: 1px solid black;
+	background: rgba(230, 210, 166, 0.8);
+	border-radius: 2px;
+	border: 1px solid black;
 	pointer-events: none;
 }
 
@@ -160,7 +159,7 @@
 
 #window[data-card-alternate-name-visible='off'] .card>.name,
 #window[data-card-alternate-name-visible='off'] .card>.range:not(.card-tag) {
-    display: none;
+	display: none;
 }
 
 
@@ -168,21 +167,21 @@
 .card>.temp-name {
 	position: absolute;
 	left: 4px;
-    top: calc(50% - 12px);
-    right: 4px;
-    width: auto;
+	top: calc(50% - 12px);
+	right: 4px;
+	width: auto;
 	height: 24px;
-    color: #181818;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: shousha;
-    line-height: 24px;
-    text-align: center;
-    text-shadow: none;
+	color: #181818;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: shousha;
+	line-height: 24px;
+	text-align: center;
+	text-shadow: none;
 	white-space: normal;
-    background: rgba(228, 207, 166, 0.8);
-    border-radius: 2px;
-    border: 1px solid black;
+	background: rgba(228, 207, 166, 0.8);
+	border-radius: 2px;
+	border: 1px solid black;
 	pointer-events: none
 }
 
@@ -197,21 +196,20 @@
 }
 
 /* .card>.temp-name[data-nature='thunder']::before { */
-	/* content:''; */
-	/* display: block; */
-    /* position: absolute; */
-	/* left: calc(50% - 50px); */
-	/* top: calc(50% - 30px); */
-	/* width: 100px; */
-  	/* height: 60px; */
-	/* text-shadow: 0 0 10px white !important; */
-  	/* background: linear-gradient(to bottom, white, blue 15%, white 30%, blue 50%, white 70%, blue 85%, white);; */
-  	/* clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%); */
-  	/* -webkit-clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%); */
-	/* transform: scale(0.8); */
+/* content:''; */
+/* display: block; */
+/* position: absolute; */
+/* left: calc(50% - 50px); */
+/* top: calc(50% - 30px); */
+/* width: 100px; */
+/* height: 60px; */
+/* text-shadow: 0 0 10px white !important; */
+/* background: linear-gradient(to bottom, white, blue 15%, white 30%, blue 50%, white 70%, blue 85%, white);; */
+/* clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%); */
+/* -webkit-clip-path: polygon(100% 0, 20% 50%, 37% 60%, 0 100%, 80% 50%, 63% 40%); */
+/* transform: scale(0.8); */
 /* } */
 
 .card>.temp-name:empty {
 	display: none;
 }
-

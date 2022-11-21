@@ -41,3 +41,9 @@
 	font-family: 'yuanli';
 	src: local('方正北魏楷书_GBK'), url('../../font/yuanli.ttf');
 }
+
+/*花色*/
+@font-face {
+	font-family: 'Suits';
+	src: local('Noname Suit'), url('../../font/suits.ttf');
+}

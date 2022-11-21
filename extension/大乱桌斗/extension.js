@@ -411,7 +411,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 		},
 		precontent:data=>{
 			if(data.enable){
-				const VERSION="2.1.6";
+				const VERSION="2.1.7";
 				lib.superSmashTabletop=VERSION;
 				//CSS
 				lib.init.css(lib.assetURL+"extension/大乱桌斗","extension");
@@ -455,7 +455,6 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 					return false;
 				};
 				if(!sstlib(VERSION)){
-					const _STATUS={};
 					const LIB={
 						translate:{
 							braces:'｛｝',
@@ -762,78 +761,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								}
 							}
 						},
-						skill:{
-							_sst_sex_select:{
-								charlotte:true,
-								superCharlotte:true,
-								trigger:{
-									global:'gameStart',
-									player:['enterGame','showCharacterEnd']
-								},
-								ruleSkill:true,
-								silent:true,
-								firstDo:true,
-								priority:2020,
-								filter:(event,player)=>player.sex=='',
-								content:()=>{
-									'step 0'
-									player.chooseControl('male','female').set('prompt','选择性别').set('ai',()=>['male','female'].randomGet());
-									'step 1'
-									player.sex=result.control;
-									game.broadcast((player,sex)=>player.sex=sex,player,result.control);
-									const name=player.name;
-									const differentAvatar=['sst_corrin','sst_robin','nnk_robin','sst_inkling'];
-									if(differentAvatar.contains(name)) player.setAvatar(name,name+'_'+result.control);
-									game.log(player,'将性别变为了','#y'+get.translation(result.control));
-									const differentGroup={sst_corrin_male:'sst_dark',sst_corrin_female:'sst_light'};
-									if(typeof differentGroup[name+'_'+result.control]=='string') player.changeGroup(differentGroup[name+'_'+result.control]);
-									player.update();
-								}
-							},
-							_sst_group_select:{
-								charlotte:true,
-								superCharlotte:true,
-								trigger:{
-									global:'gameStart',
-									player:['enterGame','showCharacterEnd']
-								},
-								ruleSkill:true,
-								silent:true,
-								firstDo:true,
-								priority:2019,
-								filter:(event,player)=>!get.config('no_group')&&player.group=='sst_smash',
-								content:()=>{
-									'step 0'
-									player.chooseControl('sst_light','sst_dark','sst_spirit','sst_reality').set('prompt','选择势力').set('ai',()=>{
-										if(game.zhu&&game.zhu!=_status.event.player&&get.attitude(_status.event.player,game.zhu)>0&&_status.event.controls.contains(game.zhu.group)) return game.zhu.group;
-										return _status.event.controls.randomGet();
-									});
-									'step 1'
-									player.changeGroup(result.control);
-									player.update();
-								}
-							},
-							_useAnger_juedou:{
-								ruleSkill:true,
-								charlotte:true,
-								forced:true,
-								popup:false,
-								trigger:{source:'damageBegin1'},
-								filter:(event,player)=>{
-									const evt=event.getParent(2);
-									if(!evt||evt.name!='useCard') return false;
-									if(typeof evt.th_anger!='object') return false;
-									if(typeof evt.th_anger[player.playerid]!='number') return false;
-									return evt.th_anger[player.playerid]!=0;
-								},
-								content:()=>trigger.num+=trigger.getParent(2).th_anger[player.playerid]
-							},
-							braces:{
-								intro:{
-									content:'#'
-								}
-							}
-						},
+						skill:{},
 						groupnature:{
 							sst_light:'metal',
 							sst_dark:'water',
@@ -1028,15 +956,11 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 							}
 						}
 					}
-					install(_status,_STATUS);
 					install(lib,LIB);
 					install(game,GAME);
 					install(ui,UI);
 					install(get,GET);
 					lib.sstlib.version=VERSION;
-					//Attack by Stratagem
-					if(!Array.isArray(_status.mougong_buff)) _status.mougong_buff=[];
-					_status.mougong_buff.addArray(['sha','shan','juedou','huogong','tao']);
 				}
 				//Custom groups
 				if(!Array.isArray(lib.group)) lib.group=[];
@@ -1065,7 +989,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				clear:true,
 				name:"<details>\
 						<summary>\
-							更新日志（"+"2.1.6"+"）\
+							更新日志（"+"2.1.7"+"）\
 						</summary>\
 						<ol>\
 							<li>\
@@ -1121,8 +1045,8 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1.6",
-			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>"+"2.1.6"+"</rt><rp>）</rp></ruby></h2>\
+			version:"2.1.7",
+			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>"+"2.1.7"+"</rt><rp>）</rp></ruby></h2>\
 				<ol>\
 					<li>\
 						修复了一些小问题。\
