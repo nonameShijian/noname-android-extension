@@ -6,15 +6,6 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 	const SST_EXTRA={
 		name:"sst_extra",
 		connect:true,
-		characterSort:{
-			sst_extra:{
-				sst_civil_war:["sst_pyra_mythra","sst_9_volt_18_volt"],
-				sst_response:["sst_claude","sst_geno","sst_duck_hunt","sst_paipai","sst_snake","sst_sheik"],
-				sst_the_use_of_spies:["sst_inkling"],
-				sst_laying_plans:["sst_ness","sst_chrom","sst_lucina","sst_robin","sst_bandana_waddle_dee","sst_sans","sst_wii_fit_trainer"],
-				sst_attack_by_stratagem:["sst_magolor","sst_roy","sst_r_o_b"]
-			}
-		},
 		character:{
 			//Soldier
 			shibing1sst_light:["male","sst_light",0,[],["unseen"]],
@@ -56,6 +47,15 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_claude:()=>{
 				if(_status.connectMode) return lib.config.connect_cards.contains("yingbian");
 				return lib.config.cards.contains("yingbian");
+			}
+		},
+		characterSort:{
+			sst_extra:{
+				sst_civil_war:["sst_pyra_mythra","sst_9_volt_18_volt"],
+				sst_response:["sst_claude","sst_geno","sst_duck_hunt","sst_paipai","sst_snake","sst_sheik"],
+				sst_the_use_of_spies:["sst_inkling"],
+				sst_laying_plans:["sst_ness","sst_chrom","sst_lucina","sst_robin","sst_bandana_waddle_dee","sst_sans","sst_wii_fit_trainer"],
+				sst_attack_by_stratagem:["sst_magolor","sst_roy","sst_r_o_b"]
 			}
 		},
 		characterIntro:{
@@ -316,6 +316,17 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_sheik:"倩影扫弦音",
 			sst_inkling:"瞎喷乱涂",
 			sst_wii_fit_trainer:"修身养性"
+		},
+		perfectPair:{
+			sst_pyra_mythra:["sst_rex"],
+			sst_9_volt_18_volt:["sst_wario"],
+			sst_claude:["sst_byleth_male","sst_byleth_female"],
+			sst_geno:["sst_mario","sst_bowser","sst_peach"],
+			sst_chrom:["sst_marth","sst_lucina","sst_robin"],
+			sst_lucina:["sst_marth","sst_robin"],
+			sst_bandana_waddle_dee:["sst_kirby","sst_meta_knight","sst_king_dedede"],
+			sst_magolor:["sst_kirby","sst_meta_knight","sst_king_dedede","sst_bandana_waddle_dee"],
+			sst_sheik:["sst_zelda"]
 		},
 		skill:{
 			//System
@@ -2653,7 +2664,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			}
 		},
 		characterReplace:{},
-		translate: {
+		translate:{
 			//Civil War mode reference
 			_guozhan_marks:"标记",
 			_guozhan_marks_backup:"标记",
@@ -2830,17 +2841,6 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_sheik:"Sheik",
 			sst_inkling:"Inkling",
 			sst_wii_fit_trainer:"Wii Fit Trainer"
-		},
-		perfectPair:{
-			sst_pyra_mythra:["sst_rex"],
-			sst_9_volt_18_volt:["sst_wario"],
-			sst_claude:["sst_byleth_male","sst_byleth_female"],
-			sst_geno:["sst_mario","sst_bowser","sst_peach"],
-			sst_chrom:["sst_marth","sst_lucina","sst_robin"],
-			sst_lucina:["sst_marth","sst_robin"],
-			sst_bandana_waddle_dee:["sst_kirby","sst_meta_knight","sst_king_dedede"],
-			sst_magolor:["sst_kirby","sst_meta_knight","sst_king_dedede","sst_bandana_waddle_dee"],
-			sst_sheik:["sst_zelda"]
 		},
 		help:{
 			"乱斗EX":"<div style=\"margin:10px\">\
