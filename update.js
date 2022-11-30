@@ -1089,7 +1089,6 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/dynamicWorker.js",
 			"extension/十周年UI/effect.css",
 			"extension/十周年UI/effect.js",
-			"extension/十周年UI/effects.css",
 			"extension/十周年UI/equip.css",
 			"extension/十周年UI/eruda.js",
 			"extension/十周年UI/extension.js",
@@ -2011,7 +2010,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_ye.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "162.84MB"
+		"size": "162.83MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.2",
