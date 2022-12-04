@@ -2522,7 +2522,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							var pe = event.getParent();
 							var pename = pe.name;
 
-							if (be == undefined && pename != 'discard' && event.type != 'discard' && pename != 'loseToDiscardpile' && event.type != 'loseToDiscardpile') {
+							if (be == undefined && (pename != 'discard' || event.type != 'discard') && (pename != 'loseToDiscardpile' || event.type != 'loseToDiscardpile')) {
 								event.animate = false;
 								event.delay = false;
 							} else {
@@ -6220,7 +6220,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						};
 
 					lib.skill._discard = {
-						trigger: { global: ['discardAfter'] },
+						trigger: { global: ['discardAfter', 'loseToDiscardpileAfter', 'loseAsyncAfter'] },
 						forced: true,
 						popup: false,
 						priority: -100,
@@ -10110,7 +10110,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
 					'当前版本：1.2.0.220114.17（Show-K修复版）',
-					'更新日期：2022-11-17',
+					'更新日期：2022-12-05',
 					'- 更新了最新的彩色卡牌。（感谢 七. 的帮助）',
 					'- 优化了所有图片素材。',
 					/*
