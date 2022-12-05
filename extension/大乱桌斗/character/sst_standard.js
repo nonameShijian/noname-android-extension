@@ -3400,28 +3400,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			},
 			//Ridley
 			sst_baozheng:{
-				init:player=>{
-					if(!Array.isArray(player.storage.sst_baozheng)) player.storage.sst_baozheng=[];
-				},
 				trigger:{player:"phaseDrawBegin1"},
 				forced:true,
 				content:()=>{
 					"step 0"
-					const evt=event.getParent("phase");
-					if(evt&&evt.name=="phase"){
-						const next=game.createEvent("sst_baozheng_clear");
-						event.next.remove(next);
-						evt.after.push(next);
-						next.player=player;
-						next.setContent(()=>{
-							if(Array.isArray(player.storage.sst_baozheng)) player.storage.sst_baozheng.length=0;
-						});
-					}
-					"step 1"
 					trigger.changeToZero();
-					"step 2"
+					"step 1"
 					player.loseHp();
-					"step 3"
+					"step 2"
 					if(player.getDamagedHp()){
 						player.chooseTarget(player.getDamagedHp(),true,(card,player,target)=>player!=target&&target.countGainableCards(player,"hej")).set("ai",target=>{
 							const player=_status.event.player;
@@ -3438,8 +3424,18 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					else{
 						event.finish();
 					}
-					"step 4"
+					"step 3"
 					if(result.targets&&result.targets.length){
+						const evt=event.getParent("phase");
+						if(evt&&evt.name=="phase"){
+							const next=game.createEvent("sst_baozheng_clear");
+							event.next.remove(next);
+							evt.after.push(next);
+							next.player=player;
+							next.setContent(()=>{
+								player.removeGaintag("sst_baozheng",player.getCards("hes"));
+							});
+						}
 						event.targets=result.targets.sortBySeat(_status.currentPhase);
 						player.line(event.targets,"green");
 						event.num=0;
@@ -3447,20 +3443,20 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					else{
 						event.finish();
 					}
-					"step 5"
+					"step 4"
 					if(num<targets.length){
 						player.gainPlayerCard(`暴征：获得${get.translation(targets[num])}区域内一张牌`,targets[num],"hej",true);
 					}
 					else{
 						event.finish();
 					}
-					"step 6"
+					"step 5"
 					if(result.cards&&result.cards.length){
-						player.storage.sst_baozheng.addArray(result.cards);
+						player.addGaintag(result.cards,"sst_baozheng");
 						player.addExpose(0.1);
 					}
 					event.num++;
-					event.goto(5);
+					event.goto(4);
 				},
 				ai:{
 					halfneg:true,
@@ -3470,23 +3466,18 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			},
 			sst_baozheng2:{
 				enable:"chooseToUse",
-				filterCard:(card,player)=>{
-					if(!player.storage.sst_baozheng) return false;
-					return player.storage.sst_baozheng.contains(card);
-				},
+				filterCard:card=>card.hasGaintag("sst_baozheng"),
 				position:"hes",
 				viewAs:{name:"sha"},
 				viewAsFilter:player=>{
-					if(!player.storage.sst_baozheng) return false;
-					if(!player.hasCard(card=>player.storage.sst_baozheng.contains(card),"he")) return false;
+					if(!player.hasCard(card=>card.hasGaintag("sst_baozheng"),"hes")) return false;
 				},
 				prompt:"将暴征获得的牌当作杀使用",
 				check:card=>5-get.value(card),
 				ai:{
 					skillTagFilter:(player,tag,arg)=>{
 						if(arg!="use") return false;
-						if(!player.storage.sst_baozheng) return false;
-						if(!player.hasCard(card=>player.storage.sst_baozheng.contains(card),"he")) return false;
+						if(!player.hasCard(card=>card.hasGaintag("sst_baozheng"),"hes")) return false;
 					},
 					respondSha:true
 				}
@@ -8527,7 +8518,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 2"
 					event.card=get.cards()[0];
 					game.cardsGotoOrdering(event.card);
-					player.showCards(event.card,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】（声明了${get.translation(event.control)}）`,0.5);
+					player.showCards(event.card,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】（声明了${get.translation(event.control)}）`).set("delay_time",0.5);
 					player.storage.sst_tankuang.push(event.card);
 					"step 3"
 					if(player.storage.sst_tankuang.length>10){
@@ -9507,7 +9498,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							});
 							if(colors.length<2) return false;
 						},
-						check:card=>5-get.value(card),
+						check:card=>6-get.value(card),
 						precontent:()=>{
 							event.result.skill="sst_fengcu";
 						},
@@ -9542,7 +9533,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							});
 							if(colors.length<2) return false;
 						},
-						check:card=>5-get.value(card),
+						check:card=>6-get.value(card),
 						precontent:()=>{
 							event.result.skill="sst_fengcu";
 						},

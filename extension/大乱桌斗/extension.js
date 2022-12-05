@@ -411,7 +411,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 		},
 		precontent:data=>{
 			if(data.enable){
-				const VERSION="2.1.9";
+				const VERSION="2.1.10";
 				lib.superSmashTabletop=VERSION;
 				//CSS
 				lib.init.css(`${lib.assetURL}extension/大乱桌斗`,"extension");
@@ -520,9 +520,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 									event.card2=card;
 									'step 4'
 									if(event.lose_list.length){
-										game.loseAsync({
-											lose_list:event.lose_list,
-										}).setContent('chooseToCompareLose');
+										event.lose_list.forEach(i=>i[0].lose(i[1],ui.ordering));
 									}
 									if(event.card2) game.cardsGotoOrdering(event.card2);
 									'step 5'
@@ -532,8 +530,14 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 									player.$compare(event.card1,player,event.card2);
 									game.log(player,'的拼点牌为',event.card1);
 									game.log('#b牌堆顶','的拼点牌为',event.card2);
-									event.num1=event.card1.number;
-									event.num2=event.card2.number;
+									const getNum=card=>{
+										for(const i of event.lose_list){
+											if(i[1]==card) return get.number(card,i[0]);
+										}
+										return get.number(card,false);
+									};
+									event.num1=getNum(event.card1);
+									event.num2=getNum(event.card2);
 									event.trigger('compare');
 									game.delay(0,1500);
 									'step 6'
@@ -634,32 +638,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 									return true;
 								},
 								chooseToComparePileTop:function(check){
-									const next=game.createEvent('chooseToCompare');
-									next.set('player',this);
-									if(check){
-										next.set('ai',check);
-									}
-									else{
-										next.set('ai',card=>{
-											if(typeof card=='string'&&lib.skill[card]){
-												const ais=lib.skill[card].check||(()=>0);
-												return ais();
-											}
-											const player=get.owner(card);
-											const getn=card=>{
-												if(player.hasSkill('tianbian')&&get.suit(card)=='heart') return 13;
-												return get.number(card);
-											};
-											const event=_status.event.getParent();
-											let addi=(get.value(card)>=8&&get.type(card)!='equip')?-10:0;
-											if(card.name=='du') addi+=5;
-											return getn(card)-get.value(card)/2+addi;
-										});
-									}
-									next.setContent('chooseToComparePileTop');
-									next.forceDie=true;
-									next._args=Array.from(arguments);
-									return next;
+									return this.chooseToCompare(null,check).setContent('chooseToComparePileTop');
 								},
 								initBraces:function(num,forced){
 									if(this.bracesInited()&&!forced) return;
@@ -989,7 +968,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				clear:true,
 				name:`<details>
 						<summary>
-							更新日志（2.1.9）
+							更新日志（2.1.10）
 						</summary>
 						<ol>
 							<li>
@@ -1045,8 +1024,8 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1.9",
-			changeLog:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>更新日志<rp>（</rp><rt>2.1.9</rt><rp>）</rp></ruby></h2>
+			version:"2.1.10",
+			changeLog:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>更新日志<rp>（</rp><rt>2.1.10</rt><rp>）</rp></ruby></h2>
 				<ol>
 					<li>
 						修复了一些小问题。

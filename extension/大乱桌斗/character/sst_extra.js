@@ -619,7 +619,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					lib.inpile.push("sst_aegises");
 					const card=game.createCard4("sst_aegises","","","",["sst_pyra_mythra"]);
 					player.give(card,target,"give",true);
-					target.addAdditionalSkill("sst_fuxin","sst_fuxin_card",true);
+					target.addAdditionalSkill("sst_fuxin","sst_fuxin_effect",true);
+					player.storage.sst_fuxin_effect.push(card);
 				},
 				ai:{
 					order:1,
@@ -632,12 +633,15 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 				}
 			},
-			sst_fuxin_card:{
+			sst_fuxin_effect:{
+				init:player=>{
+					if(Array.isArray(player.storage.sst_fuxin_effect)) player.storage.sst_fuxin_effect=[];
+				},
 				trigger:{player:"phaseZhunbeiBegin"},
-				filter:(event,player)=>!player.hasCard(card=>get.name(card)=="sst_aegises","hej"),
+				filter:(event,player)=>player.storage.sst_fuxin_effect.length&&!player.hasCard(card=>player.storage.sst_fuxin_effect.contains(card),"hej"),
 				frequent:true,
 				content:()=>{
-					const card=get.cardPile("sst_aegises","field");
+					const card=get.cardPile(card=>player.storage.sst_fuxin_effect.contains(card),"field");
 					if(card) player.gain(card,"gain2");
 				}
 			},
@@ -682,7 +686,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 2"
 					event.card=get.cards()[0];
 					game.cardsGotoOrdering(event.card);
-					player.showCards(event.card,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】（声明了${get.translation(event.control)}）`,0.5);
+					player.showCards(event.card,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】（声明了${get.translation(event.control)}）`).set("delay_time",0.5);
 					"step 3"
 					if(get.suit(card)!=event.control) event.goto(2);
 					player.gain(card,"gain2");
@@ -2717,9 +2721,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_xuanyi:"炫奕",
 			sst_xuanyi_info:"转换技，出牌阶段限一次，你可以与①一名角色②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰②雷电伤害。",
 			sst_fuxin:"付心",
-			sst_fuxin_info:"出牌阶段，你可以移除此武将牌，然后将此武将牌视为攻击范围3的武器牌加入游戏并交给一名其他角色。该角色的准备阶段，若这张牌不在其区域内，其可以检索并获得这张牌。",
-			sst_fuxin_card:"付心",
-			sst_fuxin_card_info:"准备阶段，若【天之圣杯】不在你区域内，你可以检索并获得【天之圣杯】。",
+			sst_fuxin_info:"出牌阶段，你可以移除此武将牌，然后将此武将牌视为攻击范围3的武器牌加入游戏并交给一名其他角色。若如此做，该角色的准备阶段，若这张牌不在其区域内，其可以检索并获得这张牌。",
+			sst_fuxin_effect:"付心",
+			sst_fuxin_effect_info:"准备阶段，若【天之圣杯】不在你区域内，你可以检索并获得【天之圣杯】。",
 			sst_tanfen:"贪分",
 			sst_tanfen_info:"摸牌阶段，若你的手牌数小于手牌上限，你可以放弃摸牌，改为声明一种花色，然后重复亮出并获得牌堆顶的牌，直到你以此法获得了你所声明花色的牌。",
 			sst_sutong:"速通",
