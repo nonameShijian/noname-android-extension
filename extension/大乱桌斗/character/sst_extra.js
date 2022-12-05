@@ -60,241 +60,241 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 		},
 		characterIntro:{
 			/*
-			"武将作者：Yumikohimi<br>\
-				武将作者：mario not mary<br>\
-				武将作者：Show-K<br>\
-				武将作者：南柯<br>\
-				武将作者：Axel_Zhai<br>\
-				武将作者：小时节<br>\
-				插图作者：未知<br>\
-				<hr>\
-				<br>\
-				系列：（）<br>\
-				首次登场：（）<br>\
-				<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				"
+			`武将作者：Yumikohimi<br>
+				武将作者：mario not mary<br>
+				武将作者：Show-K<br>
+				武将作者：南柯<br>
+				武将作者：Axel_Zhai<br>
+				武将作者：小时节<br>
+				插图作者：未知<br>
+				<hr>
+				<br>
+				系列：（）<br>
+				首次登场：（）<br>
+				<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				`
 			*/
-			sst_pyra_mythra:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1458. 焰（斗士）/Pyra(Fighter)/ホムラ（ファイター）<br>\
-				系列：<ruby>异度神剑<rp>（</rp><rt>Xenoblade Chronicles</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>异度神剑2<rp>（</rp><rt>Xenoblade Chronicles 2</rt><rp>）</rp></ruby><br>\
-				没错，不是莱克斯参战，而是天之圣杯参战了！——当然，莱克斯还是会在进场、炫耀和胜利画面中出现的。作为斗士的焰速度较慢，但伤害和击杀能力非常强。如有需要，她还能随时切换为光。立绘姿势来源于之前出的手办。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1459. 光（斗士）/Mythra(Fighter)/ヒカリ（ファイター）<br>\
-				系列：<ruby>异度神剑<rp>（</rp><rt>Xenoblade Chronicles</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>异度神剑2<rp>（</rp><rt>Xenoblade Chronicles 2</rt><rp>）</rp></ruby><br>\
-				光的机动性和回场能力明显高于焰，但她的招式伤害较低。此外，在恰当的时机闪避还能触发“因果律预测”，创造反击机会。灵活运用天之圣杯不同形态的特点是取胜的关键。立绘姿势同样来源于之前出的手办。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				最终，少年遇到了少女。",
-			sst_9_volt_18_volt:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0733. 九伏特&十八伏特【九伏&十八伏】/9-Volt & 18-Volt/ナインボルト & エイティーンボルト<br>\
-				系列：<ruby>瓦力欧<rp>（</rp><rt>Wario</rt><rp>）</rp></ruby><br>\
-				首次登场：<br>\
-				九伏特——<ruby>瓦力欧制造<rp>（</rp><rt>WarioWare, Inc.: Mega Microgame$!</rt><rp>）</rp></ruby><br>\
-				十八伏特——<ruby>まわる 瓦力欧制造<rp>（</rp><rt>WarioWare: Twisted!</rt><rp>）</rp></ruby><br>\
-				九伏特和十八伏特是最要好的朋友，目前正在钻石城市读小学——没错，看起来高大又成熟的十八伏特其实是个小学生。两人都喜欢玩游戏，其中九伏特会在晚上躲着妈妈偷偷玩。九伏特有个黄色的像素宠物蓬蓬，而十八伏特还很擅长rap，作为rapper的标志是老虎。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				此次推出的三噩梦命魂武将其三。",
-			sst_claude:"武将作者：mario not mary、Yumikohimi<br>\
-				插图作者：井塚大介<br>\
-				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>\
-				<hr>\
-				1386. 库罗德/Claude/クロード<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 风花雪月<rp>（</rp><rt>Fire Emblem: Three Houses</rt><rp>）</rp></ruby><br>\
-				雷斯塔诸侯同盟盟主之孙、爵位继承人。喜欢策略，喜欢琢磨战术，为了达到目标可以不择手段。不论玩家选择的是贝雷特还是贝雷丝，他都会以“兄弟”称呼他的老师。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				芙朵拉内外都要变革，才能得以见到所愿之景……对吧？",
-			sst_geno:"武将作者：Show-K<br>\
-				插图作者：ハルノ＠マリオ垢<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/88378758")+"<br>\
-				<hr>\
-				0104. Geno/ジーノ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧RPG<rp>（</rp><rt>Super Mario RPG: Legend of the Seven Stars</rt><rp>）</rp></ruby><br>\
-				他是星之族的一员，本来没有身体，本名也是无法拼读的“♡♪!?”，所以选择附身在一个叫Geno的木偶上行动。他总是自信满满，擅长分析问题，战斗能力也相当出色。他会和马力欧、桃花公主、酷霸王和Mallow一起打败恶人。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				所以Square什么时候能把超级马力欧RPG交一下！",
-			sst_duck_hunt:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0974. 打猎/Duck Hunt/ダックハント<br>\
-				系列：<ruby>打猎<rp>（</rp><rt>Duck Hunt</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>打猎<rp>（</rp><rt>Duck Hunt</rt><rp>）</rp></ruby><br>\
-				《打猎》是1984年的FC游戏，经常和FC捆绑销售。玩家需要用光枪打鸭子，而这只看起来有点欠揍的狗负责捡鸭子。在大乱斗中，狗和鸭子转而并肩作战。它们扔出的罐子和飞盘都会被某人射击从而移动或爆炸。让对手也尝尝被打猎的感觉吧！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				MNM再一次对应变大打出手了。",
-			sst_ness:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0563. 奈斯/Ness/ネス<br>\
-				系列：<ruby>地球冒险<rp>（</rp><rt>EarthBound</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>地球冒险<rp>（</rp><rt>EarthBound</rt><rp>）</rp></ruby><br>\
-				奈斯在Eagleland国的Onett镇上长大，虽然看起来很普通，但却能使用意念能力。在原作中，他要对抗邪恶的Giygas，在大乱斗中，他的意念能力让大家感到难以对付。他的意念之雷如果击中自己就能向前突进，而意念之火击中对手后会持续燃烧。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				接着MNM开始对使命技大打出手了。",
-			sst_chrom:"武将作者：mario not mary<br>\
-				插图作者：北千里<br>\
-				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>\
-				<hr>\
-				0613. 库洛姆/Chrom/クロム<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 觉醒<rp>（</rp><rt>Fire Emblem Awakening</rt><rp>）</rp></ruby><br>\
-				伊利斯圣王国的王子，英雄王马尔斯的后代。他率领一个保卫王国的自卫团。虽然他在训练时经常很莽以至于搞砸事情，但在战场上他是非常可靠的。他还会在鲁弗莱的最终必杀中出场。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“运命改变了！”",
-			sst_lucina:"武将作者：mario not mary<br>\
-				插图作者：北千里<br>\
-				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>\
-				<hr>\
-				0611. 露琪娜/Lucina/ルキナ<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 觉醒<rp>（</rp><rt>Fire Emblem Awakening</rt><rp>）</rp></ruby><br>\
-				库洛姆的女儿，伊利斯圣王国的公主，从悲惨的未来穿越到现在，阻止那种未来发生。她最初以女扮男装，自称马尔斯的形态出现。在大乱斗中，她的技能和马尔斯是一样的，但没有马尔斯那种剑尖与剑根的伤害差异。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“为了终结这个世界的战争……我会努力的。”",
-			sst_robin:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0616. 鲁弗莱（男性）/Robin (Male)/ルフレ（男性）<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 觉醒<rp>（</rp><rt>Fire Emblem Awakening</rt><rp>）</rp></ruby><br>\
-				《火焰纹章：觉醒》中的主角，形象和性别可以自定义。根据选择的性别不同，能够攻略的对象也不一样——比如男鲁弗莱可以攻略露琪娜。在大乱斗中，鲁弗莱除了剑术之外，还会使用魔法。魔法书用完之后需要等待恢复。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0617. 鲁弗莱（女性）/Robin (Female)/ルフレ（女性）<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 觉醒<rp>（</rp><rt>Fire Emblem Awakening</rt><rp>）</rp></ruby><br>\
-				《火焰纹章：觉醒》中的主角，根据选择的性别不同，能够攻略的对象也不一样——比如女鲁弗莱可以攻略库洛姆。她可以切换青铜剑和雷剑进行攻击，在地面或空中输入快弹就可以切换为雷剑，但雷剑使用时也会像魔法书一样消耗耐久。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				然后MNM开始对智囊大打出手了。",
-			sst_paipai:"武将作者：mario not mary<br>\
-				插图作者：无<br>\
-				<hr>\
-				R015. 派派\
-				<hr>\
-				然后MNM开始对指定牌不能响应大打出手了。",
-			sst_bandana_waddle_dee:"武将作者：Show-K<br>\
-				插图作者：Konna-Nani<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/98930493")+"<br>\
-				<hr>\
-				0361. 头巾瓦豆鲁迪/Bandana Waddle Dee/バンダナワドルディ<br>\
-				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星之卡比 超级豪华版<rp>（</rp><rt>Kirby Super Star</rt><rp>）</rp></ruby><br>\
-				头巾瓦豆鲁迪并非一个种群，而是指一位特定的戴蓝色头巾的瓦豆鲁迪。他是族群中的精英，使得一手好长枪，自《星之卡比：重返梦幻岛》以来多次作为可操作角色出场，可以用长枪使出暴风骤雨般的攻击。他直接效忠于帝帝帝大王，但同时也是卡比最好的朋友之一。目前他在星之卡比系列中的戏份地位堪比主角，仅次于卡比，帝帝帝大王，魅塔骑士。如果星之卡比系列还有人能够参战大乱斗，他将是最有竞争力的候选人之一。<br>\
-				——封羽翎烈、鸿渐于陆，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				一是为了蹭《星之卡比 探索发现》的热度，二是为了庆祝无名杀武将牌上牌机制变革，三是为了调侃卡比四人组中就剩他一直没有参战了。",
-			sst_magolor:"武将作者：Show-K<br>\
-				插图作者：邪仁寿<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/22504365")+"<br>\
-				<hr>\
-				0355. 魔法洛亚/Magolor/マホロア<br>\
-				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星之卡比Wii<rp>（</rp><rt>Kirby\x27s Return to Dream Land</rt><rp>）</rp></ruby><br>\
-				某一天，梦幻岛的上空出现了大洞，魔法洛亚的飞船从洞中摔到了地面。虽然飞船坏了，但是魔法洛亚本人并没有事。他拜托卡比和它的朋友们一起收集飞船的部件，并且一起穿越次元回到自己的家乡。一切看起来好像都很平常，直到……<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				比起某个把“无双，万军取首”作为台词的武将，他这个大骗子属性简直可以忽略不计了。",
-			sst_roy:"武将作者：mario not mary<br>\
-				插图作者：山田孝太郎<br>\
-				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>\
-				<hr>\
-				0612. 罗伊/Roy (Fire Emblem)/ロイ（ファイアーエムブレム）<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>任天堂明星大乱斗DX<rp>（</rp><rt>Super Smash Bros. Melee</rt><rp>）</rp></ruby><br>\
-				在父亲突病、局势动荡时毅然担当起责任，率兵抵抗敌国入侵的贵族少年。小小年纪就擅长带兵打仗和取信于人。顺便，他是先在大乱斗中出场，随后原作才发售的存在。以及，他和酷霸王军团中的洛伊是同一个英文名。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				率先体验谋攻篇。",
-			sst_sans:"武将作者：Show-K、mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				S002. Sans/サンス<br>\
-				系列：<ruby>传说之下<rp>（</rp><rt>Undertale</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>传说之下<rp>（</rp><rt>Undertale</rt><rp>）</rp></ruby><br>\
-				Sans是由Toby Fox为2015年角色扮演游戏《Undertale》创造的虚构角色。Sans在《Undertale》中为NPC，但如果玩家选择完成“种族灭绝路线”并消灭游戏中的怪物种族，他将成为事实上的最终boss。他的名字基于Comic Sans字体，而该字体用于他的大部分游戏对话。该角色因其对话，以及被认为是游戏中最难的boss战斗而被评论家称赞。他在粉丝群体中相当出名，激发了很多人为其创造同人作品。<br>\
-				——翻译自《维基百科》<br>\
-				<hr>\
-				外面是多么美好的一天啊，鸟儿在歌唱，花儿在绽放……",
-			sst_r_o_b:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0822. 机器人/R.O.B./ロボット<br>\
-				系列：<ruby>机器人<rp>（</rp><rt>R.O.B.</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>方块放置<rp>（</rp><rt>Stack-Up</rt><rp>）</rp></ruby><br>\
-				这是任天堂在80年代，为了开辟刚受到雅达利危机重创的北美游戏市场而推出的外设，它可以配合特定的游戏游玩。在大乱斗中，机器人有两种飞行道具，回场也很不错。它的机器人光束可以蓄力增加威力。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				THE SUBSPACE EMISSARY.",
-			sst_snake:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0749. 固蛇/Solid Snake/ソリッド・スネーク<br>\
-				系列：<ruby>合金装备<rp>（</rp><rt>Metal Gear</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>合金装备<rp>（</rp><rt>Metal Gear</rt><rp>）</rp></ruby><br>\
-				前Foxhound成员，IQ达180，能操流利六国语言。有“传说之佣兵”的称号，被称为“将不可能化为可能的男人”，是潜入任务中的专家，藏身纸皮箱躲过守卫进行潜入行动的桥段一直就为人津津乐道。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“The Man Who Makes the Impossible Possible.”",
-			sst_sheik:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0174. 希克/Sheik/シーク<br>\
-				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>塞尔达传说 时之笛<rp>（</rp><rt>The Legend of Zelda: Ocarina of Time</rt><rp>）</rp></ruby><br>\
-				在《塞尔达传说：时之笛》中，希克自称是从灾难中幸存的希卡族人，不过她其实是塞尔达公主为了躲避加侬多夫的追捕而女扮男装的形态。在大乱斗中，希克以高速连招为主，和塞尔达的战斗风格有很大差别。<br>\
-				——封羽翎烈、无敌阿尔宙斯，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“接下来这段旋律，你要铭记于心……”",
-			sst_inkling:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1025. 鱿鱼（女孩）/Inkling (Girl)/インクリング（ガール）<br>\
-				系列：<ruby>斯普拉遁<rp>（</rp><rt>Splatoon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>斯普拉遁<rp>（</rp><rt>Splatoon</rt><rp>）</rp></ruby><br>\
-				让我们来认识一下鱿鱼吧，这可是经过万年的进化，能切换人和鱿鱼形态的生物！她们喜欢用疯狂的、五彩缤纷的占地对战来打发时间，也不会错过任何登上顶级排名的机会。她们的时尚不叫时尚，而是叫“鱿型”！<br>\
-				——谁的错820、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1026. 鱿鱼（男孩）/Inkling (Boy)/インクリング（ボーイ）<br>\
-				系列：<ruby>斯普拉遁<rp>（</rp><rt>Splatoon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>斯普拉遁<rp>（</rp><rt>Splatoon</rt><rp>）</rp></ruby><br>\
-				和女孩们一样，他们也喜欢激烈的占地对战。为了展示自己的风格，男孩们更喜欢将两条长触手绑成发髻而不是自然下垂。说起来，斯普拉遁里所有的衣服都是不限性别的，毕竟潮流不会有任何的限制！<br>\
-				——谁的错820、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				明明是鱿鱼却又怕水，好奇怪啊。",
-			sst_wii_fit_trainer:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0921. Wii Fit教练（女性）/Wii Fit Trainer (Female)/Wii Fit トレーナー（女性）<br>\
-				系列：<ruby>Wii健身<rp>（</rp><rt>Wii Fit</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>Wii健身<rp>（</rp><rt>Wii Fit</rt><rp>）</rp></ruby><br>\
-				在Wii Fit系列中帮助你锻炼的女教练。在大乱斗中，她许多招式都和瑜伽有关，既有强力的近战，也有不错的远程手段。她的下必杀技腹式呼吸如果在恰当时机按键，便能恢复累计伤害和短时间增强攻击力。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0922. Wii Fit教练（男性）/Wii Fit Trainer (Male)/Wii Fit トレーナー（男性）<br>\
-				系列：<ruby>Wii健身<rp>（</rp><rt>Wii Fit</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>Wii健身<rp>（</rp><rt>Wii Fit</rt><rp>）</rp></ruby><br>\
-				在Wii Fit系列中帮助你锻炼的男教练。他的通常必杀技拜日式可以积蓄光球，当蓄满时发射它还会恢复一些累计伤害。他的通常空中攻击仰卧直腿（jackknife）原本是一种锻炼腹肌的姿势，其实有2次攻击判定。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				至今都有Wii的身影。"
+			sst_pyra_mythra:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1458. 焰（斗士）/Pyra(Fighter)/ホムラ（ファイター）<br>
+				系列：<ruby>异度神剑<rp>（</rp><rt>Xenoblade Chronicles</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>异度神剑2<rp>（</rp><rt>Xenoblade Chronicles 2</rt><rp>）</rp></ruby><br>
+				没错，不是莱克斯参战，而是天之圣杯参战了！——当然，莱克斯还是会在进场、炫耀和胜利画面中出现的。作为斗士的焰速度较慢，但伤害和击杀能力非常强。如有需要，她还能随时切换为光。立绘姿势来源于之前出的手办。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1459. 光（斗士）/Mythra(Fighter)/ヒカリ（ファイター）<br>
+				系列：<ruby>异度神剑<rp>（</rp><rt>Xenoblade Chronicles</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>异度神剑2<rp>（</rp><rt>Xenoblade Chronicles 2</rt><rp>）</rp></ruby><br>
+				光的机动性和回场能力明显高于焰，但她的招式伤害较低。此外，在恰当的时机闪避还能触发“因果律预测”，创造反击机会。灵活运用天之圣杯不同形态的特点是取胜的关键。立绘姿势同样来源于之前出的手办。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				最终，少年遇到了少女。`,
+			sst_9_volt_18_volt:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				0733. 九伏特&十八伏特【九伏&十八伏】/9-Volt & 18-Volt/ナインボルト & エイティーンボルト<br>
+				系列：<ruby>瓦力欧<rp>（</rp><rt>Wario</rt><rp>）</rp></ruby><br>
+				首次登场：<br>
+				九伏特——<ruby>瓦力欧制造<rp>（</rp><rt>WarioWare, Inc.: Mega Microgame$!</rt><rp>）</rp></ruby><br>
+				十八伏特——<ruby>まわる 瓦力欧制造<rp>（</rp><rt>WarioWare: Twisted!</rt><rp>）</rp></ruby><br>
+				九伏特和十八伏特是最要好的朋友，目前正在钻石城市读小学——没错，看起来高大又成熟的十八伏特其实是个小学生。两人都喜欢玩游戏，其中九伏特会在晚上躲着妈妈偷偷玩。九伏特有个黄色的像素宠物蓬蓬，而十八伏特还很擅长rap，作为rapper的标志是老虎。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				此次推出的三噩梦命魂武将其三。`,
+			sst_claude:`武将作者：mario not mary、Yumikohimi<br>
+				插图作者：井塚大介<br>
+				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>
+				<hr>
+				1386. 库罗德/Claude/クロード<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 风花雪月<rp>（</rp><rt>Fire Emblem: Three Houses</rt><rp>）</rp></ruby><br>
+				雷斯塔诸侯同盟盟主之孙、爵位继承人。喜欢策略，喜欢琢磨战术，为了达到目标可以不择手段。不论玩家选择的是贝雷特还是贝雷丝，他都会以“兄弟”称呼他的老师。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				芙朵拉内外都要变革，才能得以见到所愿之景……对吧？`,
+			sst_geno:`武将作者：Show-K<br>
+				插图作者：ハルノ＠マリオ垢<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/88378758")}<br>
+				<hr>
+				0104. Geno/ジーノ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧RPG<rp>（</rp><rt>Super Mario RPG: Legend of the Seven Stars</rt><rp>）</rp></ruby><br>
+				他是星之族的一员，本来没有身体，本名也是无法拼读的“♡♪!?”，所以选择附身在一个叫Geno的木偶上行动。他总是自信满满，擅长分析问题，战斗能力也相当出色。他会和马力欧、桃花公主、酷霸王和Mallow一起打败恶人。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				所以Square什么时候能把超级马力欧RPG交一下！`,
+			sst_duck_hunt:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0974. 打猎/Duck Hunt/ダックハント<br>
+				系列：<ruby>打猎<rp>（</rp><rt>Duck Hunt</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>打猎<rp>（</rp><rt>Duck Hunt</rt><rp>）</rp></ruby><br>
+				《打猎》是1984年的FC游戏，经常和FC捆绑销售。玩家需要用光枪打鸭子，而这只看起来有点欠揍的狗负责捡鸭子。在大乱斗中，狗和鸭子转而并肩作战。它们扔出的罐子和飞盘都会被某人射击从而移动或爆炸。让对手也尝尝被打猎的感觉吧！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				MNM再一次对应变大打出手了。`,
+			sst_ness:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0563. 奈斯/Ness/ネス<br>
+				系列：<ruby>地球冒险<rp>（</rp><rt>EarthBound</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>地球冒险<rp>（</rp><rt>EarthBound</rt><rp>）</rp></ruby><br>
+				奈斯在Eagleland国的Onett镇上长大，虽然看起来很普通，但却能使用意念能力。在原作中，他要对抗邪恶的Giygas，在大乱斗中，他的意念能力让大家感到难以对付。他的意念之雷如果击中自己就能向前突进，而意念之火击中对手后会持续燃烧。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				接着MNM开始对使命技大打出手了。`,
+			sst_chrom:`武将作者：mario not mary<br>
+				插图作者：北千里<br>
+				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>
+				<hr>
+				0613. 库洛姆/Chrom/クロム<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 觉醒<rp>（</rp><rt>Fire Emblem Awakening</rt><rp>）</rp></ruby><br>
+				伊利斯圣王国的王子，英雄王马尔斯的后代。他率领一个保卫王国的自卫团。虽然他在训练时经常很莽以至于搞砸事情，但在战场上他是非常可靠的。他还会在鲁弗莱的最终必杀中出场。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“运命改变了！”`,
+			sst_lucina:`武将作者：mario not mary<br>
+				插图作者：北千里<br>
+				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>
+				<hr>
+				0611. 露琪娜/Lucina/ルキナ<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 觉醒<rp>（</rp><rt>Fire Emblem Awakening</rt><rp>）</rp></ruby><br>
+				库洛姆的女儿，伊利斯圣王国的公主，从悲惨的未来穿越到现在，阻止那种未来发生。她最初以女扮男装，自称马尔斯的形态出现。在大乱斗中，她的技能和马尔斯是一样的，但没有马尔斯那种剑尖与剑根的伤害差异。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“为了终结这个世界的战争……我会努力的。”`,
+			sst_robin:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0616. 鲁弗莱（男性）/Robin (Male)/ルフレ（男性）<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 觉醒<rp>（</rp><rt>Fire Emblem Awakening</rt><rp>）</rp></ruby><br>
+				《火焰纹章：觉醒》中的主角，形象和性别可以自定义。根据选择的性别不同，能够攻略的对象也不一样——比如男鲁弗莱可以攻略露琪娜。在大乱斗中，鲁弗莱除了剑术之外，还会使用魔法。魔法书用完之后需要等待恢复。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0617. 鲁弗莱（女性）/Robin (Female)/ルフレ（女性）<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 觉醒<rp>（</rp><rt>Fire Emblem Awakening</rt><rp>）</rp></ruby><br>
+				《火焰纹章：觉醒》中的主角，根据选择的性别不同，能够攻略的对象也不一样——比如女鲁弗莱可以攻略库洛姆。她可以切换青铜剑和雷剑进行攻击，在地面或空中输入快弹就可以切换为雷剑，但雷剑使用时也会像魔法书一样消耗耐久。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				然后MNM开始对智囊大打出手了。`,
+			sst_paipai:`武将作者：mario not mary<br>
+				插图作者：无<br>
+				<hr>
+				R015. 派派
+				<hr>
+				然后MNM开始对指定牌不能响应大打出手了。`,
+			sst_bandana_waddle_dee:`武将作者：Show-K<br>
+				插图作者：Konna-Nani<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/98930493")}<br>
+				<hr>
+				0361. 头巾瓦豆鲁迪/Bandana Waddle Dee/バンダナワドルディ<br>
+				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星之卡比 超级豪华版<rp>（</rp><rt>Kirby Super Star</rt><rp>）</rp></ruby><br>
+				头巾瓦豆鲁迪并非一个种群，而是指一位特定的戴蓝色头巾的瓦豆鲁迪。他是族群中的精英，使得一手好长枪，自《星之卡比：重返梦幻岛》以来多次作为可操作角色出场，可以用长枪使出暴风骤雨般的攻击。他直接效忠于帝帝帝大王，但同时也是卡比最好的朋友之一。目前他在星之卡比系列中的戏份地位堪比主角，仅次于卡比，帝帝帝大王，魅塔骑士。如果星之卡比系列还有人能够参战大乱斗，他将是最有竞争力的候选人之一。<br>
+				——封羽翎烈、鸿渐于陆，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				一是为了蹭《星之卡比 探索发现》的热度，二是为了庆祝无名杀武将牌上牌机制变革，三是为了调侃卡比四人组中就剩他一直没有参战了。`,
+			sst_magolor:`武将作者：Show-K<br>
+				插图作者：邪仁寿<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/22504365")}<br>
+				<hr>
+				0355. 魔法洛亚/Magolor/マホロア<br>
+				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星之卡比Wii<rp>（</rp><rt>Kirby\x27s Return to Dream Land</rt><rp>）</rp></ruby><br>
+				某一天，梦幻岛的上空出现了大洞，魔法洛亚的飞船从洞中摔到了地面。虽然飞船坏了，但是魔法洛亚本人并没有事。他拜托卡比和它的朋友们一起收集飞船的部件，并且一起穿越次元回到自己的家乡。一切看起来好像都很平常，直到……<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				比起某个把“无双，万军取首”作为台词的武将，他这个大骗子属性简直可以忽略不计了。`,
+			sst_roy:`武将作者：mario not mary<br>
+				插图作者：山田孝太郎<br>
+				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>
+				<hr>
+				0612. 罗伊/Roy (Fire Emblem)/ロイ（ファイアーエムブレム）<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>任天堂明星大乱斗DX<rp>（</rp><rt>Super Smash Bros. Melee</rt><rp>）</rp></ruby><br>
+				在父亲突病、局势动荡时毅然担当起责任，率兵抵抗敌国入侵的贵族少年。小小年纪就擅长带兵打仗和取信于人。顺便，他是先在大乱斗中出场，随后原作才发售的存在。以及，他和酷霸王军团中的洛伊是同一个英文名。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				率先体验谋攻篇。`,
+			sst_sans:`武将作者：Show-K、mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				S002. Sans/サンス<br>
+				系列：<ruby>传说之下<rp>（</rp><rt>Undertale</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>传说之下<rp>（</rp><rt>Undertale</rt><rp>）</rp></ruby><br>
+				Sans是由Toby Fox为2015年角色扮演游戏《Undertale》创造的虚构角色。Sans在《Undertale》中为NPC，但如果玩家选择完成“种族灭绝路线”并消灭游戏中的怪物种族，他将成为事实上的最终boss。他的名字基于Comic Sans字体，而该字体用于他的大部分游戏对话。该角色因其对话，以及被认为是游戏中最难的boss战斗而被评论家称赞。他在粉丝群体中相当出名，激发了很多人为其创造同人作品。<br>
+				——翻译自《维基百科》<br>
+				<hr>
+				外面是多么美好的一天啊，鸟儿在歌唱，花儿在绽放……`,
+			sst_r_o_b:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0822. 机器人/R.O.B./ロボット<br>
+				系列：<ruby>机器人<rp>（</rp><rt>R.O.B.</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>方块放置<rp>（</rp><rt>Stack-Up</rt><rp>）</rp></ruby><br>
+				这是任天堂在80年代，为了开辟刚受到雅达利危机重创的北美游戏市场而推出的外设，它可以配合特定的游戏游玩。在大乱斗中，机器人有两种飞行道具，回场也很不错。它的机器人光束可以蓄力增加威力。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				THE SUBSPACE EMISSARY.`,
+			sst_snake:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0749. 固蛇/Solid Snake/ソリッド・スネーク<br>
+				系列：<ruby>合金装备<rp>（</rp><rt>Metal Gear</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>合金装备<rp>（</rp><rt>Metal Gear</rt><rp>）</rp></ruby><br>
+				前Foxhound成员，IQ达180，能操流利六国语言。有“传说之佣兵”的称号，被称为“将不可能化为可能的男人”，是潜入任务中的专家，藏身纸皮箱躲过守卫进行潜入行动的桥段一直就为人津津乐道。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“The Man Who Makes the Impossible Possible.”`,
+			sst_sheik:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0174. 希克/Sheik/シーク<br>
+				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>塞尔达传说 时之笛<rp>（</rp><rt>The Legend of Zelda: Ocarina of Time</rt><rp>）</rp></ruby><br>
+				在《塞尔达传说：时之笛》中，希克自称是从灾难中幸存的希卡族人，不过她其实是塞尔达公主为了躲避加侬多夫的追捕而女扮男装的形态。在大乱斗中，希克以高速连招为主，和塞尔达的战斗风格有很大差别。<br>
+				——封羽翎烈、无敌阿尔宙斯，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“接下来这段旋律，你要铭记于心……”`,
+			sst_inkling:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1025. 鱿鱼（女孩）/Inkling (Girl)/インクリング（ガール）<br>
+				系列：<ruby>斯普拉遁<rp>（</rp><rt>Splatoon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>斯普拉遁<rp>（</rp><rt>Splatoon</rt><rp>）</rp></ruby><br>
+				让我们来认识一下鱿鱼吧，这可是经过万年的进化，能切换人和鱿鱼形态的生物！她们喜欢用疯狂的、五彩缤纷的占地对战来打发时间，也不会错过任何登上顶级排名的机会。她们的时尚不叫时尚，而是叫“鱿型”！<br>
+				——谁的错820、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1026. 鱿鱼（男孩）/Inkling (Boy)/インクリング（ボーイ）<br>
+				系列：<ruby>斯普拉遁<rp>（</rp><rt>Splatoon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>斯普拉遁<rp>（</rp><rt>Splatoon</rt><rp>）</rp></ruby><br>
+				和女孩们一样，他们也喜欢激烈的占地对战。为了展示自己的风格，男孩们更喜欢将两条长触手绑成发髻而不是自然下垂。说起来，斯普拉遁里所有的衣服都是不限性别的，毕竟潮流不会有任何的限制！<br>
+				——谁的错820、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				明明是鱿鱼却又怕水，好奇怪啊。`,
+			sst_wii_fit_trainer:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0921. Wii Fit教练（女性）/Wii Fit Trainer (Female)/Wii Fit トレーナー（女性）<br>
+				系列：<ruby>Wii健身<rp>（</rp><rt>Wii Fit</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>Wii健身<rp>（</rp><rt>Wii Fit</rt><rp>）</rp></ruby><br>
+				在Wii Fit系列中帮助你锻炼的女教练。在大乱斗中，她许多招式都和瑜伽有关，既有强力的近战，也有不错的远程手段。她的下必杀技腹式呼吸如果在恰当时机按键，便能恢复累计伤害和短时间增强攻击力。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0922. Wii Fit教练（男性）/Wii Fit Trainer (Male)/Wii Fit トレーナー（男性）<br>
+				系列：<ruby>Wii健身<rp>（</rp><rt>Wii Fit</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>Wii健身<rp>（</rp><rt>Wii Fit</rt><rp>）</rp></ruby><br>
+				在Wii Fit系列中帮助你锻炼的男教练。他的通常必杀技拜日式可以积蓄光球，当蓄满时发射它还会恢复一些累计伤害。他的通常空中攻击仰卧直腿（jackknife）原本是一种锻炼腹肌的姿势，其实有2次攻击判定。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				至今都有Wii的身影。`
 		},
 		characterTitle:{
 			sst_pyra_mythra:"天之圣杯",
@@ -334,26 +334,36 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				charlotte:true,
 				superCharlotte:true,
 				trigger:{
-					global:'gameStart',
-					player:['enterGame','showCharacterEnd']
+					global:"gameStart",
+					player:["enterGame","showCharacterEnd"]
 				},
 				ruleSkill:true,
 				silent:true,
 				firstDo:true,
 				priority:2020,
-				filter:(event,player)=>player.sex=='',
+				filter:(event,player)=>player.sex=="",
 				content:()=>{
-					'step 0'
-					player.chooseControl('male','female').set('prompt','选择性别').set('ai',()=>['male','female'].randomGet());
-					'step 1'
+					"step 0"
+					player.chooseControl("male","female").set("prompt","选择性别").set("ai",()=>["male","female"].randomGet());
+					"step 1"
 					player.sex=result.control;
 					game.broadcast((player,sex)=>player.sex=sex,player,result.control);
 					const name=player.name;
-					const differentAvatar=['sst_corrin','sst_robin','nnk_robin','sst_inkling'];
-					if(differentAvatar.contains(name)) player.setAvatar(name,name+'_'+result.control);
-					game.log(player,'将性别变为了','#y'+get.translation(result.control));
-					const differentGroup={sst_corrin_male:'sst_dark',sst_corrin_female:'sst_light'};
-					if(typeof differentGroup[name+'_'+result.control]=='string') player.changeGroup(differentGroup[name+'_'+result.control]);
+					const differentAvatar=[
+						"sst_corrin",
+						"sst_robin",
+						"nnk_robin",
+						"sst_inkling"
+					];
+					const nameAfter=`${name}_${result.control}`;
+					if(differentAvatar.contains(name)) player.setAvatar(name,nameAfter);
+					game.log(player,"将性别变为了",`#y${get.translation(result.control)}`);
+					const differentGroup={
+						sst_corrin_male:"sst_dark",
+						sst_corrin_female:"sst_light"
+					};
+					const group=differentGroup[nameAfter];
+					if(typeof group=="string") player.changeGroup(group);
 					player.update();
 				}
 			},
@@ -361,28 +371,28 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				charlotte:true,
 				superCharlotte:true,
 				trigger:{
-					global:'gameStart',
-					player:['enterGame','showCharacterEnd']
+					global:"gameStart",
+					player:["enterGame","showCharacterEnd"]
 				},
 				ruleSkill:true,
 				silent:true,
 				firstDo:true,
 				priority:2019,
-				filter:(event,player)=>!get.config('no_group')&&player.group=='sst_smash',
+				filter:(event,player)=>!get.config("no_group")&&player.group=="sst_smash",
 				content:()=>{
-					'step 0'
-					player.chooseControl('sst_light','sst_dark','sst_spirit','sst_reality').set('prompt','选择势力').set('ai',()=>{
+					"step 0"
+					player.chooseControl("sst_light","sst_dark","sst_spirit","sst_reality").set("prompt","选择势力").set("ai",()=>{
 						if(game.zhu&&game.zhu!=_status.event.player&&get.attitude(_status.event.player,game.zhu)>0&&_status.event.controls.contains(game.zhu.group)) return game.zhu.group;
 						return _status.event.controls.randomGet();
 					});
-					'step 1'
+					"step 1"
 					player.changeGroup(result.control);
 					player.update();
 				}
 			},
 			braces:{
 				intro:{
-					content:'#'
+					content:"#"
 				}
 			},
 			_guozhan_marks:{
@@ -496,12 +506,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				charlotte:true,
 				forced:true,
 				popup:false,
-				trigger:{source:'damageBegin1'},
+				trigger:{source:"damageBegin1"},
 				filter:(event,player)=>{
 					const evt=event.getParent(2);
-					if(!evt||evt.name!='useCard') return false;
-					if(typeof evt.th_anger!='object') return false;
-					if(typeof evt.th_anger[player.playerid]!='number') return false;
+					if(!evt||evt.name!="useCard") return false;
+					if(typeof evt.th_anger!="object") return false;
+					if(typeof evt.th_anger[player.playerid]!="number") return false;
 					return evt.th_anger[player.playerid]!=0;
 				},
 				content:()=>trigger.num+=trigger.getParent(2).th_anger[player.playerid]
@@ -600,8 +610,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						const name=player.name;
 						const info=lib.character[name];
 						if(!info) return;
-						const to="shibing"+(info[0]=="male"?1:2)+info[1];
-						game.log(player,"移除了武将牌","#b"+name);
+						const to=`shibing${info[0]=="male"?"1":"2"}${info[1]}`;
+						game.log(player,"移除了武将牌",`#b${name}`);
 						player.reinit(name,to,false);
 						if(_status.characterlist) _status.characterlist.add(name);
 					});
@@ -662,7 +672,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.control!="cancel2"){
 						player.logSkill("sst_tanfen");
 						player.popup(result.control);
-						game.log(player,"声明了","#y"+get.translation(result.control));
+						game.log(player,"声明了",`#y${get.translation(result.control)}`);
 						event.control=result.control;
 						trigger.changeToZero();
 					}
@@ -672,7 +682,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 2"
 					event.card=get.cards()[0];
 					game.cardsGotoOrdering(event.card);
-					player.showCards(event.card,get.translation(player)+"发动了【"+get.skillTranslation(event.name,player)+"】（声明了"+get.translation(event.control)+"）",0.5);
+					player.showCards(event.card,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】（声明了${get.translation(event.control)}）`,0.5);
 					"step 3"
 					if(get.suit(card)!=event.control) event.goto(2);
 					player.gain(card,"gain2");
@@ -718,7 +728,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:event=>get.is.yingbian(event.card),
 				content:()=>{
 					"step 0"
-					const list=lib.card[get.name(trigger.card)].yingbian_tags.slice(0).map(i=>"yingbian_"+i+"_tag");
+					const list=lib.card[get.name(trigger.card)].yingbian_tags.slice(0).map(i=>`yingbian_${i}_tag`);
 					player.chooseControl(list,"cancel2").set("ai",()=>{
 						const list=_status.event.controls;
 						const card=_status.event.getTrigger().card;
@@ -744,7 +754,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						_status.cardtag[result.control.slice(0,-4)].add(trigger.card.cardid);
 						game.broadcastAll(cardtag=>_status.cardtag=cardtag,_status.cardtag);
 						player.popup(result.control,"wood");
-						game.log(player,"指定此牌的应变效果为","#y"+result.control);
+						game.log(player,"指定此牌的应变效果为",`#y${result.control}`);
 						const evt=event.getParent("useCard");
 						if(evt&&evt.name=="useCard"){
 							const next=game.createEvent("sst_guimou_clear");
@@ -796,9 +806,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						}
 						return str;
 					};
-					player.showCards(event.pileTop,get.translation(player)+"对"+translateTargets(event.target)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+					player.showCards(event.pileTop,`${get.translation(player)}对${translateTargets(event.target)}发动了【${get.skillTranslation(event.name,player)}】`);
 					"step 1"
-					player.chooseCard("复愿：你可以重铸一张牌，令"+get.translation(target)+"本回合下次造成伤害后再次结算此伤害，然后若与"+get.translation(event.pileTop)+"的点数相同，你令"+get.translation(target)+"一个限定技视为未发动过","he").set("ai",card=>{
+					player.chooseCard(`复愿：你可以重铸一张牌，令${get.translation(target)}本回合下次造成伤害后再次结算此伤害，然后若与${get.translation(event.pileTop)}的点数相同，你令${get.translation(target)}一个限定技视为未发动过`,"he").set("ai",card=>{
 						const evt=_status.event.getParent();
 						if(get.attitude(_status.event.player,evt.target)<=0) return 0;
 						const num=5.5-get.value(card);
@@ -841,7 +851,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.control){
 						target.restoreSkill(result.control);
 						target.popup(result.control,"fire");
-						game.log(player,"恢复了技能","#g【"+get.translation(result.control)+"】");
+						game.log(player,"恢复了技能",`#g【${get.translation(result.control)}】`);
 						game.delayx();
 					}
 				}
@@ -901,10 +911,10 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					player.awakenSkill("sst_doujiang");
 					event.toUse=get.cards(cards.length);
 					game.cardsGotoOrdering(event.toUse);
-					player.showCards(event.toUse,get.translation(player)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+					player.showCards(event.toUse,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】`);
 					"step 1"
 					if(event.toUse.length){
-						player.chooseCardButton("斗降：你可以使用"+get.translation(event.toUse),event.toUse).set("filterButton",button=>_status.event.player.hasUseTarget(button.link,false)).set("ai",button=>_status.event.player.getUseValue(button.link,false));
+						player.chooseCardButton(`斗降：你可以使用${get.translation(event.toUse)}`,event.toUse).set("filterButton",button=>_status.event.player.hasUseTarget(button.link,false)).set("ai",button=>_status.event.player.getUseValue(button.link,false));
 					}
 					else{
 						event.finish();
@@ -985,7 +995,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.finish();
 					}
 					"step 1"
-					event.sst_gonglie.gainPlayerCard("共猎：你可以获得"+get.translation(targets[num])+"一张牌",targets[num],"he");
+					event.sst_gonglie.gainPlayerCard(`共猎：你可以获得${get.translation(targets[num])}一张牌`,targets[num],"he");
 					"step 2"
 					event.num++;
 					if(event.num<targets.length) event.goto(1);
@@ -1013,7 +1023,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							if(lib.filter.canBeGained(card,current,player)) return true;
 						}
 					});
-					let str="你可以改为将"+get.translation(trigger.cards)+"交给"+get.translation(targets);
+					let str=`你可以改为将${get.translation(trigger.cards)}交给${get.translation(targets)}`;
 					if(targets.length>1) str+="其中的一人";
 					player.chooseTarget(get.prompt("sst_weishou2"),str,(card,player,target)=>_status.event.targets.contains(target)).set("ai",target=>Math.cbrt(get.attitude(_status.event.player,target)*_status.event.getTrigger().cards.map(card=>get.value(card)).reduce((previousValue,currentValue)=>previousValue+currentValue,0))).set("targets",targets);
 					"step 1"
@@ -1097,7 +1107,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 2"
 					event.num--;
 					if(event.num>=0){
-						player.chooseTarget("问心：弃置场上的一张"+(player.storage.sst_wenxin_alter?"红色":"")+"牌（剩余"+get.cnNumber(event.num)+"张）",true,(card,player,target)=>target.countDiscardableCards(player,"ej",card=>{
+						player.chooseTarget(`问心：弃置场上的一张${player.storage.sst_wenxin_alter?"红色":""}牌（剩余${get.cnNumber(event.num)}张）`,true,(card,player,target)=>target.countDiscardableCards(player,"ej",card=>{
 							if(player.storage.sst_wenxin_alter) return get.color(card)=="red";
 							return true;
 						})).set("ai",target=>{
@@ -1147,7 +1157,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 3"
 					if(result.targets&&result.targets.length){
 						player.line(result.targets,"green");
-						player.discardPlayerCard("问心：弃置"+get.translation(result.targets[0])+"场上一张"+(player.storage.sst_wenxin_alter?"红色":"")+"牌",result.targets[0],"ej",true).set("filterButton",button=>{
+						player.discardPlayerCard(`问心：弃置${get.translation(result.targets[0])}场上一张${player.storage.sst_wenxin_alter?"红色":""}牌`,result.targets[0],"ej",true).set("filterButton",button=>{
 							if(_status.event.player.storage.sst_wenxin_alter) return get.color(button.link)=="red";
 							return true;
 						});
@@ -1390,7 +1400,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			//Robin
 			sst_zuozhan:{
 				preHidden:true,
-				trigger:{global:"damageBegin4"},
+				trigger:{global:"damageBegin3"},
 				filter:event=>!event.player.hasSkill("sst_junce"),
 				logTarget:"player",
 				check:(event,player)=>get.attitude(player,event.player)>0,
@@ -1616,7 +1626,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 					"step 2"
 					if(event.players[num]!=player){
-						event.players[num].chooseCard("怜下：交给"+get.translation(player)+"一张牌","he",true,card=>lib.filter.canBeGained(card,_status.event.getParent().player,_status.event.player));
+						event.players[num].chooseCard(`怜下：交给${get.translation(player)}一张牌`,"he",true,card=>lib.filter.canBeGained(card,_status.event.getParent().player,_status.event.player));
 					}
 					else{
 						event.goto(4);
@@ -1763,7 +1773,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(event.num<targets.length) event.goto(3);
 					"step 6"
 					if(cards.length){
-						target.chooseCardButton("盟谌：你可以使用"+get.translation(cards)+"中的一张牌",cards).set("filterButton",button=>["o","d"].contains(get.position(button.link,true))&&_status.event.player.hasUseTarget(button.link)).set("ai",button=>_status.event.player.getUseValue(button.link));
+						target.chooseCardButton(`盟谌：你可以使用${get.translation(cards)}中的一张牌`,cards).set("filterButton",button=>["o","d"].contains(get.position(button.link,true))&&_status.event.player.hasUseTarget(button.link)).set("ai",button=>_status.event.player.getUseValue(button.link));
 					}
 					else{
 						event.goto(1);
@@ -1801,7 +1811,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					player.addSkill("sst_miulu_effect");
-					if(player.hasCard(card=>!card.hasGaintag("exposed"),"h")) player.chooseCard("谬陆：明置"+get.cnNumber(-trigger.num)+"张暗置手牌",-trigger.num,card=>!card.hasGaintag("exposed"),true).set("ai",get.value);
+					if(player.hasCard(card=>!card.hasGaintag("exposed"),"h")) player.chooseCard(`谬陆：明置${get.cnNumber(-trigger.num)}张暗置手牌`,-trigger.num,card=>!card.hasGaintag("exposed"),true).set("ai",get.value);
 					"step 1"
 					if(result.cards&&result.cards.length){
 						player.$give(result.cards,player,false);
@@ -1824,7 +1834,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_miulu_effect:{
 				charlotte:true,
 				intro:{
-					content:(storage,player)=>"本局游戏你的手牌上限+"+storage+"<br>当前你的手牌上限："+player.getHandcardLimit()
+					content:(storage,player)=>`本局游戏你的手牌上限+${storage}<br>当前你的手牌上限：${player.getHandcardLimit()}`
 				},
 				onremove:true,
 				mod:{
@@ -1874,10 +1884,10 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 								event.num=list[0];
 								game.log(player,"的“羇帆”魔法生效");
 								player.removeSkill("sst_jifan_mahou");
-								player.chooseTarget("羇帆：你可以令至多"+get.cnNumber(5-event.num)+"名角色摸"+get.cnNumber(event.num)+"张牌（手牌数大于手牌上限的角色少摸一张牌）",[1,5-event.num]).set("ai",target=>get.attitude(_status.event.player,target));
+								player.chooseTarget(`羇帆：你可以令至多${get.cnNumber(5-event.num)}名角色摸${get.cnNumber(event.num)}张牌（手牌数大于手牌上限的角色少摸一张牌）`,[1,5-event.num]).set("ai",target=>get.attitude(_status.event.player,target));
 							}
 							else{
-								game.log(player,"的“羇帆”魔法剩余","#g"+(list[1])+"回合");
+								game.log(player,"的“羇帆”魔法剩余",`#g${list[1]}回合`);
 								player.markSkill("sst_jifan_mahou");
 								event.finish();
 							}
@@ -1913,7 +1923,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 								return 0;
 							},
 							content:storage=>{
-								if(storage) return "经过"+storage[1]+"个“回合结束时”后，可以令至多"+get.cnNumber(5-storage[0])+"名角色摸"+get.cnNumber(storage[0])+"张牌（手牌数大于手牌上限的角色少摸一张牌）";
+								if(storage) return `经过${storage[1]}个“回合结束时”后，可以令至多${get.cnNumber(5-storage[0])}名角色摸${get.cnNumber(storage[0])}张牌（手牌数大于手牌上限的角色少摸一张牌）`;
 								return "未指定施法效果";
 							}
 						}
@@ -1924,7 +1934,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_nuyan:{
 				direct:true,
 				trigger:{player:"useCard"},
-				filter:event=>_status.mougong_buff.contains(get.name(event.card)),
+				filter:event=>["sha","shan","juedou","huogong","tao"].contains(get.name(event.card)),
 				content:()=>{
 					"step 0"
 					player.chooseToDiscard(get.prompt2(event.name),card=>get.color(card)=="red","he").set("ai",card=>{
@@ -2038,14 +2048,11 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				},
 				intro:{
 					name:"业报",
-					content:storage=>{
-						let str="";
-						storage.forEach((phase,i)=>{
-							str+="接下来"+get.cnNumber(phase)+"个回合的回合结束时弃置一张牌";
-							if(i<storage.length-1) str+="<br>";
-						});
-						return str;
-					},
+					content:storage=>storage.reduce((previousValue,currentValue,currentIndex)=>{
+						previousValue+=`接下来${get.cnNumber(currentValue)}个回合的回合结束时弃置一张牌`;
+						if(currentIndex<storage.length-1) previousValue+="<br>";
+						return previousValue;
+					},""),
 					markcount:storage=>storage.reduce((previousValue,currentValue)=>previousValue+currentValue,0)
 				},
 				onremove:true,
@@ -2153,7 +2160,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.finish();
 					}
 					"step 2"
-					const next=target.chooseToRespond("引爆：打出一张闪，否则受到"+get.translation(player)+"造成的1点伤害",{name:"shan"});
+					const next=target.chooseToRespond(`引爆：打出一张闪，否则受到${get.translation(player)}造成的1点伤害`,{name:"shan"});
 					next.set("ai",card=>{
 						const evt=_status.event.getParent();
 						if(get.damageEffect(evt.target,evt.player,evt.target)>=0) return 0;
@@ -2191,7 +2198,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.index){
 						event.distribution=result.index;
 						event.num+=event.distribution;
-						player.chooseTarget("铸心：分配给一名其他角色"+event.distribution+"点护甲，分配完成后获得被分配角色区域内共计等量的牌",lib.filter.notMe,true).set("ai",target=>get.attitude(_status.event.player,target)+lib.card.shunshou.ai.result.target(_status.event.player,target));
+						player.chooseTarget(`铸心：分配给一名其他角色${event.distribution}点护甲，分配完成后获得被分配角色区域内共计等量的牌`,lib.filter.notMe,true).set("ai",target=>get.attitude(_status.event.player,target)+lib.card.shunshou.ai.result.target(_status.event.player,target));
 					}
 					else{
 						event.goto(4);
@@ -2201,7 +2208,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.targets.addArray(result.targets);
 						player.line(result.targets,"green");
 						player.changeHujia(-event.distribution);
-						game.log(player,"失去了"+get.cnNumber(event.distribution)+"点护甲");
+						game.log(player,"失去了",get.cnNumber(event.distribution),"点护甲");
 						result.targets[0].changeHujia(event.distribution);
 						player.addExpose(0.1);
 					}
@@ -2209,7 +2216,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 4"
 					event.targets=event.targets.filter(target=>target.countGainableCards(player,"hej"));
 					if(event.targets.length&&event.num>0){
-						player.chooseTarget("铸心：获得"+get.translation(event.targets)+"区域内共计"+get.cnNumber(event.num)+"张牌",(card,player,target)=>_status.event.getParent().targets.contains(target)&&target.countGainableCards(_status.event.player,"hej"),true).set("ai",target=>lib.card.shunshou.ai.result.target(_status.event.player,target));
+						player.chooseTarget(`铸心：获得${get.translation(event.targets)}区域内共计${get.cnNumber(event.num)}张牌`,(card,player,target)=>_status.event.getParent().targets.contains(target)&&target.countGainableCards(_status.event.player,"hej"),true).set("ai",target=>lib.card.shunshou.ai.result.target(_status.event.player,target));
 					}
 					else{
 						event.finish();
@@ -2217,7 +2224,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 5"
 					if(result.targets&&result.targets.length){
 						player.line(result.targets,"fire");
-						player.gainPlayerCard("铸心：获得"+get.translation(result.targets[0])+"区域内至多"+get.cnNumber(event.num)+"张牌",result.targets[0],[1,event.num],"hej",true);
+						player.gainPlayerCard(`铸心：获得${get.translation(result.targets[0])}区域内至多${get.cnNumber(event.num)}张牌`,result.targets[0],[1,event.num],"hej",true);
 					}
 					else{
 						event.goto(4);
@@ -2328,7 +2335,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 								}
 								return str;
 							};
-							player.showCards(cards,get.translation(player)+"对"+translateTargets(event.target)+"发动了【潜龙】");
+							player.showCards(cards,`${get.translation(player)}对${translateTargets(event.target)}发动了【潜龙】`);
 							bool=true;
 							break;
 						}
@@ -2369,7 +2376,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					if(result.targets&&result.targets.length){
 						player.logSkill("sst_dieying",result.targets);
-						player.gainPlayerCard("谍影：获得"+get.translation(result.targets[0])+"场上一张牌",result.targets[0],"ej",true);
+						player.gainPlayerCard(`谍影：获得${get.translation(result.targets[0])}场上一张牌`,result.targets[0],"ej",true);
 					}
 				},
 				ai:{
@@ -2404,7 +2411,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.targets&&result.targets.length){
 						player.logSkill("sst_shouyin",result.targets);
 						event.target=result.targets[0];
-						event.chooseToUse=event.target.chooseToUse("授音：你可以使用一张"+get.translation(get.type(trigger.card,"trick"))+"牌",function(card){
+						event.chooseToUse=event.target.chooseToUse(`授音：你可以使用一张${get.translation(get.type(trigger.card,"trick"))}牌`,function(card){
 							if(get.type2(card)!=get.type2(_status.event.cardx)) return false;
 							return lib.filter.filterCard.apply(this,arguments);
 						}).set("addCount",false).set("cardx",trigger.card);
@@ -2432,7 +2439,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:()=>_status.currentPhase.isIn(),
 				logTarget:()=>_status.currentPhase,
 				content:()=>{
-					lib.skill.sst_anzong.logTarget().addSkill(event.name+"_effect");
+					lib.skill.sst_anzong.logTarget().addSkill(`${event.name}_effect`);
 					game.delayx();
 				}
 			},
@@ -2446,7 +2453,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				},
 				mark:true,
 				intro:{
-					content:"杀死你执行的奖惩为：<span style=\"font-family: LXGWWenKai\">杀死你的角色摸三张牌</span>",
+					content:`杀死你执行的奖惩为：<span style="font-family: LXGWWenKai">杀死你的角色摸三张牌</span>`,
 					markcount:()=>3
 				},
 				onremove:(player,skill)=>{
@@ -2658,9 +2665,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(player.storage.sst_wenxin_alter) return "结束阶段，你可以弃置至少一张手牌并依次弃置场上等量的红色牌，然后展示手牌并摸等同于你弃置黑色牌数量的牌。";
 					return "结束阶段，你可以弃置至少一张手牌并依次弃置场上等量的牌，然后展示手牌并摸等同于你弃置黑色牌数量的牌。";
 				}
-				return "使命技。结束阶段，你可以弃置至少一张手牌并依次弃置场上等量的牌，然后展示手牌并摸等同于你弃置黑色牌数量的牌。<br>\
-					成功：若以此法连续两次展示的手牌均为红色，此技能改为非使命技，你取消弃牌阶段。<br>\
-					失败：以此法展示三次手牌后，此技能改为非使命技，“场上等量的牌”改为“场上等量的红色牌”。";
+				return `使命技。结束阶段，你可以弃置至少一张手牌并依次弃置场上等量的牌，然后展示手牌并摸等同于你弃置黑色牌数量的牌。<br>
+					成功：若以此法连续两次展示的手牌均为红色，此技能改为非使命技，你取消弃牌阶段。<br>
+					失败：以此法展示三次手牌后，此技能改为非使命技，“场上等量的牌”改为“场上等量的红色牌”。`;
 			}
 		},
 		characterReplace:{},
@@ -2733,9 +2740,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_weishou_info:"一名其他角色因响应〖助战〗而弃置时，可以改为将牌交给你。",
 			sst_wenxin:"问心",
 			sst_wenxin_effect:"问心",
-			sst_wenxin_info:"使命技。结束阶段，你可以弃置至少一张手牌并依次弃置场上等量的牌，然后展示手牌并摸等同于你弃置黑色牌数量的牌。<br>\
-				成功：若以此法连续两次展示的手牌均为红色，此技能改为非使命技，你取消弃牌阶段。<br>\
-				失败：以此法展示三次手牌后，此技能改为非使命技，“场上等量的牌”改为“场上等量的红色牌”。",
+			sst_wenxin_info:`使命技。结束阶段，你可以弃置至少一张手牌并依次弃置场上等量的牌，然后展示手牌并摸等同于你弃置黑色牌数量的牌。<br>
+				成功：若以此法连续两次展示的手牌均为红色，此技能改为非使命技，你取消弃牌阶段。<br>
+				失败：以此法展示三次手牌后，此技能改为非使命技，“场上等量的牌”改为“场上等量的红色牌”。`,
 			sst_niming:"逆命",
 			sst_niming_info:"一名角色的判定牌生效前，你可以用牌堆顶的一张牌代替判定牌。",
 			sst_cuifeng:"摧锋",
@@ -2772,8 +2779,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_yebao_effect:"业报",
 			sst_yebao_info:"锁定技，当你对一名其他角色造成伤害时，若其未使用过【杀】，你防止此伤害；当一名其他角色受到你造成的伤害后，其于此后X个回合的回合结束时弃置一张牌。（X为其已损失的体力值）",
 			sst_juexin:"决心",
-			sst_juexin_info:"使命技。当你扣减1点体力时，你令一名角色判定并获得判定牌，若判定结果大于游戏轮数，你回复1点体力。<br>\
-				失败：一名受到过你造成的伤害的角色的结束阶段，若其使用过【杀】的数量大于存活角色数，你将你与其所有牌依次当作【杀】对其使用。",
+			sst_juexin_info:`使命技。当你扣减1点体力时，你令一名角色判定并获得判定牌，若判定结果大于游戏轮数，你回复1点体力。<br>
+				失败：一名受到过你造成的伤害的角色的结束阶段，若其使用过【杀】的数量大于存活角色数，你将你与其所有牌依次当作【杀】对其使用。`,
 			sst_yinbao:"引爆",
 			sst_yinbao_info:"隐匿技，锁定技，当你登场时，所有角色须打出一张闪，否则受到你造成的1点伤害。",
 			sst_zhuxin:"铸心",
@@ -2788,7 +2795,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_shouyin_info:"你使用牌结算后，可以令一名其他角色选择是否使用一张类别相同的牌，若其以此法使用了牌且两张牌目标唯一且相同，你摸一张牌。",
 			sst_anzong:"暗踪",
 			sst_anzong_effect:"暗踪",
-			sst_anzong_info:"隐匿技，锁定技，当你登场时，将杀死当前回合角色执行的奖惩改为：<span style=\"font-family: LXGWWenKai\">杀死其的角色摸三张牌</span>。",
+			sst_anzong_info:`隐匿技，锁定技，当你登场时，将杀死当前回合角色执行的奖惩改为：<span style="font-family: LXGWWenKai">杀死其的角色摸三张牌</span>。`,
 			sst_xumo:"蓄墨",
 			sst_xumo_info:"隐匿技，锁定技，当你登场时，摸三张牌。",
 			sst_pentu:"喷涂",
@@ -2843,85 +2850,85 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_wii_fit_trainer:"Wii Fit Trainer"
 		},
 		help:{
-			"乱斗EX":"<div style=\"margin:10px\">\
-					背水\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						你执行背水效果后，依次执行上述两项/上述出现的“或”改为“和”\
-					</li>\
-				</ul>\
-				<div style=\"margin:10px\">\
-					交给技能\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						交给技能为专属技能\
-					</li>\
-					<li>\
-						理论上，场上只能存在一个交给技能\
-					</li>\
-					<li>\
-						将交给技能交给一名角色前，先前角色失去此交给技能\
-					</li>\
-				</ul>\
-				<div style=\"margin:10px\">\
-					使命技\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						本身可包含子技能\
-					</li>\
-					<li>\
-						若满足成功条件，失去此技能，执行成功分支的效果\
-					</li>\
-					<li>\
-						若满足失败条件，失去此技能，执行失败分支的效果\
-					</li>\
-				</ul>\
-				<div style=\"margin:10px\">\
-					应变篇\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						派派：专属应变效果\
-						<ul style=\"padding-left:20px;padding-top:5px\">\
-							<li>\
-								回复：回复1点体力\
-							</li>\
-						</ul>\
-					</li>\
-				</ul>\
-				<div style=\"margin:10px\">\
-					怒气强化说明\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						【杀】：消耗1点怒气强化，需要一张强化【闪】或两张【闪】才能抵消\
-					</li>\
-					<li>\
-						【闪】：消耗1点怒气强化，使用时视为两张【闪】的效果\
-					</li>\
-					<li>\
-						【决斗】：消耗2点怒气强化，对目标造成伤害时，伤害+1\
-					</li>\
-					<li>\
-						【火攻】：消耗2点怒气强化，造成的伤害+1\
-					</li>\
-					<li>\
-						【桃】：消耗3点怒气强化，回复的体力+1\
-					</li>\
-				</ul>"
+			"乱斗EX":`<div style="margin:10px">
+					背水
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						你执行背水效果后，依次执行上述两项/上述出现的“或”改为“和”
+					</li>
+				</ul>
+				<div style="margin:10px">
+					交给技能
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						交给技能为专属技能
+					</li>
+					<li>
+						理论上，场上只能存在一个交给技能
+					</li>
+					<li>
+						将交给技能交给一名角色前，先前角色失去此交给技能
+					</li>
+				</ul>
+				<div style="margin:10px">
+					使命技
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						允许包含使命完成前生效的子效果
+					</li>
+					<li>
+						若满足成功条件，失去此技能，执行成功分支的效果
+					</li>
+					<li>
+						若满足失败条件，失去此技能，执行失败分支的效果
+					</li>
+				</ul>
+				<div style="margin:10px">
+					应变篇
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						派派：专属应变效果
+						<ul style="padding-left:20px;padding-top:5px">
+							<li>
+								回复：回复1点体力
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<div style="margin:10px">
+					怒气强化说明
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						【杀】：消耗1点怒气强化，需要一张强化【闪】或两张【闪】才能抵消
+					</li>
+					<li>
+						【闪】：消耗1点怒气强化，使用时视为两张【闪】的效果
+					</li>
+					<li>
+						【决斗】：消耗2点怒气强化，对目标造成伤害时，伤害+1
+					</li>
+					<li>
+						【火攻】：消耗2点怒气强化，造成的伤害+1
+					</li>
+					<li>
+						【桃】：消耗3点怒气强化，回复的体力+1
+					</li>
+				</ul>`
 		}
 	};
 	if(lib.device||lib.node){
 		for(const i in SST_EXTRA.character){
-			SST_EXTRA.character[i][4].push("ext:大乱桌斗/image/character/"+i+".png");
+			SST_EXTRA.character[i][4].push(`ext:大乱桌斗/image/character/${i}.png`);
 		}
 	}
 	else{
 		for(const i in SST_EXTRA.character){
-			SST_EXTRA.character[i][4].push("db:extension-大乱桌斗:image/character/"+i+".png");
+			SST_EXTRA.character[i][4].push(`db:extension-大乱桌斗:image/character/${i}.png`);
 		}
 	}
 	return SST_EXTRA;

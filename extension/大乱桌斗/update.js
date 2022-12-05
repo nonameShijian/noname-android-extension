@@ -1,12 +1,10 @@
 (() => ({
 	// 扩展版本
-	version: "2.1.8",
+	version: "2.1.9",
 	// 扩展的上一个版本
-	oldversion: "2.1.7",
+	oldversion: "2.1.8",
 	// 更新内容汇总
-	changeLog:
-		"1. 修复了一些小问题。"
-	,
+	changeLog: "1. 修复了一些小问题。",
 	// 本次更新的所有文件(不包括文件夹)
 	updateFiles: [
 		"extension.js",

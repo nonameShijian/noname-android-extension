@@ -47,7 +47,7 @@ game.import("card",(lib,game,ui,get,ai,_status)=>{
 							str+="（或取消并改为决定是否将武将牌上一张牌置入弃牌堆）";
 						}
 						else{
-							str+="，否则"+get.translation(player)+"对你造成1点伤害";
+							str+=`，否则${get.translation(player)}对你造成1点伤害`;
 						}
 						const next=target.chooseToRespond(str,card=>get.type(card)=="basic");
 						next.set("ai",card=>{
@@ -60,7 +60,7 @@ game.import("card",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					if(result.bool==false){
 						if(target.countCards("sx")){
-							target.chooseCardButton("刺枪：将武将牌上一张牌置入弃牌堆，否则"+get.translation(player)+"对你造成1点伤害",target.getCards("sx")).set("ai",button=>11-get.useful(button.link));
+							target.chooseCardButton(`刺枪：将武将牌上一张牌置入弃牌堆，否则${get.translation(player)}对你造成1点伤害`,target.getCards("sx")).set("ai",button=>11-get.useful(button.link));
 						}
 						else{
 							target.damage(player);
@@ -198,14 +198,14 @@ game.import("card",(lib,game,ui,get,ai,_status)=>{
 			//Exclusive
 			sst_spear_thrust:"刺枪",
 			sst_spear_thrust_info:"出牌阶段，对你攻击范围内的一名角色使用。其须打出一张基本牌或将其武将牌上一张牌置入弃牌堆，否则你对其造成1点伤害。",
-			sst_spear_thrust_append:"<span class=\"text\" style=\"font-family: fzktk\">吾乃噗噗噗大陆头巾瓦豆鲁迪也！</span>",
+			sst_spear_thrust_append:`<span class="text" style="font-family: LXGWWenKai">吾乃噗噗噗大陆头巾瓦豆鲁迪也！</span>`,
 			//Equip
 			sst_aegises:"天之圣杯",
 			sst_aegises_info:"转换技，出牌阶段限一次，你可以与①一名角色②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰②雷电伤害。",
-			sst_aegises_append:"<span class=\"text\" style=\"font-family: fzktk\">所以到底算不算大家。</span>",
+			sst_aegises_append:`<span class="text" style="font-family: LXGWWenKai">所以到底算不算大家。</span>`,
 			sst_ink:"墨水",
 			sst_ink_info:"锁定技，你计算与其他角色的距离+1，【鱿鱼】对你造成的伤害+1。",
-			sst_ink_append:"<span class=\"text\" style=\"font-family: fzktk\">禁止泼墨！</span>",
+			sst_ink_append:`<span class="text" style="font-family: LXGWWenKai">禁止泼墨！</span>`,
 			//Skill
 			sst_aegises_skill:"天之圣杯",
 			sst_aegises_skill_info:"转换技，出牌阶段限一次，你可以与①一名角色②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰②雷电伤害。",
@@ -215,7 +215,7 @@ game.import("card",(lib,game,ui,get,ai,_status)=>{
 		list:[]
 	};
 	for(const i in SST_STANDARD.card){
-		SST_STANDARD.card[i].image=("ext:大乱桌斗/image/card/"+i+".png");
+		SST_STANDARD.card[i].image=(`ext:大乱桌斗/image/card/${i}.png`);
 	}
 	return SST_STANDARD;
 });

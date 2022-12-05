@@ -411,10 +411,10 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 		},
 		precontent:data=>{
 			if(data.enable){
-				const VERSION="2.1.8";
+				const VERSION="2.1.9";
 				lib.superSmashTabletop=VERSION;
 				//CSS
-				lib.init.css(lib.assetURL+"extension/大乱桌斗","extension");
+				lib.init.css(`${lib.assetURL}extension/大乱桌斗`,"extension");
 				//SSTLib
 				/**
 				 * Check if already installed latest SSTLib
@@ -967,10 +967,10 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				const GROUP=['sst_light','sst_dark','sst_spirit','sst_reality','sst_smash'];
 				lib.group.addArray(GROUP);
 				if(typeof lib.decade_extGroupImage!="object") lib.decade_extGroupImage={};
-				GROUP.forEach(i=>lib.decade_extGroupImage[i]=lib.assetURL+"extension/大乱桌斗/image/decade_extGroupImage/name_"+i+".png");
+				GROUP.forEach(i=>lib.decade_extGroupImage[i]=`${lib.assetURL}extension/大乱桌斗/image/decade_extGroupImage/name_${i}.png`);
 				//Characters & cards
-				lib.init.js(lib.assetURL+"extension/大乱桌斗/character",["sst_standard","sst_extra"]);
-				lib.init.js(lib.assetURL+"extension/大乱桌斗/card","sst_standard");
+				lib.init.js(`${lib.assetURL}extension/大乱桌斗/character`,["sst_standard","sst_extra"]);
+				lib.init.js(`${lib.assetURL}extension/大乱桌斗/card`,"sst_standard");
 				//Characters & cards config
 				lib.config.all.characters.push("sst_standard");
 				if(!lib.config.characters.contains("sst_standard")) lib.config.characters.push("sst_standard");
@@ -987,16 +987,16 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 		config:{
 			sst_log:{
 				clear:true,
-				name:"<details>\
-						<summary>\
-							更新日志（"+"2.1.8"+"）\
-						</summary>\
-						<ol>\
-							<li>\
-								修复了一些小问题。\
-							</li>\
-						</ol>\
-					</details>",
+				name:`<details>
+						<summary>
+							更新日志（2.1.9）
+						</summary>
+						<ol>
+							<li>
+								修复了一些小问题。
+							</li>
+						</ol>
+					</details>`,
 				intro:"查看更新日志"
 			}
 		},
@@ -1014,44 +1014,44 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				skill:{},
 				translate:{}
 			},
-			intro:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>大乱桌斗LITE<rp>（</rp><rt>Super Smash Tabletop LITE</rt><rp>）</rp></ruby></h2>\
-				<p>\
-					《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于<i>任天堂</i>、<i>Sora</i>和其他相关公司。\
-				</p>\
-				<p>\
-					<details>\
-						<summary>\
-							作者（以斜体表示）\
-						</summary>\
-						<ul>\
-							<li>\
-								<i>Show-K</i>（程序开发，卡牌创作）\
-							</li>\
-							<li>\
-								<i>mario not mary</i>（《大乱斗杀》计划发起，主要卡牌创作，插图）\
-							</li>\
-							<li>\
-								<i>Yumikohimi</i>、<i>南柯</i>、<i>Axel_Zhai</i>、<i>小时节</i>等（卡牌创作）\
-							</li>\
-							<li>\
-								<i>封羽翎烈</i>等（《任天堂明星大乱斗特别版全命魂介绍》、插图）\
-							</li>\
-						</ul>\
-					</details>\
-				</p>\
-				<p>\
-					对于未经允许即使用各自作者的插图的事情表示深感抱歉，会尽量标注作者以及相应地址/社交账号，若有异议可联系修改/删除。\
-				</p>",
+			intro:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>大乱桌斗LITE<rp>（</rp><rt>Super Smash Tabletop LITE</rt><rp>）</rp></ruby></h2>
+				<p>
+					《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于<i>任天堂</i>、<i>Sora</i>和其他相关公司。
+				</p>
+				<p>
+					<details>
+						<summary>
+							作者（以斜体表示）
+						</summary>
+						<ul>
+							<li>
+								<i>Show-K</i>（程序开发，卡牌创作）
+							</li>
+							<li>
+								<i>mario not mary</i>（《大乱斗杀》计划发起，主要卡牌创作，插图）
+							</li>
+							<li>
+								<i>Yumikohimi</i>、<i>南柯</i>、<i>Axel_Zhai</i>、<i>小时节</i>等（卡牌创作）
+							</li>
+							<li>
+								<i>封羽翎烈</i>等（《任天堂明星大乱斗特别版全命魂介绍》、插图）
+							</li>
+						</ul>
+					</details>
+				</p>
+				<p>
+					对于未经允许即使用各自作者的插图的事情表示深感抱歉，会尽量标注作者以及相应地址/社交账号，若有异议可联系修改/删除。
+				</p>`,
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1.8",
-			changeLog:"<h2><img style=\"float: left; height: 1.5em; margin-right: 5px;\" src=\""+lib.assetURL+"extension/大乱桌斗/super_smash_tabletop.png\"><ruby>更新日志<rp>（</rp><rt>"+"2.1.8"+"</rt><rp>）</rp></ruby></h2>\
-				<ol>\
-					<li>\
-						修复了一些小问题。\
-					</li>\
-				</ol>"
+			version:"2.1.9",
+			changeLog:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>更新日志<rp>（</rp><rt>2.1.9</rt><rp>）</rp></ruby></h2>
+				<ol>
+					<li>
+						修复了一些小问题。
+					</li>
+				</ol>`
 		},
 		files:{
 			character:[],

@@ -122,1039 +122,1039 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 		},
 		characterIntro:{
 			/*
-			"武将作者：Yumikohimi<br>\
-				武将作者：mario not mary<br>\
-				武将作者：Show-K<br>\
-				武将作者：南柯<br>\
-				武将作者：Axel_Zhai<br>\
-				武将作者：小时节<br>\
-				插图作者：未知<br>\
-				<hr>\
-				<br>\
-				系列：（）<br>\
-				首次登场：（）<br>\
-				<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				"
+			`武将作者：Yumikohimi<br>
+				武将作者：mario not mary<br>
+				武将作者：Show-K<br>
+				武将作者：南柯<br>
+				武将作者：Axel_Zhai<br>
+				武将作者：小时节<br>
+				插图作者：未知<br>
+				<hr>
+				<br>
+				系列：（）<br>
+				首次登场：（）<br>
+				<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				`
 			*/
-			sst_mario:"武将作者：mario not mary、Show-K<br>\
-				插图作者：kuromame_983<br>\
-				<hr>\
-				0001. 马力欧/Mario/マリオ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>\
-				超级标志性的角色！这位游戏巨星常常从酷霸王手中拯救世界。他有惊人的跳跃能力和多种变身道具。在闲暇时刻，他还会参与体育运动，擅长的项目数也数不清。在大乱斗里，他是一个值得信赖的全能型斗士。让我们一起来说：“是我，马力欧！”<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				太激昂了，太生生不息了。",
-			sst_link:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0172. 林克/Link/リンク<br>\
-				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				传统上林克的标志性特征是绿衣绿帽，不过在旷野之息中林克反而穿着蓝色的英杰服，也不戴帽子了。在大乱斗里，他的剑和盾让他攻守兼备，而他的弓、回旋镖和炸弹则给战斗增加了更多的变数。在前几代大乱斗里林克还会使用勾爪——所以说他是怎么同时带这么多东西上场的啊！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“醒醒吧……”",
-			sst_yoshi:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0297. 耀西/Yoshi/ヨッシー<br>\
-				系列：<ruby>耀西<rp>（</rp><rt>Yoshi</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧世界<rp>（</rp><rt>Super Mario World</rt><rp>）</rp></ruby><br>\
-				耀西经常和马力欧一起冒险，可以说是他最好的搭档。耀西可以吃掉几乎任何大小合适的生物，然后马上生出蛋来。借助他的浮空跳能力，他在大乱斗中非常适合空战。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				耀西~！",
-			sst_wario:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0729. 瓦力欧/Wario/ワリオ<br>\
-				系列：<ruby>瓦力欧<rp>（</rp><rt>Wario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧乐园 六个金币<rp>（</rp><rt>Super Mario Land: 6 Golden Coins</rt><rp>）</rp></ruby><br>\
-				瓦力欧简直就是恶趣味的集合体。这个怪人自称是马力欧的发小，并且相当厌恶马力欧。同时他还视财如命。在大乱斗中，他是个灵活的重量级斗士，还可以通过积攒屁来释放强力攻击——真的是太恶趣味了！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				瓦！瓦！瓦！！！",
-			sst_villager:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0825. 村民（男孩）/Villager (Boy)/むらびと（男の子）<br>\
-				系列：<ruby>动物森友会<rp>（</rp><rt>Animal Crossing</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>动物森友会<rp>（</rp><rt>Doubutsu no Mori</rt><rp>）</rp></ruby><br>\
-				在动物森友会系列中和动物们平和的生活在一起的年轻人，当然他也不拒绝在大乱斗里大显身手。他的上必杀技其实来自于《气球大战》这个游戏，而下必杀技则能生动地为大家说明不要在别人砍树的时候站在旁边。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“因为什么都没有，所以什么都做得到”",
-			sst_zelda:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0173. 塞尔达/Zelda/ゼルダ<br>\
-				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				塞尔达传说系列就是以这位坚强的公主命名的。在不同的作品里她的形象也不同，但她总是肩负重任。在大乱斗里，她擅长使用多种魔法，但是移动速度不是特别快。她在大乱斗四代和五代中的下必杀是幻影铠甲，而二代和三代的下必杀则是变身希克。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				林克，这就是三角力量……",
-			sst_ganondorf:"武将作者：Show-K、mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0175. 加侬多夫【盖侬多夫】/Ganondorf/ガノンドロフ<br>\
-				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>塞尔达传说 时之笛<rp>（</rp><rt>The Legend of Zelda: Ocarina of Time</rt><rp>）</rp></ruby><br>\
-				加侬多夫是拥有力量三角的魔王，意欲将海拉鲁大陆毁灭。除了人形态之外，他还可以变成巨大的野猪魔兽。当然，在大多数作品里，他的野心都会被林克摧毁。在大乱斗里，他虽然行动缓慢但威力强大，很容易就会把对手击飞，非常适合轻度玩家使用。<br>\
-				——封羽翎烈、无敌阿尔宙斯，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				你知道吗？海拉鲁的历史，就是一部被叫做盖侬的魔善侵袭的历史……",
-			sst_dr_mario:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0008. 马力欧医生/Dr. Mario/ドクターマリオ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>马力欧医生<rp>（</rp><rt>Dr. Mario</rt><rp>）</rp></ruby><br>\
-				在1990年的益智游戏《马力欧医生》中，马力欧换上了白大褂，准备在医学界大展身手。在大乱斗世界中，他是能够投掷药丸、使用超级床单反弹攻击的全能型斗士。他比马力欧要慢，但是攻击也更高。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				一开始技能就没设计好，但我还是要占个位置……现在设计好了，然而已经改了很多次了……",
-			sst_palutena:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0705. 帕露蒂娜/Palutena/パルテナ<br>\
-				系列：<ruby>光神话<rp>（</rp><rt>Kid Icarus</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>光神话<rp>（</rp><rt>Kid Icarus</rt><rp>）</rp></ruby><br>\
-				在《新光神话：帕露蒂娜之镜》中，这位光之女神通过心灵感应和彼特交流，并且赐予他各种对冒险有帮助的奇迹。在大乱斗中，她也有能适应各种场合的技能。以及，在大乱斗四代中，她的每个自定义技能都和基础技能完全不同，可以将她打造成不同风格的斗士。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				稍微认真点也没关系哦～",
-			sst_marth:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0610. 马尔斯/Marth/マルス<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 暗黑龙与光之剑<rp>（</rp><rt>Fire Emblem: Shadow Dragon and the Blade of Light</rt><rp>）</rp></ruby><br>\
-				初代《火焰纹章》的主角，阿提利亚王国的王子，也是英雄的后裔。在大乱斗中，他是一个标志性的剑人，剑法精湛而优雅。他的剑尖比剑根能的攻击力更高，还可以使用防反来应对对方的攻击。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“那正是英雄王本人”",
-			sst_rosalina:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0009. 罗莎塔/Rosalina/ロゼッタ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧银河<rp>（</rp><rt>Super Mario Galaxy</rt><rp>）</rp></ruby><br>\
-				神秘的罗莎塔和琪琪们一起生活在长尾星天文台。在大乱斗中，罗莎塔和琪琪能同时在不同位置攻击。如果你能将对手夹在罗莎塔和琪琪中间，她们就能合力打出超高伤害！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				欢迎来到新的银河。",
-			sst_zero_suit_samus:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0266. 零装甲萨姆斯/Zero Suit Samus/ゼロスーツサムス<br>\
-				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				即使不穿能量装甲，萨姆斯也很强。虽然没有装甲形态的高火力，但她的动力鞋给了她高机动性。而她的麻痹手枪既可以定住对手，也能发射等离子鞭进行抓取或回场。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“化整为零。”",
-			sst_luigi:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0004. 路易吉/Luigi/ルイージ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>马力欧兄弟<rp>（</rp><rt>Mario Bros.</rt><rp>）</rp></ruby><br>\
-				虽说有专门为他庆贺的“路易吉年（2013年）”，也曾经在某种意义上成为了电影明星，但这些关注只是让他变得更内向和不知所措了。不论是在原作中还是在大乱斗中，他都倾向于模仿哥哥的举动，不过他也将哥哥的部分招式改良了，比如他的超级跳跃拳在特定时机击飞力超高。以及，他的嘲讽都是100%纯原创的哦！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				和哥哥一起！",
-			sst_bowser:"武将作者：mario not mary<br>\
-				插图作者：mario not mary<br>\
-				<hr>\
-				0007. 酷霸王/Bowser/クッパ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟<rp>（</rp><rt>Super Mario Bros.</rt><rp>）</rp></ruby><br>\
-				马力欧的死对头，也是桃花公主老被绑架的罪魁祸首。他的阴谋基本上都没有实现，相反，有时候他甚至还会和马力欧合作。在大乱斗中，他是全游戏最重的人物，并且不会被轻攻击打出硬直。你必须得揍得足够大力才能将他击飞！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				终于有武将图片了。",
-			sst_peach:"武将作者：mario not mary<br>\
-				插图作者：ゲB<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/50055037")+"<br>\
-				<hr>\
-				0005. 桃花公主/Peach/ピーチ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟<rp>（</rp><rt>Super Mario Bros.</rt><rp>）</rp></ruby><br>\
-				蘑菇王国的公主，也是强大和可爱可以共存的最好证明。在大乱斗中，桃花公主可以在空中飘浮，随后突然落地掏出一堆武器来——包括但不限于平底锅、阳伞和奇诺比奥——所以她到底把这些都放在哪的啊？<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				哦～我赢了吗？",
-			sst_byleth_female:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1381. 贝雷丝/Byleth (Female)/ベレス<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 风花雪月<rp>（</rp><rt>Fire Emblem: Three Houses</rt><rp>）</rp></ruby><br>\
-				作为士官学校的老师，除了教学生战斗技巧之外，还可以请他们喝茶聊天。5年前亲密的学生们5年后却要各自为敌，实在令人唏嘘。顺便，5年后贝老师的头发会变成绿色。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				老师真的很希望你们都能活下来……",
-			sst_byleth_male:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1380. 贝雷特/Byleth (Male)/ベレト<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 风花雪月<rp>（</rp><rt>Fire Emblem: Three Houses</rt><rp>）</rp></ruby><br>\
-				赛罗斯骑士团前任团长杰拉尔特的儿子/女儿，因为在意外中救了几名学生，成为了加尔古·玛库士官学校的教师。缺乏情绪起伏，被称为灰色恶魔。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“你还算是个男人嘛？！”",
-			sst_massy:"武将作者：mario not mary<br>\
-				插图作者：mario not mary<br>\
-				<hr>\
-				R001. 绯和雅也/Massy\
-				<hr>\
-				Massy，唯一的神！",
-			sst_samus:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0264. 萨姆斯/Samus/サムス<br>\
-				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				萨姆斯·亚兰是游戏历史上第一个女主角，以只身一人在外星球的作战闻名。她的能量装甲是高等文明“鸟人族”的成果，给了她强大的火力、防护力和升级的可能性。在大乱斗中，虽然她是道具人，但是她的体术也不差。她的蓄力射击威力惊人。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“萨姆斯，很不幸的消息……”",
-			sst_ridley:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0267. 利德雷/Ridley/リドリー<br>\
-				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				萨姆斯的死对头，是杀害了她至亲的仇人，也是宇宙海盗的干部之一。看上去像是野兽，但是具有高度智慧。虽然一直到这代大乱斗才成为斗士，但在之前的大乱斗里也以其他的形式露过面。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“没有任何洗白的余地与必要”",
-			sst_dark_samus:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0265. 黑暗萨姆斯/Dark Samus/ダークサムス<br>\
-				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>密特罗德 究极<rp>（</rp><rt>Metroid Prime</rt><rp>）</rp></ruby><br>\
-				萨姆斯的废弃盔甲、究极密特罗德和有机矿石“啡宗”结合的产物，不但有强大的恢复能力，还能精神控制其他生物和制造自己的分身。它在3ds和WiiU版《任天堂明星大乱斗》中作为辅助模型的时候还能使用啡宗的力量攻击，成为斗士之后各个招式倒是完全和萨姆斯一样了，遗憾。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“堕入黑暗”",
-			sst_mr_game_watch:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0689. Mr. Game & Watch/Mr.ゲーム & ウォッチ<br>\
-				系列：Game & Watch<br>\
-				首次登场：Ball<br>\
-				Game & Watch是任天堂于80年代推出的一系列游戏及其设备的统称，既能玩游戏也能当时钟，这一设备也是之后的GB以及DS掌机的雏形。在大乱斗中，Game & Watch先生会使用来自原作的各种要素攻击。不过因为它是真实意义上的纸片人，所以非常轻，容易被击飞。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“是9！是9！”",
-			sst_mario_not_mary:"武将作者：mario not mary<br>\
-				插图作者：mario not mary<br>\
-				<hr>\
-				R002. MNM\
-				<hr>\
-				这才是大佬！整个计划的发起者！还是用酷霸王斗士的高手！",
-			sst_yumikohimi:"武将作者：mario not mary<br>\
-				插图作者：mario not mary<br>\
-				<hr>\
-				R003. 柚子/Yumikohimi\
-				<hr>\
-				比MNM好相处……",
-			sst_haine:"武将作者：mario not mary<br>\
-				插图作者：无<br>\
-				<hr>\
-				R004. 海涅/Haine\
-				<hr>\
-				公认的渣男！",
-			sst_terry:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1356. 特瑞·博加德/Terry Bogard/テリー・ボガード<br>\
-				系列：<ruby>饿狼传说<rp>（</rp><rt>Fatal Fury</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>饿狼传说<rp>（</rp><rt>Fatal Fury</rt><rp>）</rp></ruby><br>\
-				被称为“传说之狼”的传奇格斗家，多次夺得KOF的冠军，实际上却是一个南镇街头的无业游民。年少时为了替养父杰夫报仇而踏上了击败吉斯的旅途。师从中华武术大师唐福禄门下，招数却都是从杰夫那里学来的。在南镇的大街小巷的一次次的战斗中，他逐渐对和吉斯之间无穷无尽的复仇产生了质疑，但吉斯并没有给他反悔的机会。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				OK！",
-			sst_simon:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1050. 西蒙·贝尔蒙特/Simon Belmont/シモン・ベルモンド<br>\
-				系列：<ruby>恶魔城<rp>（</rp><rt>Castlevania</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>恶魔城<rp>（</rp><rt>Castlevania</rt><rp>）</rp></ruby><br>\
-				初代《恶魔城》的主角，最著名的吸血鬼猎人之一，个性勇敢莽撞。依靠除魔圣鞭和其他神圣武器击败了百年后卷土重来的德古拉，并且通过焚烧德古拉遗体破解了他给自己施加的诅咒。在原作中还有如骑士般武装或是清秀优雅的形象，大乱斗中的这个形象是他最初登场时的样子。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“滚回黑暗。”",
-			sst_incineroar:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0419. 炽焰咆哮虎/Incineroar/ガオガエン<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>精灵宝可梦 太阳／月亮<rp>（</rp><rt>Pokémon Sun and Moon</rt><rp>）</rp></ruby><br>\
-				以反派摔角手为原型的宝可梦，是《宝可梦：太阳/月亮》中初始宝可梦火斑喵的最终进化。性格暴躁又任性，但讨厌欺凌弱小这类无聊的事。对于强大的对手会拿出干劲来。在大乱斗中，它主要使用各种与摔角有关的招式。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				宇宙第一宝可梦！",
-			sst_greninja:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0418. 甲贺忍蛙/Greninja/ゲッコウガ<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>精灵宝可梦 Ｘ／Ｙ<rp>（</rp><rt>Pokémon X and Y</rt><rp>）</rp></ruby><br>\
-				甲贺忍蛙是水+恶属性的宝可梦，完全想不到最初呆萌的呱呱泡蛙会进化成这样。它和所有忍者一样敏捷而致命，投掷的飞水手里剑甚至能切割金属。在大乱斗中，它是高速型的斗士，回场能力也非常不错。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“变幻自在”",
-			sst_kirby:"武将作者：mario not mary<br>\
-				插图作者：kotori<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/26818738")+"<br>\
-				<hr>\
-				0323. 卡比/Kirby/カービィ<br>\
-				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星之卡比<rp>（</rp><rt>Kirby\x27s Dream Land</rt><rp>）</rp></ruby><br>\
-				圆圆滚滚的可爱卡比在波普之星过着平静的生活。它可以吸入物品或者生物，并且将它们吐出来或者复制能力。在大乱斗中，卡比吸入斗士之后可以复制他们的通常必杀技。它虽然很容易被击飞，但回场能力还不错。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				樱井亲儿子，粉红恶魔，灯火之星。",
-			sst_king_k_rool:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0136. 库鲁鲁王/King K. Rool/キングクルール<br>\
-				系列：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级森喜刚<rp>（</rp><rt>Donkey Kong Country</rt><rp>）</rp></ruby><br>\
-				就像马力欧的死对头是酷霸王一样，森喜刚的死对头是库鲁鲁王。他是个性格恶劣的鳄鱼，拥有坚硬的肚皮铠甲和闪亮的皇冠。想要他和森喜刚合作甚至成为朋友是几乎不可能的。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				别说他了，现在连森喜刚新作也没有个影子……",
-			sst_donkey_kong:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0134. 森喜刚/Donkey Kong/ドンキーコング<br>\
-				系列：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>\
-				丛林的王者，也是最狂热的香蕉狂魔。他的冒险总是以某人偷了他的香蕉开始。在大乱斗中，他的力度和投技是众所周知的。虽然体积很大，但是速度也不是特别慢。他的前投掷还能扛着对手走哦！要合理利用这一点！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				最近来了次史诗级加强。",
-			sst_richter:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1051. 里希特·贝尔蒙特/Richter Belmont/リヒター・ベルモンド<br>\
-				系列：<ruby>恶魔城<rp>（</rp><rt>Castlevania</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>恶魔城X 血之轮回<rp>（</rp><rt>Castlevania: Rondo of Blood</rt><rp>）</rp></ruby><br>\
-				《恶魔城X：血之轮回》的主角，吸血鬼猎人家族的后代，他从德古拉手中救出了自己的恋人，还曾经和德古拉的儿子阿鲁卡多并肩作战。他擅长使用杂技般灵活的体术与敌人周旋，还能解放除鞭子外其他神圣武器的力量，进行更强力的攻击。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“我有愧于此称……”",
-			sst_pokemon_trainer_red:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0412. 宝可梦训练家（男性）/Pokémon Trainer (Male)/ポケモントレーナー（男性）<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>宝可梦 红／绿<rp>（</rp><rt>Pokémon Red and Green Versions</rt><rp>）</rp></ruby><br>\
-				历代《宝可梦》的主线里都有一个以冠军为目标的训练师，带着宝可梦博士给的初始宝可梦踏上旅途。他们还会骑自行车或者滑轮滑。在大乱斗中，宝可梦训练师会一直在场地后面，负责切换宝可梦和为他的同伴加油鼓劲。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“……”",
-			sst_isabelle:"武将作者：mario not mary、Yumikohimi<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0827. 西施惠/Isabelle/しずえ<br>\
-				系列：<ruby>动物森友会<rp>（</rp><rt>Animal Crossing</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>来吧！动物森友会<rp>（</rp><rt>Animal Crossing: New Leaf</rt><rp>）</rp></ruby><br>\
-				在3DS版《动物森友会》中，她是村民们的可靠秘书；而在NS版中，她也为每个无人岛居民提供生活服务。她有时可能健忘，但总的来说很靠谱。有个叫西施德的弟弟。她在3DS和WiiU版《任天堂明星大乱斗》中是辅助模型，NS版中则成为了斗士。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				大家都爱的秘书西施惠！",
-			sst_daisy:"武将作者：mario not mary<br>\
-				插图作者：高橋うもり<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/73249081")+"<br>\
-				<hr>\
-				0006. 菊花公主/Daisy/デイジー<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧乐园<rp>（</rp><rt>Super Mario Land</rt><rp>）</rp></ruby><br>\
-				虽然是萨拉萨大陆的公主，但菊花公主完全没有身为王族的优雅，反而相当活泼任性，这也是她的独特之处。据说路易吉对她很着迷？和桃花公主不同，菊花公主只被绑架过一次。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				嘿！我是黛西！",
-			sst_meta_knight:"武将作者：mario not mary<br>\
-				插图作者：糸谷さいれん<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/60069126")+"<br>\
-				<hr>\
-				0324. 魅塔骑士/Meta Knight/メタナイト<br>\
-				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星之卡比 梦之泉物语<rp>（</rp><rt>Kirby\x27s Adventure</rt><rp>）</rp></ruby><br>\
-				卡比的神秘劲敌，披风可以变成翅膀的样子。在大乱斗里，他以剑术和强大的空战能力著称。他拥有多段跳，并且所有的必杀技都能用来回场。在Wii版《任天堂明星大乱斗》里，他的强度甚至破坏了平衡。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“Fight me.”",
-			sst_little_mac:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0932. 小麦克/Little Mac/リトル・マック<br>\
-				系列：<ruby>击拳热斗！！<rp>（</rp><rt>Punch-Out!!</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>击拳热斗！！<rp>（</rp><rt>Punch-Out!!</rt><rp>）</rp></ruby><br>\
-				击拳热斗系列的主角，虽然身材矮小，但斗志满满。无论是在世界拳击大赛中面对高大的对手们，还是在大乱斗中面对游戏明星们，都毫不畏惧。在大乱斗中，他的拳法简单粗暴。当KO槽蓄满时，他就可以使用击飞力超强的上勾拳。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				加油！麦克！",
-			sst_oc:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				R005. OC\
-				<hr>\
-				霸凌你哦！",
-			sst_mr_8:"武将作者：mario not mary<br>\
-				插图作者：无<br>\
-				<hr>\
-				R006. 八爷/Mr. 8\
-				<hr>\
-				据说大乱斗人都叫他东北吴彦祖。",
-			sst_dark_link:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				S001. Dark Link/ダークリンク<br>\
-				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>林克的冒险<rp>（</rp><rt>Zelda II: The Adventure of Link</rt><rp>）</rp></ruby><br>\
-				暗黑林克是林克的邪恶面。他是《塞尔达传说》系列中最神秘的敌人角色之一，通常在没有背景故事和对话的情况下出现，尽管在很多场合都暗示它只是由暗影魔法构成。对于林克来说，暗黑林克不仅仅是一场与怪物的战斗，而是一场与自己的战斗，因为这位年轻的英雄必须面对自己的力量与他作对。正因为如此，暗黑林克通常是终极挑战。他有一次成为正式的最终Boss（《林克的冒险》），以及在《四剑神殿》和“Take \x27Em All On!”等中作为可选挑战的最终Boss。<br>\
-				——翻译自《塞尔达维基》<br>\
-				<hr>\
-				话说塞尔达传说的第二部和系列其他作品很不一样。",
-			sst_kyuukou:"武将作者：mario not mary<br>\
-				插图作者：封羽翎烈<br>\
-				<hr>\
-				R007. 鸿渐/Kyuukou\
-				<hr>\
-				经典白给！",
-			sst_windier:"武将作者：mario not mary<br>\
-				插图作者：封羽翎烈<br>\
-				<hr>\
-				R008. 翎烈/Windier\
-				<hr>\
-				这里几乎所有武将介绍都取材于封羽翎烈的《任天堂明星大乱斗特别版全命魂介绍》，还不快去"+get.formatUrl("https://ssbuspirits.top")+"支持一下？",
-			sst_rentianshu:"武将作者：mario not mary<br>\
-				插图作者：无<br>\
-				<hr>\
-				R009. 任天鼠\
-				<hr>\
-				当了很久的“任豚”了。",
-			sst_srf:"武将作者：mario not mary<br>\
-				插图作者：无<br>\
-				<hr>\
-				R010. Srf\
-				<hr>\
-				看来又是一个渣男。",
-			sst_bowser_jr:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0010. 酷霸王Jr. /Bowser Jr. /クッパJr.<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧阳光<rp>（</rp><rt>Super Mario Sunshine</rt><rp>）</rp></ruby><br>\
-				酷霸王超宠爱的孩子，有标志性的带大嘴巴图案的围脖。和他爸一样，酷霸王Jr.也想打败马力欧。在大乱斗中，他乘坐全副武装的酷霸王小丑飞船出战。如果被击中飞船而不是本体，受伤会更少，所以要注意走位。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				怎么也想不到，当初发誓要打败马力欧的少年，现在却和马力欧越走越近。",
-			sst_koopalings:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0011. 伊吉/Iggy/イギー<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>\
-				伊吉戴着黑框眼镜，梳着个菠萝发型，有些爱搞恶作剧。他说话语气卖萌，但是笑起来又疯疯癫癫的。他还喜欢训练汪汪，在《新超级马力欧兄弟2》中，他就靠一只暴躁的汪汪来对付马力欧。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0012. 温缇/Wendy/ウェンディ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>\
-				酷霸王7人组中唯一的一个女孩子。她非常莽，也非常傲慢自大，并且将桃花公主和菊花公主视为对手。虽然性格像是假小子，但是也不排斥用粉色蝴蝶结和高跟鞋展示自己女性化的一面。在《新超级马力欧兄弟U》中，她还展示了自己优雅的溜冰技巧。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0013. 雷米/Lemmy/レミー<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>\
-				酷霸王7人组中身材最矮小的一个，是个一脸怪相又不失稚气的小捣蛋。在《新超级马力欧兄弟U》中，他是第一关的Boss，踩在球上投掷炸弹攻击，与此同时炫彩的头发一抖一抖的。不要低估他的实力哦！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0014. 洛伊/Roy/ロイ（スーパーマリオブラザーズ）<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>\
-				酷霸王7人组中的重量级选手，经常四处耀武扬威。他的粉色墨镜虽然没什么压迫感，但他灵活可变的速度却威胁不小。在《超级马力欧兄弟3》中，他通过制造地震和使用魔法来攻击马力欧，还真是挺棘手的！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0015. 拉里/Larry/ラリー<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>\
-				酷霸王7人组中年纪最小的一个，总是想在各种事情上赢过别人——即使别人并没有想与他竞争。他高耸的蓝色头发非常引人注目。在《新超级马力欧兄弟Wii》里，他在第一关出现。虽说他的蓝色火球和刺壳旋转看起来很难对付，但其实他的行动非常套路化。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0016. 洛德威格/Ludwig/ルドウィッグ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>\
-				酷霸王7人组中最聪明的一个，有非常标志性的蓝色中分头。虽然可以表现的很成熟，但是他更喜欢装逼。在《新超级马力欧兄弟Wii》里，他是第七关的Boss，可以使用追踪魔法弹，还会故意悬在空中躲避攻击。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0017. 莫顿/Morton/モートン<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>\
-				酷霸王7人组中体格最大的一个。他标志性的特征是三根呆毛——不对，应该是脸上的星星标记。他四肢发达头脑简单，在《新超级马力欧兄弟2》中，他在第四关出现，你不打他他就不会动。也许他真的是很不爱动吧！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				摇身一变就和酷霸王没有血缘关系了。",
-			sst_ryu:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0977. 隆/Ryu/リュウ<br>\
-				系列：<ruby>街头霸王<rp>（</rp><rt>Street Fighter</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>街头霸王<rp>（</rp><rt>Street Fighter</rt><rp>）</rp></ruby><br>\
-				隆，武道上永恒的探求者，凭借着从刚拳处学来的波动流暗杀术，他遍历全球挑战强者，在夺得大赛冠军后却淡泊名利不去领奖，因为他的目标只有一个，也是豪鬼留给他的问题：战斗的意义，除了杀戮，还有什么？他也曾为了追求力量迷失自我，将自己沉浸在杀意中，但现在的他已经将阴影从心中驱逐，俨然一代宗师。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				你必须击败我的升龙拳才能得到一线转机。",
-			sst_ken:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0978. 肯/Ken/ケン<br>\
-				系列：<ruby>街头霸王<rp>（</rp><rt>Street Fighter</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>街头霸王<rp>（</rp><rt>Street Fighter</rt><rp>）</rp></ruby><br>\
-				肯是隆的头号挚友兼劲敌，两人师出同门，与风餐露宿四处苦行的隆不同，肯有着自己的家族与财大气粗的产业，据说现在空手道网课也办的红红火火。他在年轻时因为急躁吃过不少败仗，但现在的他已经有了自己的家庭，即便如此，在顾家的闲暇也一定要挤出时间与挚友对战几局，才是男人的快乐。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				我准备好了，来吧。",
-			sst_waluigi:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0035. 瓦路易吉/Waluigi/ワルイージ<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>马力欧网球64<rp>（</rp><rt>Mario Tennis</rt><rp>）</rp></ruby><br>\
-				一看他那个硬而扭曲的胡子，还有红色的鹰钩鼻，就知道这是个带恶人了。他自称是路易吉的劲敌，性格狡猾，行动敏捷。当作为辅助模型被召唤时，他会将离他最近的斗士猛踩到地里，然后用网球拍殴打他的受害者。不知道为什么，在国外希望瓦路易基参战大乱斗的呼声相当高，甚至都成为烂梗了。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				金钱，名声，邀请函，都会是本大爷的！",
-			sst_master_hand:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1095. 大师之手/Master Hand/マスターハンド<br>\
-				系列：<ruby>任天堂明星大乱斗<rp>（</rp><rt>Super Smash Bros.</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>任天堂明星大乱斗<rp>（</rp><rt>Super Smash Bros.</rt><rp>）</rp></ruby><br>\
-				创造大乱斗世界的神秘之手。它会在取胜乱斗中所有对手被打败后出现在终点。它的招数极其多样，并且在生命不足时会变得更强大。如果知道什么时候攻击，什么时候躲闪，应对它就不是难事！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				右手，代表着创造。",
-			sst_ike:"武将作者：mario not mary<br>\
-				插图作者：北千里<br>\
-				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>\
-				<hr>\
-				0614. 艾克（苍炎之轨迹）/Ike (Path of Radiance)/アイク（蒼炎の軌跡）<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 苍炎之轨迹<rp>（</rp><rt>Fire Emblem: Path of Radiance</rt><rp>）</rp></ruby><br>\
-				《火焰纹章：苍炎之轨迹》的主角，父亲被神秘的漆黑骑士所杀，于是继承了父亲的佣兵团，并且承担了保卫未来女皇的任务。拥有恐怖的力量，他的剑本来是双手剑，但他可以单手使用。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0615. 艾克（晓之女神）/Ike (Radiant Dawn)/アイク（暁の女神）<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章 苍炎之轨迹<rp>（</rp><rt>Fire Emblem: Path of Radiance</rt><rp>）</rp></ruby><br>\
-				《火焰纹章：晓之女神》的故事发生于前作《苍炎之轨迹》的3年后，狂王战争后一切百废待兴，然而又有新的势力出现威胁和平。经历过这么多事情后，艾克真能称得上是英雄。在大乱斗中，他的各种技能击飞力度也很强。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				大！天！空！",
-			sst_miumiu:"武将作者：mario not mary<br>\
-				插图作者：mario not mary<br>\
-				<hr>\
-				R011. 缪缪\
-				<hr>\
-				据说家里裙子比其他女生还要多。",
-			sst_toon_link:"武将作者：mario not mary、Yumikohimi<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0177. 卡通林克/Toon Link/トゥーンリンク<br>\
-				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>塞尔达传说 风之杖<rp>（</rp><rt>The Legend of Zelda: The Wind Waker</rt><rp>）</rp></ruby><br>\
-				这个林克来自《塞尔达传说：风之律动》，偶尔也会被称为猫眼林克。在大乱斗中，他的技能组看似和另外两个林克相同，但他的炸弹爆炸范围更大，上必杀滞空时间也更长。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“故事到处都有，传说仅此一个。”",
-			sst_wolf:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0384. 沃鲁夫/Wolf O\x27Donnell/ウルフ<br>\
-				系列：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星际火狐64<rp>（</rp><rt>Star Fox 64</rt><rp>）</rp></ruby><br>\
-				沃鲁夫曾经为安德罗斯效力，和“星际火狐”小队多次交战。在安德罗斯被流放后，他自己组建了“星狼”小队。虽然偶尔也会和火狐并肩作战，但总体而言他们还是死对头。他的通常必杀技射出的子弹比火狐和佛克都要强力。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				游戏结束了！星际火狐！",
-			sst_young_link:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0176. 幼年林克/Young Link/こどもリンク<br>\
-				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>塞尔达传说 时之笛<rp>（</rp><rt>The Legend of Zelda: Ocarina of Time</rt><rp>）</rp></ruby><br>\
-				《塞尔达传说：时之笛》中的林克，在原作中可以通过时之笛切换幼年和成年两个形态。幼年形态是不能使用大师剑的。在大乱斗中，他的通常必杀技射出的是火箭，相比另两个林克的箭性能更好。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				老摸有时候能写出让我吐血的武将……比如这个……现在〖假面〗好像废了，在找解决方法。现在应该可以了，然而要重新编写好多技能的代码啊……",
-			sst_ocarina_of_time_link:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0176. 幼年林克/Young Link/こどもリンク<br>\
-				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>塞尔达传说 时之笛<rp>（</rp><rt>The Legend of Zelda: Ocarina of Time</rt><rp>）</rp></ruby><br>\
-				《塞尔达传说：时之笛》中的林克，在原作中可以通过时之笛切换幼年和成年两个形态。幼年形态是不能使用大师剑的。在大乱斗中，他的通常必杀技射出的是火箭，相比另两个林克的箭性能更好。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				物是人非，沧海桑田……",
-			sst_spring_man:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1287. 弹簧人/Spring Man/スプリングマン<br>\
-				系列：<ruby>神臂斗士<rp>（</rp><rt>ARMS</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>神臂斗士<rp>（</rp><rt>ARMS</rt><rp>）</rp></ruby><br>\
-				在弹簧竞技场进行修炼的、热血的弹簧斗士。他的梦想是有朝一日能在ARMS大奖赛中打败最强铜领，夺得冠军。他最喜欢吃披萨，靠自己的手臂，可以在吃的时候拉出长长的奶酪丝。在大乱斗中，作为辅助模型的他会使用弹簧手臂连击对手。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				然而却是面面参战了……",
-			sst_joker:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1304. Joker（怪盗）/Joker (Phantom Thief)/ジョーカー（怪盗）<br>\
-				系列：<ruby>女神异闻录<rp>（</rp><rt>Persona</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>女神异闻录5<rp>（</rp><rt>Persona 5</rt><rp>）</rp></ruby><br>\
-				P5主人公在异世界的形态，是由反抗意识觉醒了人格面具的样子。初始人格面具为亚森——大乱斗里也是这家伙，戴着白鸟外形眼部为黑色的面具。身穿黑色的风衣，棕色古巴高跟鞋，灰衬衫和黑色长裤，配上标志性的红色手套。代号“Joker”，是“王牌”的意思。<br>\
-				——Eric、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1305. Joker（学生）/Joker (Student)/ジョーカー（学生）<br>\
-				系列：<ruby>女神异闻录<rp>（</rp><rt>Persona</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>女神异闻录5<rp>（</rp><rt>Persona 5</rt><rp>）</rp></ruby><br>\
-				P5主人公的常服。身穿秀尽学园的校服，戴着黑框眼镜，有着黑色卷发和深灰的瞳孔。在平常他会以这身装束行动，虽然打扮并不出众，但却是个美男子，所以能与许多人建立关系。<br>\
-				——Eric、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“真不愧是Joker！”",
-			sst_rex:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0966. 莱克斯/Rex/レックス<br>\
-				系列：<ruby>异度神剑<rp>（</rp><rt>Xenoblade Chronicles</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>异度神剑2<rp>（</rp><rt>Xenoblade Chronicles 2</rt><rp>）</rp></ruby><br>\
-				平时生活在巨神兽“青龙”的身上，以打捞为生的少年，梦想是登上远方的世界树，去往“乐园”。有一次接受了报酬丰厚的打捞沉船委托，并意外的唤醒了沉船中的异刃“焰”。他接受了焰分给他的一半生命，并立志要带她一起去乐园。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“莱克斯，你一个人……也已经没问题了吧。”",
-			sst_cuphead_mugman:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1398. 茶杯头/Cuphead/カップヘッド<br>\
-				系列：<ruby>茶杯头<rp>（</rp><rt>Cuphead</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>茶杯头<rp>（</rp><rt>Cuphead</rt><rp>）</rp></ruby><br>\
-				人如其名，脑袋是个茶杯，甚至还可以拿下来或者用吸管吸里面的水。他和弟弟马克杯人误入魔鬼的赌场并被魔鬼欺骗，不得不帮助魔鬼回收他其他债主的灵魂——这些债主可一个比一个难缠。所以说，一开始就不要跟魔鬼打交道啊！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“不要和恶魔做交易。”",
-			sst_krystal:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0387. 水晶/Krystal/クリスタル<br>\
-				系列：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星际火狐冒险<rp>（</rp><rt>Star Fox Adventures</rt><rp>）</rp></ruby><br>\
-				她曾经被囚禁在水晶中，这段经历太符合她的名字了。火狐在救出水晶之后邀请她加入小队，在小队中，她的读心能力发挥了很大作用。她之后还和火狐坠入爱河，不知读心能力是促成了还是阻碍了他们的关系呢？<br>\
-				——煤球，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				可惜当初没能在Brawl参战，后来彻底没机会了……",
-			sst_mega_man:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0864. 洛克人/Mega Man/ロックマン<br>\
-				系列：<ruby>洛克人<rp>（</rp><rt>Mega Man</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>洛克人<rp>（</rp><rt>Mega Man</rt><rp>）</rp></ruby><br>\
-				CAPCOM公司的元祖洛克人系列的主角，首次登场于1987年。他需要通过各个关卡，打败关底的机器人Boss得到他们的武器。在大乱斗中，他所使用的各种技能就来源于此，总共超过10种。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				有段时间老摸一直在玩洛克人……",
-			sst_captain_falcon:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0591. 飞隼队长/Captain Falcon/キャプテン・ファルコン<br>\
-				系列：<ruby>零式赛车<rp>（</rp><rt>F-Zero</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>零式赛车<rp>（</rp><rt>F-Zero</rt><rp>）</rp></ruby><br>\
-				在F-Zero赛车大赛中，飞隼队长驾驶着他的“蓝色猎鹰”取得了优秀的成绩。虽然参战了大乱斗，但他的真实身份仍然是个谜。他的速度和力量都很强，还有演出效果爆炸的招牌技能“飞隼拳”，可以在落地的时候尝试使用哦！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				亮招来见。",
-			sst_jigglypuff:"武将作者：mario not mary、南柯<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0409. 胖丁/Jigglypuff/プリン<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>宝可梦 红／绿<rp>（</rp><rt>Pokémon Red and Green Versions</rt><rp>）</rp></ruby><br>\
-				胖丁是一般+妖精属性的宝可梦，以其催眠性的歌声闻名。在大乱斗中，它空战很强，还有多段跳的能力。不过它的缺点是太轻了，如果露出破绽，很容易就会被击飞。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				什么叫超级方差斗士啊！",
-			sst_lucario:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0417. 路卡利欧/Lucario/ルカリオ<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>宝可梦不可思议迷宫 赤之救助队／青之救助队<rp>（</rp><rt>Pokémon Mystery Dungeon: Red Rescue Team and Blue Rescue Team</rt><rp>）</rp></ruby><br>\
-				路卡利欧是格斗+钢属性的宝可梦，通过观察和操纵波导来攻击。路卡利欧受到的伤害越多，自身的伤害也越高，最多可以造成1.8倍的伤害，此时波导弹也会变大！如果敌人没有击杀路卡利欧，那就很难办了。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				波导之力永存吾心。",
-			sst_pichu:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0410. 皮丘/Pichu/ピチュー<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>精灵宝可梦 金／银<rp>（</rp><rt>Pokémon Gold and Silver Versions</rt><rp>）</rp></ruby><br>\
-				皮卡丘尚未进化时就是皮丘。它还不擅长蓄电。惊讶或者发笑时，就会立刻进行放电。在大乱斗中，虽然皮丘各个技能的力度比皮卡丘强，但它每次放电都会伤到自己。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				自损八百，可伤敌一千——某张姓女子。",
-			sst_king_dedede:"武将作者：mario not mary<br>\
-				插图作者：太春/バルテー<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/42226957")+"<br>\
-				<hr>\
-				0325. 帝帝帝大王/King Dedede/デデデ大王<br>\
-				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星之卡比<rp>（</rp><rt>Kirby\x27s Dream Land</rt><rp>）</rp></ruby><br>\
-				他自称这片大陆的大王，但其实没什么统治的欲望。他是个大吃货，所以不出意外的是个重型斗士。和他有关的bgm都很魔性。虽然体积大、速度慢，但是可以多段跳。他的火箭锤威力非常惊人。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				你休想欺负我的瓦豆鲁迪！",
-			sst_corrin:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0618. 神威（男性）/Corrin (Male)/カムイ（男性）<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章if<rp>（</rp><rt>Fire Emblem Fates</rt><rp>）</rp></ruby><br>\
-				《火焰纹章：if》的主角，形象和性别可以自定义。出生和成长分别在两个文化截然不同的王国，在成人后又卷入两国之间的冲突。拥有龙的血统，可以将身体的部分或全部变为龙形态。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0619. 神威（女性）/Corrin (Female)/カムイ（女性）<br>\
-				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>火焰纹章if<rp>（</rp><rt>Fire Emblem Fates</rt><rp>）</rp></ruby><br>\
-				《火焰纹章：if》的主角，形象和性别可以自定义。因为常年被关在城堡里，所以对人情世故一无所知，因此很被亲友们担心。手里的剑是最终形态的“夜刀神”，只认她一个主人。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				我选择……",
-			sst_steve:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1428. 史蒂夫/Steve/スティーブ<br>\
-				系列：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>\
-				来自一个由立方体构成的世界的神秘人物，身为一名探险家（同时还是一名矿工），他将（和他心爱的镐子）探索这个世界，并与各位斗士们进行一次武艺切磋。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“想挖到钻石吗？尝试在Y=11找找！”<br>\
-				<hr>\
-				（Show-K注：Steve能参战我是真的很惊讶，猜到他会来却又猜不到他会在这个时候来吧……）",
-			sst_ma:"武将作者：mario not mary<br>\
-				插图作者：无<br>\
-				<hr>\
-				R012. 马老师/Ma\
-				<hr>\
-				我们都是初级人～",
-			sst_feiji:"武将作者：mario not mary<br>\
-				插图作者：无<br>\
-				<hr>\
-				R013. 飞机\
-				<hr>\
-				打了吗？还没有！",
-			sst_sonic:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0775. 索尼克/Sonic the Hedgehog/ソニック・ザ・ヘッジホッグ<br>\
-				系列：<ruby>刺猬索尼克<rp>（</rp><rt>Sonic the Hedgehog</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>刺激赛车<rp>（</rp><rt>Rad Mobile</rt><rp>）</rp></ruby><br>\
-				索尼克系列的主角，很好相处，喜欢用速度证明自己的实力。事实上，他是大乱斗中跑步速度最快的斗士。他可以利用速度优势躲避攻击并进行快攻。在过去，索尼克系列曾经对马力欧系列形成了强力的竞争。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				“SONIC SPEED！”",
-			sst_hero:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1324. 勇者（勇者斗恶龙XI S）/Hero (DRAGON QUEST XI S)/勇者（ドラゴンクエストXI S）<br>\
-				系列：<ruby>勇者斗恶龙<rp>（</rp><rt>Dragon Quest</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>勇者斗恶龙XI S<rp>（</rp><rt>Dragon Quest XI S</rt><rp>）</rp></ruby><br>\
-				勇者斗恶龙系列中的每个主角都不会说话，名字也是玩家自定义的，但他们的设定各不相同。《勇者斗恶龙XI S》中的勇者左手有世界树的标志，然而因为国王被魔王控制，他很长一段时间都被污蔑为恶魔之子并遭到追捕。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1325. 勇者（勇者斗恶龙III）/Hero (DRAGON QUEST III)/勇者（ドラゴンクエストIII）<br>\
-				系列：<ruby>勇者斗恶龙<rp>（</rp><rt>Dragon Quest</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>勇者斗恶龙III<rp>（</rp><rt>Dragon Quest III</rt><rp>）</rp></ruby><br>\
-				系列中最为标志性的勇者，通常被称为洛特，《勇者斗恶龙》和《勇者斗恶龙II》的主角都是他的后代。他为了完成父亲未竟的讨伐魔王大业，而和三个同伴一同冒险。这也是拥有转职系统的第一作。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1326. 勇者（勇者斗恶龙IV）/Hero (DRAGON QUEST IV)/勇者（ドラゴンクエストIV）<br>\
-				系列：<ruby>勇者斗恶龙<rp>（</rp><rt>Dragon Quest</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>勇者斗恶龙IV<rp>（</rp><rt>Dragon Quest IV</rt><rp>）</rp></ruby><br>\
-				这位勇者虽然肩负击败魔王的预言，生活却很平静，直到魔王发现了他隐居的村庄并将之洗劫。勇者的青梅竹马为掩护他逃跑而牺牲。一无所有的勇者决心解开自己的身世之谜，完成使命。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1327. 勇者（勇者斗恶龙VIII）/Hero (DRAGON QUEST VIII)/勇者（ドラゴンクエストVIII）<br>\
-				系列：<ruby>勇者斗恶龙<rp>（</rp><rt>Dragon Quest</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>勇者斗恶龙VIII<rp>（</rp><rt>Dragon Quest VIII</rt><rp>）</rp></ruby><br>\
-				这位勇者本来是一名皇家护卫，邪恶小丑诅咒了整个王国，将人们都变成了动植物，他只能带着变成动物的国王与公主逃离，寻找击败小丑的方法。他口袋里有一只名为Munchie的仓鼠，如果给它吃奶酪，它也会帮助战斗。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				超级摸奖。",
-			sst_fox:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0382. 火狐/Fox McCloud/フォックス<br>\
-				系列：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>\
-				火狐是星际佣兵小队“星际火狐”的队长，多次和邪恶的安德罗斯交战。他的飞机驾驶技术出神入化，即使在大乱斗里难得开一次飞机，他也能依靠自身的高速进行战斗。他的反射盾可以反射对方的飞行道具，同时增加其威力。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				这里是火狐，前来支援！",
-			sst_mii_fighters:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1090. Mii格斗类型/Mii Brawler/Miiファイター 格闘タイプ<br>\
-				系列：Mii<br>\
-				首次登场：<ruby>Mii频道<rp>（</rp><rt>Mii Channel</rt><rp>）</rp></ruby><br>\
-				这个斗士的形象以玩家的Mii形象为基准。他/她擅长近身格斗，十分敏捷，以各种高机动性的技能灵活应战，并且冲刺和跳跃性能非常优秀。和对手贴身大干一场吧——你很快就能击败他们的！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1091. Mii剑术类型/Mii Swordfighter/Miiファイター 剣術タイプ<br>\
-				系列：Mii<br>\
-				首次登场：<ruby>Mii频道<rp>（</rp><rt>Mii Channel</rt><rp>）</rp></ruby><br>\
-				以玩家的Mii形象为基准，使用剑的斗士。攻击距离相当不错，但是出招相应较慢。当然，你可以给他装上蓄力、反击或飞行道具技能。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1092. Mii射击类型/Mii Gunner/Miiファイター 射撃タイプ<br>\
-				系列：Mii<br>\
-				首次登场：<ruby>Mii频道<rp>（</rp><rt>Mii Channel</rt><rp>）</rp></ruby><br>\
-				带有臂炮的Mii斗士，非常适合喜欢远距离战的玩家。Mii射击类型有很多类型的飞行道具，你可以自取所需、灵活运用。不过也不要忘了多用A键的各种技能哦！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				可能只有玩过灯火之星的人才知道Mii斗士有默认配置。",
-			sst_alex:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1429. 艾莉克斯/Alex/アレックス（Minecraft）<br>\
-				系列：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>\
-				身为史蒂夫的女朋友，她也一同来到了大乱斗的世界，并在这里继续进行她的创造与建设，小心她所布置的各种机关！它们可能会让你陷入大麻烦。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				好像Minecraft官方的确有说过她是史蒂夫的女朋友。",
-			sst_min_min:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1414. 面面（斗士）/Min Min (Fighter)/ミェンミェン（ファイター）<br>\
-				系列：<ruby>神臂斗士<rp>（</rp><rt>ARMS</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>神臂斗士<rp>（</rp><rt>ARMS</rt><rp>）</rp></ruby><br>\
-				在2020年6月，面面作为第6个DLC斗士加入了大乱斗，打破了“有命魂和Mii服装的系列就无法参战”的前例。她使用A和B分别控制双臂的机制相当特殊，而踢回飞行道具、龙臂等要素也很还原。总之大家跟着她一起来喊——“我爱拉面！”<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				我！爱！拉！面！",
-			sst_pikachu:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0407. 皮卡丘/Pikachu/ピカチュウ<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>宝可梦 红／绿<rp>（</rp><rt>Pokémon Red and Green Versions</rt><rp>）</rp></ruby><br>\
-				世界知名的超人气宝可梦！皮卡丘是电属性宝可梦，红红的脸颊储存电力用来作战。在大乱斗里，皮卡丘的强度算是非常高的，能使用迅速而强力的攻击。他的电光石火可以改变2次方向。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				皮～卡～丘！",
-			sst_falco:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0383. 佛克/Falco Lombardi/ファルコ<br>\
-				系列：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>\
-				“星际火狐”小队里才华横溢、不拘小节的队员。在加入火狐的小队之前，他曾经在多个帮派待过。在大乱斗里，他的跳跃和空战能力很不错，并且可以将反射盾踢出去进行攻击。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				放心，一个也别想逃。",
-			sst_enderman:"武将作者：mario not mary、Yumikohimi、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1434. 末影人/Enderman/エンダーマン<br>\
-				系列：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>\
-				细长的四肢，紫色的眼睛。这比黑夜更黑暗的生物可不是你瞪眼的理想对象。它们通常出现在下界和末地，在主世界较为稀有。而更为稀有的，是曾经与它的眼神接触，然后幸存下来讲述其恐怖经历的玩家。不过放心，参加这次大乱斗的末影人并不会这样做，而是用各种技巧来击垮对手。<br>\
-				——谁的错820、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				小黑！",
-			sst_sephiroth:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1439. 萨菲罗斯/Sephiroth/セフィロス<br>\
-				系列：<ruby>最终幻想<rp>（</rp><rt>Final Fantasy</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>最终幻想VII<rp>（</rp><rt>Final Fantasy VII</rt><rp>）</rp></ruby><br>\
-				曾经是神罗公司里最伟大的战士，也是人和外星生命“杰诺瓦”进行融合的实验产物。他了解到自己身世之后，逐渐对人类产生恨意，开始了一系列的毁灭活动。只要有足够杰诺瓦细胞，他就能够重生。似乎以在战斗中和精神上折磨克劳德为乐。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				Sephiroth♫~",
-			sst_pokemon_trainer_leaf:"武将作者：南柯、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0413. 宝可梦训练家（女性）/Pokémon Trainer (Female)/ポケモントレーナー（女性）<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>宝可梦 火红／叶绿<rp>（</rp><rt>Pokémon FireRed and LeafGreen Versions</rt><rp>）</rp></ruby><br>\
-				在早一些的《宝可梦》游戏中，如果你选择了女性训练家，则你的劲敌就会变成男性，反之亦然。从《宝可梦：X/Y》开始，训练家们不但可以选择肤色，还可以更换服装了——夺冠虽然重要，但打扮也不可或缺！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				来看看新人设计的第一个武将！",
-			sst_kyo_kusanagi:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1362. 草薙京/Kyo Kusanagi/草薙京<br>\
-				系列：<ruby>拳皇<rp>（</rp><rt>The King of Fighters</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>拳皇\x2794<rp>（</rp><rt>The King of Fighters \x2794</rt><rp>）</rp></ruby><br>\
-				炎之贵公子草薙京，三神器之一“草薙剑”的传人，因此能够使用神器所带来的火焰之力。三神器家族自1800年前便与大蛇结下了宿命的渊源。大蛇作为地球的意志，想要清除一直以来破坏地球的人类，而三神器一族则世世代代守护着大蛇的封印。他们也背负上了与大蛇一族战斗的宿命。不过听说他现在还拿不到中学毕业证。<br>\
-				——Mario_not_mary、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				所以拳皇XV终于憋出来了……",
-			sst_pauline:"武将作者：mario not mary<br>\
-				插图作者：맛감쟈<br>\
-				——"+get.formatUrl("https://www.pixiv.net/artworks/84875359")+"<br>\
-				<hr>\
-				0079. 宝琳/Pauline/ポリーン<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>\
-				宝琳登场于1981年的初代《森喜刚》游戏，在那个游戏中，森喜刚不断从台阶上扔下木桶，而马力欧需要躲开木桶救出宝琳。经过这么多年之后，她现在的形象和最初登场时也截然不同了。在《超级马力欧奥德赛》中，她作为纽敦市市长举办了一场盛大的庆典。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				此次推出的三噩梦命魂武将其一。",
-			sst_dr_wily:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0873. 威利博士/Dr. Wily/Dr.ワイリー<br>\
-				系列：<ruby>洛克人<rp>（</rp><rt>Mega Man</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>洛克人<rp>（</rp><rt>Mega Man</rt><rp>）</rp></ruby><br>\
-				洛克人系列中的疯狂科学家，制造了许多战斗机器人想要掌控世界。他也丝毫不介意偷走其他科学家开发的机器人并将它们改造得更加邪恶。一般来说要击败他改造的8个机器人（初代《洛克人》为6个）才能和他对战。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				此次推出的三噩梦命魂武将其二。",
-			sst_kazuya:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1474. 三岛一八/Kazuya Mishima/三島一八<br>\
-				系列：<ruby>铁拳<rp>（</rp><rt>Tekken</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>铁拳<rp>（</rp><rt>Tekken</rt><rp>）</rp></ruby><br>\
-				为什么这位格斗家执意要把斗士们都扔下悬崖？因为这不但符合大乱斗的规则，也是在原作中他和父亲斗得你死我活的表现。作为斗士的三岛一八拥有非常丰富的技能组，还有特殊的移动方式和投技。巧妙利用各种招式制胜！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				MNM终于开始对弃牌堆大打出手了。",
-			sst_kraid:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0283. 克雷德/Kraid/クレイド<br>\
-				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>\
-				宇宙海盗的干部之一，在初代《密特罗德》就有登场。那个时候的它受机能限制还非常小只，但在《超级密特罗德》和《密特罗德：零点任务》中的它就相当巨大了，会从肚子中发射爪子攻击。它也出现在“布林斯塔深部”这个场地的背景中。在“灯火之星”中，它能赋予命魂“重战车流”的效果。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				直接上8血魔将了……",
-			sst_sora:"武将作者：mario not mary、Show-K<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1500. 索拉/Sora/ソラ<br>\
-				系列：<ruby>王国之心<rp>（</rp><rt>Kingdom Hearts</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>王国之心<rp>（</rp><rt>Kingdom Hearts</rt><rp>）</rp></ruby><br>\
-				让我们热烈欢迎这一代大乱斗的最后一个斗士登场！虽然索拉并没有带着他的迪士尼伙伴们一起来，但他仍然能使用标志性的钥匙剑“钥刃”和各种魔法，施展灵活的攻击。不过要注意，他的重量比较轻，容易被击飞。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				第一次见到这个“施法”就大为震惊……不过索拉能来大乱斗显然比这个更震惊。",
-			sst_pac_man:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0946. 吃豆人/PAC-MAN/パックマン<br>\
-				系列：<ruby>吃豆人<rp>（</rp><rt>Pac-Man</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>吃豆人<rp>（</rp><rt>Pac-Man</rt><rp>）</rp></ruby><br>\
-				黄黄圆圆的吃豆人！他的原作可是创造了“最成功的投币式街机游戏”这一吉尼斯世界纪录的。在大乱斗中，他的技能大多基于最初代的吃豆人。在他的炫耀动作中还有不少南梦宫的其他ip出场。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				大游戏天下，已半入我手！",
-			sst_mewtwo:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0411. 超梦/Mewtwo/ミュウツー<br>\
-				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>宝可梦 红／绿<rp>（</rp><rt>Pokémon Red and Green Versions</rt><rp>）</rp></ruby><br>\
-				使用梦幻的基因制造出来的宝可梦，科学力量可以造出它的身体，给予它强大的力量和极高的智慧，却无法造出一颗温柔的心。它一方面厌恶人类，另一方面又为自己的身份认同而迷茫。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				由强行添加进去的数据强行诞生。",
-			sst_olimar:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				0798. 欧力马/Olimar/キャプテン·オリマー<br>\
-				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				老练的宇宙飞行家欧力马是多露芬号飞船的船长，他和皮克敏一起在大乱斗中作战，可以拔出皮克敏和使用哨子号令它们。在拥有皮克敏的时候，欧力马的强度会更高，并且不同颜色的皮克敏有不同的效果，在对战之前要查阅清楚。顺便，他的名字倒过来就是马力欧。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0799. 阿尔福/Alph/アルフ<br>\
-				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>皮克敏3<rp>（</rp><rt>Pikmin 3</rt><rp>）</rp></ruby><br>\
-				阿尔福是坠毁在星球PNF-404上的年轻探险家，他需要尽快找到失散的船员和飞船。他醒来后发现的第一种生物就是皮克敏。除了探索星球，他和船员们还需要寻找食物以维持生存和供给母星。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0803. 红色皮克敏/Red Pikmin/赤ピクミン<br>\
-				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				红色皮克敏有着尖尖的鼻子，这也是欧力马遇到的第一种皮克敏。在原作中，它们不怕火。在大乱斗中，红色皮克敏的攻击力是第二高的，并且攻击带火属性。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0804. 蓝色皮克敏/Blue Pikmin/青ピクミン<br>\
-				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				蓝色皮克敏的嘴角一直耷拉着，看起来不太开心。在原作中，它们可以进入水中取物。在大乱斗中，蓝色皮克敏的防御力是第二高的，投掷出去的伤害也相当可观。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				0805. 黄色皮克敏/Yellow Pikmin/黄ピクミン<br>\
-				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>\
-				黄色皮克敏有尖尖的“耳朵”——其实这个结构的作用仍然不清楚。它们在原作中免疫电，并且是最轻的皮克敏。在大乱斗中，它们被投掷出去时抛物线比其他皮克敏高，并且能对接触到的斗士造成电属性伤害。<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				真正实现了主机/手柄玩即时战略游戏的梦想。",
-			sst_marioraz:"武将作者：mario not mary<br>\
-				插图作者：无<br>\
-				<hr>\
-				R014. 升哥/Marioraz\
-				<hr>\
-				“樱井懂个屁大乱斗”",
-			sst_piranha_plant:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1303. 吞食花/Piranha Plant/パックンフラワー<br>\
-				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>超级马力欧兄弟<rp>（</rp><rt>Super Mario Bros.</rt><rp>）</rp></ruby><br>\
-				这些植物与其说是肉食性的，不如说是马力欧食性的。世界上有非常多种吞食花，如果让自然王来给你讲甚至能讲出绕口令来。总之，没有什么吞食花不是火球和震地不能解决的啦！<br>\
-				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				某紫衣男子已绝望。",
-			sst_bayonetta:"武将作者：mario not mary<br>\
-				插图作者：未知<br>\
-				<hr>\
-				1006. 蓓优妮塔（安柏拉的魔女）/Bayonetta (Bayonetta 2)/ベヨネッタ（アンブラの魔女）<br>\
-				系列：<ruby>蓓优妮塔<rp>（</rp><rt>Bayonetta</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>蓓优妮塔2<rp>（</rp><rt>Bayonetta 2</rt><rp>）</rp></ruby><br>\
-				蓓优妮塔属于濒临灭绝的“安柏拉的魔女”一族。她擅长使用四肢的四把枪攻击，还能以头发为介质召唤恶魔。在大乱斗中，她的战法也和原作一样华丽。通常必杀技按住按键可以蓄力，并且连续两次使用时姿势必定不同。在3DS和WiiU版《任天堂明星大乱斗》中，她的强度甚至破坏了平衡。<br>\
-				——无敌阿尔宙斯、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				1007. 蓓优妮塔（丧失记忆的魔女）/Bayonetta (Bayonetta)/ベヨネッタ（記憶を失った魔女）<br>\
-				系列：<ruby>蓓优妮塔<rp>（</rp><rt>Bayonetta</rt><rp>）</rp></ruby><br>\
-				首次登场：<ruby>蓓优妮塔 魔兵惊天录<rp>（</rp><rt>Bayonetta</rt><rp>）</rp></ruby><br>\
-				《蓓优妮塔：魔兵惊天录》中蓓优妮塔的形象。这位安柏拉的魔女从上百年的沉睡中醒来时失去了所有记忆。她的日常一般是扮作修女，吸引天使，然后猎杀它们，直到另一个拥有与她相同力量的魔女出现，她的记忆才开始逐渐恢复。她最后被卷进一场拯救世界的战斗中。<br>\
-				——无敌阿尔宙斯、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>\
-				<hr>\
-				Broken!"
+			sst_mario:`武将作者：mario not mary、Show-K<br>
+				插图作者：kuromame_983<br>
+				<hr>
+				0001. 马力欧/Mario/マリオ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>
+				超级标志性的角色！这位游戏巨星常常从酷霸王手中拯救世界。他有惊人的跳跃能力和多种变身道具。在闲暇时刻，他还会参与体育运动，擅长的项目数也数不清。在大乱斗里，他是一个值得信赖的全能型斗士。让我们一起来说：“是我，马力欧！”<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				太激昂了，太生生不息了。`,
+			sst_link:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0172. 林克/Link/リンク<br>
+				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				传统上林克的标志性特征是绿衣绿帽，不过在旷野之息中林克反而穿着蓝色的英杰服，也不戴帽子了。在大乱斗里，他的剑和盾让他攻守兼备，而他的弓、回旋镖和炸弹则给战斗增加了更多的变数。在前几代大乱斗里林克还会使用勾爪——所以说他是怎么同时带这么多东西上场的啊！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“醒醒吧……”`,
+			sst_yoshi:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0297. 耀西/Yoshi/ヨッシー<br>
+				系列：<ruby>耀西<rp>（</rp><rt>Yoshi</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧世界<rp>（</rp><rt>Super Mario World</rt><rp>）</rp></ruby><br>
+				耀西经常和马力欧一起冒险，可以说是他最好的搭档。耀西可以吃掉几乎任何大小合适的生物，然后马上生出蛋来。借助他的浮空跳能力，他在大乱斗中非常适合空战。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				耀西~！`,
+			sst_wario:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				0729. 瓦力欧/Wario/ワリオ<br>
+				系列：<ruby>瓦力欧<rp>（</rp><rt>Wario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧乐园 六个金币<rp>（</rp><rt>Super Mario Land: 6 Golden Coins</rt><rp>）</rp></ruby><br>
+				瓦力欧简直就是恶趣味的集合体。这个怪人自称是马力欧的发小，并且相当厌恶马力欧。同时他还视财如命。在大乱斗中，他是个灵活的重量级斗士，还可以通过积攒屁来释放强力攻击——真的是太恶趣味了！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				瓦！瓦！瓦！！！`,
+			sst_villager:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0825. 村民（男孩）/Villager (Boy)/むらびと（男の子）<br>
+				系列：<ruby>动物森友会<rp>（</rp><rt>Animal Crossing</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>动物森友会<rp>（</rp><rt>Doubutsu no Mori</rt><rp>）</rp></ruby><br>
+				在动物森友会系列中和动物们平和的生活在一起的年轻人，当然他也不拒绝在大乱斗里大显身手。他的上必杀技其实来自于《气球大战》这个游戏，而下必杀技则能生动地为大家说明不要在别人砍树的时候站在旁边。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“因为什么都没有，所以什么都做得到”`,
+			sst_zelda:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				0173. 塞尔达/Zelda/ゼルダ<br>
+				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				塞尔达传说系列就是以这位坚强的公主命名的。在不同的作品里她的形象也不同，但她总是肩负重任。在大乱斗里，她擅长使用多种魔法，但是移动速度不是特别快。她在大乱斗四代和五代中的下必杀是幻影铠甲，而二代和三代的下必杀则是变身希克。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				林克，这就是三角力量……`,
+			sst_ganondorf:`武将作者：Show-K、mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0175. 加侬多夫【盖侬多夫】/Ganondorf/ガノンドロフ<br>
+				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>塞尔达传说 时之笛<rp>（</rp><rt>The Legend of Zelda: Ocarina of Time</rt><rp>）</rp></ruby><br>
+				加侬多夫是拥有力量三角的魔王，意欲将海拉鲁大陆毁灭。除了人形态之外，他还可以变成巨大的野猪魔兽。当然，在大多数作品里，他的野心都会被林克摧毁。在大乱斗里，他虽然行动缓慢但威力强大，很容易就会把对手击飞，非常适合轻度玩家使用。<br>
+				——封羽翎烈、无敌阿尔宙斯，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				你知道吗？海拉鲁的历史，就是一部被叫做盖侬的魔善侵袭的历史……`,
+			sst_dr_mario:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0008. 马力欧医生/Dr. Mario/ドクターマリオ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>马力欧医生<rp>（</rp><rt>Dr. Mario</rt><rp>）</rp></ruby><br>
+				在1990年的益智游戏《马力欧医生》中，马力欧换上了白大褂，准备在医学界大展身手。在大乱斗世界中，他是能够投掷药丸、使用超级床单反弹攻击的全能型斗士。他比马力欧要慢，但是攻击也更高。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				一开始技能就没设计好，但我还是要占个位置……现在设计好了，然而已经改了很多次了……`,
+			sst_palutena:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0705. 帕露蒂娜/Palutena/パルテナ<br>
+				系列：<ruby>光神话<rp>（</rp><rt>Kid Icarus</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>光神话<rp>（</rp><rt>Kid Icarus</rt><rp>）</rp></ruby><br>
+				在《新光神话：帕露蒂娜之镜》中，这位光之女神通过心灵感应和彼特交流，并且赐予他各种对冒险有帮助的奇迹。在大乱斗中，她也有能适应各种场合的技能。以及，在大乱斗四代中，她的每个自定义技能都和基础技能完全不同，可以将她打造成不同风格的斗士。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				稍微认真点也没关系哦～`,
+			sst_marth:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0610. 马尔斯/Marth/マルス<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 暗黑龙与光之剑<rp>（</rp><rt>Fire Emblem: Shadow Dragon and the Blade of Light</rt><rp>）</rp></ruby><br>
+				初代《火焰纹章》的主角，阿提利亚王国的王子，也是英雄的后裔。在大乱斗中，他是一个标志性的剑人，剑法精湛而优雅。他的剑尖比剑根能的攻击力更高，还可以使用防反来应对对方的攻击。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“那正是英雄王本人”`,
+			sst_rosalina:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0009. 罗莎塔/Rosalina/ロゼッタ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧银河<rp>（</rp><rt>Super Mario Galaxy</rt><rp>）</rp></ruby><br>
+				神秘的罗莎塔和琪琪们一起生活在长尾星天文台。在大乱斗中，罗莎塔和琪琪能同时在不同位置攻击。如果你能将对手夹在罗莎塔和琪琪中间，她们就能合力打出超高伤害！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				欢迎来到新的银河。`,
+			sst_zero_suit_samus:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0266. 零装甲萨姆斯/Zero Suit Samus/ゼロスーツサムス<br>
+				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				即使不穿能量装甲，萨姆斯也很强。虽然没有装甲形态的高火力，但她的动力鞋给了她高机动性。而她的麻痹手枪既可以定住对手，也能发射等离子鞭进行抓取或回场。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“化整为零。”`,
+			sst_luigi:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0004. 路易吉/Luigi/ルイージ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>马力欧兄弟<rp>（</rp><rt>Mario Bros.</rt><rp>）</rp></ruby><br>
+				虽说有专门为他庆贺的“路易吉年（2013年）”，也曾经在某种意义上成为了电影明星，但这些关注只是让他变得更内向和不知所措了。不论是在原作中还是在大乱斗中，他都倾向于模仿哥哥的举动，不过他也将哥哥的部分招式改良了，比如他的超级跳跃拳在特定时机击飞力超高。以及，他的嘲讽都是100%纯原创的哦！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				和哥哥一起！`,
+			sst_bowser:`武将作者：mario not mary<br>
+				插图作者：mario not mary<br>
+				<hr>
+				0007. 酷霸王/Bowser/クッパ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟<rp>（</rp><rt>Super Mario Bros.</rt><rp>）</rp></ruby><br>
+				马力欧的死对头，也是桃花公主老被绑架的罪魁祸首。他的阴谋基本上都没有实现，相反，有时候他甚至还会和马力欧合作。在大乱斗中，他是全游戏最重的人物，并且不会被轻攻击打出硬直。你必须得揍得足够大力才能将他击飞！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				终于有武将图片了。`,
+			sst_peach:`武将作者：mario not mary<br>
+				插图作者：ゲB<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/50055037")}<br>
+				<hr>
+				0005. 桃花公主/Peach/ピーチ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟<rp>（</rp><rt>Super Mario Bros.</rt><rp>）</rp></ruby><br>
+				蘑菇王国的公主，也是强大和可爱可以共存的最好证明。在大乱斗中，桃花公主可以在空中飘浮，随后突然落地掏出一堆武器来——包括但不限于平底锅、阳伞和奇诺比奥——所以她到底把这些都放在哪的啊？<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				哦～我赢了吗？`,
+			sst_byleth_female:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1381. 贝雷丝/Byleth (Female)/ベレス<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 风花雪月<rp>（</rp><rt>Fire Emblem: Three Houses</rt><rp>）</rp></ruby><br>
+				作为士官学校的老师，除了教学生战斗技巧之外，还可以请他们喝茶聊天。5年前亲密的学生们5年后却要各自为敌，实在令人唏嘘。顺便，5年后贝老师的头发会变成绿色。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				老师真的很希望你们都能活下来……`,
+			sst_byleth_male:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1380. 贝雷特/Byleth (Male)/ベレト<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 风花雪月<rp>（</rp><rt>Fire Emblem: Three Houses</rt><rp>）</rp></ruby><br>
+				赛罗斯骑士团前任团长杰拉尔特的儿子/女儿，因为在意外中救了几名学生，成为了加尔古·玛库士官学校的教师。缺乏情绪起伏，被称为灰色恶魔。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“你还算是个男人嘛？！”`,
+			sst_massy:`武将作者：mario not mary<br>
+				插图作者：mario not mary<br>
+				<hr>
+				R001. 绯和雅也/Massy
+				<hr>
+				Massy，唯一的神！`,
+			sst_samus:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0264. 萨姆斯/Samus/サムス<br>
+				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				萨姆斯·亚兰是游戏历史上第一个女主角，以只身一人在外星球的作战闻名。她的能量装甲是高等文明“鸟人族”的成果，给了她强大的火力、防护力和升级的可能性。在大乱斗中，虽然她是道具人，但是她的体术也不差。她的蓄力射击威力惊人。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“萨姆斯，很不幸的消息……”`,
+			sst_ridley:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0267. 利德雷/Ridley/リドリー<br>
+				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				萨姆斯的死对头，是杀害了她至亲的仇人，也是宇宙海盗的干部之一。看上去像是野兽，但是具有高度智慧。虽然一直到这代大乱斗才成为斗士，但在之前的大乱斗里也以其他的形式露过面。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“没有任何洗白的余地与必要”`,
+			sst_dark_samus:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0265. 黑暗萨姆斯/Dark Samus/ダークサムス<br>
+				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>密特罗德 究极<rp>（</rp><rt>Metroid Prime</rt><rp>）</rp></ruby><br>
+				萨姆斯的废弃盔甲、究极密特罗德和有机矿石“啡宗”结合的产物，不但有强大的恢复能力，还能精神控制其他生物和制造自己的分身。它在3ds和WiiU版《任天堂明星大乱斗》中作为辅助模型的时候还能使用啡宗的力量攻击，成为斗士之后各个招式倒是完全和萨姆斯一样了，遗憾。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“堕入黑暗”`,
+			sst_mr_game_watch:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0689. Mr. Game & Watch/Mr.ゲーム & ウォッチ<br>
+				系列：Game & Watch<br>
+				首次登场：Ball<br>
+				Game & Watch是任天堂于80年代推出的一系列游戏及其设备的统称，既能玩游戏也能当时钟，这一设备也是之后的GB以及DS掌机的雏形。在大乱斗中，Game & Watch先生会使用来自原作的各种要素攻击。不过因为它是真实意义上的纸片人，所以非常轻，容易被击飞。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“是9！是9！”`,
+			sst_mario_not_mary:`武将作者：mario not mary<br>
+				插图作者：mario not mary<br>
+				<hr>
+				R002. MNM
+				<hr>
+				这才是大佬！整个计划的发起者！还是用酷霸王斗士的高手！`,
+			sst_yumikohimi:`武将作者：mario not mary<br>
+				插图作者：mario not mary<br>
+				<hr>
+				R003. 柚子/Yumikohimi
+				<hr>
+				比MNM好相处……`,
+			sst_haine:`武将作者：mario not mary<br>
+				插图作者：无<br>
+				<hr>
+				R004. 海涅/Haine
+				<hr>
+				公认的渣男！`,
+			sst_terry:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1356. 特瑞·博加德/Terry Bogard/テリー・ボガード<br>
+				系列：<ruby>饿狼传说<rp>（</rp><rt>Fatal Fury</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>饿狼传说<rp>（</rp><rt>Fatal Fury</rt><rp>）</rp></ruby><br>
+				被称为“传说之狼”的传奇格斗家，多次夺得KOF的冠军，实际上却是一个南镇街头的无业游民。年少时为了替养父杰夫报仇而踏上了击败吉斯的旅途。师从中华武术大师唐福禄门下，招数却都是从杰夫那里学来的。在南镇的大街小巷的一次次的战斗中，他逐渐对和吉斯之间无穷无尽的复仇产生了质疑，但吉斯并没有给他反悔的机会。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				OK！`,
+			sst_simon:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1050. 西蒙·贝尔蒙特/Simon Belmont/シモン・ベルモンド<br>
+				系列：<ruby>恶魔城<rp>（</rp><rt>Castlevania</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>恶魔城<rp>（</rp><rt>Castlevania</rt><rp>）</rp></ruby><br>
+				初代《恶魔城》的主角，最著名的吸血鬼猎人之一，个性勇敢莽撞。依靠除魔圣鞭和其他神圣武器击败了百年后卷土重来的德古拉，并且通过焚烧德古拉遗体破解了他给自己施加的诅咒。在原作中还有如骑士般武装或是清秀优雅的形象，大乱斗中的这个形象是他最初登场时的样子。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“滚回黑暗。”`,
+			sst_incineroar:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0419. 炽焰咆哮虎/Incineroar/ガオガエン<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>精灵宝可梦 太阳／月亮<rp>（</rp><rt>Pokémon Sun and Moon</rt><rp>）</rp></ruby><br>
+				以反派摔角手为原型的宝可梦，是《宝可梦：太阳/月亮》中初始宝可梦火斑喵的最终进化。性格暴躁又任性，但讨厌欺凌弱小这类无聊的事。对于强大的对手会拿出干劲来。在大乱斗中，它主要使用各种与摔角有关的招式。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				宇宙第一宝可梦！`,
+			sst_greninja:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0418. 甲贺忍蛙/Greninja/ゲッコウガ<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>精灵宝可梦 Ｘ／Ｙ<rp>（</rp><rt>Pokémon X and Y</rt><rp>）</rp></ruby><br>
+				甲贺忍蛙是水+恶属性的宝可梦，完全想不到最初呆萌的呱呱泡蛙会进化成这样。它和所有忍者一样敏捷而致命，投掷的飞水手里剑甚至能切割金属。在大乱斗中，它是高速型的斗士，回场能力也非常不错。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“变幻自在”`,
+			sst_kirby:`武将作者：mario not mary<br>
+				插图作者：kotori<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/26818738")}<br>
+				<hr>
+				0323. 卡比/Kirby/カービィ<br>
+				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星之卡比<rp>（</rp><rt>Kirby\x27s Dream Land</rt><rp>）</rp></ruby><br>
+				圆圆滚滚的可爱卡比在波普之星过着平静的生活。它可以吸入物品或者生物，并且将它们吐出来或者复制能力。在大乱斗中，卡比吸入斗士之后可以复制他们的通常必杀技。它虽然很容易被击飞，但回场能力还不错。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				樱井亲儿子，粉红恶魔，灯火之星。`,
+			sst_king_k_rool:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0136. 库鲁鲁王/King K. Rool/キングクルール<br>
+				系列：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级森喜刚<rp>（</rp><rt>Donkey Kong Country</rt><rp>）</rp></ruby><br>
+				就像马力欧的死对头是酷霸王一样，森喜刚的死对头是库鲁鲁王。他是个性格恶劣的鳄鱼，拥有坚硬的肚皮铠甲和闪亮的皇冠。想要他和森喜刚合作甚至成为朋友是几乎不可能的。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				别说他了，现在连森喜刚新作也没有个影子……`,
+			sst_donkey_kong:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0134. 森喜刚/Donkey Kong/ドンキーコング<br>
+				系列：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>
+				丛林的王者，也是最狂热的香蕉狂魔。他的冒险总是以某人偷了他的香蕉开始。在大乱斗中，他的力度和投技是众所周知的。虽然体积很大，但是速度也不是特别慢。他的前投掷还能扛着对手走哦！要合理利用这一点！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				最近来了次史诗级加强。`,
+			sst_richter:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				1051. 里希特·贝尔蒙特/Richter Belmont/リヒター・ベルモンド<br>
+				系列：<ruby>恶魔城<rp>（</rp><rt>Castlevania</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>恶魔城X 血之轮回<rp>（</rp><rt>Castlevania: Rondo of Blood</rt><rp>）</rp></ruby><br>
+				《恶魔城X：血之轮回》的主角，吸血鬼猎人家族的后代，他从德古拉手中救出了自己的恋人，还曾经和德古拉的儿子阿鲁卡多并肩作战。他擅长使用杂技般灵活的体术与敌人周旋，还能解放除鞭子外其他神圣武器的力量，进行更强力的攻击。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“我有愧于此称……”`,
+			sst_pokemon_trainer_red:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0412. 宝可梦训练家（男性）/Pokémon Trainer (Male)/ポケモントレーナー（男性）<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>宝可梦 红／绿<rp>（</rp><rt>Pokémon Red and Green Versions</rt><rp>）</rp></ruby><br>
+				历代《宝可梦》的主线里都有一个以冠军为目标的训练师，带着宝可梦博士给的初始宝可梦踏上旅途。他们还会骑自行车或者滑轮滑。在大乱斗中，宝可梦训练师会一直在场地后面，负责切换宝可梦和为他的同伴加油鼓劲。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“……”`,
+			sst_isabelle:`武将作者：mario not mary、Yumikohimi<br>
+				插图作者：未知<br>
+				<hr>
+				0827. 西施惠/Isabelle/しずえ<br>
+				系列：<ruby>动物森友会<rp>（</rp><rt>Animal Crossing</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>来吧！动物森友会<rp>（</rp><rt>Animal Crossing: New Leaf</rt><rp>）</rp></ruby><br>
+				在3DS版《动物森友会》中，她是村民们的可靠秘书；而在NS版中，她也为每个无人岛居民提供生活服务。她有时可能健忘，但总的来说很靠谱。有个叫西施德的弟弟。她在3DS和WiiU版《任天堂明星大乱斗》中是辅助模型，NS版中则成为了斗士。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				大家都爱的秘书西施惠！`,
+			sst_daisy:`武将作者：mario not mary<br>
+				插图作者：高橋うもり<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/73249081")}<br>
+				<hr>
+				0006. 菊花公主/Daisy/デイジー<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧乐园<rp>（</rp><rt>Super Mario Land</rt><rp>）</rp></ruby><br>
+				虽然是萨拉萨大陆的公主，但菊花公主完全没有身为王族的优雅，反而相当活泼任性，这也是她的独特之处。据说路易吉对她很着迷？和桃花公主不同，菊花公主只被绑架过一次。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				嘿！我是黛西！`,
+			sst_meta_knight:`武将作者：mario not mary<br>
+				插图作者：糸谷さいれん<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/60069126")}<br>
+				<hr>
+				0324. 魅塔骑士/Meta Knight/メタナイト<br>
+				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星之卡比 梦之泉物语<rp>（</rp><rt>Kirby\x27s Adventure</rt><rp>）</rp></ruby><br>
+				卡比的神秘劲敌，披风可以变成翅膀的样子。在大乱斗里，他以剑术和强大的空战能力著称。他拥有多段跳，并且所有的必杀技都能用来回场。在Wii版《任天堂明星大乱斗》里，他的强度甚至破坏了平衡。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“Fight me.”`,
+			sst_little_mac:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0932. 小麦克/Little Mac/リトル・マック<br>
+				系列：<ruby>击拳热斗！！<rp>（</rp><rt>Punch-Out!!</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>击拳热斗！！<rp>（</rp><rt>Punch-Out!!</rt><rp>）</rp></ruby><br>
+				击拳热斗系列的主角，虽然身材矮小，但斗志满满。无论是在世界拳击大赛中面对高大的对手们，还是在大乱斗中面对游戏明星们，都毫不畏惧。在大乱斗中，他的拳法简单粗暴。当KO槽蓄满时，他就可以使用击飞力超强的上勾拳。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				加油！麦克！`,
+			sst_oc:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				R005. OC
+				<hr>
+				霸凌你哦！`,
+			sst_mr_8:`武将作者：mario not mary<br>
+				插图作者：无<br>
+				<hr>
+				R006. 八爷/Mr. 8
+				<hr>
+				据说大乱斗人都叫他东北吴彦祖。`,
+			sst_dark_link:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				S001. Dark Link/ダークリンク<br>
+				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>林克的冒险<rp>（</rp><rt>Zelda II: The Adventure of Link</rt><rp>）</rp></ruby><br>
+				暗黑林克是林克的邪恶面。他是《塞尔达传说》系列中最神秘的敌人角色之一，通常在没有背景故事和对话的情况下出现，尽管在很多场合都暗示它只是由暗影魔法构成。对于林克来说，暗黑林克不仅仅是一场与怪物的战斗，而是一场与自己的战斗，因为这位年轻的英雄必须面对自己的力量与他作对。正因为如此，暗黑林克通常是终极挑战。他有一次成为正式的最终Boss（《林克的冒险》），以及在《四剑神殿》和“Take \x27Em All On!”等中作为可选挑战的最终Boss。<br>
+				——翻译自《塞尔达维基》<br>
+				<hr>
+				话说塞尔达传说的第二部和系列其他作品很不一样。`,
+			sst_kyuukou:`武将作者：mario not mary<br>
+				插图作者：封羽翎烈<br>
+				<hr>
+				R007. 鸿渐/Kyuukou
+				<hr>
+				经典白给！`,
+			sst_windier:`武将作者：mario not mary<br>
+				插图作者：封羽翎烈<br>
+				<hr>
+				R008. 翎烈/Windier
+				<hr>
+				这里几乎所有武将介绍都取材于封羽翎烈的《任天堂明星大乱斗特别版全命魂介绍》，还不快去${get.formatUrl("https://ssbuspirits.top")}支持一下？`,
+			sst_rentianshu:`武将作者：mario not mary<br>
+				插图作者：无<br>
+				<hr>
+				R009. 任天鼠
+				<hr>
+				当了很久的“任豚”了。`,
+			sst_srf:`武将作者：mario not mary<br>
+				插图作者：无<br>
+				<hr>
+				R010. Srf
+				<hr>
+				看来又是一个渣男。`,
+			sst_bowser_jr:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0010. 酷霸王Jr. /Bowser Jr. /クッパJr.<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧阳光<rp>（</rp><rt>Super Mario Sunshine</rt><rp>）</rp></ruby><br>
+				酷霸王超宠爱的孩子，有标志性的带大嘴巴图案的围脖。和他爸一样，酷霸王Jr.也想打败马力欧。在大乱斗中，他乘坐全副武装的酷霸王小丑飞船出战。如果被击中飞船而不是本体，受伤会更少，所以要注意走位。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				怎么也想不到，当初发誓要打败马力欧的少年，现在却和马力欧越走越近。`,
+			sst_koopalings:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0011. 伊吉/Iggy/イギー<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>
+				伊吉戴着黑框眼镜，梳着个菠萝发型，有些爱搞恶作剧。他说话语气卖萌，但是笑起来又疯疯癫癫的。他还喜欢训练汪汪，在《新超级马力欧兄弟2》中，他就靠一只暴躁的汪汪来对付马力欧。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0012. 温缇/Wendy/ウェンディ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>
+				酷霸王7人组中唯一的一个女孩子。她非常莽，也非常傲慢自大，并且将桃花公主和菊花公主视为对手。虽然性格像是假小子，但是也不排斥用粉色蝴蝶结和高跟鞋展示自己女性化的一面。在《新超级马力欧兄弟U》中，她还展示了自己优雅的溜冰技巧。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0013. 雷米/Lemmy/レミー<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>
+				酷霸王7人组中身材最矮小的一个，是个一脸怪相又不失稚气的小捣蛋。在《新超级马力欧兄弟U》中，他是第一关的Boss，踩在球上投掷炸弹攻击，与此同时炫彩的头发一抖一抖的。不要低估他的实力哦！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0014. 洛伊/Roy/ロイ（スーパーマリオブラザーズ）<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>
+				酷霸王7人组中的重量级选手，经常四处耀武扬威。他的粉色墨镜虽然没什么压迫感，但他灵活可变的速度却威胁不小。在《超级马力欧兄弟3》中，他通过制造地震和使用魔法来攻击马力欧，还真是挺棘手的！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0015. 拉里/Larry/ラリー<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>
+				酷霸王7人组中年纪最小的一个，总是想在各种事情上赢过别人——即使别人并没有想与他竞争。他高耸的蓝色头发非常引人注目。在《新超级马力欧兄弟Wii》里，他在第一关出现。虽说他的蓝色火球和刺壳旋转看起来很难对付，但其实他的行动非常套路化。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0016. 洛德威格/Ludwig/ルドウィッグ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>
+				酷霸王7人组中最聪明的一个，有非常标志性的蓝色中分头。虽然可以表现的很成熟，但是他更喜欢装逼。在《新超级马力欧兄弟Wii》里，他是第七关的Boss，可以使用追踪魔法弹，还会故意悬在空中躲避攻击。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0017. 莫顿/Morton/モートン<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟3<rp>（</rp><rt>Super Mario Bros. 3</rt><rp>）</rp></ruby><br>
+				酷霸王7人组中体格最大的一个。他标志性的特征是三根呆毛——不对，应该是脸上的星星标记。他四肢发达头脑简单，在《新超级马力欧兄弟2》中，他在第四关出现，你不打他他就不会动。也许他真的是很不爱动吧！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				摇身一变就和酷霸王没有血缘关系了。`,
+			sst_ryu:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0977. 隆/Ryu/リュウ<br>
+				系列：<ruby>街头霸王<rp>（</rp><rt>Street Fighter</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>街头霸王<rp>（</rp><rt>Street Fighter</rt><rp>）</rp></ruby><br>
+				隆，武道上永恒的探求者，凭借着从刚拳处学来的波动流暗杀术，他遍历全球挑战强者，在夺得大赛冠军后却淡泊名利不去领奖，因为他的目标只有一个，也是豪鬼留给他的问题：战斗的意义，除了杀戮，还有什么？他也曾为了追求力量迷失自我，将自己沉浸在杀意中，但现在的他已经将阴影从心中驱逐，俨然一代宗师。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				你必须击败我的升龙拳才能得到一线转机。`,
+			sst_ken:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0978. 肯/Ken/ケン<br>
+				系列：<ruby>街头霸王<rp>（</rp><rt>Street Fighter</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>街头霸王<rp>（</rp><rt>Street Fighter</rt><rp>）</rp></ruby><br>
+				肯是隆的头号挚友兼劲敌，两人师出同门，与风餐露宿四处苦行的隆不同，肯有着自己的家族与财大气粗的产业，据说现在空手道网课也办的红红火火。他在年轻时因为急躁吃过不少败仗，但现在的他已经有了自己的家庭，即便如此，在顾家的闲暇也一定要挤出时间与挚友对战几局，才是男人的快乐。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				我准备好了，来吧。`,
+			sst_waluigi:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0035. 瓦路易吉/Waluigi/ワルイージ<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>马力欧网球64<rp>（</rp><rt>Mario Tennis</rt><rp>）</rp></ruby><br>
+				一看他那个硬而扭曲的胡子，还有红色的鹰钩鼻，就知道这是个带恶人了。他自称是路易吉的劲敌，性格狡猾，行动敏捷。当作为辅助模型被召唤时，他会将离他最近的斗士猛踩到地里，然后用网球拍殴打他的受害者。不知道为什么，在国外希望瓦路易基参战大乱斗的呼声相当高，甚至都成为烂梗了。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				金钱，名声，邀请函，都会是本大爷的！`,
+			sst_master_hand:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1095. 大师之手/Master Hand/マスターハンド<br>
+				系列：<ruby>任天堂明星大乱斗<rp>（</rp><rt>Super Smash Bros.</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>任天堂明星大乱斗<rp>（</rp><rt>Super Smash Bros.</rt><rp>）</rp></ruby><br>
+				创造大乱斗世界的神秘之手。它会在取胜乱斗中所有对手被打败后出现在终点。它的招数极其多样，并且在生命不足时会变得更强大。如果知道什么时候攻击，什么时候躲闪，应对它就不是难事！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				右手，代表着创造。`,
+			sst_ike:`武将作者：mario not mary<br>
+				插图作者：北千里<br>
+				——《TCG火焰纹章<ruby>0<rp>（</rp><rt>Cipher</rt><rp>）</rp></ruby>》<br>
+				<hr>
+				0614. 艾克（苍炎之轨迹）/Ike (Path of Radiance)/アイク（蒼炎の軌跡）<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 苍炎之轨迹<rp>（</rp><rt>Fire Emblem: Path of Radiance</rt><rp>）</rp></ruby><br>
+				《火焰纹章：苍炎之轨迹》的主角，父亲被神秘的漆黑骑士所杀，于是继承了父亲的佣兵团，并且承担了保卫未来女皇的任务。拥有恐怖的力量，他的剑本来是双手剑，但他可以单手使用。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0615. 艾克（晓之女神）/Ike (Radiant Dawn)/アイク（暁の女神）<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章 苍炎之轨迹<rp>（</rp><rt>Fire Emblem: Path of Radiance</rt><rp>）</rp></ruby><br>
+				《火焰纹章：晓之女神》的故事发生于前作《苍炎之轨迹》的3年后，狂王战争后一切百废待兴，然而又有新的势力出现威胁和平。经历过这么多事情后，艾克真能称得上是英雄。在大乱斗中，他的各种技能击飞力度也很强。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				大！天！空！`,
+			sst_miumiu:`武将作者：mario not mary<br>
+				插图作者：mario not mary<br>
+				<hr>
+				R011. 缪缪
+				<hr>
+				据说家里裙子比其他女生还要多。`,
+			sst_toon_link:`武将作者：mario not mary、Yumikohimi<br>
+				插图作者：未知<br>
+				<hr>
+				0177. 卡通林克/Toon Link/トゥーンリンク<br>
+				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>塞尔达传说 风之杖<rp>（</rp><rt>The Legend of Zelda: The Wind Waker</rt><rp>）</rp></ruby><br>
+				这个林克来自《塞尔达传说：风之律动》，偶尔也会被称为猫眼林克。在大乱斗中，他的技能组看似和另外两个林克相同，但他的炸弹爆炸范围更大，上必杀滞空时间也更长。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“故事到处都有，传说仅此一个。”`,
+			sst_wolf:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0384. 沃鲁夫/Wolf O\x27Donnell/ウルフ<br>
+				系列：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星际火狐64<rp>（</rp><rt>Star Fox 64</rt><rp>）</rp></ruby><br>
+				沃鲁夫曾经为安德罗斯效力，和“星际火狐”小队多次交战。在安德罗斯被流放后，他自己组建了“星狼”小队。虽然偶尔也会和火狐并肩作战，但总体而言他们还是死对头。他的通常必杀技射出的子弹比火狐和佛克都要强力。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				游戏结束了！星际火狐！`,
+			sst_young_link:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				0176. 幼年林克/Young Link/こどもリンク<br>
+				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>塞尔达传说 时之笛<rp>（</rp><rt>The Legend of Zelda: Ocarina of Time</rt><rp>）</rp></ruby><br>
+				《塞尔达传说：时之笛》中的林克，在原作中可以通过时之笛切换幼年和成年两个形态。幼年形态是不能使用大师剑的。在大乱斗中，他的通常必杀技射出的是火箭，相比另两个林克的箭性能更好。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				老摸有时候能写出让我吐血的武将……比如这个……现在〖假面〗好像废了，在找解决方法。现在应该可以了，然而要重新编写好多技能的代码啊……`,
+			sst_ocarina_of_time_link:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0176. 幼年林克/Young Link/こどもリンク<br>
+				系列：<ruby>塞尔达传说<rp>（</rp><rt>The Legend of Zelda</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>塞尔达传说 时之笛<rp>（</rp><rt>The Legend of Zelda: Ocarina of Time</rt><rp>）</rp></ruby><br>
+				《塞尔达传说：时之笛》中的林克，在原作中可以通过时之笛切换幼年和成年两个形态。幼年形态是不能使用大师剑的。在大乱斗中，他的通常必杀技射出的是火箭，相比另两个林克的箭性能更好。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				物是人非，沧海桑田……`,
+			sst_spring_man:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1287. 弹簧人/Spring Man/スプリングマン<br>
+				系列：<ruby>神臂斗士<rp>（</rp><rt>ARMS</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>神臂斗士<rp>（</rp><rt>ARMS</rt><rp>）</rp></ruby><br>
+				在弹簧竞技场进行修炼的、热血的弹簧斗士。他的梦想是有朝一日能在ARMS大奖赛中打败最强铜领，夺得冠军。他最喜欢吃披萨，靠自己的手臂，可以在吃的时候拉出长长的奶酪丝。在大乱斗中，作为辅助模型的他会使用弹簧手臂连击对手。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				然而却是面面参战了……`,
+			sst_joker:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1304. Joker（怪盗）/Joker (Phantom Thief)/ジョーカー（怪盗）<br>
+				系列：<ruby>女神异闻录<rp>（</rp><rt>Persona</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>女神异闻录5<rp>（</rp><rt>Persona 5</rt><rp>）</rp></ruby><br>
+				P5主人公在异世界的形态，是由反抗意识觉醒了人格面具的样子。初始人格面具为亚森——大乱斗里也是这家伙，戴着白鸟外形眼部为黑色的面具。身穿黑色的风衣，棕色古巴高跟鞋，灰衬衫和黑色长裤，配上标志性的红色手套。代号“Joker”，是“王牌”的意思。<br>
+				——Eric、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1305. Joker（学生）/Joker (Student)/ジョーカー（学生）<br>
+				系列：<ruby>女神异闻录<rp>（</rp><rt>Persona</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>女神异闻录5<rp>（</rp><rt>Persona 5</rt><rp>）</rp></ruby><br>
+				P5主人公的常服。身穿秀尽学园的校服，戴着黑框眼镜，有着黑色卷发和深灰的瞳孔。在平常他会以这身装束行动，虽然打扮并不出众，但却是个美男子，所以能与许多人建立关系。<br>
+				——Eric、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“真不愧是Joker！”`,
+			sst_rex:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0966. 莱克斯/Rex/レックス<br>
+				系列：<ruby>异度神剑<rp>（</rp><rt>Xenoblade Chronicles</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>异度神剑2<rp>（</rp><rt>Xenoblade Chronicles 2</rt><rp>）</rp></ruby><br>
+				平时生活在巨神兽“青龙”的身上，以打捞为生的少年，梦想是登上远方的世界树，去往“乐园”。有一次接受了报酬丰厚的打捞沉船委托，并意外的唤醒了沉船中的异刃“焰”。他接受了焰分给他的一半生命，并立志要带她一起去乐园。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“莱克斯，你一个人……也已经没问题了吧。”`,
+			sst_cuphead_mugman:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1398. 茶杯头/Cuphead/カップヘッド<br>
+				系列：<ruby>茶杯头<rp>（</rp><rt>Cuphead</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>茶杯头<rp>（</rp><rt>Cuphead</rt><rp>）</rp></ruby><br>
+				人如其名，脑袋是个茶杯，甚至还可以拿下来或者用吸管吸里面的水。他和弟弟马克杯人误入魔鬼的赌场并被魔鬼欺骗，不得不帮助魔鬼回收他其他债主的灵魂——这些债主可一个比一个难缠。所以说，一开始就不要跟魔鬼打交道啊！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“不要和恶魔做交易。”`,
+			sst_krystal:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0387. 水晶/Krystal/クリスタル<br>
+				系列：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星际火狐冒险<rp>（</rp><rt>Star Fox Adventures</rt><rp>）</rp></ruby><br>
+				她曾经被囚禁在水晶中，这段经历太符合她的名字了。火狐在救出水晶之后邀请她加入小队，在小队中，她的读心能力发挥了很大作用。她之后还和火狐坠入爱河，不知读心能力是促成了还是阻碍了他们的关系呢？<br>
+				——煤球，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				可惜当初没能在Brawl参战，后来彻底没机会了……`,
+			sst_mega_man:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0864. 洛克人/Mega Man/ロックマン<br>
+				系列：<ruby>洛克人<rp>（</rp><rt>Mega Man</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>洛克人<rp>（</rp><rt>Mega Man</rt><rp>）</rp></ruby><br>
+				CAPCOM公司的元祖洛克人系列的主角，首次登场于1987年。他需要通过各个关卡，打败关底的机器人Boss得到他们的武器。在大乱斗中，他所使用的各种技能就来源于此，总共超过10种。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				有段时间老摸一直在玩洛克人……`,
+			sst_captain_falcon:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0591. 飞隼队长/Captain Falcon/キャプテン・ファルコン<br>
+				系列：<ruby>零式赛车<rp>（</rp><rt>F-Zero</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>零式赛车<rp>（</rp><rt>F-Zero</rt><rp>）</rp></ruby><br>
+				在F-Zero赛车大赛中，飞隼队长驾驶着他的“蓝色猎鹰”取得了优秀的成绩。虽然参战了大乱斗，但他的真实身份仍然是个谜。他的速度和力量都很强，还有演出效果爆炸的招牌技能“飞隼拳”，可以在落地的时候尝试使用哦！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				亮招来见。`,
+			sst_jigglypuff:`武将作者：mario not mary、南柯<br>
+				插图作者：未知<br>
+				<hr>
+				0409. 胖丁/Jigglypuff/プリン<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>宝可梦 红／绿<rp>（</rp><rt>Pokémon Red and Green Versions</rt><rp>）</rp></ruby><br>
+				胖丁是一般+妖精属性的宝可梦，以其催眠性的歌声闻名。在大乱斗中，它空战很强，还有多段跳的能力。不过它的缺点是太轻了，如果露出破绽，很容易就会被击飞。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				什么叫超级方差斗士啊！`,
+			sst_lucario:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0417. 路卡利欧/Lucario/ルカリオ<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>宝可梦不可思议迷宫 赤之救助队／青之救助队<rp>（</rp><rt>Pokémon Mystery Dungeon: Red Rescue Team and Blue Rescue Team</rt><rp>）</rp></ruby><br>
+				路卡利欧是格斗+钢属性的宝可梦，通过观察和操纵波导来攻击。路卡利欧受到的伤害越多，自身的伤害也越高，最多可以造成1.8倍的伤害，此时波导弹也会变大！如果敌人没有击杀路卡利欧，那就很难办了。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				波导之力永存吾心。`,
+			sst_pichu:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0410. 皮丘/Pichu/ピチュー<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>精灵宝可梦 金／银<rp>（</rp><rt>Pokémon Gold and Silver Versions</rt><rp>）</rp></ruby><br>
+				皮卡丘尚未进化时就是皮丘。它还不擅长蓄电。惊讶或者发笑时，就会立刻进行放电。在大乱斗中，虽然皮丘各个技能的力度比皮卡丘强，但它每次放电都会伤到自己。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				自损八百，可伤敌一千。`,
+			sst_king_dedede:`武将作者：mario not mary<br>
+				插图作者：太春/バルテー<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/42226957")}<br>
+				<hr>
+				0325. 帝帝帝大王/King Dedede/デデデ大王<br>
+				系列：<ruby>星之卡比<rp>（</rp><rt>Kirby</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星之卡比<rp>（</rp><rt>Kirby\x27s Dream Land</rt><rp>）</rp></ruby><br>
+				他自称这片大陆的大王，但其实没什么统治的欲望。他是个大吃货，所以不出意外的是个重型斗士。和他有关的bgm都很魔性。虽然体积大、速度慢，但是可以多段跳。他的火箭锤威力非常惊人。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				你休想欺负我的瓦豆鲁迪！`,
+			sst_corrin:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0618. 神威（男性）/Corrin (Male)/カムイ（男性）<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章if<rp>（</rp><rt>Fire Emblem Fates</rt><rp>）</rp></ruby><br>
+				《火焰纹章：if》的主角，形象和性别可以自定义。出生和成长分别在两个文化截然不同的王国，在成人后又卷入两国之间的冲突。拥有龙的血统，可以将身体的部分或全部变为龙形态。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0619. 神威（女性）/Corrin (Female)/カムイ（女性）<br>
+				系列：<ruby>火焰纹章<rp>（</rp><rt>Fire Emblem</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>火焰纹章if<rp>（</rp><rt>Fire Emblem Fates</rt><rp>）</rp></ruby><br>
+				《火焰纹章：if》的主角，形象和性别可以自定义。因为常年被关在城堡里，所以对人情世故一无所知，因此很被亲友们担心。手里的剑是最终形态的“夜刀神”，只认她一个主人。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				我选择……`,
+			sst_steve:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				1428. 史蒂夫/Steve/スティーブ<br>
+				系列：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>
+				来自一个由立方体构成的世界的神秘人物，身为一名探险家（同时还是一名矿工），他将（和他心爱的镐子）探索这个世界，并与各位斗士们进行一次武艺切磋。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“想挖到钻石吗？尝试在Y=11找找！”<br>
+				<hr>
+				（Show-K注：Steve能参战我是真的很惊讶，猜到他会来却又猜不到他会在这个时候来吧……）`,
+			sst_ma:`武将作者：mario not mary<br>
+				插图作者：无<br>
+				<hr>
+				R012. 马老师/Ma
+				<hr>
+				我们都是初级人～`,
+			sst_feiji:`武将作者：mario not mary<br>
+				插图作者：无<br>
+				<hr>
+				R013. 飞机
+				<hr>
+				打了吗？还没有！`,
+			sst_sonic:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0775. 索尼克/Sonic the Hedgehog/ソニック・ザ・ヘッジホッグ<br>
+				系列：<ruby>刺猬索尼克<rp>（</rp><rt>Sonic the Hedgehog</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>刺激赛车<rp>（</rp><rt>Rad Mobile</rt><rp>）</rp></ruby><br>
+				索尼克系列的主角，很好相处，喜欢用速度证明自己的实力。事实上，他是大乱斗中跑步速度最快的斗士。他可以利用速度优势躲避攻击并进行快攻。在过去，索尼克系列曾经对马力欧系列形成了强力的竞争。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				“SONIC SPEED！”`,
+			sst_hero:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				1324. 勇者（勇者斗恶龙XI S）/Hero (DRAGON QUEST XI S)/勇者（ドラゴンクエストXI S）<br>
+				系列：<ruby>勇者斗恶龙<rp>（</rp><rt>Dragon Quest</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>勇者斗恶龙XI S<rp>（</rp><rt>Dragon Quest XI S</rt><rp>）</rp></ruby><br>
+				勇者斗恶龙系列中的每个主角都不会说话，名字也是玩家自定义的，但他们的设定各不相同。《勇者斗恶龙XI S》中的勇者左手有世界树的标志，然而因为国王被魔王控制，他很长一段时间都被污蔑为恶魔之子并遭到追捕。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1325. 勇者（勇者斗恶龙III）/Hero (DRAGON QUEST III)/勇者（ドラゴンクエストIII）<br>
+				系列：<ruby>勇者斗恶龙<rp>（</rp><rt>Dragon Quest</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>勇者斗恶龙III<rp>（</rp><rt>Dragon Quest III</rt><rp>）</rp></ruby><br>
+				系列中最为标志性的勇者，通常被称为洛特，《勇者斗恶龙》和《勇者斗恶龙II》的主角都是他的后代。他为了完成父亲未竟的讨伐魔王大业，而和三个同伴一同冒险。这也是拥有转职系统的第一作。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1326. 勇者（勇者斗恶龙IV）/Hero (DRAGON QUEST IV)/勇者（ドラゴンクエストIV）<br>
+				系列：<ruby>勇者斗恶龙<rp>（</rp><rt>Dragon Quest</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>勇者斗恶龙IV<rp>（</rp><rt>Dragon Quest IV</rt><rp>）</rp></ruby><br>
+				这位勇者虽然肩负击败魔王的预言，生活却很平静，直到魔王发现了他隐居的村庄并将之洗劫。勇者的青梅竹马为掩护他逃跑而牺牲。一无所有的勇者决心解开自己的身世之谜，完成使命。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1327. 勇者（勇者斗恶龙VIII）/Hero (DRAGON QUEST VIII)/勇者（ドラゴンクエストVIII）<br>
+				系列：<ruby>勇者斗恶龙<rp>（</rp><rt>Dragon Quest</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>勇者斗恶龙VIII<rp>（</rp><rt>Dragon Quest VIII</rt><rp>）</rp></ruby><br>
+				这位勇者本来是一名皇家护卫，邪恶小丑诅咒了整个王国，将人们都变成了动植物，他只能带着变成动物的国王与公主逃离，寻找击败小丑的方法。他口袋里有一只名为Munchie的仓鼠，如果给它吃奶酪，它也会帮助战斗。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				超级摸奖。`,
+			sst_fox:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0382. 火狐/Fox McCloud/フォックス<br>
+				系列：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>
+				火狐是星际佣兵小队“星际火狐”的队长，多次和邪恶的安德罗斯交战。他的飞机驾驶技术出神入化，即使在大乱斗里难得开一次飞机，他也能依靠自身的高速进行战斗。他的反射盾可以反射对方的飞行道具，同时增加其威力。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				这里是火狐，前来支援！`,
+			sst_mii_fighters:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1090. Mii格斗类型/Mii Brawler/Miiファイター 格闘タイプ<br>
+				系列：Mii<br>
+				首次登场：<ruby>Mii频道<rp>（</rp><rt>Mii Channel</rt><rp>）</rp></ruby><br>
+				这个斗士的形象以玩家的Mii形象为基准。他/她擅长近身格斗，十分敏捷，以各种高机动性的技能灵活应战，并且冲刺和跳跃性能非常优秀。和对手贴身大干一场吧——你很快就能击败他们的！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1091. Mii剑术类型/Mii Swordfighter/Miiファイター 剣術タイプ<br>
+				系列：Mii<br>
+				首次登场：<ruby>Mii频道<rp>（</rp><rt>Mii Channel</rt><rp>）</rp></ruby><br>
+				以玩家的Mii形象为基准，使用剑的斗士。攻击距离相当不错，但是出招相应较慢。当然，你可以给他装上蓄力、反击或飞行道具技能。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1092. Mii射击类型/Mii Gunner/Miiファイター 射撃タイプ<br>
+				系列：Mii<br>
+				首次登场：<ruby>Mii频道<rp>（</rp><rt>Mii Channel</rt><rp>）</rp></ruby><br>
+				带有臂炮的Mii斗士，非常适合喜欢远距离战的玩家。Mii射击类型有很多类型的飞行道具，你可以自取所需、灵活运用。不过也不要忘了多用A键的各种技能哦！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				可能只有玩过灯火之星的人才知道Mii斗士有默认配置。`,
+			sst_alex:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1429. 艾莉克斯/Alex/アレックス（Minecraft）<br>
+				系列：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>
+				身为史蒂夫的女朋友，她也一同来到了大乱斗的世界，并在这里继续进行她的创造与建设，小心她所布置的各种机关！它们可能会让你陷入大麻烦。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				好像Minecraft官方的确有说过她是史蒂夫的女朋友。`,
+			sst_min_min:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1414. 面面（斗士）/Min Min (Fighter)/ミェンミェン（ファイター）<br>
+				系列：<ruby>神臂斗士<rp>（</rp><rt>ARMS</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>神臂斗士<rp>（</rp><rt>ARMS</rt><rp>）</rp></ruby><br>
+				在2020年6月，面面作为第6个DLC斗士加入了大乱斗，打破了“有命魂和Mii服装的系列就无法参战”的前例。她使用A和B分别控制双臂的机制相当特殊，而踢回飞行道具、龙臂等要素也很还原。总之大家跟着她一起来喊——“我爱拉面！”<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				我！爱！拉！面！`,
+			sst_pikachu:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0407. 皮卡丘/Pikachu/ピカチュウ<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>宝可梦 红／绿<rp>（</rp><rt>Pokémon Red and Green Versions</rt><rp>）</rp></ruby><br>
+				世界知名的超人气宝可梦！皮卡丘是电属性宝可梦，红红的脸颊储存电力用来作战。在大乱斗里，皮卡丘的强度算是非常高的，能使用迅速而强力的攻击。他的电光石火可以改变2次方向。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				皮～卡～丘！`,
+			sst_falco:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0383. 佛克/Falco Lombardi/ファルコ<br>
+				系列：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>星际火狐<rp>（</rp><rt>Star Fox</rt><rp>）</rp></ruby><br>
+				“星际火狐”小队里才华横溢、不拘小节的队员。在加入火狐的小队之前，他曾经在多个帮派待过。在大乱斗里，他的跳跃和空战能力很不错，并且可以将反射盾踢出去进行攻击。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				放心，一个也别想逃。`,
+			sst_enderman:`武将作者：mario not mary、Yumikohimi、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				1434. 末影人/Enderman/エンダーマン<br>
+				系列：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>我的世界<rp>（</rp><rt>Minecraft</rt><rp>）</rp></ruby><br>
+				细长的四肢，紫色的眼睛。这比黑夜更黑暗的生物可不是你瞪眼的理想对象。它们通常出现在下界和末地，在主世界较为稀有。而更为稀有的，是曾经与它的眼神接触，然后幸存下来讲述其恐怖经历的玩家。不过放心，参加这次大乱斗的末影人并不会这样做，而是用各种技巧来击垮对手。<br>
+				——谁的错820、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				小黑！`,
+			sst_sephiroth:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1439. 萨菲罗斯/Sephiroth/セフィロス<br>
+				系列：<ruby>最终幻想<rp>（</rp><rt>Final Fantasy</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>最终幻想VII<rp>（</rp><rt>Final Fantasy VII</rt><rp>）</rp></ruby><br>
+				曾经是神罗公司里最伟大的战士，也是人和外星生命“杰诺瓦”进行融合的实验产物。他了解到自己身世之后，逐渐对人类产生恨意，开始了一系列的毁灭活动。只要有足够杰诺瓦细胞，他就能够重生。似乎以在战斗中和精神上折磨克劳德为乐。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				Sephiroth♫~`,
+			sst_pokemon_trainer_leaf:`武将作者：南柯、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				0413. 宝可梦训练家（女性）/Pokémon Trainer (Female)/ポケモントレーナー（女性）<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>宝可梦 火红／叶绿<rp>（</rp><rt>Pokémon FireRed and LeafGreen Versions</rt><rp>）</rp></ruby><br>
+				在早一些的《宝可梦》游戏中，如果你选择了女性训练家，则你的劲敌就会变成男性，反之亦然。从《宝可梦：X/Y》开始，训练家们不但可以选择肤色，还可以更换服装了——夺冠虽然重要，但打扮也不可或缺！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				来看看新人设计的第一个武将！`,
+			sst_kyo_kusanagi:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1362. 草薙京/Kyo Kusanagi/草薙京<br>
+				系列：<ruby>拳皇<rp>（</rp><rt>The King of Fighters</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>拳皇\x2794<rp>（</rp><rt>The King of Fighters \x2794</rt><rp>）</rp></ruby><br>
+				炎之贵公子草薙京，三神器之一“草薙剑”的传人，因此能够使用神器所带来的火焰之力。三神器家族自1800年前便与大蛇结下了宿命的渊源。大蛇作为地球的意志，想要清除一直以来破坏地球的人类，而三神器一族则世世代代守护着大蛇的封印。他们也背负上了与大蛇一族战斗的宿命。不过听说他现在还拿不到中学毕业证。<br>
+				——Mario_not_mary、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				所以拳皇XV终于憋出来了……`,
+			sst_pauline:`武将作者：mario not mary<br>
+				插图作者：맛감쟈<br>
+				——${get.formatUrl("https://www.pixiv.net/artworks/84875359")}<br>
+				<hr>
+				0079. 宝琳/Pauline/ポリーン<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>森喜刚<rp>（</rp><rt>Donkey Kong</rt><rp>）</rp></ruby><br>
+				宝琳登场于1981年的初代《森喜刚》游戏，在那个游戏中，森喜刚不断从台阶上扔下木桶，而马力欧需要躲开木桶救出宝琳。经过这么多年之后，她现在的形象和最初登场时也截然不同了。在《超级马力欧奥德赛》中，她作为纽敦市市长举办了一场盛大的庆典。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				此次推出的三噩梦命魂武将其一。`,
+			sst_dr_wily:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0873. 威利博士/Dr. Wily/Dr.ワイリー<br>
+				系列：<ruby>洛克人<rp>（</rp><rt>Mega Man</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>洛克人<rp>（</rp><rt>Mega Man</rt><rp>）</rp></ruby><br>
+				洛克人系列中的疯狂科学家，制造了许多战斗机器人想要掌控世界。他也丝毫不介意偷走其他科学家开发的机器人并将它们改造得更加邪恶。一般来说要击败他改造的8个机器人（初代《洛克人》为6个）才能和他对战。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				此次推出的三噩梦命魂武将其二。`,
+			sst_kazuya:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1474. 三岛一八/Kazuya Mishima/三島一八<br>
+				系列：<ruby>铁拳<rp>（</rp><rt>Tekken</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>铁拳<rp>（</rp><rt>Tekken</rt><rp>）</rp></ruby><br>
+				为什么这位格斗家执意要把斗士们都扔下悬崖？因为这不但符合大乱斗的规则，也是在原作中他和父亲斗得你死我活的表现。作为斗士的三岛一八拥有非常丰富的技能组，还有特殊的移动方式和投技。巧妙利用各种招式制胜！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				MNM终于开始对弃牌堆大打出手了。`,
+			sst_kraid:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				0283. 克雷德/Kraid/クレイド<br>
+				系列：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>密特罗德<rp>（</rp><rt>Metroid</rt><rp>）</rp></ruby><br>
+				宇宙海盗的干部之一，在初代《密特罗德》就有登场。那个时候的它受机能限制还非常小只，但在《超级密特罗德》和《密特罗德：零点任务》中的它就相当巨大了，会从肚子中发射爪子攻击。它也出现在“布林斯塔深部”这个场地的背景中。在“灯火之星”中，它能赋予命魂“重战车流”的效果。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				直接上8血魔将了……`,
+			sst_sora:`武将作者：mario not mary、Show-K<br>
+				插图作者：未知<br>
+				<hr>
+				1500. 索拉/Sora/ソラ<br>
+				系列：<ruby>王国之心<rp>（</rp><rt>Kingdom Hearts</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>王国之心<rp>（</rp><rt>Kingdom Hearts</rt><rp>）</rp></ruby><br>
+				让我们热烈欢迎这一代大乱斗的最后一个斗士登场！虽然索拉并没有带着他的迪士尼伙伴们一起来，但他仍然能使用标志性的钥匙剑“钥刃”和各种魔法，施展灵活的攻击。不过要注意，他的重量比较轻，容易被击飞。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				第一次见到这个“施法”就大为震惊……不过索拉能来大乱斗显然比这个更震惊。`,
+			sst_pac_man:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0946. 吃豆人/PAC-MAN/パックマン<br>
+				系列：<ruby>吃豆人<rp>（</rp><rt>Pac-Man</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>吃豆人<rp>（</rp><rt>Pac-Man</rt><rp>）</rp></ruby><br>
+				黄黄圆圆的吃豆人！他的原作可是创造了“最成功的投币式街机游戏”这一吉尼斯世界纪录的。在大乱斗中，他的技能大多基于最初代的吃豆人。在他的炫耀动作中还有不少南梦宫的其他ip出场。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				大游戏天下，已半入我手！`,
+			sst_mewtwo:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0411. 超梦/Mewtwo/ミュウツー<br>
+				系列：<ruby>宝可梦<rp>（</rp><rt>Pokémon</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>宝可梦 红／绿<rp>（</rp><rt>Pokémon Red and Green Versions</rt><rp>）</rp></ruby><br>
+				使用梦幻的基因制造出来的宝可梦，科学力量可以造出它的身体，给予它强大的力量和极高的智慧，却无法造出一颗温柔的心。它一方面厌恶人类，另一方面又为自己的身份认同而迷茫。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				由强行添加进去的数据强行诞生。`,
+			sst_olimar:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				0798. 欧力马/Olimar/キャプテン·オリマー<br>
+				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				老练的宇宙飞行家欧力马是多露芬号飞船的船长，他和皮克敏一起在大乱斗中作战，可以拔出皮克敏和使用哨子号令它们。在拥有皮克敏的时候，欧力马的强度会更高，并且不同颜色的皮克敏有不同的效果，在对战之前要查阅清楚。顺便，他的名字倒过来就是马力欧。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0799. 阿尔福/Alph/アルフ<br>
+				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>皮克敏3<rp>（</rp><rt>Pikmin 3</rt><rp>）</rp></ruby><br>
+				阿尔福是坠毁在星球PNF-404上的年轻探险家，他需要尽快找到失散的船员和飞船。他醒来后发现的第一种生物就是皮克敏。除了探索星球，他和船员们还需要寻找食物以维持生存和供给母星。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0803. 红色皮克敏/Red Pikmin/赤ピクミン<br>
+				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				红色皮克敏有着尖尖的鼻子，这也是欧力马遇到的第一种皮克敏。在原作中，它们不怕火。在大乱斗中，红色皮克敏的攻击力是第二高的，并且攻击带火属性。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0804. 蓝色皮克敏/Blue Pikmin/青ピクミン<br>
+				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				蓝色皮克敏的嘴角一直耷拉着，看起来不太开心。在原作中，它们可以进入水中取物。在大乱斗中，蓝色皮克敏的防御力是第二高的，投掷出去的伤害也相当可观。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				0805. 黄色皮克敏/Yellow Pikmin/黄ピクミン<br>
+				系列：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>皮克敏<rp>（</rp><rt>Pikmin</rt><rp>）</rp></ruby><br>
+				黄色皮克敏有尖尖的“耳朵”——其实这个结构的作用仍然不清楚。它们在原作中免疫电，并且是最轻的皮克敏。在大乱斗中，它们被投掷出去时抛物线比其他皮克敏高，并且能对接触到的斗士造成电属性伤害。<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				真正实现了主机/手柄玩即时战略游戏的梦想。`,
+			sst_marioraz:`武将作者：mario not mary<br>
+				插图作者：无<br>
+				<hr>
+				R014. 升哥/Marioraz
+				<hr>
+				“樱井懂个屁大乱斗”`,
+			sst_piranha_plant:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1303. 吞食花/Piranha Plant/パックンフラワー<br>
+				系列：<ruby>马力欧<rp>（</rp><rt>Mario</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>超级马力欧兄弟<rp>（</rp><rt>Super Mario Bros.</rt><rp>）</rp></ruby><br>
+				这些植物与其说是肉食性的，不如说是马力欧食性的。世界上有非常多种吞食花，如果让自然王来给你讲甚至能讲出绕口令来。总之，没有什么吞食花不是火球和震地不能解决的啦！<br>
+				——封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				某紫衣男子已绝望。`,
+			sst_bayonetta:`武将作者：mario not mary<br>
+				插图作者：未知<br>
+				<hr>
+				1006. 蓓优妮塔（安柏拉的魔女）/Bayonetta (Bayonetta 2)/ベヨネッタ（アンブラの魔女）<br>
+				系列：<ruby>蓓优妮塔<rp>（</rp><rt>Bayonetta</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>蓓优妮塔2<rp>（</rp><rt>Bayonetta 2</rt><rp>）</rp></ruby><br>
+				蓓优妮塔属于濒临灭绝的“安柏拉的魔女”一族。她擅长使用四肢的四把枪攻击，还能以头发为介质召唤恶魔。在大乱斗中，她的战法也和原作一样华丽。通常必杀技按住按键可以蓄力，并且连续两次使用时姿势必定不同。在3DS和WiiU版《任天堂明星大乱斗》中，她的强度甚至破坏了平衡。<br>
+				——无敌阿尔宙斯、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				1007. 蓓优妮塔（丧失记忆的魔女）/Bayonetta (Bayonetta)/ベヨネッタ（記憶を失った魔女）<br>
+				系列：<ruby>蓓优妮塔<rp>（</rp><rt>Bayonetta</rt><rp>）</rp></ruby><br>
+				首次登场：<ruby>蓓优妮塔 魔兵惊天录<rp>（</rp><rt>Bayonetta</rt><rp>）</rp></ruby><br>
+				《蓓优妮塔：魔兵惊天录》中蓓优妮塔的形象。这位安柏拉的魔女从上百年的沉睡中醒来时失去了所有记忆。她的日常一般是扮作修女，吸引天使，然后猎杀它们，直到另一个拥有与她相同力量的魔女出现，她的记忆才开始逐渐恢复。她最后被卷进一场拯救世界的战斗中。<br>
+				——无敌阿尔宙斯、封羽翎烈，《任天堂明星大乱斗特别版全命魂介绍》<br>
+				<hr>
+				Broken!`
 		},
 		characterTitle:{
 			sst_mario:"炎烈意决",
@@ -1287,26 +1287,36 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				charlotte:true,
 				superCharlotte:true,
 				trigger:{
-					global:'gameStart',
-					player:['enterGame','showCharacterEnd']
+					global:"gameStart",
+					player:["enterGame","showCharacterEnd"]
 				},
 				ruleSkill:true,
 				silent:true,
 				firstDo:true,
 				priority:2020,
-				filter:(event,player)=>player.sex=='',
+				filter:(event,player)=>player.sex=="",
 				content:()=>{
-					'step 0'
-					player.chooseControl('male','female').set('prompt','选择性别').set('ai',()=>['male','female'].randomGet());
-					'step 1'
+					"step 0"
+					player.chooseControl("male","female").set("prompt","选择性别").set("ai",()=>["male","female"].randomGet());
+					"step 1"
 					player.sex=result.control;
 					game.broadcast((player,sex)=>player.sex=sex,player,result.control);
 					const name=player.name;
-					const differentAvatar=['sst_corrin','sst_robin','nnk_robin','sst_inkling'];
-					if(differentAvatar.contains(name)) player.setAvatar(name,name+'_'+result.control);
-					game.log(player,'将性别变为了','#y'+get.translation(result.control));
-					const differentGroup={sst_corrin_male:'sst_dark',sst_corrin_female:'sst_light'};
-					if(typeof differentGroup[name+'_'+result.control]=='string') player.changeGroup(differentGroup[name+'_'+result.control]);
+					const differentAvatar=[
+						"sst_corrin",
+						"sst_robin",
+						"nnk_robin",
+						"sst_inkling"
+					];
+					const nameAfter=`${name}_${result.control}`;
+					if(differentAvatar.contains(name)) player.setAvatar(name,nameAfter);
+					game.log(player,"将性别变为了",`#y${get.translation(result.control)}`);
+					const differentGroup={
+						sst_corrin_male:"sst_dark",
+						sst_corrin_female:"sst_light"
+					};
+					const group=differentGroup[nameAfter];
+					if(typeof group=="string") player.changeGroup(group);
 					player.update();
 				}
 			},
@@ -1314,28 +1324,28 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				charlotte:true,
 				superCharlotte:true,
 				trigger:{
-					global:'gameStart',
-					player:['enterGame','showCharacterEnd']
+					global:"gameStart",
+					player:["enterGame","showCharacterEnd"]
 				},
 				ruleSkill:true,
 				silent:true,
 				firstDo:true,
 				priority:2019,
-				filter:(event,player)=>!get.config('no_group')&&player.group=='sst_smash',
+				filter:(event,player)=>!get.config("no_group")&&player.group=="sst_smash",
 				content:()=>{
-					'step 0'
-					player.chooseControl('sst_light','sst_dark','sst_spirit','sst_reality').set('prompt','选择势力').set('ai',()=>{
+					"step 0"
+					player.chooseControl("sst_light","sst_dark","sst_spirit","sst_reality").set("prompt","选择势力").set("ai",()=>{
 						if(game.zhu&&game.zhu!=_status.event.player&&get.attitude(_status.event.player,game.zhu)>0&&_status.event.controls.contains(game.zhu.group)) return game.zhu.group;
 						return _status.event.controls.randomGet();
 					});
-					'step 1'
+					"step 1"
 					player.changeGroup(result.control);
 					player.update();
 				}
 			},
 			braces:{
 				intro:{
-					content:'#'
+					content:"#"
 				}
 			},
 			//Mario
@@ -1393,7 +1403,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				direct:true,
 				content:()=>{
 					"step 0";
-					player.chooseBool(get.prompt("sst_tanshi",trigger.player),"你可以获得"+get.translation(trigger.player)+"所摸的"+get.cnNumber(trigger.cards.length)+"张牌").set("ai",()=>get.attitude(_status.event.player,_status.event.getTrigger().player)<0);
+					player.chooseBool(get.prompt("sst_tanshi",trigger.player),`你可以获得${get.translation(trigger.player)}所摸的${get.cnNumber(trigger.cards.length)}张牌`).set("ai",()=>get.attitude(_status.event.player,_status.event.getTrigger().player)<0);
 					"step 1"
 					if(result.bool){
 						player.logSkill("sst_tanshi",trigger.player);
@@ -1450,7 +1460,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.targets){
 						player.logSkill("sst_huandai",result.targets);
 						event.target=result.targets[0];
-						event.target.chooseCard([1,Infinity],"还贷：是否交给"+get.translation(player)+"任意张手牌？",card=>lib.filter.canBeGained(card,_status.event.getParent().player,_status.event.player)).set("ai",card=>{
+						event.target.chooseCard([1,Infinity],`还贷：是否交给${get.translation(player)}任意张手牌？`,card=>lib.filter.canBeGained(card,_status.event.getParent().player,_status.event.player)).set("ai",card=>{
 							const target=_status.event.getParent().player;
 							if(target.hasJudge("lebu")) return 0;
 							const player=_status.event.player;
@@ -1483,7 +1493,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				charlotte:true,
 				mark:true,
 				intro:{
-					content:storage=>"你已向"+game.findPlayersByPlayerid(Object.keys(storage)).sortBySeat(_status.currentPhase).map(current=>get.translation(current)+"（"+get.cnNumber(storage[current.playerid])+"张牌）").join("、")+"贷款",
+					content:storage=>`你已向${game.findPlayersByPlayerid(Object.keys(storage)).sortBySeat(_status.currentPhase).map(current=>`${get.translation(current)}（${get.cnNumber(storage[current.playerid])}张牌）`).join("、")}贷款`,
 					markcount:storage=>game.findPlayersByPlayerid(Object.keys(storage)).map(current=>storage[current.playerid]).reduce((previousValue,currentValue)=>previousValue+currentValue,0)
 				},
 				onremove:true,
@@ -1584,9 +1594,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						if(!players.length) return "〖印结〗角色不在场";
 						if(!players.length>1){
 							players.sortBySeat(_status.currentPhase);
-							return get.translation(players)+"与你相互距离为1<br>本回合内你使用牌不能指定其他角色为目标<br>结束阶段，"+get.translation(players)+"获得你所有牌";
+							return `${get.translation(players)}与你相互距离为1<br>本回合内你使用牌不能指定其他角色为目标<br>结束阶段，${get.translation(players)}获得你所有牌`;
 						}
-						return get.translation(players)+"与你相互距离为1<br>本回合内你使用牌不能指定除"+get.translation(players)+"外角色为目标<br>结束阶段，"+get.translation(players)+"获得你所有牌";
+						return `${get.translation(players)}与你相互距离为1<br>本回合内你使用牌不能指定除${get.translation(players)}外角色为目标<br>结束阶段，${get.translation(players)}获得你所有牌`;
 					}
 				},
 				mod:{
@@ -1612,15 +1622,15 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				},
 				intro:{
 					content:(storage,player)=>{
-						if(!storage.length) return "没有与你距离最近的其他"+get.translation(player.group)+"势力角色";
-						let str="与你距离最近的其他"+get.translation(player.group)+"势力角色："+get.translation(storage)+"<br>";
+						if(!storage.length) return `没有与你距离最近的其他${get.translation(player.group)}势力角色`;
+						let str=`与你距离最近的其他${get.translation(player.group)}势力角色：${get.translation(storage)}<br>`;
 						const equips=[];
 						storage.forEach(current=>equips.addArray(current.getCards("e",card=>get.name(card)!="muniu")));
 						if(!equips.length){
 							str+="没有装备";
 						}
 						else{
-							str+="装备："+get.translation(equips);
+							str+=`装备：${get.translation(equips)}`;
 						}
 						return str;
 					}
@@ -1748,7 +1758,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					let num=_status.event.player.countUsed(null,true);
 					if(_status.currentPhase!=_status.event.player) num++;
 					num++;
-					return "你可以将"+get.cnNumber(num)+"张牌当作任意一张基本牌或普通锦囊牌使用";
+					return `你可以将${get.cnNumber(num)}张牌当作任意一张基本牌或普通锦囊牌使用`;
 				},
 				chooseButton:{
 					dialog:(event,player)=>{
@@ -1798,7 +1808,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						let num=player.countUsed(null,true);
 						if(_status.currentPhase!=player) num++;
 						num++;
-						return "将"+get.cnNumber(num)+"张牌当作"+(get.translation(links[0][3])||"")+get.translation(links[0][2])+"使用";
+						return `将${get.cnNumber(num)}张牌当作${get.translation(links[0][3])||""}${get.translation(links[0][2])}使用`;
 					}
 				},
 				ai:{
@@ -1878,7 +1888,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				mark:true,
 				intro:{
 					mark:(dialog,content,player)=>{
-						if(player!=game.me) return "牌堆顶的牌始终对"+get.translation(player)+"可见";
+						if(player!=game.me) return `牌堆顶的牌始终对${get.translation(player)}可见`;
 						if(get.itemtype(_status.pileTop)!="card") return "牌堆顶无牌";
 						dialog.add([_status.pileTop]);
 					}
@@ -1900,14 +1910,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						trigger.targets.forEach(current=>effect+=get.effect(current,trigger.card,trigger.player,player));
 					}
 					const suit=get.suit(trigger.card);
-					const info=["###"+get.prompt("sst_quji",trigger.player)+(suit?"（"+get.translation(suit)+"）":"")+"###你可以将牌堆顶一张与"+get.translation(trigger.card)+"花色相同的牌置入弃牌堆，或弃置一张与"+get.translation(trigger.card)+"花色相同的手牌，取消之"+(suit?"（"+get.translation(suit)+"）":"")];
+					const info=[`###${get.prompt("sst_quji",trigger.player)}${suit?`（${get.translation(suit)}）`:""}###你可以将牌堆顶一张与${get.translation(trigger.card)}花色相同的牌置入弃牌堆，或弃置一张与${get.translation(trigger.card)}花色相同的手牌，取消之${suit?`（${get.translation(suit)}）`:""}`];
 					if(get.itemtype(_status.pileTop)=="card"&&lib.filter.cardDiscardable(_status.pileTop,player)){
-						info.push("<div class=\"text center\">牌堆顶</div>");
+						info.push(`<div class="text center">牌堆顶</div>`);
 						event.card=_status.pileTop;
 						info.push([_status.pileTop]);
 					}
 					if(player.countCards("h")){
-						info.push("<div class=\"text center\">手牌区</div>");
+						info.push(`<div class="text center">手牌区</div>`);
 						info.push(player.getCards("h"));
 					}
 					const next=player.chooseButton();
@@ -2222,7 +2232,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:(event,player)=>event.player!=player&&event.player.hasZhuSkill("sst_fuguo",player)&&event.player.group==player.group&&player.countGainableCards(event.player,"he"),
 				content:()=>{
 					"step 0"
-					player.chooseCard(get.prompt("sst_fuguo2",trigger.player),"你可以交给"+get.translation(trigger.player)+"一张牌","he",card=>lib.filter.canBeGained(card,_status.event.getTrigger().player,_status.event.player)).set("ai",card=>{
+					player.chooseCard(get.prompt("sst_fuguo2",trigger.player),`你可以交给${get.translation(trigger.player)}一张牌`,"he",card=>lib.filter.canBeGained(card,_status.event.getTrigger().player,_status.event.player)).set("ai",card=>{
 						const player=_status.event.player;
 						const target=_status.event.getTrigger().player;
 						if(get.name(card)=="du") return Math.cbrt(-get.attitude(player,target)*20);
@@ -2249,8 +2259,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					return false;
 				},
 				prompt2:event=>{
-					const str="你可以将"+get.translation(event.cards.filter(card=>event.player.hasCard(i=>i==card,"h")))+"任意分配给其他角色";
-					if(_status.currentPhase&&_status.currentPhase.isIn()) return str+"，然后"+get.translation(_status.currentPhase)+"摸一张牌";
+					const str=`你可以将${get.translation(event.cards.filter(card=>event.player.hasCard(i=>i==card,"h")))}任意分配给其他角色`;
+					if(_status.currentPhase&&_status.currentPhase.isIn()) return `${str}，然后${get.translation(_status.currentPhase)}摸一张牌`;
 					return str;
 				},
 				check:(event,player)=>game.hasPlayer(current=>current!=player&&get.attitude(player,current)>0),
@@ -2274,7 +2284,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.links&&result.links.length){
 						result.links.forEach(link=>cards.remove(link));
 						event.toGive=result.links;
-						player.chooseTarget("将"+get.translation(result.links)+"分配给一名其他角色",true,lib.filter.notMe).set("ai",target=>{
+						player.chooseTarget(`将${get.translation(result.links)}分配给一名其他角色`,true,lib.filter.notMe).set("ai",target=>{
 							const att=get.attitude(_status.event.player,target);
 							if(_status.event.enemy){
 								return -att;
@@ -2340,7 +2350,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(event.change) event.trigger("removeCharacterBefore");
 					event.group=group;
 					"step 2"
-					game.log(trigger.player,"将武将变更为","#b"+get.translation(event.toChange));
+					game.log(trigger.player,"将武将变更为",`#b${get.translation(event.toChange)}`);
 					trigger.player.reinit(trigger.player.name,event.toChange);
 					if(event.group!="shen"&&event.group!="sst_smash") trigger.player.changeGroup(event.group,false);
 					game.triggerEnter(player);
@@ -2410,7 +2420,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				delay:false,
 				content:()=>{
 					"step 0"
-					player.discardPlayerCard("轻影：弃置"+get.translation(target)+"场上一张牌",target,"ej",true);
+					player.discardPlayerCard(`轻影：弃置${get.translation(target)}场上一张牌`,target,"ej",true);
 					"step 1"
 					if(target==player){
 						player.draw(2);
@@ -2465,11 +2475,11 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				direct:true,
 				content:()=>{
 					"step 0"
-					player.chooseTarget(get.prompt("sst_que"),"你可以观看一名其他角色的手牌，然后获得其中至多"+get.cnNumber(player.getDamagedHp()+1)+"张黑色牌",(card,player,target)=>target!=player&&target.countCards("h")).set("ai",target=>-get.attitude(_status.event.player,target));
+					player.chooseTarget(get.prompt("sst_que"),`你可以观看一名其他角色的手牌，然后获得其中至多${get.cnNumber(player.getDamagedHp()+1)}张黑色牌`,(card,player,target)=>target!=player&&target.countCards("h")).set("ai",target=>-get.attitude(_status.event.player,target));
 					"step 1"
 					if(result.targets&&result.targets.length){
 						player.logSkill("sst_que",result.targets);
-						player.gainPlayerCard("驱厄：你可以获得最多"+get.cnNumber(player.getDamagedHp()+1)+"张黑色牌",result.targets[0],[1,player.getDamagedHp()+1],"h","visible").set("filterButton",button=>get.color(button.link)=="black").set("visibleMove",true);
+						player.gainPlayerCard(`驱厄：你可以获得最多${get.cnNumber(player.getDamagedHp()+1)}张黑色牌`,result.targets[0],[1,player.getDamagedHp()+1],"h","visible").set("filterButton",button=>get.color(button.link)=="black").set("visibleMove",true);
 					}
 					"step 2"
 					if(!result.cards||!result.cards.length) game.delayx();
@@ -2514,7 +2524,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				trigger:{player:"phaseZhunbeiBegin"},
 				filter:(event,player)=>lib.skill.sst_xiduo.logTarget(event,player).length,
 				logTarget:(event,player)=>game.filterPlayer(current=>current.getHp()<player.getHp()).sortBySeat(_status.currentPhase),
-				prompt2:(event,player)=>"你可以令"+get.translation(lib.skill.sst_xiduo.logTarget(event,player))+"选择一项：1. 令你获得其一张牌；2. 你对其使用牌无距离和次数限制且其非锁定技失效",
+				prompt2:(event,player)=>`你可以令${get.translation(lib.skill.sst_xiduo.logTarget(event,player))}选择一项：1. 令你获得其一张牌；2. 你对其使用牌无距离和次数限制且其非锁定技失效`,
 				check:(event,player)=>{
 					let fin=0;
 					lib.skill.sst_xiduo.logTarget(event,player).forEach(target=>{
@@ -2535,7 +2545,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						const target=event.targets.shift();
 						event.target=target;
 						if(target.countCards("he")){
-							target.chooseBool("袭夺：令"+get.translation(player)+"获得你一张牌，否则本回合"+get.translation(player)+"对你使用牌无距离和次数限制且你非锁定技失效").set("ai",()=>{
+							target.chooseBool(`袭夺：令${get.translation(player)}获得你一张牌，否则本回合${get.translation(player)}对你使用牌无距离和次数限制且你非锁定技失效`).set("ai",()=>{
 								const player=_status.event.player;
 								const source=_status.event.getTrigger().player;
 								if(get.attitude(source,player)>=0) return false;
@@ -2556,7 +2566,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 					"step 2"
 					if(result.bool){
-						player.gainPlayerCard("袭夺：获得"+get.translation(target)+"一张牌",target,"he",true);
+						player.gainPlayerCard(`袭夺：获得${get.translation(target)}一张牌`,target,"he",true);
 					}
 					else{
 						player.addTempSkill("sst_xiduo_effect");
@@ -2625,9 +2635,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				selectCard:-1,
 				prompt:()=>{
 					const list=game.filterPlayer(current=>current.hasZhuSkill("sst_yujun",_status.event.player));
-					let str="若"+get.translation(list);
+					let str=`若${get.translation(list)}`;
 					if(list.length>1) str+="中的一人";
-					return str+"允许，则你可以将允许角色的一张手牌当作杀使用";
+					return `${str}允许，则你可以将允许角色的一张手牌当作杀使用`;
 				},
 				ai:{
 					order:1,
@@ -2660,14 +2670,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.targets&&result.targets.length){
 						event.request=result.targets[0];
 						player.line(event.request,"green");
-						event.request.chooseBool().set("prompt","驭军：是否允许"+get.translation(player)+"将你的一张手牌当杀对"+get.translation(trigger.targets)+"使用？").set("ai",()=>get.attitude(_status.event.player,_status.event.getParent().player)>0);
+						event.request.chooseBool().set("prompt",`驭军：是否允许${get.translation(player)}将你的一张手牌当杀对${get.translation(trigger.targets)}使用？`).set("ai",()=>get.attitude(_status.event.player,_status.event.getParent().player)>0);
 					}
 					else{
 						event.finish();
 					}
 					"step 3"
 					if(result.bool){
-						player.choosePlayerCard("驭军：你可以将"+get.translation(event.request)+"的一张手牌当作杀使用（对"+get.translation(trigger.targets)+"）",event.request,"h","visible").set("ai",button=>{
+						player.choosePlayerCard(`驭军：你可以将${get.translation(event.request)}的一张手牌当作杀使用（对${get.translation(trigger.targets)}）`,event.request,"h","visible").set("ai",button=>{
 							const val=get.buttonValue(button);
 							if(get.attitude(_status.event.player,get.owner(button.link))>0) return 10-val;
 							return val;
@@ -2722,7 +2732,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				direct:true,
 				content:()=>{
 					"step 0"
-					player.chooseTarget(get.prompt("sst_yice"),"你可以与一名不是"+get.translation(trigger.card)+"目标的角色展示并交换一张手牌，若展示时颜色相同，"+get.translation(trigger.card)+"对你无效；不同，该角色摸一张牌",(card,player,target)=>!_status.event.getTrigger().targets.contains(target)&&target.countGainableCards(player,"h")&&player.countGainableCards(target,"h")).set("ai",target=>{
+					player.chooseTarget(get.prompt("sst_yice"),`你可以与一名不是${get.translation(trigger.card)}目标的角色展示并交换一张手牌，若展示时颜色相同，${get.translation(trigger.card)}对你无效；不同，该角色摸一张牌`,(card,player,target)=>!_status.event.getTrigger().targets.contains(target)&&target.countGainableCards(player,"h")&&player.countGainableCards(target,"h")).set("ai",target=>{
 						const evt=_status.event.getTrigger();
 						if(get.effect(evt.target,evt.card,evt.player,_status.event.player)<0) return Math.cbrt(get.attitude(_status.event.player,target)*target.countCards("h"))+5;
 						return 0;
@@ -2881,7 +2891,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				direct:true,
 				content:()=>{
 					"step 0"
-					player.chooseTarget(get.prompt("sst_qiuyuan"),"选择一名目标角色。你可以摸一张牌，将"+get.translation(trigger.card)+"的目标改为自己",(card,player,target)=>target.hasZhuSkill("sst_qiuyuan",player)&&_status.event.getTrigger().targets.contains(target)).set("ai",target=>{
+					player.chooseTarget(get.prompt("sst_qiuyuan"),`选择一名目标角色。你可以摸一张牌，将${get.translation(trigger.card)}的目标改为自己`,(card,player,target)=>target.hasZhuSkill("sst_qiuyuan",player)&&_status.event.getTrigger().targets.contains(target)).set("ai",target=>{
 						const player=_status.event.player;
 						const evt=_status.event.getTrigger();
 						return get.attitude(player,target)-target.hp-player.maxHp+player.hp+get.effect(player,evt.card,evt.player,player);
@@ -2981,7 +2991,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					event.cards=trigger.cards2.filter(card=>get.position(card,true)=="d");
-					let str="你可以将"+get.translation(event.cards)+"交给一名其他角色";
+					let str=`你可以将${get.translation(event.cards)}交给一名其他角色`;
 					if(trigger.getParent(2).name=="sst_potian") str+="，然后你令该角色于其下一个回合内拥有【破天】";
 					player.chooseTarget(get.prompt("sst_shenjiao"),str,lib.filter.notMe).set("ai",target=>get.attitude(_status.event.player,target));
 					"step 1"
@@ -3091,7 +3101,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 									phaseLoop.player=player;
 									phaseLoop.goto(0);
 								}
-								game.log("由",player,"的回合开始","#g第"+(game.roundNumber+1)+"轮");
+								game.log("由",player,"的回合开始",`#g第${game.roundNumber+1}轮`);
 							}
 						});
 					}
@@ -3317,7 +3327,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 								break;
 						}
 						game.log(player,"更改了","#g【绝战】","的描述");
-						game.log(player,"删除了","#y"+str);
+						game.log(player,"删除了",`#y${str}`);
 						player.popup("更改描述");
 					}
 				}
@@ -3328,11 +3338,11 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				intro:{
 					content:(storage,player)=>{
 						let str="";
-						if(player.storage.sst_qiongtu[0]) str+="本局游戏你的摸牌阶段摸牌数+"+player.storage.sst_qiongtu[0];
+						if(player.storage.sst_qiongtu[0]) str+=`本局游戏你的摸牌阶段摸牌数+${player.storage.sst_qiongtu[0]}`;
 						if(player.storage.sst_qiongtu[0]&&(player.storage.sst_qiongtu[1]||player.storage.sst_qiongtu[2])) str+="<br>";
-						if(player.storage.sst_qiongtu[1]) str+="本局游戏你的攻击范围+"+player.storage.sst_qiongtu[1];
+						if(player.storage.sst_qiongtu[1]) str+=`本局游戏你的攻击范围+${player.storage.sst_qiongtu[1]}`;
 						if(player.storage.sst_qiongtu[1]&&player.storage.sst_qiongtu[2]) str+="<br>";
-						if(player.storage.sst_qiongtu[2]) str+="本局游戏你的体力上限+"+player.storage.sst_qiongtu[2];
+						if(player.storage.sst_qiongtu[2]) str+=`本局游戏你的体力上限+${player.storage.sst_qiongtu[2]}`;
 						return str;
 					},
 					markcount:(storage,player)=>player.storage.sst_qiongtu[0]+player.storage.sst_qiongtu[1]+player.storage.sst_qiongtu[2]
@@ -3439,7 +3449,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 					"step 5"
 					if(num<targets.length){
-						player.gainPlayerCard("暴征：获得"+get.translation(targets[num])+"区域内一张牌",targets[num],"hej",true);
+						player.gainPlayerCard(`暴征：获得${get.translation(targets[num])}区域内一张牌`,targets[num],"hej",true);
 					}
 					else{
 						event.finish();
@@ -3644,7 +3654,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.targets&&result.targets.length){
 						event.target=result.targets[0];
 						player.line(event.target,"green");
-						player.choosePlayerCard(event.target,"e","将"+get.translation(event.target)+"一张装备牌移动到你的装备区",true).set("filterButton",button=>_status.event.player.isEmpty(get.subtype(button.link)));
+						player.choosePlayerCard(event.target,"e",`将${get.translation(event.target)}一张装备牌移动到你的装备区`,true).set("filterButton",button=>_status.event.player.isEmpty(get.subtype(button.link)));
 					}
 					else{
 						event.finish();
@@ -4030,7 +4040,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							return get.effect(target,evt.card,evt.player,_status.event.player);
 						},
 						prompt:get.prompt("sst_huxiao"),
-						prompt2:"你可以弃置一张红色牌，为"+get.translation(trigger.card)+"增加一个目标"
+						prompt2:`你可以弃置一张红色牌，为${get.translation(trigger.card)}增加一个目标`
 					});
 					"step 1"
 					if(result.cards&&result.cards.length&&result.targets&&result.targets.length){
@@ -4094,7 +4104,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					const num=lib.skill.sst_mingxi.maxTarget(player);
-					player.chooseTarget(get.prompt("sst_mingxi"),"你可以展示至多"+get.cnNumber(num)+"名角色的手牌",[1,num],(card,player,target)=>target.countCards("h")).set("ai",target=>-get.attitude(_status.event.player,target));
+					player.chooseTarget(get.prompt("sst_mingxi"),`你可以展示至多${get.cnNumber(num)}名角色的手牌`,[1,num],(card,player,target)=>target.countCards("h")).set("ai",target=>-get.attitude(_status.event.player,target));
 					"step 1"
 					if(result.targets&&result.targets.length){
 						const targets=result.targets.sortBySeat(_status.currentPhase);
@@ -4211,7 +4221,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_shengbian:{
 				mark:true,
 				intro:{
-					content:(storage,player)=>"当前攻击范围："+player.getAttackRange(),
+					content:(storage,player)=>`当前攻击范围：${player.getAttackRange()}`,
 					markcount:(storage,player)=>player.countCards()
 				},
 				lastDo:true,
@@ -4398,7 +4408,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					const player=_status.event.player;
 					let str="将一张牌当作";
 					if(typeof player.storage.sst_huanbian_previous=="object") str+=get.translation(player.storage.sst_huanbian_previous);
-					return str+"使用";
+					return `${str}使用`;
 				},
 				onuse:(result,player)=>{
 					player.storage.sst_huanbian.push(get.name(result.card));
@@ -4519,7 +4529,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.logSkill("sst_qushi",trigger.player);
 						if(result.control!="摸一张牌"){
 							player.popup(result.control,"thunder");
-							game.log(player,"获得了技能","#g【"+get.translation(result.control)+"】");
+							game.log(player,"获得了技能",`#g【${get.translation(result.control)}】`);
 							player.addTempSkill(result.control,{player:"damageEnd"});
 						}
 						else{
@@ -4554,7 +4564,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					event.num1=1;
 					event.num2=1;
 					const controls=["draw_card"];
-					let prompt="你可以令"+get.translation(event.current)+"摸一张牌";
+					let prompt=`你可以令${get.translation(event.current)}摸一张牌`;
 					if(event.current.getDamagedHp()){
 						event.num2=Math.min(event.num2,event.current.maxHp-event.current.hp);
 						controls.push("recover_hp");
@@ -4612,7 +4622,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					if(result.targets&&result.targets.length){
 						player.logSkill("sst_badao",result.targets);
-						player.gainPlayerCard("霸岛：获得"+get.translation(result.targets[0])+"区域内一张牌",result.targets[0],"hej",true);
+						player.gainPlayerCard(`霸岛：获得${get.translation(result.targets)}区域内一张牌`,result.targets[0],"hej",true);
 						event.inRanges=game.filterPlayer(current=>current.inRange(player));
 						if(event.inRanges.length){
 							event.inRanges.sortBySeat(_status.currentPhase);
@@ -4630,7 +4640,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 3"
 					if(num<event.inRanges.length){
 						if(player.isIn()){
-							event.inRanges[event.num++].chooseToUse("霸岛：是否以"+get.translation(player)+"为目标使用一张基本牌？").set("filterTarget",function(card,player,target){
+							event.inRanges[event.num++].chooseToUse(`霸岛：是否以${get.translation(player)}为目标使用一张基本牌？`).set("filterTarget",function(card,player,target){
 								if(target!=_status.event.getParent().player) return false;
 								return lib.filter.targetEnabled3.apply(this,arguments);
 							}).set("filterCard",function(card){
@@ -4744,7 +4754,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 					return Math.random()>rand?true:false;
 				},
-				prompt2:(event,player)=>"出牌阶段限一次，你使用带有「伤害」标签的牌指定唯一目标时，你可以令其伤害值基数为"+(Math.ceil(player.getHistory("lose",evt=>evt.cards2&&evt.cards2.length).map(evt=>evt.cards2.length).reduce((previousValue,currentValue)=>previousValue+currentValue,0)/2)+1)+"；然后若此牌没有造成伤害，本局游戏你的手牌上限-1",
+				prompt2:(event,player)=>`出牌阶段限一次，你使用带有「伤害」标签的牌指定唯一目标时，你可以令其伤害值基数为${Math.ceil(player.getHistory("lose",evt=>evt.cards2&&evt.cards2.length).map(evt=>evt.cards2.length).reduce((previousValue,currentValue)=>previousValue+currentValue,0)/2)+1}；然后若此牌没有造成伤害，本局游戏你的手牌上限-1`,
 				content:()=>{
 					const num=Math.ceil(player.getHistory("lose",evt=>evt.cards2&&evt.cards2.length).map(evt=>evt.cards2.length).reduce((previousValue,currentValue)=>previousValue+currentValue,0)/2)+1;
 					trigger.getParent().baseDamage+=num-1;
@@ -4768,7 +4778,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_baochui_effect:{
 				charlotte:true,
 				intro:{
-					content:(storage,player)=>"本局游戏你的手牌上限-"+storage+"<br>当前你的手牌上限："+player.getHandcardLimit()
+					content:(storage,player)=>`本局游戏你的手牌上限-${storage}<br>当前你的手牌上限：${player.getHandcardLimit()}`
 				},
 				onremove:true,
 				mod:{
@@ -4785,7 +4795,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				mark:true,
 				marktext:"☯",
 				intro:{
-					content:storage=>"转换技，你视为拥有"+["〖茕途〗","〖圣罚〗","〖勇魂〗"][storage-1]+"，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。"
+					content:storage=>`转换技，你视为拥有${["〖茕途〗","〖圣罚〗","〖勇魂〗"][storage-1]}，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。`
 				},
 				derivation:["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"],
 				zhuanhuanji:(player,skill)=>{
@@ -4843,17 +4853,17 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:(event,player)=>player.hasSkill("sst_xuelun")&&event.source&&!event.source.hasSkill(["sst_qiongtu","sst_shengfa","sst_yonghun"][player.storage.sst_xuelun-1],null,null,false)&&!event.source.hasSkill(["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage.sst_xuelun-1],null,null,false),
 				logTarget:"source",
 				check:(event,player)=>get.attitude(player,event.source)>0,
-				prompt2:(event,player)=>"你可以询问"+get.translation(event.source)+"是否获得〖"+get.translation(["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage.sst_xuelun-1])+"〗直到其发动此技能后",
+				prompt2:(event,player)=>`你可以询问${get.translation(event.source)}是否获得〖${get.translation(["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage.sst_xuelun-1])}〗直到其发动此技能后`,
 				content:()=>{
 					"step 0"
 					event.current=["sst_xuelun_qiongtu","sst_xuelun_shengfa","sst_xuelun_yonghun"][player.storage.sst_xuelun-1];
-					trigger.source.chooseBool("圣袭：是否获得"+get.translation(event.current)+"？").set("ai",()=>true);
+					trigger.source.chooseBool(`圣袭：是否获得【${get.translation(event.current)}】？`).set("ai",()=>true);
 					"step 1"
 					if(result.bool){
 						trigger.source.addAdditionalSkill("sst_shengxi_effect",event.current,true);
 						trigger.source.addSkill("sst_shengxi_effect");
 						trigger.source.popup(event.current,"thunder");
-						game.log(trigger.source,"获得了技能","#g【"+get.translation(event.current)+"】");
+						game.log(trigger.source,"获得了技能",`#g【${get.translation(event.current)}】`);
 					}
 					else{
 						game.log(trigger.source,"拒绝了",player,"的请求");
@@ -4894,7 +4904,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							dialog.addAuto(cards);
 						}
 						else{
-							return "共有"+get.cnNumber(cards.length)+"张牌";
+							return `共有${get.cnNumber(cards.length)}张牌`;
 						}
 					},
 					markcount:"expansion"
@@ -4908,7 +4918,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:(event,player)=>event.player!=player&&!player.getExpansions("sst_xiandu").length,
 				content:()=>{
 					"step 0"
-					player.chooseCard("h",get.prompt("sst_xiandu",trigger.player),"你可以扣置一张手牌，于"+get.translation(trigger.player)+"本回合第一次使用牌时亮出。若这两张牌的类别：相同，你可以对"+get.translation(trigger.player)+"造成一点伤害或摸两张牌；不同，"+get.translation(trigger.player)+"对你造成一点伤害。出牌阶段结束时，你将此牌置入弃牌堆").set("ai",card=>{
+					player.chooseCard("h",get.prompt("sst_xiandu",trigger.player),`你可以扣置一张手牌，于${get.translation(trigger.player)}本回合第一次使用牌时亮出。若这两张牌的类别：相同，你可以对${get.translation(trigger.player)}造成一点伤害或摸两张牌；不同，${get.translation(trigger.player)}对你造成一点伤害。出牌阶段结束时，你将此牌置入弃牌堆`).set("ai",card=>{
 						const target=_status.event.getTrigger().player;
 						if(target.countUsed(null,true)) return 0;
 						const cards=target.getCards("h",card=>target.hasUseTarget(card));
@@ -4949,10 +4959,10 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						}
 						return str;
 					};
-					player.showCards(player.getExpansions("sst_xiandu"),get.translation(player)+"对"+translateTargets(trigger.player)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+					player.showCards(player.getExpansions("sst_xiandu"),`${get.translation(player)}对${translateTargets(trigger.player)}发动了【${get.skillTranslation(event.name,player)}】`);
 					"step 1"
 					if(get.type2(player.getExpansions("sst_xiandu")[0])==get.type2(trigger.card)){
-						player.chooseControl("对"+get.translation(trigger.player)+"造成1点伤害","摸两张牌","cancel2").set("ai",()=>{
+						player.chooseControl(`对${get.translation(trigger.player)}造成1点伤害`,"摸两张牌","cancel2").set("ai",()=>{
 							const player=_status.event.player;
 							if(get.damageEffect(_status.event.getTrigger().player,player,player)-4>0) return 0;
 							return 1;
@@ -5142,24 +5152,24 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.addTempSkill("sst_renqing_effect");
 						switch(result.control){
 							case "摸牌阶段":
-								game.log(player,"将此","#y"+event.phaseTranslate(trigger.name),"改为","#y摸牌阶段");
-								player.popup(event.phaseTranslateShort(trigger.name)+"→摸牌","wood");
+								game.log(player,"将此",`#y${event.phaseTranslate(trigger.name)}`,"改为","#y摸牌阶段");
+								player.popup(`${event.phaseTranslateShort(trigger.name)}→摸牌`,"wood");
 								const phaseDraw=trigger.player.phaseDraw();
 								event.next.remove(phaseDraw);
 								trigger.next.push(phaseDraw);
 								phaseDraw.set("sst_renqing",true);
 								break;
 							case "出牌阶段":
-								game.log(player,"将此","#y"+event.phaseTranslate(trigger.name),"改为","#y出牌阶段");
-								player.popup(event.phaseTranslateShort(trigger.name)+"→出牌","wood");
+								game.log(player,"将此",`#y${event.phaseTranslate(trigger.name)}`,"改为","#y出牌阶段");
+								player.popup(`${event.phaseTranslateShort(trigger.name)}→出牌`,"wood");
 								const phaseUse=trigger.player.phaseUse();
 								event.next.remove(phaseUse);
 								trigger.next.push(phaseUse);
 								phaseUse.set("sst_renqing",true);
 								break;
 							case "弃牌阶段":
-								game.log(player,"将此","#y"+event.phaseTranslate(trigger.name),"改为","#y弃牌阶段");
-								player.popup(event.phaseTranslateShort(trigger.name)+"→弃牌","wood");
+								game.log(player,"将此",`#y${event.phaseTranslate(trigger.name)}`,"改为","#y弃牌阶段");
+								player.popup(`${event.phaseTranslateShort(trigger.name)}→弃牌`,"wood");
 								const phaseDiscard=trigger.player.phaseDiscard();
 								event.next.remove(phaseDiscard);
 								trigger.next.push(phaseDiscard);
@@ -5202,7 +5212,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					const num=Math.floor(player.countCards("h")/2);
-					player.chooseToDiscard(get.prompt("sst_manchan",trigger.source),"你可以弃置"+get.cnNumber(num)+"张手牌，然后你可以于"+get.translation(trigger.source)+"的下个回合内发动〖任情〗",num).set("ai",get.unuseful3).set("logSkill",["sst_manchan",trigger.source]);
+					player.chooseToDiscard(get.prompt("sst_manchan",trigger.source),`你可以弃置${get.cnNumber(num)}张手牌，然后你可以于${get.translation(trigger.source)}的下个回合内发动〖任情〗`,num).set("ai",get.unuseful3).set("logSkill",["sst_manchan",trigger.source]);
 					"step 1"
 					if(result.bool){
 						if(!trigger.source.storage.sst_manchan) trigger.source.storage.sst_manchan=[];
@@ -5222,7 +5232,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				charlotte:true,
 				mark:"character",
 				intro:{
-					content:(storage,player)=>get.translation(player.storage.sst_manchan)+"可以于你的下个回合内发动〖任情〗"
+					content:(storage,player)=>`${get.translation(player.storage.sst_manchan)}可以于你的下个回合内发动〖任情〗`
 				},
 				onremove:player=>player.addTempSkill("sst_manchan_effect_active")
 			},
@@ -5274,7 +5284,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						storage.forEach(suit=>{
 							if(!suits.contains(suit)) suits.push(suit);
 						});
-						return "本回合所有角色不能使用或打出"+get.translation(suits)+"牌";
+						return `本回合所有角色不能使用或打出${get.translation(suits)}牌`;
 					}
 				},
 				onremove:true
@@ -5307,7 +5317,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 2"
 					if(num<targets.length){
 						if(targets[num].isIn()){
-							targets[num].chooseToUse("斗魂：对"+get.translation(player)+"使用一张杀（无距离限制），若如此做，你计算与"+get.translation(player)+"距离为1直到"+get.translation(player)+"的下个准备阶段，否则本回合你不能响应"+get.translation(player)+"使用的牌").set("filterTarget",function(card,player,target){
+							targets[num].chooseToUse(`斗魂：对${get.translation(player)}使用一张杀（无距离限制），若如此做，你计算与${get.translation(player)}距离为1直到${get.translation(player)}的下个准备阶段，否则本回合你不能响应${get.translation(player)}使用的牌`).set("filterTarget",function(card,player,target){
 								if(target!=_status.event.getParent().player) return false;
 								return lib.filter.targetEnabled.apply(this,arguments);
 							}).set("filterCard",function(card){
@@ -5398,7 +5408,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.draw(4-player.countCards("h"),"nodelay");
 					}
 					else{
-						player.chooseToDiscard("绝境：弃置"+get.cnNumber(player.countCards("h")-4)+"张手牌",player.countCards("h")-4,true).set("delay",false);
+						player.chooseToDiscard(`绝境：弃置${get.cnNumber(player.countCards("h")-4)}张手牌`,player.countCards("h")-4,true).set("delay",false);
 					}
 				},
 				ai:{
@@ -5416,7 +5426,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 0"
 					const controls=["选项一"];
 					if(trigger.player.countGainableCards(player,"he")) controls.push("选项二");
-					const list=["受到"+get.translation(player)+"造成的一点伤害，然后你本回合下次造成的伤害+1",get.translation(player)+"获得你一张牌"];
+					const list=[`受到${get.translation(player)}造成的一点伤害，然后你本回合下次造成的伤害+1`,`${get.translation(player)}获得你一张牌`];
 					trigger.player.chooseControl(controls).set("choiceList",list).set("ai",()=>{
 						if(!_status.event.controls.contains("选项二")) return "选项一";
 						const player=_status.event.player;
@@ -5431,7 +5441,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						trigger.player.addMark("sst_baling_effect",1,false);
 					}
 					else{
-						player.gainPlayerCard("霸凌：获得"+get.translation(trigger.player)+"一张牌",trigger.player,"he",true);
+						player.gainPlayerCard(`霸凌：获得${get.translation(trigger.player)}一张牌`,trigger.player,"he",true);
 						event.finish();
 					}
 					"step 2"
@@ -5561,7 +5571,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					const eff=get.effect(player,trigger.card,trigger.player,trigger.player);
-					trigger.player.chooseToDiscard("享乐：弃置一张基本牌，否则杀对"+get.translation(player)+"无效",card=>get.type(card)=="basic").set("ai",card=>{
+					trigger.player.chooseToDiscard(`享乐：弃置一张基本牌，否则杀对${get.translation(player)}无效`,card=>get.type(card)=="basic").set("ai",card=>{
 						if(_status.event.eff>0) return 10-get.value(card);
 						return 0;
 					}).set("eff",eff);
@@ -5625,7 +5635,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					if(event.triggername=="phaseJieshuBegin"){
-						player.chooseBool("镜月：以"+get.translation(trigger.player)+"为唯一目标依次使用"+get.translation(player.getExpansions("sst_jingyue_effect"))+"（目标不合法则置入弃牌堆），否则获得"+get.translation(player.getExpansions("sst_jingyue_effect"))).set("ai",()=>{
+						player.chooseBool(`镜月：以${get.translation(trigger.player)}为唯一目标依次使用${get.translation(player.getExpansions("sst_jingyue_effect"))}（目标不合法则置入弃牌堆），否则获得${get.translation(player.getExpansions("sst_jingyue_effect"))}`).set("ai",()=>{
 							const player=_status.event.player;
 							const cards=player.getExpansions("sst_jingyue_effect");
 							const target=_status.event.getTrigger().player;
@@ -5670,7 +5680,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_jianxiang_effect:{
 				charlotte:true,
 				intro:{
-					content:(storage,player)=>"你本局游戏计算与其他角色距离-"+storage+"<br>当前你计算与其他角色距离："+(-player.getGlobalFrom())
+					content:(storage,player)=>`你本局游戏计算与其他角色距离-${storage}<br>当前你计算与其他角色距离：${-player.getGlobalFrom()}`
 				},
 				onremove:true,
 				mod:{
@@ -5709,7 +5719,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_baochao_effect:{
 				charlotte:true,
 				intro:{
-					content:(storage,player)=>"你本局游戏计算与其他角色距离+"+storage+"<br>当前你计算与其他角色距离："+(-player.getGlobalFrom())
+					content:(storage,player)=>`你本局游戏计算与其他角色距离+${storage}<br>当前你计算与其他角色距离：${-player.getGlobalFrom()}`
 				},
 				onremove:true,
 				mod:{
@@ -5734,7 +5744,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				direct:true,
 				content:()=>{
 					"step 0"
-					player.chooseTarget(get.prompt("sst_chixing"),"你可以令至多"+get.cnNumber(player.getBraces())+"名角色将手牌数调整到与你另外指定的一名角色相等",[1,player.getBraces()]).set("ai",target=>{
+					player.chooseTarget(get.prompt("sst_chixing"),`你可以令至多${get.cnNumber(player.getBraces())}名角色将手牌数调整到与你另外指定的一名角色相等`,[1,player.getBraces()]).set("ai",target=>{
 						let fin=0;
 						const att=get.attitude(_status.event.player,target);
 						fin+=game.filterPlayer(current=>current.isMaxHandcard())[0].countCards("h")-target.countCards("h")*att;
@@ -5745,7 +5755,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.targets&&result.targets.length){
 						event.targets=result.targets.sortBySeat(_status.currentPhase);
 						player.logSkill("sst_chixing",event.targets);
-						player.chooseTarget("赤行：另外指定一名角色，令"+get.translation(event.targets)+"将手牌数调整到与其相等",true).set("ai",target=>_status.event.getParent().targets.map(current=>{
+						player.chooseTarget(`赤行：另外指定一名角色，令${get.translation(event.targets)}将手牌数调整到与其相等`,true).set("ai",target=>_status.event.getParent().targets.map(current=>{
 							if(get.attitude(_status.event.player,current)>0) return target.countCards("h")-current.countCards("h");
 							return current.countCards("h")-target.countCards("h");
 						}).reduce((previousValue,currentValue)=>previousValue+currentValue,0));
@@ -5771,7 +5781,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							const num2=target.countCards("h");
 							source.line(target,"green");
 							if(num<num2){
-								let next=target.chooseToDiscard("赤行：弃置"+get.cnNumber(num2-num)+"张手牌",num2-num,true);
+								let next=target.chooseToDiscard(`赤行：弃置${get.cnNumber(num2-num)}张手牌`,num2-num,true);
 								if(i<targets.length-1) next.set("delay",false);
 							}
 							else{
@@ -5807,7 +5817,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				check:(event,player)=>get.attitude(player,event.player)>0,
 				content:()=>{
 					"step 0"
-					trigger.player.gainPlayerCard("辑略：你可以获得"+get.translation(player)+"任意张手牌",player,[1,Infinity],"h","visible").set("ai",button=>_status.event.player.getUseValue(button.link));
+					trigger.player.gainPlayerCard(`辑略：你可以获得${get.translation(player)}任意张手牌，然后你本回合计算与其他角色距离-X（X为其以此法获得${get.translation(player)}的牌的数量），若因此你与场上所有其他角色距离为1，${get.translation(player)}摸两张牌`,player,[1,Infinity],"h","visible").set("ai",button=>_status.event.player.getUseValue(button.link));
 					"step 1"
 					if(result.cards&&result.cards.length){
 						trigger.player.addTempSkill("sst_jilve_effect");
@@ -5955,7 +5965,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.target=result.targets[0];
 						player.logSkill("sst_guaibi",event.target);
 						player.storage.sst_guaibi++;
-						player.discardPlayerCard("怪笔：弃置"+get.translation(event.target)+"两张牌",event.target,"he",2,true);
+						player.discardPlayerCard(`怪笔：弃置${get.translation(event.target)}两张牌`,event.target,"he",2,true);
 					}
 					else{
 						event.finish();
@@ -5965,7 +5975,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					game.log(target,"成为了",trigger.card,"的使用者");
 					game.delayx();
 					"step 3"
-					target.chooseTarget("怪笔：你可以为"+get.translation(trigger.card)+"重新指定目标").set("ai",target=>{
+					target.chooseTarget(`怪笔：你可以为${get.translation(trigger.card)}重新指定目标`).set("ai",target=>{
 						const player=_status.event.player;
 						const card=get.card();
 						let val=get.effect(target,card,player,player);
@@ -6051,7 +6061,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						if(player.hp<=1) return 0;
 						const num=game.hasPlayer2(current=>current.hasAllHistory("useSkill",evt=>evt.skill=="sst_shimo"&&evt.targets.contains(target)))?1:2;
 						if(get.attitude(player,target)<0){
-							if(target.countCards("he")<2) return 0;
+							if(target.countCards("he",card=>lib.filter.cardDiscardable(card,target))<2) return 0;
 							return Math.sqrt(-get.attitude(player,target))*num-4+player.hp;
 						}
 						return Math.sqrt(get.attitude(player,target))*num-4+player.hp;
@@ -6063,20 +6073,23 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.target=result.targets[0];
 						event.num=1;
 						if(!game.hasPlayer2(current=>current.getAllHistory("useSkill",evt=>evt.skill=="sst_shimo"&&evt.targets.contains(event.target)).length-1>0)) event.num=2;
-						const str1="摸"+get.cnNumber(event.num)+"张牌";
-						const str2="弃置"+get.cnNumber(event.num)+"张牌";
-						player.chooseControl(str1,str2).set("ai",()=>_status.event.choice).set("choice",get.attitude(player,event.target)>0?0:1).set("prompt","施魔：选择一项");
+						const controls=["选项一"];
+						if(trigger.player.countCards("he",card=>lib.filter.cardDiscardable(card,trigger.player))>=2) controls.push("选项二");
+						player.chooseControl(controls).set("choiceList",[
+							`摸${get.cnNumber(event.num)}张牌`,
+							`弃置${get.cnNumber(event.num)}张牌`
+						]).set("ai",()=>get.attitude(player,_status.event.getParent().target)>0?0:1).set("prompt","施魔：选择一项");
 						event.str=str2;
 					}
 					else{
 						event.finish();
 					}
 					"step 2"
-					if(result.control!=event.str){
-						target.draw(event.num);
+					if(result.control=="选项二"){
+						target.chooseToDiscard(`施魔：弃置${get.cnNumber(num)}张牌`,num,true,"he");
 					}
 					else{
-						target.chooseToDiscard("施魔：弃置"+get.cnNumber(event.num)+"张牌",event.num,true,"he");
+						target.draw(num);
 					}
 					player.addExpose(0.2);
 				}
@@ -6155,7 +6168,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					trigger.changeToZero();
 					event.cards=get.cards(4);
 					event.cards.forEach(card=>ui.cardPile.insertBefore(card.fix(),ui.cardPile.firstChild));
-					player.showCards(event.cards,get.translation(player)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+					player.showCards(event.cards,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】`);
 					"step 1"
 					let str="探道：获得其中的杀或非杀的牌";
 					if(player.storage.sst_tandao==1){
@@ -6298,12 +6311,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				delay:false,
 				content:()=>{
 					"step 0"
-					target.discardPlayerCard("诈谋：弃置"+get.translation(player)+"一张手牌",player,"h",true);
+					target.discardPlayerCard(`诈谋：弃置${get.translation(player)}一张手牌，若为黑色，视为${get.translation(player)}对你使用一张任意普通锦囊牌`,player,"h",true);
 					"step 1"
 					if(result.cards&&result.cards.length&&get.color(result.cards[0])=="black"){
 						event.card=result.cards[0];
 						const list=lib.inpile.filter(name=>get.type(name)=="trick"&&lib.filter.targetEnabled3({name:name,isCard:true},player,target)).map(name=>["锦囊","",name]);
-						if(list.length) player.chooseButton(["诈谋：视为对"+get.translation(target)+"使用一张锦囊牌",[list,"vcard"]],true).set("filterButton",button=>lib.filter.targetEnabled3({name:button.link[2],isCard:true},_status.event.player,_status.event.getParent().target)).set("ai",button=>get.effect(_status.event.getParent().target,{name:button.link[2],isCard:true},_status.event.player,_status.event.player));
+						if(list.length) player.chooseButton([`诈谋：视为对${get.translation(target)}使用一张锦囊牌`,[list,"vcard"]],true).set("filterButton",button=>lib.filter.targetEnabled3({name:button.link[2],isCard:true},_status.event.player,_status.event.getParent().target)).set("ai",button=>get.effect(_status.event.getParent().target,{name:button.link[2],isCard:true},_status.event.player,_status.event.player));
 					}
 					else{
 						event.finish();
@@ -6311,7 +6324,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 2"
 					if(result.links&&result.links.length) player.useCard({name:result.links[0][2],isCard:true},target,false);
 					"step 3"
-					player.chooseBool("诈谋：是否收回"+get.translation(card)+"？否则令此技能视为此出牌阶段未发动过").set("ai",()=>{
+					player.chooseBool(`诈谋：是否收回${get.translation(card)}？否则令此技能视为此出牌阶段未发动过`).set("ai",()=>{
 						const card=_status.event.getParent().card;
 						if(!_status.event.player.countCards("h",{color:"black"})&&get.value(card)>0) return true;
 						if(get.position(card)=="d") return get.value(card)>7;
@@ -6364,7 +6377,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						});
 					}
 					"step 1"
-					const next=player.choosePlayerCard("主宰：展示"+get.translation(trigger.player)+"一张手牌",trigger.player,"h",true).set("ai",get.buttonValue);
+					const next=player.choosePlayerCard(`主宰：展示${get.translation(trigger.player)}一张手牌，若为基本牌或普通锦囊牌，${get.translation(trigger.player)}本回合使用此牌时你可以为其增加一个目标。结束阶段，若${get.translation(trigger.player)}本回合未使用此牌，你可以对${get.translation(trigger.player)}造成1点伤害`,trigger.player,"h",true).set("ai",get.buttonValue);
 					if(player.hasZhuSkill("sst_zhixu",player)&&trigger.player.group==player.group) next.set("visible",true);
 					"step 2"
 					if(result.cards&&result.cards.length){
@@ -6385,7 +6398,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						};
 						player.storage.sst_zhuzai.addArray(result.cards);
 						trigger.player.addGaintag(result.cards,"sst_zhuzai");
-						player.showCards(result.cards,get.translation(player)+"对"+translateTargets(trigger.player)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+						player.showCards(result.cards,`${get.translation(player)}对${translateTargets(trigger.player)}发动了【${get.skillTranslation(event.name,player)}】`);
 					}
 				},
 				group:["sst_zhuzai2","sst_zhuzai3"]
@@ -6407,7 +6420,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				direct:true,
 				content:()=>{
 					"step 0"
-					player.chooseTarget(get.prompt("sst_zhuzai2"),"为"+get.translation(trigger.card)+"增加目标",(card,player,target)=>{
+					player.chooseTarget(get.prompt("sst_zhuzai2"),`为${get.translation(trigger.card)}增加目标`,(card,player,target)=>{
 						const evt=_status.event.getTrigger();
 						return !evt.targets.contains(target)&&lib.filter.targetEnabled2(evt.card,evt.player,target);
 					}).set("autodelay",true).set("ai",target=>get.effect(target,_status.event.getTrigger().card,_status.event.player,_status.event.player));
@@ -6431,7 +6444,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					return false;
 				})),
 				logTarget:"player",
-				prompt2:event=>"你可以对"+get.translation(event.player)+"造成1点伤害",
+				prompt2:event=>`你可以对${get.translation(event.player)}造成1点伤害`,
 				check:(event,player)=>get.damageEffect(event.player,player,player)>0,
 				content:()=>{
 					"step 0"
@@ -6505,7 +6518,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						popname:true,
 						viewAs:{name:links[0][2],nature:links[0][3]}
 					}),
-					prompt:links=>"将一张不带有「伤害」标签的牌当作"+(get.translation(links[0][3])||"")+get.translation(links[0][2])+"使用"
+					prompt:links=>`将一张不带有「伤害」标签的牌当作${get.translation(links[0][3])||""}${get.translation(links[0][2])}使用`
 				},
 				ai:{
 					threaten:2,
@@ -6564,7 +6577,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			},
 			sst_qichang_effect:{
 				intro:{
-					content:(storage,player)=>"本回合你的手牌上限-"+storage+"<br>当前你的手牌上限："+player.getHandcardLimit()
+					content:(storage,player)=>`本回合你的手牌上限-${storage}<br>当前你的手牌上限：${player.getHandcardLimit()}`
 				},
 				onremove:true,
 				mod:{
@@ -6608,11 +6621,16 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					if(trigger.player==player){
-						player.chooseTarget(get.prompt("sst_shizhu"),"你可以令一名其他角色弃置"+get.cnNumber(trigger.cards.length)+"张牌，若如此做，你可以从你与其弃置的牌中选择任意张对你或其使用",lib.filter.notMe).set("ai",target=>-get.attitude(_status.event.player,target));
+						player.chooseTarget(get.prompt("sst_shizhu"),`你可以令一名其他角色弃置${get.cnNumber(trigger.cards.length)}张牌，若如此做，你可以从你与其弃置的牌中选择任意张对你或其使用`,(card,player,target)=>target.countCards("he",i=>lib.filter.cardDiscardable(i,target))>=_status.event.getTrigger().cards.length).set("ai",target=>-get.attitude(_status.event.player,target));
 						event.control=1;
 					}
 					else{
-						player.chooseToDiscard(get.prompt("sst_shizhu"),"你可以弃置"+get.cnNumber(trigger.cards.length)+"张牌，若如此做，你可以从你与"+get.translation(trigger.player)+"弃置的牌中选择任意张对你或其使用",trigger.cards.length,"he").set("logSkill",["sst_shizhu",trigger.player]).set("ai",card=>Math.max(get.effect(_status.event.player,card,_status.event.player,_status.event.player),get.effect(_status.event.getTrigger().player,card,_status.event.player,_status.event.player))-5);
+						player.chooseToDiscard(get.prompt("sst_shizhu"),`你可以弃置${get.cnNumber(trigger.cards.length)}张牌，若如此做，你可以从此阶段进入弃牌堆的牌中选择任意张对你或其使用`,trigger.cards.length,"he").set("logSkill",["sst_shizhu",trigger.player]).set("ai",card=>{
+							const player=_status.event.player;
+							const target=_status.event.getTrigger().player;
+							if(!lib.filter.targetEnabled3(card,player,player)&&!lib.filter.targetEnabled3(card,player,target)&&!_status.event.getTrigger().cards.some(i=>lib.filter.targetEnabled3(i,player,player)||lib.filter.targetEnabled3(i,player,target))) return 0;
+							return Math.max(get.effect(player,card,player,player),get.effect(target,card,player,player))-5;
+						});
 						event.control=2;
 					}
 					"step 1"
@@ -6620,7 +6638,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						if(result.targets&&result.targets.length){
 							event.target=result.targets[0];
 							player.logSkill("sst_shizhu",event.target);
-							event.target.chooseToDiscard("拾珠：弃置"+get.cnNumber(trigger.cards.length)+"张牌",trigger.cards.length,"he",true);
+							event.target.chooseToDiscard(`拾珠：弃置${get.cnNumber(trigger.cards.length)}张牌，然后${get.translation(player)}可以从此阶段进入弃牌堆的牌中选择任意张对${get.translation(player)}或你使用`,trigger.cards.length,"he",true);
 						}
 						else{
 							event.finish();
@@ -6659,7 +6677,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.finish();
 					}
 					"step 5"
-					player.chooseTarget("拾珠：选择"+get.translation(card)+"的目标",(card,player,target)=>{
+					player.chooseTarget(`拾珠：选择${get.translation(card)}的目标`,(card,player,target)=>{
 						const evt=_status.event.getParent();
 						return [player,evt.target].contains(target)&&lib.filter.targetEnabled3(evt.card,player,target);
 					}).set("ai",target=>get.effect(target,_status.event.getParent().card,_status.event.player,_status.event.player));
@@ -6718,7 +6736,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							if(["heart","diamond"].contains(suit)) return "red";
 							return "none";
 						}
-						return "本回合"+get.translation(color(storage))+"牌花色均视为"+get.translation(storage);
+						return `本回合${get.translation(color(storage))}牌花色均视为${get.translation(storage)}`;
 					}
 				},
 				mod:{
@@ -6743,9 +6761,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					const list=game.filterPlayer(current=>current.hasSkill("sst_chihang"));
-					let str="你可以展示并交给"+get.translation(list);
+					let str=`你可以展示并交给${get.translation(list)}`;
 					if(list.length>1) str+="中的一人";
-					str+="一张牌，然后此出牌阶段内，你使用或打出牌时，若与此牌花色：相同，你将手牌补至体力上限；不同，你须失去1点体力或结束出牌阶段";
 					player.chooseCardTarget({
 						filterCard:true,
 						position:"he",
@@ -6773,7 +6790,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							return 0;
 						},
 						prompt:get.prompt("sst_chihang2"),
-						prompt2:str
+						prompt2:`${str}一张牌，然后此出牌阶段内，你使用或打出牌时，若与此牌花色：相同，你将手牌补至体力上限；不同，你须失去1点体力或结束出牌阶段`
 					});
 					"step 1"
 					if(result.cards&&result.cards.length&&result.targets&&result.targets.length){
@@ -6796,7 +6813,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							}
 							return str;
 						};
-						player.showCards(event.card,get.translation(player)+"对"+translateTargets(event.target)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+						player.showCards(event.card,`${get.translation(player)}对${translateTargets(event.target)}发动了【${get.skillTranslation(event.name,player)}】`);
 					}
 					else{
 						event.finish();
@@ -6927,7 +6944,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(event.sst_shishi=="discard"&&result.targets&&result.targets.length){
 						event.target=result.targets[0];
 						player.line(event.target,"green");
-						player.discardPlayerCard("时逝：弃置"+get.translation(event.target)+"一张牌",event.target,"he",true);
+						player.discardPlayerCard(`时逝：弃置${get.translation(event.target)}一张牌`,event.target,"he",true);
 					}
 					"step 2"
 					if(result.cards&&result.cards.length) player.addExpose(0.1);
@@ -6946,7 +6963,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					next.card=trigger.card;
 					next.setContent(()=>{
 						if(!game.cardCausedDamage(card)){
-							game.log(player,"将武将变更为","#b"+get.translation("sst_ocarina_of_time_link"));
+							game.log(player,"将武将变更为",`#b${get.translation("sst_ocarina_of_time_link")}`);
 							player.reinit(player.name,"sst_ocarina_of_time_link");
 							player.changeGroup("sst_light",false);
 							game.triggerEnter(player);
@@ -6967,7 +6984,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				onremove:player=>{
 					for(const i in player.storage.sst_jiamian_map){
 						lib.skill.sst_jiamian.removeCharacter(player,i);
-						game.log(player,"移除了假面牌","#g"+get.translation(i));
+						game.log(player,"移除了假面牌",`#g${get.translation(i)}`);
 					}
 					delete player.storage.sst_jiamian;
 					delete player.storage.sst_jiamian_removing;
@@ -6984,7 +7001,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							for(const i in player.storage.sst_jiamian_map){
 								skills.addArray(player.storage.sst_jiamian_map[i]);
 							}
-							dialog.addText("可用技能："+(skills.length?get.translation(skills):"无"));
+							dialog.addText(`可用技能：${skills.length?get.translation(skills):"无"}`);
 						}
 						else{
 							return "没有假面";
@@ -6995,7 +7012,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						for(const i in player.storage.sst_jiamian_map){
 							skills.addArray(player.storage.sst_jiamian_map[i]);
 						}
-						return get.translation(storage)+"；可用技能："+(skills.length?get.translation(skills):"无");
+						return `【${get.translation(storage)}】<br>可用技能：${skills.length?get.translation(skills):"无"}`;
 					}
 				},
 				filterSkill:(player,name)=>{
@@ -7022,10 +7039,10 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				drawCharacter:(player,name)=>{
 					game.broadcastAll((player,name)=>{
 						const cards=[];
-						const cardname="sst_jiamian_card_"+name;
+						const cardname=`sst_jiamian_card_${name}`;
 						lib.card[cardname]={
 							fullimage:true,
-							image:"character:"+name
+							image:`character:${name}`
 						}
 						lib.translate[cardname]=lib.translate[name];
 						cards.push(game.createCard(cardname,"","",""));
@@ -7035,10 +7052,10 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				discardCharacter:(player,name)=>{
 					game.broadcastAll((player,name)=>{
 						const cards=[];
-						const cardname="sst_jiamian_card_"+name;
+						const cardname=`sst_jiamian_card_${name}`;
 						lib.card[cardname]={
 							fullimage:true,
-							image:"character:"+name
+							image:`character:${name}`
 						}
 						lib.translate[cardname]=lib.translate[name];
 						cards.push(game.createCard(cardname,"","",""));
@@ -7119,7 +7136,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							lib.skill.sst_jiamian.addCharacter(player,name);
 							lib.skill.sst_jiamian.drawCharacter(player,name);
 							//player.addTempSkill("sst_jiamian_triggered");
-							game.log(player,"获得了一张假面牌","#g"+get.translation(name));
+							game.log(player,"获得了一张假面牌",`#g${get.translation(name)}`);
 							game.delayx();
 						}
 					},
@@ -7195,7 +7212,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							"step 1"
 							if(!event.directresult&&result&&result.links[0]) event.directresult=result.links[0];
 							lib.skill.sst_jiamian.removeCharacter(player,event.directresult);
-							game.log(player,"移除了假面牌","#g"+get.translation(event.directresult));
+							game.log(player,"移除了假面牌",`#g${get.translation(event.directresult)}`);
 							game.delayx();
 							"step 2"
 							if(!_status.characterlist){
@@ -7216,7 +7233,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							lib.skill.sst_jiamian.addCharacter(player,name);
 							lib.skill.sst_jiamian.drawCharacter(player,name);
 							//player.addTempSkill("sst_jiamian_triggered");
-							game.log(player,"获得了一张假面牌","#g"+get.translation(name));
+							game.log(player,"获得了一张假面牌",`#g${get.translation(name)}`);
 							game.delayx();
 						}
 					}
@@ -7246,7 +7263,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				}),
 				forced:true,
 				content:()=>{
-					game.log(player,"将武将变更为","#b"+get.translation("sst_young_link"));
+					game.log(player,"将武将变更为",`#b${get.translation("sst_young_link")}`);
 					player.reinit(player.name,"sst_young_link");
 					player.changeGroup("sst_dark",false);
 					game.triggerEnter(player);
@@ -7305,7 +7322,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					const num=_status.currentPhase.countCards("h");
 					const num2=player.countCards("h");
 					if(num-1<num2){
-						player.chooseToDiscard("神臂：弃置"+get.cnNumber(num2-num+1)+"张手牌",num2-num+1,true).set("delay",false);
+						player.chooseToDiscard(`神臂：弃置${get.cnNumber(num2-num+1)}张手牌`,num2-num+1,true).set("delay",false);
 					}
 					else{
 						player.drawTo(num-1,["nodelay"]);
@@ -7334,7 +7351,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.goto(2);
 					}
 					"step 1"
-					game.log(player,"选择了","#y"+result.control);
+					game.log(player,"选择了",`#y${result.control}`);
 					player.chat(result.control);
 					player.storage.sst_shenbi.remove(result.control);
 					switch(result.control){
@@ -7412,7 +7429,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}).set("prompt","蓝波：选择一项");
 					"step 1"
 					if(result.control=="弃置手牌"){
-						player.chooseToDiscard("蓝波：弃置"+get.cnNumber(player.needsToDiscard())+"张手牌",player.needsToDiscard(),true);
+						player.chooseToDiscard(`蓝波：弃置${get.cnNumber(player.needsToDiscard())}张手牌`,player.needsToDiscard(),true);
 						event.finish();
 					}
 					else{
@@ -7424,8 +7441,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 					"step 2"
 					if(result.control){
-						game.log(player,"删除了","#y"+result.control);
-						player.chat("删除："+result.control);
+						game.log(player,"删除了",`#y${result.control}`);
+						player.chat(`删除：${result.control}`);
 						player.storage.sst_shenbi_ready.remove(result.control);
 						player.storage.sst_shenbi.remove(result.control);
 					}
@@ -7483,7 +7500,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					event.num--;
 					if(event.num>=0&&player.hasUseTarget({name:"sha",isCard:true})){
-						player.chooseUseTarget("反逆：视为使用一张杀（剩余"+event.num+"次）",{name:"sha",isCard:true},"nodistance",true,false);
+						player.chooseUseTarget(`反逆：视为使用一张杀（剩余${event.num}次）`,{name:"sha",isCard:true},"nodistance",true,false);
 						event.redo();
 					}
 				},
@@ -7598,7 +7615,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					if(result.targets&&result.targets.length){
 						player.line(result.targets,"green");
-						player.discardPlayerCard("牵绊：弃置"+get.translation(result.targets[0])+"场上一张牌",result.targets[0],"ej",true);
+						player.discardPlayerCard(`牵绊：弃置${get.translation(result.targets[0])}场上一张牌`,result.targets[0],"ej",true);
 					}
 					"step 2"
 					if(result.cards&&result.cards.length) player.addExpose(0.1);
@@ -7679,7 +7696,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				direct:true,
 				filter:event=>event.player.hasSkill("sst_zhuizhai_effect")&&event.player.countCards("he")>1,
 				content:()=>{
-					player.gainPlayerCard(get.prompt("sst_zhuizhai_effect2",trigger.player),trigger.player,"he",2).set("logSkill",["sst_zhuizhai_effect2",trigger.player]).set("prompt2","你可以获得"+get.translation(trigger.player)+"两张牌");
+					player.gainPlayerCard(get.prompt("sst_zhuizhai_effect2",trigger.player),trigger.player,"he",2).set("logSkill",["sst_zhuizhai_effect2",trigger.player]).set("prompt2",`你可以获得${get.translation(trigger.player)}两张牌`);
 				}
 			},
 			sst_fanfei:{
@@ -7725,7 +7742,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				forced:true,
 				content:()=>{
 					"step 0"
-					player.showCards(trigger.cards,get.translation(player)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+					player.showCards(trigger.cards,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】`);
 					event.cardName=get.name(trigger.card);
 					if(Array.isArray(trigger.card.cards)){
 						trigger.card.cards.length=0;
@@ -7740,7 +7757,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					delete trigger.skill;
 					trigger.getParent().set("sst_liaoyi",true);
 					"step 1"
-					player.chooseTarget("聊依：指定一名男性角色，其可以打出一张"+get.translation(event.cardName)+"，若其如此做，视为"+(trigger.name=="useCard"?"使用":"打出")+"一张"+get.translation(event.cardName)+"，然后其获得你一张牌",(card,player,target)=>target.hasSex("male"),true).set("ai",target=>{
+					player.chooseTarget(`聊依：指定一名男性角色，其可以打出一张${get.translation(event.cardName)}，若其如此做，视为${trigger.name=="useCard"?"使用":"打出"}一张${get.translation(event.cardName)}，然后其获得你一张牌`,(card,player,target)=>target.hasSex("male"),true).set("ai",target=>{
 						if(target[_status.event.getParent().cardName=="sha"?"hasSha":"hasShan"]()) return get.sgnAttitude(_status.event.player,target);
 						return 0;
 					});
@@ -7748,12 +7765,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.targets&&result.targets.length){
 						event.current=result.targets[0];
 						player.line(event.current,"green");
-						//game.log(player,"请求",event.current,"打出一张","#y"+get.translation(event.cardName),"（发动技能","#g【聊依】","）");
-						const next=event.current.chooseToRespond("聊依：是否打出一张"+get.translation(event.cardName)+"？",{name:event.cardName});
+						//game.log(player,"请求",event.current,"打出一张",`#y${get.translation(event.cardName)}`,"（发动技能","#g【聊依】","）");
+						const next=event.current.chooseToRespond(`聊依：是否打出一张${get.translation(event.cardName)}？若如此做，视为${get.translation(player)}${trigger.name=="useCard"?"使用":"打出"}一张${get.translation(event.cardName)}，然后你获得${get.translation(player)}一张牌`,{name:event.cardName});
 						next.set("ai",()=>get.attitude(_status.event.player,_status.event.source)-2);
 						next.set("source",player);
 						next.set("sst_liaoyi",true);
-						next.set("skillwarn","打出一张"+get.translation(event.cardName));
+						next.set("skillwarn",`打出一张${get.translation(event.cardName)}`);
 						next.set("autochoose",event.cardName=="sha"?lib.filter.autoRespondSha:lib.filter.autoRespondShan);
 					}
 					else{
@@ -7769,7 +7786,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						next.player=event.current;
 						next.target=player;
 						next.setContent(()=>{
-							player.gainPlayerCard("聊依：获得"+get.translation(target)+"一张牌",target,"he",true);
+							player.gainPlayerCard(`聊依：获得${get.translation(target)}一张牌`,target,"he",true);
 						});
 					}
 					else{
@@ -7867,7 +7884,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					if(trigger.player.countDiscardableCards(player,"he")){
 						player.line(trigger.target,"green");
-						player.discardPlayerCard("霜寒：弃置"+get.translation(trigger.target)+"两张牌","he",trigger.target,2,true);
+						player.discardPlayerCard(`霜寒：弃置${get.translation(trigger.target)}两张牌`,"he",trigger.target,2,true);
 					}
 				}
 			},
@@ -7902,20 +7919,11 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 0"
 					target.damage(player,"nocard");
 					"step 1"
-					const hs=player.getCards("h");
 					const name=get.name(cards[0]);
-					event.noIdentical=true;
-					for(const i of hs){
-						if(name==get.name(i)){
-							event.noIdentical=false;
-							break;
-						}
-					}
-					let str="光炮：你手上有与"+get.translation(cards)+"同名的牌";
-					if(event.noIdentical) str="光炮：是否展示手牌并摸一张牌？";
-					player.chooseBool(str).set("ai",()=>true);
+					event.identical=player.getCards("h").some(i=>name==get.name(i));
+					player.chooseBool(event.identical?`光炮：你手上有与${get.translation(cards)}同名的牌`:"光炮：是否展示手牌并摸一张牌？").set("ai",()=>true);
 					"step 2"
-					if(result.bool&&event.noIdentical){
+					if(result.bool&&!event.identical){
 						player.showHandcards();
 					}
 					else{
@@ -7939,12 +7947,12 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					nocount:true
 				},
 				global:"sst_tewu2",
-				trigger:{source:"damageSource"},
+				trigger:{source:"damageBegin1"},
 				forced:true,
 				filter:(event,player)=>event.player.hasMark("sst_tewu")&&event.player.countCards("he"),
 				logTarget:"player",
 				content:()=>{
-					player.discardPlayerCard("特武：弃置"+get.translation(trigger.player)+"一张牌",trigger.player,"he",true);
+					player.discardPlayerCard(`特武：弃置${get.translation(trigger.player)}一张牌`,trigger.player,"he",true);
 				}
 			},
 			sst_tewu2:{
@@ -7957,7 +7965,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				forceDie:true,
 				content:()=>{
 					"step 0"
-					player.chooseTarget("特武：指定一名其他角色，"+get.translation(game.filterPlayer(current=>current!=player&&current.hasSkill("sst_tewu")))+"对该角色造成伤害时弃置其一张牌",(card,player,target)=>target!=player&&!target.hasMark("sst_tewu"),true).set("ai",target=>10-get.attitude(_status.event.player,target)).set("forceDie",true);
+					player.chooseTarget(`特武：指定一名其他角色，${get.translation(game.filterPlayer(current=>current!=player&&current.hasSkill("sst_tewu")))}对该角色造成伤害时弃置其一张牌`,(card,player,target)=>target!=player&&!target.hasMark("sst_tewu"),true).set("ai",target=>10-get.attitude(_status.event.player,target)).set("forceDie",true);
 					"step 1"
 					if(result.targets&&result.targets.length){
 						player.logSkill("sst_tewu2",result.targets);
@@ -8044,7 +8052,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						const targets=game.filterPlayer(current=>current!=player);
 						player.logSkill("sst_yinyao",targets);
 						event.card=result.cards[0];
-						player.showCards(event.card,get.translation(player)+"对"+translateTargets(targets)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+						player.showCards(event.card,`${get.translation(player)}对${translateTargets(targets)}发动了【${get.skillTranslation(event.name,player)}】`);
 					}
 					else{
 						event.finish();
@@ -8062,7 +8070,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					}
 					"step 4"
 					player.line(event.current,"green");
-					event.current.chooseCard("音谣：展示与"+get.translation(card)+"花色或点数相同的牌，否则你翻面","he",card=>{
+					event.current.chooseCard(`音谣：展示与${get.translation(card)}花色或点数相同的牌，否则你翻面`,"he",card=>{
 						const evt=_status.event.getParent();
 						return get.suit(card)==get.suit(evt.card)||get.number(card)==get.number(evt.card);
 					}).set("ai",card=>{
@@ -8094,9 +8102,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					const list=game.filterPlayer(current=>current.hasSkill("sst_anke"));
-					let str="你可以交给"+get.translation(list);
+					let str=`你可以交给${get.translation(list)}`;
 					if(list.length>1) str+="中的一人";
-					str+="一张手牌，然后你翻回正面";
 					player.chooseCardTarget({
 						filterCard:true,
 						filterTarget:(card,player,target)=>{
@@ -8107,7 +8114,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						ai1:card=>7-get.value(card),
 						ai2:target=>10+get.attitude(_status.event.player,target),
 						prompt:get.prompt("sst_anke2"),
-						prompt2:str
+						prompt2:`${str}一张手牌，然后你翻回正面`
 					});
 					"step 1"
 					if(result.cards&&result.cards.length&&result.targets&&result.targets.length){
@@ -8127,7 +8134,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					const eff=get.effect(trigger.target,trigger.card,player,trigger.target);
-					trigger.target.chooseToDiscard("波导：弃置"+get.cnNumber(player.getDamagedHp())+"张牌，否则不能响应"+get.translation(trigger.card),player.getDamagedHp(),"he").set("ai",card=>{
+					trigger.target.chooseToDiscard(`波导：弃置${get.cnNumber(player.getDamagedHp())}张牌，否则不能响应${get.translation(trigger.card)}`,player.getDamagedHp(),"he").set("ai",card=>{
 						if(!get.tag(_status.event.getTrigger().card,"respond")) return 0;
 						if(_status.event.eff<0) return 5-get.useful(card);
 						return 0;
@@ -8184,9 +8191,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				intro:{
 					content:(storage,player)=>{
 						let str="";
-						if(player.storage.sst_juyuan_black) str+="本回合你的攻击范围+"+player.storage.sst_juyuan_black;
+						if(player.storage.sst_juyuan_black) str+=`本回合你的攻击范围+${player.storage.sst_juyuan_black}`;
 						if(player.storage.sst_juyuan_black&&player.storage.sst_juyuan_red) str+="<br>";
-						if(player.storage.sst_juyuan_red) str+="本回合你使用【杀】的次数上限+"+player.storage.sst_juyuan_red;
+						if(player.storage.sst_juyuan_red) str+=`本回合你使用【杀】的次数上限+${player.storage.sst_juyuan_red}`;
 						return str;
 					},
 					markcount:(storage,player)=>{
@@ -8212,7 +8219,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:(event,player)=>player.countCards("he"),
 				content:()=>{
 					"step 0"
-					player.chooseCard("he",get.prompt2("sst_tieyan")+"（先选择的在上）",player.getHp()).set("ai",card=>{
+					player.chooseCard("he",`${get.prompt2("sst_tieyan")}（先选择的在上）`,player.getHp()).set("ai",card=>{
 						const player=_status.event.player;
 						const judges=player.getCards("j");
 						if(ui.selected.cards.length){
@@ -8240,7 +8247,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						});
 						if(hs.length){
 							player.$throw(hs.length);
-							game.log(player,"将"+get.cnNumber(hs.length)+"张牌置于牌堆顶");
+							game.log(player,"将",get.cnNumber(hs.length),"张牌置于牌堆顶");
 						}
 						if(nhs.length){
 							player.$throw(nhs);
@@ -8254,7 +8261,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 2"
 					if(player.getDamagedHp()){
 						event.linkTargets=true;
-						player.chooseTarget("贴颜：横置你和"+get.cnNumber(player.getDamagedHp())+"名未横置的角色",player.getDamagedHp(),(card,player,target)=>target!=player&&!target.isLinked(),true).set("ai",target=>get.effect(target,{name:"tiesuo"},_status.event.player,_status.event.player));
+						player.chooseTarget(`贴颜：横置你和${get.cnNumber(player.getDamagedHp())}名未横置的角色`,player.getDamagedHp(),(card,player,target)=>target!=player&&!target.isLinked(),true).set("ai",target=>get.effect(target,{name:"tiesuo"},_status.event.player,_status.event.player));
 					}
 					"step 3"
 					event.targets=[];
@@ -8302,7 +8309,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					player.draw(2,"nodelay");
 					"step 1"
 					if(player.countCards("h")>player.getHp()&&player.countCards("hej")>1){
-						player.discardPlayerCard("暴食：弃置"+get.cnNumber(player.countCards("hej")-1)+"张区域内的牌",player,player.countCards("hej")-1,"hej",true).set("ai",button=>{
+						player.discardPlayerCard(`暴食：弃置${get.cnNumber(player.countCards("hej")-1)}张区域内的牌`,player,player.countCards("hej")-1,"hej",true).set("ai",button=>{
 							if(get.position(button.link)=="e"||get.position(button.link)=="j") return 100;
 							if(get.name(button.link)=="du") return 20;
 							const player=_status.event.player;
@@ -8372,7 +8379,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						game.filterPlayer(current=>{
 							if(!list.contains(current.identity)) list.push(current.identity);
 						});
-						return "标记的身份："+get.translation(storage+"2")+"<br>"+get.translation(storage+"2")+"人数排名："+(list.filter(i=>get.population(i)>get.population(storage)).length+1);
+						return `标记的身份：${get.translation(`${storage}2`)}<br>${get.translation(`${storage}2`)}人数排名：${list.filter(i=>get.population(i)>get.population(storage)).length+1}`;
 					},
 					markcount:storage=>{
 						const list=[];
@@ -8390,12 +8397,10 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				forced:true,
 				content:()=>{
 					"step 0"
-					const list=[];
-					game.filterPlayer2(current=>{
-						if(!list.contains(current.identity+"2")) list.push(current.identity+"2");
-					});
-					list.randomSort();
-					player.chooseControl(list).set("prompt","决路：标记一个身份");
+					player.chooseControl(game.filterPlayer2().reduce((previousValue,currentValue)=>{
+						previousValue.add(`${currentValue.identity}2`);
+						return previousValue;
+					},[]).randomSort()).set("prompt","决路：标记一个身份");
 					"step 1"
 					if(result.control){
 						const control=result.control.slice(0,-1)
@@ -8403,7 +8408,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.popup(result.control);
 						player.markSkill("sst_juelu");
 						game.broadcastAll((player,text)=>player.marks.sst_juelu.firstChild.innerHTML=text,player,get.translation(control));
-						game.log(player,"标记了","#y"+get.translation(result.control));
+						game.log(player,"标记了",`#y${get.translation(result.control)}`);
 					}
 					game.delayx();
 				},
@@ -8469,7 +8474,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					return evt&&evt.name=="phase"&&!evt.sst_tankuang_overflow;
 				},
 				chooseButton:{
-					dialog:(event,player)=>ui.create.dialog("###探矿###按花色或类别举荐一张牌，其间若本回合亮出的牌超过十张，中止此流程且本回合不能再发动此技能，然后你受到1点伤害（本回合已亮出"+get.cnNumber(player.storage.sst_tankuang.length)+"张牌）"),
+					dialog:(event,player)=>ui.create.dialog(`###探矿###按花色或类别举荐一张牌，其间若本回合亮出的牌超过十张，中止此流程且本回合不能再发动此技能，然后你受到1点伤害（本回合已亮出${get.cnNumber(player.storage.sst_tankuang.length)}张牌）`),
 					chooseControl:()=>lib.suit.concat(["basic","trick","equip"]),
 					check:(event,player)=>{
 						let count=0;
@@ -8518,11 +8523,11 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					event.control=lib.skill.sst_tankuang_backup.control;
 					player.popup(event.control);
-					game.log(player,"声明了","#y"+get.translation(event.control));
+					game.log(player,"声明了",`#y${get.translation(event.control)}`);
 					"step 2"
 					event.card=get.cards()[0];
 					game.cardsGotoOrdering(event.card);
-					player.showCards(event.card,get.translation(player)+"发动了【"+get.skillTranslation(event.name,player)+"】（声明了"+get.translation(event.control)+"）",0.5);
+					player.showCards(event.card,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】（声明了${get.translation(event.control)}）`,0.5);
 					player.storage.sst_tankuang.push(event.card);
 					"step 3"
 					if(player.storage.sst_tankuang.length>10){
@@ -8573,7 +8578,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.finish();
 					}
 					else{
-						player.chooseToDiscard("伏妙：弃置"+get.cnNumber(player.countCards("h")-trigger.player.getHp())+"张手牌",player.countCards("h")-trigger.player.getHp(),true);
+						player.chooseToDiscard(`伏妙：弃置${get.cnNumber(player.countCards("h")-trigger.player.getHp())}张手牌`,player.countCards("h")-trigger.player.getHp(),true);
 					}
 					"step 1"
 					const next=player.chooseToUse("伏妙：你可以将一张牌当作【杀】使用（无距离限制，不计入使用次数）");
@@ -8683,7 +8688,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							}
 						}
 						return mayDamage?"是":"否";
-					}).set("prompt","虚晃："+get.translation(trigger.card)+"是否造成伤害？");
+					}).set("prompt",`虚晃：${get.translation(trigger.card)}是否造成伤害？`);
 					"step 1"
 					const evt=trigger.getParent();
 					if(typeof evt.sst_xuhuang!="object") evt.set("sst_xuhuang",{});
@@ -8709,7 +8714,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					event.identical=trigger.sst_xuhuang[target.playerid].result==game.cardCausedDamage(trigger.card);
 					target.popup(trigger.sst_xuhuang[target.playerid].result?"是":"否");
 					target.$fullscreenpop(trigger.sst_xuhuang[target.playerid].result?"造成伤害":"不造成伤害",event.identical?"wood":"fire");
-					game.log(target,"公布了结果","#y"+(trigger.sst_xuhuang[target.playerid].result?"造成伤害":"不造成伤害"));
+					game.log(target,"公布了结果",`#y${trigger.sst_xuhuang[target.playerid].result?"造成伤害":"不造成伤害"}`);
 					game.delayx();
 					"step 2"
 					if(event.identical){
@@ -8735,17 +8740,17 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				firstDo:true,
 				priority:2020,
 				content:()=>{
-					player.addTempSkill("sst_phase_sonic","roundStart");
+					player.addTempSkill("sst_phase_pass","roundStart");
 				}
 			},
-			sst_phase_sonic:{
+			sst_phase_pass:{
 				charlotte:true,
 				ruleSkill:true
 			},
 			sst_jibu:{
 				lastDo:true,
 				trigger:{global:"phaseBefore"},
-				filter:(event,player)=>event.player!=player&&!player.hasSkill("sst_phase_sonic")&&!player.hasSkill("sst_jibu_effect"),
+				filter:(event,player)=>event.player!=player&&!player.hasSkill("sst_phase_pass")&&!player.hasSkill("sst_jibu_effect"),
 				logTarget:"player",
 				check:(event,player)=>get.attitude(event.player,player)<0,
 				content:()=>{
@@ -8775,14 +8780,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:(event,player)=>{
 					if(_status.currentPhase!=player) return false;
 					if(get.type(event.card)!="basic"&&get.type(event.card)!="trick") return false;
-					return game.hasPlayer(current=>!event.targets.contains(current)&&lib.filter.targetEnabled2(event.card,event.player,current)&&!current.hasSkill("sst_phase_sonic"));
+					return game.hasPlayer(current=>!event.targets.contains(current)&&lib.filter.targetEnabled2(event.card,event.player,current)&&!current.hasSkill("sst_phase_pass"));
 				},
 				direct:true,
 				content:()=>{
 					"step 0"
-					player.chooseTarget(get.prompt("sst_juechen"),"为"+get.translation(trigger.card)+"增加一个目标",(card,player,target)=>{
+					player.chooseTarget(get.prompt("sst_juechen"),`为${get.translation(trigger.card)}增加一个目标`,(card,player,target)=>{
 						const evt=_status.event.getTrigger();
-						return !evt.targets.contains(target)&&lib.filter.targetEnabled2(evt.card,evt.player,target)&&!target.hasSkill("sst_phase_sonic");
+						return !evt.targets.contains(target)&&lib.filter.targetEnabled2(evt.card,evt.player,target)&&!target.hasSkill("sst_phase_pass");
 					}).set("autodelay",true).set("ai",target=>{
 						const evt=_status.event.getTrigger();
 						return get.effect(target,evt.card,evt.player,_status.event.player);
@@ -8798,14 +8803,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				trigger:{player:"useCard2"},
 				filter:(event,player)=>{
 					if(get.type(event.card)!="basic"&&get.type(event.card)!="trick") return false;
-					return game.hasPlayer(current=>!event.targets.contains(current)&&lib.filter.targetEnabled2(event.card,event.player,current)&&current.hasSkill("sst_phase_sonic")&&_status.currentPhase!=current&&current.hasSkill("sst_juechen"));
+					return game.hasPlayer(current=>!event.targets.contains(current)&&lib.filter.targetEnabled2(event.card,event.player,current)&&current.hasSkill("sst_phase_pass")&&_status.currentPhase!=current&&current.hasSkill("sst_juechen"));
 				},
 				direct:true,
 				content:()=>{
 					"step 0"
-					player.chooseTarget(get.prompt("sst_juechen2"),"为"+get.translation(trigger.card)+"增加目标",[1,Infinity],(card,player,target)=>{
+					player.chooseTarget(get.prompt("sst_juechen2"),`为${get.translation(trigger.card)}增加目标`,[1,Infinity],(card,player,target)=>{
 						const evt=_status.event.getTrigger();
-						return !evt.targets.contains(target)&&lib.filter.targetEnabled2(evt.card,evt.player,target)&&target.hasSkill("sst_phase_sonic")&&_status.currentPhase!=target&&target.hasSkill("sst_juechen");
+						return !evt.targets.contains(target)&&lib.filter.targetEnabled2(evt.card,evt.player,target)&&target.hasSkill("sst_phase_pass")&&_status.currentPhase!=target&&target.hasSkill("sst_juechen");
 					}).set("autodelay",true).set("ai",target=>{
 						const evt=_status.event.getTrigger();
 						return get.effect(target,evt.card,evt.player,_status.event.player);
@@ -8830,10 +8835,10 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					player.addSkill("sst_songmo_effect");
 					player.addMark("sst_songmo_effect",1,false);
 					"step 1"
-					if(player.needsToDiscard()) player.chooseToDiscard("诵魔：弃置"+get.cnNumber(player.needsToDiscard())+"张手牌",player.needsToDiscard(),true);
+					if(player.needsToDiscard()) player.chooseToDiscard(`诵魔：弃置${get.cnNumber(player.needsToDiscard())}张手牌`,player.needsToDiscard(),true);
 					"step 2"
 					const list=lib.inpile.filter(name=>get.type(name)=="trick"&&trigger.player.hasUseTarget({name:name,isCard:true})).map(name=>["锦囊","",name]);
-					if(list.length) player.chooseButton(["诵魔：视为"+get.translation(trigger.player)+"使用一张锦囊牌",[list,"vcard"]],true).set("filterButton",button=>_status.event.getTrigger().player.hasUseTarget({name:button.link[2],isCard:true})).set("ai",button=>_status.event.getTrigger().player.getUseValue({name:button.link[2],isCard:true}));
+					if(list.length) player.chooseButton([`诵魔：视为${get.translation(trigger.player)}使用一张锦囊牌`,[list,"vcard"]],true).set("filterButton",button=>_status.event.getTrigger().player.hasUseTarget({name:button.link[2],isCard:true})).set("ai",button=>_status.event.getTrigger().player.getUseValue({name:button.link[2],isCard:true}));
 					"step 3"
 					if(result&&result.bool&&result.links&&result.links.length) trigger.player.chooseUseTarget({name:result.links[0][2],isCard:true},true,false);
 				},
@@ -8844,7 +8849,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_songmo_effect:{
 				charlotte:true,
 				intro:{
-					content:(storage,player)=>"本局游戏你的手牌上限-"+storage+"<br>当前你的手牌上限："+player.getHandcardLimit()
+					content:(storage,player)=>`本局游戏你的手牌上限-${storage}<br>当前你的手牌上限：${player.getHandcardLimit()}`
 				},
 				onremove:true,
 				mod:{
@@ -8886,7 +8891,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_yonghun_effect:{
 				charlotte:true,
 				intro:{
-					content:(storage,player)=>"本局游戏你的手牌上限+"+storage+"<br>当前你的手牌上限："+player.getHandcardLimit()
+					content:(storage,player)=>`本局游戏你的手牌上限+${storage}<br>当前你的手牌上限：${player.getHandcardLimit()}`
 				},
 				onremove:true,
 				mod:{
@@ -8932,14 +8937,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				trigger:{player:"phaseDrawBegin2"},
 				check:(event,player)=>player.countCards("h"),
 				filter:event=>!event.numFixed,
-				prompt2:()=>"摸牌阶段，你可以令摸牌数-"+(game.countPlayer(current=>current.isDamaged())*2>game.countPlayer()?2:1)+"，然后亮出牌堆顶的等量牌且可以使用之（不能指定自己为目标）。你重复此流程直到你没有以此法使用牌。",
+				prompt2:()=>`摸牌阶段，你可以令摸牌数-${game.countPlayer(current=>current.isDamaged())*2>game.countPlayer()?2:1}，然后亮出牌堆顶的等量牌且可以使用之（不能指定自己为目标）。你重复此流程直到你没有以此法使用牌。`,
 				content:()=>{
 					"step 0"
 					event.num=game.countPlayer(current=>current.isDamaged())*2>game.countPlayer()?2:1;
 					"step 1"
 					trigger.num-=trigger.num-num<0?0:num;
 					event.cards=game.cardsGotoOrdering(get.cards(event.num)).cards;
-					player.showCards(event.cards,get.translation(player)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+					player.showCards(event.cards,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】`);
 					"step 2"
 					if(cards.length) player.chooseCardButton("破围：选择一张牌",cards).set("ai",button=>_status.event.player.getUseValue(button.link)).set("filterButton",button=>lib.filter.cardEnabled(button.link,_status.event.player));
 					"step 3"
@@ -8993,7 +8998,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						const choiceList=ui.create.dialog("编设：选择两个技能，本轮内视为拥有之");
 						choiceList.videoId=id;
 						list.forEach((text,i)=>{
-							let str="<div class=\"button text\" style=\"padding:5px;width:calc(100% - 10px);display:inline-block\">";
+							let str=`<div class="button text" style="padding:5px;width:calc(100% - 10px);display:inline-block">`;
 							str+=text;
 							str+="</div>";
 							const next=choiceList.add(str);
@@ -9029,7 +9034,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						const list=["sst_miquan","sst_mijian","sst_miqiang"];
 						result.links.forEach(link=>{
 							player.popup(list[link],"thunder");
-							game.log(player,"获得了技能","#g【"+get.translation(list[link])+"】");
+							game.log(player,"获得了技能",`#g【${get.translation(list[link])}】`);
 							player.addTempSkill(list[link],"roundStart");
 						});
 						game.delayx();
@@ -9092,7 +9097,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							});
 						}
 						else{
-							sst_qiaoqi.forEach(card=>dialog.addText(get.translation(card)+"：共有"+get.cnNumber(card.cards.length)+"张牌"));
+							sst_qiaoqi.forEach(card=>dialog.addText(`${get.translation(card)}：共有${get.cnNumber(card.cards.length)}张牌`));
 						}
 					},
 					markcount:(storage,player)=>{
@@ -9157,7 +9162,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filterTarget:(card,player,target)=>target.countCards("e"),
 				content:()=>{
 					"step 0"
-					player.showCards(cards,get.translation(player)+"发动了【"+get.skillTranslation(event.name,player)+"】");
+					player.showCards(cards,`${get.translation(player)}发动了【${get.skillTranslation(event.name,player)}】`);
 					"step 1"
 					player.choosePlayerCard("巧器：选择一张装备牌","e",target,true);
 					"step 2"
@@ -9190,10 +9195,10 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(!muniu||!cards.length) cards.forEach(card=>card.discard());
 					if(typeof muniu.cards=="undefined") muniu.cards=[];
 					muniu.cards.addArray(cards);
-					muniu.sst_qiaoqi=true;
+					if(get.name(muniu)!="muniu") muniu.sst_qiaoqi=true;
 					game.broadcast((muniu,cards)=>{
 						muniu.cards=cards;
-						muniu.sst_qiaoqi=true;
+						if(get.name(muniu)!="muniu") muniu.sst_qiaoqi=true;
 					},muniu,muniu.cards);
 					target.markSkill("sst_qiaoqi");
 					game.delayx();
@@ -9273,7 +9278,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						if(!current.getEquip(event.muniu)&&current!=player&&!current.isTurnedOver()&&
 							get.attitude(player,current)>=3&&get.attitude(current,player)>=3) return true;
 					}).sort(lib.sort.seat)[0];
-					const next=player.chooseTarget("是否移动"+get.translation(event.muniu)+"？",(card,player,target)=>!target.isMin()&&player!=target&&target.isEmpty(get.equiptype(event.muniu)));
+					const next=player.chooseTarget(`是否移动${get.translation(event.muniu)}？`,(card,player,target)=>!target.isMin()&&player!=target&&target.isEmpty(get.equiptype(event.muniu)));
 					next.set("ai",target=>target==_status.event.choice?1:-1);
 					next.set("choice",choice);
 					"step 4"
@@ -9413,7 +9418,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							trigger.nature=result.control;
 						}
 						player.popup(result.control,result.control);
-						game.log(player,"将对",trigger.player,"造成伤害的属性指定为","#y"+get.translation(result.control));
+						game.log(player,"将对",trigger.player,"造成伤害的属性指定为",`#y${get.translation(result.control)}`);
 					}
 				},
 				group:["sst_fumo2","sst_fumo3"]
@@ -9591,7 +9596,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				filter:event=>event.player.countCards("he"),
 				logTarget:"player",
 				content:()=>{
-					player.gainPlayerCard("凤蹴：获得"+get.translation(trigger.player)+"一张牌",trigger.player,"he",true);
+					player.gainPlayerCard(`凤蹴：获得${get.translation(trigger.player)}一张牌`,trigger.player,"he",true);
 				}
 			},
 			//Pikachu
@@ -9635,15 +9640,15 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					player.logSkill("sst_fulei",target);
 					const info=["伏雷：选择用于拼点的牌"];
 					if(event.hs.length){
-						info.push("<div class=\"text center\">来自手牌区</div>");
+						info.push(`<div class="text center">来自手牌区</div>`);
 						info.push(event.hs);
 					}
 					if(event.es.length){
-						info.push("<div class=\"text center\">来自装备区</div>");
+						info.push(`<div class="text center">来自装备区</div>`);
 						info.push(event.es);
 					}
 					if(event.js.length){
-						info.push("<div class=\"text center\">来自判定区</div>");
+						info.push(`<div class="text center">来自判定区</div>`);
 						info.push(event.js);
 					}
 					const next=player.chooseButton();
@@ -9686,7 +9691,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 5"
 					if(num<targets.length){
 						if(event.winner!=targets[num]&&targets[num].isIn()){
-							player.chooseControl().set("choiceList",[get.translation(targets[num])+"受到你造成的1点雷电伤害",get.translation(targets[num])+"判定一次【闪电】"]).set("ai",()=>{
+							player.chooseControl().set("choiceList",[`${get.translation(targets[num])}受到你造成的1点雷电伤害`,`${get.translation(targets[num])}判定一次【闪电】`]).set("ai",()=>{
 								const evt=_status.event.getParent();
 								return get.damageEffect(evt.targets[evt.num],_status.event.player,_status.event.player,"thunder")>0?0:1;
 							}).set("prompt","伏雷：选择一项");
@@ -9821,7 +9826,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					event.num=0;
 					"step 2"
-					player.gainPlayerCard("反窥：获得"+get.translation(trigger.targets[num])+"区域里的一张牌",trigger.targets[num],"hej",true).set("filterButton",button=>!_status.event.player.storage.sst_fankui.contains(button.link));
+					player.gainPlayerCard(`反窥：获得${get.translation(trigger.targets[num])}区域里的一张牌`,trigger.targets[num],"hej",true).set("filterButton",button=>!_status.event.player.storage.sst_fankui.contains(button.link));
 					"step 3"
 					if(result.cards&&result.cards.length){
 						player.storage.sst_fankui.addArray(result.cards);
@@ -9879,7 +9884,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.targets&&result.targets.length){
 						event.target=result.targets[0];
 						player.logSkill("sst_xiangzhu",event.target);
-						player.choosePlayerCard("向筑：将"+get.translation(event.target)+"装备区里的一张牌移动到你的装备区里",event.target,"e",true).set("filterButton",button=>_status.event.player.isEmpty(get.subtype(button.link)));
+						player.choosePlayerCard(`向筑：将${get.translation(event.target)}装备区里的一张牌移动到你的装备区里`,event.target,"e",true).set("filterButton",button=>_status.event.player.isEmpty(get.subtype(button.link)));
 					}
 					"step 2"
 					if(result.cards&&result.cards.length){
@@ -9911,7 +9916,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						event.finish();
 					}
 					"step 1"
-					player.chooseTarget("向筑：将"+get.translation(card)+"移动到一名其他角色的装备区内",(card,player,target)=>target!=player&&target.isEmpty(get.subtype(_status.event.getParent().card)),true).set("ai",target=>get.effect(target,_status.event.getParent().card,_status.event.player,_status.event.player));
+					player.chooseTarget(`向筑：将${get.translation(card)}移动到一名其他角色的装备区内`,(card,player,target)=>target!=player&&target.isEmpty(get.subtype(_status.event.getParent().card)),true).set("ai",target=>get.effect(target,_status.event.getParent().card,_status.event.player,_status.event.player));
 					"step 2"
 					if(result.targets&&result.targets.length){
 						const target=result.targets[0];
@@ -9988,7 +9993,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					if(result.targets&&result.targets.length){
 						targets.push(...result.targets);
 						player.logSkill("sst_fenshi",result.targets);
-						player.discardPlayerCard("焚世：弃置"+get.translation(result.targets[0])+"两张牌",result.targets[0],2,"he",true);
+						player.discardPlayerCard(`焚世：弃置${get.translation(result.targets[0])}两张牌`,result.targets[0],2,"he",true);
 					}
 					else{
 						event.finish();
@@ -10071,7 +10076,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						if(_status.event.player.isTurnedOver()) return 1;
 						if(_status.event.player.hp>4) return 1;
 						return 0;
-					}).set("choiceList",["失去"+Math.floor(target.hp/2)+"点体力","翻面"]).set("prompt","星堕：选择一项");
+					}).set("choiceList",[`失去${Math.floor(target.hp/2)}点体力`,"翻面"]).set("prompt","星堕：选择一项");
 					"step 4"
 					if(typeof result.index=="number"){
 						switch(result.index){
@@ -10127,7 +10132,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				content:()=>{
 					"step 0"
 					const max=game.countPlayer(current=>get.distance(player,current)<=1);
-					player.chooseTarget("茂盛：令至多"+get.cnNumber(max)+"名角色横置（已横置的角色改为弃置其一张牌），然后你失去〖茂盛〗，获得〖猛火〗",[1,max]).set("ai",target=>-get.attitude(_status.event.player,target));
+					player.chooseTarget(`茂盛：令至多${get.cnNumber(max)}名角色横置（已横置的角色改为弃置其一张牌），然后你失去〖茂盛〗，获得〖猛火〗`,[1,max]).set("ai",target=>-get.attitude(_status.event.player,target));
 					"step 1"
 					if(result.targets&&result.targets.length){
 						event.targets=result.targets.sortBySeat(_status.currentPhase);
@@ -10144,7 +10149,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							targets[num].link();
 						}
 						else{
-							player.discardPlayerCard("茂盛：弃置"+get.translation(targets[num])+"一张牌",targets[num],true);
+							player.discardPlayerCard(`茂盛：弃置${get.translation(targets[num])}一张牌`,targets[num],true);
 						}
 						event.num++;
 						event.redo();
@@ -10241,7 +10246,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					event.num--;
 					if(event.num>=0){
-						player.chooseUseTarget("祓濯：视为使用一张火【杀】（剩余"+event.num+"次）",{name:"sha",nature:"fire",isCard:true},"nodistance",true,false);
+						player.chooseUseTarget(`祓濯：视为使用一张火【杀】（剩余${event.num}次）`,{name:"sha",nature:"fire",isCard:true},"nodistance",true,false);
 						event.redo();
 					}
 				}
@@ -10273,10 +10278,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						if(dist<=1) return true;
 						return !game.hasPlayer(current2=>current2!=player&&get.distance(player,current2)<dist);
 					}).sortBySeat(_status.currentPhase);
-					let str="商政：是否令"+get.translation(player)+"获得"+get.translation(event.nearests);
+					let str=`商政：是否令${get.translation(player)}获得${get.translation(event.nearests)}`;
 					if(event.nearests.length>1) str+="各";
-					str+="一张牌？";
-					target.chooseBool(str).set("ai",()=>{
+					target.chooseBool(`${str}一张牌？`).set("ai",()=>{
 						const evt=_status.event.getParent();
 						const target=evt.player;
 						if(get.attitude(_status.event.player,target)<=0) return false;
@@ -10504,7 +10508,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					trigger.source.addSkill("sst_chouyu");
 					if(trigger.source.hasSkill("sst_chouyu")){
 						trigger.source.popup("sst_chouyu");
-						game.log(trigger.source,"获得了技能","#g【"+get.translation("sst_chouyu")+"】");
+						game.log(trigger.source,"获得了技能",`#g【${get.translation("sst_chouyu")}】`);
 					};
 				},
 				ai:{
@@ -10641,10 +10645,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 1"
 					if(num&&targets.length){
 						event.num--;
-						let str="骨溃：将一张手牌当作无距离限制的【杀】对"+get.translation(targets);
+						let str=`骨溃：将一张手牌当作无距离限制的【杀】对${get.translation(targets)}`;
 						if(targets.length>1) str+="中的一人";
-						str+="使用（剩余"+event.num+"次）";
-						const next=player.chooseToUse(str,true);
+						const next=player.chooseToUse(`${str}使用（剩余${event.num}次）`,true);
 						next.set("norestore",true);
 						next.set("_backupevent","sst_gukuix");
 						next.backup("sst_gukuix");
@@ -10728,7 +10731,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							else{
 								str+="<br>";
 							}
-							str+="直到"+get.translation(current)+"的下个回合开始可以视为使用一次"+get.translation(storage[current.playerid].map(card=>get.translation({name:card.name,nature:card.nature,isCard:true})));
+							str+=`直到${get.translation(current)}的下个回合开始可以视为使用一次${get.translation(storage[current.playerid].map(card=>get.translation({name:card.name,nature:card.nature,isCard:true})))}`;
 						});
 						return str;
 					}
@@ -10772,7 +10775,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							if(cleared) player.unmarkSkill("sst_qixin_effect");
 						}
 					}),
-					prompt:links=>"视为使用"+(get.translation(links[0][3])||"")+get.translation(links[0][2])
+					prompt:links=>`视为使用${get.translation(links[0][3])||""}${get.translation(links[0][2])}`
 				},
 				hiddenCard:(player,name)=>{
 					for(const i in player.storage.sst_qixin_effect){
@@ -10832,7 +10835,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				},
 				content:()=>{
 					"step 0"
-					player.chooseCard(get.prompt("sst_gongcun2",trigger.player),"你可以交给"+get.translation(trigger.player)+"一张手牌",card=>lib.filter.canBeGained(card,_status.event.targetx,_status.event.player)).set("ai",card=>{
+					player.chooseCard(get.prompt("sst_gongcun2",trigger.player),`你可以交给${get.translation(trigger.player)}一张手牌`,card=>lib.filter.canBeGained(card,_status.event.targetx,_status.event.player)).set("ai",card=>{
 						const evt=_status.event.getTrigger();
 						if(get.name(card)=="du") return Math.cbrt(-get.attitude(_status.event.player,evt.player)*20);
 						return Math.cbrt(get.attitude(_status.event.player,evt.player)*get.value(card,evt.player));
@@ -10870,7 +10873,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					});
 					event.videoId=lib.status.videoId++;
 					const func=(id,total)=>{
-						const setting=ui.create.dialog("###饥肠：设定本回合的以下数值###（三项数值相加须等于"+total+"）");
+						const setting=ui.create.dialog(`###饥肠：设定本回合的以下数值###（三项数值相加须等于${total}）`);
 						setting.videoId=id;
 						//Number of cards
 						setting.addText("摸牌阶段额外摸牌数");
@@ -10884,7 +10887,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							const td=ui.create.div(".button.tdnode");
 							table.appendChild(td);
 							setting.buttons.add(td);
-							td.innerHTML="<span>"+i+"</span>";
+							td.innerHTML=`<span>${i}</span>`;
 							td.addEventListener(lib.config.touchscreen?"touchend":"click",ui.click.button);
 							td.link=["sst_jichang_first",i];
 							for(const j in lib.element.button){
@@ -10903,7 +10906,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							const td=ui.create.div(".button.tdnode");
 							table2.appendChild(td);
 							setting.buttons.add(td);
-							td.innerHTML="<span>"+i+"</span>";
+							td.innerHTML=`<span>${i}</span>`;
 							td.addEventListener(lib.config.touchscreen?"touchend":"click",ui.click.button);
 							td.link=["sst_jichang_second",i];
 							for(const j in lib.element.button){
@@ -10922,7 +10925,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							const td=ui.create.div(".button.tdnode");
 							table3.appendChild(td);
 							setting.buttons.add(td);
-							td.innerHTML="<span>"+i+"</span>";
+							td.innerHTML=`<span>${i}</span>`;
 							td.addEventListener(lib.config.touchscreen?"touchend":"click",ui.click.button);
 							td.link=["sst_jichang_third",i];
 							for(const j in lib.element.button){
@@ -10984,7 +10987,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 								sst_jichang_third+=link[1];
 							}
 						});
-						game.log(player,"设定的数值：<br>摸牌阶段额外摸牌数：","#y"+sst_jichang_first,"<br>攻击范围增加数：","#y"+sst_jichang_second,"<br>出牌阶段额外使用【杀】次数：","#y"+sst_jichang_third);
+						game.log(player,"设定的数值：<br>摸牌阶段额外摸牌数：",`#y${sst_jichang_first}`,"<br>攻击范围增加数：",`#y${sst_jichang_second}`,"<br>出牌阶段额外使用【杀】次数：",`#y${sst_jichang_third}`);
 						const zeroToTwentyAsCircledNumber=n=>{
 							if(n===0){
 								return String.fromCharCode(9450);
@@ -10995,7 +10998,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							return String.fromCharCode(9311+n);
 						};
 						player.popup(zeroToTwentyAsCircledNumber(sst_jichang_first)+zeroToTwentyAsCircledNumber(sst_jichang_second)+zeroToTwentyAsCircledNumber(sst_jichang_third),"green");
-						player.chat("摸牌阶段额外摸牌数："+sst_jichang_first+"<br>攻击范围增加数："+sst_jichang_second+"<br>出牌阶段额外使用【杀】次数："+sst_jichang_third);
+						player.chat(`摸牌阶段额外摸牌数：${sst_jichang_first}<br>攻击范围增加数：${sst_jichang_second}<br>出牌阶段额外使用【杀】次数：${sst_jichang_third}`);
 						player.storage.sst_jichang_effect=[sst_jichang_first,sst_jichang_second,sst_jichang_third];
 						player.addTempSkill("sst_jichang_effect");
 					}
@@ -11013,11 +11016,11 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					content:storage=>{
 						let str="";
 						if(Array.isArray(storage)){
-							if(typeof storage[0]=="number") str+="本回合你的摸牌阶段额外摸"+get.cnNumber(storage[0])+"张牌";
+							if(typeof storage[0]=="number") str+=`本回合你的摸牌阶段额外摸${get.cnNumber(storage[0])}张牌`;
 							if(typeof storage[0]=="number"&&(typeof storage[1]=="number"||typeof storage[2]=="number")) str+="<br>";
-							if(typeof storage[1]=="number") str+="本回合你的攻击范围+"+storage[1];
+							if(typeof storage[1]=="number") str+=`本回合你的攻击范围+${storage[1]}`;
 							if(typeof storage[1]=="number"&&typeof storage[2]=="number") str+="<br>";
-							if(typeof storage[2]=="number") str+="本回合你的出牌阶段使用【杀】次数+"+storage[2];
+							if(typeof storage[2]=="number") str+=`本回合你的出牌阶段使用【杀】次数+${storage[2]}`;
 						}
 						return str;
 					},
@@ -11079,7 +11082,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							return (storage.contains("sst_xiongli_second")&&current.isMinHp(true))||(storage.contains("sst_xiongli_third")&&current.isMinEquip(true));
 						});
 						if(targets.length){
-							str+="满足条件角色："+get.translation(targets);
+							str+=`满足条件角色：${get.translation(targets)}`;
 						}
 						else{
 							str+="无满足条件角色";
@@ -11162,7 +11165,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					"step 2"
 					switch(result.control){
 						case "选项一":
-							game.log(player,"选择了","#y"+"本轮造成伤害唯一最少的角色");
+							game.log(player,"选择了","#y本轮造成伤害唯一最少的角色");
 							player.popup("①","thunder");
 							player.chat("1. 本轮造成伤害唯一最少的角色");
 							player.storage.sst_xiongli.push("sst_xiongli_first");
@@ -11170,7 +11173,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							game.delayx();
 							break;
 						case "选项二":
-							game.log(player,"选择了","#y"+"体力唯一最少的角色");
+							game.log(player,"选择了","#y体力唯一最少的角色");
 							player.popup("②","thunder");
 							player.chat("2. 体力唯一最少的角色");
 							player.storage.sst_xiongli.push("sst_xiongli_second");
@@ -11178,7 +11181,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							game.delayx();
 							break;
 						case "选项三":
-							game.log(player,"选择了","#y"+"装备唯一最少的角色");
+							game.log(player,"选择了","#y装备唯一最少的角色");
 							player.popup("③","thunder");
 							player.chat("3. 装备唯一最少的角色");
 							player.storage.sst_xiongli.push("sst_xiongli_third");
@@ -11281,7 +11284,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				mark:true,
 				marktext:"☯",
 				intro:{
-					content:storage=>"转换技，当你需要使用一张"+["【杀】","【闪】","【桃】","【酒】","【无懈可击】"][storage-1]+"时，你可以弃置一张牌视为使用之，若你弃置的牌与先前弃牌堆顶的牌颜色不同，你可以指定此转换技的状态。"
+					content:storage=>`转换技，当你需要使用一张${["【杀】","【闪】","【桃】","【酒】","【无懈可击】"][storage-1]}时，你可以弃置一张牌视为使用之，若你弃置的牌与先前弃牌堆顶的牌颜色不同，你可以指定此转换技的状态。`
 				},
 				init:player=>{
 					if(typeof player.storage.sst_liedui!="number") player.storage.sst_liedui=1;
@@ -11388,7 +11391,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							case 4:str="④【酒】";break;
 							case 5:str="⑤【无懈可击】";break;
 						}
-						game.log(player,"指定了","#g【列队】","的转换状态为","#y"+str);
+						game.log(player,"指定了","#g【列队】","的转换状态为",`#y${str}`);
 					}
 				},
 				ai:{
@@ -11458,7 +11461,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 						player.addTempSkill("sst_chunni_effect",{player:"die"});
 					}
 					game.updateRoundNumber();
-					game.log(player,"将"+get.cnNumber(cards.length)+"张牌置入了","#b自己","的牌库");
+					game.log(player,"将",get.cnNumber(cards.length),"张牌置入了","#b自己","的牌库");
 					"step 1"
 					if(event.clear) game.broadcastAll(ui.clear);
 				}
@@ -11468,7 +11471,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				mark:true,
 				intro:{
 					content:(storage,player)=>{
-						if(typeof player.deckCards=="object"&&typeof player.deckCards.length=="number") return "共有"+get.cnNumber(player.deckCards.length)+"张牌";
+						if(typeof player.deckCards=="object"&&typeof player.deckCards.length=="number") return `共有${get.cnNumber(player.deckCards.length)}张牌`;
 						return false;
 					},
 					markcount:(storage,player)=>{
@@ -11585,7 +11588,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 								val=Math.sqrt(val);
 							}
 							return get.recoverEffect(target,player,player)>att*val?"选项一":"选项二";
-						}).set("choiceList",["令"+get.translation(player)+"回复1点体力","令"+get.translation(player)+"获得本回合内进入弃牌堆的牌"+(event.cards.length?"（"+get.translation(event.cards)+"）":"")]);
+						}).set("choiceList",[`令${get.translation(player)}回复1点体力`,`令${get.translation(player)}获得本回合内进入弃牌堆的牌${event.cards.length?`（${get.translation(event.cards)}）`:""}`]);
 					}
 					else{
 						event.finish();
@@ -11615,7 +11618,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					event.delayed=false;
 					event.num=0;
 					"step 1"
-					player.discardPlayerCard("自化：弃置"+get.translation(targets[num])+"一张手牌",targets[num],"h",true).set("boolline",false).set("delay",num==targets.length-1);
+					player.discardPlayerCard(`自化：弃置${get.translation(targets[num])}一张手牌`,targets[num],"h",true).set("boolline",false).set("delay",num==targets.length-1);
 					"step 2"
 					if(result.bool) if(num==targets.length-1) event.delayed=true;
 					event.num++;
@@ -11737,7 +11740,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				mark:true,
 				marktext:"☯",
 				intro:{
-					content:storage=>"转换技，你使用【杀】时，你可以"+["于结算后视为使用一张【杀】","令本阶段使用【杀】无距离和次数限制","于结算后摸两张牌，当前回合结束"][storage-1]+"。"
+					content:storage=>`转换技，你使用【杀】时，你可以${["于结算后视为使用一张【杀】","令本阶段使用【杀】无距离和次数限制","于结算后摸两张牌，当前回合结束"][storage-1]}。`
 				},
 				init:player=>{
 					if(typeof player.storage.sst_qiangyi!="number") player.storage.sst_qiangyi=1;
@@ -11883,14 +11886,14 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				if(player.storage.sst_qixiao) return "出牌阶段限两次，你可以失去2点体力，视为对至多两名角色使用火【杀】（不受使用次数限制，不计入使用次数）。你每以此法造成伤害后，摸两张牌。";
 				return "出牌阶段限一次，你可以失去1点体力，视为对一名角色使用火【杀】（不受使用次数限制，不计入使用次数）。你每以此法造成伤害后，摸一张牌。";
 			},
-			sst_chixing:player=>"你使用的最后一张牌为红色的回合结束后，你可以令至多｛<span class=\"bluetext\">"+player.getBraces()+"</span>｝名角色将手牌数调整到与你另外指定的一名角色相等。",
+			sst_chixing:player=>`你使用的最后一张牌为红色的回合结束后，你可以令至多｛<span class="bluetext">${player.getBraces()}</span>｝名角色将手牌数调整到与你另外指定的一名角色相等。`,
 			sst_diebu:player=>{
-				if(player.storage.sst_diebu) return "转换技，你可以视为使用一张①【杀】<span class=\"bluetext\">②【闪】</span>。";
-				return "转换技，你可以视为使用一张<span class=\"bluetext\">①【杀】</span>②【闪】。";
+				if(player.storage.sst_diebu) return `转换技，你可以视为使用一张①【杀】<span class="bluetext">②【闪】</span>。`;
+				return `转换技，你可以视为使用一张<span class="bluetext">①【杀】</span>②【闪】。`;
 			},
-			sst_guaibi:player=>"每轮限｛<span class=\"bluetext\">"+player.getBraces()+"</span>｝次，一张【杀】指定目标前，你可以弃置一名角色的两张牌，令其成为此【杀】的使用者，然后该角色可以为此【杀】重新指定目标。",
+			sst_guaibi:player=>`每轮限｛<span class="bluetext">${player.getBraces()}</span>｝次，一张【杀】指定目标前，你可以弃置一名角色的两张牌，令其成为此【杀】的使用者，然后该角色可以为此【杀】重新指定目标。`,
 			sst_shenbi:player=>{
-				if(!Array.isArray(player.storage.sst_shenbi)||!Array.isArray(player.storage.sst_shenbi_ready)) return "你可以将手牌数调整至比当前回合角色少1，视为使用或打出一张无距离限制的【杀】，然后当你以此法使用或打出【杀】时，你选择未选择过的一项：<span class=\"bluetext\">1. 你使用的下一张【杀】伤害基数+1；</span><span class=\"bluetext\">2. 此【杀】不可被响应；</span><span class=\"bluetext\">3. 失去1点体力。</span>然后若均已选择过或你体力值为1，重置此技能。";
+				if(!Array.isArray(player.storage.sst_shenbi)||!Array.isArray(player.storage.sst_shenbi_ready)) return `你可以将手牌数调整至比当前回合角色少1，视为使用或打出一张无距离限制的【杀】，然后当你以此法使用或打出【杀】时，你选择未选择过的一项：<span class="bluetext">1. 你使用的下一张【杀】伤害基数+1；</span><span class="bluetext">2. 此【杀】不可被响应；</span><span class="bluetext">3. 失去1点体力。</span>然后若均已选择过或你体力值为1，重置此技能。`;
 				let str="你可以将手牌数调整至比当前回合角色少1，视为使用或打出一张无距离限制的【杀】";
 				if(!player.storage.sst_shenbi_ready.length){
 					str+="。";
@@ -11900,13 +11903,13 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					player.storage.sst_shenbi_ready.forEach((item,i)=>{
 						switch(item){
 							case "下一张杀伤害基数+1":
-								str+=(player.storage.sst_shenbi.contains(item)?"<span class=\"bluetext\">":"<span style=\"opacity:0.5\">")+"1. 你使用的下一张【杀】伤害基数+1";
+								str+=`${player.storage.sst_shenbi.contains(item)?`<span class="bluetext">`:`<span style="opacity:0.5">`}1. 你使用的下一张【杀】伤害基数+1`;
 								break;
 							case "此杀不可被响应":
-								str+=(player.storage.sst_shenbi.contains(item)?"<span class=\"bluetext\">":"<span style=\"opacity:0.5\">")+"2. 此【杀】不可被响应";
+								str+=`${player.storage.sst_shenbi.contains(item)?`<span class="bluetext">`:`<span style="opacity:0.5">`}2. 此【杀】不可被响应`;
 								break;
 							case "失去1点体力":
-								str+=(player.storage.sst_shenbi.contains(item)?"<span class=\"bluetext\">":"<span style=\"opacity:0.5\">")+"3. 失去1点体力";
+								str+=`${player.storage.sst_shenbi.contains(item)?`<span class="bluetext">`:`<span style="opacity:0.5">`}3. 失去1点体力`;
 								break;
 						}
 						if(i==player.storage.sst_shenbi_ready.length-1){
@@ -11921,52 +11924,49 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				return str;
 			},
 			sst_xuanyi:player=>{
-				if(player.storage.sst_xuanyi) return "转换技，出牌阶段限一次，你可以与①一名角色<span class=\"bluetext\">②牌堆顶的一张牌</span>拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰<span class=\"bluetext\">②雷电伤害</span>。";
-				return "转换技，出牌阶段限一次，你可以与<span class=\"bluetext\">①一名角色</span>②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点<span class=\"bluetext\">①火焰</span>②雷电伤害。";
+				if(player.storage.sst_xuanyi) return `转换技，出牌阶段限一次，你可以与①一名角色<span class="bluetext">②牌堆顶的一张牌</span>拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点①火焰<span class="bluetext">②雷电伤害</span>。`;
+				return `转换技，出牌阶段限一次，你可以与<span class="bluetext">①一名角色</span>②牌堆顶的一张牌拼点，赢的一方获得没赢的一方拼点的牌，然后若你没有获得牌，你对一名角色造成1点<span class="bluetext">①火焰</span>②雷电伤害。`;
 			},
 			sst_juezhan:player=>{
-				if(!Array.isArray(player.storage.sst_juezhan)) return "锁定技，<span class=\"bluetext\">｛你带有「伤害」标签的牌均视为【杀】。｝</span><span class=\"bluetext\">｛你使用牌不能指定与你距离1以外的目标。｝</span><span class=\"bluetext\">｛你的装备区被废除。｝</span>";
-				if(!player.storage.sst_juezhan[0]&&!player.storage.sst_juezhan[1]&&!player.storage.sst_juezhan[2]) return "<span style=\"opacity:0.5\">锁定技，｛你带有「伤害」标签的牌均视为【杀】。｝｛你使用牌不能指定与你距离1以外的目标。｝｛你的装备区被废除。｝</span>";
+				if(!Array.isArray(player.storage.sst_juezhan)) return `锁定技，<span class="bluetext">｛你带有「伤害」标签的牌均视为【杀】。｝</span><span class="bluetext">｛你使用牌不能指定与你距离1以外的目标。｝</span><span class="bluetext">｛你的装备区被废除。｝</span>`;
+				if(!player.storage.sst_juezhan[0]&&!player.storage.sst_juezhan[1]&&!player.storage.sst_juezhan[2]) return `<span style="opacity:0.5">锁定技，｛你带有「伤害」标签的牌均视为【杀】。｝｛你使用牌不能指定与你距离1以外的目标。｝｛你的装备区被废除。｝</span>`;
 				let str="锁定技，";
-				if(player.storage.sst_juezhan[0]) str+="<span class=\"bluetext\">｛你带有「伤害」标签的牌均视为【杀】。｝</span>";
-				if(player.storage.sst_juezhan[1]) str+="<span class=\"bluetext\">｛你使用牌不能指定与你距离1以外的目标。｝</span>";
-				if(player.storage.sst_juezhan[2]) str+="<span class=\"bluetext\">｛你的装备区被废除。｝</span>";
+				if(player.storage.sst_juezhan[0]) str+=`<span class="bluetext">｛你带有「伤害」标签的牌均视为【杀】。｝</span>`;
+				if(player.storage.sst_juezhan[1]) str+=`<span class="bluetext">｛你使用牌不能指定与你距离1以外的目标。｝</span>`;
+				if(player.storage.sst_juezhan[2]) str+=`<span class="bluetext">｛你的装备区被废除。｝</span>`;
 				return str;
 			},
 			sst_fenshi:player=>{
 				let str="准备阶段各限一次：1. 你可以对一名角色造成1点伤害；2. 你可以弃置一名角色两张牌。";
-				if(!Array.isArray(player.storage.sst_fenshi)||player.storage.sst_fenshi[0]) str+="<span class=\"bluetext\">｛若你没有指定自己，你减1点体力上限并删除此内容。｝</span>";
-				if(!Array.isArray(player.storage.sst_fenshi)||player.storage.sst_fenshi[1]) str+="<span class=\"bluetext\">｛若你一回合两次指定了同一名角色，你减1点体力上限并删除此内容。｝</span>";
+				if(!Array.isArray(player.storage.sst_fenshi)||player.storage.sst_fenshi[0]) str+=`<span class="bluetext">｛若你没有指定自己，你减1点体力上限并删除此内容。｝</span>`;
+				if(!Array.isArray(player.storage.sst_fenshi)||player.storage.sst_fenshi[1]) str+=`<span class="bluetext">｛若你一回合两次指定了同一名角色，你减1点体力上限并删除此内容。｝</span>`;
 				return str;
 			},
 			sst_xuelun:player=>{
-				if(typeof player.storage.sst_xuelun!="number") return "转换技，你视为拥有<span class=\"bluetext\">①〖茕途〗</span>②〖圣罚〗③〖勇魂〗，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。";
+				if(typeof player.storage.sst_xuelun!="number") return `转换技，你视为拥有<span class="bluetext">①〖茕途〗</span>②〖圣罚〗③〖勇魂〗，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。`;
 				let str="转换技，你视为拥有";
-				str+=player.storage.sst_xuelun==1?"<span class=\"bluetext\">"+"①〖茕途〗"+"</span>":"①〖茕途〗";
-				str+=player.storage.sst_xuelun==2?"<span class=\"bluetext\">"+"②〖圣罚〗"+"</span>":"②〖圣罚〗";
-				str+=player.storage.sst_xuelun==3?"<span class=\"bluetext\">"+"③〖勇魂〗"+"</span>":"③〖勇魂〗";
-				str+="，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。";
-				return str;
+				str+=player.storage.sst_xuelun==1?`<span class="bluetext">①〖茕途〗</span>`:"①〖茕途〗";
+				str+=player.storage.sst_xuelun==2?`<span class="bluetext">②〖圣罚〗</span>`:"②〖圣罚〗";
+				str+=player.storage.sst_xuelun==3?`<span class="bluetext">③〖勇魂〗</span>`:"③〖勇魂〗";
+				return `${str}，发动上述技能时转换。每完成一轮转换，你将手牌补至手牌上限。`;
 			},
 			sst_liedui:player=>{
-				if(typeof player.storage.sst_liedui!="number") return "转换技，当你需要使用一张<span class=\"bluetext\">①【杀】</span>②【闪】③【桃】④【酒】⑤【无懈可击】时，你可以弃置一张牌视为使用之，若你弃置的牌与先前弃牌堆顶的牌颜色不同，你可以指定此转换技的状态。";
+				if(typeof player.storage.sst_liedui!="number") return `转换技，当你需要使用一张<span class="bluetext">①【杀】</span>②【闪】③【桃】④【酒】⑤【无懈可击】时，你可以弃置一张牌视为使用之，若你弃置的牌与先前弃牌堆顶的牌颜色不同，你可以指定此转换技的状态。`;
 				let str="转换技，当你需要使用一张";
-				str+=player.storage.sst_liedui==1?"<span class=\"bluetext\">"+"①【杀】"+"</span>":"①【杀】";
-				str+=player.storage.sst_liedui==2?"<span class=\"bluetext\">"+"②【闪】"+"</span>":"②【闪】";
-				str+=player.storage.sst_liedui==3?"<span class=\"bluetext\">"+"③【桃】"+"</span>":"③【桃】";
-				str+=player.storage.sst_liedui==4?"<span class=\"bluetext\">"+"④【酒】"+"</span>":"④【酒】";
-				str+=player.storage.sst_liedui==5?"<span class=\"bluetext\">"+"⑤【无懈可击】"+"</span>":"⑤【无懈可击】";
-				str+="时，你可以弃置一张牌视为使用之，若你弃置的牌与先前弃牌堆顶的牌颜色不同，你可以指定此转换技的状态。";
-				return str;
+				str+=player.storage.sst_liedui==1?`<span class="bluetext">①【杀】</span>`:"①【杀】";
+				str+=player.storage.sst_liedui==2?`<span class="bluetext">②【闪】</span>`:"②【闪】";
+				str+=player.storage.sst_liedui==3?`<span class="bluetext">③【桃】</span>`:"③【桃】";
+				str+=player.storage.sst_liedui==4?`<span class="bluetext">④【酒】</span>`:"④【酒】";
+				str+=player.storage.sst_liedui==5?`<span class="bluetext">⑤【无懈可击】</span>`:"⑤【无懈可击】";
+				return `${str}时，你可以弃置一张牌视为使用之，若你弃置的牌与先前弃牌堆顶的牌颜色不同，你可以指定此转换技的状态。`;
 			},
 			sst_qiangyi:player=>{
-				if(typeof player.storage.sst_qiangyi!="number") return "转换技，你使用【杀】时，你可以<span class=\"bluetext\">①于结算后视为使用一张【杀】</span>②令本阶段使用【杀】无距离和次数限制③于结算后摸两张牌，当前回合结束。";
+				if(typeof player.storage.sst_qiangyi!="number") return `转换技，你使用【杀】时，你可以<span class="bluetext">①于结算后视为使用一张【杀】</span>②令本阶段使用【杀】无距离和次数限制③于结算后摸两张牌，当前回合结束。`;
 				let str="转换技，你使用【杀】时，你可以";
-				str+=player.storage.sst_qiangyi==1?"<span class=\"bluetext\">"+"①于结算后视为使用一张【杀】"+"</span>":"①于结算后视为使用一张【杀】";
-				str+=player.storage.sst_qiangyi==2?"<span class=\"bluetext\">"+"②令本阶段使用【杀】无距离和次数限制"+"</span>":"②令本阶段使用【杀】无距离和次数限制";
-				str+=player.storage.sst_qiangyi==3?"<span class=\"bluetext\">"+"③于结算后摸两张牌，当前回合结束"+"</span>":"③于结算后摸两张牌，当前回合结束";
-				str+="。";
-				return str;
+				str+=player.storage.sst_qiangyi==1?`<span class="bluetext">①于结算后视为使用一张【杀】</span>`:"①于结算后视为使用一张【杀】";
+				str+=player.storage.sst_qiangyi==2?`<span class="bluetext">②令本阶段使用【杀】无距离和次数限制</span>`:"②令本阶段使用【杀】无距离和次数限制";
+				str+=player.storage.sst_qiangyi==3?`<span class="bluetext">③于结算后摸两张牌，当前回合结束</span>`:"③于结算后摸两张牌，当前回合结束";
+				return `${str}。`;
 			}
 		},
 		characterReplace:{},
@@ -12172,7 +12172,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_shenfa_info:"锁定技，你使用【杀】指定目标后，你令目标角色选择一项：此【杀】不可被响应，或此【杀】伤害+1。",
 			sst_shenwu:"神悟",
 			sst_shenwu_info:"锁定技，结束阶段，若你本回合内未造成过伤害，你摸一张牌，然后若〖神罚〗不为最高级，你减1点体力上限，升级〖神罚〗。",
-			sst_shenwu_append:"<span style=\"font-family: LXGWWenKai\">*〖神罚〗二级：改为由自己选择一项效果。三级：改为同时具有两种效果。</span>",
+			sst_shenwu_append:`<span style="font-family: LXGWWenKai">*〖神罚〗二级：改为由自己选择一项效果。三级：改为同时具有两种效果。</span>`,
 			sst_shenwu_faq:"*",
 			sst_shenwu_faq_info:"〖神罚〗二级：改为由自己选择一项效果。三级：改为同时具有两种效果。",
 			sst_qiongtu:"茕途",
@@ -12195,28 +12195,28 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_shunxing_draw:"摸牌",
 			sst_shunxing_use:"出牌",
 			sst_shunxing_info:"锁定技，弃牌阶段结束时，若你于此阶段弃置了牌，你废除一个阶段，然后将场上一张装备移动到你的装备区，否则你恢复一个阶段。",
-			sst_shunxing_append:"<span style=\"font-family: LXGWWenKai\">*可废除/恢复阶段：摸牌阶段〖影流〗、出牌阶段〖影流〗、摸牌阶段、出牌阶段。</span>",
+			sst_shunxing_append:`<span style="font-family: LXGWWenKai">*可废除/恢复阶段：摸牌阶段〖影流〗、出牌阶段〖影流〗、摸牌阶段、出牌阶段。</span>`,
 			sst_shunxing_faq:"*",
 			sst_shunxing_faq_info:"可废除/恢复阶段：摸牌阶段〖影流〗、出牌阶段〖影流〗、摸牌阶段、出牌阶段。",
 			sst_shenpan:"审判",
 			sst_shenpan_animation:"审判",
-			sst_shenpan_info:"你使用杀或普通锦囊牌指定唯一目标后，你可以判定，若判定结果：<br>\
-				为1，你失去1点体力；<br>\
-				为2，你弃置一张牌；<br>\
-				为3，此牌不可响应；<br>\
-				为4，你对其造成1点伤害；<br>\
-				为5，你对其造成1点雷电伤害；<br>\
-				为6，你对其造成1点火焰伤害；<br>\
-				为7，你回复1点体力；<br>\
-				为8，你令其翻面；<br>\
-				为9，你对其造成3点伤害。",
+			sst_shenpan_info:`你使用杀或普通锦囊牌指定唯一目标后，你可以判定，若判定结果：<br>
+				为1，你失去1点体力；<br>
+				为2，你弃置一张牌；<br>
+				为3，此牌不可响应；<br>
+				为4，你对其造成1点伤害；<br>
+				为5，你对其造成1点雷电伤害；<br>
+				为6，你对其造成1点火焰伤害；<br>
+				为7，你回复1点体力；<br>
+				为8，你令其翻面；<br>
+				为9，你对其造成3点伤害。`,
 			sst_qixiao:"奇嚣",
 			sst_qixiao2:"奇嚣",
 			sst_qixiao_info:"出牌阶段限一次，你可以失去1点体力，视为对一名角色使用火【杀】（不受使用次数限制，不计入使用次数）。你每以此法造成伤害后，摸一张牌。",
 			sst_xuansha:"喧杀",
 			sst_xuansha_effect:"喧杀",
 			sst_xuansha_info:"觉醒技，准备阶段，若你的体力值为1，你加1点体力上限，然后修改〖奇嚣〗描述，且本回合你的手牌均视为【桃】。",
-			sst_xuansha_append:"<span style=\"font-family: LXGWWenKai\">*“一”修改为“两”，“1”修改为“2”，“两名角色”修改为“至多两名角色”。</span>",
+			sst_xuansha_append:`<span style="font-family: LXGWWenKai">*“一”修改为“两”，“1”修改为“2”，“两名角色”修改为“至多两名角色”。</span>`,
 			sst_xuansha_faq:"*",
 			sst_xuansha_faq_info:"“一”修改为“两”，“1”修改为“2”，“两名角色”修改为“至多两名角色”。",
 			sst_yingji:"鹰击",
@@ -12258,7 +12258,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_xinghuo2:"星火",
 			sst_xinghuo_info:"其他角色死亡后，其可以令你摸一张牌或回复1点体力。",
 			sst_badao:"霸岛",
-			sst_badao_info:"准备阶段，你可以获得一名其他角色区域内的一张牌，然后攻击范围内有你的角色可以依次以你为目标使用一张基本牌。",
+			sst_badao_info:"准备阶段，你可以获得一名其他角色区域内的一张牌，然后攻击范围内包含你的角色可以依次以你为目标使用一张基本牌。",
 			sst_jinjia:"金甲",
 			sst_jinjia_info:"锁定技，每当你受到1点伤害时，你令此伤害减1，若此前你于本回合以此法减少过伤害，你翻面，失去〖金甲〗。",
 			sst_baochui:"爆锤",
@@ -12393,7 +12393,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_shishi_info:"锁定技，结束阶段，若你未受伤，你弃置一名角色的一张牌；若你已受伤，你视为使用一张【杀】，若此【杀】未造成伤害，你将武将牌变更为【时光的笛音·林克】 。",
 			sst_jiamian:"假面",
 			sst_jiamian_info:"此武将牌登场时，你获得一张武将牌置于一旁，称为“假面”。你可以弃置一张“假面”，发动场上与“假面”同势力角色的一个没有技能标签的技能，然后获得一张新的“假面”。",
-			sst_jiamian_append:"<span style=\"font-family: LXGWWenKai\">*斗势力或神势力的“假面”视为与任意角色同势力。</span>",
+			sst_jiamian_append:`<span style="font-family: LXGWWenKai">*斗势力或神势力的“假面”视为与任意角色同势力。</span>`,
 			sst_jiamian_faq:"*",
 			sst_jiamian_faq_info:"斗势力或神势力的“假面”视为与任意角色同势力。",
 			sst_shisu:"时溯",
@@ -12493,7 +12493,9 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_powei_info:"摸牌阶段，你可以令摸牌数-1（若场上已受伤角色超过一半，改为令摸牌数-2），然后亮出牌堆顶的等量牌且可以使用之（不能指定自己为目标）。你重复此流程直到你没有以此法使用牌。",
 			sst_bianshe:"编设",
 			sst_bianshe_info:"锁定技，每轮游戏开始时，你选择以下任意两个技能，本轮内视为拥有之。",
-			sst_bianshe_append:"<span style=\"font-family: LXGWWenKai\">〖秘拳〗你可以跳过摸牌阶段，然后对攻击范围内一名角色造成1点伤害。<br>〖秘剑〗出牌阶段开始时，你可以摸一张牌，然后你可以使用一张牌。<br>〖秘枪〗你的攻击范围视为无限。</span>",
+			sst_bianshe_append:`<span style="font-family: LXGWWenKai">〖秘拳〗你可以跳过摸牌阶段，然后对攻击范围内一名角色造成1点伤害。<br>
+				〖秘剑〗出牌阶段开始时，你可以摸一张牌，然后你可以使用一张牌。<br>
+				〖秘枪〗你的攻击范围视为无限。</span>`,
 			sst_miquan:"秘拳",
 			sst_miquan_info:"你可以跳过摸牌阶段，然后对攻击范围内一名角色造成1点伤害。",
 			sst_mijian:"秘剑",
@@ -12501,7 +12503,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_miqiang:"秘枪",
 			sst_miqiang_info:"你的攻击范围视为无限。",
 			sst_qiaoqi:"巧器",
-			sst_qiaoqi_bg:"<span class=\"bluetext\">辎</span>",
+			sst_qiaoqi_bg:`<span class="bluetext">辎</span>`,
 			sst_qiaoqi2:"巧器·木牛",
 			sst_qiaoqi2_info:"将一张手牌扣置于你装备区里的“巧器”牌下，然后可以将此装备移动到一名其他角色的装备区里。",
 			sst_qiaoqi4:"巧器",
@@ -12510,7 +12512,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_fumo:"附魔",
 			sst_fumo2:"附魔",
 			sst_fumo3:"附魔",
-			sst_fumo_info:"锁定技，若你的装备区内有：<br>武器牌，你可以指定你造成伤害（不得为连环伤害）的属性；<br>防具牌，攻击范围内没有你的角色不能对你造成伤害；<br>坐骑牌，坐骑数值翻倍；<br>宝物牌，〖巧器〗无次数限制。",
+			sst_fumo_info:"锁定技，若你的装备区内有：<br>武器牌，你可以指定你造成伤害（不得为连环伤害）的属性；<br>防具牌，攻击范围内不包含你的角色不能对你造成伤害；<br>坐骑牌，坐骑数值翻倍；<br>宝物牌，〖巧器〗无次数限制。",
 			sst_longbo:"龙搏",
 			sst_longbo_info:"你使用红色牌对上X家、使用黑色牌对下X家无次数限制；你使用牌无距离限制。（X为存活玩家数的一半且向上取整）",
 			sst_fengcu:"凤蹴",
@@ -12539,21 +12541,18 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_jiliu:"激流",
 			sst_jiliu_effect:"激流",
 			sst_jiliu_info:"锁定技，当你造成伤害后，你摸X张牌（X为与你距离1以内的角色数），本回合你计算与其他角色距离-1，然后你失去〖激流〗，获得〖茂盛〗。",
-			sst_jiliu_append:"<span style=\"font-family: LXGWWenKai\">"+
-			"〖茂盛〗锁定技，当你使用或打出牌时，令至多X名角色横置（已横置的角色改为弃置其一张牌），然后你失去〖茂盛〗，获得〖猛火〗。（X为与你距离1以内的角色数）<br>\
-				〖猛火〗锁定技，你造成的伤害均视为火焰伤害；当你使用【决斗】时，你失去一点体力，此决斗造成的伤害+1；当一名角色因你造成的伤害进入濒死状态时，你失去〖猛火〗，获得〖激流〗。</span>",
+			sst_jiliu_append:`<span style="font-family: LXGWWenKai">〖茂盛〗锁定技，当你使用或打出牌时，令至多X名角色横置（已横置的角色改为弃置其一张牌），然后你失去〖茂盛〗，获得〖猛火〗。（X为与你距离1以内的角色数）<br>
+				〖猛火〗锁定技，你造成的伤害均视为火焰伤害；当你使用【决斗】时，你失去一点体力，此决斗造成的伤害+1；当一名角色因你造成的伤害进入濒死状态时，你失去〖猛火〗，获得〖激流〗。</span>`,
 			sst_maosheng:"茂盛",
 			sst_maosheng_info:"锁定技，当你使用或打出牌时，令至多X名角色横置（已横置的角色改为弃置其一张牌），然后你失去〖茂盛〗，获得〖猛火〗。（X为与你距离1以内的角色数）",
-			sst_maosheng_append:"<span style=\"font-family: LXGWWenKai\">"+
-			"〖猛火〗锁定技，你造成的伤害均视为火焰伤害；当你使用【决斗】时，你失去一点体力，此决斗造成的伤害+1；当一名角色因你造成的伤害进入濒死状态时，你失去〖猛火〗，获得〖激流〗。<br>\
-				〖激流〗锁定技，当你造成伤害后，你摸X张牌（X为与你距离1以内的角色数），本回合你计算与其他角色距离-1，然后你失去〖激流〗，获得〖茂盛〗。</span>",
+			sst_maosheng_append:`<span style="font-family: LXGWWenKai">〖猛火〗锁定技，你造成的伤害均视为火焰伤害；当你使用【决斗】时，你失去一点体力，此决斗造成的伤害+1；当一名角色因你造成的伤害进入濒死状态时，你失去〖猛火〗，获得〖激流〗。<br>
+				〖激流〗锁定技，当你造成伤害后，你摸X张牌（X为与你距离1以内的角色数），本回合你计算与其他角色距离-1，然后你失去〖激流〗，获得〖茂盛〗。</span>`,
 			sst_menghuo:"猛火",
 			sst_menghuo2:"猛火",
 			sst_menghuo3:"猛火",
 			sst_menghuo_info:"锁定技，你造成的伤害均视为火焰伤害；当你使用【决斗】时，你失去一点体力，此决斗造成的伤害+1；当一名角色因你造成的伤害进入濒死状态时，你失去〖猛火〗，获得〖激流〗。",
-			sst_menghuo_append:"<span style=\"font-family: LXGWWenKai\">"+
-			"〖激流〗锁定技，当你造成伤害后，你摸X张牌（X为与你距离1以内的角色数），本回合你计算与其他角色距离-1，然后你失去〖激流〗，获得〖茂盛〗。<br>\
-				〖茂盛〗锁定技，当你使用或打出牌时，令至多X名角色横置（已横置的角色改为弃置其一张牌），然后你失去〖茂盛〗，获得〖猛火〗。（X为与你距离1以内的角色数）</span>",
+			sst_menghuo_append:`<span style="font-family: LXGWWenKai">〖激流〗锁定技，当你造成伤害后，你摸X张牌（X为与你距离1以内的角色数），本回合你计算与其他角色距离-1，然后你失去〖激流〗，获得〖茂盛〗。<br>
+				〖茂盛〗锁定技，当你使用或打出牌时，令至多X名角色横置（已横置的角色改为弃置其一张牌），然后你失去〖茂盛〗，获得〖猛火〗。（X为与你距离1以内的角色数）</span>`,
 			sst_congyun:"丛云",
 			sst_congyun_info:"出牌阶段限一次，你可以视为使用一张【火攻】。",
 			sst_fuzhuo:"祓濯",
@@ -12593,20 +12592,20 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_gongcun_info:"一名角色的每回合限一次，当与其相邻的角色正面朝上失去♥牌后，其可以交给该角色一张手牌。",
 			sst_jichang:"饥肠",
 			sst_jichang_effect:"饥肠",
-			sst_jichang_info:"锁定技，准备阶段，你弃置所有手牌，然后你设定本回合的以下数值：<br>\
-				1. 摸牌阶段额外摸牌数；<br>\
-				2. 攻击范围增加数；<br>\
-				3. 出牌阶段额外使用【杀】次数；<br>\
-				三项数值相加须等于上述弃置牌的类别数+4。",
+			sst_jichang_info:`锁定技，准备阶段，你弃置所有手牌，然后你设定本回合的以下数值：<br>
+				1. 摸牌阶段额外摸牌数；<br>
+				2. 攻击范围增加数；<br>
+				3. 出牌阶段额外使用【杀】次数；<br>
+				三项数值相加须等于上述弃置牌的类别数+4。`,
 			sst_jiangshang:"奖赏",
 			sst_jiangshang_info:"锁定技，一张装备牌置入你的装备区时，你弃置之并摸两张牌。",
 			sst_xiongli:"凶戾",
 			sst_xiongli_animation:"凶戾",
-			sst_xiongli_info:"锁定技，每轮游戏开始时，你选择一个与上轮不同的条件：<br>\
-				1. 本轮造成伤害唯一最少的角色；<br>\
-				2. 体力唯一最少的角色；<br>\
-				3. 装备唯一最少的角色。<br>\
-				下一轮游戏开始你杀死该角色。",
+			sst_xiongli_info:`锁定技，每轮游戏开始时，你选择一个与上轮不同的条件：<br>
+				1. 本轮造成伤害唯一最少的角色；<br>
+				2. 体力唯一最少的角色；<br>
+				3. 装备唯一最少的角色。<br>
+				下一轮游戏开始你杀死该角色。`,
 			sst_nixi:"逆袭",
 			sst_nixi_info:"结束阶段，若你满足本轮〖凶戾〗的条件（可不为唯一），你可以对一名角色造成1点伤害并摸一张牌。",
 			sst_liedui:"列队",
@@ -12738,56 +12737,56 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_bayonetta:"Bayonetta"
 		},
 		help:{
-			"大乱桌斗":"<div style=\"margin:10px\">\
-					举荐\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						你亮出牌堆顶的一张牌，若此牌满足指定条件，你获得此牌，否则将此牌置入弃牌堆并重复此流程\
-					</li>\
-				</ul>\
-				<div style=\"margin:10px\">\
-					破军\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						你将目标的指定牌扣置于其武将牌上，回合结束时其获得武将牌上的这些牌\
-					</li>\
-				</ul>\
-				<div style=\"margin:10px\">\
-					提前执行回合\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						你执行一个额外回合，若如此做，本轮你的下一个非额外回合开始前，你取消之\
-					</li>\
-				</ul>\
-				<div style=\"margin:10px\">\
-					销毁\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						将一张牌永久移出游戏\
-					</li>\
-				</ul>\
-				<div style=\"margin:10px\">\
-					移除武将牌\
-				</div>\
-				<ul style=\"margin-top:0\">\
-					<li>\
-						计算机端会将武将替换为同势力同性别无技能的士兵，且不触发武将登场\
-					</li>\
-				</ul>"
+			"大乱桌斗":`<div style="margin:10px">
+					举荐
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						你亮出牌堆顶的一张牌，若此牌满足指定条件，你获得此牌，否则将此牌置入弃牌堆并重复此流程
+					</li>
+				</ul>
+				<div style="margin:10px">
+					破军
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						你将目标的指定牌扣置于其武将牌上，回合结束时其获得武将牌上的这些牌
+					</li>
+				</ul>
+				<div style="margin:10px">
+					提前执行回合
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						你执行一个额外回合，若如此做，本轮你的下一个非额外回合开始前，你取消之
+					</li>
+				</ul>
+				<div style="margin:10px">
+					销毁
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						将一张牌永久移出游戏
+					</li>
+				</ul>
+				<div style="margin:10px">
+					移除武将牌
+				</div>
+				<ul style="margin-top:0">
+					<li>
+						计算机端会将武将替换为同势力同性别无技能的士兵，且不触发武将登场
+					</li>
+				</ul>`
 		}
 	};
 	if(lib.device||lib.node){
 		for(const i in SST_STANDARD.character){
-			SST_STANDARD.character[i][4].push("ext:大乱桌斗/image/character/"+i+".png");
+			SST_STANDARD.character[i][4].push(`ext:大乱桌斗/image/character/${i}.png`);
 		}
 	}
 	else{
 		for(const i in SST_STANDARD.character){
-			SST_STANDARD.character[i][4].push("db:extension-大乱桌斗:image/character/"+i+".png");
+			SST_STANDARD.character[i][4].push(`db:extension-大乱桌斗:image/character/${i}.png`);
 		}
 	}
 	return SST_STANDARD;
