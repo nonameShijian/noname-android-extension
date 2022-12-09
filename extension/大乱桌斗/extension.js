@@ -411,7 +411,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 		},
 		precontent:data=>{
 			if(data.enable){
-				const VERSION="2.1.10";
+				const VERSION="2.1.11";
 				lib.superSmashTabletop=VERSION;
 				//CSS
 				lib.init.css(`${lib.assetURL}extension/大乱桌斗`,"extension");
@@ -968,7 +968,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				clear:true,
 				name:`<details>
 						<summary>
-							更新日志（2.1.10）
+							更新日志（2.1.11）
 						</summary>
 						<ol>
 							<li>
@@ -1024,8 +1024,8 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1.10",
-			changeLog:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>更新日志<rp>（</rp><rt>2.1.10</rt><rp>）</rp></ruby></h2>
+			version:"2.1.11",
+			changeLog:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>更新日志<rp>（</rp><rt>2.1.11</rt><rp>）</rp></ruby></h2>
 				<ol>
 					<li>
 						修复了一些小问题。

@@ -7,7 +7,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 		name:"sst_standard",
 		connect:true,
 		character:{
-			sst_mario:["male","sst_light",4,["sst_jueyi"],["type:neutral","primary:1","attack:1.6","defense:1.6"]],
+			sst_mario:["male","sst_light",4,["sst_jueyi"],["type:neutral","primary:10","attack:1,0.125,3","defense:1,0.125,3"]],
 			sst_link:["male","sst_light",4,["sst_qingyong"],["type:shield","primary:1.4","attack:1.9","defense:1.6"]],
 			sst_yoshi:["male","sst_light",4,["sst_tanshi"],["type:grab","primary:1.4","attack:1.6","defense:1.5"]],
 			sst_wario:["male","sst_dark",4,["sst_haoduo"],[]],
@@ -20,7 +20,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_rosalina:["female","sst_light",3,["sst_xingchen","sst_zhuansheng"],[]],
 			sst_zero_suit_samus:["female","sst_light",3,["sst_guangsuo","sst_qingying"],[]],
 			sst_luigi:["male","sst_light",4,["sst_que","sst_guiyun"],["type:grab","primary:4.2","attack:1.4","defense:1.2"]],
-			sst_bowser:["male","sst_dark",5,["sst_xiduo","sst_xiongao","sst_yujun"],["zhu","type:neutral","primary:2.7","attack:2.2","defense:1.9"]],
+			sst_bowser:["male","sst_dark",5,["sst_xiduo","sst_xiongao","sst_yujun"],["zhu","type:neutral","primary:20","attack:1,0.25,2","defense:1,0.25,2"]],
 			sst_peach:["female","sst_light",3,["sst_hongyan","sst_yice","sst_qiuyuan"],["zhu"]],
 			sst_byleth_female:["female","sst_light",3,["sst_potian","sst_shenjiao"],[]],
 			sst_byleth_male:["male","sst_light",4,["sst_yanchuan","sst_tianmai"],[]],
@@ -1783,6 +1783,11 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					check:button=>{
 						if(["wugu","zhulu_card","yiyi","lulitongxin","lianjunshengyan","diaohulishan"].contains(button.link[2])) return 0;
 						const player=_status.event.player;
+						if(player.countCards()<=(()=>{
+							const num=player.countUsed(null,true)+1;
+							if(_status.currentPhase!=player) return num+1;
+							return num+1;
+						})()) return 0;
 						if(player.countCards("hs",button.link[2])) return 0;
 						if(player.hasHistory("useCard",evt=>evt.skill=="sst_chengli_backup"&&get.name(evt.card)==button.link[2])) return 0;
 						let val=player.getUseValue({
@@ -1795,8 +1800,8 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					backup:links=>({
 						filterCard:true,
 						selectCard:()=>{
-							let num=_status.event.player.countUsed(null,true);
-							if(_status.currentPhase!=_status.event.player) num++;
+							const num=_status.event.player.countUsed(null,true)+1;
+							if(_status.currentPhase!=_status.event.player) return num+1;
 							return num+1;
 						},
 						popname:true,
@@ -1875,7 +1880,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 				unique:true,
 				zhuSkill:true,
 				logTarget:"player",
-				check:(event,player)=>get.damageEffect(event.player,player,player)+Math.cbrt(get.attitude(player,event.player)),
+				check:(event,player)=>get.damageEffect(event.player,player,player)+Math.cbrt(get.attitude(player,event.player))>0,
 				content:()=>{
 					"step 0"
 					trigger.player.damage(player,"nocard");
@@ -3409,7 +3414,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 					player.loseHp();
 					"step 2"
 					if(player.getDamagedHp()){
-						player.chooseTarget(player.getDamagedHp(),true,(card,player,target)=>player!=target&&target.countGainableCards(player,"hej")).set("ai",target=>{
+						player.chooseTarget(`暴征：获得${get.cnNumber(player.getDamagedHp())}名其他角色区域内的各一张牌，本回合内你可以将这些牌当作【杀】使用`,player.getDamagedHp(),true,(card,player,target)=>player!=target&&target.countGainableCards(player,"hej")).set("ai",target=>{
 							const player=_status.event.player;
 							let att=get.attitude(player,target);
 							if(att<0){
@@ -6908,7 +6913,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			//Young Link
 			sst_shishi:{
 				trigger:{player:"phaseJieshuBegin"},
-				filter:(event,player)=>(!player.isDamaged()&&game.hasPlayer(current=>current.countDiscardableCards(player,"he")))||(player.isDamaged()&&player.hasUseTarget({name:"sha",isCard:true})),
+				filter:(event,player)=>(!player.isDamaged()&&game.hasPlayer(current=>current.countDiscardableCards(player,"he")))||(player.isDamaged()&&player.hasUseTarget({name:"sha",isCard:true},false)),
 				forced:true,
 				content:()=>{
 					"step 0"
@@ -6958,6 +6963,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 							player.reinit(player.name,"sst_ocarina_of_time_link");
 							player.changeGroup("sst_light",false);
 							game.triggerEnter(player);
+							game.delayx();
 						}
 					});
 				}
@@ -12119,7 +12125,7 @@ game.import("character",(lib,game,ui,get,ai,_status)=>{
 			sst_xingchen:"星尘",
 			sst_xingchen_info:"每当你的手牌因弃置而进入弃牌堆前，你可以将这些牌任意分配给其他角色，然后当前回合角色摸一张牌。",
 			sst_zhuansheng:"转生",
-			sst_zhuansheng_info:"限定技，一名角色死亡前，你可以弃置你区域内的所有牌，令其变更武将牌，将体力上限调整至与新的武将牌相同，然后回复体力至上限的一半。",
+			sst_zhuansheng_info:"限定技，一名角色死亡前，你可以弃置你区域内的所有牌，令其改为变更武将牌，将体力上限调整至与新的武将牌相同，然后回复体力至上限的一半。",
 			sst_guangsuo:"光索",
 			sst_guangsuo2:"光索",
 			sst_guangsuo_info:"你使用【杀】结算完成后，你可以横置目标。你的回合内，已横置的其他角色不能使用或打出牌。",
