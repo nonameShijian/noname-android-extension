@@ -3206,6 +3206,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										var buttons = ui.create.div('.buttons', this.content);
 										if (zoom) buttons.classList.add('smallzoom');
 										this.buttons = this.buttons.concat(ui.create.buttons(item, 'player', buttons, noclick));
+									} else if (item[1] == 'textbutton') {
+										ui.create.textbuttons(item[0], this, noclick);
 									} else {
 										var buttons = ui.create.div('.buttons', this.content);
 										if (zoom) buttons.classList.add('smallzoom');
@@ -10109,10 +10111,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.17（Show-K修复版）',
-					'更新日期：2022-12-05',
-					'- 更新了最新的彩色卡牌。（感谢 七. 的帮助）',
-					'- 优化了所有图片素材。',
+					'当前版本：1.2.0.220114.18（Show-K修复版）',
+					'更新日期：2022-12-23',
+					'- 修复了不支持最新推出的textbutton的异常。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
