@@ -1313,7 +1313,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"step 1"
 							if (event.result == 'ai') {
 								game.check();
-								if (ai.basic.chooseTarget(event.ai) || forced) {
+								if ((ai.basic.chooseTarget(event.ai) || forced) && (!event.filterOk || event.filterOk())) {
 									ui.click.ok();
 								} else {
 									ui.click.cancel();
@@ -1462,7 +1462,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"step 1"
 							if (event.result == 'ai') {
 								game.check();
-								if (ai.basic.chooseCard(event.ai) || forced) {
+								if ((ai.basic.chooseCard(event.ai) || forced) && (!event.filterOk || event.filterOk())) {
 									ui.click.ok();
 								} else if (event.skill) {
 									var skill = event.skill;
@@ -1506,6 +1506,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								} else {
 									event.done = player.discard(event.result.cards);
 								}
+								event.done.discarder = player;
 							}
 							if (event.dialog && event.dialog.close) event.dialog.close();
 						};
@@ -1598,7 +1599,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (ok) {
 									ui.click.ok();
 								} else if (ai.basic.chooseCard(event.ai1 || event.ai)) {
-									if (ai.basic.chooseTarget(event.ai2)) {
+									if (ai.basic.chooseTarget(event.ai2) && (!event.filterOk || event.filterOk())) {
 										ui.click.ok();
 										event._aiexcludeclear = true;
 									} else {
@@ -1868,7 +1869,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (ok) {
 									ui.click.ok();
 								} else if (ai.basic.chooseCard(event.ai1)) {
-									if (ai.basic.chooseTarget(event.ai2)) {
+									if (ai.basic.chooseTarget(event.ai2) && (!event.filterOk || event.filterOk())) {
 										ui.click.ok();
 										event._aiexcludeclear = true;
 									} else {
@@ -5238,7 +5239,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								}
 							}
-							if (ok && auto && (auto_confirm || (skillinfo && skillinfo.direct)) && (!_status.mousedragging || !_status.mouseleft) && !_status.mousedown && !_status.touchnocheck) {
+							if (ok && (!event.filterOk || event.filterOk()) && auto && (auto_confirm || (skillinfo && skillinfo.direct)) && (!_status.mousedragging || !_status.mouseleft) && !_status.mousedown && !_status.touchnocheck) {
 								if (ui.confirm) {
 									if (!skillinfo || !skillinfo.preservecancel) {
 										ui.confirm.close();
@@ -5259,7 +5260,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (!_status.noconfirm && !_status.event.noconfirm) {
 									if (!_status.mousedown || _status.mouseleft) {
 										var str = '';
-										if (ok) str += 'o';
+										if (ok && (!event.filterOk || event.filterOk())) str += 'o';
 										if (!event.forced && !event.fakeforce && get.noSelected()) str += 'c';
 										ui.create.confirm(str);
 									}
@@ -10111,9 +10112,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.18（Show-K修复版）',
-					'更新日期：2022-12-23',
-					'- 修复了不支持最新推出的textbutton的异常。',
+					'当前版本：1.2.0.220114.19（Show-K修复版）',
+					'更新日期：2023-01-24',
+					'- 新年快乐！',
+					'- 修复了不支持最新推出的filterOk的异常（举例：神张飞〖巡使〗）。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10133,7 +10135,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.17",
+			version: "1.2.0.220114.19",
 		},
 		files: {
 			"character": [],
