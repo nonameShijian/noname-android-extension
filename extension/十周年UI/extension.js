@@ -4958,10 +4958,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											var tempname = '';
 											if (cards[i].suit != cardsuit) {
 												var suitData = {
-													'heart': "<span style='color:red;'>♥</span>",
-													'diamond': "<span style='color:red;'>♦</span>",
-													'spade': "<span style='color:black;'>♠</span>",
-													'club': "<span style='color:black;'>♣</span>",
+													'heart': "<span style='color:red;text-shadow:black 0 0 3px;'>♥</span>",
+													'diamond': "<span style='color:red;text-shadow:black 0 0 3px;'>♦</span>",
+													'spade': "<span style='color:black;text-shadow:black 0 0 3px;'>♠</span>",
+													'club': "<span style='color:black;text-shadow:black 0 0 3px;'>♣</span>",
+													'none': "<span style='color:white;text-shadow:black 0 0 3px;'>◎</span>"
 												};
 												tempname += suitData[cardsuit];
 											}
