@@ -19,14 +19,14 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 					legend:[
 						"ymk_isabelle",
 						"sst_sans",
-						"sst_massy"
+						"sst_massy",
+						"sst_marioraz"
 					],
 					epic:[
 						"sst_dr_mario",
 						"sst_palutena",
 						"sst_rosalina",
 						"sst_zero_suit_samus",
-						"sst_peach",
 						"sst_byleth_female",
 						"sst_byleth_male",
 						"sst_mario_not_mary",
@@ -76,14 +76,14 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 						"sst_lucina",
 						"ymk_tianyi",
 						"sst_olimar",
-						"sst_marioraz",
 						"sst_piranha_plant",
 						"alz_yuri_kozukata",
 						"sst_ganondorf",
 						"sst_r_o_b",
 						"sst_bayonetta",
-						"nnk_decidueye",
-						"nnk_machamp"
+						"nnk_machamp",
+						"ska_rabbid_rosalina",
+						"ska_tails"
 					],
 					rare:[
 						"sst_mario",
@@ -158,21 +158,26 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 						"sst_roy",
 						"ska_daroach",
 						"sst_inkling",
-						"sst_wii_fit_trainer"
+						"sst_wii_fit_trainer",
+						"nnk_decidueye",
+						"sst_peach",
+						"ska_edge",
+						"ska_warden",
+						"ska_rabbid_peach"
 					],
 					junk:[]
 				}
 			};
-			for(const i in RANK){
-				if(i=="rarity"){
-					for(const j in RANK[i]){
-						if(!Array.isArray(lib.rank[i][j])) lib.rank[i][j]=[];
-						lib.rank[i][j].addArray(RANK[i][j]);
+			for(const rank in RANK){
+				if(rank=="rarity"){
+					for(const rarity in RANK[rank]){
+						if(!Array.isArray(lib.rank[rank][rarity])) lib.rank[rank][rarity]=[];
+						lib.rank[rank][rarity].addArray(RANK[rank][rarity]);
 					}
 				}
 				else{
-					if(!Array.isArray(lib.rank[i])) lib.rank[i]=[];
-					lib.rank[i].addArray(RANK[i]);
+					if(!Array.isArray(lib.rank[rank])) lib.rank[rank]=[];
+					lib.rank[rank].addArray(RANK[rank]);
 				}
 			}
 			// 下载进度条
@@ -411,7 +416,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 		},
 		precontent:data=>{
 			if(data.enable){
-				const VERSION="2.1.11";
+				const VERSION="2.1.12";
 				lib.superSmashTabletop=VERSION;
 				//CSS
 				lib.init.css(`${lib.assetURL}extension/大乱桌斗`,"extension");
@@ -588,17 +593,10 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								},
 								judgeCard:()=>{
 									'step 0'
-									if(typeof event.card=='string'){
-										event.card=game.createCard(event.card,'','');
-										event.card._destroy=true;
-										event.card.expired=true;
-									}
-									'step 1'
-									//player.lose(event.card,'visible',ui.ordering);
-									player.$phaseJudge(event.card);
+									player.$phaseJudge(card);
 									event.cancelled=false;
 									event.trigger('judgeCard');
-									event.cardName=event.card.viewAs||event.card.name;
+									event.cardName=card.viewAs||card.name;
 									player.popup(event.cardName,'thunder');
 									if(!lib.card[event.cardName].effect){
 										game.delay();
@@ -608,15 +606,25 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 										game.delay();
 										event.nojudge=true;
 									}
+									'step 1'
+									if(!event.cancelled&&!event.nojudge) player.judge(card);
 									'step 2'
-									if(!event.cancelled&&!event.nojudge) player.judge(event.card);
-									'step 3'
-									if(event.cancelled&&!event.direct){
+									if(event.excluded){
+										delete event.excluded;
+									}
+									else if(event.cancelled&&!event.direct){
 										if(lib.card[event.cardName].cancel){
-											const next=game.createEvent(event.cardName+'Cancel');
+											const next=game.createEvent(`${event.cardName}Cancel`);
 											next.setContent(lib.card[event.cardName].cancel);
-											next.card=event.card;
-											next.cards=[event.card];
+											next.cards=[card];
+											if(!card.viewAs){
+												next.card=get.autoViewAs(card);
+												next.card.expired=card.expired;
+											}
+											else{
+												next.card=get.autoViewAs({name:event.cardName},next.cards);
+												next.card.expired=card.expired;
+											}
 											next.player=player;
 										}
 									}
@@ -624,8 +632,15 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 										const next=game.createEvent(event.cardName);
 										next.setContent(lib.card[event.cardName].effect);
 										next._result=result;
-										next.card=event.card;
-										next.cards=[event.card];
+										next.cards=[card];
+										if(!card.viewAs){
+											next.card=get.autoViewAs(card);
+											next.card.expired=card.expired;
+										}
+										else{
+											next.card=get.autoViewAs({name:event.cardName},next.cards);
+											next.card.expired=card.expired;
+										}
 										next.player=player;
 									}
 									ui.clear();
@@ -728,7 +743,14 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								judgeCard:function(card){
 									const next=game.createEvent('judgeCard');
 									next.player=this;
-									next.card=card;
+									if(get.itemtype(card)=='card'){
+										next.card=card;
+									}
+									else{
+										next.card=game.createCard(card,'','');
+										next.card._destroy=true;
+										next.card.expired=true;
+									}
 									next.setContent('judgeCard');
 									return next;
 								},
@@ -740,7 +762,6 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 								}
 							}
 						},
-						skill:{},
 						groupnature:{
 							sst_light:'metal',
 							sst_dark:'water',
@@ -750,13 +771,6 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 						}
 					}
 					const GAME={
-						updateDiscardpile:()=>{
-							if(ui.discardPile){
-								_status.discardPile.length=0;
-								_status.discardPile.push(...Array.from(ui.discardPile.childNodes));
-							}
-							game.broadcast(discardPile=>_status.discardPile=discardPile,_status.discardPile);
-						},
 						findPlayersByPlayerid:playerid=>{
 							if(Array.isArray(playerid)){
 								return game.filterPlayer2(current=>playerid.contains(current.playerid));
@@ -968,7 +982,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 				clear:true,
 				name:`<details>
 						<summary>
-							更新日志（2.1.11）
+							更新日志（2.1.12）
 						</summary>
 						<ol>
 							<li>
@@ -995,7 +1009,7 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			},
 			intro:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>大乱桌斗LITE<rp>（</rp><rt>Super Smash Tabletop LITE</rt><rp>）</rp></ruby></h2>
 				<p>
-					《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于<i>任天堂</i>、<i>Sora</i>和其他相关公司。
+					《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于任天堂、Sora和其他相关公司。
 				</p>
 				<p>
 					<details>
@@ -1024,8 +1038,8 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 			author:"Show-K",
 			diskURL:"https://github.com/Show-K/noname",
 			forumURL:"https://unitedrhythmized.club/html/work/game/super-smash-tabletop.html",
-			version:"2.1.11",
-			changeLog:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>更新日志<rp>（</rp><rt>2.1.11</rt><rp>）</rp></ruby></h2>
+			version:"2.1.12",
+			changeLog:`<h2><img style="float: left; height: 1.5em; margin-right: 5px;" src="${lib.assetURL}extension/大乱桌斗/super_smash_tabletop.png"><ruby>更新日志<rp>（</rp><rt>2.1.12</rt><rp>）</rp></ruby></h2>
 				<ol>
 					<li>
 						修复了一些小问题。
