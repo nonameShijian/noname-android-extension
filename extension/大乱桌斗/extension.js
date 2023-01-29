@@ -989,7 +989,6 @@ game.import("extension",(lib,game,ui,get,ai,_status)=>{
 							</li>
 						</ol>
 					</details>`,
-				intro:"查看更新日志",
 				clear:true,
 				nopointer:true
 			}
