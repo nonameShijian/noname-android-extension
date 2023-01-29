@@ -101,6 +101,8 @@ Promise.all(promiseList).then(() => {
 	// fs.writeFileSync(__dirname + '/extension/大乱桌斗/updateFiles.js', `${extData.大乱桌斗.files.filter(v => v != 'extension/大乱桌斗/updateFiles.js').map(v => `"${v.slice(15)}"`).join(',\n')}`);
 	// console.log(extData.天牢令.files);
 	// fs.writeFileSync(__dirname + '/extension/天牢令/updateFiles.js', `${extData.天牢令.files.filter(v => v != 'extension/天牢令/updateFiles.js').map(v => `"${v.slice(14)}"`).join(',\n')}`);
+	// console.log(extData.桌面大战.files);
+	// fs.writeFileSync(__dirname + '/extension/桌面大战/updateFiles.js', `${extData.桌面大战.files.filter(v => v != 'extension/桌面大战/updateFiles.js').map(v => `"${v.slice(15)}"`).join(',\n')}`);
 	fs.writeFileSync(`${__dirname}/update.js`, `window["noname_android_extension"] = ${JSON.stringify(extData, null, '\t')};`);
 });
 

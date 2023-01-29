@@ -2828,7 +2828,7 @@ window["noname_android_extension"] = {
 	"大乱桌斗": {
 		"version": "2.1.12",
 		"author": "Show-K",
-		"intro": "《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于<i>任天堂</i>、<i>Sora</i>和其他相关公司。",
+		"intro": "《大乱桌斗LITE》（原《大乱斗杀》）是《任天堂明星大乱斗》同人无名杀扩展，由《大乱桌斗》同人游戏移植而来，不隶属于任天堂、Sora和其他相关公司。",
 		"files": [
 			"extension/大乱桌斗/extension.css",
 			"extension/大乱桌斗/extension.js",
@@ -3068,5 +3068,32 @@ window["noname_android_extension"] = {
 			"extension/合纵抗秦/zhenlongchangjian.jpg"
 		],
 		"size": "5.00MB"
+	},
+	"桌面大战": {
+		"version": "1",
+		"author": "Show-K",
+		"intro": "一个基于《桌面大战》（《火柴人VS动画师》）系列的同人《无名杀》扩展，不隶属于Alan Becker等相关创作者。",
+		"files": [
+			"extension/桌面大战/animation_vs_noname.webp",
+			"extension/桌面大战/extension.css",
+			"extension/桌面大战/extension.js",
+			"extension/桌面大战/LICENSE",
+			"extension/桌面大战/README.md",
+			"extension/桌面大战/update.js",
+			"extension/桌面大战/audio/effect/avn_character_unlocked.mp3",
+			"extension/桌面大战/character/animation_vs_noname.js",
+			"extension/桌面大战/image/background/avn_the_second_coming_the_chosen_one_s_return_bg.webp",
+			"extension/桌面大战/image/character/avn_alan_becker.webp",
+			"extension/桌面大战/image/character/avn_blue.webp",
+			"extension/桌面大战/image/character/avn_green.webp",
+			"extension/桌面大战/image/character/avn_red.webp",
+			"extension/桌面大战/image/character/avn_the_chosen_one.webp",
+			"extension/桌面大战/image/character/avn_the_dark_lord.webp",
+			"extension/桌面大战/image/character/avn_the_second_coming.webp",
+			"extension/桌面大战/image/character/avn_the_second_coming_the_chosen_one_s_return.webp",
+			"extension/桌面大战/image/character/avn_victim.webp",
+			"extension/桌面大战/image/character/avn_yellow.webp"
+		],
+		"size": "4.58MB"
 	}
 };
