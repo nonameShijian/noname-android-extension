@@ -1,13 +1,16 @@
 (() => ({
 	// 扩展版本
-	version: "2.1.11",
+	version: "2.1.12",
 	// 扩展的上一个版本
-	oldversion: "2.1.10",
+	oldversion: "2.1.11",
 	// 更新内容汇总
 	changeLog: "1. 修复了一些小问题。",
 	// 本次更新的所有文件(不包括文件夹)
 	updateFiles: [
+		"extension.css",
 		"extension.js",
+		"LICENSE",
+		"README.md",
 		"update.js",
 		"card/sst_standard.js",
 		"character/sst_extra.js",
@@ -40,6 +43,8 @@
 	allFiles: [
 		"extension.css",
 		"extension.js",
+		"LICENSE",
+		"README.md",
 		"super_smash_tabletop.png",
 		"update.js",
 		"card/sst_standard.js",

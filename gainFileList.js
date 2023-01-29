@@ -8,11 +8,11 @@ const data = require('./extData');
  */
 function getFileListSync(path, callback) {
 	let files = [], folders = [];
-	path = __dirname + '/' + path;
+	path = `${__dirname}/${path}`;
 	let result = fs.readdirSync(path);
 	for (let i = 0; i < result.length; i++) {
 		if (result[i][0] != '.' && result[i][0] != '_') {
-			if (fs.statSync(path + '/' + result[i]).isDirectory()) {
+			if (fs.statSync(`${path}/${result[i]}`).isDirectory()) {
 				folders.push(result[i]);
 			} else {
 				files.push(result[i]);
@@ -33,7 +33,7 @@ async function getExtFiles(ext) {
 
 		function callback(name, folders, files) {
 			for (let i = 0; i < files.length; i++) {
-				const p = name + '/' + files[i];
+				const p = `${name}/${files[i]}`;
 				size += getSize(p);
 				list.push(p);
 			}
@@ -44,7 +44,7 @@ async function getExtFiles(ext) {
 			}
 		}
 		for (let i = 0; i < filesList.length; i++) {
-			const p = ext + '/' + files[i];
+			const p = `${ext}/${files[i]}`;
 			size += getSize(p);
 			list.push(p);
 		}
@@ -62,20 +62,20 @@ const parseSize = function (limit) {
 	let size = "";
 	if (limit < 1 * 1024) {
 		// 小于1KB，则转化成B
-		size = limit.toFixed(2) + "B"
+		size = `${limit.toFixed(2)}B`;
 	} else if (limit < 1 * 1024 * 1024) {
 		// 小于1MB，则转化成KB
-		size = (limit / 1024).toFixed(2) + "KB"
+		size = `${(limit / 1024).toFixed(2)}KB`;
 	} else if (limit < 1 * 1024 * 1024 * 1024) {
 		// 小于1GB，则转化成MB
-		size = (limit / (1024 * 1024)).toFixed(2) + "MB"
+		size = `${(limit / (1024 * 1024)).toFixed(2)}MB`;
 	} else {
 		// 其他转化成GB
-		size = (limit / (1024 * 1024 * 1024)).toFixed(2) + "GB"
+		size = `${(limit / (1024 * 1024 * 1024)).toFixed(2)}GB`;
 	}
 
 	// 转成字符串
-	let sizeStr = size + "";
+	let sizeStr = `${size}`;
 	// 获取小数点处的索引
 	let index = sizeStr.indexOf(".");
 	// 获取小数点后两位的值
@@ -90,7 +90,7 @@ const parseSize = function (limit) {
 const extData = data.extension;
 
 const promiseList = Object.keys(extData).map(async name => {
-	const { list, size } = await getExtFiles('extension/' + name);
+	const { list, size } = await getExtFiles(`extension/${name}`);
 	extData[name].files = list;
 	extData[name].size = parseSize(size);
 });
@@ -101,7 +101,7 @@ Promise.all(promiseList).then(() => {
 	// fs.writeFileSync(__dirname + '/extension/大乱桌斗/updateFiles.js', `${extData.大乱桌斗.files.filter(v => v != 'extension/大乱桌斗/updateFiles.js').map(v => `"${v.slice(15)}"`).join(',\n')}`);
 	// console.log(extData.天牢令.files);
 	// fs.writeFileSync(__dirname + '/extension/天牢令/updateFiles.js', `${extData.天牢令.files.filter(v => v != 'extension/天牢令/updateFiles.js').map(v => `"${v.slice(14)}"`).join(',\n')}`);
-	fs.writeFileSync(__dirname + '/update.js', `window["noname_android_extension"] = ${JSON.stringify(extData, null, '\t')};`);
+	fs.writeFileSync(`${__dirname}/update.js`, `window["noname_android_extension"] = ${JSON.stringify(extData, null, '\t')};`);
 });
 
 // node gainFileList.js
