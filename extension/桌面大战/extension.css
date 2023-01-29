@@ -1,0 +1,72 @@
+progress.zxgxProgress {
+	width: 75%;
+	height: 10px;
+	border: 2px solid;
+	border-radius: 15px;
+	vertical-align: middle;
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+progress.zxgxProgress::-webkit-progress-bar {
+	background: rgb(239, 239, 239);
+	border-radius: 0.2rem;
+}
+
+progress.zxgxProgress::-webkit-progress-value {
+	border-radius: 0.2rem;
+	background: rgb(0, 117, 255);
+}
+
+@keyframes avn-pulse {
+	0% {
+		transform: scale(1);
+	}
+
+	20% {
+		transform: scale(1.0625);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes avn-strong-pulse {
+	0% {
+		transform: scale(1);
+	}
+
+	20% {
+		transform: scale(1.125);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+body {
+	transform-origin: center;
+}
+
+.avn-pulse {
+	animation: avn-pulse 1s ease-in-out;
+}
+
+.avn-strong-pulse {
+	animation: avn-strong-pulse 1s ease-in-out;
+}
+
+#avn-pre-anomaly {
+	box-shadow: inset 0 0 200px 200px #d8eec2;
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	transition-duration: 180s;
+	width: 100%;
+	z-index: 100;
+}
