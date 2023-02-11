@@ -1,19 +1,19 @@
 window["noname_android_extension"] = {
 	"在线更新": {
-		"version": "1.46",
+		"version": "1.49",
 		"author": "诗笺",
-		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。",
+		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。<br>注: 第一次安装游戏请解压完整包后再用此扩展检查更新",
 		"files": [
 			"extension/在线更新/extension.css",
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "69.13KB"
+		"size": "71.00KB"
 	},
 	"SJ Settings": {
 		"version": "1.3",
 		"author": "诗笺",
-		"intro": "诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除<span style=\"color: red;\">注：从1.26版本起，扩展版本最好和app版本对应</span>",
+		"intro": "诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除",
 		"files": [
 			"extension/SJ Settings/extension.css",
 			"extension/SJ Settings/extension.js",
@@ -40,7 +40,7 @@ window["noname_android_extension"] = {
 			"extension/全能搜索/languages/javascript.min.js",
 			"extension/全能搜索/typings/index.d.ts"
 		],
-		"size": "5.44MB"
+		"size": "5.43MB"
 	},
 	"阳光包": {
 		"version": "5.8.21",
@@ -1069,10 +1069,10 @@ window["noname_android_extension"] = {
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp1.jpg",
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp2.jpg"
 		],
-		"size": "104.43MB"
+		"size": "104.42MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.118",
+		"nonameVersion": "1.9.119",
 		"version": "1.2.0.220114.19",
 		"author": "短歌(寰宇星城, Show-K代更)",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
@@ -2010,10 +2010,10 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_ye.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "162.83MB"
+		"size": "162.87MB"
 	},
 	"千幻聆音": {
-		"version": "4.0.2",
+		"version": "4.0.3",
 		"author": "寰宇星城",
 		"intro": "换肤换音扩展，提供美化的武将个人资料页功能",
 		"files": [
@@ -2053,11 +2053,13 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/newui.css",
 			"extension/千幻聆音/newui_arrow_left.png",
 			"extension/千幻聆音/newui_arrow_left_lol.png",
+			"extension/千幻聆音/newui_arrow_left_rq.png",
 			"extension/千幻聆音/newui_arrow_left_shuimo.png",
 			"extension/千幻聆音/newui_arrow_left_sksn.png",
 			"extension/千幻聆音/newui_arrow_left_wz.png",
 			"extension/千幻聆音/newui_arrow_right.png",
 			"extension/千幻聆音/newui_arrow_right_lol.png",
+			"extension/千幻聆音/newui_arrow_right_rq.png",
 			"extension/千幻聆音/newui_arrow_right_shuimo.png",
 			"extension/千幻聆音/newui_arrow_right_sksn.png",
 			"extension/千幻聆音/newui_arrow_right_wz.png",
@@ -2153,6 +2155,7 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/newui_shuimo_skillname.png",
 			"extension/千幻聆音/newui_shuimo_skin_title.png",
 			"extension/千幻聆音/newui_skin_background.png",
+			"extension/千幻聆音/newui_skin_background_rq.png",
 			"extension/千幻聆音/newui_skin_background_shuimo.png",
 			"extension/千幻聆音/newui_skin_background_sksn.png",
 			"extension/千幻聆音/newui_skin_background_wz.png",
@@ -2217,7 +2220,7 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/youyuan.ttf",
 			"extension/千幻聆音/zhunyuan.ttf"
 		],
-		"size": "63.15MB"
+		"size": "63.33MB"
 	},
 	"云将": {
 		"version": "8.73.93",
@@ -3067,7 +3070,7 @@ window["noname_android_extension"] = {
 			"extension/合纵抗秦/zhaoji_xianji.mp3",
 			"extension/合纵抗秦/zhenlongchangjian.jpg"
 		],
-		"size": "5.00MB"
+		"size": "4.99MB"
 	},
 	"桌面大战": {
 		"version": "1",
@@ -3080,7 +3083,6 @@ window["noname_android_extension"] = {
 			"extension/桌面大战/LICENSE",
 			"extension/桌面大战/README.md",
 			"extension/桌面大战/update.js",
-			"extension/桌面大战/audio/effect/avn_character_unlocked.mp3",
 			"extension/桌面大战/character/animation_vs_noname.js",
 			"extension/桌面大战/image/background/avn_the_second_coming_the_chosen_one_s_return_bg.webp",
 			"extension/桌面大战/image/character/avn_alan_becker.webp",
@@ -3094,6 +3096,6 @@ window["noname_android_extension"] = {
 			"extension/桌面大战/image/character/avn_victim.webp",
 			"extension/桌面大战/image/character/avn_yellow.webp"
 		],
-		"size": "4.58MB"
+		"size": "4.46MB"
 	}
 };

@@ -1,7 +1,6 @@
 game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千幻聆音",content:function(config,pack){
-    //提示：本扩展源代码向无名杀社区开放，欢迎大家借鉴和参考代码。（但是对于部分品行卑劣、素质低下、造谣诽谤的扩展作者【比如大某小某】，工作室保留禁止其复制、借鉴、引用、抄袭本扩展原创代码的权力。）
-    
-    
+    //提示：本扩展源代码向无名杀社区开放，欢迎大家借鉴和参考代码。
+
     var QHLY_DEBUGMODE = true;
 
     //判断是否安装了某个扩展，用来处理兼容事宜。
@@ -6987,5 +6986,5 @@ game.import("extension",function(lib,game,ui,get,ai,_status){return {name:"千�
     author:"玄武江湖工作室",
     diskURL:"",
     forumURL:"",
-    version:"4.0.2",
+    version:"4.0.3",
 },files:{"character":[],"card":[],"skill":[]}}})

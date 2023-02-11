@@ -32,7 +32,7 @@
     left: 0px;
     top: 0px;
     width: 8%;
-    height: 15.3%;
+    height: 13.3%;
     display: block;
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -145,7 +145,7 @@
     position: absolute;
     left: calc(5.8496%);
     top:calc(2.237%);
-    height: calc(18.5%);
+    height: calc(18%);
     width: calc(88%);
     color:yellow;
     font-family: 'xingkai';
@@ -182,12 +182,12 @@
 .qh-window>.qh-hp{
     z-index: 34;
     position: absolute;
-    left:calc(5.23%);
-    bottom: calc(9.64%);
-    width: calc(22.80%);
-    height: calc(10.70%);
+    left:calc(10.23%);
+    bottom: calc(8.64%);
+    width: calc(20.80%);
+    height: calc(9.70%);
     background-image: url('newui_hp_rq.png');
-    background-size: 100% 100%;
+    background-size: 95% 95%;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -242,7 +242,7 @@
 .qh-window>.qh-button1{
     z-index: 31;
     left: calc(39.54%);
-    top:calc(14.65%);
+    top:calc(6.65%);
     width: calc(14.05%);
     height: calc(9.13%);
     background-image: url('newui_button_rq.png');
@@ -305,7 +305,7 @@
 .qh-window>.qh-button2{
     z-index: 31;
     left: calc(53.44%);
-    top:calc(14.65%);
+    top:calc(6.65%);
     width: calc(14.05%);
     height: calc(9.13%);
     background-image: url('newui_button_rq.png');
@@ -325,7 +325,7 @@
 .qh-window>.qh-button3{
     z-index: 31;
     left: calc(67.34%);
-    top:calc(14.65%);
+    top:calc(6.65%);
     width: calc(14.05%);
     height: calc(9.13%);
     background-image: url('newui_button_rq.png');
@@ -345,7 +345,7 @@
 .qh-window>.qh-button4{
     z-index: 31;
     left: calc(81.24%);
-    top:calc(14.65%);
+    top:calc(6.65%);
     width: calc(14.05%);
     height: calc(9.13%);
     background-image: url('newui_button_rq.png');
@@ -365,9 +365,9 @@
 .qh-window>.qh-page-introduce{
     z-index: 31;
     left:calc(39.84%);
-    top:calc(23.52%);
+    top:calc(16.52%);
     width: calc(54.41%);
-    height: calc(67.10%);
+    height: calc(76.10%);
     display: block;
 }
 
@@ -387,27 +387,27 @@
 .qh-window>.qh-page-skill{
     z-index: 31;
     left:calc(39.84%);
-    top:calc(23.52%);
+    top:calc(16.52%);
     width: calc(54.41%);
-    height: calc(67.10%);
+    height: calc(76.10%);
     display: block;
 }
 
 .qh-window>.qh-page-skin{
     z-index: 31;
     left:calc(39.84%);
-    top:calc(23.52%);
+    top:calc(16.52%);
     width: calc(54.41%);
-    height: calc(67.10%);
+    height: calc(76.10%);
     display: block;
 }
 
 .qh-window>.qh-page-config{
     z-index: 31;
     left:calc(39.84%);
-    top:calc(23.52%);
+    top:calc(16.52%);
     width: calc(54.41%);
-    height: calc(67.10%);
+    height: calc(76.10%);
     display: block;
 }
 
@@ -457,7 +457,7 @@
     width:calc(26.24%);
     height:calc(48.66%);
     display: block;
-    background-image: url('newui_skin_background_sksn.png');
+    background-image: url('newui_skin_background_rq.png');
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -470,7 +470,7 @@
     width:calc(26.24%);
     height:calc(48.66%);
     display: block;
-    background-image: url('newui_skin_background_sksn.png');
+    background-image: url('newui_skin_background_rq.png');
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -483,7 +483,7 @@
     width:calc(26.24%);
     height:calc(48.66%);
     display: block;
-    background-image: url('newui_skin_background_sksn.png');
+    background-image: url('newui_skin_background_rq.png');
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -559,8 +559,8 @@
     z-index:35;
     left: calc(0.34%);
     bottom:calc(14.88%);
-    width: calc(10.01%);
-    height: calc(14.20%);
+    width: calc(12.01%);
+    height: calc(16.20%);
     display: block;
     background-size: 100% 100%;
     background-position: center;
@@ -572,13 +572,13 @@
     z-index:35;
     left: calc(79.35%);
     bottom:calc(14.88%);
-    width: calc(10.01%);
-    height: calc(14.20%);
+    width: calc(12.01%);
+    height: calc(16.20%);
     display: block;
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url('newui_arrow_right.png');
+    background-image: url('newui_arrow_right_rq.png');
 }
 
 .qh-page-skin>.qh-hide-skin-button{

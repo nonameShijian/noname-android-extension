@@ -1,14 +1,14 @@
 module.exports = {
 	extension: {
 		'在线更新': {
-			version: '1.46',
+			version: '1.49',
 			author: '诗笺',
-			intro: '用于更新无名杀版本，<span style="color: red;">基本实现0崩溃</span>。',
+			intro: '用于更新无名杀版本，<span style="color: red;">基本实现0崩溃</span>。<br>注: 第一次安装游戏请解压完整包后再用此扩展检查更新',
 		},
 		'SJ Settings': {
 			version: '1.3',
 			author: '诗笺',
-			intro: '诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除<span style="color: red;">注：从1.26版本起，扩展版本最好和app版本对应</span>',
+			intro: '诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除',
 		},
 		'全能搜索': {
 			version: '2.15',
@@ -22,13 +22,14 @@ module.exports = {
 		},
 		'十周年UI': {
 			// 美化扩展应只适合当前的无名杀版本
-			nonameVersion: '1.9.118',
+			// TODO: 版本号最前面可以用+号代表最低支持版本
+			nonameVersion: '1.9.119',
 			version: '1.2.0.220114.19',
 			author: '短歌(寰宇星城, Show-K代更)',
 			intro: '是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础',
 		},
 		'千幻聆音': {
-			version: '4.0.2',
+			version: '4.0.3',
 			author: '寰宇星城',
 			intro: '换肤换音扩展，提供美化的武将个人资料页功能',
 		},
