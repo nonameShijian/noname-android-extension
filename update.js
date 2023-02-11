@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "71.00KB"
+		"size": "69.87KB"
 	},
 	"SJ Settings": {
 		"version": "1.3",

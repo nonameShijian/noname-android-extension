@@ -137,11 +137,11 @@ declare interface Game {
 		fastgit: 'GitHub镜像',
 		xuanwu: '玄武镜像',
 		URC: 'URC'
-	}) => never |
-		Promise<{
+	}) => never | 
+		Promise<{ 
 			success: Array<{ key: string, finish: number }>;
 			failed: Error | Array<{ key: string, err: Error }>;
-			fastest?: { key: string, finish: number };
+			fastest?: { key: string, finish: number }; 
 		}>;
 
 	/**
