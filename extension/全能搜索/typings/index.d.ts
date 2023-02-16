@@ -26,6 +26,8 @@ declare interface Window {
 	 * @param charName 武将名
 	 */
 	qnssFindDieAudio: (ext: string, charName: string) => void;
+
+	hljs: import('highlight.js').HLJSApi;
 }
 
 /** 设置全局Symbol,用于设置一个对象的描述 */
@@ -59,10 +61,18 @@ declare interface Lib {
 }
 
 declare interface Game {
+	/** 水波纹 文字 */
+	全能搜索_createWaveText<T extends keyof CSSStyleDeclaration>(text: string, style?: {
+		[key in T]?: string
+	}): HTMLDivElement;
 	/** 把js代码高亮显示 */
 	全能搜索_highlight: (text: string) => string;
 	/** 双击复制target */
 	全能搜索_copy: (target: any) => void;
+}
+
+declare interface Status {
+	全能搜索_Searcher: any;
 }
 
 declare interface UI {

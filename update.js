@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "69.87KB"
+		"size": "71.76KB"
 	},
 	"SJ Settings": {
 		"version": "1.3",
@@ -22,7 +22,7 @@ window["noname_android_extension"] = {
 		"size": "28.39KB"
 	},
 	"全能搜索": {
-		"version": "2.15",
+		"version": "3.0",
 		"author": "诗笺",
 		"intro": "用于在游戏内便捷地搜索各种武将,技能和相应代码",
 		"files": [
@@ -38,9 +38,10 @@ window["noname_android_extension"] = {
 			"extension/全能搜索/img/qhly_pic_playaudiobutton.png",
 			"extension/全能搜索/img/相爱相杀.png",
 			"extension/全能搜索/languages/javascript.min.js",
+			"extension/全能搜索/typings/highlight.d.ts",
 			"extension/全能搜索/typings/index.d.ts"
 		],
-		"size": "5.43MB"
+		"size": "5.50MB"
 	},
 	"阳光包": {
 		"version": "5.8.21",
@@ -1069,7 +1070,7 @@ window["noname_android_extension"] = {
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp1.jpg",
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp2.jpg"
 		],
-		"size": "104.42MB"
+		"size": "104.43MB"
 	},
 	"十周年UI": {
 		"nonameVersion": "1.9.119",
@@ -2220,7 +2221,7 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/youyuan.ttf",
 			"extension/千幻聆音/zhunyuan.ttf"
 		],
-		"size": "63.33MB"
+		"size": "63.34MB"
 	},
 	"云将": {
 		"version": "8.73.93",
@@ -3070,7 +3071,7 @@ window["noname_android_extension"] = {
 			"extension/合纵抗秦/zhaoji_xianji.mp3",
 			"extension/合纵抗秦/zhenlongchangjian.jpg"
 		],
-		"size": "4.99MB"
+		"size": "5.00MB"
 	},
 	"桌面大战": {
 		"version": "1",

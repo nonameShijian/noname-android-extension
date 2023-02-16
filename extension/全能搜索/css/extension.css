@@ -16,6 +16,7 @@
 	width: 100%;
 	height: 50px;
 	background: rgba(0, 0, 0, 0.6);
+	color: white;
 }
 
 .Searcher>.content {
@@ -45,9 +46,9 @@
 	height: auto;
 }
 
-.Searcher>.content>.content-container>.content>.caption div > *[ondblclick],
-.Searcher>.content>.content-container>.content>.caption div > li > *[ondblclick],
-.Searcher>.content>.content-container>.content>.caption div > img[onclick]  {
+.Searcher>.content>.content-container>.content>.caption div>*[ondblclick],
+.Searcher>.content>.content-container>.content>.caption div>li>*[ondblclick],
+.Searcher>.content>.content-container>.content>.caption div>img[onclick] {
 	cursor: pointer;
 }
 
@@ -65,11 +66,16 @@
 	background: transparent;
 }
 
+.Searcher>.menu>input.wrong {
+	border: 2px solid red;
+	animation: wrong 0.2s ease-in-out 2;
+}
+
 .Searcher>.menu>ul {
-    z-index: 1000;
-    background: white;
-    /* 去除li的原点占位 */
-    padding-left: 0px;
+	z-index: 1000;
+	background: white;
+	/* 去除li的原点占位 */
+	padding-left: 0px;
 	position: absolute;
 	top: calc(50% + 15px);
 	left: calc(50% - 100px);
@@ -80,27 +86,27 @@
     */
 	max-height: 400px;
 	overflow: scroll;
-	list-style: none;	
+	list-style: none;
 	border: 1px solid #778899;
 }
 
-.Searcher>.menu>ul li{
-    min-width: 200px;
-    width: auto;
-    font-size: 25px;
-    color: black;
-    text-shadow: none;
-    padding: 5px;
+.Searcher>.menu>ul li {
+	min-width: 200px;
+	width: auto;
+	font-size: 25px;
+	color: black;
+	text-shadow: none;
+	padding: 5px;
 }
 
 .Searcher>.menu>ul li>.description {
-    float: right;
-    right: 5px;
-    width: 0;
-    height:0;
-    border-top: 13px solid transparent;
-    border-bottom: 13px solid transparent;
-    border-left: 13px solid black;
+	float: right;
+	right: 5px;
+	width: 0;
+	height: 0;
+	border-top: 13px solid transparent;
+	border-bottom: 13px solid transparent;
+	border-left: 13px solid black;
 }
 
 .Searcher>.menu>.chooseModule {
@@ -148,23 +154,23 @@
 }
 
 .showDescription {
-    min-width: 150px;
-    width: auto;
-    min-height: 100px;
-    height: auto;
-    overflow: scroll;
-    background-color: white;
-    color: black;
-    text-shadow: none;
-    font-size: 20px;
-    border: 2px solid black;
+	min-width: 150px;
+	width: auto;
+	min-height: 100px;
+	height: auto;
+	overflow: scroll;
+	background-color: white;
+	color: black;
+	text-shadow: none;
+	font-size: 20px;
+	border: 2px solid black;
 }
 
 .Searcher>.menu>ul li:not(:last-child) {
-    border-bottom: 1px solid black;
+	border-bottom: 1px solid black;
 }
 
-.Searcher>.menu>ul li.hover{
+.Searcher>.menu>ul li.hover {
 	background-color: #87CEFA;
 }
 
@@ -214,7 +220,7 @@
 
 .updateContentClose {
 	position: fixed !important;
-    right: 15% !important;
+	right: 15% !important;
 	width: 50px;
 	height: 50px;
 	background: silver;
@@ -259,7 +265,125 @@
 }
 
 .qnssSee {
-    color: #409eff;
-    text-decoration: underline;
-    cursor: pointer;
+	color: #409eff;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+div.qnssWave {
+	font-size: 25px;
+	color: black;
+	-webkit-text-stroke: 1px #00ffff;
+	letter-spacing: 5px;
+	position: relative;
+}
+
+div.qnssWave::before {
+	content: attr(data-text);
+	position: absolute;
+	color: #00ffff;
+	/* 添加波浪动画 */
+	animation: wave 4s ease-in-out infinite;
+}
+
+@keyframes wave {
+
+	0%,
+	100% {
+		clip-path: polygon(0 100%,
+				0 61%,
+				16% 77%,
+				29% 86%,
+				44% 90%,
+				62% 88%,
+				78% 81%,
+				89% 74%,
+				100% 62%,
+				100% 100%);
+	}
+
+	50% {
+		clip-path: polygon(0 100%,
+				0 25%,
+				16% 52%,
+				29% 65%,
+				43% 75%,
+				64% 76%,
+				77% 72%,
+				88% 62%,
+				100% 49%,
+				100% 100%);
+	}
+}
+
+.caption.qnssCaption > .qnssWave {
+	display: inline-block !important;
+	width: 300px !important;
+	text-align: center !important;
+	font-size: 35px !important;
+	margin: 0 auto !important;
+}
+
+.qnssArrowDown::before {
+	content: "↓";
+}
+
+.qnssArrowUp::before {
+	content: "↑";
+}
+
+.qnssArrowDown {
+	width: 35px !important;
+	font-size: 35px !important;
+	display: inline-block !important;
+	animation: slide1 1s ease-in-out infinite;
+	cursor: pointer;
+}
+
+.qnssArrowUp {
+	width: 35px !important;
+	font-size: 35px !important;
+	display: inline-block !important;
+	animation: slide2 1s ease-in-out infinite;
+	cursor: pointer;
+}
+
+@keyframes slide1 {
+	0%,
+	100% {
+		transform: translate(0, 0);
+	}
+
+	50% {
+		transform: translate(0, 10px);
+	}
+}
+
+@keyframes slide2 {
+	0%,
+	100% {
+		transform: translate(0, 0);
+	}
+
+	50% {
+		transform: translate(0, -10px);
+	}
+}
+
+@keyframes wrong {
+	0% {
+		transform: translatex(0%);
+	}
+	25% {
+		transform: translatex(-10%);
+	}
+	50% {
+		transform: translatex(0%);
+	}
+	75% {
+		transform: translatex(10%);
+	}
+	100% {
+		transform: translatex(0%);
+	}
 }
