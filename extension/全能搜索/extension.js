@@ -37,23 +37,46 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
             window.qnssSee = function (a) {
                 _status.全能搜索_Searcher.tujianBegin(_status.全能搜索_Searcher.content, a ? a.innerText : undefined, false);
             };
+            // 显示/关闭代码
+            window.qnssShowCode = function(type) {
+                if (type) {
+                    // @ts-ignore
+                    var display = this.nextElementSibling.style.display;
+                    // @ts-ignore
+                    this.nextElementSibling.style.display = (display == "none" ? "" : "none");
+                    this.innerHTML = (display !== "none" ? `点击查看${type}代码` : `点击关闭${type}代码`);
+                } else {
+                    type = '技能';
+                    // @ts-ignore
+                    var display = this.parentNode.nextElementSibling.style.display;
+                    // @ts-ignore
+                    this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
+                    this.innerHTML = (display !== "none" ? `点击查看${type}代码` : `点击关闭${type}代码`);
+                }
+            };
 
             if (!('scrollBehavior' in document.documentElement.style)) {
                 const Element = window.HTMLElement || window.Element;
-
-                Element.prototype.scrollTo = function () {
-                    let left = 0;
-                    let top = 0;
-                    if (arguments.length > 1) {
-                        left = arguments[0];
-                        top = arguments[1];
-                    } else {
-                        left = arguments[0].left;
-                        top = arguments[0].top;
-                    }
-                    this.scrollLeft = left;
-                    this.scrollTop = top;
-                };
+                Object.defineProperty(Element.prototype, 'scrollTo', {
+                    enumerable: false,
+                    configurable: true,
+                    get() {
+                        return function () {
+                            let left = 0;
+                            let top = 0;
+                            if (arguments.length > 1) {
+                                left = arguments[0];
+                                top = arguments[1];
+                            } else {
+                                left = arguments[0].left;
+                                top = arguments[0].top;
+                            }
+                            this.scrollLeft = left;
+                            this.scrollTop = top;
+                        };
+                    },
+                    set(v) { }
+                });
             }
 
             if (!('includes' in Array.prototype)) {
@@ -64,46 +87,74 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         return Array.prototype.contains;
                     },
                     set(v) {}
-                })
+                });
             }
 
-			Promise.allSettled = Promise.allSettled || function (arr) {
-				var P = this;
-				return new P(function (resolve, reject) {
-					if (Object.prototype.toString.call(arr) !== '[object Array]') {
-						return reject(new TypeError(typeof arr + ' ' + arr +
-							' ' + ' is not iterable(cannot read property Symbol(Symbol.iterator))'));
-					}
-					var args = Array.prototype.slice.call(arr);
-					if (args.length === 0) return resolve([]);
-					var arrCount = args.length;
+            if (!('allSettled' in Promise)) {
+                Object.defineProperty(Promise, 'allSettled', {
+                    enumerable: false,
+                    configurable: true,
+                    get() {
+                        return function (arr) {
+                            var P = this;
+                            return new P(function (resolve, reject) {
+                                if (Object.prototype.toString.call(arr) !== '[object Array]') {
+                                    return reject(new TypeError(typeof arr + ' ' + arr +
+                                        ' ' + ' is not iterable(cannot read property Symbol(Symbol.iterator))'));
+                                }
+                                var args = Array.prototype.slice.call(arr);
+                                if (args.length === 0) return resolve([]);
+                                var arrCount = args.length;
 
-					function resolvePromise(index, value) {
-						if (typeof value === 'object') {
-							var then = value.then;
-							if (typeof then === 'function') {
-								then.call(value, function (val) {
-									args[index] = { status: 'fulfilled', value: val };
-									if (--arrCount === 0) {
-										resolve(args);
-									}
-								}, function (e) {
-									args[index] = { status: 'rejected', reason: e };
-									if (--arrCount === 0) {
-										resolve(args);
-									}
-								})
-							}
-						}
-					}
+                                function resolvePromise(index, value) {
+                                    if (typeof value === 'object') {
+                                        var then = value.then;
+                                        if (typeof then === 'function') {
+                                            then.call(value, function (val) {
+                                                args[index] = { status: 'fulfilled', value: val };
+                                                if (--arrCount === 0) {
+                                                    resolve(args);
+                                                }
+                                            }, function (e) {
+                                                args[index] = { status: 'rejected', reason: e };
+                                                if (--arrCount === 0) {
+                                                    resolve(args);
+                                                }
+                                            })
+                                        }
+                                    }
+                                }
 
-					for (var i = 0; i < args.length; i++) {
-						resolvePromise(i, args[i]);
-					}
-				})
-			};
+                                for (var i = 0; i < args.length; i++) {
+                                    resolvePromise(i, args[i]);
+                                }
+                            })
+                        };
+                    },
+                    set(v) { }
+                });
+            }
 
 			window.qnssFindDieAudio = function (ext, charName) {
+                if (lib.skill["_ansory@method_die.audio"]) {
+                    const info = lib.character[charName];
+                    if (info && Array.isArray(info[4])) {
+                        const dieTags = info[4].filter(tag => /^die:/.test(tag));
+                        if (dieTags.length > 0) {
+                            const dieTag = dieTags[0];
+                            const matchResult = dieTag.match(/^die:(?:ext:(.+?)\/)?(.+)$/);
+                            if (matchResult != null) {
+                                const extensionName = matchResult[1], path = matchResult[2];
+                                if (extensionName) {
+                                    game.playAudio("..", "extension", extensionName, path);
+                                } else {
+                                    game.playAudio("..", path);
+                                }
+                                return;
+                            }
+                        }
+                    }
+                }
 				const r =  new RegExp(`game.playAudio\\(['"]..['"],\\s*['"]extension['"],\\s*['"]` + ext + `\\S*['"],\\s*\\S+\\)`);
 				const player = ui.create.player().init(charName);
 				const dieAudioSkills = Object.keys(lib.skill).filter(v => {
@@ -155,12 +206,21 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 				}
 			};
 
+            if (!window.qnssGame) {
+                Object.defineProperty(window, 'qnssGame', {
+                    enumerable: false,
+                    configurable: true,
+                    get() {
+                        return game;
+                    },
+                    set(v) { }
+                });
+            }
+
             // 引入全局api描述
             // 创建Promise
             const importDescription = function(path, file) {
                 return new Promise(resolve => {
-					// 变量添加到全局
-					lib.cheat.i();
 					// 引入js
                     lib.init.js(path, file, () => {
                         delete lib.imported.libDescription;
@@ -179,23 +239,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 }
                 const exts = lib.config.extensions.filter(extName => game.getExtensionConfig(extName, 'enable')).map(extName => importDescription(`${lib.assetURL}extension/${extName}/`, 'description'));
                 Promise.allSettled(exts).then(() => {
-                    // 删除全局变量
-                    if (!lib.config.dev) {
-                        // @ts-ignore
-                        delete window.cheat;
-                        // @ts-ignore
-                        delete window.game;
-                        // @ts-ignore
-                        delete window.ui;
-                        // @ts-ignore
-                        delete window.get;
-                        // @ts-ignore
-                        delete window.ai;
-                        // @ts-ignore
-                        delete window.lib;
-                        // @ts-ignore
-                        delete window._status;
-                    }
+                    console.log('importDescription finish');
                 });
             });
 
@@ -267,6 +311,16 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 constructor(target) {
                     /** @type {string} 原先的背景图片 **/
                     this.Image = ui.background.style.backgroundImage;
+
+                    if (!game.getExtensionConfig('全能搜索', 'backgroundImage')) {
+                        ui.background.setBackgroundImage("extension/全能搜索/img/" + ['相爱相杀', 'picture'].randomGet() + ".png");
+                    } else {
+                        ui.background.setBackgroundImage("extension/全能搜索/img/" + game.getExtensionConfig('全能搜索', 'backgroundImage'));
+                    }
+
+                    // 暂时不会隐藏canvas
+                    // this.canvas = Array.from(document.getElementsByTagName('canvas'));
+
                     /** @type {HTMLDivElement} */
                     this.manual = ui.create.div('.Searcher');
                     /** @type {HTMLDivElement} */
@@ -298,6 +352,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     this.close = ui.create.div('.close', this.menu, '关闭');
                     this.oldDialog = _status.event.dialog || ui.dialog;
                     this.dialog = ui.create.dialog();
+                    // 防止国战dialog.filterButton报错
+                    ui.dialog = this.oldDialog;
                     this.content = this.manual.appendChild(this.dialog);
 					// 选择搜索方式
 					this.searcherModule = game.getExtensionConfig('全能搜索', 'searcherModule') || ['findCharacter', 'findCard', 'findSkill', 'findCode'];
@@ -306,6 +362,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 						if (e.path[0] != this) return;
 						this.firstElementChild.classList.toggle('hover');
 					});
+
 					/** @type { HTMLUListElement }  */
 					const cm = ui.create.node('ul.list', this.chooseModuleDiv);
                     for (const arr of [['findCharacter', '搜索武将'], ['findCard', '搜索卡牌'], ['findSkill', '搜索技能'], ['findCode', '搜索代码']]) {
@@ -336,7 +393,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     this.keydownFun = window.onkeydown;
                     window.onkeydown = null;
 
-                    //this.input.setAttribute('list', '全能搜索_datalist');
+                    // this.input.setAttribute('list', '全能搜索_datalist');
                     this.ul.setAttribute('id', '全能搜索_datalist');
 
                     //主要函数放在window里
@@ -701,6 +758,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         }
                     };
 
+                    // 使tab补全而不移动焦点
                     this.input.onkeydown = e => {
                         e.stopPropagation();
                         if (e.code == "Tab") {
@@ -762,7 +820,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     ui.background.style.backgroundImage = this.Image;
                     ui.arena.classList.add('menupaused');
                     ui.menuContainer.show();
-                    ui.dialog = this.oldDialog;
+                    // ui.dialog = this.oldDialog;
                     if (ui.dialog) ui.dialog.show();
                     _status.全能搜索_Searcher = null;
                     window.onkeydown = this.keydownFun;
@@ -893,11 +951,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                         </br>
 
                                         <span class="bluetext">技能代码&nbsp</span>
-                                        <a onclick='
-                                            var display = this.parentNode.nextElementSibling.style.display;
-                                            this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
-                                            this.innerHTML = (display !== "none" ? "点击查看技能代码" : "点击关闭技能代码");
-                                        '>点击查看技能代码</a>
+                                        <a onclick='window.qnssShowCode.call(this)'>点击查看技能代码</a>
                                     </li>
 
                                     <li style="display: none; list-style-type: none;">
@@ -918,11 +972,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                     <span class="bluetext">技能语音&nbsp</span>
                                     <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${derivation}", {name:"${charName}"}, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
                                     <span class="bluetext">技能代码&nbsp</span>
-                                    <a onclick='
-                                        var display = this.parentNode.nextElementSibling.style.display;
-                                        this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
-                                        this.innerHTML = (display !== "none" ? "点击查看技能代码" : "点击关闭技能代码");
-                                    '>点击查看技能代码</a>
+                                    <a onclick='window.qnssShowCode.call(this)'>点击查看技能代码</a>
                                 </li>
 
                                 <li style="display: none; list-style-type: none;">
@@ -1272,11 +1322,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             </br>
 
                             <span class="bluetext">卡牌代码</span>
-                            <span style="color: white;" onclick='
-                                    var display = this.nextElementSibling.style.display;
-                                    this.nextElementSibling.style.display = display == "none" ? "" : "none";
-                                    this.innerHTML = (display !== "none" ? "点击查看${lib.translate[cardName]}代码" : "点击关闭${lib.translate[cardName]}代码");
-                            '>点击查看${lib.translate[cardName]}代码</span>
+                            <span style="color: white;" onclick='window.qnssShowCode.call(this, "${lib.translate[cardName]}")'>点击查看${lib.translate[cardName]}代码</span>
                             
                             <span style="display: none;">
                                 </br>
@@ -1402,6 +1448,24 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             }
                         }
 
+                        // 技能拥有者
+                        let name = [];
+                        for (const packName in lib.characterPack) {
+                            for (const characterName in lib.characterPack[packName]) {
+                                // 没有翻译的武将不显示
+                                if (typeof lib.translate[characterName] != 'string') continue;
+                                /** 
+                                 * 武将信息
+                                 * @type { HeroData } 
+                                 */
+                                const characterData = lib.characterPack[packName][characterName];
+                                // 如果result是中文
+                                if (characterData[3].includes(skillName)) {
+                                    name.push(characterName);
+                                }
+                            }
+                        }
+
                         const caption = ui.create.div('.caption');
 
                         const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
@@ -1420,20 +1484,75 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                 <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述</span>：${info}</br>
                                 <span class="bluetext">技能语音</span>：
                                 <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${skillName}", null, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
+                                <span class="bluetext">技能拥有者</span>：<div id="replaceCharacters"></div></br>
                                 <span class="bluetext">技能代码</span>：
-                                <a onclick='
-                                    var display = this.parentNode.nextElementSibling.style.display;
-                                    this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
-                                    this.innerHTML = (display !== "none" ? "点击查看技能代码" : "点击关闭技能代码");
-                                    '>点击查看技能代码</a>
+                                <a onclick='window.qnssShowCode.call(this)'>点击查看技能代码</a>
                             </li>
 
                             <li style="display: none; list-style-type: none;">
                                 <font color="21ffd8">[ ${translate} ] </font>技能代码：</br>
                                 <pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(lib.skill[skillName]))}</pre>
                             </li>
+
                             </br></br></br>
                         `);
+
+                        const replaceCharacters = d.querySelector("#replaceCharacters");
+                        if (replaceCharacters) {
+                            if (name.length > 0) {
+                                /*
+                                const buttons = ui.create.div('.buttons', d);
+                                buttons.classList.add('smallzoom');
+                                const buttons2 = ui.create.buttons(name, 'character', buttons, false);
+                                buttons2.forEach(v => {
+                                    v.style.height = '108px';
+
+                                    const hps = v.getElementsByClassName('hp');
+                                    // @ts-ignore
+                                    const hp = hps[0];
+                                    hp.style.left = 'auto';
+                                    hp.style.right = '6px';
+                                    hp.style.top = 'auto';
+                                    hp.style.bottom = '5px';
+                                    hp.style.textAlign = 'right';
+
+                                    const identitys = v.getElementsByClassName('identity');
+                                    // @ts-ignore
+                                    const identity = identitys[0];
+                                    identity.style.left = 'auto';
+                                    identity.style.right = '3px';
+                                    identity.style.top = '3px';
+                                    
+                                    v.setAttribute('onclick', `
+                                        if (confirm("是否查看" + this.link + "的信息？")) {
+                                            _status.全能搜索_Searcher.tujianBegin(this.link);
+                                        }
+                                    `);
+                                });
+                                this.dialog.buttons = this.dialog.buttons.concat(buttons2);
+                                // @ts-ignore
+                                replaceCharacters.insertAdjacentElement('afterend', buttons);
+                                */
+                                name.map(name => {
+                                    const a = document.createElement('a');
+                                    a.classList.add('qnssSee');
+                                    a.style.color = 'white';
+                                    a.addEventListener('click', function () {
+                                        window.qnssSee(this);
+                                    });
+                                    a.innerText = lib.translate[name];
+                                    return a;
+                                }).forEach(a => {
+                                    replaceCharacters.insertAdjacentElement('afterend', a);
+                                    replaceCharacters.insertAdjacentHTML('afterend', '&nbsp&nbsp');
+                                });
+                            } else {
+                                const span = document.createElement('span');
+                                span.innerText = '无';
+                                replaceCharacters.insertAdjacentElement('afterend', span);
+                            }
+                            replaceCharacters.remove();
+                        }
 
                         fragment.appendChild(caption);
                     }
@@ -1461,6 +1580,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     // 防止执行函数
                     if (result.indexOf('(') != -1 || result.indexOf(')') != -1) {
                         console.error('寻找代码功能，不能寻找带有小括号的代码（防止执行函数）');
+                        console.timeEnd('findCode');
                         return false;
                     }
 
@@ -1486,7 +1606,10 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         //result 字符串 -> 代码变量
                         const obj = exceptResult[last];
 
-                        if (!key || (!obj && !(last in exceptResult))) return false;
+                        if (!key || (!obj && !(last in exceptResult))) {
+                            console.timeEnd('findCode');
+                            return false;
+                        }
 
                         function stringify(obj, level) {
                             level = level || 0;
@@ -1801,6 +1924,11 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     if (result === "" || result === null || result === undefined) return game.alert("请输入名称");
                     game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
 
+                    this.dialog.buttons = [];
+
+                    console.log('------------------------');
+                    console.log('搜索内容: ' + result);
+
 					const containsKey = key => this.searcherModule.contains(key);
 
                     let resultCharacter = containsKey('findCharacter') ? this.findCharacter(result, this.searcherModule.length > 1 ? ('findCharacter' !== this.searcherModule[0]) : false) : false;
@@ -1823,11 +1951,6 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 							canAddToDataList && this.addToDataList(result);
 						}
 					}
-                    if (!game.getExtensionConfig('全能搜索', 'backgroundImage')) {
-                        ui.background.setBackgroundImage("extension/全能搜索/img/" + ['相爱相杀', 'picture'].randomGet() + ".png");
-                    } else {
-                        ui.background.setBackgroundImage("extension/全能搜索/img/" + game.getExtensionConfig('全能搜索', 'backgroundImage'));
-                    }
                 }
             }
 
@@ -1860,7 +1983,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
             version: {
                 nopointer: true,
                 clear: true,
-                name: "扩展版本: v3.0<br>更新日期: 2023-02-16",
+                name: "扩展版本: v3.1<br>更新日期: 2023-02-21",
             },
             background: {
                 'name': '搜索界面背景图片',
@@ -1917,7 +2040,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
 		package: {
 			intro: '【武将卡牌搜索器】的重命名版本。',
 			author: "<span class='bluetext'>诗笺</span>",
-			version: "3.0",
+			version: "3.1",
 		},
 	}
 });

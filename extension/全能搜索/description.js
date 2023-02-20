@@ -1,6 +1,7 @@
 /// <reference path="./typings/index.d.ts" />
 "use strict";
-game.import("libDescription", function (lib, game, ui, get, ai, _status) {
+window.qnssGame.import("libDescription", function (lib, game, ui, get, ai, _status) {
+	// @ts-ignore
 	if (!lib.description) lib.description = {};
 
 	const description = {

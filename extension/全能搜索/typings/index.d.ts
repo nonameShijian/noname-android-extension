@@ -28,6 +28,11 @@ declare interface Window {
 	qnssFindDieAudio: (ext: string, charName: string) => void;
 
 	hljs: import('highlight.js').HLJSApi;
+
+	/** 解决非开发者模式game不存在的问题 */
+	qnssGame: Game;
+	/** 显示/关闭代码 */
+	qnssShowCode: (this: HTMLDivElement, type = '技能') => void;
 }
 
 /** 设置全局Symbol,用于设置一个对象的描述 */

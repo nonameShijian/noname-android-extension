@@ -2,7 +2,7 @@
 /// <reference path="../../typings/index.d.ts" />
 
 "use strict";
-game.import("libDescription", function (lib, game, ui, get, ai, _status) {
+window.qnssGame.import("libDescription", function (lib, game, ui, get, ai, _status) {
     /* 
         设置全局Symbol, 用于设置一个对象的描述
         window.qnssDescriptionSymbol = Symbol('description');
