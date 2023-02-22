@@ -59,7 +59,7 @@ module.exports = {
 			intro: 'OL的合纵抗秦模式，现在由诗笺维护更新'
 		},
 		'桌面大战': {
-			version: '1',
+			version: '2',
 			author: 'Show-K',
 			intro: '一个基于《桌面大战》（《火柴人VS动画师》）系列的同人《无名杀》扩展，不隶属于Alan Becker等相关创作者。'
 		}
