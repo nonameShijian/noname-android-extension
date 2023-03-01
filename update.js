@@ -11,7 +11,7 @@ window["noname_android_extension"] = {
 		"size": "69.87KB"
 	},
 	"SJ Settings": {
-		"version": "1.42",
+		"version": "1.4204",
 		"author": "诗笺",
 		"intro": "诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除",
 		"files": [
@@ -19,7 +19,7 @@ window["noname_android_extension"] = {
 			"extension/SJ Settings/extension.js",
 			"extension/SJ Settings/typings/index.d.ts"
 		],
-		"size": "38.91KB"
+		"size": "39.30KB"
 	},
 	"全能搜索": {
 		"version": "3.1",

@@ -6,7 +6,7 @@ module.exports = {
 			intro: '用于更新无名杀版本，<span style="color: red;">基本实现0崩溃</span>。<br>注: 第一次安装游戏请解压完整包后再用此扩展检查更新',
 		},
 		'SJ Settings': {
-			version: '1.42',
+			version: '1.4204',
 			author: '诗笺',
 			intro: '诗笺版（安卓）无名杀自带的SJ Settings扩展是用于导入“从其他应用使用无名杀打开的扩展包”，请勿删除',
 		},
