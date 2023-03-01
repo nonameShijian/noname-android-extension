@@ -406,8 +406,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		precontent: function () {
 			// 添加两个更新地址
 			Object.assign(lib.updateURLS, {
-				fastgit: 'https://raw.fastgit.org/libccy/noname',
-				// fastgit: 'https://raw.fgit.ml/libccy/noname',
+				fastgit: 'https://raw.fgit.ml/libccy/noname',
 				// xuanwu: 'https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw',
 				URC: 'https://unitedrhythmized.club/libccy/noname'
 			});
