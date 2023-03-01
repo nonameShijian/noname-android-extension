@@ -396,6 +396,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 				}).catch(console.error);
 			}
+			
 			setInterval(() => {
 				if (game.getExtensionConfig('在线更新', 'auto_check_update')) checkUpdate();
 			}, 1000 * 60 * 10);
@@ -405,7 +406,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		precontent: function () {
 			// 添加两个更新地址
 			Object.assign(lib.updateURLS, {
-				// fastgit: 'https://raw.fastgit.org/libccy/noname',
+				fastgit: 'https://raw.fastgit.org/libccy/noname',
+				// fastgit: 'https://raw.fgit.ml/libccy/noname',
 				// xuanwu: 'https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw',
 				URC: 'https://unitedrhythmized.club/libccy/noname'
 			});
@@ -1111,7 +1113,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			show_version: {
 				clear: true,
 				nopointer: true,
-				name: '扩展版本： v1.49',
+				name: '扩展版本： v1.5',
 			},
 			update_link_explain: {
 				clear: true,
@@ -1143,7 +1145,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							str = '由寰宇星城创建的更新源，和coding差不多，版本的更新需要他在苏婆更新后手动拉代码到服务器上。目前因coding网址的政策已废弃';
 							break;
 						case 'URC':
-							str = '由Show-K大佬提供，名字取自United Rhythmized Club，推荐使用此更新源';
+							str = '由Show-K大佬提供，名字取自United Rhythmized Club，推荐使用此更新源。此更新源能否连接取决于服务器是否还有剩余流量';
 					}
 					typeof str != 'undefined' && alert(str);
 					return false;
@@ -1166,7 +1168,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				item: {
 					coding: 'Coding',
 					github: 'GitHub',
-					// fastgit: 'GitHub镜像',
+					fastgit: 'GitHub镜像',
 					// xuanwu: '玄武镜像',
 					URC: 'URC'
 				},
@@ -1908,10 +1910,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				clear: true,
 				nopointer: true,
 				name: `</br>
-					最新完整包下载地址1：
-					<a target='_self' href='https://hub.fastgit.org/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
-					最新完整包下载地址2：
-					<a target='_self' href='https://hub.fastgit.xyz/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a>
+					最新完整包下载地址：
+					<a target='_self' href='https://hub.fgit.ml/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
 					</br>
 				`,
 			}
@@ -1927,7 +1927,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.49",
+			version: "1.5",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}
