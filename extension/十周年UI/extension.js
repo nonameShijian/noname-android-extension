@@ -2750,6 +2750,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"step 4"
 							var evt = event.getParent();
 							if (evt.name != 'discard' && event.type != 'discard' && evt.name != 'loseToDiscardpile' && event.type != 'loseToDiscardpile') return;
+							if (event.animate === false || event.delay === false) return;
 							if (evt.delay != false) {
 								if (evt.waitingForTransition) {
 									_status.waitingForTransition = evt.waitingForTransition;
@@ -6910,6 +6911,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							next.num1 = event.num1;
 							next.num2 = event.num2;
 							next.setContent(event.callback);
+							event.compareMultiple = true;
 						}
 
 						"step 6"
@@ -10131,11 +10133,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.20（Show-K修复版）',
-					'更新日期：2023-02-22',
-					'- 现在无需修改《十周年UI》本体即可为扩展卡牌添加卡牌美化素材（在lib.decade_extCardImage对象内添加“<卡牌内部名称>:<卡牌美化素材文件路径>”的字符串键值对，会覆盖内置卡牌美化素材）。',
-					'- 现在可以为除【杀】外不同属性的牌添加卡牌美化素材（所需文件名为<卡牌内部名称>_<属性内部名称>）。',
-					'- 现在“动态背景”的选项默认为“关闭”。',
+					'当前版本：1.2.0.220114.21（Show-K修复版）',
+					'更新日期：2023-03-05',
+					'- 适配《无名杀》1.9.120.1。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10155,7 +10155,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.20",
+			version: "1.2.0.220114.21",
 		},
 		files: {
 			"character": [],
