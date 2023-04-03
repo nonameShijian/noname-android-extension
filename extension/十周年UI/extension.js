@@ -1374,7 +1374,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 									game.pause();
 									if (range[1] > 1 && typeof event.selectCard != 'function') {
-										event.promptdiscard = ui.create.control('提示', function () {
+										event.promptdiscard = ui.create.control('AI代选', function () {
 											ai.basic.chooseCard(event.ai);
 											if (_status.event.custom.add.card) {
 												_status.event.custom.add.card();
@@ -2469,6 +2469,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							game.addVideo('judge2', null, event.videoId);
 							game.log(player, '的判定结果为', event.result.card);
 							event.triggerMessage('judgeresult');
+							event.trigger('judgeFixing');
 							if (event.callback) {
 								var next = game.createEvent('judgeCallback', false);
 								next.player = player;
@@ -2799,7 +2800,18 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											return lib.filter.cardSavable(card, player, event.dying);
 										},
 										dyingPlayer: trigger.player,
-										filterTarget: trigger.player,
+										filterTarget: function (card, player, target) {
+											if (target != _status.event.dying) return false;
+											if (!card) return false;
+											var info = get.info(card);
+											if (!info.singleCard || ui.selected.targets.length == 0) {
+												var mod = game.checkMod(card, player, target, 'unchanged', 'playerEnabled', player);
+												if (mod == false) return false;
+												var mod = game.checkMod(card, player, target, 'unchanged', 'targetEnabled', target);
+												if (mod != 'unchanged') return mod;
+											}
+											return true;
+										},
 										prompt: function (event) {
 											var handTip = event.handTip;
 											var player = event.player;
@@ -3920,6 +3932,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 												id: id
 											});
 											player.marks[id]._name = target;
+											player.marks[id].style.backgroundSize += " !important";
 											game.addVideo('markCharacter', player, {
 												name: name,
 												content: content,
@@ -10133,9 +10146,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.21（Show-K修复版）',
-					'更新日期：2023-03-05',
-					'- 适配《无名杀》1.9.120.1。',
+					'当前版本：1.2.0.220114.22（Show-K修复版）',
+					'更新日期：2023-04-03',
+					'- 将chooseToDiscard时可能出现的“提示”按钮的文本改为“AI代选”。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10155,7 +10168,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.21",
+			version: "1.2.0.220114.22",
 		},
 		files: {
 			"character": [],
