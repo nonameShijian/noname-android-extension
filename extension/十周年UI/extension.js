@@ -580,7 +580,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 
 							if (player == game.me) {
-								dui.layoutHandDraws(cards.reverse());
+								if (cards && cards.length) dui.layoutHandDraws(cards.reverse());
 								dui.queueNextFrameTick(dui.layoutHand, dui);
 							}
 
@@ -3932,7 +3932,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 												id: id
 											});
 											player.marks[id]._name = target;
-											player.marks[id].style.backgroundSize += " !important";
+											player.marks[id].style.backgroundSize = "cover !important";
 											game.addVideo('markCharacter', player, {
 												name: name,
 												content: content,
@@ -10146,9 +10146,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.22（Show-K修复版）',
-					'更新日期：2023-04-03',
-					'- 将chooseToDiscard时可能出现的“提示”按钮的文本改为“AI代选”。',
+					'当前版本：1.2.0.220114.23（Show-K修复版）',
+					'更新日期：2023-05-02',
+					'- 修复尝试修改初始手牌数为0导致报错问题。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10168,7 +10168,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.22",
+			version: "1.2.0.220114.23",
 		},
 		files: {
 			"character": [],
