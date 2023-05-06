@@ -4,6 +4,7 @@ progress.zxgxProgress {
 	border: 2px solid;
 	border-radius: 15px;
 	vertical-align: middle;
+	appearance: none;
 	-webkit-appearance: none;
 }
 
@@ -14,5 +15,5 @@ progress.zxgxProgress::-webkit-progress-bar {
 
 progress.zxgxProgress::-webkit-progress-value {
 	border-radius: 0.2rem;
-	background: rgb(0,117,255);
+	background: rgb(0, 117, 255);
 }
