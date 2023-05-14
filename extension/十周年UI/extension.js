@@ -1599,8 +1599,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								var ok = game.check();
 								if (ok) {
 									ui.click.ok();
-								} else if (ai.basic.chooseCard(event.ai1 || event.ai)) {
-									if (ai.basic.chooseTarget(event.ai2) && (!event.filterOk || event.filterOk())) {
+								} else if (ai.basic.chooseCard(event.ai1 || event.ai) || forced) {
+									if ((ai.basic.chooseTarget(event.ai2) || forced) && (!event.filterOk || event.filterOk())) {
 										ui.click.ok();
 										event._aiexcludeclear = true;
 									} else {
@@ -1871,8 +1871,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								var ok = game.check();
 								if (ok) {
 									ui.click.ok();
-								} else if (ai.basic.chooseCard(event.ai1)) {
-									if (ai.basic.chooseTarget(event.ai2) && (!event.filterOk || event.filterOk())) {
+								} else if (ai.basic.chooseCard(event.ai1) || forced) {
+									if ((ai.basic.chooseTarget(event.ai2) || forced) && (!event.filterOk || event.filterOk())) {
 										ui.click.ok();
 										event._aiexcludeclear = true;
 									} else {
@@ -2172,13 +2172,17 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									var owner = get.owner(i, 'judge');
 									if (owner && (owner != player || get.position(i) != 'h')) {
 										var id = owner.playerid;
-										if (!map[id]) map[id] = [];
-										map[id].push(i);
+										if (!map[id]) map[id] = [[], [], []];
+										map[id][0].push(i);
+										var position = get.position(i);
+										if (position == 'h') map[id][1].push(i);
+										else map[id][2].push(i);
 									} else if (!event.updatePile && get.position(i) == 'c') event.updatePile = true;
 								}
+								event.losing_map = map;
 								for (var i in map) {
 									var owner = (_status.connectMode ? lib.playerOL : game.playerMap)[i];
-									var next = owner.lose(map[i], ui.special).set('type', 'gain').set('forceDie', true).set('getlx', false);
+									var next = owner.lose(map[i][0], ui.special).set('type', 'gain').set('forceDie', true).set('getlx', false);
 									if (event.visible == true)
 										next.visible = true;
 
@@ -2275,31 +2279,34 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								game.pause();
 								gainTo(cards);
 								player.$gain2(cards);
-							} else if (event.source && (event.animate == 'give' || event.animate == 'giveAuto')) {
+							} else if (event.animate == 'give' || event.animate == 'giveAuto') {
 								game.pause();
 								gainTo(cards);
-								var evtmap = event.relatedLose;
+								var evtmap = event.losing_map;
 								if (event.animate == 'give') {
-									if (evtmap && evtmap.cards && evtmap.cards.length > 0) event.source.$give(evtmap.cards, player);
-									else event.source.$give(cards, player);
-								} else {
-									var c;
-									var hs = [];
-									var ots = [];
-									hs.duiMod = ots.duiMod = event.source;
-									if (evtmap && evtmap.hs && evtmap.cards) {
-										for (var i = 0; i < cards.length; i++) {
-											c = cards[i];
-											if (evtmap.hs.contains(c)) hs.push(c);
-											else if (evtmap.cards.contains(c)) ots.push(c);
-										}
+									for (var i in evtmap) {
+										var source = (_status.connectMode ? lib.playerOL : game.playerMap)[i];
+										source.$give(evtmap[i][0], player)
 									}
-
-									if (hs.length)
-										event.source.$giveAuto(hs, player);
-									if (ots.length)
-										event.source.$give(ots, player);
+								} else {
+									for (var i in evtmap) {
+										var source = (_status.connectMode ? lib.playerOL : game.playerMap)[i];
+										if (evtmap[i][1].length) source.$giveAuto(evtmap[i][1], player);
+										if (evtmap[i][2].length) source.$give(evtmap[i][2], player);
+									}
 								}
+							} else if (typeof event.animate == 'function') {
+								var time = event.animate(event);
+								game.pause();
+								setTimeout(function () {
+									addv();
+									player.node.handcards1.insertBefore(frag1, player.node.handcards1.firstChild);
+									player.node.handcards2.insertBefore(frag2, player.node.handcards2.firstChild);
+									player.update();
+									if (player == game.me) ui.updatehl();
+									broadcast();
+									game.resume();
+								}, get.delayx(time, time));
 							} else {
 								gainTo(cards, true);
 								event.finish();
@@ -2856,7 +2863,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								}
 								"step 2"
 								if (result.bool) {
-									if (trigger.player.hp <= 0 && !trigger.player.nodying && trigger.player.isAlive() && !trigger.player.isOut() && !trigger.player.removed) event.goto(0);
+									var player = trigger.player;
+									if (player.hp <= 0 && !trigger.nodying && !player.nodying && player.isAlive() && !player.isOut() && !player.removed) event.goto(0);
 									else trigger.untrigger();
 								} else {
 									for (var i = 0; i < 20; i++) {
@@ -10146,9 +10154,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.23（Show-K修复版）',
-					'更新日期：2023-05-02',
-					'- 修复尝试修改初始手牌数为0导致报错问题。',
+					'当前版本：1.2.0.220114.24（Show-K修复版）',
+					'更新日期：2023-05-14',
+					'- 母亲节快乐！恋恋日快乐！',
+					'- 跟进《无名杀》新版本。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10168,7 +10177,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.23",
+			version: "1.2.0.220114.24",
 		},
 		files: {
 			"character": [],
