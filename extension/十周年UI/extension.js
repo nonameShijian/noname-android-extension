@@ -10154,10 +10154,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.24（Show-K修复版）',
-					'更新日期：2023-05-14',
-					'- 母亲节快乐！恋恋日快乐！',
-					'- 跟进《无名杀》新版本。',
+					'当前版本：1.2.0.220114.25（Show-K修复版）',
+					'更新日期：2023-05-29',
+					'- 增加LICENSE文件。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10174,10 +10173,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 				return '<p style="color:rgb(210,210,000); font-size:12px; line-height:14px; text-shadow: 0 0 2px black;">' + log.join('<br>') + '</p>';
 			})(),
-			author: "短歌 QQ464598631",
+			author: "Show-K←寰宇星城←短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.24",
+			version: "1.2.0.220114.25",
 		},
 		files: {
 			"character": [],

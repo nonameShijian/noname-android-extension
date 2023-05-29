@@ -1073,9 +1073,9 @@ window["noname_android_extension"] = {
 		"size": "104.43MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.121",
-		"version": "1.2.0.220114.24",
-		"author": "短歌(寰宇星城, Show-K代更)",
+		"nonameVersion": "1.9.122.1",
+		"version": "1.2.0.220114.25",
+		"author": "Show-K←寰宇星城←短歌",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
 			"extension/十周年UI/animation.css",
@@ -2990,7 +2990,7 @@ window["noname_android_extension"] = {
 			"extension/大乱桌斗/image/decade_extGroupImage/name_sst_smash.png",
 			"extension/大乱桌斗/image/decade_extGroupImage/name_sst_spirit.png"
 		],
-		"size": "27.74MB"
+		"size": "27.77MB"
 	},
 	"合纵抗秦": {
 		"version": "1.7",
@@ -3200,6 +3200,6 @@ window["noname_android_extension"] = {
 			"extension/桌面大战/image/decade_extCardImage/avn_sidebar.webp",
 			"extension/桌面大战/image/decade_extCardImage/avn_wings.webp"
 		],
-		"size": "6.05MB"
+		"size": "6.08MB"
 	}
 };
