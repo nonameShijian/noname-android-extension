@@ -405,6 +405,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 							this.skipList = [];
 							this.skills = this.skills.contains('cangji_yozuru') ? ['cangji_yozuru'] : [];
+							this.invisibleSkills = [];
 							this.initedSkills = [];
 							this.additionalSkills = {};
 							this.disabledSkills = {};
@@ -1517,7 +1518,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								event.dialog = undefined;
 								return;
 							}
-							var skills = player.getSkills(true);
+							var skills = player.getSkills('invisible').concat(lib.skill.global);
 							game.expandSkills(skills);
 							for (var i = 0; i < skills.length; i++) {
 								var info = lib.skill[skills[i]];
@@ -1752,7 +1753,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							if (game.modeSwapPlayer && !_status.auto && player.isUnderControl() && !lib.filter.wuxieSwap(event)) {
 								game.modeSwapPlayer(player);
 							}
-							var skills = player.getSkills(true);
+							var skills = player.getSkills('invisible').concat(lib.skill.global);
 							game.expandSkills(skills);
 							for (var i = 0; i < skills.length; i++) {
 								var info = lib.skill[skills[i]];
@@ -5178,7 +5179,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (get.mode() == 'guozhan' && player.hasSkillTag('nomingzhi', false, null, true)) {
 									skills2 = player.getSkills(false, true, false);
 								} else {
-									skills2 = player.getSkills(true, true, false);
+									skills2 = player.getSkills('invisible', true, false);
 								}
 								skills2 = game.filterSkills(skills2.concat(lib.skill.global), player, player.getSkills('e').concat(lib.skill.global));
 								event._skillChoice = [];
@@ -5192,7 +5193,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									else if (typeof info.enable == 'string') enable = (info.enable == event.name);
 
 									if (enable) {
-										if (!game.expandSkills(player.getSkills().concat(lib.skill.global)).contains(skills2[i]) && (info.noHidden || get.mode() != 'guozhan' || player.hasSkillTag('nomingzhi', false, null, true))) enable = false;
+										if (!game.expandSkills(player.getSkills(false).concat(lib.skill.global)).contains(skills2[i]) && (info.noHidden || get.mode() != 'guozhan' || player.hasSkillTag('nomingzhi', false, null, true))) enable = false;
 										if (info.filter && !info.filter(event, player)) enable = false;
 										if (info.viewAs && typeof info.viewAs != 'function' && event.filterCard && !event.filterCard(info.viewAs, player, event)) enable = false;
 										if (info.viewAs && typeof info.viewAs != 'function' && info.viewAsFilter && info.viewAsFilter(player) == false) enable = false;
@@ -5220,7 +5221,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								}
 							}
 							var equipskills = [];
-							var ownedskills = player.getSkills(true, false);
+							var ownedskills = player.getSkills('invisible', false);
 							game.expandSkills(ownedskills);
 							for (var i = 0; i < skills.length; i++) {
 								if (!ownedskills.contains(skills[i])) {
@@ -5749,6 +5750,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							phaseNumber: 0,
 							skipList: [],
 							skills: [],
+							invisibleSkills: [],
 							initedSkills: [],
 							additionalSkills: {},
 							disabledSkills: {},
@@ -10154,9 +10156,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.25（Show-K修复版）',
-					'更新日期：2023-05-29',
-					'- 增加LICENSE文件。',
+					'当前版本：1.2.0.220114.26（Show-K修复版）',
+					'更新日期：2023-06-05',
+					'- 修复了invisibleSkills不存在的问题。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10176,7 +10178,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "Show-K←寰宇星城←短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.25",
+			version: "1.2.0.220114.26",
 		},
 		files: {
 			"character": [],
