@@ -1149,346 +1149,346 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 				},
 			}
 		},
-		huashen: {
-			audio: 'huashen2',
-			unique: true,
-			forbid: ['guozhan'],
-			init: function (player) {
-				player.storage.huashen = {
-					list: [],
-					shown: [],
-					owned: {},
-					player: player,
-				}
-			},
-			get: function (player, num) {
-				if (typeof num != 'number') num = 1;
-				var list = [];
-				while (num--) {
-					var name = player.storage.huashen.list.randomRemove();
-					var skills = lib.character[name][3].slice(0);
-					for (var i = 0; i < skills.length; i++) {
-						var info = lib.skill[skills[i]];
-						if (info.limited || info.juexingji || info.charlotte || info.zhuSkill || info.hiddenSkill || info.dutySkill) {
-							skills.splice(i--, 1);
-						}
-					}
-					player.storage.huashen.owned[name] = skills;
-					// player.popup(name);
-					game.log(player, '获得了一个化身');
-					list.push(name);
-				}
-				if (player.isUnderControl(true)) {
-					var cards = [];
-					for (var i = 0; i < list.length; i++) {
-						var cardname = 'huashen_card_' + list[i];
-						lib.card[cardname] = {
-							fullimage: true,
-							image: 'character:' + list[i]
-						}
-						lib.translate[cardname] = lib.translate[list[i]];
-						cards.push(game.createCard(cardname, '', ''));
-					}
-					player.$draw(cards);
-				}
-			},
-			group: ['huashen1', 'huashen2'],
-			intro: {
-				content: function (storage, player) {
-					var str = '';
-					var slist = storage.owned;
-					var list = [];
-					for (var i in slist) {
-						list.push(i);
-					}
-					if (list.length) {
-						str += get.translation(list[0]);
-						for (var i = 1; i < list.length; i++) {
-							str += '、' + get.translation(list[i]);
-						}
-					}
-					var skill = player.additionalSkills.huashen[0];
-					if (skill) {
-						str += '<p>当前技能：' + get.translation(skill);
-					}
-					return str;
-				},
-				mark: function (dialog, content, player) {
-					var slist = content.owned;
-					var list = [];
-					for (var i in slist) {
-						list.push(i);
-					}
-					if (list.length) {
-						dialog.addSmall([list, 'character']);
-					}
-					if (!player.isUnderControl(true)) {
-						for (var i = 0; i < dialog.buttons.length; i++) {
-							if (!content.shown.contains(dialog.buttons[i].link)) {
-								dialog.buttons[i].node.group.remove();
-								dialog.buttons[i].node.hp.remove();
-								dialog.buttons[i].node.intro.remove();
-								dialog.buttons[i].node.name.innerHTML = '未<br>知';
-								dialog.buttons[i].node.name.dataset.nature = '';
-								dialog.buttons[i].style.background = '';
-								dialog.buttons[i]._nointro = true;
-								dialog.buttons[i].classList.add('menubg');
-							}
-						}
-					}
-					if (player.additionalSkills.huashen) {
-						var skill = player.additionalSkills.huashen[0];
-						if (skill) {
-							dialog.add('<div><div class="skill">【' + get.translation(skill) +
-								'】</div><div>' + lib.translate[skill + '_info'] + '</div></div>');
-						}
-					}
-				}
-			},
-			setup: function (player, gain) {
-				for (var i in lib.character) {
-					if (lib.filter.characterDisabled2(i) || lib.filter.characterDisabled(i)) continue;
-					var add = false;
-					for (var j = 0; j < lib.character[i][3].length; j++) {
-						var info = lib.skill[lib.character[i][3][j]];
-						if (!info) {
-							continue;
-						}
-						if (!info.limited && !info.juexingji && !info.charlotte && !info.zhuSkill && !info.hiddenSkill && !info.dutySkill) {
-							add = true; break;
-						}
-					}
-					if (add) {
-						player.storage.huashen.list.push(i);
-					}
-				}
-				for (var i = 0; i < game.players.length; i++) {
-					player.storage.huashen.list.remove([game.players[i].name]);
-					player.storage.huashen.list.remove([game.players[i].name1]);
-					player.storage.huashen.list.remove([game.players[i].name2]);
-				}
-				player.storage.huasheninited = true;
-				if (gain) {
-					player.markSkill('huashen');
-					lib.skill.huashen.get(player, 2);
-					_status.event.trigger('huashenStart');
-				}
-			}
-		},
-		huashen1: {
-			trigger: { global: 'gameStart', player: ['enterGame', 'damageBefore'] },
-			forced: true,
-			popup: false,
-			//priority:10,
-			filter: function (event, player) {
-				return !player.storage.huasheninited;
-			},
-			content: function () {
-				lib.skill.huashen.setup(player, trigger.name != 'damage');
-			}
-		},
-		huashen2: {
-			audio: 2,
-			trigger: { player: ['phaseBegin', 'phaseEnd', 'huashenStart'] },
-			filter: function (event, player, name) {
-				//if(name=='phaseBegin'&&game.phaseNumber==1) return false;
-				return true;
-			},
-			//priority:50,
-			forced: true,
-			//popup:false,
-			content: function () {
-				'step 0'
-				if (get.is.empty(player.storage.huashen.owned)) {
-					if (!player.storage.huasheninited) {
-						lib.skill.huashen.setup(player, false);
-					}
-					event.finish();
-					return;
-				}
-				event.trigger('playercontrol');
-				'step 1'
-				var slist = player.storage.huashen.owned;
-				var list = [];
-				for (var i in slist) {
-					list.push(i);
-				}
-				event.switchToAuto = function () {
-					var currentbutton = event.dialog.querySelector('.selected.button');
-					if (!currentbutton) {
-						currentbutton = event.dialog.buttons[0];
-						currentbutton.classList.add('selected');
-					}
-					event.clickControl(player.storage.huashen.owned[currentbutton.link].randomGet());
-				}
+		// huashen: {
+		// 	audio: 'huashen2',
+		// 	unique: true,
+		// 	forbid: ['guozhan'],
+		// 	init: function (player) {
+		// 		player.storage.huashen = {
+		// 			list: [],
+		// 			shown: [],
+		// 			owned: {},
+		// 			player: player,
+		// 		}
+		// 	},
+		// 	get: function (player, num) {
+		// 		if (typeof num != 'number') num = 1;
+		// 		var list = [];
+		// 		while (num--) {
+		// 			var name = player.storage.huashen.list.randomRemove();
+		// 			var skills = lib.character[name][3].slice(0);
+		// 			for (var i = 0; i < skills.length; i++) {
+		// 				var info = lib.skill[skills[i]];
+		// 				if (info.limited || info.juexingji || info.charlotte || info.zhuSkill || info.hiddenSkill || info.dutySkill) {
+		// 					skills.splice(i--, 1);
+		// 				}
+		// 			}
+		// 			player.storage.huashen.owned[name] = skills;
+		// 			// player.popup(name);
+		// 			game.log(player, '获得了一个化身');
+		// 			list.push(name);
+		// 		}
+		// 		if (player.isUnderControl(true)) {
+		// 			var cards = [];
+		// 			for (var i = 0; i < list.length; i++) {
+		// 				var cardname = 'huashen_card_' + list[i];
+		// 				lib.card[cardname] = {
+		// 					fullimage: true,
+		// 					image: 'character:' + list[i]
+		// 				}
+		// 				lib.translate[cardname] = lib.translate[list[i]];
+		// 				cards.push(game.createCard(cardname, '', ''));
+		// 			}
+		// 			player.$draw(cards);
+		// 		}
+		// 	},
+		// 	group: ['huashen1', 'huashen2'],
+		// 	intro: {
+		// 		content: function (storage, player) {
+		// 			var str = '';
+		// 			var slist = storage.owned;
+		// 			var list = [];
+		// 			for (var i in slist) {
+		// 				list.push(i);
+		// 			}
+		// 			if (list.length) {
+		// 				str += get.translation(list[0]);
+		// 				for (var i = 1; i < list.length; i++) {
+		// 					str += '、' + get.translation(list[i]);
+		// 				}
+		// 			}
+		// 			var skill = player.additionalSkills.huashen[0];
+		// 			if (skill) {
+		// 				str += '<p>当前技能：' + get.translation(skill);
+		// 			}
+		// 			return str;
+		// 		},
+		// 		mark: function (dialog, content, player) {
+		// 			var slist = content.owned;
+		// 			var list = [];
+		// 			for (var i in slist) {
+		// 				list.push(i);
+		// 			}
+		// 			if (list.length) {
+		// 				dialog.addSmall([list, 'character']);
+		// 			}
+		// 			if (!player.isUnderControl(true)) {
+		// 				for (var i = 0; i < dialog.buttons.length; i++) {
+		// 					if (!content.shown.contains(dialog.buttons[i].link)) {
+		// 						dialog.buttons[i].node.group.remove();
+		// 						dialog.buttons[i].node.hp.remove();
+		// 						dialog.buttons[i].node.intro.remove();
+		// 						dialog.buttons[i].node.name.innerHTML = '未<br>知';
+		// 						dialog.buttons[i].node.name.dataset.nature = '';
+		// 						dialog.buttons[i].style.background = '';
+		// 						dialog.buttons[i]._nointro = true;
+		// 						dialog.buttons[i].classList.add('menubg');
+		// 					}
+		// 				}
+		// 			}
+		// 			if (player.additionalSkills.huashen) {
+		// 				var skill = player.additionalSkills.huashen[0];
+		// 				if (skill) {
+		// 					dialog.add('<div><div class="skill">【' + get.translation(skill) +
+		// 						'】</div><div>' + lib.translate[skill + '_info'] + '</div></div>');
+		// 				}
+		// 			}
+		// 		}
+		// 	},
+		// 	setup: function (player, gain) {
+		// 		for (var i in lib.character) {
+		// 			if (lib.filter.characterDisabled2(i) || lib.filter.characterDisabled(i)) continue;
+		// 			var add = false;
+		// 			for (var j = 0; j < lib.character[i][3].length; j++) {
+		// 				var info = lib.skill[lib.character[i][3][j]];
+		// 				if (!info) {
+		// 					continue;
+		// 				}
+		// 				if (!info.limited && !info.juexingji && !info.charlotte && !info.zhuSkill && !info.hiddenSkill && !info.dutySkill) {
+		// 					add = true; break;
+		// 				}
+		// 			}
+		// 			if (add) {
+		// 				player.storage.huashen.list.push(i);
+		// 			}
+		// 		}
+		// 		for (var i = 0; i < game.players.length; i++) {
+		// 			player.storage.huashen.list.remove([game.players[i].name]);
+		// 			player.storage.huashen.list.remove([game.players[i].name1]);
+		// 			player.storage.huashen.list.remove([game.players[i].name2]);
+		// 		}
+		// 		player.storage.huasheninited = true;
+		// 		if (gain) {
+		// 			player.markSkill('huashen');
+		// 			lib.skill.huashen.get(player, 2);
+		// 			_status.event.trigger('huashenStart');
+		// 		}
+		// 	}
+		// },
+		// huashen1: {
+		// 	trigger: { global: 'gameStart', player: ['enterGame', 'damageBefore'] },
+		// 	forced: true,
+		// 	popup: false,
+		// 	//priority:10,
+		// 	filter: function (event, player) {
+		// 		return !player.storage.huasheninited;
+		// 	},
+		// 	content: function () {
+		// 		lib.skill.huashen.setup(player, trigger.name != 'damage');
+		// 	}
+		// },
+		// huashen2: {
+		// 	audio: 2,
+		// 	trigger: { player: ['phaseBegin', 'phaseEnd', 'huashenStart'] },
+		// 	filter: function (event, player, name) {
+		// 		//if(name=='phaseBegin'&&game.phaseNumber==1) return false;
+		// 		return true;
+		// 	},
+		// 	//priority:50,
+		// 	forced: true,
+		// 	//popup:false,
+		// 	content: function () {
+		// 		'step 0'
+		// 		if (get.is.empty(player.storage.huashen.owned)) {
+		// 			if (!player.storage.huasheninited) {
+		// 				lib.skill.huashen.setup(player, false);
+		// 			}
+		// 			event.finish();
+		// 			return;
+		// 		}
+		// 		event.trigger('playercontrol');
+		// 		'step 1'
+		// 		var slist = player.storage.huashen.owned;
+		// 		var list = [];
+		// 		for (var i in slist) {
+		// 			list.push(i);
+		// 		}
+		// 		event.switchToAuto = function () {
+		// 			var currentbutton = event.dialog.querySelector('.selected.button');
+		// 			if (!currentbutton) {
+		// 				currentbutton = event.dialog.buttons[0];
+		// 				currentbutton.classList.add('selected');
+		// 			}
+		// 			event.clickControl(player.storage.huashen.owned[currentbutton.link].randomGet());
+		// 		}
 
-				event.clickControl = function (link, type) {
-					if (link != 'cancel2') {
-						var currentname;
-						if (type == 'ai') {
-							currentname = event.currentname;
-						}
-						else {
-							currentname = event.dialog.querySelector('.selected.button').link;
-						}
-						player.storage.huashen.shown.add(currentname);
-						if (!player.additionalSkills.huashen || !player.additionalSkills.huashen.contains(link)) {
-							player.addAdditionalSkill('huashen', link);
-							//player.logSkill('huashen2');
-							player.flashAvatar('huashen', currentname);
-							game.log(player, '获得技能', '【' + get.translation(link) + '】');
-							player.popup(link);
+		// 		event.clickControl = function (link, type) {
+		// 			if (link != 'cancel2') {
+		// 				var currentname;
+		// 				if (type == 'ai') {
+		// 					currentname = event.currentname;
+		// 				}
+		// 				else {
+		// 					currentname = event.dialog.querySelector('.selected.button').link;
+		// 				}
+		// 				player.storage.huashen.shown.add(currentname);
+		// 				if (!player.additionalSkills.huashen || !player.additionalSkills.huashen.contains(link)) {
+		// 					player.addAdditionalSkill('huashen', link);
+		// 					//player.logSkill('huashen2');
+		// 					player.flashAvatar('huashen', currentname);
+		// 					game.log(player, '获得技能', '【' + get.translation(link) + '】');
+		// 					player.popup(link);
 
-							if (event.dialog && event.dialog.buttons) {
-								for (var i = 0; i < event.dialog.buttons.length; i++) {
-									if (event.dialog.buttons[i].classList.contains('selected')) {
-										var name = event.dialog.buttons[i].link;
-										player.sex = lib.character[name][0];
-										player.group = lib.character[name][1];
-										// player.node.identity.style.backgroundColor=get.translation(player.group+'Color');
-										break;
-									}
-								}
-							}
+		// 					if (event.dialog && event.dialog.buttons) {
+		// 						for (var i = 0; i < event.dialog.buttons.length; i++) {
+		// 							if (event.dialog.buttons[i].classList.contains('selected')) {
+		// 								var name = event.dialog.buttons[i].link;
+		// 								player.sex = lib.character[name][0];
+		// 								player.group = lib.character[name][1];
+		// 								// player.node.identity.style.backgroundColor=get.translation(player.group+'Color');
+		// 								break;
+		// 							}
+		// 						}
+		// 					}
 
-							// if(event.triggername=='phaseZhunbeiBegin'){
-							// 	(function(){
-							// 		var skills=[link];
-							// 		var list=[];
-							// 		game.expandSkills(skills);
-							// 		var triggerevent=event._trigger;
-							// 		var name='phaseZhunbeiBegin';
-							// 		for(i=0;i<skills.length;i++){
-							// 			var trigger=get.info(skills[i]).trigger;
-							// 			if(trigger){
-							// 				var add=false;
-							// 				if(player==triggerevent.player&&trigger.player){
-							// 					if(typeof trigger.player=='string'){
-							// 						if(trigger.player==name) add=true;
-							// 					}
-							// 					else if(trigger.player.contains(name)) add=true;
-							// 				}
-							// 				if(trigger.global){
-							// 					if(typeof trigger.global=='string'){
-							// 						if(trigger.global==name) add=true;
-							// 					}
-							// 					else if(trigger.global.contains(name)) add=true;
-							// 				}
-							// 				if(add&&player.isOut()==false) list.push(skills[i]);
-							// 			}
-							// 		}
-							// 		for(var i=0;i<list.length;i++){
-							// 			game.createTrigger('phaseZhunbeiBegin',list[i],player,triggerevent);
-							// 		}
-							// 	}());
-							// }
-						}
-					}
-					if (type != 'ai') {
-						// ui.auto.show();
-						event.dialog.close();
-						event.control.close();
-						game.resume();
-					}
-				};
-				if (event.isMine()) {
-					event.dialog = ui.create.dialog('选择获得一项技能', [list, 'character']);
-					for (var i = 0; i < event.dialog.buttons.length; i++) {
-						event.dialog.buttons[i].classList.add('pointerdiv');
-					}
-					if (trigger.name == 'game') {
-						event.control = ui.create.control();
-					}
-					else {
-						event.control = ui.create.control(['cancel2']);
-					}
-					event.control.custom = event.clickControl;
-					event.control.replaceTransition = false;
-					// ui.auto.hide();
-					game.pause();
-					for (var i = 0; i < event.dialog.buttons.length; i++) {
-						event.dialog.buttons[i].classList.add('selectable');
-					}
-					event.custom.replace.button = function (button) {
-						if (button.classList.contains('selected')) {
-							button.classList.remove('selected');
-							if (trigger.name == 'game') {
-								event.control.style.opacity = 0;
-							}
-							else {
-								event.control.replace(['cancel2']);
-							}
-						}
-						else {
-							for (var i = 0; i < event.dialog.buttons.length; i++) {
-								event.dialog.buttons[i].classList.remove('selected');
-							}
-							button.classList.add('selected');
-							event.control.replace(slist[button.link]);
-							if (trigger.name == 'game' && getComputedStyle(event.control).opacity == 0) {
-								event.control.style.transition = 'opacity 0.5s';
-								ui.refresh(event.control);
-								event.control.style.opacity = 1;
-								event.control.style.transition = '';
-								ui.refresh(event.control);
-							}
-							else {
-								event.control.style.opacity = 1;
-							}
-						}
-						event.control.custom = event.clickControl;
-					}
-					event.custom.replace.window = function () {
-						for (var i = 0; i < event.dialog.buttons.length; i++) {
-							if (event.dialog.buttons[i].classList.contains('selected')) {
-								event.dialog.buttons[i].classList.remove('selected');
-								if (trigger.name == 'game') {
-									event.control.style.opacity = 0;
-								}
-								else {
-									event.control.replace(['cancel2']);
-								}
-								event.control.custom = event.clickControl;
-								return;
-							}
-						}
-					}
-				}
-				else {
-					var skills = [];
-					var map = {};
-					for (var i = 0; i < list.length; i++) {
-						var sub = player.storage.huashen.owned[list[i]];
-						skills.addArray(sub);
-						for (var j = 0; j < sub.length; j++) {
-							map[sub[j]] = list[i];
-						}
-					}
-					var add = player.additionalSkills.huashen;
-					if (typeof add == 'string') {
-						add = [add];
-					}
-					if (Array.isArray(add)) {
-						for (var i = 0; i < add.length; i++) {
-							skills.remove(add[i]);
-						}
-					}
-					var cond = 'out';
-					if (event.triggername == 'phaseZhunbeiBegin') {
-						cond = 'in';
-					}
-					skills.randomSort();
-					skills.sort(function (a, b) {
-						return get.skillRank(b, cond) - get.skillRank(a, cond);
-					});
-					var choice = skills[0];
-					if (choice) {
-						event.currentname = map[choice];
-						event.clickControl(choice, 'ai');
-					}
-				}
-			}
-		},
+		// 					// if(event.triggername=='phaseZhunbeiBegin'){
+		// 					// 	(function(){
+		// 					// 		var skills=[link];
+		// 					// 		var list=[];
+		// 					// 		game.expandSkills(skills);
+		// 					// 		var triggerevent=event._trigger;
+		// 					// 		var name='phaseZhunbeiBegin';
+		// 					// 		for(i=0;i<skills.length;i++){
+		// 					// 			var trigger=get.info(skills[i]).trigger;
+		// 					// 			if(trigger){
+		// 					// 				var add=false;
+		// 					// 				if(player==triggerevent.player&&trigger.player){
+		// 					// 					if(typeof trigger.player=='string'){
+		// 					// 						if(trigger.player==name) add=true;
+		// 					// 					}
+		// 					// 					else if(trigger.player.contains(name)) add=true;
+		// 					// 				}
+		// 					// 				if(trigger.global){
+		// 					// 					if(typeof trigger.global=='string'){
+		// 					// 						if(trigger.global==name) add=true;
+		// 					// 					}
+		// 					// 					else if(trigger.global.contains(name)) add=true;
+		// 					// 				}
+		// 					// 				if(add&&player.isOut()==false) list.push(skills[i]);
+		// 					// 			}
+		// 					// 		}
+		// 					// 		for(var i=0;i<list.length;i++){
+		// 					// 			game.createTrigger('phaseZhunbeiBegin',list[i],player,triggerevent);
+		// 					// 		}
+		// 					// 	}());
+		// 					// }
+		// 				}
+		// 			}
+		// 			if (type != 'ai') {
+		// 				// ui.auto.show();
+		// 				event.dialog.close();
+		// 				event.control.close();
+		// 				game.resume();
+		// 			}
+		// 		};
+		// 		if (event.isMine()) {
+		// 			event.dialog = ui.create.dialog('选择获得一项技能', [list, 'character']);
+		// 			for (var i = 0; i < event.dialog.buttons.length; i++) {
+		// 				event.dialog.buttons[i].classList.add('pointerdiv');
+		// 			}
+		// 			if (trigger.name == 'game') {
+		// 				event.control = ui.create.control();
+		// 			}
+		// 			else {
+		// 				event.control = ui.create.control(['cancel2']);
+		// 			}
+		// 			event.control.custom = event.clickControl;
+		// 			event.control.replaceTransition = false;
+		// 			// ui.auto.hide();
+		// 			game.pause();
+		// 			for (var i = 0; i < event.dialog.buttons.length; i++) {
+		// 				event.dialog.buttons[i].classList.add('selectable');
+		// 			}
+		// 			event.custom.replace.button = function (button) {
+		// 				if (button.classList.contains('selected')) {
+		// 					button.classList.remove('selected');
+		// 					if (trigger.name == 'game') {
+		// 						event.control.style.opacity = 0;
+		// 					}
+		// 					else {
+		// 						event.control.replace(['cancel2']);
+		// 					}
+		// 				}
+		// 				else {
+		// 					for (var i = 0; i < event.dialog.buttons.length; i++) {
+		// 						event.dialog.buttons[i].classList.remove('selected');
+		// 					}
+		// 					button.classList.add('selected');
+		// 					event.control.replace(slist[button.link]);
+		// 					if (trigger.name == 'game' && getComputedStyle(event.control).opacity == 0) {
+		// 						event.control.style.transition = 'opacity 0.5s';
+		// 						ui.refresh(event.control);
+		// 						event.control.style.opacity = 1;
+		// 						event.control.style.transition = '';
+		// 						ui.refresh(event.control);
+		// 					}
+		// 					else {
+		// 						event.control.style.opacity = 1;
+		// 					}
+		// 				}
+		// 				event.control.custom = event.clickControl;
+		// 			}
+		// 			event.custom.replace.window = function () {
+		// 				for (var i = 0; i < event.dialog.buttons.length; i++) {
+		// 					if (event.dialog.buttons[i].classList.contains('selected')) {
+		// 						event.dialog.buttons[i].classList.remove('selected');
+		// 						if (trigger.name == 'game') {
+		// 							event.control.style.opacity = 0;
+		// 						}
+		// 						else {
+		// 							event.control.replace(['cancel2']);
+		// 						}
+		// 						event.control.custom = event.clickControl;
+		// 						return;
+		// 					}
+		// 				}
+		// 			}
+		// 		}
+		// 		else {
+		// 			var skills = [];
+		// 			var map = {};
+		// 			for (var i = 0; i < list.length; i++) {
+		// 				var sub = player.storage.huashen.owned[list[i]];
+		// 				skills.addArray(sub);
+		// 				for (var j = 0; j < sub.length; j++) {
+		// 					map[sub[j]] = list[i];
+		// 				}
+		// 			}
+		// 			var add = player.additionalSkills.huashen;
+		// 			if (typeof add == 'string') {
+		// 				add = [add];
+		// 			}
+		// 			if (Array.isArray(add)) {
+		// 				for (var i = 0; i < add.length; i++) {
+		// 					skills.remove(add[i]);
+		// 				}
+		// 			}
+		// 			var cond = 'out';
+		// 			if (event.triggername == 'phaseZhunbeiBegin') {
+		// 				cond = 'in';
+		// 			}
+		// 			skills.randomSort();
+		// 			skills.sort(function (a, b) {
+		// 				return get.skillRank(b, cond) - get.skillRank(a, cond);
+		// 			});
+		// 			var choice = skills[0];
+		// 			if (choice) {
+		// 				event.currentname = map[choice];
+		// 				event.clickControl(choice, 'ai');
+		// 			}
+		// 		}
+		// 	}
+		// },
 		nsanruo: {
 			unique: true,
 			init: function (player) {
