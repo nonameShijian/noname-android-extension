@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "76.88KB"
+		"size": "75.95KB"
 	},
 	"SJ Settings": {
 		"version": "1.4204",
@@ -1070,7 +1070,7 @@ window["noname_android_extension"] = {
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp1.jpg",
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp2.jpg"
 		],
-		"size": "104.43MB"
+		"size": "104.42MB"
 	},
 	"十周年UI": {
 		"nonameVersion": "1.9.122.1",
@@ -2012,7 +2012,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_ye.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "162.90MB"
+		"size": "162.91MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.3",
@@ -2222,7 +2222,7 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/youyuan.ttf",
 			"extension/千幻聆音/zhunyuan.ttf"
 		],
-		"size": "63.34MB"
+		"size": "63.33MB"
 	},
 	"云将": {
 		"version": "8.73.93",
@@ -3072,7 +3072,7 @@ window["noname_android_extension"] = {
 			"extension/合纵抗秦/zhaoji_xianji.mp3",
 			"extension/合纵抗秦/zhenlongchangjian.jpg"
 		],
-		"size": "5.00MB"
+		"size": "4.99MB"
 	},
 	"桌面大战": {
 		"version": "2",

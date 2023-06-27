@@ -328,6 +328,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			function checkUpdate() {
 				game.shijianGetUpdateFiles().then(({ update }) => {
 					console.log('获取到更新', update);
+					if (!lib.version) lib.version = "1.9";
 					if (update.version == lib.version) {
 						return;
 					} else {
@@ -403,7 +404,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 				}).catch(console.error);
 			}
-
+			
 			// 刚开启时候的网络请求不会成功
 			if (game.getExtensionConfig('在线更新', 'auto_check_update')) {
 				setTimeout(() => {
@@ -460,7 +461,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							game.saveExtensionConfig('在线更新', 'update_link', item);
 							lib.updateURL = lib.updateURLS[item];
 						} else {
-							alert(`选择的更新源(${item})不存在`);
+							alert(`选择的更新源(${ item })不存在`);
 							return false;
 						}
 					},
@@ -641,18 +642,30 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							target: e.target,
 							error: errorCode[e.code]
 						});
-						switch (e.http_status) {
-							case 404:
+						switch(e.http_status) {
+							case 404: 
 								game.print(`更新源中不存在${path}/${name}`);
 								console.log(`更新源中不存在${path}/${name}`);
 								success(undefined, true);
+								break;
+							case 402:
+								// git镜像中这个资源无法下载，那就跳过
+								if (lib.updateURL === lib.updateURLS.fastgit) {
+									if (!sessionStorage.getItem('在线更新_fastgit_402')) {
+										alert('这个资源在git镜像更新源内无法下载，请在下载操作全部完成后切换更新源下载！');
+										sessionStorage.setItem('在线更新_fastgit_402', 'true');
+									}
+									success(undefined, true);
+								} else if (typeof onerror == 'function') {
+									onerror(e, e.body);
+								}
 								break;
 							default:
 								if (typeof onerror == 'function') {
 									onerror(e, e.body);
 								}
 						}
-
+						
 					} else {
 						// 电脑端下载的错误
 						console.error(e, message);
@@ -660,7 +673,17 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							game.print(`更新源中不存在${path}/${name}`);
 							console.log(`更新源中不存在${path}/${name}`);
 							success(undefined, true);
-						} else if (typeof onerror == 'function') {
+						}
+						// git镜像中这个资源无法下载，那就跳过
+						// @ts-ignore
+						else if (e.message == '402' && lib.updateURL === lib.updateURLS.fastgit) {
+							if (!sessionStorage.getItem('在线更新_fastgit_402')) {
+								alert('这个资源在git镜像更新源内无法下载，请在下载操作全部完成后切换更新源下载！');
+								sessionStorage.setItem('在线更新_fastgit_402', 'true');
+							}
+							success(undefined, true);
+						}
+						else if (typeof onerror == 'function') {
 							onerror(e, message);
 						}
 					}
@@ -685,7 +708,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								}, download);
 							}, download);
 						}, download);
-				} else if (typeof window.require == 'function') {
+				} else if (typeof window.require == 'function'){
 					const fetch = myFetch(`${url}?date=${(new Date()).getTime()}`);
 
 					// if (typeof onprogress == 'function') {
@@ -768,7 +791,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							response => {
 								console.log(response);
 								error(new Error(String(response.status)), response.statusText);
-							})
+						})
 				}
 			};
 
@@ -813,7 +836,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						}
 					}*/);
 				};
-
+				
 				let download = () => {
 					if (length < list.length) {
 						let num_copy = list3.length;
@@ -1129,9 +1152,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						game.saveConfig('auto_check_update', false);
 					};
 				},
-				set(v) { }
+				set(v) {}
 			});
-
+			
 			if (!Array.isArray(lib.updateReady)) lib.updateReady = [];
 			if (!Array.isArray(lib.updateAssetReady)) lib.updateAssetReady = [];
 
@@ -1246,7 +1269,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			show_version: {
 				clear: true,
 				nopointer: true,
-				name: '扩展版本： v1.6',
+				name: '扩展版本： v1.61',
 			},
 			update_link_explain: {
 				clear: true,
@@ -1474,6 +1497,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 						game.shijianGetUpdateFiles().then(({ update, source_list: updates }) => {
 							game.saveConfig('check_version', update.version);
+							if (!lib.version) lib.version = "1.9";
 							//要更新的版本和现有的版本一致
 							if (update.version == lib.version) {
 								if (!confirm('当前版本已经是最新，是否覆盖更新？')) {
@@ -1582,7 +1606,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								// 下载之前保留下载列表
 								updates.forEach(v => lib.config.extension_在线更新_brokenFile.add(v));
 								game.saveConfigValue('extension_在线更新_brokenFile');
-
+								
 								game.shijianMultiDownload(updates, (fileNameList) => {
 									n1++;
 									span.innerHTML = `正在下载文件（${n1}/${n2}）`;
@@ -1598,7 +1622,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								},
 									// 下载失败
-									e => { },
+									e => {},
 									// 下载完成
 									() => {
 										// 更新进度, 下载完成时不执行onsuccess而是onfinish
@@ -1636,7 +1660,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 												parentNode.insertBefore(button2, parentNode.firstElementChild);
 											}, 750);
 										}, 250);
-									}, (current, loaded, total) => {
+									},
+									(current, loaded, total) => {
 										if (total != 0) {
 											progress.setFileName(`${current}(已完成${Math.round((loaded / total) * 100)}%)`);
 										} else {
@@ -2078,7 +2103,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "诗笺",
 			diskURL: "",
 			forumURL: "",
-			version: "1.6",
+			version: "1.61",
 		},
 		files: { "character": [], "card": [], "skill": [] }
 	}
