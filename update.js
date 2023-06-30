@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "75.95KB"
+		"size": "78.01KB"
 	},
 	"SJ Settings": {
 		"version": "1.4204",
@@ -1070,11 +1070,11 @@ window["noname_android_extension"] = {
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp1.jpg",
 			"extension/阳光包/skin/standard/lyz_zhugeliang/lyz_zhugeliangp2.jpg"
 		],
-		"size": "104.42MB"
+		"size": "104.43MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.122.1",
-		"version": "1.2.0.220114.26",
+		"nonameVersion": "1.9.122.3",
+		"version": "1.2.0.220114.27",
 		"author": "Show-K←寰宇星城←短歌",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
@@ -2222,7 +2222,7 @@ window["noname_android_extension"] = {
 			"extension/千幻聆音/youyuan.ttf",
 			"extension/千幻聆音/zhunyuan.ttf"
 		],
-		"size": "63.33MB"
+		"size": "63.34MB"
 	},
 	"云将": {
 		"version": "8.73.93",
@@ -3072,7 +3072,7 @@ window["noname_android_extension"] = {
 			"extension/合纵抗秦/zhaoji_xianji.mp3",
 			"extension/合纵抗秦/zhenlongchangjian.jpg"
 		],
-		"size": "4.99MB"
+		"size": "5.00MB"
 	},
 	"桌面大战": {
 		"version": "2",

@@ -2007,6 +2007,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							"step 0"
 							var owner = get.owner(card);
 							if (owner) {
+								event.owner = owner;
 								var next = owner.lose(card, ui.special, 'visible').set('type', 'equip').set('getlx', false);
 								next.animate = true;
 								next.blameEvent = event;
@@ -2021,6 +2022,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (player.hasSkill(card.destroyed)) {
 									delete card.destroyed;
 								} else {
+									event.finish();
+									return;
+								}
+							} else if (event.owner) {
+								if (event.owner.getCards('hejsx').contains(card)) {
 									event.finish();
 									return;
 								}
@@ -2046,7 +2052,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									player.$throw(current);
 								}
 								event.swapped = true;
-								event.redo();
+								// event.redo();
 							}
 							"step 4"
 							if (player.isMin() || player.countCards('e', {
@@ -6340,6 +6346,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								event.finish();
 								return;
 							}
+						} else if (event.relatedLose) {
+							var owner = event.relatedLose.player;
+							if (owner.getCards('hejsx').contains(card)) {
+								event.finish();
+								return;
+							}
 						}
 						cards[0].fix();
 						cards[0].style.transform = '';
@@ -10156,10 +10168,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			intro: (function () {
 				var log = [
 					'有bug先检查其他扩展，不行再关闭UI重试，最后再联系作者。',
-					'当前版本：1.2.0.220114.26（Show-K修复版）',
-					'更新日期：2023-06-05',
-					'- 修复了invisibleSkills不存在的问题。（感谢寰宇星城）',
-					'- 不再覆盖左慈〖化身〗。',
+					'当前版本：1.2.0.220114.27（Show-K修复版）',
+					'更新日期：2023-06-30',
+					'- 感谢原作者短歌的认可！',
+					'- 修复了因equip和addJudge导致的问题。',
 					/*
 					'- 新增动皮及背景：[曹节-凤历迎春]、[曹婴-巾帼花舞]、[貂蝉-战场绝版]、[何太后-耀紫迷幻]、[王荣-云裳花容]、[吴苋-金玉满堂]、[周夷-剑舞浏漓]；',
 					'- 新增动皮oncomplete支持(函数内部只能调用this.xxx代码)；',
@@ -10179,7 +10191,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			author: "Show-K←寰宇星城←短歌 QQ464598631",
 			diskURL: "",
 			forumURL: "",
-			version: "1.2.0.220114.26",
+			version: "1.2.0.220114.27",
 		},
 		files: {
 			"character": [],
