@@ -4,3 +4,6 @@
 [submodule "extension/大乱桌斗"]
 	path = extension/大乱桌斗
 	url = https://github.com/Show-K/super-smash-tabletop-lite
+[submodule "extension/十周年UI"]
+	path = extension/十周年UI
+	url = https://github.com/Tipx-L/decade-ui
