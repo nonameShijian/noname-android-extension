@@ -1,18 +1,19 @@
-progress.zxgxProgress {
+progress.oafaProgress {
 	width: 75%;
 	height: 10px;
 	border: 2px solid;
 	border-radius: 15px;
 	vertical-align: middle;
+	appearance: none;
 	-webkit-appearance: none;
 }
 
-progress.zxgxProgress::-webkit-progress-bar {
+progress.oafaProgress::-webkit-progress-bar {
 	background: rgb(239, 239, 239);
 	border-radius: 0.2rem;
 }
 
-progress.zxgxProgress::-webkit-progress-value {
+progress.oafaProgress::-webkit-progress-value {
 	border-radius: 0.2rem;
-	background: rgb(0,117,255);
+	background: rgb(0, 117, 255);
 }

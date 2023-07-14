@@ -2,8 +2,8 @@ module.exports = {
 	extension: {
 		'一劳永逸': {
 			version: '1.62',
-			author: '诗笺',
-			intro: '用于更新无名杀版本，<span style="color: red;">基本实现0崩溃</span>。<br>注: 第一次安装游戏请解压完整包后再用此扩展检查更新',
+			author: 'Show-K←诗笺',
+			intro: '允许在联机模式使用扩展，以及其他在联机模式中可能有用的功能',
 		}
 	}
 };

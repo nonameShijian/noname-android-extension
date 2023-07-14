@@ -3,9 +3,9 @@
 // @ts-check
 game.import("extension", function (lib, game, ui, get, ai, _status) {
 
-	if (!game.getExtensionConfig('在线更新', 'incompatibleExtension') && game.getExtensionConfig('假装无敌', 'enable')) {
-		alert('【在线更新】扩展提示您：\r\n【假装无敌】扩展也覆盖了游戏内的检查更新按钮，使用时请注意避免出现bug。');
-		game.saveExtensionConfig('在线更新', 'incompatibleExtension', true);
+	if (!game.getExtensionConfig('一劳永逸', 'firstTime')) {
+		alert('《一劳永逸》扩展提示您：\r\n刚导入扩展时尚未《一劳永逸》！请仔细阅读扩展介绍（选项→扩展→一劳永逸）！不受理因没有仔细阅读扩展介绍而产生的问题！');
+		game.saveExtensionConfig('一劳永逸', 'firstTime', true);
 	}
 
 	/**
@@ -14,7 +14,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 	 * @param { fetchOptions } options 配置
 	 * @returns { Promise<Response> }
 	 */
-	function myFetch(url, options = { timeout: typeof game.getExtensionConfig('在线更新', 'timeout') == 'number' ? game.getExtensionConfig('在线更新', 'timeout') : 5000 }) {
+	function myFetch(url, options = { timeout: typeof game.getExtensionConfig('一劳永逸', 'timeout') == 'number' ? game.getExtensionConfig('一劳永逸', 'timeout') : 0 }) {
 		return new Promise((resolve, reject) => {
 			/** @type { AbortController | undefined } */
 			let myAbortController;
@@ -45,15 +45,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 	};
 
 	/**
-	 * 判断是否能进行更新(即是否能连接上百度)
+	 * 判断是否能更新(即是否能连接上必应)
 	 * @returns { Promise<number | void> }
 	 */
 	function canUpdate() {
 		return new Promise((resolve, reject) => {
-			myFetch(`https://www.baidu.com?date=${(new Date()).getTime()}`).then(response => {
+			myFetch(`https://www.bing.com?date=${(new Date()).getTime()}`).then(response => {
 				// 304: 自上次访问以来，请求的资源未被修改
 				if (response.status == 200 || response.status == 304) {
-					console.log('连接百度成功，状态码: ' + response.status);
+					console.log('连接必应成功，状态码: ' + response.status);
 					resolve();
 				} else {
 					reject(response.status);
@@ -97,7 +97,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 	const assetConfigFun = function (configName) {
 		return function (bool) {
-			game.saveExtensionConfig('在线更新', configName, bool);
+			game.saveExtensionConfig('一劳永逸', configName, bool);
 		}
 	};
 
@@ -112,11 +112,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			const { url, error, message } = err;
 			if (typeof url !== 'undefined' && typeof error !== 'undefined' && typeof message !== 'undefined') {
 				const translate = {
-					coding: 'Coding',
+					URCOAFA: '一劳永逸URC',
+					codingOAFA: '一劳永逸GitHub Proxy',
+					fastGitOAFA: '一劳永逸Fast Git',
+					githubOAFA: '一劳永逸GitHub',
+					URC: 'URC',
+					fastGit: 'Fast Git',
 					github: 'GitHub',
-					fastgit: 'GitHub镜像',
-					// xuanwu: '玄武镜像'
-					URC: 'URC'
+					coding: 'GitHub Proxy'
 				};
 				let url_in_updateURLS;
 				for (const updateURL in lib.updateURLS) {
@@ -142,24 +145,25 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 		} else if (typeof err == 'string') {
 			alert(err);
 		}
-		if (++game.updateErrors > 5) {
+		if (++game.showKUpdateErrors > 5) {
 			alert('检测到获取更新失败次数过多，建议您更换无名杀的更新源');
-			game.updateErrors = 0;
+			game.showKUpdateErrors = 0;
 		}
 	};
 
 	return {
-		name: "在线更新",
+		name: "一劳永逸",
 		editable: false,
 		onremove: function () {
+			game.saveExtensionConfig('一劳永逸', 'firstTime');
 			// 删除本扩展后，更新源改回coding
 			lib.updateURL = lib.updateURLS.coding;
 			game.saveConfig('update_link', 'coding');
 			// 取消监听
-			window.removeEventListener('beforeunload', window.saveBrokenFile);
+			window.removeEventListener('beforeunload', window.showKSaveBrokenFile);
 		},
 		content: function (config, pack) {
-			if (game.getExtensionConfig('在线更新', 'rewriteUpdateButton')) {
+			if (game.getExtensionConfig('一劳永逸', 'rewriteUpdateButton')) {
 				// 替换无名杀自带的更新功能
 				// 取消复选框和扩展的绑定
 				const { checkForUpdate, checkForAssetUpdate } = this[4].code.config;
@@ -197,7 +201,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							assetUpdateButton
 						});
 						clearInterval(interval);
-						return alert('【在线更新】扩展提示您：\r\n获取按钮异常,覆盖游戏更新操作失败');
+						return alert('《一劳永逸》扩展提示您：\r\n获取按钮异常,覆盖游戏更新操作失败');
 					}
 
 					if (
@@ -214,7 +218,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							assetUpdateButton
 						});
 						clearInterval(interval);
-						return alert('【在线更新】扩展提示您：\r\n获取按钮异常,覆盖游戏更新操作失败');
+						return alert('《一劳永逸》扩展提示您：\r\n获取按钮异常,覆盖游戏更新操作失败');
 					}
 
 					// 插入一条修改说明
@@ -222,11 +226,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					/** @type HTMLUListElement  */
 					// @ts-ignore
 					const insertLi = ul.insertBefore(document.createElement('li'), ul.firstElementChild);
-					insertLi.innerHTML = "<span class='bluetext'>更新功能已由【在线更新】扩展覆盖</span></br>";
+					insertLi.innerHTML = "<span class='bluetext'>更新功能已由《一劳永逸》扩展覆盖</span></br>";
 					// a标签跳转到扩展界面
 					const jumpToExt = document.createElement('a');
 					jumpToExt.href = "javascript:void(0)";
-					jumpToExt.onclick = () => ui.click.extensionTab('在线更新');
+					jumpToExt.onclick = () => ui.click.extensionTab('一劳永逸');
 
 					HTMLDivElement.prototype.css.call(jumpToExt, {
 						color: 'white',
@@ -236,39 +240,39 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					insertLi.appendChild(jumpToExt);
 
 					clearInterval(interval);
-					console.log("【在线更新】扩展已修改更新界面");
+					console.log("《一劳永逸》扩展已修改更新界面");
 				}, 500);
 			}
 
 			// 重启前下载失败的文件名(去除重复的)
-			if (!Array.isArray(lib.config.extension_在线更新_brokenFile)) {
-				game.saveExtensionConfig('在线更新', 'brokenFile', []);
+			if (!Array.isArray(lib.config.extension_一劳永逸_brokenFile)) {
+				game.saveExtensionConfig('一劳永逸', 'brokenFile', []);
 			} else {
-				game.saveExtensionConfig('在线更新', 'brokenFile', Array.from(new Set([...lib.config.extension_在线更新_brokenFile])));
+				game.saveExtensionConfig('一劳永逸', 'brokenFile', Array.from(new Set([...lib.config.extension_一劳永逸_brokenFile])));
 			}
 
 			// 如果有没下载完就重启的文件
-			let brokenFileArr = lib.config.extension_在线更新_brokenFile;
-			window.saveBrokenFile = () => {
-				game.saveExtensionConfig('在线更新', 'brokenFile', [...new Set(brokenFileArr)]);
+			let brokenFileArr = lib.config.extension_一劳永逸_brokenFile;
+			window.showKSaveBrokenFile = () => {
+				game.saveExtensionConfig('一劳永逸', 'brokenFile', [...new Set(brokenFileArr)]);
 			};
-			window.addEventListener('beforeunload', window.saveBrokenFile);
+			window.addEventListener('beforeunload', window.showKSaveBrokenFile);
 			if (brokenFileArr && brokenFileArr.length) {
 				// 改为用setTimeout，因为刚开启时候的网络请求不会成功
 				setTimeout(() => {
-					if (confirm(`检测到有未下载成功的文件(${brokenFileArr})，是否进行重新下载?`)) {
+					if (confirm(`检测到有未下载成功的文件(${brokenFileArr})，是否重新下载?`)) {
 						console.log('未下载成功的文件：', brokenFileArr);
 						// 复制文件数组，用来和进度绑定
 						const copyList = [...brokenFileArr];
 						// 当前下载进度
 						let index = 0;
 						// 创建下载进度div
-						const progress = game.shijianCreateProgress('重新下载', copyList.length, copyList[0], index);
+						const progress = game.showKCreateProgress('重新下载', copyList.length, copyList[0], index);
 						document.body.appendChild(progress);
 						// 下载之前保留下载列表
-						brokenFileArr.forEach(v => lib.config.extension_在线更新_brokenFile.add(v));
-						game.saveConfigValue('extension_在线更新_brokenFile');
-						game.shijianMultiDownload(brokenFileArr, (fileNameList) => {
+						brokenFileArr.forEach(v => lib.config.extension_一劳永逸_brokenFile.add(v));
+						game.saveConfigValue('extension_一劳永逸_brokenFile');
+						game.showKMultiDownload(brokenFileArr, (fileNameList) => {
 							// 下载成功，更新进度
 							progress.setProgressValue(++index);
 							progress.autoSetFileNameFromArray(fileNameList);
@@ -279,7 +283,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								progress.remove();
 								// 延时提示
 								setTimeout(() => {
-									alert('错误: 用户未登录(用coding和玄武镜像可能会出现此问题)\n请更换成其他更新源');
+									alert('错误: 用户未登录\n请更换成其他更新源');
 								}, 100);
 							}
 						}, () => {
@@ -303,15 +307,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 						});
 					} else {
-						console.log('不进行重新下载，已清空失败列表');
+						console.log('不重新下载，已清空失败列表');
 						brokenFileArr.length = 0;
-						game.saveConfigValue('extension_在线更新_brokenFile');
+						game.saveConfigValue('extension_一劳永逸_brokenFile');
 					}
 				}, 2500);
 			}
 
 			// 切换回应用，清除app通知
-			if (game.shijianHasLocalNotification()) {
+			if (game.showKHasLocalNotification()) {
 				document.addEventListener('visibilitychange', () => {
 					if (!document.hidden) {
 						// 检查更新
@@ -326,7 +330,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 			// 自动检测更新
 			function checkUpdate() {
-				game.shijianGetUpdateFiles().then(({ update }) => {
+				game.showKGetUpdateFiles().then(({ update }) => {
 					console.log('获取到更新', update);
 					if (!lib.version) lib.version = "1.9";
 					if (update.version == lib.version) {
@@ -339,7 +343,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 					function goupdate() {
 						ui.menuContainer.show();
-						ui.click.extensionTab('在线更新');
+						ui.click.extensionTab('一劳永逸');
 						/** @type { HTMLButtonElement[] } */
 						// @ts-ignore
 						const buttonList = ui.menuContainer.querySelectorAll('.config>span>button');
@@ -349,15 +353,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							updateButton.click();
 							assetUpdateButton.click();
 						} else {
-							alert('【在线更新】扩展提示您：\r\n未找到本扩展的更新按钮，请手动点击检查游戏更新和素材更新');
+							alert('《一劳永逸》扩展提示您：\r\n未找到本扩展的更新按钮，请手动点击检查游戏更新和素材更新');
 						}
 					}
 
-					// 获取到更新，进行提示
-					let str = '有新版本' + update.version + '可用，是否前往【在线更新】扩展界面下载？';
+					// 获取到更新，准备提示
+					let str = '有新版本' + update.version + '可用，是否前往《一劳永逸》扩展界面下载？';
 
 					// 处于后台时，发送通知
-					if (game.shijianHasLocalNotification()) {
+					if (game.showKHasLocalNotification()) {
 						if (document.hidden) {
 							let str2 = update.changeLog[0];
 							for (let i = 1; i < update.changeLog.length; i++) {
@@ -394,32 +398,35 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 				}).catch(console.error);
 			}
-			
+
 			// 刚开启时候的网络请求不会成功
-			if (game.getExtensionConfig('在线更新', 'auto_check_update')) {
+			if (game.getExtensionConfig('一劳永逸', 'auto_check_update')) {
 				setTimeout(() => {
 					checkUpdate();
 					setInterval(() => {
-						if (game.getExtensionConfig('在线更新', 'auto_check_update')) checkUpdate();
+						if (game.getExtensionConfig('一劳永逸', 'auto_check_update')) checkUpdate();
 					}, 1000 * 60 * 10);
 				}, 10000);
 			}
 		},
 		precontent: function () {
-			// 添加两个更新地址
+			// 添加更新地址
 			Object.assign(lib.updateURLS, {
-				fastgit: 'https://raw.fgit.ml/libccy/noname',
-				// xuanwu: 'https://kuangthree.coding.net/p/nonamexwjh/d/nonamexwjh/git/raw',
-				URC: 'https://unitedrhythmized.club/libccy/noname'
+				URCOAFA: "https://unitedrhythmized.club/Tipx-L/noname",
+				codingOAFA: "https://ghproxy.com/https://raw.githubusercontent.com/Tipx-L/noname",
+				fastGitOAFA: "https://raw.fgit.ml/Tipx-L/noname",
+				githubOAFA: "https://raw.githubusercontent.com/Tipx-L/noname",
+				URC: 'https://unitedrhythmized.club/libccy/noname',
+				fastGit: 'https://raw.fgit.ml/libccy/noname'
 			});
 
-			// 初始化，更新地址修改为URC
-			if (!game.getExtensionConfig('在线更新', 'update_link')) {
-				game.saveConfig('update_link', 'URC');
-				game.saveExtensionConfig('在线更新', 'update_link', 'URC');
-				lib.updateURL = lib.updateURLS['URC'];
+			// 初始化，更新地址修改为一劳永逸URC
+			if (!game.getExtensionConfig('一劳永逸', 'update_link')) {
+				game.saveConfig('update_link', 'URCOAFA');
+				game.saveExtensionConfig('一劳永逸', 'update_link', 'URCOAFA');
+				lib.updateURL = lib.updateURLS['URCOAFA'];
 			} else {
-				game.saveConfig('update_link', game.getExtensionConfig('在线更新', 'update_link'));
+				game.saveConfig('update_link', game.getExtensionConfig('一劳永逸', 'update_link'));
 			}
 
 			// 修改游戏原生更新选项，插入上面的更新地址
@@ -433,25 +440,28 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								return url;
 							}
 						}
-						game.saveConfig('update_link', 'URC');
-						game.saveExtensionConfig('在线更新', 'update_link', 'URC');
-						lib.updateURL = lib.updateURLS.URC;
-						return 'URC';
+						game.saveConfig('update_link', 'URCOAFA');
+						game.saveExtensionConfig('一劳永逸', 'update_link', 'URCOAFA');
+						lib.updateURL = lib.updateURLS.URCOAFA;
+						return 'URCOAFA';
 					})(),
 					item: {
-						coding: 'Coding',
+						URCOAFA: '一劳永逸URC',
+						codingOAFA: '一劳永逸GitHub Proxy',
+						fastGitOAFA: '一劳永逸Fast Git',
+						githubOAFA: '一劳永逸GitHub',
+						URC: 'URC',
+						fastGit: 'Fast Git',
 						github: 'GitHub',
-						// fastgit: 'GitHub镜像',
-						// xuanwu: '玄武镜像',
-						URC: 'URC'
+						coding: 'GitHub Proxy'
 					},
 					onclick: function (item) {
 						if (lib.updateURLS[item]) {
 							game.saveConfig('update_link', item);
-							game.saveExtensionConfig('在线更新', 'update_link', item);
+							game.saveExtensionConfig('一劳永逸', 'update_link', item);
 							lib.updateURL = lib.updateURLS[item];
 						} else {
-							alert(`选择的更新源(${ item })不存在`);
+							alert(`选择的更新源(${item})不存在`);
 							return false;
 						}
 					},
@@ -460,12 +470,15 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 			/** 检测最快连接到的更新源  */
 			// @ts-ignore
-			game.getFastestUpdateURL = function (updateURLS = lib.updateURLS, translate = {
-				coding: 'Coding',
+			game.showKGetFastestUpdateURL = function (updateURLS = lib.updateURLS, translate = {
+				URCOAFA: '一劳永逸URC',
+				codingOAFA: '一劳永逸GitHub Proxy',
+				fastGitOAFA: '一劳永逸Fast Git',
+				githubOAFA: '一劳永逸GitHub',
+				URC: 'URC',
+				fastGit: 'Fast Git',
 				github: 'GitHub',
-				fastgit: 'GitHub镜像',
-				// xuanwu: '玄武镜像',
-				URC: 'URC'
+				coding: 'GitHub Proxy'
 			}) {
 				if (typeof updateURLS != 'object') throw new TypeError('updateURLS must be an object type');
 				if (typeof translate != 'object') throw new TypeError('translate must be an object type');
@@ -556,7 +569,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					});
 			}
 
-			game.shijianDownload = (url, onsuccess, onerror, onprogress) => {
+			game.showKDownload = (url, onsuccess, onerror, onprogress) => {
 				let downloadUrl = url, path = '', name = url;
 				if (url.indexOf('/') != -1) {
 					path = url.slice(0, url.lastIndexOf('/'));
@@ -567,8 +580,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					url = lib.updateURL + '/master/' + url;
 				}
 
-				lib.config.extension_在线更新_brokenFile.add(downloadUrl);
-				game.saveConfigValue('extension_在线更新_brokenFile');
+				lib.config.extension_一劳永逸_brokenFile.add(downloadUrl);
+				game.saveConfigValue('extension_一劳永逸_brokenFile');
 
 				/**
 				 * 下载成功
@@ -632,18 +645,18 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							target: e.target,
 							error: errorCode[e.code]
 						});
-						switch(e.http_status) {
-							case 404: 
+						switch (e.http_status) {
+							case 404:
 								game.print(`更新源中不存在${path}/${name}`);
 								console.log(`更新源中不存在${path}/${name}`);
 								success(undefined, true);
 								break;
 							case 402:
 								// git镜像中这个资源无法下载，那就跳过
-								if (lib.updateURL === lib.updateURLS.fastgit) {
-									if (!sessionStorage.getItem('在线更新_fastgit_402')) {
+								if (lib.updateURL === lib.updateURLS.fastGit || lib.updateURL === lib.updateURLS.fastGitOAFA) {
+									if (!sessionStorage.getItem('在线更新_fastGit_402')) {
 										alert('这个资源在git镜像更新源内无法下载，请在下载操作全部完成后切换更新源下载！');
-										sessionStorage.setItem('在线更新_fastgit_402', 'true');
+										sessionStorage.setItem('在线更新_fastGit_402', 'true');
 									}
 									success(undefined, true);
 								} else if (typeof onerror == 'function') {
@@ -655,7 +668,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									onerror(e, e.body);
 								}
 						}
-						
+
 					} else {
 						// 电脑端下载的错误
 						console.error(e, message);
@@ -666,10 +679,10 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						}
 						// git镜像中这个资源无法下载，那就跳过
 						// @ts-ignore
-						else if (e.message == '402' && lib.updateURL === lib.updateURLS.fastgit) {
-							if (!sessionStorage.getItem('在线更新_fastgit_402')) {
+						else if (e.message == '402' && (lib.updateURL === lib.updateURLS.fastGit || lib.updateURL === lib.updateURLS.fastGitOAFA)) {
+							if (!sessionStorage.getItem('在线更新_fastGit_402')) {
 								alert('这个资源在git镜像更新源内无法下载，请在下载操作全部完成后切换更新源下载！');
-								sessionStorage.setItem('在线更新_fastgit_402', 'true');
+								sessionStorage.setItem('在线更新_fastGit_402', 'true');
 							}
 							success(undefined, true);
 						}
@@ -698,7 +711,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								}, download);
 							}, download);
 						}, download);
-				} else if (typeof window.require == 'function'){
+				} else if (typeof window.require == 'function') {
 					const fetch = myFetch(`${url}?date=${(new Date()).getTime()}`);
 
 					// if (typeof onprogress == 'function') {
@@ -766,8 +779,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (stat.isDirectory()) {
 									console.error(`${path + '/' + name}是个文件夹`);
 									alert(`${path + '/' + name}是个文件夹，不予下载。请将此问题报告给此更新源的管理者。`);
-									lib.config.extension_在线更新_brokenFile.remove(path + '/' + name);
-									game.saveConfigValue('extension_在线更新_brokenFile');
+									lib.config.extension_一劳永逸_brokenFile.remove(path + '/' + name);
+									game.saveConfigValue('extension_一劳永逸_brokenFile');
 									return success(undefined, true);
 								} else {
 									writeFile();
@@ -781,11 +794,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							response => {
 								console.log(response);
 								error(new Error(String(response.status)), response.statusText);
-						})
+							})
 				}
 			};
 
-			game.shijianMultiDownload = (list, onsuccess, onerror, onfinish, onprogress) => {
+			game.showKMultiDownload = (list, onsuccess, onerror, onfinish, onprogress) => {
 				// 不修改原数组
 				let list2 = list.slice(0);
 				// 正在并发下载的文件名数组
@@ -793,13 +806,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				// 已经下载的数量
 				let length = 0;
 				// 最大并发量
-				let max = game.getExtensionConfig('在线更新', 'maxFetchNum') || 5;
+				let max = game.getExtensionConfig('一劳永逸', 'maxFetchNum') || 16;
 				/**
 				 * 下载文件，失败后300ms重新下载
 				 * @param { string } current 文件名 
 				 */
 				let reload = current => {
-					game.shijianDownload(current, skipDownload => {
+					game.showKDownload(current, skipDownload => {
 						if (skipDownload === true) {
 							game.print(`跳过下载: ${current}`);
 							console.log(`跳过下载: ${current}`);
@@ -820,13 +833,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							setTimeout(() => reload(current), 300);
 						}
 					}/*, (loaded, total) => {
-						if (!game.getExtensionConfig('在线更新', 'logProgress')) return;
+						if (!game.getExtensionConfig('一劳永逸', 'logProgress')) return;
 						if (typeof onprogress == 'function') {
 							onprogress(current, loaded, total);
 						}
 					}*/);
 				};
-				
+
 				let download = () => {
 					if (length < list.length) {
 						let num_copy = list3.length;
@@ -849,7 +862,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			};
 
 			// 下载进度
-			game.shijianCreateProgress = (title, max, fileName, value) => {
+			game.showKCreateProgress = (title, max, fileName, value) => {
 				/** @type { progress } */
 				// @ts-ignore
 				const parent = ui.create.div(ui.window, {
@@ -907,7 +920,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 				ui.create.node('br', container);
 
-				const progress = ui.create.node('progress.zxgxProgress', container);
+				const progress = ui.create.node('progress.oafaProgress', container);
 				progress.setAttribute('value', value || '0');
 				progress.setAttribute('max', max);
 
@@ -934,7 +947,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			};
 
 			// 获取更新文件
-			game.shijianGetUpdateFiles = () => {
+			game.showKGetUpdateFiles = () => {
 				/** 获取noname_update */
 				function getNonameUpdate() {
 					/** 更新源地址 */
@@ -949,7 +962,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								try {
 									const data = JSON.parse(text);
 									if (data.msg.user_not_login == '用户未登录') {
-										alert('错误: 用户未登录(用coding和玄武镜像可能会出现此问题)\n请更换成其他更新源');
+										alert('错误: 用户未登录\n请更换成其他更新源');
 										return Promise.reject('user_not_login');
 									} else {
 										eval(text);
@@ -981,7 +994,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								try {
 									const data = JSON.parse(text);
 									if (data.msg.user_not_login == '用户未登录') {
-										alert('错误: 用户未登录(用coding和玄武镜像可能会出现此问题)\n请更换成其他更新源');
+										alert('错误: 用户未登录\n请更换成其他更新源');
 										return Promise.reject('user_not_login');
 									} else {
 										eval(text);
@@ -1045,7 +1058,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			};
 
 			// 获取更新素材
-			game.shijianGetUpdateAssets = () => {
+			game.showKGetUpdateAssets = () => {
 				/** 获取noname_asset_list */
 				function getNonameAssets() {
 					/** 更新源地址 */
@@ -1060,7 +1073,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								try {
 									const data = JSON.parse(text);
 									if (data.msg.user_not_login == '用户未登录') {
-										alert('错误: 用户未登录(用coding和玄武镜像可能会出现此问题)\n请更换成其他更新源');
+										alert('错误: 用户未登录\n请更换成其他更新源');
 										return Promise.reject('user_not_login');
 									} else {
 										eval(text);
@@ -1124,11 +1137,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				});
 			}
 
-			game.shijianHasLocalNotification = () => {
+			game.showKHasLocalNotification = () => {
 				return !!(window.cordova && cordova.plugins && cordova.plugins.notification && cordova.plugins.notification.local);
 			}
 
-			game.updateErrors = 0;
+			game.showKUpdateErrors = 0;
 
 			game.shijianCheckVersion = (ver1, ver2) => {
 				if (typeof ver1 != 'string') ver1 = '';
@@ -1193,16 +1206,18 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				enumerable: true,
 				get() {
 					return function () {
-						if (!sessionStorage.getItem('在线更新_checkForUpdate')) {
-							alert('无名杀自带的自动检查更新已被在线更新扩展禁用，请使用在线更新扩展内的自动检查更新功能');
-							sessionStorage.setItem('在线更新_checkForUpdate', '1');
+						if (!sessionStorage.getItem('一劳永逸_checkForUpdate')) {
+							alert('无名杀自带的自动检查更新已被一劳永逸扩展禁用，请使用一劳永逸扩展内的自动检查更新功能');
+							sessionStorage.setItem('一劳永逸_checkForUpdate', '1');
 						}
 						game.saveConfig('auto_check_update', false);
 					};
 				},
-				set(v) {}
+				set(v) {
+					void 0;
+				}
 			});
-			
+
 			if (!Array.isArray(lib.updateReady)) lib.updateReady = [];
 			if (!Array.isArray(lib.updateAssetReady)) lib.updateAssetReady = [];
 
@@ -1311,7 +1326,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				}
 			});
 
-			lib.init.css(lib.assetURL + 'extension/在线更新', 'extension');
+			lib.init.css(lib.assetURL + 'extension/一劳永逸', 'extension');
 		},
 		config: {
 			show_version: {
@@ -1326,30 +1341,41 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				init: '无',
 				item: {
 					无: '无',
-					coding: 'Coding',
-					github: 'GitHub',
-					// fastgit: 'GitHub镜像',
-					// xuanwu: '玄武镜像',
+					URCOAFA: '一劳永逸URC',
+					codingOAFA: '一劳永逸GitHub Proxy',
+					fastGitOAFA: '一劳永逸Fast Git',
+					githubOAFA: '一劳永逸GitHub',
 					URC: 'URC',
+					fastGit: 'Fast Git',
+					github: 'GitHub',
+					coding: 'GitHub Proxy'
 				},
 				onclick: function (item) {
 					let str;
 					switch (item) {
-						case 'coding':
-							// str = '目前最主要的更新源，但也是崩的最彻底的一个';
-							str = '目前最主要的更新源。从v1.9.115.3以后(不包括)，coding更新源更换为了另一个可用网址(好像现在也不能用了)';
+						case 'URCOAFA':
+							str = '《一劳永逸》更新源，用于《一劳永逸》（由Show-K大佬提供，名字取自United Rhythmized Club，推荐使用此更新源。此更新源能否连接取决于服务器是否还有剩余流量）';
+							break;
+						case 'codingOAFA':
+							str = '《一劳永逸》更新源，用于《一劳永逸》（目前最主要的更新源。从v1.9.115.3以后(不包括)，coding更新源更换为了另一个可用网址）';
+							break;
+						case 'fastGitOAFA':
+							str = '《一劳永逸》更新源，用于《一劳永逸》（GitHub的镜像网址，拥有在国内访问的能力，但是偶尔会很卡）';
+							break;
+						case 'githubOAFA':
+							str = '《一劳永逸》更新源，用于《一劳永逸》（国外的更新源，没有vpn或修改host设置的情况下几乎连不上此更新源）';
+							break;
+						case 'URC':
+							str = '由Show-K大佬提供，名字取自United Rhythmized Club，推荐使用此更新源。此更新源能否连接取决于服务器是否还有剩余流量';
+							break;
+						case 'fastGit':
+							str = 'GitHub的镜像网址，拥有在国内访问的能力，但是偶尔会很卡';
 							break;
 						case 'github':
 							str = '国外的更新源，没有vpn或修改host设置的情况下几乎连不上此更新源';
 							break;
-						case 'fastgit':
-							str = 'github的镜像网址，拥有在国内访问的能力，但是偶尔会很卡，推荐使用此更新源';
-							break;
-						case 'xuanwu':
-							str = '由寰宇星城创建的更新源，和coding差不多，版本的更新需要他在苏婆更新后手动拉代码到服务器上。目前因coding网址的政策已废弃';
-							break;
-						case 'URC':
-							str = '由Show-K大佬提供，名字取自United Rhythmized Club，推荐使用此更新源。此更新源能否连接取决于服务器是否还有剩余流量';
+						case 'coding':
+							str = '目前最主要的更新源。从v1.9.115.3以后(不包括)，coding更新源更换为了另一个可用网址(好像现在也不能用了)';
 					}
 					typeof str != 'undefined' && alert(str);
 					return false;
@@ -1357,37 +1383,35 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			},
 			update_link: {
 				name: '更新地址',
-				//init: (lib.updateURL == lib.updateURLS['coding'] ? 'coding' : 'fastgit'),
 				init: (() => {
 					for (const url in lib.updateURLS) {
 						if (lib.updateURL == lib.updateURLS[url]) {
 							return url;
 						}
 					}
-					game.saveConfig('update_link', 'URC');
-					game.saveExtensionConfig('在线更新', 'update_link', 'URC');
-					lib.updateURL = lib.updateURLS['URC'];
-					return 'URC';
+					game.saveConfig('update_link', 'URCOAFA');
+					game.saveExtensionConfig('一劳永逸', 'update_link', 'URCOAFA');
+					lib.updateURL = lib.updateURLS['URCOAFA'];
+					return 'URCOAFA';
 				})(),
 				item: {
-					coding: 'Coding',
+					URCOAFA: '一劳永逸URC',
+					codingOAFA: '一劳永逸GitHub Proxy',
+					fastGitOAFA: '一劳永逸Fast Git',
+					githubOAFA: '一劳永逸GitHub',
+					URC: 'URC',
+					fastGit: 'Fast Git',
 					github: 'GitHub',
-					fastgit: 'GitHub镜像',
-					// xuanwu: '玄武镜像',
-					URC: 'URC'
+					coding: 'GitHub Proxy'
 				},
 				onclick: function (item) {
-					if (item != game.getExtensionConfig('在线更新', 'update_link')) {
-						if (['xuanwu'].includes(item)) {
-							alert('此更新源已弃用，请不要再使用此更新源');
-							return false;
-						}
+					if (item != game.getExtensionConfig('一劳永逸', 'update_link')) {
 						delete window.noname_update;
 						delete window.noname_asset_list;
 						delete window.noname_skin_list;
 						if (lib.updateURLS[item]) {
 							game.saveConfig('update_link', item);
-							game.saveExtensionConfig('在线更新', 'update_link', item);
+							game.saveExtensionConfig('一劳永逸', 'update_link', item);
 							lib.updateURL = lib.updateURLS[item];
 						} else {
 							alert(`选择的更新源(${item})不存在`);
@@ -1408,7 +1432,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					const span = this.childNodes[0].childNodes[0];
 					if (span.innerText == '测试最快连接到的更新源') {
 						span.innerText = '测试中...';
-						game.getFastestUpdateURL().then(result => {
+						game.showKGetFastestUpdateURL().then(result => {
 							console.log(result);
 							span.innerText = '测试最快连接到的更新源';
 						});
@@ -1416,7 +1440,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				}
 			},
 			timeout: {
-				init: '5000',
+				init: '0',
 				name: '网络超时时间（毫秒）',
 				input: true,
 				onblur: function (e) {
@@ -1438,7 +1462,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						target.innerText = '300';
 						time = 300;
 					}
-					game.saveExtensionConfig('在线更新', 'timeout', time);
+					game.saveExtensionConfig('一劳永逸', 'timeout', time);
 
 					if (typeof window.AbortController !== 'function') {
 						alert('您的设备不支持设置超时时间');
@@ -1450,11 +1474,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				intro: '下载文件时显示的进度条是否实时显示每个文件的下载进度',
 				name: '显示每个文件的下载进度',
 				onclick: function (bool) {
-					game.saveExtensionConfig('在线更新', 'logProgress', bool);
+					game.saveExtensionConfig('一劳永逸', 'logProgress', bool);
 				}
 			},*/
 			maxFetchNum: {
-				init: 5,
+				init: 16,
 				name: '下载多个文件的最大并发数',
 				input: true,
 				onblur: function (e) {
@@ -1465,8 +1489,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					let target = e.target;
 					let num = Number(target.innerText);
 					if (isNaN(num)) {
-						target.innerText = '5';
-						num = 5;
+						target.innerText = '16';
+						num = 16;
 					} else if (num < 1) {
 						alert('并发数最小为1');
 						target.innerText = '1';
@@ -1474,11 +1498,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					} else {
 						num = Math.floor(num);
 					}
-					game.saveExtensionConfig('在线更新', 'maxFetchNum', num);
+					game.saveExtensionConfig('一劳永逸', 'maxFetchNum', num);
 				},
 			},
 			rewriteUpdateButton: {
-				init: true,
+				init: false,
 				name: '覆盖更新按钮',
 				intro: '覆盖无名杀自带的更新按钮',
 				onclick: assetConfigFun('rewriteUpdateButton'),
@@ -1490,7 +1514,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				intro: '每次开启游戏后，每10分钟检查无名杀是否有更新',
 				name: '每10分钟自动检测更新',
 				onclick: function (bool) {
-					game.saveExtensionConfig('在线更新', 'auto_check_update', bool);
+					game.saveExtensionConfig('一劳永逸', 'auto_check_update', bool);
 					game.saveConfig('auto_check_update', false);
 				}
 			},
@@ -1517,8 +1541,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					// @ts-ignore
 					let parentNode = button.parentNode;
 					if (button instanceof HTMLButtonElement && button.innerHTML == "检查游戏更新") {
-						if (game.Updating) return alert('正在更新游戏文件，请勿重复点击');
-						if (game.allUpdatesCompleted) return alert('游戏文件和素材全部更新完毕');
+						if (game.showKUpdating) return alert('正在更新游戏文件，请勿重复点击');
+						if (game.showKAllUpdatesCompleted) return alert('游戏文件和素材全部更新完毕');
 					}
 					if (button.innerText != '检查游戏更新') return;
 					// 是否可以更新，每次都调用的原因是判断网络问题
@@ -1527,12 +1551,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					} catch (e) {
 						return response_catch(e);
 					}
-					game.Updating = true;
-					game.unwantedToUpdate = false;
+					game.showKUpdating = true;
+					game.showKUnwantedToUpdate = false;
 
 					/** 按钮还原状态 */
 					const reduction = () => {
-						game.Updating = false;
+						game.showKUpdating = false;
 						button.innerText = '检查游戏更新';
 						button.disabled = false;
 					};
@@ -1543,13 +1567,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						button.innerHTML = '正在检查更新';
 						button.disabled = true;
 
-						game.shijianGetUpdateFiles().then(({ update, source_list: updates }) => {
+						game.showKGetUpdateFiles().then(({ update, source_list: updates }) => {
 							game.saveConfig('check_version', update.version);
 							if (!lib.version) lib.version = "1.9";
 							//要更新的版本和现有的版本一致
 							if (update.version == lib.version) {
-								if (!confirm('当前版本已经是最新，是否覆盖更新？')) {
-									game.Updating = false;
+								if (!confirm('当前版本已经是最新，是否覆盖更新？\n（如果此时需要《一劳永逸》或解除《一劳永逸》，请直接点击确定）')) {
+									game.showKUpdating = false;
 									button.innerHTML = '检查游戏更新';
 									button.disabled = false;
 									return;
@@ -1557,8 +1581,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							} else {
 								const result = game.shijianCheckVersion(lib.version, update.version);
 								if (result == 1) {
-									if (!confirm('游戏版本比服务器提供的版本还要高，是否覆盖更新？')) {
-										game.Updating = false;
+									if (!confirm('游戏版本比服务器提供的版本还要高，是否覆盖更新？\n（如果此时需要《一劳永逸》或解除《一劳永逸》，请检查更新源是否正常）')) {
+										game.showKUpdating = false;
 										button.innerHTML = '检查游戏更新';
 										button.disabled = false;
 										return;
@@ -1574,7 +1598,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								lib.version = update.version;
 								delete window.noname_source_list;
 
-								if (!game.getExtensionConfig('在线更新', 'updateAll') && Array.isArray(files)) {
+								if (!game.getExtensionConfig('一劳永逸', 'updateAll') && Array.isArray(files)) {
 									files.add('game/update.js');
 									let files2 = [];
 									for (let i = 0; i < files.length; i++) {
@@ -1633,9 +1657,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								// 复制文件数组，用来和进度绑定
 								const copyList = [...updates];
 								// 创建下载进度div
-								const progress = game.shijianCreateProgress('更新游戏', copyList.length, copyList[0]);
+								const progress = game.showKCreateProgress('更新游戏', copyList.length, copyList[0]);
 								// app创建通知
-								if (game.shijianHasLocalNotification()) {
+								if (game.showKHasLocalNotification()) {
 									cordova.plugins.notification.local.schedule({
 										id: 2,
 										title: '游戏版本更新',
@@ -1645,16 +1669,16 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									});
 								}
 								// 下载之前保留下载列表
-								updates.forEach(v => lib.config.extension_在线更新_brokenFile.add(v));
-								game.saveConfigValue('extension_在线更新_brokenFile');
-								
-								game.shijianMultiDownload(updates, (fileNameList) => {
+								updates.forEach(v => lib.config.extension_一劳永逸_brokenFile.add(v));
+								game.saveConfigValue('extension_一劳永逸_brokenFile');
+
+								game.showKMultiDownload(updates, (fileNameList) => {
 									n1++;
 									span.innerHTML = `正在下载文件（${n1}/${n2}）`;
 									// 更新进度
 									progress.setProgressValue(n1);
 									progress.autoSetFileNameFromArray(fileNameList);
-									if (game.shijianHasLocalNotification()) {
+									if (game.showKHasLocalNotification()) {
 										cordova.plugins.notification.local.update({
 											id: 2,
 											text: `正在下载文件（${n1}/${n2}）`,
@@ -1663,13 +1687,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									}
 								},
 									// 下载失败
-									e => {},
+									e => void 0,
 									// 下载完成
 									() => {
 										// 更新进度, 下载完成时不执行onsuccess而是onfinish
 										progress.setProgressValue(copyList.length);
 										progress.setFileName('下载完成');
-										if (game.shijianHasLocalNotification()) {
+										if (game.showKHasLocalNotification()) {
 											cordova.plugins.notification.local.clear(2);
 											if (document.hidden) {
 												cordova.plugins.notification.local.schedule({
@@ -1686,12 +1710,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 											delete window.noname_update;
 											span.innerHTML = `游戏更新完毕（${n1}/${n2}）`;
 											setTimeout(() => {
-												if (!game.UpdatingForAsset) {
-													if (game.unwantedToUpdateAsset) game.allUpdatesCompleted = true;
+												if (!game.showKUpdatingForAsset) {
+													if (game.showKUnwantedToUpdateAsset) game.showKAllUpdatesCompleted = true;
 													alert('游戏更新完毕');
 												}
-												game.Updating = false;
-												game.unwantedToUpdate = true;
+												game.showKUpdating = false;
+												game.showKUnwantedToUpdate = true;
 												typeof consoleMenu != 'undefined' && consoleMenu.remove();
 												parentNode.insertBefore(document.createElement('br'), parentNode.firstElementChild);
 												let button2 = document.createElement('button');
@@ -1749,7 +1773,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										} else {
 											// 还原版本
 											lib.version = version;
-											game.Updating = false;
+											game.showKUpdating = false;
 											button.innerHTML = '检查游戏更新';
 											button.disabled = false;
 										}
@@ -1763,13 +1787,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								} else {
 									// 还原版本
 									lib.version = version;
-									game.Updating = false;
+									game.showKUpdating = false;
 									button.innerHTML = '检查游戏更新';
 									button.disabled = false;
 								}
 							}
 						}).catch(err => {
-							game.Updating = false;
+							game.showKUpdating = false;
 							button.innerHTML = '检查游戏更新';
 							button.disabled = false;
 							response_catch(err);
@@ -1779,11 +1803,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				}
 			},
 			updateAll: {
-				init: false,
+				init: true,
 				intro: '更新游戏时，下载所有主要文件（不包括素材），如果你自行修改了无名杀本体的theme等文件夹下的素材，建议不要开启此选项',
 				name: '强制更新所有主文件',
 				/*onclick: (bool) => {
-					game.saveExtensionConfig('在线更新', 'updateAll', bool);
+					game.saveExtensionConfig('一劳永逸', 'updateAll', bool);
 				}*/
 				onclick: assetConfigFun('updateAll'),
 			},
@@ -1808,13 +1832,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					// @ts-ignore
 					let parentNode = button.parentNode;
 					if (button instanceof HTMLButtonElement && button.innerHTML == "检查素材更新") {
-						if (game.UpdatingForAsset) {
+						if (game.showKUpdatingForAsset) {
 							return alert('正在更新游戏素材，请勿重复点击');
 						}
-						if (game.allUpdatesCompleted) {
+						if (game.showKAllUpdatesCompleted) {
 							return alert('游戏文件和素材全部更新完毕');
 						}
-						if (game.unwantedToUpdateAsset) {
+						if (game.showKUnwantedToUpdateAsset) {
 							return alert('素材已是最新');
 						}
 					}
@@ -1825,12 +1849,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					} catch (e) {
 						return response_catch(e);
 					}
-					game.UpdatingForAsset = true;
-					game.unwantedToUpdateAsset = false;
+					game.showKUpdatingForAsset = true;
+					game.showKUnwantedToUpdateAsset = false;
 
 					/** 还原状态 */
 					let reduction = () => {
-						game.UpdatingForAsset = false;
+						game.showKUpdatingForAsset = false;
 						button.innerText = '检查素材更新';
 						button.disabled = false;
 					};
@@ -1841,14 +1865,14 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					} else {
 						button.innerHTML = '正在检查更新';
 						button.disabled = true;
-						game.shijianGetUpdateAssets().then(({ assets: updates, skins }) => {
+						game.showKGetUpdateAssets().then(({ assets: updates, skins }) => {
 							delete window.noname_asset_list;
 							let asset_version = updates.shift();
 							let skipcharacter = []
 							let skipcard = []; //['tiesuo_mark'];
 
 							//如果没选择【检查图片素材】（全部）
-							if (!game.getExtensionConfig('在线更新', 'assetImageFull')) {
+							if (!game.getExtensionConfig('一劳永逸', 'assetImageFull')) {
 								for (let i = 0; i < lib.config.all.sgscharacters.length; i++) {
 									let pack = lib.characterPack[lib.config.all.sgscharacters[i]];
 									for (let j in pack) {
@@ -1867,9 +1891,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								switch (updates[i].slice(0, 5)) {
 									case 'image':
 										//如果没选择检查图片更新（全部）
-										if (!game.getExtensionConfig('在线更新', 'assetImageFull')) {
+										if (!game.getExtensionConfig('一劳永逸', 'assetImageFull')) {
 											//如果没选择检查图片更新（部分）
-											if (!game.getExtensionConfig('在线更新', 'assetImage')) {
+											if (!game.getExtensionConfig('一劳永逸', 'assetImage')) {
 												//跳过
 												updates.splice(i--, 1);
 											} else {
@@ -1889,13 +1913,13 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										}
 										break;
 									case 'audio':
-										if (!game.getExtensionConfig('在线更新', 'assetAudio')) {
+										if (!game.getExtensionConfig('一劳永逸', 'assetAudio')) {
 											updates.splice(i--, 1);
 										}
 										break;
 
 									case 'font/':
-										if (!game.getExtensionConfig('在线更新', 'assetFont')) {
+										if (!game.getExtensionConfig('一劳永逸', 'assetFont')) {
 											updates.splice(i--, 1);
 										}
 
@@ -1903,7 +1927,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							}
 
 							// 如果更新皮肤
-							if (game.getExtensionConfig('在线更新', 'assetSkin') && typeof skins == 'object') {
+							if (game.getExtensionConfig('一劳永逸', 'assetSkin') && typeof skins == 'object') {
 								for (let i in skins) {
 									for (let j = 1; j <= skins[i]; j++) {
 										updates.push('image/skin/' + i + '/' + j + '.jpg');
@@ -1915,8 +1939,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								if (updates.length == 0) {
 									game.saveConfig('asset_version', asset_version);
 									alert('素材已是最新');
-									game.UpdatingForAsset = false;
-									game.unwantedToUpdateAsset = true;
+									game.showKUpdatingForAsset = false;
+									game.showKUnwantedToUpdateAsset = true;
 									button.innerHTML = '素材已是最新';
 									// button.disabled = false;
 									return;
@@ -1945,12 +1969,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								// 复制文件数组，用来和进度绑定
 								const copyList = [...updates];
 								// 创建下载进度div
-								const progress = game.shijianCreateProgress('更新游戏素材', copyList.length, copyList[0]);
+								const progress = game.showKCreateProgress('更新游戏素材', copyList.length, copyList[0]);
 								// 修改样式，保证不和更新游戏的进度框重复
 								progress.style.bottom = 'calc(25% - 75px)';
 
 								// app创建通知
-								if (game.shijianHasLocalNotification()) {
+								if (game.showKHasLocalNotification()) {
 									cordova.plugins.notification.local.schedule({
 										id: 3,
 										title: '游戏素材更新',
@@ -1961,17 +1985,17 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 								}
 
 								// 下载之前保留下载列表
-								updates.forEach(v => lib.config.extension_在线更新_brokenFile.add(v));
-								game.saveConfigValue('extension_在线更新_brokenFile');
+								updates.forEach(v => lib.config.extension_一劳永逸_brokenFile.add(v));
+								game.saveConfigValue('extension_一劳永逸_brokenFile');
 
-								game.shijianMultiDownload(updates, (fileNameList) => {
+								game.showKMultiDownload(updates, (fileNameList) => {
 									n1++;
 									span.innerHTML = `正在下载文件（${n1}/${n2}）`;
 									// 更新进度
 									progress.setProgressValue(n1);
 									progress.autoSetFileNameFromArray(fileNameList);
 									// app创建通知
-									if (game.shijianHasLocalNotification()) {
+									if (game.showKHasLocalNotification()) {
 										cordova.plugins.notification.local.update({
 											id: 3,
 											text: `正在下载文件（${n1}/${n2}）`,
@@ -1986,7 +2010,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									progress.setProgressValue(copyList.length);
 									progress.setFileName('下载完成');
 									// app创建通知
-									if (game.shijianHasLocalNotification()) {
+									if (game.showKHasLocalNotification()) {
 										cordova.plugins.notification.local.clear(3);
 										if (document.hidden) {
 											cordova.plugins.notification.local.schedule({
@@ -2001,12 +2025,12 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 										progress.remove();
 										span.innerHTML = `素材更新完毕（${n1}/${n2}）`;
 										setTimeout(() => {
-											if (!game.Updating) {
+											if (!game.showKUpdating) {
 												alert('更新完成');
-												if (game.unwantedToUpdate) game.allUpdatesCompleted = true;
+												if (game.showKUnwantedToUpdate) game.showKAllUpdatesCompleted = true;
 											}
-											game.UpdatingForAsset = false;
-											game.unwantedToUpdateAsset = true;
+											game.showKUpdatingForAsset = false;
+											game.showKUnwantedToUpdateAsset = true;
 											typeof consoleMenu != 'undefined' && consoleMenu.remove();
 											parentNode.insertBefore(document.createElement('br'), parentNode.firstElementChild);
 											let button2 = document.createElement('button');
@@ -2084,7 +2108,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							checkFileList(updates, proceed);
 
 						}).catch(e => {
-							game.UpdatingForAsset = false;
+							game.showKUpdatingForAsset = false;
 							button.innerHTML = '检查素材更新';
 							button.disabled = false;
 							response_catch(e);
@@ -2106,7 +2130,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				onclick: assetConfigFun('assetAudio')
 			},
 			assetSkin: {
-				init: false,
+				init: true,
 				intro: '检查更新时，检查皮肤文件',
 				name: '检查皮肤素材',
 				onclick: assetConfigFun('assetSkin')
@@ -2122,26 +2146,22 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 				intro: '检查更新时，检查图片文件(全部)',
 				name: '检查图片素材(全部)',
 				onclick: assetConfigFun('assetImageFull')
-			},
-			address: {
-				clear: true,
-				nopointer: true,
-				name: `</br>
-					最新完整包下载地址：
-					<a target='_self' href='https://hub.fgit.ml/libccy/noname/archive/refs/heads/master.zip'><span style='text-decoration: underline;'>点击下载</span></a></br>
-					</br>
-				`,
 			}
 		},
 		help: {},
 		package: {
 			intro: `
-				<span style='font-weight: bold;'>※【假装无敌】扩展也覆盖了游戏内的检查更新按钮，使用时请注意避免出现bug。</span></br>
-				安装本扩展后会自动覆盖【自动检测更新】的功能，不论扩展是否开启</br>
-				点击按钮即可在线更新，文件下载失败会自动重新下载。目前已经覆盖了游戏自带的更新按钮</br>
+				允许在联机模式使用扩展，以及其他在联机模式中可能有用的功能</br>
+				切记：刚导入扩展时尚未《一劳永逸》！</br>
+				（确定更新源的名称带“一劳永逸”前缀后）请点击“检查游戏更新”按钮（即使提示“当前版本已经是最新……”，也不能取消，一定要点击确定），稍等重启即可《一劳永逸》</br>
+				若更新源无法连接，可切换其他同类更新源；若更新源于中途连接不稳定，可于中途切换其他同类更新源，扩展会智能处理</br>
+				改用名称不带“一劳永逸”前缀的更新源（“URC”等）再点击“检查游戏更新”按钮即可解除《一劳永逸》</br>
+				因为基于《在线更新》修改，所以也可单纯当作《在线更新》使用</br>
 				<span style='color:red'>※请不要在更新时关闭游戏或主动断网，否则后果自负</span></br>
+				<span style='font-weight: bold;'>※《在线更新》《假装无敌》等扩展也覆盖了游戏内的检查更新按钮，使用时请注意避免出现bug。</span></br>
+				<span style='font-weight: bold;'>※基于诗笺《在线更新》修改</span></br>
 			`,
-			author: "诗笺",
+			author: "Show-K←诗笺",
 			diskURL: "",
 			forumURL: "",
 			version: "1.62",
