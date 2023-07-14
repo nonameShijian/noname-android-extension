@@ -1073,8 +1073,8 @@ window["noname_android_extension"] = {
 		"size": "104.43MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.122.3",
-		"version": "1.2.0.220114.27",
+		"nonameVersion": "1.9.123",
+		"version": "1.2.0.220114.28",
 		"author": "Show-K←寰宇星城←短歌",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
@@ -2012,7 +2012,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_ye.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "162.91MB"
+		"size": "162.99MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.3",
@@ -2828,7 +2828,7 @@ window["noname_android_extension"] = {
 			"extension/Thunder/image/stand/zhaoxiang/芳芷飒敌.png",
 			"extension/Thunder/image/stand/zhoufei/晴空暖鸢.png"
 		],
-		"size": "32.81MB"
+		"size": "32.82MB"
 	},
 	"大乱桌斗": {
 		"version": "2.1.12",
