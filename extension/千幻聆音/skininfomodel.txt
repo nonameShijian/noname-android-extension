@@ -1,5 +1,0 @@
-'use strict';
-window.qhly_import_safe(function(lib,game,ui,get,ai,_status){
-	var obj = _REPLACE_OBJECT_;
-    game.qhly_importSkinInfo(obj);
-});

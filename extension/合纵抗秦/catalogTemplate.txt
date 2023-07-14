@@ -1,9 +1,0 @@
-﻿extension["合纵抗秦"]={
-	intro:"OL的合纵抗秦模式，现在由诗笺维护更新",
-	author:"烟雨墨染&苏婆玛丽奥",
-	nedisk:"",
-	forum:"",
-	size:"#SIZE",
-	version:"1.7",
-	files:[#FILES],
-};
