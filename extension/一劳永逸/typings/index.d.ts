@@ -181,7 +181,7 @@ declare interface Game {
 	showKDownload: (url: string, onsuccess?: (skipDownload?: boolean) => void, onerror?: (e: FileTransferError | Error, message?: string) => void, onprogress?: (loaded: number, total: number) => void) => void;
 
 	/**
-	 * 将current分别显示在无名杀控制台中，比game.shijianDownload做出了更细致的错误划分
+	 * 将current分别显示在无名杀控制台中，比game.showKDownload做出了更细致的错误划分
 	 * 
 	 * onsuccess中的bool代表当前文件是否下载了（即是否是404）
 	 * 
@@ -248,10 +248,10 @@ declare interface Game {
 	 * @param ver2 版本号2
 	 * @example
 	 * ```
-	 * game.shijianCheckVersion('1.61', '1.62'); // -1
-	 * game.shijianCheckVersion('1.61.1', '1.61'); // 1
-	 * game.shijianCheckVersion('1.61', '1.61'); // 0
+	 * game.showKCheckVersion('1.61', '1.62'); // -1
+	 * game.showKCheckVersion('1.61.1', '1.61'); // 1
+	 * game.showKCheckVersion('1.61', '1.61'); // 0
 	 * ```
 	 */
-	shijianCheckVersion: (ver1: string, ver2: string) => -1 | 0 | 1;
+	showKCheckVersion: (ver1: string, ver2: string) => -1 | 0 | 1;
 }

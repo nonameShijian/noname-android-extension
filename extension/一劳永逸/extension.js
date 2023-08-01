@@ -336,7 +336,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 					if (update.version == lib.version) {
 						return;
 					} else {
-						const result = game.shijianCheckVersion(lib.version, update.version);
+						const result = game.showKCheckVersion(lib.version, update.version);
 						// 游戏版本比服务器提供的版本还要高
 						if (result == 1) return;
 					}
@@ -1143,7 +1143,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 
 			game.showKUpdateErrors = 0;
 
-			game.shijianCheckVersion = (ver1, ver2) => {
+			game.showKCheckVersion = (ver1, ver2) => {
 				if (typeof ver1 != 'string') ver1 = '';
 				if (typeof ver2 != 'string') ver2 = '';
 				/**
@@ -1579,7 +1579,7 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 									return;
 								}
 							} else {
-								const result = game.shijianCheckVersion(lib.version, update.version);
+								const result = game.showKCheckVersion(lib.version, update.version);
 								if (result == 1) {
 									if (!confirm('游戏版本比服务器提供的版本还要高，是否覆盖更新？\n（如果此时需要《一劳永逸》或解除《一劳永逸》，请检查更新源是否正常）')) {
 										game.showKUpdating = false;
