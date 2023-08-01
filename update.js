@@ -1,6 +1,6 @@
 window["noname_android_extension"] = {
 	"在线更新": {
-		"version": "1.61",
+		"version": "1.62",
 		"author": "诗笺",
 		"intro": "用于更新无名杀版本，<span style=\"color: red;\">基本实现0崩溃</span>。<br>注: 第一次安装游戏请解压完整包后再用此扩展检查更新",
 		"files": [
@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "78.01KB"
+		"size": "77.19KB"
 	},
 	"SJ Settings": {
 		"version": "1.4204",
