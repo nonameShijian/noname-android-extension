@@ -609,8 +609,8 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							fileReader.readAsText(file, "UTF-8");
 						});
 					} else {
-						lib.config.extension_在线更新_brokenFile.remove(downloadUrl);
-						game.saveConfigValue('extension_在线更新_brokenFile');
+						lib.config.extension_一劳永逸_brokenFile.remove(downloadUrl);
+						game.saveConfigValue('extension_一劳永逸_brokenFile');
 						if (typeof onsuccess == 'function') {
 							if (skipDownload === true) {
 								onsuccess(skipDownload);
@@ -654,9 +654,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 							case 402:
 								// git镜像中这个资源无法下载，那就跳过
 								if (lib.updateURL === lib.updateURLS.fastGit || lib.updateURL === lib.updateURLS.fastGitOAFA) {
-									if (!sessionStorage.getItem('在线更新_fastGit_402')) {
+									if (!sessionStorage.getItem('一劳永逸_fastGit_402')) {
 										alert('这个资源在git镜像更新源内无法下载，请在下载操作全部完成后切换更新源下载！');
-										sessionStorage.setItem('在线更新_fastGit_402', 'true');
+										sessionStorage.setItem('一劳永逸_fastGit_402', 'true');
 									}
 									success(undefined, true);
 								} else if (typeof onerror == 'function') {
@@ -680,9 +680,9 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 						// git镜像中这个资源无法下载，那就跳过
 						// @ts-ignore
 						else if (e.message == '402' && (lib.updateURL === lib.updateURLS.fastGit || lib.updateURL === lib.updateURLS.fastGitOAFA)) {
-							if (!sessionStorage.getItem('在线更新_fastGit_402')) {
+							if (!sessionStorage.getItem('一劳永逸_fastGit_402')) {
 								alert('这个资源在git镜像更新源内无法下载，请在下载操作全部完成后切换更新源下载！');
-								sessionStorage.setItem('在线更新_fastGit_402', 'true');
+								sessionStorage.setItem('一劳永逸_fastGit_402', 'true');
 							}
 							success(undefined, true);
 						}
