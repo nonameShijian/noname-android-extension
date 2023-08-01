@@ -1073,8 +1073,8 @@ window["noname_android_extension"] = {
 		"size": "104.43MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.123",
-		"version": "1.2.0.220114.28",
+		"nonameVersion": "1.9.124",
+		"version": "1.2.0.220114.29",
 		"author": "Show-K←寰宇星城←短歌",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
@@ -1952,6 +1952,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/identity_fan.png",
 			"extension/十周年UI/image/decoration/identity_friend.png",
 			"extension/十周年UI/image/decoration/identity_guessing.png",
+			"extension/十周年UI/image/decoration/identity_houshou.png",
 			"extension/十周年UI/image/decoration/identity_junshi.png",
 			"extension/十周年UI/image/decoration/identity_mengjun.png",
 			"extension/十周年UI/image/decoration/identity_mingzhong.png",
@@ -1960,6 +1961,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/identity_qianfeng.png",
 			"extension/十周年UI/image/decoration/identity_qianfeng_blue.png",
 			"extension/十周年UI/image/decoration/identity_suicong.png",
+			"extension/十周年UI/image/decoration/identity_xianshou.png",
 			"extension/十周年UI/image/decoration/identity_xizuo.png",
 			"extension/十周年UI/image/decoration/identity_xizuo_blue.png",
 			"extension/十周年UI/image/decoration/identity_ye.png",
@@ -2012,7 +2014,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_ye.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "162.99MB"
+		"size": "163.00MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.3",
