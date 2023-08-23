@@ -8,7 +8,7 @@ window["noname_android_extension"] = {
 			"extension/在线更新/extension.js",
 			"extension/在线更新/typings/index.d.ts"
 		],
-		"size": "77.19KB"
+		"size": "79.29KB"
 	},
 	"SJ Settings": {
 		"version": "1.4204",
@@ -1073,9 +1073,9 @@ window["noname_android_extension"] = {
 		"size": "104.43MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.9.124",
-		"version": "1.2.0.220114.29",
-		"author": "Show-K←寰宇星城←短歌",
+		"nonameVersion": "1.9.125.1",
+		"version": "1.2.0.220114.31",
+		"author": "Show-K←寰宇星城←disgrace2013←短歌 QQ464598631",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
 			"extension/十周年UI/animation.css",
