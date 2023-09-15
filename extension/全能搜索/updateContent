@@ -1,5 +1,38 @@
 <pre style="color:rgb(210,210,000); font-size:25px; line-height:20px; text-shadow: 0 0 2px black;">
 <br>
+2023-09-14 更新内容：
+
+1.增加lib.qnssOnCreate和lib.qnssOnClose两个数组接口，
+用于给其他ui扩展处理和本扩展ui层面的不兼容问题<br>
+
+2.修复部分复制操作不正确的bug<br>
+
+3.修复点击“技能拥有者”时，会被搜索模式限制而搜索不到的bug<br>
+
+4.可以输入“武将1-20”来搜索第一到第20个武将了(from Curpond)<br>
+
+5.为不标准的技能额外进行一次额外技能的判定(from Curpond)<br>
+
+2023-07-14 更新内容：
+
+1.修复Array.prototype.includes的polyfill效果不正确的问题<br>
+
+2023-04-09 更新内容：
+
+1.新增更改代码高亮样式的功能<br>
+
+2.修复不能直接通过技能id搜索没有中文翻译技能的bug<br>
+
+3.现在输入框可以获取关于技能id的提示了<br>
+
+4."搜索界面背景图片"选项增加"随机"和"本体默认背景"选项<br>
+
+5.取消"每一大类搜索结果可点击箭头隐藏/显示"的功能<br>
+
+6.搜索结果分页显示，再次优化性能<br>
+
+7.解决扩展中使用的event.path在Chrome 109废弃而报错的bug<br>
+
 2023-02-21 更新内容：
 
 1.修复因占用ui.dialog导致的国战模式弹窗bug<br>

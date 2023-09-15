@@ -107,9 +107,9 @@
 	background: transparent;
 }
 
-.Searcher>.menu>input.wrong {
-	border: 2px solid red;
-	animation: wrong 0.2s ease-in-out 2;
+.Searcher>.menu>input.qnssWrong {
+	border: 2px solid red !important;
+	animation: qnssWrong 0.2s ease-in-out 2 !important;
 }
 
 .Searcher>.menu>ul {
@@ -324,10 +324,10 @@ div.qnssWave::before {
 	position: absolute;
 	color: #00ffff;
 	/* 添加波浪动画 */
-	animation: wave 4s ease-in-out infinite;
+	animation: qnssWave 4s ease-in-out infinite;
 }
 
-@keyframes wave {
+@keyframes qnssWave {
 
 	0%,
 	100% {
@@ -377,7 +377,7 @@ div.qnssWave::before {
 	width: 35px !important;
 	font-size: 35px !important;
 	display: inline-block !important;
-	animation: slide1 1s ease-in-out infinite;
+	animation: qnssSlide1 1s ease-in-out infinite;
 	cursor: pointer;
 }
 
@@ -385,11 +385,11 @@ div.qnssWave::before {
 	width: 35px !important;
 	font-size: 35px !important;
 	display: inline-block !important;
-	animation: slide2 1s ease-in-out infinite;
+	animation: qnssSlide2 1s ease-in-out infinite;
 	cursor: pointer;
 }
 
-@keyframes slide1 {
+@keyframes qnssSlide1 {
 
 	0%,
 	100% {
@@ -401,7 +401,7 @@ div.qnssWave::before {
 	}
 }
 
-@keyframes slide2 {
+@keyframes qnssSlide2 {
 
 	0%,
 	100% {
@@ -413,7 +413,7 @@ div.qnssWave::before {
 	}
 }
 
-@keyframes wrong {
+@keyframes qnssWrong {
 	0% {
 		transform: translatex(0%);
 	}
@@ -433,6 +433,10 @@ div.qnssWave::before {
 	100% {
 		transform: translatex(0%);
 	}
+}
+
+pre.hljs {
+	overflow: scroll;
 }
 
 /*
@@ -484,3 +488,106 @@ div.qnssWave::before {
 }
 
 */
+
+/* 
+ * 分页css, 颜色样式修改
+ * https: //github.com/accforgit/blog-data/blob/master/%E7%AE%80%E5%8D%95%E5%88%86%E9%A1%B5/demo/style.css
+ */
+
+.Searcher .pagination {
+	margin-top: 18px;
+	font-size: 0;
+	text-align: center;
+
+	/* 自行添加的居中 */
+	position: fixed;
+	bottom: 0px;
+	display: block;
+	left: 0;
+	right: 0;
+	margin: 8px auto;
+	z-index: 100;
+}
+
+.Searcher .pagination .page-li {
+	display: inline-block;
+	font-size: 15px;
+	line-height: 1;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.Searcher .pagination .page-li:not(.number-ellipsis):hover {
+	cursor: pointer;
+	background-color: #409eff;
+}
+
+.Searcher .pagination .page-li.page-active {
+	cursor: default;
+	color: #fff;
+	border-color: #409eff;
+	background-color: #409eff;
+}
+
+.Searcher .pagination .page-li.number-ellipsis {
+	border: none;
+	cursor: default;
+}
+
+.Searcher .pagination .page-li.number-ellipsis:hover {
+	color: #409eff;
+}
+
+.Searcher .pagination .page-number {
+	width: 38px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	border: 1px solid #EAEAEA;
+	text-align: center;
+}
+
+.Searcher .pagination .page-prev {
+	padding: 8px 14px;
+	margin-right: 8px;
+	border: 1px solid #EAEAEA;
+}
+
+.Searcher .pagination .page-prev.no-prev {
+	color: #c6c6c6;
+}
+
+.Searcher .pagination .page-prev.no-prev:hover {
+	cursor: default;
+	background-color: #409eff;
+}
+
+.Searcher .pagination .page-next {
+	padding: 8px 14px;
+	margin-left: 8px;
+	border: 1px solid #EAEAEA;
+}
+
+.Searcher .pagination .page-next.no-next {
+	color: #c6c6c6;
+}
+
+.Searcher .pagination .page-next.no-next:hover {
+	cursor: default;
+}
+
+.Searcher .pagination .number-ellipsis {
+	display: inline-block;
+	font-size: 15px;
+	padding: 8px 14px;
+}
+
+.Searcher .pagination .number-ellipsis.page-hidden {
+	display: none;
+}
+
+#page-go {
+	margin-top: 10px;
+	text-align: center;
+}

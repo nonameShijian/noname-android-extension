@@ -31,8 +31,15 @@ declare interface Window {
 
 	/** 解决非开发者模式game不存在的问题 */
 	qnssGame: Game;
+
 	/** 显示/关闭代码 */
 	qnssShowCode: (this: HTMLDivElement, type = '技能') => void;
+
+	/** 播放使用卡牌的音效 */
+	qnssPlayCardAudio(sex: string, cardName: string, nature: string): void;
+
+	/** 播放角色阵亡的音效 */
+	qnssPlayDieAudio(charName: string): void;
 }
 
 /** 设置全局Symbol,用于设置一个对象的描述 */
@@ -63,6 +70,16 @@ declare interface Lib {
 		ai: Map<string | Symbol, any>, 
 		_status: Map<string | Symbol, any>
 	}
+
+	/** 开启全能搜索界面后执行回调 */
+	qnssOnCreate: Function[],
+	/** 关闭全能搜索界面后执行回调 */
+	qnssOnClose: Function[],
+}
+
+declare interface Get {
+	/** 获取所有的额外技能 */
+	qnssAllDerivation(skill: string, step?: number): string[];
 }
 
 declare interface Game {
@@ -81,6 +98,10 @@ declare interface Status {
 }
 
 declare interface UI {
+	/** 更换css */
+    qnssChangeEditorCss: (name: string) => void;
+	/** css */
+    qnssEditorCss: HTMLLinkElement;
 	/** 点击进入全能搜索界面 */
 	Searcher: HTMLDivElement;
 }

@@ -2,20 +2,52 @@
 /// <reference path="./typings/highlight.d.ts" />
 /// <reference path="../../typings/index.d.ts" />
 "use strict";
-game.import("extension", function(lib, game, ui, get, ai, _status) {
-	return {
-		name: "全能搜索",
-		editable: false,
-		onremove: function () {
-			// game.saveExtensionConfig('全能搜索', 'searchList');
-		},
-		content: function(config, pack) {
+game.import("extension", function (lib, game, ui, get, ai, _status) {
+    return {
+        name: "全能搜索",
+        editable: false,
+        // @ts-ignore
+        content: function (config, pack) {
+            /********************************************************************************************* */
+            //向【诗笺】致敬，斗胆增加一点功能。下面是更改的内容。
+
+            get.qnssAllDerivation = function (skill, step) {
+                step = step || 0;
+                if (step >= 2) return [];
+                const skillobj = lib.skill[skill];
+                if (!skillobj) return [];
+                let subSkillList = [];
+                //添加技能中derivation,group和global中的技能
+                const arr = ['derivation', 'group', 'global'];
+                arr.forEach((i) => {
+                    if (skillobj[i]) {
+                        if (typeof skillobj[i] == 'string') {
+                            subSkillList.add(skillobj[i]);
+                        } else if (Array.isArray(skillobj[i])) {
+                            subSkillList.addArray(skillobj[i]);
+                        }
+                    }
+                });
+
+                const reg = /(addTempSkill|addSkill|addAdditionalSkill)\((['"])([\w]+)\2/g;
+                let str = get.stringify(skillobj);
+                for (let match of str.matchAll(reg)) {
+                    if (match && match[3]) subSkillList.add(match[3]);
+                }
+                for (let s of subSkillList) {
+                    subSkillList.addArray(get.qnssAllDerivation(s, step + 1));
+                }
+                return subSkillList;
+            };
+
+            /******************************************************************************************** */
+
             // 移除武将卡牌搜索器扩展
             // game.removeExtension("武将卡牌搜索器", false);
 
             let layoutPath = lib.assetURL + 'extension/全能搜索/';
 
-            //加入hljs
+            // 加入hljs
             lib.init.js(layoutPath, 'highlight.min', () => {
                 window.hljs.configure({
                     // tabReplace: '	',
@@ -23,11 +55,23 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     languages: ['javaScript'],
                 });
                 game.全能搜索_highlight = text => window.hljs.highlightAuto(text).value;
-            });
+            }, () => { });
+
+            // 加入分页插件
+            lib.init.js(layoutPath, 'SimplePagination');
 
             //加入css
             lib.init.css(layoutPath, 'css/extension');
-            lib.init.css(layoutPath, 'css/vs2015.min');
+            ui.qnssEditorCss = lib.init.css(layoutPath, `css/${game.getExtensionConfig('全能搜索', 'css') ? game.getExtensionConfig('全能搜索', 'css').slice(0, -4) : 'vs2015.min'}`);
+
+            const css = ['a11y-dark.min.css', 'an-old-hope.min.css', 'atom-one-dark.min.css', 'extension.css', 'felipec.min.css', 'gml.min.css', 'vs2015.min.css'];
+            ui.qnssChangeEditorCss = (name) => {
+                if (css.includes(`${name}.min.css`) || css.includes(name)) {
+                    ui.qnssEditorCss && ui.qnssEditorCss.remove();
+                    if (!name.endsWith('.min.css')) name = name + '.min.css';
+                    ui.qnssEditorCss = lib.init.css(layoutPath, `css/${name.slice(0, -4)}`);
+                }
+            };
 
             // 设置全局Symbol,用于设置一个对象的描述
             window.qnssDescriptionSymbol = Symbol('description');
@@ -35,10 +79,10 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
             window.qnssKeySymbol = Symbol('key');
             // 设置全局的跳转搜索功能
             window.qnssSee = function (a) {
-                _status.全能搜索_Searcher.tujianBegin(_status.全能搜索_Searcher.content, a ? a.innerText : undefined, false);
+                _status.全能搜索_Searcher.tujianBegin(_status.全能搜索_Searcher.content, a ? a.innerText : undefined, false, true);
             };
             // 显示/关闭代码
-            window.qnssShowCode = function(type) {
+            window.qnssShowCode = function (type) {
                 if (type) {
                     // @ts-ignore
                     var display = this.nextElementSibling.style.display;
@@ -52,6 +96,62 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     // @ts-ignore
                     this.parentNode.nextElementSibling.style.display = (display == "none" ? "" : "none");
                     this.innerHTML = (display !== "none" ? `点击查看${type}代码` : `点击关闭${type}代码`);
+                }
+            };
+
+            window.qnssPlayCardAudio = function (sex, cardName, nature) {
+                let audioinfo = lib.card[cardName].audio;
+                if (cardName == 'sha' && ['fire', 'thunder', 'ice'].includes(nature)) {
+                    game.playAudio('card', sex, `sha_${nature}`);
+                } else {
+                    if (typeof audioinfo == 'string') {
+                        if (audioinfo.indexOf('ext:') == 0) game.playAudio('..', 'extension', audioinfo.slice(4), `${cardName}_male`);
+                        else game.playAudio('card', sex, audioinfo);
+                    }
+                    else {
+                        game.playAudio('card', sex, cardName);
+                    }
+                }
+            };
+
+            window.qnssPlayDieAudio = function (charName) {
+                let findInExt = false;
+                // @ts-ignore
+                Object.keys(lib.characterPack).forEach(key => {
+                    // 扩展自带的武将包
+                    if (key.includes("mode_extension_")) {
+                        if (charName in lib.characterPack[key] && lib.character[charName] == lib.characterPack[key][charName]) {
+                            // @ts-ignore
+                            findInExt = key.slice(15);
+                        }
+                    }
+                    // 扩展自定义的武将包
+                    if (lib.config.extensions.includes(lib.translate[key + "_character_config"])) {
+                        if (charName in lib.characterPack[key] && lib.character[charName] == lib.characterPack[key][charName]) {
+                            // @ts-ignore
+                            findInExt = lib.translate[key + "_character_config"];
+                        }
+                    }
+                });
+                if (findInExt) {
+                    // @ts-ignore
+                    game.playAudio("..", "extension", findInExt, charName, function () {
+                        // @ts-ignore
+                        window.qnssFindDieAudio(findInExt, charName)
+                    });
+                } else if (lib.character[charName] && lib.character[charName][4].contains("die_audio")) {
+                    // @ts-ignore
+                    game.playAudio("die", charName, function () {
+                        game.alert("该武将没有阵亡语音");
+                    });
+                } else {
+                    // @ts-ignore
+                    game.playAudio("die", charName, function () {
+                        // @ts-ignore
+                        game.playAudio("die", charName.slice(charName.indexOf("_") + 1), function () {
+                            game.alert("该武将没有阵亡语音");
+                        });
+                    });
                 }
             };
 
@@ -75,6 +175,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             this.scrollTop = top;
                         };
                     },
+                    // @ts-ignore
                     set(v) { }
                 });
             }
@@ -86,7 +187,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     get() {
                         return Array.prototype.contains;
                     },
-                    set(v) {}
+                    // @ts-ignore
+                    set(v) { }
                 });
             }
 
@@ -131,11 +233,12 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             })
                         };
                     },
+                    // @ts-ignore
                     set(v) { }
                 });
             }
 
-			window.qnssFindDieAudio = function (ext, charName) {
+            window.qnssFindDieAudio = function (ext, charName) {
                 if (lib.skill["_ansory@method_die.audio"]) {
                     const info = lib.character[charName];
                     if (info && Array.isArray(info[4])) {
@@ -155,56 +258,56 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         }
                     }
                 }
-				const r =  new RegExp(`game.playAudio\\(['"]..['"],\\s*['"]extension['"],\\s*['"]` + ext + `\\S*['"],\\s*\\S+\\)`);
-				const player = ui.create.player().init(charName);
-				const dieAudioSkills = Object.keys(lib.skill).filter(v => {
-					if (!v.startsWith('_')) return false;
-					const info = lib.skill[v];
-					if (typeof info.trigger != 'object' || typeof info.content != 'function') return false;
+                const r = new RegExp(`game.playAudio\\(['"]..['"],\\s*['"]extension['"],\\s*['"]` + ext + `\\S*['"],\\s*\\S+\\)`);
+                const player = ui.create.player().init(charName);
+                const dieAudioSkills = Object.keys(lib.skill).filter(v => {
+                    if (!v.startsWith('_')) return false;
+                    const info = lib.skill[v];
+                    if (typeof info.trigger != 'object' || typeof info.content != 'function') return false;
                     for (const t in info.trigger) {
                         if (['global', 'player'].contains(t)) {
                             if (!Array.isArray(info.trigger[t])) info.trigger[t] = [info.trigger[t]];
                             if (!info.trigger[t].some(v => v.startsWith('die'))) return false;
                         }
                     }
-					if (typeof info.filter == 'function') {
-						try {
+                    if (typeof info.filter == 'function') {
+                        try {
                             // @ts-ignore
-							if (info.filter({ player }, player) == false) return false;
-						} catch (e) {
-							return false;
-						}
-					}
-					if (r.test(info.content.toString()) == false) return false;
-					return true;
-				});
-				if (!dieAudioSkills.length) {
-					game.alert("该武将没有阵亡语音");
-				} else {
-					const dieAudioSkillsPromise = dieAudioSkills.map(skill => {
-						return new Promise((resolve, reject) => {
+                            if (info.filter({ player }, player) == false) return false;
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                    if (r.test(info.content.toString()) == false) return false;
+                    return true;
+                });
+                if (!dieAudioSkills.length) {
+                    game.alert("该武将没有阵亡语音");
+                } else {
+                    const dieAudioSkillsPromise = dieAudioSkills.map(skill => {
+                        return new Promise((resolve, reject) => {
                             // @ts-ignore
-							const toString = lib.skill[skill].content.toString();
-							const match = toString.match(r);
-							if (!match) reject();
+                            const toString = lib.skill[skill].content.toString();
+                            const match = toString.match(r);
+                            if (!match) reject();
                             // @ts-ignore
-							let evalArgs = match[0];
-							evalArgs = evalArgs.slice(0, evalArgs.lastIndexOf(',') + 1) + '\'' + player.name + '\'' + ', (e) => { reject(e); });';
-							// console.log(evalArgs);
-							eval(evalArgs);
-							// audio的onerror是异步触发的
-							setTimeout(() => {
-								resolve(null);
-							}, 100);
-						});
-					});
-					Promise.allSettled(dieAudioSkillsPromise).then(result => {
-						if (result.every(v => v.status == 'rejected')) {
-							game.alert("该武将没有阵亡语音");
-						}
-					});
-				}
-			};
+                            let evalArgs = match[0];
+                            evalArgs = evalArgs.slice(0, evalArgs.lastIndexOf(',') + 1) + '\'' + player.name + '\'' + ', (e) => { reject(e); });';
+                            // console.log(evalArgs);
+                            eval(evalArgs);
+                            // audio的onerror是异步触发的
+                            setTimeout(() => {
+                                resolve(null);
+                            }, 100);
+                        });
+                    });
+                    Promise.allSettled(dieAudioSkillsPromise).then(result => {
+                        if (result.every(v => v.status == 'rejected')) {
+                            game.alert("该武将没有阵亡语音");
+                        }
+                    });
+                }
+            };
 
             if (!window.qnssGame) {
                 Object.defineProperty(window, 'qnssGame', {
@@ -213,15 +316,16 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     get() {
                         return game;
                     },
+                    // @ts-ignore
                     set(v) { }
                 });
             }
 
             // 引入全局api描述
             // 创建Promise
-            const importDescription = function(path, file) {
+            const importDescription = function (path, file) {
                 return new Promise(resolve => {
-					// 引入js
+                    // 引入js
                     lib.init.js(path, file, () => {
                         delete lib.imported.libDescription;
                         resolve(null);
@@ -240,8 +344,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 const exts = lib.config.extensions.filter(extName => game.getExtensionConfig(extName, 'enable')).map(extName => importDescription(`${lib.assetURL}extension/${extName}/`, 'description'));
                 Promise.allSettled(exts).then(() => {
                     console.log('importDescription finish');
-                });
-            });
+                }).catch(console.error);
+            }).catch(console.error);
 
             /** 
              * @description 双击复制
@@ -286,6 +390,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     //alert('此版本不支持写入剪切板');
                     return error();
                 };
+                // @ts-ignore
                 navigator.clipboard.writeText(text).then(e => {
                     game.alert("复制成功！\n" + text);
                 }).catch(error);
@@ -312,10 +417,12 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     /** @type {string} 原先的背景图片 **/
                     this.Image = ui.background.style.backgroundImage;
 
-                    if (!game.getExtensionConfig('全能搜索', 'backgroundImage')) {
-                        ui.background.setBackgroundImage("extension/全能搜索/img/" + ['相爱相杀', 'picture'].randomGet() + ".png");
-                    } else {
-                        ui.background.setBackgroundImage("extension/全能搜索/img/" + game.getExtensionConfig('全能搜索', 'backgroundImage'));
+                    if (game.getExtensionConfig('全能搜索', 'backgroundImage') !== 'none') {
+                        if (game.getExtensionConfig('全能搜索', 'backgroundImage') == '随机') {
+                            ui.background.setBackgroundImage("extension/全能搜索/img/" + ['相爱相杀', 'picture'].randomGet() + ".png");
+                        } else {
+                            ui.background.setBackgroundImage("extension/全能搜索/img/" + game.getExtensionConfig('全能搜索', 'backgroundImage'));
+                        }
                     }
 
                     // 暂时不会隐藏canvas
@@ -328,8 +435,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     /** @type {HTMLInputElement} */
                     this.input = this.menu.appendChild(document.createElement('input'));
 
-                    this.input.addEventListener('animationend', function(e) {
-                        if (e.animationName == 'wrong') this.classList.remove('wrong');
+                    this.input.addEventListener('animationend', function (e) {
+                        if (e.animationName == 'qnssWrong') this.classList.remove('qnssWrong');
                     });
 
                     /**
@@ -337,15 +444,14 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                      * @type {string[]}
                      *  */
                     this.searchList = game.getExtensionConfig('全能搜索', 'searchList') || [];
-					/**
-					 * @description 搜索历史, 用于和武将界面联动。该config不随“清空历史”而清空
-					 * @type {string[]}
-					 *  */
-					this.tsymqSearchList = game.getExtensionConfig('全能搜索', 'tsymqSearchList') || [];
+                    /**
+                     * @description 搜索历史, 用于和武将界面联动。该config不随“清空历史”而清空
+                     * @type {string[]}
+                     *  */
+                    this.tsymqSearchList = game.getExtensionConfig('全能搜索', 'tsymqSearchList') || [];
                     /** @type {HTMLUListElement} */
                     this.ul = this.menu.appendChild(document.createElement('ul'));
 
-                    /* this.logindex = -1; */
                     this.hoverLi = null;
                     this.search = ui.create.div('.search', this.menu, '搜索');
                     this.clear = ui.create.div('.clear', this.menu, '清空历史', this.clearDataList.bind(this));
@@ -355,37 +461,38 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     // 防止国战dialog.filterButton报错
                     ui.dialog = this.oldDialog;
                     this.content = this.manual.appendChild(this.dialog);
-					// 选择搜索方式
-					this.searcherModule = game.getExtensionConfig('全能搜索', 'searcherModule') || ['findCharacter', 'findCard', 'findSkill', 'findCode'];
-					game.saveExtensionConfig('全能搜索', 'searcherModule', this.searcherModule);
-					this.chooseModuleDiv = ui.create.div('.chooseModule', this.menu, '搜索模式', function(e) {
-						if (e.path[0] != this) return;
-						this.firstElementChild.classList.toggle('hover');
-					});
+                    // 选择搜索方式
+                    this.searcherModule = game.getExtensionConfig('全能搜索', 'searcherModule') || ['findCharacter', 'findCard', 'findSkill', 'findCode'];
+                    game.saveExtensionConfig('全能搜索', 'searcherModule', this.searcherModule);
+                    this.chooseModuleDiv = ui.create.div('.chooseModule', this.menu, '搜索模式', function (e) {
+                        // 解决chrome109废弃event.path的问题
+                        if (e.target != this) return;
+                        this.firstElementChild.classList.toggle('hover');
+                    });
 
-					/** @type { HTMLUListElement }  */
-					const cm = ui.create.node('ul.list', this.chooseModuleDiv);
+                    /** @type { HTMLUListElement }  */
+                    const cm = ui.create.node('ul.list', this.chooseModuleDiv);
                     for (const arr of [['findCharacter', '搜索武将'], ['findCard', '搜索卡牌'], ['findSkill', '搜索技能'], ['findCode', '搜索代码']]) {
                         const key = arr[0];
                         const value = arr[1];
                         const li = ui.create.node('li');
-						cm.appendChild(li);
-						const input = ui.create.node('input');
-						input.type = 'checkbox';
-						input.value = key;
-						input.checked = this.searcherModule.contains(key);
-						input.addEventListener('change', () => {
-							if (input.checked) {
-								this.searcherModule.add(key);
-							} else {
-								this.searcherModule.remove(key);
-							}
-							game.saveExtensionConfig('全能搜索', 'searcherModule', this.searcherModule);
-						});
-						this[key + 'Input'] = input;
-						li.appendChild(input);
-						li.appendChild(ui.create.node('span', value));
-					}
+                        cm.appendChild(li);
+                        const input = ui.create.node('input');
+                        input.type = 'checkbox';
+                        input.value = key;
+                        input.checked = this.searcherModule.contains(key);
+                        input.addEventListener('change', () => {
+                            if (input.checked) {
+                                this.searcherModule.add(key);
+                            } else {
+                                this.searcherModule.remove(key);
+                            }
+                            game.saveExtensionConfig('全能搜索', 'searcherModule', this.searcherModule);
+                        });
+                        this[key + 'Input'] = input;
+                        li.appendChild(input);
+                        li.appendChild(ui.create.node('span', value));
+                    }
 
                     // 暂停游戏 
                     game.pause2();
@@ -568,9 +675,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             this.ul.removeChild(this.ul.firstChild);
                         }
                         if (!this.input.value) return;
-                        alwaysShow.sort();
-                        for (let data of alwaysShow) {
-                            if (!this.searchList.contains(data) || !data.startsWith(this.input.value) || this.input.value == data) {
+                        this.alwaysShow.sort();
+                        for (let data of this.alwaysShow.filter(data => data.startsWith(this.input.value) && this.input.value != data)) {
+                            if (!this.searchList.contains(data) && !lib.skill[data]) {
                                 continue;
                             }
                             this.ul.appendChild(createLi(data));
@@ -581,8 +688,8 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     /** 添加提示 */
                     let addOptions = (value, array) => {
                         for (const key of array) {
-							// 最多显示30条信息
-							if (this.ul.childElementCount >= 30) return;
+                            // 最多显示30条信息
+                            if (this.ul.childElementCount >= 30) return;
                             if (this.searchList.contains(value + key)) {
                                 continue;
                             } else if (!this.input.value) {
@@ -600,7 +707,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         }
                     };
 
-                    /**清除提示 */
+                    /** 清除提示 */
                     let clearOptions = () => {
                         alwaysShow = this.searchList.slice(0).sort();
                         updateDescription();
@@ -633,16 +740,16 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         e.stopPropagation();
                         if (e.key == 'Enter') {
                             //回车
-							this.ul.style.display = 'none';
+                            this.ul.style.display = 'none';
                             if (this.hoverLi) {
                                 this.input.value = this.hoverLi.innerText;
-								delete this.hoverLi;
-								this.input.dispatchEvent(new CustomEvent('changeInput'));
-								this.ul.style.display = 'none';
-								while (this.ul.hasChildNodes()) {
+                                delete this.hoverLi;
+                                this.input.dispatchEvent(new CustomEvent('changeInput'));
+                                this.ul.style.display = 'none';
+                                while (this.ul.hasChildNodes()) {
                                     // @ts-ignore
-									this.ul.removeChild(this.ul.firstChild);
-								}
+                                    this.ul.removeChild(this.ul.firstChild);
+                                }
                             }
                             // @ts-ignore
                             if (this.ul.descriptionDiv) {
@@ -656,36 +763,36 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             //上一个
                             if (!this.ul.hasChildNodes()) return;
                             e.preventDefault();
-							if (!this.hoverLi || !this.hoverLi.previousSibling) {
-								this.hoverLi && this.hoverLi.classList.remove('hover');
+                            if (!this.hoverLi || !this.hoverLi.previousSibling) {
+                                this.hoverLi && this.hoverLi.classList.remove('hover');
                                 this.hoverLi = this.ul.lastChild;
-								this.hoverLi.classList.add('hover');
+                                this.hoverLi.classList.add('hover');
                             } else {
                                 this.hoverLi.classList.remove('hover');
                                 this.hoverLi = this.hoverLi.previousSibling;
-								this.hoverLi.classList.add('hover');
+                                this.hoverLi.classList.add('hover');
                             }
                             if (this.hoverLi) {
                                 this.hoverLi.dispatchEvent(new CustomEvent('mouseover'));
                             }
-							this.input.setSelectionRange(-1, -1);
+                            this.input.setSelectionRange(-1, -1);
                         } else if (e.key == 'ArrowDown') {
                             //下一个
                             if (!this.ul.hasChildNodes()) return;
                             e.preventDefault();
-							if (!this.hoverLi || !this.hoverLi.nextSibling) {
-								this.hoverLi && this.hoverLi.classList.remove('hover');
+                            if (!this.hoverLi || !this.hoverLi.nextSibling) {
+                                this.hoverLi && this.hoverLi.classList.remove('hover');
                                 this.hoverLi = this.ul.firstChild;
-								this.hoverLi.classList.add('hover');
+                                this.hoverLi.classList.add('hover');
                             } else {
                                 this.hoverLi.classList.remove('hover');
                                 this.hoverLi = this.hoverLi.nextSibling;
-								this.hoverLi.classList.add('hover');
+                                this.hoverLi.classList.add('hover');
                             }
                             if (this.hoverLi) {
-                               this.hoverLi.dispatchEvent(new CustomEvent('mouseover'));
+                                this.hoverLi.dispatchEvent(new CustomEvent('mouseover'));
                             }
-							this.input.setSelectionRange(-1, -1);
+                            this.input.setSelectionRange(-1, -1);
                         } else if (e.key == 'Tab') {
                             if (!this.ul.hasChildNodes()) return;
                             const li = this.hoverLi || this.ul.firstChild;
@@ -703,26 +810,39 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             // 关于搜索代码的判断
                             const value = this.input.value;
                             const variableKeys = Object.keys(qnssVariable);
-                            // 由于水乎改了array.find,只能用别的办法写
                             let key;
                             if (value) {
+                                // 由于水乎改了array.find,只能用别的办法写
+                                /*
                                 for (const variable of variableKeys) {
                                     if (value.startsWith(variable + '.') || variable.startsWith(value)) {
                                         key = variable;
                                         break;
                                     }
                                 }
+                                */
+                                // 后面苏婆把array.find改回来了
+                                key = variableKeys.find(current => {
+                                    return value.startsWith(current + '.') || current.startsWith(value)
+                                });
                             }
                             if (!key) {
                                 clearOptions();
-                                for (const item of this.searchList) {
-                                    if (item.startsWith(this.input.value) && this.input.value.length > 0 && this.input.value != item) {
-                                        this.alwaysShow.add(item);
-                                        updateDescription();
-                                        break;
+                                if (this.input.value.length > 0) {
+                                    for (const item of this.searchList) {
+                                        if (item.startsWith(this.input.value) && this.input.value != item) {
+                                            this.alwaysShow.add(item);
+                                            break;
+                                        }
                                     }
+
+                                    // 添加技能id的提示
+                                    const skillNames = Object.keys(lib.skill).filter(key => typeof lib.skill[key] == 'object' && key.startsWith(this.input.value) && this.input.value != key);
+                                    skillNames.forEach(key => {
+                                        this.alwaysShow.add(key);
+                                    });
                                 }
-                                return;
+                                return updateDescription();
                             }
                             if (!qnssVariable.player && !qnssVariable.card) {
                                 // @ts-ignore
@@ -789,6 +909,45 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     ui.menuContainer && ui.menuContainer.hide();
                     ui.window.appendChild(this.manual);
 
+                    /** @type { DocumentFragment[] } */
+                    this.fragmentList = [];
+                    /** @type { Function[] [] } 无名杀的武将转换为字符串太费劲，不如变成函数 */
+                    this.fragmentDataList = [
+                        // [fun1, fun2]
+                    ];
+
+                    /** @type { HTMLDivElement } */
+                    this.page = ui.create.div('.pagination', this.dialog.content);
+
+                    // @ts-ignore
+                    const slp = new SimplePagination(1);
+                    this.slp = slp;
+                    slp.init({
+                        container: '.pagination',
+                        onPageChange: state => {
+                            this.updatePage(state.pageNumber);
+                        }
+                    });
+
+                    // 定义一个方法用来渲染容器
+                    this.updatePage = page => {
+                        this.clearDialog(this.dialog);
+                        // console.log(this.fragmentDataList);
+                        const fragment = this.fragmentList[page - 1];
+                        // @ts-ignore
+                        if (!fragment.loadDom) {
+                            // @ts-ignore
+                            fragment.loadDom = true;
+                            const data = this.fragmentDataList[page - 1];
+                            data.forEach(fun => fun(fragment));
+                        }
+                        this.dialog.content.appendChild(fragment.cloneNode(true));
+                        // @ts-ignore
+                        if (slp.state.totalPageCount != this.fragmentList.length) {
+                            slp.setTotalPageCount(this.fragmentList.length);
+                        }
+                    }
+
                     if (typeof target == 'string') {
                         this.input.value = target;
                         this.search.click();
@@ -813,7 +972,6 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         // @ts-ignore
                         delete window._status;
                     }
-
                     this.manual.remove();
                     ui.arena.show();
                     ui.system.show();
@@ -824,20 +982,23 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     if (ui.dialog) ui.dialog.show();
                     _status.全能搜索_Searcher = null;
                     window.onkeydown = this.keydownFun;
+                    lib.qnssOnClose.forEach(fun => {
+                        fun();
+                    });
                 }
                 /** 清除dialog内容 */
                 clearDialog(dialog) {
-					dialog.content.scrollTo({
-						top: 0,
-						left: 0,
-						behavior: 'smooth'
-					});
-                    while (dialog.content.hasChildNodes()) {
-                        dialog.content.removeChild(dialog.content.firstChild);
-                    }
+                    dialog.content.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                    Array.from(dialog.content.childNodes)
+                        .filter(v => v != this.page)
+                        .forEach(e => dialog.content.removeChild(e));
                 }
                 /** 寻找角色 */
-                findCharacter(result, hide) {
+                findCharacter(result) {
                     console.time('findCharacter');
                     /** 
                      * @type { ({ packName: string, packTranslate: string, characterName: string, characterData: HeroData })[] }
@@ -873,20 +1034,60 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             }
                         }
                     }
+                    (function () {
+                        if (!name.length) {
+                            const reg = /武将(\d+)-(\d+)/g
+                            const match = reg.exec(result)
+                            if (!match) return
+                            const start = parseInt(match[1])
+                            const end = parseInt(match[2])
+                            let packName
+                            let characterName
+                            let characterData
+                            let packTranslate
+                            const maxLength = Object.keys(lib.character).length
+                            if (start <= end && start > 0) {
+
+                                let list = Object.keys(lib.character).slice(start - 1, Math.min(end, maxLength))
+                                for (let j of list) {
+                                    for (let packname in lib.characterPack) {
+                                        if (j in lib.characterPack[packname]) {
+                                            packName = packname
+                                            packTranslate = lib.translate[packName + '_character_config']
+                                            break;
+                                        }
+                                    }
+                                    name.push({
+                                        characterName: j,
+                                        // @ts-ignore
+                                        packName: packName,
+                                        characterData: lib.character[j],
+                                        // @ts-ignore
+                                        packTranslate
+
+                                    })
+                                }
+                                game.alert(`共有${maxLength}个武将，第${start}个到第${end}个`)
+                            }
+                        }
+                    })();
 
                     if (name.length == 0) {
                         console.timeEnd('findCharacter');
                         return false;
                     }
 
-                    if (this.dialog.content.childElementCount == 0) hide = false;
+                    let lastFragment = document.createDocumentFragment();
+                    this.fragmentList.push(lastFragment);
+                    this.fragmentDataList.push([]);
 
-                    const qnssCaption = ui.create.div('.caption.qnssCaption', this.dialog.content);
+                    const qnssCaption = ui.create.div('.caption.qnssCaption');
+                    lastFragment.appendChild(qnssCaption);
 
                     qnssCaption.appendChild(game.全能搜索_createWaveText('武将搜索结果'));
 
+                    /*
                     const content = this.dialog.content;
-
                     qnssCaption.appendChild(ui.create.div(hide ? '.qnssArrowDown' : '.qnssArrowUp').listen(function() {
                         const show = this.classList.contains('qnssArrowDown');
 
@@ -906,8 +1107,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             }
                         });
                     }));
-
-                    const fragment = document.createDocumentFragment();
+                    */
 
                     for (const data of name) {
                         let character = data.characterData;
@@ -925,7 +1125,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         for (const skill of skills) {
                             if (!lib.skill[skill]) continue;
                             // 衍生技
-                            let derivation = lib.skill[skill].derivation;
+                            // let derivation = lib.skill[skill].derivation;
+                            let derivation = get.qnssAllDerivation(skill);
+
                             if (derivation) {
                                 if (Array.isArray(derivation)) {
                                     skillDerivation.addArray(derivation);
@@ -943,7 +1145,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                         <font color=6df95b>]</font>
                                         </br>
 
-                                        <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述&nbsp</span><span>${lib.translate[skill + '_info']}</span>
+                                        <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述&nbsp</span><span>${(lib.translate[skill + '_info'] || '无技能描述').replace(/<\/li>/g, '').split('<li>').map((v, i) => i == 0 ? v : ('•' + v)).join('<br/>')}</span>
                                         </br>
 
                                         <span class="bluetext">技能语音&nbsp</span>
@@ -968,7 +1170,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                     <font color=6df95b>[</font>
                                     <font color=6df95b>${derivation}</font>
                                     <font color=6df95b>]</font></br>
-                                    <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述&nbsp</span><span>${lib.translate[derivation + '_info']}</span></br>
+                                    <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述&nbsp</span><span>${(lib.translate[derivation + '_info'] || '无').replace(/<\/li>/g, '').split('<li>').map((v, i) => i == 0 ? v : ('•' + v)).join('<br/>')}</span></br>
                                     <span class="bluetext">技能语音&nbsp</span>
                                     <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${derivation}", {name:"${charName}"}, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
                                     <span class="bluetext">技能代码&nbsp</span>
@@ -985,115 +1187,88 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             [charName], 'character'
                         ]);*/
 
-                        const buttons = ui.create.div('.buttons'/*, this.dialog.content*/);
-                        buttons.classList.add('smallzoom');
-                        this.dialog.buttons = this.dialog.buttons.concat(ui.create.buttons([charName], 'character', buttons, false));
+                        this.fragmentDataList[this.fragmentList.length - 1].push((lastFragment) => {
+                            const buttons = ui.create.div('.buttons');
+                            buttons.classList.add('smallzoom');
+                            this.dialog.buttons =
+                                this.dialog.buttons.concat(
+                                    ui.create.buttons([charName], 'character', buttons, false)
+                                );
 
-                        fragment.appendChild(buttons);
+                            lastFragment.appendChild(buttons);
 
-                        const caption = ui.create.div('.caption');
+                            const caption = ui.create.div('.caption');
 
-                        const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
-                            display: 'block',
-                            left: 'auto',
-                            textAlign: 'left',
-                            fontSize: '20px'
+                            const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
+                                display: 'block',
+                                left: 'auto',
+                                textAlign: 'left',
+                                fontSize: '20px'
+                            });
+
+                            d.insertAdjacentHTML('afterbegin', `
+                                </br>
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling)">武将信息&nbsp</span>
+                                <span>${get.characterIntro(charName)}</span>
+                                </br>
+
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling.nextElementSibling)">所在武将包&nbsp</span>
+                                <span>${data.packTranslate}</span>
+                                <font color=6df95b>[</font>
+                                <font color=6df95b>${data.packName}</font>
+                                <font color=6df95b>]</font>
+                                </br>
+                                
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">武将名称&nbsp</span>
+                                    ${lib.translate[charName]}
+                                    <font color=6df95b>[</font>
+                                    <font color=6df95b>${charName}</font>
+                                    <font color=6df95b>]</font>
+                                </br>
+                                
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling)">武将称号&nbsp</span>
+                                <span>${get.colorspan(lib.characterTitle[charName] || "暂无称号")}</span>
+                                </br>
+
+                                <span class="bluetext">武将性别&nbsp</span><span>${lib.translate[character[0]]}</span>
+                                </br>
+
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling.nextElementSibling)">武将势力&nbsp</span>
+                                <span>${lib.translate[character[1]]}</span>
+                                <font color=6df95b>[</font>
+                                <font color=6df95b>${character[1]}</font>
+                                <font color=6df95b>]</font>
+                                </br>
+
+                                <span class="bluetext">体力上限&nbsp</span><span>${character[2]}</span>
+                                </br>
+                                            
+                                <span class="bluetext">阵亡语音&nbsp</span>
+                                <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放阵亡语音' onclick='window.qnssPlayDieAudio("${charName}");'style='position: absolute; width: 100px; margin: 0; padding: 0;' />
+                                </br>
+
+                                <span class="bluetext">武将技能</span>${skillstr}
+                                </br>
+
+                                <span class="bluetext">武将衍生技</span><span>${skillDerivationstr.length > 0 ? skillDerivationstr : '无'}</span>
+
+                                </br></br></br>
+                            `);
+
+                            lastFragment.appendChild(caption);
                         });
 
-                        d.insertAdjacentHTML('afterbegin', `
-                            </br>
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">武将信息&nbsp</span>
-                            <span>${get.characterIntro(charName)}</span>
-                            </br>
-
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling.this.nextElementSibling.nextElementSibling)">所在武将包&nbsp</span>
-                            <span>${data.packTranslate}</span>
-                            <font color=6df95b>[</font>
-                            <font color=6df95b>${data.packName}</font>
-                            <font color=6df95b>]</font>
-                            </br>
-                            
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">武将名称&nbsp</span>
-                                ${lib.translate[charName]}
-                                <font color=6df95b>[</font>
-                                <font color=6df95b>${charName}</font>
-                                <font color=6df95b>]</font>
-                            </br>
-                            
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">武将称号&nbsp</span>
-                            <span>${get.colorspan(lib.characterTitle[charName] || "暂无称号")}</span>
-                            </br>
-
-                            <span class="bluetext">武将性别&nbsp</span><span>${lib.translate[character[0]]}</span>
-                            </br>
-
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">武将势力&nbsp</span>
-                            <span>${lib.translate[character[1]]}</span>
-                            <font color=6df95b>[</font>
-                            <font color=6df95b>${character[1]}</font>
-                            <font color=6df95b>]</font>
-                            </br>
-
-                            <span class="bluetext">体力上限&nbsp</span><span>${character[2]}</span>
-                            </br>
-                                        
-                            <span class="bluetext">阵亡语音&nbsp</span>
-                            <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放阵亡语音' onclick='
-                                "use strict";
-                                let findInExt = false;
-                                Object.keys(lib.characterPack).forEach((key, index, arr) => {
-                                    // 扩展自带的武将包
-                                    if(key.includes("mode_extension_")) {
-                                        if("${charName}" in lib.characterPack[key] && lib.character["${charName}"] == lib.characterPack[key]["${charName}"]) {
-                                            findInExt = key.slice(15);
-                                        }
-                                    }
-                                    // 扩展自定义的武将包
-                                    if (lib.config.extensions.includes( lib.translate[key + "_character_config"] )) {
-                                        if("${charName}" in lib.characterPack[key] && lib.character["${charName}"] == lib.characterPack[key]["${charName}"]) {
-                                            findInExt = lib.translate[key + "_character_config"];
-                                        }
-                                    }
-                                });
-                                if(findInExt){
-                                    game.playAudio("..", "extension", findInExt, "${charName}", function() {
-                                        window.qnssFindDieAudio(findInExt, "${charName}")
-                                    });
-                                } else if(lib.character["${charName}"] && lib.character["${charName}"][4].contains("die_audio")){
-                                    game.playAudio("die", "${charName}", function() {
-                                        game.alert("该武将没有阵亡语音");
-                                    });
-                                } else{
-                                    game.playAudio("die", "${charName}",function() {
-                                        game.playAudio("die", "${charName}".slice("${charName}".indexOf("_") + 1), function(){
-                                            game.alert("该武将没有阵亡语音");
-                                        });
-                                    });
-                                }'
-                            style='position: absolute; width: 100px; margin: 0; padding: 0;' />
-                            </br>
-
-                            <span class="bluetext">武将技能</span>${skillstr}
-                            </br>
-
-                            <span class="bluetext">武将衍生技</span><span>${skillDerivationstr.length > 0 ? skillDerivationstr : '无'}</span>
-
-                            </br></br></br>
-                        `);
-
-                        fragment.appendChild(caption);
+                        if (this.fragmentDataList[this.fragmentList.length - 1].length > 9) {
+                            lastFragment = document.createDocumentFragment();
+                            this.fragmentList.push(lastFragment);
+                            this.fragmentDataList.push([]);
+                        }
                     }
 
-                    if (hide) {
-                        // @ts-ignore
-                        Array.from(fragment.childNodes).forEach(ele => ele.style && (ele.style.display = 'none'));
-                    }
-
-                    this.dialog.content.appendChild(fragment);
                     console.timeEnd('findCharacter');
                 }
                 /** 寻找卡牌 */
-                findCard(result, hide) {
+                findCard(result) {
                     console.time('findCard');
                     /** 
                     * @type { ({ packName: string, packTranslate: string, cardName: string, cardData: ExCardData, nature?: string })[] }
@@ -1187,12 +1362,16 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         return false;
                     }
 
-                    if (this.dialog.content.childElementCount == 0) hide = false;
+                    let lastFragment = document.createDocumentFragment();
+                    this.fragmentList.push(lastFragment);
+                    this.fragmentDataList.push([]);
 
-                    const qnssCaption = ui.create.div('.caption.qnssCaption', this.dialog.content);
+                    const qnssCaption = ui.create.div('.caption.qnssCaption');
+                    lastFragment.appendChild(qnssCaption);
 
                     qnssCaption.appendChild(game.全能搜索_createWaveText('卡牌搜索结果'));
 
+                    /*
                     const content = this.dialog.content;
 
                     qnssCaption.appendChild(ui.create.div(hide ? '.qnssArrowDown' : '.qnssArrowUp').listen(function () {
@@ -1214,8 +1393,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             }
                         });
                     }));
-
-                    const fragment = document.createDocumentFragment();
+                    */
 
                     for (const data of name) {
                         const cardPack = data.packName;
@@ -1233,131 +1411,104 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         ]);
                         */
 
-                        const buttons = ui.create.div('.buttons');
-                        buttons.classList.add('smallzoom');
-                        this.dialog.buttons = this.dialog.buttons.concat(ui.create.buttons([{
-                            name: data.cardName,
-                            nature: data.nature
-                        }], 'vcard', buttons, false));
+                        this.fragmentDataList[this.fragmentList.length - 1].push((lastFragment) => {
+                            const buttons = ui.create.div('.buttons');
+                            buttons.classList.add('smallzoom');
+                            this.dialog.buttons = this.dialog.buttons.concat(ui.create.buttons([{
+                                name: data.cardName,
+                                nature: data.nature
+                            }], 'vcard', buttons, false));
 
-                        fragment.appendChild(buttons);
+                            lastFragment.appendChild(buttons);
 
-                        const caption = ui.create.div('.caption');
+                            const caption = ui.create.div('.caption');
 
-                        const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
-                            display: 'block',
-                            left: 'auto',
-                            textAlign: 'left',
-                            fontSize: '20px'
+                            const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
+                                display: 'block',
+                                left: 'auto',
+                                textAlign: 'left',
+                                fontSize: '20px'
+                            });
+
+                            d.insertAdjacentHTML('afterbegin', `
+                                </br>
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling.nextElementSibling)">卡牌名称</span>
+                                <span>${lib.translate[cardName]}</span>
+                                <font color=6df95b>[ </font>
+                                <font color=6df95b>${cardName}</font>
+                                <font color=6df95b> ]</font>
+                                </br>
+
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling.nextElementSibling)">卡牌类别</span>
+                                <span>${cardData.type ? lib.translate[cardData.type] : '无'}</span>
+                                <font color=6df95b>[ </font>
+                                <font color=6df95b>${cardData.type ? lib.translate[cardData.type] : '无'}</font>
+                                <font color=6df95b> ]</font>
+                                </br>
+                                
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">卡牌效果</span>${nature ? lib.card.sha.cardPrompt({ name: 'sha', nature }) : lib.translate[cardName + '_info']}
+                                </br>
+                                
+                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">所在卡牌包</span>${packTranslate || '无'}
+                                <font color=6df95b>[ </font>
+                                <font color=6df95b>${cardPack || '无'}</font>
+                                <font color=6df95b> ]</font>
+                                </br>
+
+                                ${cardData.derivation ? (
+                                    '<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">卡牌来源</span>' + lib.translate[cardData.derivation] +
+                                    '<font color="6df95b"> [ </font>' +
+                                    '<font color="6df95b">' + cardData.derivation + '</font>' +
+                                    '<font color="6df95b"> ]</font>' +
+                                    '</br>'
+                                ) : ''
+                                }
+
+                                <span class="bluetext">卡牌语音（男）</span>
+                                <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='卡牌语音（男）' onclick="window.qnssPlayCardAudio('male', '${cardName}', '${nature}');" style='position: absolute; width: 100px; margin: 0; padding: 0;' />
+                                </br>
+
+                                <span class="bluetext">卡牌语音（女）</span>：
+                                <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='卡牌语音（女）' onclick="window.qnssPlayCardAudio('female', '${cardName}', '${nature}');" style='position: absolute; width: 100px; margin: 0; padding: 0;' />
+                                </br>
+
+                                <span class="bluetext">卡牌代码</span>
+                                <span style="color: white;" onclick='window.qnssShowCode.call(this, "${lib.translate[cardName]}")'>点击查看${lib.translate[cardName]}代码</span>
+                                
+                                <span style="display: none;">
+                                    </br>
+                                    <font color="21ffd8">[ ${lib.translate[cardName]} ] </font>卡牌代码：</br>
+                                    <pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(cardData))}</pre>
+                                </span>
+                                
+                                </br></br></br>
+                            `);
+
+                            lastFragment.appendChild(caption);
                         });
 
-                        d.insertAdjacentHTML('afterbegin', `
-                            </br>
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">卡牌名称</span>
-                            <span>${lib.translate[cardName]}</span>
-                            <font color=6df95b>[ </font>
-                            <font color=6df95b>${cardName}</font>
-                            <font color=6df95b> ]</font>
-                            </br>
-
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">卡牌类别</span>
-                            <span>${cardData.type ? lib.translate[cardData.type] : '无'}</span>
-                            <font color=6df95b>[ </font>
-                            <font color=6df95b>${cardData.type ? lib.translate[cardData.type] : '无'}</font>
-                            <font color=6df95b> ]</font>
-                            </br>
-                            
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">卡牌效果</span>${nature ? lib.card.sha.cardPrompt({ name: 'sha', nature }) : lib.translate[cardName + '_info']}
-                            </br>
-                            
-                            <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">所在卡牌包</span>${packTranslate || '无'}
-                            <font color=6df95b>[ </font>
-                            <font color=6df95b>${cardPack || '无'}</font>
-                            <font color=6df95b> ]</font>
-                            </br>
-
-                            ${cardData.derivation ? (
-                                '<span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling.nextElementSibling)">卡牌来源</span>' + lib.translate[cardData.derivation] +
-                                '<font color="6df95b"> [ </font>' +
-                                '<font color="6df95b">' + cardData.derivation + '</font>' +
-                                '<font color="6df95b"> ]</font>' +
-                                '</br>'
-                            ) : ''
-                            }
-
-                            <span class="bluetext">卡牌语音（男）</span>
-                            <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='卡牌语音（男）' onclick="
-                                "use strict";
-                                let audioinfo = lib.card['${cardName}'].audio;
-                                if('${cardName}' == 'sha' && ['fire', 'thunder', 'ice'].includes('${nature}') ){
-                                    game.playAudio('card', 'male', 'sha_${nature}');
-                                } else {
-                                    if (typeof audioinfo == 'string') {
-                                        if (audioinfo.indexOf('ext:') == 0) game.playAudio('..', 'extension', audioinfo.slice(4), '${cardName}_male');
-                                        else game.playAudio('card', 'male', audioinfo);
-                                    }
-                                    else {
-                                        game.playAudio('card', 'male', '${cardName}');
-                                    }
-                                }
-                            " style='position: absolute; width: 100px; margin: 0; padding: 0;' />
-                            </br>
-
-                            <span class="bluetext">卡牌语音（女）</span>：
-                            <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='卡牌语音（女）' onclick="
-                                "use strict";
-                                let audioinfo = lib.card['${cardName}'].audio;
-                                if('${cardName}' == 'sha' && ['fire', 'thunder', 'ice'].includes('${nature}') ){
-                                    game.playAudio('card', 'female', 'sha_${nature}');
-                                } else {
-                                    if (typeof audioinfo == 'string') {
-                                        if (audioinfo.indexOf('ext:') == 0) game.playAudio('..', 'extension', audioinfo.slice(4), '${cardName}_female');
-                                        else game.playAudio('card', 'female', audioinfo);
-                                    }
-                                    else {
-                                        game.playAudio('card', 'female', '${cardName}');
-                                    }
-                                }
-                            " style='position: absolute; width: 100px; margin: 0; padding: 0;' />
-                            </br>
-
-                            <span class="bluetext">卡牌代码</span>
-                            <span style="color: white;" onclick='window.qnssShowCode.call(this, "${lib.translate[cardName]}")'>点击查看${lib.translate[cardName]}代码</span>
-                            
-                            <span style="display: none;">
-                                </br>
-                                <font color="21ffd8">[ ${lib.translate[cardName]} ] </font>卡牌代码：</br>
-                                <pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(cardData))}</pre>
-                            </span>
-                            
-                            </br></br></br>
-                        `);
-
-                        fragment.appendChild(caption);
+                        if (this.fragmentDataList[this.fragmentList.length - 1].length > 9) {
+                            lastFragment = document.createDocumentFragment();
+                            this.fragmentList.push(lastFragment);
+                            this.fragmentDataList.push([]);
+                        }
                     }
-
-                    if (hide) {
-                        // @ts-ignore
-                        Array.from(fragment.childNodes).forEach(ele => ele.style && (ele.style.display = 'none'));
-                    }
-
-                    this.dialog.content.appendChild(fragment);
 
                     console.timeEnd('findCard');
                 }
                 /** 寻找技能 */
-                findSkill(result, hide) {
+                findSkill(result) {
                     console.time('findSkill');
+                    /** @type { { skillName: string, translate: string, info: string }[] }  */
                     let skills = [];
 
                     for (let skillName in lib.skill) {
                         if (['global', 'globalmap', 'storage'].contains(skillName) || typeof lib.skill[skillName] != 'object') continue;
-                        if (typeof lib.translate[skillName] != 'string') continue;
                         // 中文包含的，或者英文id对应的
-                        if (lib.translate[skillName].includes(result) || skillName === result) skills.push({
+                        if ((lib.translate[skillName] && lib.translate[skillName].includes(result)) || skillName === result) skills.push({
                             skillName,
                             translate: lib.translate[skillName],
-                            info: lib.translate[skillName + '_info'],
+                            info: lib.translate[skillName + '_info'] || '无',
                             // append: lib.translate[skillName + '_append']
                         });
                     }
@@ -1394,12 +1545,16 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                         return false;
                     }
 
-                    if (this.dialog.content.childElementCount == 0) hide = false;
+                    let lastFragment = document.createDocumentFragment();
+                    this.fragmentList.push(lastFragment);
+                    this.fragmentDataList.push([]);
 
-                    const qnssCaption = ui.create.div('.caption.qnssCaption', this.dialog.content);
+                    const qnssCaption = ui.create.div('.caption.qnssCaption');
+                    lastFragment.appendChild(qnssCaption);
 
                     qnssCaption.appendChild(game.全能搜索_createWaveText('技能搜索结果'));
 
+                    /*
                     const content = this.dialog.content;
 
                     qnssCaption.appendChild(ui.create.div(hide ? '.qnssArrowDown' : '.qnssArrowUp').listen(function () {
@@ -1421,8 +1576,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             }
                         });
                     }));
-
-                    const fragment = document.createDocumentFragment();
+                    */
 
                     for (let i = 0; i < skills.length; i++) {
                         const skill = skills[i];
@@ -1466,108 +1620,107 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             }
                         }
 
-                        const caption = ui.create.div('.caption');
+                        this.fragmentDataList[this.fragmentList.length - 1].push((lastFragment) => {
+                            const caption = ui.create.div('.caption');
 
-                        const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
-                            display: 'block',
-                            left: 'auto',
-                            textAlign: 'left',
-                            fontSize: '20px'
+                            const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
+                                display: 'block',
+                                left: 'auto',
+                                textAlign: 'left',
+                                fontSize: '20px'
+                            });
+
+                            d.insertAdjacentHTML('afterbegin', `
+                                <li>
+                                    <!-- 技能中文名 -->
+                                    <font color="21ffd8">[ ${translate} ]</font>
+                                    <!-- 技能id -->
+                                    <font color=6df95b>[ ${skillName} ]</font></br>
+                                    <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextElementSibling)">技能描述</span>：<span>${info.replace(/<\/li>/g, '').split('<li>').map((v, i) => i == 0 ? v : ('•' + v)).join('<br/>')}</span></br>
+                                    <span class="bluetext">技能语音</span>：
+                                    <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${skillName}", null, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
+                                    <span class="bluetext">技能拥有者</span>：<div id="replaceCharacters"></div></br>
+                                    <span class="bluetext">技能代码</span>：
+                                    <a onclick='window.qnssShowCode.call(this)'>点击查看技能代码</a>
+                                </li>
+
+                                <li style="display: none; list-style-type: none;">
+                                    <font color="21ffd8">[ ${translate} ] </font>技能代码：</br>
+                                    <pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(lib.skill[skillName]))}</pre>
+                                </li>
+
+                                </br></br></br>
+                            `);
+
+                            const replaceCharacters = d.querySelector("#replaceCharacters");
+                            if (replaceCharacters) {
+                                if (name.length > 0) {
+                                    /*
+                                    const buttons = ui.create.div('.buttons', d);
+                                    buttons.classList.add('smallzoom');
+                                    const buttons2 = ui.create.buttons(name, 'character', buttons, false);
+                                    buttons2.forEach(v => {
+                                        v.style.height = '108px';
+     
+                                        const hps = v.getElementsByClassName('hp');
+                                        // @ts-ignore
+                                        const hp = hps[0];
+                                        hp.style.left = 'auto';
+                                        hp.style.right = '6px';
+                                        hp.style.top = 'auto';
+                                        hp.style.bottom = '5px';
+                                        hp.style.textAlign = 'right';
+     
+                                        const identitys = v.getElementsByClassName('identity');
+                                        // @ts-ignore
+                                        const identity = identitys[0];
+                                        identity.style.left = 'auto';
+                                        identity.style.right = '3px';
+                                        identity.style.top = '3px';
+                                        
+                                        v.setAttribute('onclick', `
+                                            if (confirm("是否查看" + this.link + "的信息？")) {
+                                                _status.全能搜索_Searcher.tujianBegin(this.link);
+                                            }
+                                        `);
+                                    });
+                                    this.dialog.buttons = this.dialog.buttons.concat(buttons2);
+                                    // @ts-ignore
+                                    replaceCharacters.insertAdjacentElement('afterend', buttons);
+                                    */
+                                    name.map(name => {
+                                        const a = document.createElement('a');
+                                        a.classList.add('qnssSee');
+                                        a.style.color = 'white';
+                                        a.setAttribute('onclick', 'window.qnssSee(this)');
+                                        a.innerText = lib.translate[name];
+                                        return a;
+                                    }).forEach(a => {
+                                        replaceCharacters.insertAdjacentElement('afterend', a);
+                                        replaceCharacters.insertAdjacentHTML('afterend', '&nbsp&nbsp');
+                                    });
+                                } else {
+                                    const span = document.createElement('span');
+                                    span.innerText = '无';
+                                    replaceCharacters.insertAdjacentElement('afterend', span);
+                                }
+                                replaceCharacters.remove();
+                            }
+
+                            lastFragment.appendChild(caption);
                         });
 
-                        d.insertAdjacentHTML('afterbegin', `
-                            <li>
-                                <!-- 技能中文名 -->
-                                <font color="21ffd8">[ ${translate} ]</font>
-                                <!-- 技能id -->
-                                <font color=6df95b>[ ${skillName} ]</font></br>
-                                <span class="bluetext" ondblclick="game.全能搜索_copy(this.nextSibling)">技能描述</span>：${info}</br>
-                                <span class="bluetext">技能语音</span>：
-                                <img src='${layoutPath}img/qhly_pic_playaudiobutton.png' alt='点击播放技能语音' onclick='game.trySkillAudio("${skillName}", null, true)' style='position: absolute; width: 100px; margin: 0; padding: 0;' /></br>
-                                <span class="bluetext">技能拥有者</span>：<div id="replaceCharacters"></div></br>
-                                <span class="bluetext">技能代码</span>：
-                                <a onclick='window.qnssShowCode.call(this)'>点击查看技能代码</a>
-                            </li>
-
-                            <li style="display: none; list-style-type: none;">
-                                <font color="21ffd8">[ ${translate} ] </font>技能代码：</br>
-                                <pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${game.全能搜索_highlight(get.stringify(lib.skill[skillName]))}</pre>
-                            </li>
-
-                            </br></br></br>
-                        `);
-
-                        const replaceCharacters = d.querySelector("#replaceCharacters");
-                        if (replaceCharacters) {
-                            if (name.length > 0) {
-                                /*
-                                const buttons = ui.create.div('.buttons', d);
-                                buttons.classList.add('smallzoom');
-                                const buttons2 = ui.create.buttons(name, 'character', buttons, false);
-                                buttons2.forEach(v => {
-                                    v.style.height = '108px';
-
-                                    const hps = v.getElementsByClassName('hp');
-                                    // @ts-ignore
-                                    const hp = hps[0];
-                                    hp.style.left = 'auto';
-                                    hp.style.right = '6px';
-                                    hp.style.top = 'auto';
-                                    hp.style.bottom = '5px';
-                                    hp.style.textAlign = 'right';
-
-                                    const identitys = v.getElementsByClassName('identity');
-                                    // @ts-ignore
-                                    const identity = identitys[0];
-                                    identity.style.left = 'auto';
-                                    identity.style.right = '3px';
-                                    identity.style.top = '3px';
-                                    
-                                    v.setAttribute('onclick', `
-                                        if (confirm("是否查看" + this.link + "的信息？")) {
-                                            _status.全能搜索_Searcher.tujianBegin(this.link);
-                                        }
-                                    `);
-                                });
-                                this.dialog.buttons = this.dialog.buttons.concat(buttons2);
-                                // @ts-ignore
-                                replaceCharacters.insertAdjacentElement('afterend', buttons);
-                                */
-                                name.map(name => {
-                                    const a = document.createElement('a');
-                                    a.classList.add('qnssSee');
-                                    a.style.color = 'white';
-                                    a.addEventListener('click', function () {
-                                        window.qnssSee(this);
-                                    });
-                                    a.innerText = lib.translate[name];
-                                    return a;
-                                }).forEach(a => {
-                                    replaceCharacters.insertAdjacentElement('afterend', a);
-                                    replaceCharacters.insertAdjacentHTML('afterend', '&nbsp&nbsp');
-                                });
-                            } else {
-                                const span = document.createElement('span');
-                                span.innerText = '无';
-                                replaceCharacters.insertAdjacentElement('afterend', span);
-                            }
-                            replaceCharacters.remove();
+                        if (this.fragmentDataList[this.fragmentList.length - 1].length > 9) {
+                            lastFragment = document.createDocumentFragment();
+                            this.fragmentList.push(lastFragment);
+                            this.fragmentDataList.push([]);
                         }
-
-                        fragment.appendChild(caption);
                     }
-
-                    if (hide) {
-                        // @ts-ignore
-                        Array.from(fragment.childNodes).forEach(ele => ele.style && (ele.style.display = 'none'));
-                    }
-
-                    this.dialog.content.appendChild(fragment);
 
                     console.timeEnd('findSkill');
                 }
                 /** 寻找代码 */
-                findCode(result, hide) {
+                findCode(result) {
                     console.time('findCode');
                     const variableKeys = Object.keys(qnssVariable);//['lib', 'game', 'ui', 'get', 'ai', '_status', 'player', 'card'];
                     let key;
@@ -1734,7 +1887,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                 if (descriptionObj.from) {
                                     descriptionStr += `
                                         <span class="bluetext">代码来源</span>：
-                                        <span>${ lib.config.extensions.contains(descriptionObj.from) ? ('扩展【' + descriptionObj.from +'】') : descriptionObj.from }</span>
+                                        <span>${lib.config.extensions.contains(descriptionObj.from) ? ('扩展【' + descriptionObj.from + '】') : descriptionObj.from}</span>
                                         </br>
                                     `;
                                 }
@@ -1743,7 +1896,7 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                 if (get.objtype(descriptionObj.type) == 'object' || descriptionObj.args || descriptionObj.return) {
                                     descriptionStr += `
                                         <span class="bluetext">代码类型</span>：
-                                        <span>${ (!descriptionObj.args && !descriptionObj.return) ? descriptionObj.type : 'function' }</span>
+                                        <span>${(!descriptionObj.args && !descriptionObj.return) ? descriptionObj.type : 'function'}</span>
                                         </br>
                                     `;
                                 }
@@ -1836,12 +1989,16 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                             }
                         }
 
-                        if (this.dialog.content.childElementCount == 0) hide = false;
+                        let lastFragment = document.createDocumentFragment();
+                        this.fragmentList.push(lastFragment);
+                        this.fragmentDataList.push([]);
 
-                        const qnssCaption = ui.create.div('.caption.qnssCaption', this.dialog.content);
+                        const qnssCaption = ui.create.div('.caption.qnssCaption');
+                        lastFragment.appendChild(qnssCaption);
 
                         qnssCaption.appendChild(game.全能搜索_createWaveText('代码搜索结果'));
 
+                        /*
                         const content = this.dialog.content;
 
                         qnssCaption.appendChild(ui.create.div(hide ? '.qnssArrowDown' : '.qnssArrowUp').listen(function () {
@@ -1863,29 +2020,33 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                                 }
                             });
                         }));
+                        */
 
-                        const fragment = document.createDocumentFragment();
+                        this.fragmentDataList[this.fragmentList.length - 1].push((lastFragment) => {
+                            const caption = ui.create.div('.caption');
 
-                        const caption = ui.create.div('.caption');
+                            const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
+                                display: 'block',
+                                left: 'auto',
+                                textAlign: 'left',
+                                fontSize: '20px'
+                            });
 
-                        const d = ui.create.div(ui.create.div(ui.create.div('.text.center', caption)), {
-                            display: 'block',
-                            left: 'auto',
-                            textAlign: 'left',
-                            fontSize: '20px'
+                            d.insertAdjacentHTML('afterbegin', `
+                                <li>
+                                    <font color="21ffd8">[ ${result} ] </font>搜索结果：</br>
+                                    ${descriptionStr}
+                                    <pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${result + ' = '}${game.全能搜索_highlight(stringify(obj))}</pre>
+                                </li>
+                            `);
+
+                            lastFragment.appendChild(caption);
                         });
 
-                        d.insertAdjacentHTML('afterbegin', `
-                            <li>
-								<font color="21ffd8">[ ${result} ] </font>搜索结果：</br>
-								${descriptionStr}
-								<pre class="hljs language-javascript" style="user-select:text;-webkit-user-select:text;">${result + ' = '}${game.全能搜索_highlight(stringify(obj))}</pre>
-							</li>
-                        `);
-
-                        fragment.appendChild(caption);
-
-                        this.dialog.content.appendChild(fragment);
+                        if (this.fragmentDataList[this.fragmentList.length - 1].length > 9) {
+                            lastFragment = document.createDocumentFragment();
+                            this.fragmentList.push(lastFragment);
+                        }
 
                         console.timeEnd('findCode');
 
@@ -1896,12 +2057,12 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 }
                 /** 将内容加入到下拉框 */
                 addToDataList(data) {
-					if (this.searchList.add(data) !== false) {
-						game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
-					}
-					if (this.tsymqSearchList.add(data) !== false) {
-						game.saveExtensionConfig('全能搜索', 'tsymqSearchList', [...new Set(this.tsymqSearchList)]);
-					}
+                    if (this.searchList.add(data) !== false) {
+                        game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
+                    }
+                    if (this.tsymqSearchList.add(data) !== false) {
+                        game.saveExtensionConfig('全能搜索', 'tsymqSearchList', [...new Set(this.tsymqSearchList)]);
+                    }
                     //输入框失去焦点
                     this.input.blur();
                 }
@@ -1909,18 +2070,21 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 clearDataList() {
                     this.searchList = [];
                     this.clearOptions();
-					game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
+                    game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
                     game.alert("搜索历史已清空");
                 }
-				/**
-				 * 展示
-				 * @param { Lib.element.Dialog } dialog 
-				 * @param { string } result 
-				 * @param { boolean } [canAddToDataList] 
-				 * @returns 
-				 */
-                tujianBegin(dialog, result, canAddToDataList) {
+                /**
+                 * 展示
+                 * @param { Lib.element.Dialog } dialog 
+                 * @param { string } result 
+                 * @param { boolean } [canAddToDataList] 
+                 * @param { boolean } [notCheckKey] 
+                 * @returns 
+                 */
+                tujianBegin(dialog, result, canAddToDataList, notCheckKey) {
                     this.clearDialog(dialog);
+                    this.fragmentList = [];
+                    this.fragmentDataList = [];
                     if (result === "" || result === null || result === undefined) return game.alert("请输入名称");
                     game.saveExtensionConfig('全能搜索', 'searchList', this.searchList);
 
@@ -1929,33 +2093,44 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                     console.log('------------------------');
                     console.log('搜索内容: ' + result);
 
-					const containsKey = key => this.searcherModule.contains(key);
+                    const containsKey = key => notCheckKey || this.searcherModule.contains(key);
 
-                    let resultCharacter = containsKey('findCharacter') ? this.findCharacter(result, this.searcherModule.length > 1 ? ('findCharacter' !== this.searcherModule[0]) : false) : false;
-                    let resultCard = containsKey('findCard') ? this.findCard(result, this.searcherModule.length > 1 ? ('findCard' !== this.searcherModule[0]) : false) : false;
-                    let resultSKill = containsKey('findSkill') ? this.findSkill(result, this.searcherModule.length > 1 ? ('findSkill' !== this.searcherModule[0]) : false) : false;
-                    let resultCode = containsKey('findCode') ? this.findCode(result, this.searcherModule.length > 1 ? ('findCode' !== this.searcherModule[0]) : false) : false;
+                    let resultCharacter = containsKey('findCharacter') ? this.findCharacter(result) : false;
+                    let resultCard = containsKey('findCard') ? this.findCard(result) : false;
+                    let resultSKill = containsKey('findSkill') ? this.findSkill(result) : false;
+                    let resultCode = containsKey('findCode') ? this.findCode(result) : false;
 
-					if ([resultCharacter, resultCard, resultSKill, resultCode].every(v => v == false)) {
+                    if ([resultCharacter, resultCard, resultSKill, resultCode].every(v => v == false)) {
                         this.input.blur();
-                        this.input.classList.add('wrong');
-						game.alert(`没有符合条件的武将，卡牌，技能或代码!(搜索内容："${result}")`);
-						this.clearDialog(dialog);
-						return;
-					}
+                        this.input.classList.add('qnssWrong');
+                        game.alert(`没有符合条件的武将，卡牌，技能或代码!(搜索内容："${result}")`);
+                        this.clearDialog(dialog);
+                        return;
+                    }
 
-					// 只搜索到代码的，不加入搜索历史
-					if (![resultCharacter, resultCard, resultSKill].every(v => v === false)) {
-						// 搜索的字大于1 或 搜索内容不包括技能且单字为汉字
-						if (result.length > 1 || (resultSKill === false && /[\u4e00-\u9fa5]+/.test(result))) {
-							canAddToDataList && this.addToDataList(result);
-						}
-					}
+                    // 只搜索到代码的，不加入搜索历史
+                    if (![resultCharacter, resultCard, resultSKill].every(v => v === false)) {
+                        // 搜索的字大于1 或 搜索内容不包括技能且单字为汉字
+                        if (result.length > 1 || (resultSKill === false && /[\u4e00-\u9fa5]+/.test(result))) {
+                            canAddToDataList && this.addToDataList(result);
+                        }
+                    }
+
+                    // 添加技能id的搜索提示后，this.alwaysShow的元素就过多了
+                    this.alwaysShow = this.searchList.slice(0).sort();
+
+                    // console.log(this.fragmentList);
+                    if (this.fragmentList.length) {
+                        this.updatePage(1);
+                    }
                 }
             }
 
             window.诗笺_manual = {
                 show(target) {
+                    lib.qnssOnCreate.forEach(fun => {
+                        fun();
+                    });
                     if (!_status.全能搜索_Searcher) {
                         _status.全能搜索_Searcher = new Searcher(target);
                     } else if (_status.全能搜索_Searcher.constructor === Searcher) {
@@ -1968,6 +2143,9 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 }
             };
 
+            if (!Array.isArray(lib.qnssOnCreate)) lib.qnssOnCreate = [];
+            if (!Array.isArray(lib.qnssOnClose)) lib.qnssOnClose = [];
+
             const getSystem = setInterval(() => {
                 if (ui.system1 || ui.system2) {
                     clearInterval(getSystem);
@@ -1977,70 +2155,91 @@ game.import("extension", function(lib, game, ui, get, ai, _status) {
                 }
             }, 500);
         },
-		precontent: function() {},
-		help: {},
-		config: {
+        precontent: function () {},
+        help: {},
+        config: {
             version: {
                 nopointer: true,
                 clear: true,
-                name: "扩展版本: v3.1<br>更新日期: 2023-02-21",
+                name: "扩展版本: v3.4<br>更新日期: 2023-09-14",
+            },
+            css: {
+                clear: true,
+                'name': '更换代码高亮样式',
+                'init': 'vs2015.min.css',
+                'item': {
+                    'a11y-dark.min.css': 'a11y-dark',
+                    'an-old-hope.min.css': 'an-old-hope',
+                    'atom-one-dark.min.css': 'atom-one-dark',
+                    'felipec.min.css': 'felipec',
+                    'gml.min.css': 'gml',
+                    'vs2015.min.css': 'vs2015'
+                },
+                onclick(item) {
+                    game.saveExtensionConfig('全能搜索', 'css', item);
+                    ui.qnssChangeEditorCss(item)
+                }
             },
             background: {
                 'name': '搜索界面背景图片',
                 'init': '相爱相杀.png',
                 'item': {
                     '相爱相杀.png': '相爱相杀.png',
-                    'picture.png': 'picture.png'
+                    'picture.png': 'picture.png',
+                    '随机': '随机',
+                    'none': '本体默认背景'
                 },
                 onclick(item) {
                     game.saveExtensionConfig('全能搜索', 'backgroundImage', item);
                 }
             },
-			"loadUpdateContent": {
-				clear: true,
-				name: '<span style="text-decoration: underline;">点击显示本扩展更新内容<span>',
-				intro: '本扩展历史更新内容',
-				onclick: function() {
-					if(_status.qnssUpdateContent) return false;
-					_status.qnssUpdateContent = true;
-					
-					let oReq = new XMLHttpRequest();
-					
-					oReq.addEventListener("load", function() {
-						let layer = ui.create.div(ui.window, '.updateContent');
-						let close = ui.create.div(layer, '.updateContentClose', () => {
-							delete _status.qnssUpdateContent;
-							layer.remove();
-						});
-						let content = ui.create.div(layer, {
-							width: '100%',
-							height: '100%',
-							innerHTML: this.responseText,
-						});
-					});
-					
-					oReq.addEventListener("error", err => {
-						delete _status.qnssUpdateContent;
-						console.error("获取历史更新内容失败", err);
-						alert("获取历史更新内容失败");
-					});
-					
-					oReq.open("GET", lib.assetURL + 'extension/全能搜索/updateContent');
-					oReq.send();
-				},
-			},
-			"Searcher": {
-				"name": "<span style='text-decoration: underline;'>点击此处进行搜索</span>",
-				"clear": true,
-                onclick: function() {
+            "loadUpdateContent": {
+                clear: true,
+                name: '<span style="text-decoration: underline;">点击显示本扩展更新内容<span>',
+                intro: '本扩展历史更新内容',
+                onclick: function () {
+                    if (_status.qnssUpdateContent) return false;
+                    _status.qnssUpdateContent = true;
+
+                    let oReq = new XMLHttpRequest();
+
+                    oReq.addEventListener("load", function () {
+                        let layer = ui.create.div(ui.window, '.updateContent');
+                        // @ts-ignore
+                        let close = ui.create.div(layer, '.updateContentClose', () => {
+                            delete _status.qnssUpdateContent;
+                            layer.remove();
+                        });
+                        // @ts-ignore
+                        let content = ui.create.div(layer, {
+                            width: '100%',
+                            height: '100%',
+                            innerHTML: this.responseText,
+                        });
+                    });
+
+                    oReq.addEventListener("error", err => {
+                        delete _status.qnssUpdateContent;
+                        console.error("获取历史更新内容失败", err);
+                        alert("获取历史更新内容失败");
+                    });
+
+                    oReq.open("GET", lib.assetURL + 'extension/全能搜索/updateContent');
+                    oReq.send();
+                },
+            },
+            "Searcher": {
+                "name": "<span style='text-decoration: underline;'>点击此处进行搜索</span>",
+                "clear": true,
+                onclick: function () {
                     window.诗笺_manual.show();
-				},
-			}
-		},
-		package: {
-			intro: '【武将卡牌搜索器】的重命名版本。',
-			author: "<span class='bluetext'>诗笺</span>",
-			version: "3.1",
-		},
-	}
+                },
+            }
+        },
+        package: {
+            intro: '【武将卡牌搜索器】的重命名版本。',
+            author: "<span class='bluetext'>诗笺</span>",
+            version: "3.4",
+        },
+    }
 });
