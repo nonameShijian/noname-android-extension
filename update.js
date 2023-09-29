@@ -1080,14 +1080,15 @@ window["noname_android_extension"] = {
 		"size": "104.43MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.10.1.0.1",
-		"version": "1.2.0.220114.34",
+		"nonameVersion": "1.10.2.1",
+		"version": "1.2.0.220114.35",
 		"author": "Show-K←寰宇星城←disgrace2013←短歌 QQ464598631",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
 			"extension/十周年UI/animation.css",
 			"extension/十周年UI/animation.js",
 			"extension/十周年UI/card.css",
+			"extension/十周年UI/CHANGELOG.md",
 			"extension/十周年UI/component.css",
 			"extension/十周年UI/component.js",
 			"extension/十周年UI/content.js",
@@ -1102,6 +1103,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/icon.css",
 			"extension/十周年UI/layout.css",
 			"extension/十周年UI/LICENSE",
+			"extension/十周年UI/menu.js",
 			"extension/十周年UI/player.css",
 			"extension/十周年UI/skill.js",
 			"extension/十周年UI/spine.js",
@@ -1582,7 +1584,6 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/bingliang.webp",
 			"extension/十周年UI/image/card/binglinchengxia.webp",
 			"extension/十周年UI/image/card/binglinchengxiax.webp",
-			"extension/十周年UI/image/card/bingsha.webp",
 			"extension/十周年UI/image/card/bintieshuangji.webp",
 			"extension/十周年UI/image/card/boss_mengpohuihun.webp",
 			"extension/十周年UI/image/card/caochuan.webp",
@@ -1605,7 +1606,6 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/chiyanzhenhunqin.webp",
 			"extension/十周年UI/image/card/chuanguoyuxi.webp",
 			"extension/十周年UI/image/card/chuqibuyi.webp",
-			"extension/十周年UI/image/card/cisha.webp",
 			"extension/十周年UI/image/card/cixiong.webp",
 			"extension/十周年UI/image/card/dagongche.webp",
 			"extension/十周年UI/image/card/dawan.webp",
@@ -1683,7 +1683,6 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/hualiu.webp",
 			"extension/十周年UI/image/card/huihun.webp",
 			"extension/十周年UI/image/card/huogong.webp",
-			"extension/十周年UI/image/card/huosha.webp",
 			"extension/十周年UI/image/card/huoshan.webp",
 			"extension/十周年UI/image/card/huoshaolianying.webp",
 			"extension/十周年UI/image/card/huxinjing.webp",
@@ -1704,7 +1703,6 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/kuwu.webp",
 			"extension/十周年UI/image/card/lanyinjia.webp",
 			"extension/十周年UI/image/card/lebu.webp",
-			"extension/十周年UI/image/card/leisha.webp",
 			"extension/十周年UI/image/card/lianjunshengyan.webp",
 			"extension/十周年UI/image/card/linglongshimandai.webp",
 			"extension/十周年UI/image/card/lingsheji.webp",
@@ -1806,6 +1804,10 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/shandian.webp",
 			"extension/十周年UI/image/card/shangyangbianfa.webp",
 			"extension/十周年UI/image/card/shanrangzhaoshu.webp",
+			"extension/十周年UI/image/card/sha_fire.webp",
+			"extension/十周年UI/image/card/sha_ice.webp",
+			"extension/十周年UI/image/card/sha_stab.webp",
+			"extension/十周年UI/image/card/sha_thunder.webp",
 			"extension/十周年UI/image/card/shengdong.webp",
 			"extension/十周年UI/image/card/shezhanqunru.webp",
 			"extension/十周年UI/image/card/shoulijian.webp",
@@ -2020,7 +2022,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_ye.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "162.58MB"
+		"size": "162.56MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.3",
