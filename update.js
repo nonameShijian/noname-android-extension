@@ -1080,8 +1080,8 @@ window["noname_android_extension"] = {
 		"size": "104.43MB"
 	},
 	"十周年UI": {
-		"nonameVersion": "1.10.3.1",
-		"version": "1.2.0.220114.36",
+		"nonameVersion": "1.10.4",
+		"version": "1.2.0.220114.37",
 		"author": "Show-K←寰宇星城←disgrace2013←短歌 QQ464598631",
 		"intro": "是最主流的美化扩展，能让无名杀的操作界面更像三国杀，也是许多特效，美化的基础",
 		"files": [
@@ -1094,7 +1094,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/content.js",
 			"extension/十周年UI/decadeLayout.css",
 			"extension/十周年UI/dialog.css",
-			"extension/十周年UI/dynamicSkin.js",
+			"extension/十周年UI/dynamicSkinTemplate.js",
 			"extension/十周年UI/dynamicWorker.js",
 			"extension/十周年UI/effect.css",
 			"extension/十周年UI/effect.js",
@@ -1686,6 +1686,12 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/card/huoshan.webp",
 			"extension/十周年UI/image/card/huoshaolianying.webp",
 			"extension/十周年UI/image/card/huxinjing.webp",
+			"extension/十周年UI/image/card/identity_enemy.webp",
+			"extension/十周年UI/image/card/identity_fan.webp",
+			"extension/十周年UI/image/card/identity_friend.webp",
+			"extension/十周年UI/image/card/identity_nei.webp",
+			"extension/十周年UI/image/card/identity_zhong.webp",
+			"extension/十周年UI/image/card/identity_zhu.webp",
 			"extension/十周年UI/image/card/jiedao.webp",
 			"extension/十周年UI/image/card/jiejia.webp",
 			"extension/十周年UI/image/card/jinchan.webp",
@@ -2022,7 +2028,7 @@ window["noname_android_extension"] = {
 			"extension/十周年UI/image/decoration/name_ye.png",
 			"extension/十周年UI/image/decoration/vs.png"
 		],
-		"size": "162.54MB"
+		"size": "162.68MB"
 	},
 	"千幻聆音": {
 		"version": "4.0.3",
