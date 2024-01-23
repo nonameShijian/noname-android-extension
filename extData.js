@@ -62,6 +62,11 @@ module.exports = {
 			version: '2',
 			author: 'Show-K',
 			intro: '一个基于《桌面大战》（《火柴人VS动画师》）系列的同人《无名杀》扩展，不隶属于Alan Becker等相关创作者。'
+		},
+		'JoJo': {
+			version: '1.0',
+			author: 'Sunny',
+			intro: '本扩列添加了JOJO一系列各种作品的角色,后续还会更新更多角色!!',
 		}
 	}
 };
