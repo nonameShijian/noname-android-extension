@@ -99,14 +99,14 @@ declare interface Lib {
 	updateURLS: {
 		/** 感谢Show-K */
 		URCOAFA: "https://unitedrhythmized.club/Show-K/noname",
-		codingOAFA: "https://ghproxy.com/https://raw.githubusercontent.com/Show-K/noname",
-		fastGitOAFA: "https://raw.fgit.ml/Show-K/noname",
+		codingOAFA: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Show-K/noname",
+		fastGitOAFA: "https://raw.fgit.cf/Show-K/noname",
 		githubOAFA: "https://raw.githubusercontent.com/Show-K/noname",
 		/** 感谢Show-K */
 		URC: 'https://unitedrhythmized.club/libccy/noname',
-		fastGit: 'https://raw.fgit.ml/libccy/noname',
+		fastGit: 'https://raw.fgit.cf/libccy/noname',
 		github: 'https://raw.githubusercontent.com/libccy/noname',
-		coding: 'https://ghproxy.com/https://raw.githubusercontent.com/libccy/noname'
+		coding: 'https://mirror.ghproxy.com/https://raw.githubusercontent.com/libccy/noname'
 	},
 	/**
 	 * 游戏更新完成后覆盖文件(于v1.6添加)

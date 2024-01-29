@@ -413,11 +413,11 @@ game.import("extension", function (lib, game, ui, get, ai, _status) {
 			// 添加更新地址
 			Object.assign(lib.updateURLS, {
 				URCOAFA: "https://unitedrhythmized.club/Tipx-L/noname",
-				codingOAFA: "https://ghproxy.com/https://raw.githubusercontent.com/Tipx-L/noname",
-				fastGitOAFA: "https://raw.fgit.ml/Tipx-L/noname",
+				codingOAFA: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Tipx-L/noname",
+				fastGitOAFA: "https://raw.fgit.cf/Tipx-L/noname",
 				githubOAFA: "https://raw.githubusercontent.com/Tipx-L/noname",
 				URC: 'https://unitedrhythmized.club/libccy/noname',
-				fastGit: 'https://raw.fgit.ml/libccy/noname'
+				fastGit: 'https://raw.fgit.cf/libccy/noname'
 			});
 
 			// 初始化，更新地址修改为一劳永逸URC
